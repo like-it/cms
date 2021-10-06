@@ -19,7 +19,9 @@ class Install {
         $url = $object->data('controller.dir.data') . File::basename(__CLASS__) . $object->config('extension.json');
         d($url);
         $object->request('node.type', 'user');
-        $validate_1 = Install::validate($object, $url);
+        $validate = Install::validate($object, $url);
+
+        d($validate);
 
 
         dd($object->request());
