@@ -16,28 +16,22 @@
 </head>
 <body>
 <form method="post" action="/Process">
-    <h1>Funda CMS</h1>
-    <h3>Installation:</h3>
     <fieldset>
-        <legend>Admin User:</legend>
+        <legend>Installation</legend>
+        <h1>Funda CMS</h1>
+        <p>
+            Welcome to the installation... <br>
+            Before you can use the CMS system we need some information.<br>
+        </p>
+        <h3>Credentials</h3>
         <label for="email">E-mail</label>
         <input id="email" name="node.email" placeholder="E-mail" />
         <label for="password">Password</label>
         <input id="password" name="node.password" placeholder="Password"/>
-    </fieldset>
-    <fieldset>
-        <legend>Cms location:</legend>
-        <label for="cms-subdomain">Cms host: </label>
-        <input id="cms-subdomain" name="node.cms.subdomain" disabled value="cms" />
-        <input name="node.cms.domain" placeholder="domain name"/>
-        <input name="node.cms.extension" placeholder="domain extension"/>
-    </fieldset>
-    <fieldset>
-        <legend>Core location:</legend>
-        <label for="core-subdomain">Core host: </label>
-        <input id="core-subdomain" name="node.core.subdomain" disabled value="core" />
-        <input name="node.core.domain" placeholder="domain name"/>
-        <input name="node.core.extension" placeholder="domain extension" />
+        <h3>Domain</h3>
+        <label for="domain">Host: </label>
+        <input id="domain" name="node.domain" placeholder="domain name"/>
+        <input name="node.extension" placeholder="domain extension"/>
     </fieldset>
 </form>
 </body>
