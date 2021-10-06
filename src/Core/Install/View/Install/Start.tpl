@@ -34,7 +34,7 @@
 
         label {$ldelim}
             display: inline-block;
-            min-width: 50rem;
+            min-width: 8rem;
         {$rdelim}
 
         .install {$ldelim}
