@@ -40,6 +40,7 @@
         .install {$ldelim}
             background: rgba(255, 255, 255, 0.75);
             background: rgba(100, 177, 248, 0.5);
+            border-radius: 0.75rem;
         {$rdelim}
     </style>
 </head>
