@@ -15,9 +15,9 @@
     <link rel="shortcut icon" href="{$html.head.icon|default:''}">
     <link rel="stylesheet" href="/Bootstrap/5.1.0/css/bootstrap.css">
     <style>
-        fieldset {
+        fieldset {$ldelim}
             border: 1px solid #000000;
-        }
+        {$rdelim}
     </style>
 </head>
 <body>
