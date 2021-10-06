@@ -63,9 +63,9 @@
                 <label for="email">E-mail</label>
                 <input id="email" name="node.email" placeholder="E-mail" /><br>
                 <label for="password">Password</label>
-                <input id="password" name="node.password" placeholder="Password"/>
+                <input id="password" name="node.password" placeholder="Password"/><br>
                 <label for="password-repeat">Repeat</label>
-                <input id="password-repeat" name="node.password2" placeholder="Password"/>
+                <input id="password-repeat" name="node.password2" placeholder="Password"/><br>
                 <h3>Domain</h3>
                 <p>
                     Please specify the main domain name and its extension without subdomain.<br>
@@ -75,7 +75,7 @@
                 <input id="domain" name="node.domain" placeholder="Domain name"/>
                 <input name="node.extension" placeholder="Domain extension"/><br>
                 <br>
-                <input type="submit" name="install" value="Install"/>
+                <input type="submit" name="install" value="Install"/><br>
             </fieldset>
         </form>
     </div>
