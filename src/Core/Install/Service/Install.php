@@ -5,6 +5,7 @@ use JetBrains\PhpStorm\NoReturn;
 use R3m\Io\App;
 
 use Exception;
+use R3m\Io\Module\File;
 use R3m\Io\Module\Validate;
 
 class Install {
