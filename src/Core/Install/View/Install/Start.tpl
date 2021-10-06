@@ -18,6 +18,7 @@
         fieldset {$ldelim}
             border: 1px solid #000000;
             margin: 10px;
+            padding: 10px;
         {$rdelim}
     </style>
 </head>
