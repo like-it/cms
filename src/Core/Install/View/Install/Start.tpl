@@ -32,12 +32,16 @@
             display: inline-block;
             min-width: 100px;
         {$rdelim}
+
+        .install {$ldelim}
+            background: rgba(255, 255, 255, 0.5);
+        {$rdelim}
     </style>
 </head>
 <body>
 <div class="row">
     <div class="col-3"></div>
-    <div class="col-6">
+    <div class="col-6 align-middle install">
         <form method="post" action="/Process">
             <fieldset>
                 <legend>Installation</legend>
