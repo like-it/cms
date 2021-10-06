@@ -50,31 +50,28 @@
     <div class="col-6 align-self-center shadow p-3 mb-5 rounded install">
         <form method="post" action="/Installation/Process">
             <fieldset>
-                <legend>Installation</legend>
-                <h1>Funda CMS</h1>
+                <legend>{__('install.legend')}</legend>
+                <h1>{__('install.title')}</h1>
                 <p>
-                    Welcome to the installation... <br>
-                    Before you can use Funda CMS we need some information.<br>
+                    {__('install.text')}
                 </p>
-                <h3>Credentials</h3>
+                <h3>{__('install.credentials.title')}</h3>
                 <p>
-                    These credentials are used for the main administrator and can be changed later in the user section.<br>
+                    {__('install.credentials.text')}
                 </p>
-                <label for="email">E-mail</label>
-                <input id="email" name="node.email" placeholder="E-mail" /><br>
-                <label for="password">Password</label>
-                <input id="password" name="node.password" placeholder="Password"/><br>
-                <label for="password-repeat">Password again</label>
-                <input id="password-repeat" name="node.password2" placeholder="Password again"/><br>
-                <h3>Domain</h3>
+                <label for="email">{__('install.email.label')}</label>
+                <input id="email" name="node.email" placeholder="{__('install.email.placeholder')}" /><br>
+                <label for="password">{__('install.password.label')}</label>
+                <input id="password" name="node.password" placeholder="{__('install.password.placeholder')}"/><br>
+                <label for="password-again">{__('install.password.again.label')}</label>
+                <input id="password-again" name="node.password2" placeholder="{__('install.password.again.placeholder')}"/><br>
+                <h3>{__('install.domain.title')}</h3>
                 <p>
-                    Please specify the main domain name and its extension without subdomain.<br>
-                    Subdomains and other domains can be configured later and Funda CMS is using cms as its subdomain for your main domain.<br>
-                    Example: www.example.com, use example.com and cms.example.com is where the cms lives.<br>
+                    {__('install.domain.text')}
                 </p>
-                <label for="domain">Host: </label>
-                <input id="domain" name="node.domain" placeholder="Domain.extension"/><br>
-                <input type="submit" name="install" value="Install"/><br>
+                <label for="domain">{__('install.domain.label')}</label>
+                <input id="domain" name="node.domain" placeholder="{__('install.domain.placeholder')}"/><br>
+                <input type="submit" name="install" value="{__('install.button.submit')}"/><br>
             </fieldset>
         </form>
     </div>

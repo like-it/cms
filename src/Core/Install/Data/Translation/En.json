@@ -2,5 +2,21 @@
     "meta.author" : "Remco van der Velde (remco@universeorange.com)",
     "meta.description" : "CMS panel",
     "meta.keywords" : "",
-    "meta.title" : "CMS | Funda.world"
+    "meta.title" : "CMS | Funda.world",
+    "install.legend": "Installation",
+    "install.title": "Funda CMS",
+    "install.text": "Welcome to the installation... <br>\n                    Before you can use Funda CMS we need some information.<br>",
+    "install.credentials.title": "Credentials",
+    "install.credentials.text": "These credentials are used for the main administrator and can be changed later in the user section.<br>",
+    "install.email.label": "E-mail",
+    "install.email.placeholder": "E-mail",
+    "install.password.label": "Password",
+    "install.password.placeholder": "Password",
+    "install.password.again.label": "Password again",
+    "install.password.again.placeholder": "Password again",
+    "install.domain.title": "Domain",
+    "install.domain.text": "Please specify the main domain name and its extension without subdomain.<br>\n                    Subdomains and other domains can be configured later and Funda CMS is using cms as its subdomain for your main domain.<br>\n                    Example: www.example.com, use example.com and cms.example.com is where the cms lives.<br>",
+    "install.domain.label": "Host: ",
+    "install.domain.placeholder": "domain.extension",
+    "install.button.submit": "Install"
 }
