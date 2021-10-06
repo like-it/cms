@@ -45,7 +45,7 @@
 <body>
 <div class="row h-100">
     <div class="col-3"></div>
-    <div class="col-6 align-self-center shadow p-3 mb-5 bg-body rounded install">
+    <div class="col-6 align-self-center shadow p-3 mb-5 rounded install">
         <form method="post" action="/Process">
             <fieldset>
                 <legend>Installation</legend>
