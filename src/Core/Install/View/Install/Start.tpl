@@ -21,17 +21,19 @@
         <h1>Funda CMS</h1>
         <p>
             Welcome to the installation... <br>
-            Before you can use the CMS system we need some information.<br>
+            Before you can use Funda CMS we need some information.<br>
         </p>
         <h3>Credentials</h3>
         <label for="email">E-mail</label>
-        <input id="email" name="node.email" placeholder="E-mail" />
+        <input id="email" name="node.email" placeholder="E-mail" /><br>
         <label for="password">Password</label>
         <input id="password" name="node.password" placeholder="Password"/>
         <h3>Domain</h3>
         <label for="domain">Host: </label>
         <input id="domain" name="node.domain" placeholder="domain name"/>
-        <input name="node.extension" placeholder="domain extension"/>
+        <input name="node.extension" placeholder="domain extension"/><br>
+        <br>
+        <input type="submit" name="install" value="Install"/>
     </fieldset>
 </form>
 </body>
