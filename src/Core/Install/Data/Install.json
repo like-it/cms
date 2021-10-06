@@ -22,6 +22,11 @@
                 {
                     "string.has.symbol" : ">=1"
                 }
+            ],
+            "password2" : [
+                {
+                    "string.equals": "password"
+                }
             ]
         }
     }
