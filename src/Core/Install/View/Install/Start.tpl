@@ -21,7 +21,7 @@
         {$rdelim}
         body {$ldelim}
             background: rgba(0, 0, 0, 1);
-            background: url('/Image/Background/4.png');
+            background: url('/Image/Background/4.jpg');
             background-repeat: no-repeat;
             background-size: cover;
         {$rdelim}
