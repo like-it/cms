@@ -157,16 +157,16 @@
         },
         {
             "name": "r3m/framework",
-            "version": "0.1.50",
+            "version": "0.1.51",
             "source": {
                 "type": "git",
                 "url": "https://github.com/like-it/r3m-framework.git",
-                "reference": "9c869cb5d9fa3ddf3b09b57d08376ba7f8d05802"
+                "reference": "0d61e5b2b2bbd8f1411ca4c64c32cbde8c62fed5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/like-it/r3m-framework/zipball/9c869cb5d9fa3ddf3b09b57d08376ba7f8d05802",
-                "reference": "9c869cb5d9fa3ddf3b09b57d08376ba7f8d05802",
+                "url": "https://api.github.com/repos/like-it/r3m-framework/zipball/0d61e5b2b2bbd8f1411ca4c64c32cbde8c62fed5",
+                "reference": "0d61e5b2b2bbd8f1411ca4c64c32cbde8c62fed5",
                 "shasum": ""
             },
             "require": {
@@ -202,9 +202,9 @@
             ],
             "support": {
                 "issues": "https://github.com/like-it/r3m-framework/issues",
-                "source": "https://github.com/like-it/r3m-framework/tree/0.1.50"
+                "source": "https://github.com/like-it/r3m-framework/tree/0.1.51"
             },
-            "time": "2021-10-03T20:32:52+00:00"
+            "time": "2021-10-06T21:55:07+00:00"
         }
     ],
     "packages-dev": [],
