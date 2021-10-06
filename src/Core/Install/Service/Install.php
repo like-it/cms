@@ -33,25 +33,13 @@ class Install {
         ){
             //form error return to install with a post
 
-            dd($_SERVER);
+            $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'];
 
-            $url = 'http://server.com/path';
-            $data = [
-                'key1' => 'value1',
-                'key2' => 'value2'
-            ];
+            $data = (array) $validate;
 
-            // use key 'http' even if you send the request to https://...
-            $options = array(
-                'http' => array(
-                    'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-                    'method'  => 'POST',
-                    'content' => http_build_query($data)
-                )
-            );
-            $context  = stream_context_create($options);
-            $result = file_get_contents($url, false, $context);
+            dd($data);
 
+            Install::redirect_post($url, $data);
 
         } else {
             //validate error return to install
@@ -77,5 +65,31 @@ class Install {
                 echo $e;
             }
         }
+    }
+
+    public static function redirect_post($url, $data = []){
+            ?>
+            <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+                <script type="text/javascript">
+                    function closethisasap() {
+                        document.forms["redirectpost"].submit();
+                    }
+                </script>
+            </head>
+            <body onload="closethisasap();">
+            <form name="redirectpost" method="post" action="<?php echo $url; ?>">
+                <?php
+                if ( !is_null($data) ) {
+                    foreach ($data as $k => $v) {
+                        echo '<input type="hidden" name="' . $k . '" value="' . $v . '"> ';
+                    }
+                }
+                ?>
+            </form>
+            </body>
+            </html>
+            <?php
+            exit;
     }
 }
