@@ -22,4 +22,15 @@ class Install extends View {
             return $exception;
         }
     }
+
+    public static function process(App $object){
+        $name = Install::name(__FUNCTION__, __CLASS__, '/');
+        try {
+            $url = Install::locate($object, $name);
+            $view = Install::response($object, $url);
+            return $view;
+        } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception){
+            return $exception;
+        }
+    }
 }
