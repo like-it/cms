@@ -39,6 +39,7 @@
 
         .install {$ldelim}
             background: rgba(255, 255, 255, 0.75);
+            background: rgba(0, 37, 156, 0.75);
         {$rdelim}
     </style>
 </head>
