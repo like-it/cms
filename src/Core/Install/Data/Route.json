@@ -1,5 +1,5 @@
 {
-    "cms-core-install": {
+    "cms-install": {
         "path": "\/",
         "host": [
             "localhost"
@@ -7,6 +7,16 @@
         "controller": "LikeIt.Cms.Core.Install.Controller.Install.start",
         "method": [
             "GET",
+            "POST"
+        ]
+    },
+    "cms-install-process": {
+        "path": "\/Installation\/Process\/",
+        "host": [
+            "localhost"
+        ],
+        "controller": "LikeIt.Cms.Core.Install.Controller.Install.process",
+        "method": [
             "POST"
         ]
     }
