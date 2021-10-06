@@ -14,29 +14,41 @@
     <meta name="description" content="{$html.head.description|default:''}">
     <link rel="shortcut icon" href="{$html.head.icon|default:''}">
     <link rel="stylesheet" href="/Bootstrap/5.1.0/css/bootstrap.css">
+    <style>
+        fieldset {
+            border: 1px solid #000000;
+        }
+    </style>
 </head>
 <body>
-<form method="post" action="/Process">
-    <fieldset>
-        <legend>Installation</legend>
-        <h1>Funda CMS</h1>
-        <p>
-            Welcome to the installation... <br>
-            Before you can use Funda CMS we need some information.<br>
-        </p>
-        <h3>Credentials</h3>
-        <label for="email">E-mail</label>
-        <input id="email" name="node.email" placeholder="E-mail" /><br>
-        <label for="password">Password</label>
-        <input id="password" name="node.password" placeholder="Password"/>
-        <h3>Domain</h3>
-        <label for="domain">Host: </label>
-        <input id="domain" name="node.domain" placeholder="domain name"/>
-        <input name="node.extension" placeholder="domain extension"/><br>
-        <br>
-        <input type="submit" name="install" value="Install"/>
-    </fieldset>
-</form>
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <form method="post" action="/Process">
+            <fieldset>
+                <legend>Installation</legend>
+                <h1>Funda CMS</h1>
+                <p>
+                    Welcome to the installation... <br>
+                    Before you can use Funda CMS we need some information.<br>
+                </p>
+                <h3>Credentials</h3>
+                <label for="email">E-mail</label>
+                <input id="email" name="node.email" placeholder="E-mail" /><br>
+                <label for="password">Password</label>
+                <input id="password" name="node.password" placeholder="Password"/>
+                <h3>Domain</h3>
+                <label for="domain">Host: </label>
+                <input id="domain" name="node.domain" placeholder="domain name"/>
+                <input name="node.extension" placeholder="domain extension"/><br>
+                <br>
+                <input type="submit" name="install" value="Install"/>
+            </fieldset>
+        </form>
+    </div>
+    <div class="col-3"></div>
+</div>
+
 </body>
 </html>
 
