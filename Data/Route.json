@@ -1,0 +1,6 @@
+{
+    "d702a6dd-0c0e-4b07-b79f-0730377114f2": {
+        "comment" : "This route needs to be on top",
+        "resource": "{$project.dir.vendor}like-it\/cms\/src\/Core\/Install\/Data\/Route.json"
+    }
+}

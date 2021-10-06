@@ -1,0 +1,25 @@
+{
+	"name" : "like-it/cms",
+	"description" : "Cms",
+	"type" : "library",
+	"keywords" : ["cms", "funda", "r3m", "like-it", "universe orange"],
+	"homepage": "https://funda.world",
+	"require" : {
+		"php": ">=7.1",
+		"ext-mbstring": "*",
+		"ext-json": "*",
+		"ext-posix": "*",
+		"r3m/framework" : "*"
+	},
+	"license" : "proprietary",
+	"authors" : [{
+			"name" : "Remco van der Velde",
+			"email" : "remco@universeorange.com"
+		}
+	],
+	"autoload" : {
+		"psr-4" : {
+			"LikeIt\\Cms\\" : "src/"
+		}
+	}
+}
