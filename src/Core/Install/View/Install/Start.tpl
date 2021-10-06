@@ -62,9 +62,9 @@
                 <label for="email">{__('install.email.label')}</label>
                 <input id="email" name="node.email" placeholder="{__('install.email.placeholder')}" /><br>
                 <label for="password">{__('install.password.label')}</label>
-                <input id="password" name="node.password" placeholder="{__('install.password.placeholder')}"/><br>
+                <input id="password" type="password" name="node.password" placeholder="{__('install.password.placeholder')}"/><br>
                 <label for="password-again">{__('install.password.again.label')}</label>
-                <input id="password-again" name="node.password2" placeholder="{__('install.password.again.placeholder')}"/><br>
+                <input id="password-again" type="password" name="node.password2" placeholder="{__('install.password.again.placeholder')}"/><br>
                 <h3>{__('install.domain.title')}</h3>
                 <p>
                     {__('install.domain.text')}
