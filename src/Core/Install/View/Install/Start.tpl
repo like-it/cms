@@ -21,7 +21,7 @@
         {$rdelim}
         body {$ldelim}
             background: rgba(0, 0, 0, 1);
-            background: url('/Image/Background/4.jpg');
+            background: url('/Image/Background/1.jpg');
             background-repeat: no-repeat;
             background-size: cover;
         {$rdelim}
@@ -64,8 +64,8 @@
                 <input id="email" name="node.email" placeholder="E-mail" /><br>
                 <label for="password">Password</label>
                 <input id="password" name="node.password" placeholder="Password"/><br>
-                <label for="password-repeat">Password repeat</label>
-                <input id="password-repeat" name="node.password2" placeholder="Password"/><br>
+                <label for="password-repeat">Password again</label>
+                <input id="password-repeat" name="node.password2" placeholder="Password again"/><br>
                 <h3>Domain</h3>
                 <p>
                     Please specify the main domain name and its extension without subdomain.<br>
