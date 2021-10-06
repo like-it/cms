@@ -15,6 +15,10 @@
     <link rel="shortcut icon" href="{$html.head.icon|default:''}">
     <link rel="stylesheet" href="/Bootstrap/5.1.0/css/bootstrap.css">
     <style>
+        html, body {$ldelim}
+            height: 100%;
+            width: 100%;
+        {$rdelim}
         body {$ldelim}
             background: rgba(0, 0, 0, 1);
             background: url('/Image/Background/4.jpg');
@@ -39,7 +43,7 @@
     </style>
 </head>
 <body>
-<div class="row">
+<div class="row h-100">
     <div class="col-3"></div>
     <div class="col-6 align-self-center install">
         <form method="post" action="/Process">
