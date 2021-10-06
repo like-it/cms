@@ -46,7 +46,7 @@
 <div class="row h-100">
     <div class="col-3"></div>
     <div class="col-6 align-self-center shadow p-3 mb-5 rounded install">
-        <form method="post" action="/Process">
+        <form method="post" action="/Installation/Process">
             <fieldset>
                 <legend>Installation</legend>
                 <h1>Funda CMS</h1>
@@ -55,11 +55,20 @@
                     Before you can use Funda CMS we need some information.<br>
                 </p>
                 <h3>Credentials</h3>
+                <p>
+                    These credentials are used for the main administrator and can be changed later in the user section.<br>
+                </p>
                 <label for="email">E-mail</label>
                 <input id="email" name="node.email" placeholder="E-mail" /><br>
                 <label for="password">Password</label>
                 <input id="password" name="node.password" placeholder="Password"/>
+                <label for="password-repeat">Repeat</label>
+                <input id="password-repeat" name="node.password2" placeholder="Password"/>
                 <h3>Domain</h3>
+                <p>
+                    Please specify the main domain name and its extension without subdomain.<br>
+                    Subdomains can be configured later and Funda CMS is using cms as its subdomain.<br>
+                </p>
                 <label for="domain">Host: </label>
                 <input id="domain" name="node.domain" placeholder="Domain name"/>
                 <input name="node.extension" placeholder="Domain extension"/><br>
