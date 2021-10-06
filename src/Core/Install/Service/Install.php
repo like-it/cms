@@ -35,7 +35,9 @@ class Install {
 
             $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'];
 
-            $data = (array) $validate;
+            $data = [
+                'validate' => json_encode($validate)
+            ];
 
             dd($data);
 
