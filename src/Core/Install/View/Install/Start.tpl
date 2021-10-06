@@ -13,6 +13,7 @@
     <meta name="keywords" content="{$html.head.keywords}">
     <meta name="description" content="{$html.head.description|default:''}">
     <link rel="shortcut icon" href="{$html.head.icon|default:''}">
+    <link rel="stylesheet" href="/Bootstrap/5.1.0/css/bootstrap.css">
 </head>
 <body>
 <form method="post" action="/Process">
