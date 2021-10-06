@@ -15,6 +15,13 @@
     <link rel="shortcut icon" href="{$html.head.icon|default:''}">
     <link rel="stylesheet" href="/Bootstrap/5.1.0/css/bootstrap.css">
     <style>
+        body {$ldelim}
+            background: rgba(0, 0, 0, 1);
+            background: url('/Image/Background/4.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        {$rdelim}
+
         fieldset {$ldelim}
             border: 1px solid #000000;
             margin: 10px;
