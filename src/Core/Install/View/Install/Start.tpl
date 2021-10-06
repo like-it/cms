@@ -28,7 +28,7 @@
 
         fieldset {$ldelim}
             border: 1px solid #000000;
-            margin: 10px;
+            border-radius: 0.75rem;
             padding: 10px;
         {$rdelim}
 
@@ -61,8 +61,8 @@
                 <input id="password" name="node.password" placeholder="Password"/>
                 <h3>Domain</h3>
                 <label for="domain">Host: </label>
-                <input id="domain" name="node.domain" placeholder="domain name"/>
-                <input name="node.extension" placeholder="domain extension"/><br>
+                <input id="domain" name="node.domain" placeholder="Domain name"/>
+                <input name="node.extension" placeholder="Domain extension"/><br>
                 <br>
                 <input type="submit" name="install" value="Install"/>
             </fieldset>
