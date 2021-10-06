@@ -20,6 +20,11 @@
             margin: 10px;
             padding: 10px;
         {$rdelim}
+
+        label {$ldelim}
+            display: inline-block;
+            min-width: 100px;
+        {$rdelim}
     </style>
 </head>
 <body>
