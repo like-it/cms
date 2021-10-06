@@ -38,14 +38,14 @@
         {$rdelim}
 
         .install {$ldelim}
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.75);
         {$rdelim}
     </style>
 </head>
 <body>
 <div class="row h-100">
     <div class="col-3"></div>
-    <div class="col-6 align-self-center install">
+    <div class="col-6 align-self-center shadow p-3 mb-5 bg-body rounded install">
         <form method="post" action="/Process">
             <fieldset>
                 <legend>Installation</legend>
