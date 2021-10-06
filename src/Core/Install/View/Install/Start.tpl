@@ -45,7 +45,7 @@
     </style>
 </head>
 <body>
-<div class="row h-100">
+<div class="row h-100 w-100">
     <div class="col-3"></div>
     <div class="col-6 align-self-center shadow p-3 mb-5 rounded install">
         <form method="post" action="/Installation/Process">
