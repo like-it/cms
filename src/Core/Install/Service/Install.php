@@ -21,6 +21,43 @@ class Install {
         $object->request('node.type', 'user');
         $validate = Install::validate($object, $url);
 
+        if(
+            property_exists($validate, 'success') &&
+            $validate->success === true
+        ){
+            //split domain
+        }
+        elseif(
+            property_exists($validate, 'success') &&
+            $validate->success === false
+        ){
+            //form error return to install with a post
+
+            dd($_SERVER);
+
+            $url = 'http://server.com/path';
+            $data = [
+                'key1' => 'value1',
+                'key2' => 'value2'
+            ];
+
+            // use key 'http' even if you send the request to https://...
+            $options = array(
+                'http' => array(
+                    'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                    'method'  => 'POST',
+                    'content' => http_build_query($data)
+                )
+            );
+            $context  = stream_context_create($options);
+            $result = file_get_contents($url, false, $context);
+
+
+        } else {
+            //validate error return to install
+        }
+
+
         d($validate);
 
 
