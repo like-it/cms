@@ -69,7 +69,8 @@
                 <h3>Domain</h3>
                 <p>
                     Please specify the main domain name and its extension without subdomain.<br>
-                    Subdomains can be configured later and Funda CMS is using cms as its subdomain for your main domain.<br>
+                    Subdomains and other domains can be configured later and Funda CMS is using cms as its subdomain for your main domain.<br>
+                    Example: www.example.com, use example.com and cms.example.com is where the cms lives.<br>
                 </p>
                 <label for="domain">Host: </label>
                 <input id="domain" name="node.domain" placeholder="Domain.extension"/><br>
