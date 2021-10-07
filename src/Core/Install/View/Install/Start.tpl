@@ -75,7 +75,7 @@
                     {__('install.domain.text')}
                 </p>
                 <label for="domain">{__('install.domain.label')}</label>
-                <input id="domain" name="node.domain" placeholder="{__('install.domain.placeholder')}"/><br>
+                <input id="domain" name="node.domain" placeholder="{__('install.domain.placeholder')}" value="{$request.node.domain}"/><br>
                 <input type="submit" name="install" value="{__('install.button.submit')}"/><br>
             </fieldset>
         </form>

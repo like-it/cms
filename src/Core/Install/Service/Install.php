@@ -40,7 +40,8 @@ class Install {
                 ],[
                         '&quot;'
                 ], (json_encode($validate))),
-                'node.email' => $object->request('node.email')
+                'node.email' => $object->request('node.email'),
+                'node.domain' => $object->request('node.domain')
             ];
             Install::redirect_post($url, $data);
 
