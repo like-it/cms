@@ -59,6 +59,7 @@
                 <p>
                     {__('install.credentials.text')}
                 </p>
+                {dd($error)}
                 {if($error.test.email.validate_email.0 === false)}
                     <p class="alert">
                         The e-mail address is invalid.
