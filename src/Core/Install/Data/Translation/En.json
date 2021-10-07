@@ -3,7 +3,7 @@
     "meta.description" : "CMS panel",
     "meta.keywords" : "",
     "meta.title" : "CMS | Funda.world",
-    "install.legend": "Installation",
+    "install.legend": "Installation version {$version}",
     "install.title": "Funda CMS",
     "install.text": "Welcome to the installation... <br>\n                    Before you can use Funda CMS we need some information.<br>",
     "install.credentials.title": "Credentials",
