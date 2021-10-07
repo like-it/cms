@@ -6,6 +6,7 @@
 {$request = request()}
 {if(!is.empty($request.error))}
 {$error = $request.error|json.decode}
+{d($request)}
 {dd($error)}
 {/if}
 {if(!is.empty($request.section.id))}
