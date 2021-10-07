@@ -36,8 +36,9 @@ class Install {
             $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'];
 
             $data = [
-                'error' => json_encode($validate)
+                'error' => html_entity_decode(json_encode($validate))
             ];
+            dd($data);
             Install::redirect_post($url, $data);
 
         } else {
@@ -72,6 +73,7 @@ class Install {
             <head>
                 <script type="text/javascript">
                     function closethisasap() {
+
                         document.forms["redirectpost"].submit();
                     }
                 </script>
