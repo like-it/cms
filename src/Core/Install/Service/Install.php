@@ -47,12 +47,6 @@ class Install {
         } else {
             //validate error return to install
         }
-
-
-        d($validate);
-
-
-        dd($object->request());
     }
 
     public static function validate(App $object, $url){
