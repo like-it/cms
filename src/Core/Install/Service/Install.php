@@ -42,7 +42,6 @@ class Install {
                         '&quot;'
                 ], (json_encode($validate)))
             ];
-            dd($data);
             Install::redirect_post($url, $data);
 
         } else {
