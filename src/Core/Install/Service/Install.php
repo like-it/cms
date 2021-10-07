@@ -17,7 +17,6 @@ class Install {
         $domain = $object->request('domain');
 
         $url = $object->data('controller.dir.data') . File::basename(__CLASS__) . $object->config('extension.json');
-        d($url);
         $object->request('node.type', 'user');
         $validate = Install::validate($object, $url);
 
@@ -40,7 +39,8 @@ class Install {
                         '"'
                 ],[
                         '&quot;'
-                ], (json_encode($validate)))
+                ], (json_encode($validate))),
+                'node.email' => $object->request('node.email')
             ];
             Install::redirect_post($url, $data);
 

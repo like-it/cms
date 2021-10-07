@@ -60,12 +60,12 @@
                     {__('install.credentials.text')}
                 </p>
                 {if($error.test.email.validate_is_email.0 === false)}
-                    <p class="alert">
+                    <p class="alert alert-danger" role="alert">
                         The e-mail address is invalid.
                     </p>
                 {/if}
                 <label for="email">{__('install.email.label')}</label>
-                <input id="email" name="node.email" placeholder="{__('install.email.placeholder')}" /><br>
+                <input id="email" name="node.email" placeholder="{__('install.email.placeholder')}" value="{$request.node.email}"/><br>
                 <label for="password">{__('install.password.label')}</label>
                 <input id="password" type="password" name="node.password" placeholder="{__('install.password.placeholder')}"/><br>
                 <label for="password-again">{__('install.password.again.label')}</label>
