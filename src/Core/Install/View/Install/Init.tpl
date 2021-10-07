@@ -4,6 +4,7 @@
 {$meta.keywords = __('meta.keywords')}
 {$meta.description = __('meta.description')}
 {$request = request()}
+{dd($request)}
 {if(!is.empty($request.section.id))}
 {$id = $request.section.id}
 {else}

@@ -36,7 +36,7 @@ class Install {
             $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'];
 
             $data = [
-                'validate' => json_encode($validate)
+                'error' => json_encode($validate)
             ];
             Install::redirect_post($url, $data);
 
