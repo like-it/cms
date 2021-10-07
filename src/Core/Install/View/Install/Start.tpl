@@ -1,3 +1,5 @@
+{dd(config())}
+
 {require($controller.dir.view + $controller.title + '/Init.tpl')}
 <!DOCTYPE html>
 <html lang="en">
