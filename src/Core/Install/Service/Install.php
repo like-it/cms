@@ -41,28 +41,21 @@ class Install {
                 //Core::execute($execute, $output);
                 //d($execute);
                 //d($output);
-                //$execute = 'funda configure host add 0.0.0.0 ' . $subdomain . '.' . $host . '.' .  $extension;
-                //Core::execute($execute, $output);
-                //d($execute);
-                //d($output);
 
-                Dir::create(
-                $object->config('project.dir.root') .
-                    'Host' . $object->config('ds') .
+                $execute = 'rm -rf ' .
+                    $object->config('project.dir.root') . 'Host' . $object->config('ds') .
                     ucfirst($subdomain) . $object->config('ds') .
                     ucfirst($host) . $object->config('ds') .
-                    ucfirst($extension) . $object->config('ds')
-                );
+                    ucfirst($extension) . $object->config('ds');
+                Core::execute($execute, $output);
+                d($execute);
+                d($output);
+                $output = [];
+                $execute = 'funda configure host add 0.0.0.0 ' . $subdomain . '.' . $host . '.' .  $extension;
+                Core::execute($execute, $output);
+                d($execute);
+                d($output);
                 $dir = new Dir();
-                /*
-                $read = $dir->read(
-                    $object->config('project.dir.root') .
-                    'Host' . $object->config('ds') .
-                    ucfirst($subdomain) . $object->config('ds') .
-                    ucfirst($host) . $object->config('ds') .
-                    ucfirst($extension) . $object->config('ds')
-                );
-                */
                 $read = $dir->read($object->config('controller.dir.data') . 'Cms' . $object->config('ds'), true);
                 foreach($read as $nr => $file){
                     if($file->type === File::TYPE){
