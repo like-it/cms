@@ -49,6 +49,19 @@ class Install {
                 $dir = new Dir();
                 $read = $dir->read($object->config('controller.dir.data') . 'Cms' . $object->config('ds'), true);
                 foreach($read as $nr => $file){
+                    if($file->type === File::TYPE){
+                        continue;
+                    }
+                    $explode = explode($object->config('controller.dir.data') . 'Cms' . $object->config('ds'), $file->url, 2);
+                    if(array_key_exists(1, $explode)){
+                        $target = $object->config('project.root') .
+                            'Host' . $object->config('ds') .
+                            ucfirst($subdomain) . $object->config('ds') .
+                            ucfirst($host) . $object->config('ds') .
+                            ucfirst($extension) . $object->config('ds') .
+                            $explode[1];
+                        d($target);
+                    }
                     dd($file);
                 }
                 d($object->config('controller.dir.data'));
