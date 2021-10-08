@@ -25,6 +25,16 @@ class Install {
             $validate->success === true
         ){
             //split domain
+            $explode = explode('.', $domain, 2);
+            if(
+                array_key_exists(1, $explode) !== false &&
+                !empty($explode[1])
+            ){
+                $host = $explode[0];
+                $extension = $explode[1];
+                d($host);
+                dd($extension);
+            }
         }
         elseif(
             property_exists($validate, 'success') &&
