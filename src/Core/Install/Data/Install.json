@@ -27,6 +27,14 @@
                 {
                     "string.equals": "password"
                 }
+            ],
+            "domain" : [
+                {
+                    "string.length": ">=3"
+                },
+                {
+                    "string.contains": "."
+                }
             ]
         }
     }

@@ -114,6 +114,24 @@
                 <p>
                     {__('install.domain.text')}
                 </p>
+                {if(
+                $error.test.domain.validate_string_length.0 === false ||
+                $error.test.domain.validate_string_contains.0 === false
+                )}
+                    <p class="alert alert-danger" role="alert">
+                {/if}
+                {if($error.test.domain.validate_string_length.0 === false)}
+                    The domain name needs to be at least 3 characters in length.<br>
+                {/if}
+                {if($error.test.domain.validate_string_contains.0 === false)}
+                    The domain name needs contain a dot (.).<br>
+                {/if}
+                {if(
+                $error.test.domain.validate_string_length.0 === false ||
+                $error.test.domain.validate_string_contains.0 === false
+                )}
+                    </p>
+                {/if}
                 <label for="domain">{__('install.domain.label')}</label>
                 <input id="domain" name="node.domain" placeholder="{__('install.domain.placeholder')}" value="{$request.node.domain}"/><br>
                 <input type="submit" name="install" value="{__('install.button.submit')}"/><br>
