@@ -37,16 +37,32 @@ class Install {
                 $extension = $explode[1];
                 $subdomain = Install::SUBDOMAIN_CMS;
                 $output = [];
-                $execute = 'funda configure domain add ' . $subdomain . '.' . $host . '.' .  $extension;
-                Core::execute($execute, $output);
-                d($execute);
-                d($output);
+                //$execute = 'funda configure domain add ' . $subdomain . '.' . $host . '.' .  $extension;
+                //Core::execute($execute, $output);
+                //d($execute);
+                //d($output);
                 //$execute = 'funda configure host add 0.0.0.0 ' . $subdomain . '.' . $host . '.' .  $extension;
                 //Core::execute($execute, $output);
                 //d($execute);
                 //d($output);
 
+                Dir::create(
+                $object->config('project.dir.root') .
+                    'Host' . $object->config('ds') .
+                    ucfirst($subdomain) . $object->config('ds') .
+                    ucfirst($host) . $object->config('ds') .
+                    ucfirst($extension) . $object->config('ds')
+                );
                 $dir = new Dir();
+                /*
+                $read = $dir->read(
+                    $object->config('project.dir.root') .
+                    'Host' . $object->config('ds') .
+                    ucfirst($subdomain) . $object->config('ds') .
+                    ucfirst($host) . $object->config('ds') .
+                    ucfirst($extension) . $object->config('ds')
+                );
+                */
                 $read = $dir->read($object->config('controller.dir.data') . 'Cms' . $object->config('ds'), true);
                 foreach($read as $nr => $file){
                     if($file->type === File::TYPE){
