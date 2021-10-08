@@ -61,10 +61,39 @@
                 <p>
                     {__('install.credentials.text')}
                 </p>
-                {d($error)}
                 {if($error.test.email.validate_is_email.0 === false)}
                     <p class="alert alert-danger" role="alert">
                         The e-mail address is invalid.
+                    </p>
+                {/if}
+                {if($error.test.password.validate_string_length.0 === false)}
+                    <p class="alert alert-danger" role="alert">
+                        The password needs to be 8 characters at least.
+                    </p>
+                {/if}
+                {if($error.test.password.validate_string_has_number.0 === false)}
+                    <p class="alert alert-danger" role="alert">
+                        The password needs to contain at least one number.
+                    </p>
+                {/if}
+                {if($error.test.password.validate_string_has_uppercase.0 === false)}
+                    <p class="alert alert-danger" role="alert">
+                        The password needs to contain at least one uppercase character.
+                    </p>
+                {/if}
+                {if($error.test.password.validate_string_has_lowercase.0 === false)}
+                    <p class="alert alert-danger" role="alert">
+                        The password needs to contain at least one lowercase character.
+                    </p>
+                {/if}
+                {if($error.test.password.validate_string_has_symbol.0 === false)}
+                    <p class="alert alert-danger" role="alert">
+                        The password needs to contain at least one symbol character.
+                    </p>
+                {/if}
+                {if($error.test.password2.validate_string_equals.0 === false)}
+                    <p class="alert alert-danger" role="alert">
+                        The password and password again needs to match.
                     </p>
                 {/if}
                 <label for="email">{__('install.email.label')}</label>
