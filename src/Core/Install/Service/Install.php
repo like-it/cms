@@ -26,6 +26,7 @@ class Install {
         ){
             //split domain
             $explode = explode('.', $domain, 2);
+            d($explode);
             if(
                 array_key_exists(1, $explode) !== false &&
                 !empty($explode[1])
