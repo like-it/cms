@@ -5,10 +5,12 @@ use JetBrains\PhpStorm\NoReturn;
 use R3m\Io\App;
 
 use Exception;
+use R3m\Io\Module\Core;
 use R3m\Io\Module\File;
 use R3m\Io\Module\Validate;
 
 class Install {
+    const SUBDOMAIN_CMS = 'cms';
 
     public static function start(App $object){
         $email = $object->request('node.email');
@@ -26,13 +28,18 @@ class Install {
         ){
             //split domain
             $explode = explode('.', $domain, 2);
-            d($explode);
             if(
                 array_key_exists(1, $explode) !== false &&
                 !empty($explode[1])
             ){
                 $host = $explode[0];
                 $extension = $explode[1];
+                $subdomain = Install::SUBDOMAIN_CMS;
+                $output = [];
+                $execute = 'funda configure domain add ' . $subdomain . '.' . $host . '.' .  $extension;
+                Core::execute($execute, $output);
+                d($execute);
+                d($subdomain);
                 d($host);
                 dd($extension);
             }
