@@ -78,8 +78,17 @@ class Install {
                             ucfirst($host) . $object->config('ds') .
                             ucfirst($extension) . $object->config('ds') .
                             $explode[1];
-                        dd(File::Extension($file->url));
-                        File::copy($file->url, $target);
+                        $read = File::read($file->url);
+                        if(File::Extension($file->url) === 'php'){
+                            $read = str_replace([
+                                '\\Cms\\Host\\Extension\\'
+                            ],[
+                                '\\Cms\\' . ucfirst($host) . '\\' . ucfirst($extension) . '\\'
+                            ], $read);
+                            File::write($target, $read);
+                        } else {
+                            File::copy($file->url, $target);
+                        }
                     }
                 }
             }
