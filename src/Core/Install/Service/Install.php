@@ -72,7 +72,7 @@ class Install {
                     }
                     $explode = explode($object->config('controller.dir.data') . 'Cms' . $object->config('ds'), $file->url, 2);
                     if(array_key_exists(1, $explode)){
-                        $target = $object->config('project.root') .
+                        $target = $object->config('project.dir.root') .
                             'Host' . $object->config('ds') .
                             ucfirst($subdomain) . $object->config('ds') .
                             ucfirst($host) . $object->config('ds') .
