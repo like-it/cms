@@ -49,7 +49,7 @@
     <div class="col-3"></div>
     <div class="col-6 align-self-center shadow p-3 mb-5 rounded install">
         <form method="post" action="/Installation/Process">
-            <fieldset>
+            <>
                 <legend>{parse.string(__('install.legend'), [
                     'version' => '{$version}'
                     ])}</legend>
@@ -61,40 +61,48 @@
                 <p>
                     {__('install.credentials.text')}
                 </p>
+                {if(
+                $error.test.email.validate_is_email.0 === false ||
+                $error.test.password.validate_string_length.0 === false ||
+                $error.test.password.validate_string_has_number.0 === false ||
+                $error.test.password.validate_string_has_uppercase.0 === false ||
+                $error.test.password.validate_string_has_lowercase.0 === false ||
+                $error.test.password.validate_string_has_symbol.0 === false ||
+                $error.test.password2.validate_string_equals.0 === false
+                )}
+                <p class="alert alert-danger" role="alert">
+                {/if}
                 {if($error.test.email.validate_is_email.0 === false)}
-                    <p class="alert alert-danger" role="alert">
-                        The e-mail address is invalid.
-                    </p>
+                    The e-mail address is invalid.<br>
                 {/if}
                 {if($error.test.password.validate_string_length.0 === false)}
-                    <p class="alert alert-danger" role="alert">
-                        The password needs to be 8 characters at least.
-                    </p>
+                    The password needs to be 8 characters at least.<br>
                 {/if}
                 {if($error.test.password.validate_string_has_number.0 === false)}
-                    <p class="alert alert-danger" role="alert">
-                        The password needs to contain at least one number.
-                    </p>
+                    The password needs to contain at least one number.<br>
                 {/if}
                 {if($error.test.password.validate_string_has_uppercase.0 === false)}
-                    <p class="alert alert-danger" role="alert">
-                        The password needs to contain at least one uppercase character.
-                    </p>
+                    The password needs to contain at least one uppercase character.<br>
                 {/if}
                 {if($error.test.password.validate_string_has_lowercase.0 === false)}
-                    <p class="alert alert-danger" role="alert">
-                        The password needs to contain at least one lowercase character.
-                    </p>
+                    The password needs to contain at least one lowercase character.<br>
                 {/if}
                 {if($error.test.password.validate_string_has_symbol.0 === false)}
-                    <p class="alert alert-danger" role="alert">
-                        The password needs to contain at least one symbol character.
-                    </p>
+                    The password needs to contain at least one symbol character.<br>
                 {/if}
                 {if($error.test.password2.validate_string_equals.0 === false)}
-                    <p class="alert alert-danger" role="alert">
-                        The password and password again needs to match.
-                    </p>
+                    The password and password again needs to match.<br>
+                {/if}
+                {if(
+                $error.test.email.validate_is_email.0 === false ||
+                $error.test.password.validate_string_length.0 === false ||
+                $error.test.password.validate_string_has_number.0 === false ||
+                $error.test.password.validate_string_has_uppercase.0 === false ||
+                $error.test.password.validate_string_has_lowercase.0 === false ||
+                $error.test.password.validate_string_has_symbol.0 === false ||
+                $error.test.password2.validate_string_equals.0 === false
+                )}
+                </p>
                 {/if}
                 <label for="email">{__('install.email.label')}</label>
                 <input id="email" name="node.email" placeholder="{__('install.email.placeholder')}" value="{$request.node.email}"/><br>
