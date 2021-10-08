@@ -60,7 +60,10 @@ class Install {
                             ucfirst($host) . $object->config('ds') .
                             ucfirst($extension) . $object->config('ds') .
                             $explode[1];
+                        if(Dir::is($target) === false){
                             Dir::create($target);
+                        }
+
                     }
                 }
                 foreach($read as $nr => $file){
