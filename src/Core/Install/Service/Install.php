@@ -11,10 +11,10 @@ use R3m\Io\Module\Validate;
 class Install {
 
     public static function start(App $object){
-        $email = $object->request('email');
-        $password = $object->request('password');
-        $password2 = $object->request('password2');
-        $domain = $object->request('domain');
+        $email = $object->request('node.email');
+        $password = $object->request('node.password');
+        $password2 = $object->request('node.password2');
+        $domain = $object->request('node.domain');
 
         $url = $object->data('controller.dir.data') . File::basename(__CLASS__) . $object->config('extension.json');
         $object->request('node.type', 'user');
