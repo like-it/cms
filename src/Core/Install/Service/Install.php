@@ -6,6 +6,7 @@ use R3m\Io\App;
 
 use Exception;
 use R3m\Io\Module\Core;
+use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
 use R3m\Io\Module\Validate;
 
@@ -44,6 +45,12 @@ class Install {
                 //Core::execute($execute, $output);
                 //d($execute);
                 //d($output);
+
+                $dir = new Dir();
+                $read = $dir->read($object->config('controller.dir.data') . 'Cms' . $object->config('ds'), true);
+                foreach($read as $nr => $file){
+                    dd($file);
+                }
                 d($object->config('controller.dir.data'));
                 d($subdomain);
                 d($host);

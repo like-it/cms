@@ -1,0 +1,13 @@
+{
+    "cms-funda-world-index": {
+        "path": "\/",
+        "host": [
+            "cms.funda.world"
+        ],
+        "controller": "Host.Cms.Funda.World.Controller.Index.overview",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    }
+}
