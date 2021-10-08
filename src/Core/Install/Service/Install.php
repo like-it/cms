@@ -40,10 +40,11 @@ class Install {
                 Core::execute($execute, $output);
                 d($execute);
                 d($output);
-                $execute = 'funda configure host add 0.0.0.0 ' . $subdomain . '.' . $host . '.' .  $extension;
-                Core::execute($execute, $output);
-                d($execute);
-                d($output);
+                //$execute = 'funda configure host add 0.0.0.0 ' . $subdomain . '.' . $host . '.' .  $extension;
+                //Core::execute($execute, $output);
+                //d($execute);
+                //d($output);
+                d($object->config('controller.dir.data'));
                 d($subdomain);
                 d($host);
                 dd($extension);
