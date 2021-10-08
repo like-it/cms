@@ -49,7 +49,7 @@
     <div class="col-3"></div>
     <div class="col-6 align-self-center shadow p-3 mb-5 rounded install">
         <form method="post" action="/Installation/Process">
-            <>
+            <fieldset>
                 <legend>{parse.string(__('install.legend'), [
                     'version' => '{$version}'
                     ])}</legend>
