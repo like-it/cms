@@ -1,5 +1,3 @@
-{dd(config())}
-
 {require($controller.dir.view + $controller.title + '/Init.tpl')}
 <!DOCTYPE html>
 <html lang="en">
@@ -63,6 +61,7 @@
                 <p>
                     {__('install.credentials.text')}
                 </p>
+                {d($error)}
                 {if($error.test.email.validate_is_email.0 === false)}
                     <p class="alert alert-danger" role="alert">
                         The e-mail address is invalid.
