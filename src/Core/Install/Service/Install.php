@@ -78,6 +78,7 @@ class Install {
                             ucfirst($host) . $object->config('ds') .
                             ucfirst($extension) . $object->config('ds') .
                             $explode[1];
+                        dd(File::Extension($file->url));
                         File::copy($file->url, $target);
                     }
                 }
