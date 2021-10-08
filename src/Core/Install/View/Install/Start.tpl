@@ -76,7 +76,7 @@
                     The e-mail address is invalid.<br>
                 {/if}
                 {if($error.test.password.validate_string_length.0 === false)}
-                    The password needs to be 8 characters at least.<br>
+                    The password needs to be at least 8 characters in length.<br>
                 {/if}
                 {if($error.test.password.validate_string_has_number.0 === false)}
                     The password needs to contain at least one number.<br>
