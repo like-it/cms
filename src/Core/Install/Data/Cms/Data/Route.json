@@ -2,9 +2,9 @@
     "cms-funda-world-index": {
         "path": "\/",
         "host": [
-            "cms.funda.world"
+            "cms.<host>.<extension>"
         ],
-        "controller": "Host.Cms.Funda.World.Controller.Index.overview",
+        "controller": "Host.Cms.<Host>.<Extension>.Controller.Index.overview",
         "method": [
             "GET",
             "POST"

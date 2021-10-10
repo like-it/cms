@@ -124,7 +124,7 @@
                     The domain name needs to be at least 3 characters in length.<br>
                 {/if}
                 {if($error.test.domain.validate_string_contains.0 === false)}
-                    The domain name needs contain a dot (.).<br>
+                    The domain name needs to contain a dot (.).<br>
                 {/if}
                 {if(
                 $error.test.domain.validate_string_length.0 === false ||
