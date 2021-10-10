@@ -56,7 +56,7 @@ class Install {
                 d($execute);
                 d($output);
                 $output = [];
-                $execute = 'funda configure domain add 0.0.0.0 ' . $subdomain . '.' . $host . '.' .  $extension;
+                $execute = 'funda configure domain add ' . $subdomain . '.' . $host . '.' .  $extension;
                 Core::execute($execute, $output);
                 d($execute);
                 d($output);
