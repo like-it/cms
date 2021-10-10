@@ -55,6 +55,11 @@ class Install {
                 Core::execute($execute, $output);
                 d($execute);
                 d($output);
+                $output = [];
+                $execute = 'funda configure route delete {\$project.dir.host}'.  $subdomain . '/' . $host . '/' . $extension . '/Data/Route.json';
+                Core::execute($execute, $output);
+                d($execute);
+                d($output);
                 $dir = new Dir();
                 $read = $dir->read($object->config('controller.dir.data') . 'Cms' . $object->config('ds'), true);
                 foreach($read as $nr => $file){
@@ -87,15 +92,31 @@ class Install {
                             ucfirst($host) . $object->config('ds') .
                             ucfirst($extension) . $object->config('ds') .
                             $explode[1];
-                        $read = File::read($file->url);
                         if(File::Extension($file->url) === 'php'){
+                            $read = File::read($file->url);
                             $read = str_replace([
                                 '\\Cms\\Host\\Extension\\'
                             ],[
                                 '\\Cms\\' . ucfirst($host) . '\\' . ucfirst($extension) . '\\'
                             ], $read);
                             File::write($target, $read);
-                        } else {
+                        }
+                        elseif(stristr($file->url, 'Cms/Data/Route.json') !== false){
+                            $read = File::read($file->url);
+                            $read = str_replace([
+                                '<Host>',
+                                '<Extension>',
+                                '<host>',
+                                '<extension>'
+                            ],[
+                                ucfirst($host),
+                                ucfirst($extension),
+                                $host,
+                                $extension
+                            ], $read);
+                            File::write($target, $read);
+                        }
+                        else {
                             d($file->url);
                             File::copy($file->url, $target);
                         }
