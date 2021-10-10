@@ -51,12 +51,12 @@ class Install {
                 d($execute);
                 d($output);
                 $output = [];
-                $execute = 'funda configure domain add 0.0.0.0 ' . $subdomain . '.' . $host . '.' .  $extension;
+                $execute = 'funda configure route delete {\$project.dir.host}'.  $subdomain . '/' . $host . '/' . $extension . '/Data/Route.json';
                 Core::execute($execute, $output);
                 d($execute);
                 d($output);
                 $output = [];
-                $execute = 'funda configure route delete {\$project.dir.host}'.  $subdomain . '/' . $host . '/' . $extension . '/Data/Route.json';
+                $execute = 'funda configure domain add 0.0.0.0 ' . $subdomain . '.' . $host . '.' .  $extension;
                 Core::execute($execute, $output);
                 d($execute);
                 d($output);
