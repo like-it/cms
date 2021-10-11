@@ -1,5 +1,5 @@
 {
-    "{$subdomain}-{$host}-{$extension}-index": {
+    "{$subdomain}-{$host}-{$extension}-index-overview": {
         "path": "\/",
         "host": [
             "{$subdomain}.{$host}.{$extension}"
