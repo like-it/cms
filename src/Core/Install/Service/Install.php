@@ -149,7 +149,6 @@ class Install {
                 $add['path'] = '/{$module|uppercase.first}/{$command|uppercase.first}/';
                 $add['resource'] = '{$subdomain|uppercase.first}/{$host|uppercase.first}/{$extension|uppercase.first}';
 
-                $add = json_encode($add);
                 $parse = new Parse($object);
                 $add = $parse->compile($add, [
                     'module' => $module,
@@ -158,6 +157,7 @@ class Install {
                     'host'=> $host,
                     'extension' => $extension
                 ]);
+                $add = json_encode($add);
                 $add = '"' . str_replace('"', '\"', $add);
 
                 $execute = 'funda configure route add ' . $add;
