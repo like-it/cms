@@ -106,9 +106,6 @@ class Install {
                             $read = File::read($file->url);
                             $parse = new Parse($object);
                             $compile = $parse->compile($read, [
-                                'Subdomain' => ucfirst($subdomain),
-                                'Host' => ucfirst($host),
-                                'Extension' => ucfirst($extension),
                                 'subdomain' => $subdomain,
                                 'host'=> $host,
                                 'extension' => $extension
@@ -137,6 +134,26 @@ class Install {
                         }
                     }
                 }
+                $output = [];
+                $add = [];
+                $add['controller'] = 'Host.Cms.Funda.World.Controller.User.login';
+                $add['host'] = [
+                    'cms.funda.world'
+                ];
+                $add['method'] = [
+                    'POST'
+                ];
+                $add['name'] = 'cms-funda-world-user-login';
+                $add['path'] = '/User/Login/';
+                $add['resource'] = 'Cms/Funda/World';
+
+                $add = json_encode($add);
+                $add = '"' . str_replace('"', '\"', $add);
+                
+                $execute = 'funda configure route add ' . $add;
+                Core::execute($execute, $output);
+                d($execute);
+                d($output);
             }
         }
         elseif(
