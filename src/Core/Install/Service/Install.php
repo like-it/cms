@@ -139,41 +139,35 @@ class Install {
                             File::write($target, $compile);
                             */
                         }
+                        elseif(stristr($file->url, 'Cms/Data/Command.json') !== false){
+                            $read = $object->data_read($file->url);
+                            if($read){
+                                foreach($read->data() as $id => $add){
+                                    $parse = new Parse($object);
+                                    $add = $parse->compile($add, [
+                                        'module' => $add->module,
+                                        'command' => $add->command,
+                                        'subdomain' => $subdomain,
+                                        'host'=> $host,
+                                        'extension' => $extension
+                                    ]);
+                                    unset($add->module);
+                                    unset($add->command);
+                                    $add = json_encode($add);
+                                    $add = '"' . str_replace('"', '\"', $add);
+
+                                    $execute = 'funda configure route add ' . $add;
+                                    Core::execute($execute, $output);
+                                    d($execute);
+                                    d($output);
+                                }
+                            }
+                        }
                         else {
                             File::copy($file->url, $target);
                         }
                     }
                 }
-                $output = [];
-                $add = [];
-                $module = 'user';
-                $command = 'login';
-                $add['controller'] = 'Host.{$subdomain|uppercase.first}.{$host|uppercase.first}.{$extension|uppercase.first}.Controller.{$module|uppercase.first}.{$command}';
-                $add['host'] = [
-                    '{$subdomain}.{$host}.{$extension}'
-                ];
-                $add['method'] = [
-                    'POST'
-                ];
-                $add['name'] = '{$subdomain}-{$host}-{$extension}-{$module}-{$command}';
-                $add['path'] = '/{$module|uppercase.first}/{$command|uppercase.first}/';
-                $add['resource'] = '{$subdomain|uppercase.first}/{$host|uppercase.first}/{$extension|uppercase.first}';
-
-                $parse = new Parse($object);
-                $add = $parse->compile($add, [
-                    'module' => $module,
-                    'command' => $command,
-                    'subdomain' => $subdomain,
-                    'host'=> $host,
-                    'extension' => $extension
-                ]);
-                $add = json_encode($add);
-                $add = '"' . str_replace('"', '\"', $add);
-
-                $execute = 'funda configure route add ' . $add;
-                Core::execute($execute, $output);
-                d($execute);
-                d($output);
             }
         }
         elseif(

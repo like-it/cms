@@ -1,0 +1,15 @@
+{
+    "1" : {
+        "module" : "user",
+        "command" : "login",
+        "path": "\/{$module|uppercase.first}\/{$command|uppercase.first}\/",
+        "host": [
+            "{$subdomain}.{$host}.{$extension}"
+        ],
+        "controller": "Host.{$subdomain|uppercase.first}.{$host|uppercase.first}.{$extension|uppercase.first}.Controller.{$module|uppercase.first}.{$command}",
+        "method": [
+            "POST"
+        ],
+        "resource" : "{$subdomain|uppercase.first}/{$host|uppercase.first}/{$extension|uppercase.first}"
+    }
+}
