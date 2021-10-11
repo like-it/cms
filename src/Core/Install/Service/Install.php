@@ -136,20 +136,30 @@ class Install {
                 }
                 $output = [];
                 $add = [];
-                $add['controller'] = 'Host.Cms.Funda.World.Controller.User.login';
+                $module = 'user';
+                $command = 'login';
+                $add['controller'] = 'Host.{$subdomain|uppercase.first}.{$host|uppercase.first}.{$extension|uppercase.first}.Controller.{$module|uppercase.first}.{$command}';
                 $add['host'] = [
-                    'cms.funda.world'
+                    '{$subdomain}.{$host}.{$extension}'
                 ];
                 $add['method'] = [
                     'POST'
                 ];
-                $add['name'] = 'cms-funda-world-user-login';
-                $add['path'] = '/User/Login/';
-                $add['resource'] = 'Cms/Funda/World';
+                $add['name'] = '{$subdomain}-{$host}-{$extension}-{$module}-{$command}';
+                $add['path'] = '/{$module|uppercase.first}/{$command|uppercase.first}/';
+                $add['resource'] = '{$subdomain|uppercase.first}/{$host|uppercase.first}/{$extension|uppercase.first}';
 
                 $add = json_encode($add);
+                $parse = new Parse($object);
+                $add = $parse->compile($add, [
+                    'module' => $module,
+                    'command' => $command,
+                    'subdomain' => $subdomain,
+                    'host'=> $host,
+                    'extension' => $extension
+                ]);
                 $add = '"' . str_replace('"', '\"', $add);
-                
+
                 $execute = 'funda configure route add ' . $add;
                 Core::execute($execute, $output);
                 d($execute);
