@@ -103,13 +103,15 @@ class Install {
                             File::write($target, $read);
                         }
                         elseif(stristr($file->url, 'Cms/Data/Route.json') !== false){
-                            $read = File::read($file->url);
+                            $read = $object->data_read($file->url);
                             $parse = new Parse($object);
-                            $compile = $parse->compile($read, [
+                            $compile = $parse->compile($read->data(), [
                                 'subdomain' => $subdomain,
                                 'host'=> $host,
                                 'extension' => $extension
                             ]);
+                            $read->data($compile);
+                            $read->write($target);
                             /*
                             $read = str_replace([
                                 '{$Subdomain}',
@@ -126,8 +128,8 @@ class Install {
                                 $host,
                                 $extension
                             ], $read);
-                            */
                             File::write($target, $compile);
+                            */
                         }
                         else {
                             File::copy($file->url, $target);
