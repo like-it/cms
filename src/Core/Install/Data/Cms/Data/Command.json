@@ -2,6 +2,7 @@
     "1" : {
         "module" : "user",
         "command" : "login",
+        "name": "{$subdomain}-{$host}-{$extension}-{$module}-{$command}",
         "path": "\/{$module|uppercase.first}\/{$command|uppercase.first}\/",
         "host": [
             "{$subdomain}.{$host}.{$extension}"
