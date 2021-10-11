@@ -105,13 +105,21 @@ class Install {
                         elseif(stristr($file->url, 'Cms/Data/Route.json') !== false){
                             $read = $object->data_read($file->url);
                             $parse = new Parse($object);
-                            $compile = $parse->compile($read->data(), [
+                            $data = [
                                 'subdomain' => $subdomain,
                                 'host'=> $host,
                                 'extension' => $extension
-                            ]);
-                            $read->data($compile);
-                            $read->write($target);
+                            ];
+                            if($read){
+                                foreach($read->data() as $key => $compile){
+                                    $parse_key = $parse->compile($key, $data);
+                                    $compile = $parse->compile($compile, $data);
+                                    $read->data('delete', $key);
+                                    $read->data($parse_key, $compile);
+                                }
+                                $read->write($target);
+                            }
+
                             /*
                             $read = str_replace([
                                 '{$Subdomain}',
