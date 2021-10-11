@@ -8,6 +8,7 @@ use Exception;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
+use R3m\Io\Module\Parse;
 use R3m\Io\Module\Validate;
 
 class Install {
@@ -103,21 +104,35 @@ class Install {
                         }
                         elseif(stristr($file->url, 'Cms/Data/Route.json') !== false){
                             $read = File::read($file->url);
+                            $parse = new Parse($object);
+                            $compile = $parse->compile($read, [
+                                'Subdomain' => ucfirst($subdomain),
+                                'Host' => ucfirst($host),
+                                'Extension' => ucfirst($extension),
+                                'subdomain' => $subdomain,
+                                'host'=> $host,
+                                'extension' => $extension
+                            ]);
+                            /*
                             $read = str_replace([
-                                '<Host>',
-                                '<Extension>',
-                                '<host>',
-                                '<extension>'
+                                '{$Subdomain}',
+                                '{$Host}',
+                                '{$Extension}',
+                                '{$subdomain}',
+                                '{$host}',
+                                '{$extension}'
                             ],[
+                                ucfirst($subdomain),
                                 ucfirst($host),
                                 ucfirst($extension),
+                                $subdomain,
                                 $host,
                                 $extension
                             ], $read);
-                            File::write($target, $read);
+                            */
+                            File::write($target, $compile);
                         }
                         else {
-                            d($file->url);
                             File::copy($file->url, $target);
                         }
                     }

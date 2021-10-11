@@ -1,10 +1,10 @@
 {
-    "cms-funda-world-index": {
+    "{$subdomain}-{$host}-{$extension}-index": {
         "path": "\/",
         "host": [
-            "cms.<host>.<extension>"
+            "{$subdomain}.{$host}.{$extension}"
         ],
-        "controller": "Host.Cms.<Host>.<Extension>.Controller.Index.overview",
+        "controller": "Host.{$subdomain|uppercase.first}.{$host|uppercase.first}.{$extension|uppercase.first}.Controller.Index.overview",
         "method": [
             "GET",
             "POST"
