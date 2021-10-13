@@ -157,8 +157,9 @@ class Host {
                         ], $read);
                         File::write($target, $read);
                     }
-                    elseif(stristr($file->url, ucfirst($options['name']) . '/Data/Route.json') !== false) {
-                        $read = $object->data_read($file->url);
+                    elseif(stristr($file->url, ucfirst($options['name']) . '/Data/Command.json') !== false){
+                        $read = $object->data_read(Dir::name($file->url) . 'Route.json');
+                        $target = dirname($target) . 'Route.json';
                         $parse = new Parse($object);
                         $data = [
                             'subdomain' => $options['subdomain'],
@@ -174,10 +175,9 @@ class Host {
                             }
                             $read->write($target);
                         }
-                    }
-                    elseif(stristr($file->url, ucfirst($options['name']) . '/Data/Command.json') !== false){
-                        $read = $object->data_read($file->url);
+                        //$read = $object->data_read($file->url);
                         if($read){
+                            /*
                             $has_route = false;
                             foreach($object->data(App::ROUTE)->data() as $nr => $route){
                                 if(!property_exists($route, 'resource')){
@@ -188,7 +188,8 @@ class Host {
                                     break;
                                 }
                             }
-                            if($has_route){
+                            */
+                            if($target){
                                 foreach($read->data() as $id => $add){
                                     $add->host = [
                                         $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension']
@@ -197,14 +198,14 @@ class Host {
                                     $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->command;
                                     $add->path = ucfirst($add->module) . '/' . ucfirst($add->command) . '/';
                                     //$add->resource = $has_route->resource;
-                                    $data = $object->data_read($has_route->resource);
+                                    $data = $object->data_read($target);
                                     if($data){
                                         unset($add->module);
                                         unset($add->command);
                                         $data->data($key, $add);
                                         d($data);
-                                        d($has_route->resource);
-                                        d($data->write($has_route->resource));
+                                        d($target);
+                                        d($data->write($target));
                                     }
                                 }
                             }
