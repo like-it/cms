@@ -162,7 +162,7 @@ class Host {
                         d(Dir::name($target));
                         $read = $object->data_read(Dir::name($file->url) . 'Route.json');
                         $target = Dir::name($target) . 'Route.json';
-                        dd($target);
+                        d($target);
                         $parse = new Parse($object);
                         $data = [
                             'subdomain' => $options['subdomain'],
@@ -178,20 +178,7 @@ class Host {
                             }
                             $read->write($target);
                         }
-                        //$read = $object->data_read($file->url);
                         if($read){
-                            /*
-                            $has_route = false;
-                            foreach($object->data(App::ROUTE)->data() as $nr => $route){
-                                if(!property_exists($route, 'resource')){
-                                    continue;
-                                }
-                                if(stristr($route->resource, ucfirst($options['subdomain']) . '/' . ucfirst($options['host']) . '/' . ucfirst($options['extension']))){
-                                    $has_route = $route;
-                                    break;
-                                }
-                            }
-                            */
                             if($target){
                                 $list = $object->data_read($file->url);
                                 foreach($list->data() as $id => $add){
@@ -203,14 +190,12 @@ class Host {
                                     $add->path = ucfirst($add->module) . '/' . ucfirst($add->command) . '/';
                                     //$add->resource = $has_route->resource;
                                     //$data = $object->data_read($target);
-                                    if($read){
-                                        unset($add->module);
-                                        unset($add->command);
-                                        $read->data($key, $add);
-                                        d($read);
-                                        d($target);
-                                        d($read->write($target));
-                                    }
+                                    unset($add->module);
+                                    unset($add->command);
+                                    $read->data($key, $add);
+                                    d($read);
+                                    d($target);
+                                    d($read->write($target));
                                 }
                             }
                         }
