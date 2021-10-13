@@ -179,6 +179,9 @@ class Host {
                         $read = $object->data_read($file->url);
                         if($read){
                             foreach($read->data() as $id => $add){
+                                $add['subdomain'] = $options['subdomain'];
+                                $add['host'] = $options['host'];
+                                $add['extension'] = $options['extension'];
                                 dd($add);
                             }
                         }
