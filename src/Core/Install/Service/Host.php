@@ -178,12 +178,19 @@ class Host {
                     elseif(stristr($file->url, ucfirst($options['name']) . '/Data/Command.json') !== false){
                         $read = $object->data_read($file->url);
                         if($read){
+                            foreach($object->data(App::ROUTE) as $nr => $route){
+                                if(!property_exists($route, 'resource')){
+                                    continue;
+                                }
+                                d($route);
+                            }
                             foreach($read->data() as $id => $add){
                                 $add->host = [
                                     $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension']
                                 ];
                                 $add->key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->command;
                                 $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->command;
+                                $add->path = ucfirst($add->module) . '/' . ucfirst($add->command) . '/';
                                 dd($add);
                             }
                         }
