@@ -179,10 +179,11 @@ class Host {
                         $read = $object->data_read($file->url);
                         if($read){
                             foreach($read->data() as $id => $add){
-                                $add->subdomain = $options['subdomain'];
-                                $add->host = $options['host'];
-                                $add->extension = $options['extension'];
-                                $add->key = $add->subdomain . '-' . $add->host . '-' . $add->extension . '-' . $add->module . '-' . $add->command;
+                                $add->host = [
+                                    $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension']
+                                ];
+                                $add->key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->command;
+                                $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->command;
                                 dd($add);
                             }
                         }
