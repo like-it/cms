@@ -205,6 +205,7 @@ class Host {
                                             'host' => $add->host,
                                             'method' => $add->method
                                         ]);
+                                        dd($data);
                                         $data->write($has_route->resource);
                                     }
                                 }
