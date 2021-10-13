@@ -203,6 +203,7 @@ class Host {
                                         unset($add->command);
                                         $data->data($key, $add);
                                         d($data);
+                                        d($has_route->resource);
                                         d($data->write($has_route->resource));
                                     }
                                 }
