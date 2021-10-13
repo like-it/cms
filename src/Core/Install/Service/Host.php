@@ -190,8 +190,8 @@ class Host {
                             }
                             */
                             if($target){
-                                $read = $object->data_read($file->url);
-                                foreach($read->data() as $id => $add){
+                                $list = $object->data_read($file->url);
+                                foreach($list->data() as $id => $add){
                                     $add->host = [
                                         $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension']
                                     ];
@@ -199,14 +199,14 @@ class Host {
                                     $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->command;
                                     $add->path = ucfirst($add->module) . '/' . ucfirst($add->command) . '/';
                                     //$add->resource = $has_route->resource;
-                                    $data = $object->data_read($target);
-                                    if($data){
+                                    //$data = $object->data_read($target);
+                                    if($read){
                                         unset($add->module);
                                         unset($add->command);
-                                        $data->data($key, $add);
-                                        d($data);
+                                        $read->data($key, $add);
+                                        d($read);
                                         d($target);
-                                        d($data->write($target));
+                                        d($read->write($target));
                                     }
                                 }
                             }
