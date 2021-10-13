@@ -182,6 +182,7 @@ class Host {
                                 $add->subdomain = $options['subdomain'];
                                 $add->host = $options['host'];
                                 $add->extension = $options['extension'];
+                                $add->key = $add->subdomain . '-' . $add->host . '-' . $add->extension . '-' . $add->module . '-' . $add->command;
                                 dd($add);
                             }
                         }
