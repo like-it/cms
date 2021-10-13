@@ -178,21 +178,29 @@ class Host {
                     elseif(stristr($file->url, ucfirst($options['name']) . '/Data/Command.json') !== false){
                         $read = $object->data_read($file->url);
                         if($read){
+                            $has_route = false;
                             foreach($object->data(App::ROUTE)->data() as $nr => $route){
                                 if(!property_exists($route, 'resource')){
                                     continue;
                                 }
-                                d($route);
+                                if(stristr($route->resource, ucfirst($options['subdomain']) . '/' . ucfirst($options['host']) . '/' . ucfirst($options['extension']))){
+                                    $has_route = $route;
+                                    break;
+                                }
                             }
-                            foreach($read->data() as $id => $add){
-                                $add->host = [
-                                    $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension']
-                                ];
-                                $add->key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->command;
-                                $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->command;
-                                $add->path = ucfirst($add->module) . '/' . ucfirst($add->command) . '/';
-                                dd($add);
+                            if($has_route){
+                                foreach($read->data() as $id => $add){
+                                    $add->host = [
+                                        $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension']
+                                    ];
+                                    $add->key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->command;
+                                    $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->command;
+                                    $add->path = ucfirst($add->module) . '/' . ucfirst($add->command) . '/';
+                                    $add->resource = $has_route->resource;
+                                    dd($add);
+                                }
                             }
+
                         }
                     } else {
                         File::copy($file->url, $target);
