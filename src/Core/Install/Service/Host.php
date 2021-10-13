@@ -158,6 +158,8 @@ class Host {
                         File::write($target, $read);
                     }
                     elseif(stristr($file->url, ucfirst($options['name']) . '/Data/Command.json') !== false){
+                        d(Dir::name($file->url));
+                        d(Dir::name($target));
                         $read = $object->data_read(Dir::name($file->url) . 'Route.json');
                         $target = Dir::name($target) . 'Route.json';
                         dd($target);
