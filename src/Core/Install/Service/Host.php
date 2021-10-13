@@ -165,6 +165,7 @@ class Host {
                         d(Dir::name($target));
                         $read = $object->data_read(Dir::name($file->url) . 'Route.json');
                         $target = Dir::name($target) . 'Route.json';
+                        d($target);
                         $parse = new Parse($object);
                         $data = [
                             'subdomain' => $options['subdomain'],
@@ -178,30 +179,22 @@ class Host {
                                 $read->data('delete', $key);
                                 $read->data($parse_key, $compile);
                             }
-                            d($target);
                             $read->write($target);
-                        }
-                        if($read){
-                            if($target){
-                                $list = $object->data_read($file->url);
-                                foreach($list->data() as $id => $add){
-                                    $add->host = [
-                                        $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension']
-                                    ];
-                                    $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->command;
-                                    $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->command;
-                                    $add->path = ucfirst($add->module) . '/' . ucfirst($add->command) . '/';
-                                    //$add->resource = $has_route->resource;
-                                    //$data = $object->data_read($target);
-                                    unset($add->module);
-                                    unset($add->command);
-                                    $read->data($key, $add);
-                                    d($read);
-                                    d($target);
-                                    d($read->write($target));
-                                }
+                            $list = $object->data_read($file->url);
+                            foreach($list->data() as $id => $add){
+                                $add->host = [
+                                    $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension']
+                                ];
+                                $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->command;
+                                $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->command;
+                                $add->path = ucfirst($add->module) . '/' . ucfirst($add->command) . '/';
+                                //$add->resource = $has_route->resource;
+                                //$data = $object->data_read($target);
+                                unset($add->module);
+                                unset($add->command);
+                                $read->data($key, $add);
+                                $read->write($target);
                             }
-                        }
                     } else {
                         File::copy($file->url, $target);
                     }
