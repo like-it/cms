@@ -157,6 +157,9 @@ class Host {
                         ], $read);
                         File::write($target, $read);
                     }
+                    elseif(stristr($file->url, ucfirst($options['name']) . '/Data/Route.json') !== false){
+                        continue;
+                    }
                     elseif(stristr($file->url, ucfirst($options['name']) . '/Data/Command.json') !== false){
                         d(Dir::name($file->url));
                         d(Dir::name($target));
