@@ -12,6 +12,7 @@ use R3m\Io\Module\Parse;
 use R3m\Io\Module\Validate;
 
 class Install {
+    const SUBDOMAIN_CORE = 'core';
     const SUBDOMAIN_CMS = 'cms';
 
     public static function start(App $object){
@@ -37,30 +38,18 @@ class Install {
                 $host = $explode[0];
                 $extension = $explode[1];
                 $subdomain = Install::SUBDOMAIN_CMS;
-                $output = [];
-                //$execute = 'funda configure domain add ' . $subdomain . '.' . $host . '.' .  $extension;
-                //Core::execute($execute, $output);
-                //d($execute);
-                //d($output);
+                Install::Host($object, [
+                    'host' => $host,
+                    'extension' => $extension,
+                    'subdomain' => Install::SUBDOMAIN_CORE
+                ]);
+                Install::Host($object, [
+                    'host' => $host,
+                    'extension' => $extension,
+                    'subdomain' => Install::SUBDOMAIN_CMS
+                ]);
 
-                $execute = 'rm -rf ' .
-                    $object->config('project.dir.root') . 'Host' . $object->config('ds') .
-                    ucfirst($subdomain) . $object->config('ds') .
-                    ucfirst($host) . $object->config('ds') .
-                    ucfirst($extension) . $object->config('ds');
-                Core::execute($execute, $output);
-                d($execute);
-                d($output);
-                $output = [];
-                $execute = 'funda configure route delete {\$project.dir.host}'.  $subdomain . '/' . $host . '/' . $extension . '/Data/Route.json';
-                Core::execute($execute, $output);
-                d($execute);
-                d($output);
-                $output = [];
-                $execute = 'funda configure domain add ' . $subdomain . '.' . $host . '.' .  $extension;
-                Core::execute($execute, $output);
-                d($execute);
-                d($output);
+
                 $dir = new Dir();
                 $read = $dir->read($object->config('controller.dir.data') . 'Cms' . $object->config('ds'), true);
                 foreach($read as $nr => $file){
@@ -143,6 +132,15 @@ class Install {
                             $read = $object->data_read($file->url);
                             if($read){
                                 foreach($read->data() as $id => $add){
+                                    dd($add);
+                                }
+                            }
+                        }
+                        /*
+                        elseif(stristr($file->url, 'Cms/Data/Command.json') !== false){
+                            $read = $object->data_read($file->url);
+                            if($read){
+                                foreach($read->data() as $id => $add){
                                     $parse = new Parse($object);
                                     $add = $parse->compile($add, [
                                         'module' => $add->module,
@@ -163,6 +161,7 @@ class Install {
                                 }
                             }
                         }
+                        */
                         else {
                             File::copy($file->url, $target);
                         }
@@ -192,6 +191,21 @@ class Install {
         } else {
             //validate error return to install
         }
+    }
+
+    public static function host(App $object, $options=[]){
+        if(!array_key_exists('host', $options)){
+            return;
+        }
+        if(!array_key_exists('extension', $options)){
+            return;
+        }
+        $options['name'] = array_key_exists('subdomain', $options) ? $options['subdomain'] : $options['host'];
+        Host::clear($object, $options);
+        Host::route_delete($object, $options);
+        Host::domain_add($object, $options);
+        Host::dir_create($object, $options);
+        Host::file_create($object, $options);
     }
 
     public static function validate(App $object, $url){
