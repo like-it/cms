@@ -160,6 +160,7 @@ class Host {
                     elseif(stristr($file->url, ucfirst($options['name']) . '/Data/Command.json') !== false){
                         $read = $object->data_read(Dir::name($file->url) . 'Route.json');
                         $target = Dir::name($target) . 'Route.json';
+                        dd($target);
                         $parse = new Parse($object);
                         $data = [
                             'subdomain' => $options['subdomain'],
