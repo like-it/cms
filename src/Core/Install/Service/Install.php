@@ -37,7 +37,7 @@ class Install {
             ){
                 $host = $explode[0];
                 $extension = $explode[1];
-                $subdomain = Install::SUBDOMAIN_CMS;
+//                $subdomain = Install::SUBDOMAIN_CMS;
                 Install::Host($object, [
                     'host' => $host,
                     'extension' => $extension,
@@ -48,125 +48,6 @@ class Install {
                     'extension' => $extension,
                     'subdomain' => Install::SUBDOMAIN_CMS
                 ]);
-
-
-                $dir = new Dir();
-                $read = $dir->read($object->config('controller.dir.data') . 'Cms' . $object->config('ds'), true);
-                foreach($read as $nr => $file){
-                    if($file->type === File::TYPE){
-                        continue;
-                    }
-                    $explode = explode($object->config('controller.dir.data') . 'Cms' . $object->config('ds'), $file->url, 2);
-                    if(array_key_exists(1, $explode)){
-                        $target = $object->config('project.dir.root') .
-                            'Host' . $object->config('ds') .
-                            ucfirst($subdomain) . $object->config('ds') .
-                            ucfirst($host) . $object->config('ds') .
-                            ucfirst($extension) . $object->config('ds') .
-                            $explode[1];
-                        if(Dir::is($target) === false){
-                            Dir::create($target);
-                        }
-
-                    }
-                }
-                foreach($read as $nr => $file){
-                    if($file->type === Dir::TYPE){
-                        continue;
-                    }
-                    $explode = explode($object->config('controller.dir.data') . 'Cms' . $object->config('ds'), $file->url, 2);
-                    if(array_key_exists(1, $explode)){
-                        $target = $object->config('project.dir.root') .
-                            'Host' . $object->config('ds') .
-                            ucfirst($subdomain) . $object->config('ds') .
-                            ucfirst($host) . $object->config('ds') .
-                            ucfirst($extension) . $object->config('ds') .
-                            $explode[1];
-                        if(File::Extension($file->url) === 'php'){
-                            $read = File::read($file->url);
-                            $read = str_replace([
-                                '\\Cms\\Host\\Extension\\'
-                            ],[
-                                '\\Cms\\' . ucfirst($host) . '\\' . ucfirst($extension) . '\\'
-                            ], $read);
-                            File::write($target, $read);
-                        }
-                        elseif(stristr($file->url, 'Cms/Data/Route.json') !== false){
-                            $read = $object->data_read($file->url);
-                            $parse = new Parse($object);
-                            $data = [
-                                'subdomain' => $subdomain,
-                                'host'=> $host,
-                                'extension' => $extension
-                            ];
-                            if($read){
-                                foreach($read->data() as $key => $compile){
-                                    $parse_key = $parse->compile($key, $data);
-                                    $compile = $parse->compile($compile, $data);
-                                    $read->data('delete', $key);
-                                    $read->data($parse_key, $compile);
-                                }
-                                $read->write($target);
-                            }
-
-                            /*
-                            $read = str_replace([
-                                '{$Subdomain}',
-                                '{$Host}',
-                                '{$Extension}',
-                                '{$subdomain}',
-                                '{$host}',
-                                '{$extension}'
-                            ],[
-                                ucfirst($subdomain),
-                                ucfirst($host),
-                                ucfirst($extension),
-                                $subdomain,
-                                $host,
-                                $extension
-                            ], $read);
-                            File::write($target, $compile);
-                            */
-                        }
-                        elseif(stristr($file->url, 'Cms/Data/Command.json') !== false){
-                            $read = $object->data_read($file->url);
-                            if($read){
-                                foreach($read->data() as $id => $add){
-                                    dd($add);
-                                }
-                            }
-                        }
-                        /*
-                        elseif(stristr($file->url, 'Cms/Data/Command.json') !== false){
-                            $read = $object->data_read($file->url);
-                            if($read){
-                                foreach($read->data() as $id => $add){
-                                    $parse = new Parse($object);
-                                    $add = $parse->compile($add, [
-                                        'module' => $add->module,
-                                        'command' => $add->command,
-                                        'subdomain' => $subdomain,
-                                        'host'=> $host,
-                                        'extension' => $extension
-                                    ]);
-                                    unset($add->module);
-                                    unset($add->command);
-                                    $add = json_encode($add);
-                                    $add = '"' . str_replace('"', '\"', $add);
-
-                                    $execute = 'funda configure route add ' . $add;
-                                    Core::execute($execute, $output);
-                                    d($execute);
-                                    d($output);
-                                }
-                            }
-                        }
-                        */
-                        else {
-                            File::copy($file->url, $target);
-                        }
-                    }
-                }
             }
         }
         elseif(

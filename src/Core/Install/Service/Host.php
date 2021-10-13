@@ -196,8 +196,8 @@ class Host {
                                     $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->command;
                                     $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->command;
                                     $add->path = ucfirst($add->module) . '/' . ucfirst($add->command) . '/';
-                                    $add->resource = $has_route->resource;
-                                    $data = $object->data_read($add->resource, sha1($add->resource));
+                                    //$add->resource = $has_route->resource;
+                                    $data = $object->data_read($has_route->resource, sha1($has_route->resource));
                                     if($data){
                                         $data->data($key, [
                                             'controller' => $add->controller,
@@ -209,7 +209,6 @@ class Host {
                                     }
                                 }
                             }
-
                         }
                     } else {
                         File::copy($file->url, $target);
