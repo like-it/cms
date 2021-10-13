@@ -200,7 +200,7 @@ class Host {
                                     $data = $object->data_read($has_route->resource);
                                     if($data){
                                         unset($add->module);
-                                        unst($add->command);
+                                        unset($add->command);
                                         $data->data($key, $add);
                                         d($data);
                                         d($data->write($has_route->resource));
