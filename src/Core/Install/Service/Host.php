@@ -193,11 +193,20 @@ class Host {
                                     $add->host = [
                                         $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension']
                                     ];
-                                    $add->key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->command;
+                                    $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->command;
                                     $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->command;
                                     $add->path = ucfirst($add->module) . '/' . ucfirst($add->command) . '/';
                                     $add->resource = $has_route->resource;
-                                    dd($add);
+                                    $data = $object->data_read($add->resource, sha1($add->resource));
+                                    if($data){
+                                        $data->data($key, [
+                                            'controller' => $add->controller,
+                                            'path' => $add->path,
+                                            'host' => $add->host,
+                                            'method' => $add->method
+                                        ]);
+                                    }
+                                    dd($data);
                                 }
                             }
 
