@@ -178,7 +178,7 @@ class Host {
                     elseif(stristr($file->url, ucfirst($options['name']) . '/Data/Command.json') !== false){
                         $read = $object->data_read($file->url);
                         if($read){
-                            foreach($object->data(App::ROUTE) as $nr => $route){
+                            foreach($object->data(App::ROUTE)->data() as $nr => $route){
                                 if(!property_exists($route, 'resource')){
                                     continue;
                                 }
