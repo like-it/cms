@@ -190,6 +190,7 @@ class Host {
                             }
                             */
                             if($target){
+                                $read = $object->data_read($file->url);
                                 foreach($read->data() as $id => $add){
                                     $add->host = [
                                         $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension']
