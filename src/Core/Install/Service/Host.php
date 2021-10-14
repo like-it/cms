@@ -43,9 +43,19 @@ class Host {
         if(!array_key_exists('extension', $options)){
             return;
         }
-        if(array_key_exists('subdomain', $options)){
-
+        if(!array_key_exists('route', $options)){
+            return;
         }
+        if(!array_key_exists('command', $options)){
+            return;
+        }
+        if(array_key_exists('subdomain', $options)){
+            $route = $object->data_read($options['route']);
+            $command = $object->data_read($options['command']);
+            d($route);
+            dd($command);
+        }
+
     }
 
     public static function route_delete(App $object, $options=[]){
@@ -122,6 +132,51 @@ class Host {
         return true;
     }
 
+    public static function options(App $object, $options=[]){
+        $options['name'] = array_key_exists('subdomain', $options) ? $options['subdomain'] : $options['host'];
+        $options['route'] = array_key_exists('subdomain', $options) ?
+            $object->config('project.dir.host') .
+            $options['subdomain'] .
+            $object->config('ds') .
+            $options['host'] .
+            $object->config('ds') .
+            $options['extension'] .
+            $object->config('ds') .
+            'Data' .
+            $object->config('ds') .
+            'Route.json'
+            :
+            $object->config('project.dir.host') .
+            $options['host'] .
+            $object->config('ds') .
+            $options['extension'] .
+            $object->config('ds') .
+            'Data' .
+            $object->config('ds') .
+            'Route.json';
+        $options['command'] = array_key_exists('subdomain', $options) ?
+            $object->config('project.dir.host') .
+            $options['subdomain'] .
+            $object->config('ds') .
+            $options['host'] .
+            $object->config('ds') .
+            $options['extension'] .
+            $object->config('ds') .
+            'Data' .
+            $object->config('ds') .
+            'Command.json'
+            :
+            $object->config('project.dir.host') .
+            $options['host'] .
+            $object->config('ds') .
+            $options['extension'] .
+            $object->config('ds') .
+            'Data' .
+            $object->config('ds') .
+            'Command.json';
+        return $options;
+    }
+
     public static function file_create(App $object, $options=[]): bool
     {
         if (!array_key_exists('name', $options)) {
@@ -159,7 +214,6 @@ class Host {
                     }
                     elseif(stristr($file->url, ucfirst($options['name']) . '/Data/Route.json') !== false){
                         $read = $object->data_read($file->url);
-                        dd($target);
                         $parse = new Parse($object);
                         $data = [
                             'subdomain' => $options['subdomain'],
