@@ -54,10 +54,28 @@ class Host {
             d($options['command']);
             $route = $object->data_read($options['route']);
             $command = $object->data_read($options['command']);
-            d($route);
-            dd($command);
+            if(
+                $route &&
+                $command
+            ){
+                foreach ($command->data() as $id => $add) {
+                    $add->host = [
+                        $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension']
+                    ];
+                    $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->command;
+                    $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->command;
+                    $add->path = ucfirst($add->module) . '/' . ucfirst($add->command) . '/';
+                    //$add->resource = $has_route->resource;
+                    //$data = $object->data_read($target);
+                    unset($add->module);
+                    unset($add->command);
+                }
+                $route>data($key, $add);
+                $route->write($options['route']);
+                d($route);
+                dd($command);
+            }
         }
-
     }
 
     public static function route_delete(App $object, $options=[]){
