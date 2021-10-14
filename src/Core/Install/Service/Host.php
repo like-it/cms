@@ -50,6 +50,8 @@ class Host {
             return;
         }
         if(array_key_exists('subdomain', $options)){
+            d($options['route']);
+            d($options['command']);
             $route = $object->data_read($options['route']);
             $command = $object->data_read($options['command']);
             d($route);
