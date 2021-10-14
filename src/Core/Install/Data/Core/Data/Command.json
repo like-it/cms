@@ -1,8 +1,26 @@
 {
-    "1" : {
+    "0c0670ec-2b6d-410b-83d1-f51f5de67fd5" : {
         "module" : "user",
         "command" : "login",
         "method": [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "cea7754e-d924-4e50-8b53-7786f8185d6d" : {
+        "module" : "user",
+        "command" : "logout",
+        "method": [
+            "GET",
+            "OPTIONS"
+        ]
+    },
+    "2b2364b5-4eca-46f4-a1e7-29df1adae7da" : {
+        "module" : "user",
+        "submodule" : "login",
+        "command" : "blocked",
+        "method": [
+            "GET",
             "POST",
             "OPTIONS"
         ]
