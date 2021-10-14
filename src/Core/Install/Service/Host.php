@@ -70,7 +70,7 @@ class Host {
                     unset($add->module);
                     unset($add->command);
                 }
-                $route>data($key, $add);
+                $route->data($key, $add);
                 $route->write($options['route']);
                 d($route);
                 dd($command);
