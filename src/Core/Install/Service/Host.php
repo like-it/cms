@@ -158,8 +158,25 @@ class Host {
                         File::write($target, $read);
                     }
                     elseif(stristr($file->url, ucfirst($options['name']) . '/Data/Route.json') !== false){
-                        continue;
+                        $read = $object->data_read($file->url);
+                        dd($target);
+                        $parse = new Parse($object);
+                        $data = [
+                            'subdomain' => $options['subdomain'],
+                            'host' => $options['host'],
+                            'extension' => $options['extension']
+                        ];
+                        if ($read) {
+                            foreach ($read->data() as $key => $compile) {
+                                $parse_key = $parse->compile($key, $data);
+                                $compile = $parse->compile($compile, $data);
+                                $read->data('delete', $key);
+                                $read->data($parse_key, $compile);
+                            }
+                            $read->write($target);
+                        }
                     }
+                    /*
                     elseif(stristr($file->url, ucfirst($options['name']) . '/Data/Command.json') !== false){
                         d(Dir::name($file->url));
                         d(Dir::name($target));
@@ -181,7 +198,7 @@ class Host {
                             }
                             $read->write($target);
                             $list = $object->data_read($file->url);
-                            foreach($list->data() as $id => $add){
+                            foreach ($list->data() as $id => $add) {
                                 $add->host = [
                                     $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension']
                                 ];
@@ -195,7 +212,8 @@ class Host {
                                 $read->data($key, $add);
                                 $read->write($target);
                             }
-                    } else {
+                        }
+                    }*/ else {
                         File::copy($file->url, $target);
                     }
                 } else {
