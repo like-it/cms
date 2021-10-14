@@ -24,5 +24,26 @@
             "POST",
             "OPTIONS"
         ]
+    },
+    "0bd02850-e7f1-475e-8723-001e3db88699" : {
+        "module" : "user",
+        "submodule" : "password",
+        "command" : "forgot",
+        "method": [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "d09462b0-8a67-43a9-a360-2ea750450f3f" : {
+        "module" : "user",
+        "submodule" : "password",
+        "command" : "forgot",
+        "subcommand" : "success",
+        "method": [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
     }
 }

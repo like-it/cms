@@ -60,11 +60,17 @@ class Host {
                     $add->host = [
                         $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension']
                     ];
-                    if(property_exists($add, 'submodule')){
+                    if(property_exists($add, 'submodule') && !property_exists($add,'subcommand')){
                         $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->submodule . '-' . $add->command;
                         $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->submodule . '_' . $add->command;
                         $add->path = ucfirst($add->module) . '/' . ucfirst($add->submodule) . '/' . ucfirst($add->command) . '/';
-                    } else {
+                    }
+                    elseif(property_exists($add, 'submodule') && property_exists($add,'subcommand')){
+                        $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->submodule . '-' . $add->command . '-' . $add->subcommand;
+                        $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->submodule . '_' . $add->command . '_' . $add->subcommand;
+                        $add->path = ucfirst($add->module) . '/' . ucfirst($add->submodule) . '/' . ucfirst($add->command) . '/' . ucfirst($add->subcommand) . '/';
+                    }
+                    else {
                         $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->command;
                         $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->command;
                         $add->path = ucfirst($add->module) . '/' . ucfirst($add->command) . '/';
@@ -72,6 +78,7 @@ class Host {
                     unset($add->module);
                     unset($add->submodule);
                     unset($add->command);
+                    unset($add->subcommand);
                     $route->data($key, $add);
                 }
                 $route->write($options['route']);
