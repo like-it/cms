@@ -70,6 +70,7 @@ class Host {
                         $add->path = ucfirst($add->module) . '/' . ucfirst($add->command) . '/';
                     }
                     unset($add->module);
+                    unset($add->submodule);
                     unset($add->command);
                 }
                 $route->data($key, $add);
