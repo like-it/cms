@@ -138,40 +138,40 @@ class Host {
         $options['name'] = array_key_exists('subdomain', $options) ? $options['subdomain'] : $options['host'];
         $options['route'] = array_key_exists('subdomain', $options) ?
             $object->config('project.dir.host') .
-            $options['subdomain'] .
+            ucfirst($options['subdomain']) .
             $object->config('ds') .
-            $options['host'] .
+            ucfirst($options['host']) .
             $object->config('ds') .
-            $options['extension'] .
+            ucfirst($options['extension']) .
             $object->config('ds') .
             'Data' .
             $object->config('ds') .
             'Route.json'
             :
             $object->config('project.dir.host') .
-            $options['host'] .
+            ucfirst($options['host']) .
             $object->config('ds') .
-            $options['extension'] .
+            ucfirst($options['extension']) .
             $object->config('ds') .
             'Data' .
             $object->config('ds') .
             'Route.json';
         $options['command'] = array_key_exists('subdomain', $options) ?
             $object->config('project.dir.host') .
-            $options['subdomain'] .
+            ucfirst($options['subdomain']) .
             $object->config('ds') .
-            $options['host'] .
+            ucfirst($options['host']) .
             $object->config('ds') .
-            $options['extension'] .
+            ucfirst($options['extension']) .
             $object->config('ds') .
             'Data' .
             $object->config('ds') .
             'Command.json'
             :
             $object->config('project.dir.host') .
-            $options['host'] .
+            ucfirst($options['host']) .
             $object->config('ds') .
-            $options['extension'] .
+            ucfirst($options['extension']) .
             $object->config('ds') .
             'Data' .
             $object->config('ds') .
