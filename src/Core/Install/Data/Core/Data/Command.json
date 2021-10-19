@@ -1,5 +1,5 @@
 {
-    "0c0670ec-2b6d-410b-83d1-f51f5de67fd5" : {
+    "0c3e7b89-9100-46c4-abdd-7eb76732166e" : {
         "module" : "user",
         "method": [
             "GET",
@@ -7,7 +7,7 @@
             "OPTIONS"
         ]
     },
-    "0c0670ec-2b6d-410b-83d1-f51f5de67fd5" : {
+    "7bc142d4-0578-4309-9714-d079332363ee" : {
         "module" : "user",
         "path" : "/User/{$id/",
         "method": [
