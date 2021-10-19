@@ -1,6 +1,24 @@
 {
     "0c0670ec-2b6d-410b-83d1-f51f5de67fd5" : {
         "module" : "user",
+        "method": [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "0c0670ec-2b6d-410b-83d1-f51f5de67fd5" : {
+        "module" : "user",
+        "path" : "/User/{$id/",
+        "method": [
+            "GET",
+            "PUT",
+            "DELETE",
+            "OPTIONS"
+        ]
+    },
+    "0c0670ec-2b6d-410b-83d1-f51f5de67fd5" : {
+        "module" : "user",
         "command" : "login",
         "method": [
             "POST",
@@ -41,6 +59,102 @@
         "command" : "forgot",
         "subcommand" : "success",
         "method": [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "325c705e-a545-4f79-87db-51ea729c70cf" : {
+        "module" : "user",
+        "submodule" : "refresh",
+        "command" : "token",
+        "method" : [
+            "GET",
+            "OPTIONS"
+        ]
+    },
+    "8adeece0-6590-4bfe-b3c3-545dea80d9ca" : {
+        "module" : "user",
+        "command" : "current",
+        "method" : [
+            "GET",
+            "OPTIONS"
+        ]
+    },
+    "d0e593d8-b601-4a30-b2cb-ccf0da31f8af" : {
+        "module" : "user",
+        "command" : "list",
+        "method" : [
+            "GET",
+            "OPTIONS"
+        ]
+    },
+    "92a63a25-71de-4d37-88cf-8bd98ab23b8d" : {
+        "module" : "fileSystem",
+        "command" : "read",
+        "method" : [
+            "GET",
+            "OPTIONS"
+        ]
+    },
+    "d349c424-e66a-4ee2-98fc-8f2ce9bd1980" : {
+        "module" : "fileSystem",
+        "command" : "write",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "c938d367-f725-439d-ac88-009414737809" : {
+        "module" : "fileSystem",
+        "command" : "move",
+        "method" : [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "7d850636-7468-44b3-ae02-e316276ef5ea" : {
+        "module" : "fileSystem",
+        "command" : "upload",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "d6d63948-3e71-47cd-a037-5027f8f2a4b8" : {
+        "module" : "fileSystem",
+        "command" : "delete",
+        "method" : [
+            "DELETE",
+            "OPTIONS"
+        ]
+    },
+    "e169c37e-49a0-44d5-9c43-ea9b408643e9" : {
+        "module" : "fileSystem",
+        "submodule" : "list",
+        "command" : "directory",
+        "method" : [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "9403e839-4ce0-4be1-a249-ab8e8e5f74b1" : {
+        "module" : "fileSystem",
+        "submodule" : "list",
+        "command" : "file",
+        "method" : [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "76f96508-4235-46d0-af6a-2a10a02732e1" : {
+        "module" : "fileSystem",
+        "submodule" : "list",
+        "command" : "tree",
+        "method" : [
             "GET",
             "POST",
             "OPTIONS"

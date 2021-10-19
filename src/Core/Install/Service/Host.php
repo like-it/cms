@@ -8,6 +8,7 @@ use R3m\Io\Module\Core;
 use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
 use R3m\Io\Module\Parse;
+use R3m\Io\Module\Parse\Token;
 
 
 class Host {
@@ -60,20 +61,59 @@ class Host {
                     $add->host = [
                         $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension']
                     ];
-                    if(property_exists($add, 'submodule') && !property_exists($add,'subcommand')){
-                        $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->submodule . '-' . $add->command;
-                        $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->submodule . '_' . $add->command;
-                        $add->path = ucfirst($add->module) . '/' . ucfirst($add->submodule) . '/' . ucfirst($add->command) . '/';
+                    if(
+                        property_exists($add, 'module') &&
+                        !property_exists($add, 'submodule') &&
+                        !property_exists($add, 'command') &&
+                        !property_exists($add,'subcommand')
+                    ){
+                        $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . 'command';
+                        $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . 'command';
+                        if(!property_exists($add, 'path')){
+                            $add->path = ucfirst($add->module) . '/';
+                        } else {
+                            $tree = Token::tree($add->path);
+                            dd($tree);
+                        }
                     }
-                    elseif(property_exists($add, 'submodule') && property_exists($add,'subcommand')){
-                        $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->submodule . '-' . $add->command . '-' . $add->subcommand;
-                        $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->submodule . '_' . $add->command . '_' . $add->subcommand;
-                        $add->path = ucfirst($add->module) . '/' . ucfirst($add->submodule) . '/' . ucfirst($add->command) . '/' . ucfirst($add->subcommand) . '/';
-                    }
-                    else {
+                    elseif(
+                        property_exists($add, 'module') &&
+                        property_exists($add, 'command') &&
+                        !property_exists($add, 'submodule') &&
+                        !property_exists($add,'subcommand')
+                    ) {
                         $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->command;
                         $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->command;
-                        $add->path = ucfirst($add->module) . '/' . ucfirst($add->command) . '/';
+                        if(!property_exists($add, 'path')){
+                            $add->path = ucfirst($add->module) . '/' . ucfirst($add->command) . '/';
+                        }
+                    }
+                    elseif(
+                        property_exists($add, 'module') &&
+                        property_exists($add, 'submodule') &&
+                        property_exists($add, 'command') &&
+                        !property_exists($add,'subcommand')
+                    ){
+                        $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->submodule . '-' . $add->command;
+                        $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->submodule . '_' . $add->command;
+                        if(!property_exists($add, 'path')){
+                            $add->path = ucfirst($add->module) . '/' . ucfirst($add->submodule) . '/' . ucfirst($add->command) . '/';
+                        }
+
+                    }
+                    elseif(
+                        property_exists($add, 'module') &&
+                        property_exists($add, 'submodule') &&
+                        property_exists($add, 'command') &&
+                        property_exists($add,'subcommand')
+                    ){
+                        $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->submodule . '-' . $add->command . '-' . $add->subcommand;
+                        $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->submodule . '_' . $add->command . '_' . $add->subcommand;
+                        if(!property_exists($add, 'path')) {
+                            $add->path = ucfirst($add->module) . '/' . ucfirst($add->submodule) . '/' . ucfirst($add->command) . '/' . ucfirst($add->subcommand) . '/';
+                        }
+                    } else {
+                        throw new exception('need module');
                     }
                     unset($add->module);
                     unset($add->submodule);
