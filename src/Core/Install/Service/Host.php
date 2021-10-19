@@ -21,7 +21,7 @@ class Host {
         if(!array_key_exists('extension', $options)){
             return false;
         }
-        if(array_key_exists('subdomain', $options)){
+        if(!array_key_exists('subdomain', $options)){
             $execute = 'rm -rf ' .
                 $object->config('project.dir.root') . 'Host' . $object->config('ds') .
                 ucfirst($options['host']) . $object->config('ds') .
@@ -122,10 +122,7 @@ class Host {
                     unset($add->subcommand);
                     $route->data($key, $add);
                 }
-                d($options['route']);
-                //$route->write($options['route']);
-                //d($route);
-                //dd($command);
+                $route->write($options['route']);
             }
         }
     }
