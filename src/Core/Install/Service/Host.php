@@ -122,6 +122,7 @@ class Host {
                     unset($add->subcommand);
                     $route->data($key, $add);
                 }
+                d($options['route']);
                 //$route->write($options['route']);
                 //d($route);
                 //dd($command);
