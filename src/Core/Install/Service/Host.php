@@ -67,14 +67,12 @@ class Host {
                         !property_exists($add, 'command') &&
                         !property_exists($add,'subcommand')
                     ){
-                        $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . 'command';
-                        $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . 'command';
                         if(!property_exists($add, 'path')){
                             $add->path = ucfirst($add->module) . '/';
-                        } else {
-                            $tree = Token::tree($add->path);
-                            dd($tree);
                         }
+                        $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . 'command';
+                        $key = Host::key_create($add, $key);
+                        $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . 'command';
                     }
                     elseif(
                         property_exists($add, 'module') &&
@@ -82,11 +80,13 @@ class Host {
                         !property_exists($add, 'submodule') &&
                         !property_exists($add,'subcommand')
                     ) {
-                        $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->command;
-                        $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->command;
                         if(!property_exists($add, 'path')){
                             $add->path = ucfirst($add->module) . '/' . ucfirst($add->command) . '/';
                         }
+                        $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->command;
+                        $key = Host::key_create($add, $key);
+                        $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->command;
+
                     }
                     elseif(
                         property_exists($add, 'module') &&
@@ -94,12 +94,12 @@ class Host {
                         property_exists($add, 'command') &&
                         !property_exists($add,'subcommand')
                     ){
-                        $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->submodule . '-' . $add->command;
-                        $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->submodule . '_' . $add->command;
                         if(!property_exists($add, 'path')){
                             $add->path = ucfirst($add->module) . '/' . ucfirst($add->submodule) . '/' . ucfirst($add->command) . '/';
                         }
-
+                        $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->submodule . '-' . $add->command;
+                        $key = Host::key_create($add, $key);
+                        $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->submodule . '_' . $add->command;
                     }
                     elseif(
                         property_exists($add, 'module') &&
@@ -107,11 +107,12 @@ class Host {
                         property_exists($add, 'command') &&
                         property_exists($add,'subcommand')
                     ){
-                        $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->submodule . '-' . $add->command . '-' . $add->subcommand;
-                        $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->submodule . '_' . $add->command . '_' . $add->subcommand;
                         if(!property_exists($add, 'path')) {
                             $add->path = ucfirst($add->module) . '/' . ucfirst($add->submodule) . '/' . ucfirst($add->command) . '/' . ucfirst($add->subcommand) . '/';
                         }
+                        $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->submodule . '-' . $add->command . '-' . $add->subcommand;
+                        $key = Host::key_create($add, $key);
+                        $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->submodule . '_' . $add->command . '_' . $add->subcommand;
                     } else {
                         throw new exception('need module');
                     }
@@ -126,6 +127,16 @@ class Host {
                 dd($command);
             }
         }
+    }
+
+    public static function key_create($add, $key=''){
+        $tree = Token::tree($add->path);
+        foreach($tree as $nr => $record){
+            if($record['type'] === Token::TYPE_VARIABLE){
+                $key .= '-' . $record['variable']['attribute'];
+            }
+        }
+        return $key;
     }
 
     public static function route_delete(App $object, $options=[]){
