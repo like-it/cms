@@ -9,7 +9,7 @@
     },
     "7bc142d4-0578-4309-9714-d079332363ee" : {
         "module" : "user",
-        "path" : "/User/{$id}/",
+        "path" : "/User/{$uuid}/",
         "method": [
             "GET",
             "PUT",

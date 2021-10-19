@@ -16,8 +16,8 @@ class User extends View {
     const DIR = __DIR__ . DIRECTORY_SEPARATOR;    
 
     public static function command(App $object){
-        $id = $object->request('id');
-        if($id){
+        $uuid = $object->request('uuid');
+        if($uuid){
             try {
                 switch(Handler::method()){
                     case Handler::GET :
