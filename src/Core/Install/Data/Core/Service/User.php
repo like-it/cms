@@ -14,6 +14,7 @@ use R3m\Io\Exception\UrlNotExistException;
 class User  {
 
     public static function create(App $object){
+        d($object->request());
         dd('create User');
     }
 
