@@ -12,16 +12,11 @@ use R3m\Io\Exception\LocateException;
 use R3m\Io\Exception\UrlEmptyException;
 use R3m\Io\Exception\UrlNotExistException;
 
-class User  {
+class User extends Main {
 
     public static function create(App $object){
 
-        //$data = new Data();
-        //$data->set('email', $object->request('email'));
-
-        dd($object->data());
-
-        $url = $object->data('controller.dir.root') .
+        $url = $object->data('host.dir.root') .
             'Node' .
             $object->config('ds') .
             'Validator' .
@@ -29,7 +24,10 @@ class User  {
             File::basename(__CLASS__) .
             $object->config('extension.json');
 
-        d($url);
+        $object->request('node.type', 'user');
+        $validate = Main::validate($object, $url);
+
+        d($validate);
 
         d($object->request());
         dd('create User');
