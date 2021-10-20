@@ -79,6 +79,7 @@ class User extends Main {
     }
 
     public static function update(App $object){
+        $object->request('node.type', 'user');
         $uuid = $object->request('uuid');
         $url = User::getDataUrl($object);
         $data = $object->data_read($url);

@@ -61,6 +61,9 @@ class Main {
         }
         if($data){
             $validate = $data->data($object->request('node.type') . '.validate');
+            if(empty($validate)){
+                return false;
+            }
             try {
                 return Validate::validate($object, $validate);
             } catch (Exception $e) {
