@@ -35,7 +35,7 @@ class User extends Main {
         } else {
             $error = [];
             $error['error'] = 'error: Validator did not received valid url...';
-            return new Response($error);
+            return new Response($error, Response::TYPE_JSON, 400);
         }
     }
 
