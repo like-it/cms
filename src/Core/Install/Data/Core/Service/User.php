@@ -5,6 +5,7 @@ namespace Host\Subdomain\Host\Extension\Service;
 use R3m\Io\App;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
+use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
 use R3m\Io\Module\Response;
 
@@ -23,7 +24,10 @@ class User extends Main {
         $validate = Main::validate($object, User::getValidatorUrl($object));
         if($validate){
             if($validate->success === true){
-                $data = $object->data_read(User::getDataUrl($object));
+                $url = User::getDataUrl($object);
+                $dir = Dir::name($url);
+                Dir::create($dir);
+                $data = $object->data_read($url);
                 if(!$data){
                     $data = new Data();
                 }
@@ -34,7 +38,7 @@ class User extends Main {
                 $data->set($uuid . '.email', $email);
                 $data->set($uuid . '.password', $password);
                 $data->set($uuid . '.isActive', false);
-                $data->write(User::getDataUrl($object));
+                $data->write($url);
                 //store activation code in userParameter with activation expiration date...
                 //send activation email to user...
                 return new Response($data->get($uuid), Response::TYPE_JSON);
