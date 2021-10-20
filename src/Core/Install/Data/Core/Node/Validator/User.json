@@ -1,0 +1,41 @@
+{
+    "user": {
+        "validate": {
+            "uuid" : [
+                {
+                    "string.length": "==36"
+                },
+                {
+                    "is.uuid" : true
+                }
+            ],
+            "email" : [
+                {
+                    "is.email" : true
+                }
+            ],
+            "password" : [
+                {
+                    "string.length": ">=8"
+                },
+                {
+                    "string.has.number": ">=1"
+                },
+                {
+                    "string.has.uppercase": ">=1"
+                },
+                {
+                    "string.has.lowercase": ">=1"
+                },
+                {
+                    "string.has.symbol" : ">=1"
+                }
+            ],
+            "password2" : [
+                {
+                    "string.equals": "password"
+                }
+            ]
+        }
+    }
+}

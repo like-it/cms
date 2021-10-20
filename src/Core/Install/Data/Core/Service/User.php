@@ -19,7 +19,9 @@ class User  {
         //$data = new Data();
         //$data->set('email', $object->request('email'));
 
-        $url = $object->data('controller.dir.data') .
+        dd($object->data());
+
+        $url = $object->data('controller.dir.root') .
             'Node' .
             $object->config('ds') .
             'Validator' .
