@@ -3,7 +3,8 @@ namespace Host\Subdomain\Host\Extension\Service;
 
 
 use R3m\Io\App;
-use R3m\Io\Module\Handler;
+use R3m\Io\Module\Data;
+use R3m\Io\Module\File;
 use R3m\Io\Module\View;
 
 use Exception;
@@ -14,6 +15,14 @@ use R3m\Io\Exception\UrlNotExistException;
 class User  {
 
     public static function create(App $object){
+
+        //$data = new Data();
+        //$data->set('email', $object->request('email'));
+
+        $url = $object->data('controller.dir.data') . File::basename(__CLASS__) . $object->config('extension.json');
+
+        dd($url);
+
         d($object->request());
         dd('create User');
     }
