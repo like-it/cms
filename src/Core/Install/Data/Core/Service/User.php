@@ -89,6 +89,7 @@ class User extends Main {
         }
         $record = $data->get($uuid);
         if($record){
+            d($object->request());
             if($object->request('password') && $object->request('password2')){
                 $is_valid = User::validatePasswords($object);
                 d($is_valid);
