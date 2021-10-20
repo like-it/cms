@@ -121,7 +121,9 @@ class User extends Main {
                     case '1' :
                     case 'true' :
                         $isActive = true;
-                    default: false;
+                    break;
+                    default:
+                        $isActive = false;
                 }
                 $data->set($uuid . '.isActive', $isActive);
                 $is_change = true;
