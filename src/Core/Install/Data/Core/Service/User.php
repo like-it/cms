@@ -115,7 +115,15 @@ class User extends Main {
                 }
             }
             if($object->request('isActive')){
-                $data->set($uuid . '.isActive', (bool) $object->request('isActive'));
+                $isActive = $object->request('isActive');
+                switch($isActive){
+                    case 1 :
+                    case '1' :
+                    case 'true' :
+                        $isActive = true;
+                    default: false;
+                }
+                $data->set($uuid . '.isActive', $isActive);
                 $is_change = true;
             }
             if($is_change){
