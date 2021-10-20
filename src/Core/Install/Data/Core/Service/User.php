@@ -21,7 +21,7 @@ class User  {
 
         $url = $object->data('controller.dir.data') . File::basename(__CLASS__) . $object->config('extension.json');
 
-        dd($url);
+        d($url);
 
         d($object->request());
         dd('create User');
