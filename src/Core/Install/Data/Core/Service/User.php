@@ -3,7 +3,7 @@ namespace Host\Subdomain\Host\Extension\Service;
 
 
 use R3m\Io\App;
-use R3m\Io\Module\Data;
+use R3m\Io\Module\Core;
 use R3m\Io\Module\File;
 use R3m\Io\Module\Response;
 
@@ -24,6 +24,7 @@ class User extends Main {
             File::basename(__CLASS__) .
             $object->config('extension.json');
 
+        $object->request('uuid', Core::uuid());
         $object->request('node.type', 'user');
         $validate = Main::validate($object, $url);
         if($validate){
