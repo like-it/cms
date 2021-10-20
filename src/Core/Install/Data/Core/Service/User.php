@@ -16,7 +16,7 @@ class User extends Main {
 
     public static function create(App $object){
 
-        $url = $object->data('host.dir.root') .
+        $url = $object->config('host.dir.root') .
             'Node' .
             $object->config('ds') .
             'Validator' .
