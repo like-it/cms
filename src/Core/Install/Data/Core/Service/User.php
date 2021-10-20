@@ -90,19 +90,44 @@ class User extends Main {
         }
         $record = $data->get($uuid);
         if($record){
-            d($object->request());
+            $is_change = false;
             if($object->request('password') && $object->request('password2')){
-                $is_valid = User::validatePasswords($object);
-                d($is_valid);
-                if($is_valid){
-                    dd('yue');
+                $validate = User::validatePasswords($object);
+                if($validate->is_valid){
+                    $password = password_hash($object->request('password'),User::PASSWORD_ALGO, ['cost' => User::PASSWORD_COST]);
+                    $data->set($uuid . '.password', $password);
+                    $is_change = true;
+                } else {
+                    $error = [];
+                    $error['validate']['password'] = $validate->test['password'];
+                    return new Response($error, Response::TYPE_JSON, 400);
                 }
-//                $password = password_hash($object->request('password'),User::PASSWORD_ALGO, ['cost' => User::PASSWORD_COST]);
             }
-
-//            $email = $object->request('email');
-
-//            return new Response($record, Response::TYPE_JSON);
+            if($object->request('email')){
+                $validate = User::validateAttribute($object, 'email');
+                if($validate->is_valid){
+                    $data->set($uuid . '.email', $object->request('email'));
+                    $is_change = true;
+                } else {
+                    $error = [];
+                    $error['validate']['email'] = $validate->test['email'];
+                    return new Response($error, Response::TYPE_JSON, 400);
+                }
+            }
+            if($object->request('isActive')){
+                $data->set($uuid . '.isActive', (bool) $object->request('isActive'));
+                $is_change = true;
+            }
+            if($is_change){
+                $data->write($url);
+                $record = $data->get($uuid);
+                unset($record->password);
+                return new Response($record, Response::TYPE_JSON);
+            } else {
+                $error = [];
+                $error['error'] = 'Nothing has changed...';
+                return new Response($error, Response::TYPE_JSON, 400);
+            }
         } else {
             $error = [];
             $error['error'] = 'Could not find node with uuid: '. $uuid;
@@ -145,7 +170,7 @@ class User extends Main {
         return rand(1000, 9999) . '-' . rand(1000, 9999) . '-' .  rand(1000, 9999) . '-' .  rand(1000, 9999) . '-' .  rand(1000, 9999) . '-' .  rand(1000, 9999);
     }
 
-    private static function validatePasswords($object): bool
+    private static function validatePasswords($object)
     {
         $validate = Main::validate($object, User::getValidatorUrl($object));
         $is_valid = false;
@@ -170,6 +195,26 @@ class User extends Main {
                 }
             }
         }
-        return $is_valid;
+        $validate->is_valid = $is_valid;
+        return $validate;
+    }
+
+    private static function validateAttribute($object, $attribute)
+    {
+        $validate = Main::validate($object, User::getValidatorUrl($object));
+        $is_valid = false;
+        if($validate){
+            $is_valid = true;
+            foreach($validate->test[$attribute] as $type => $status_list){
+                foreach ($status_list as $nr => $status){
+                    if($status === false){
+                        $is_valid = false;
+                        break 2;
+                    }
+                }
+            }
+        }
+        $validate->is_valid = $is_valid;
+        return $validate;
     }
 }
