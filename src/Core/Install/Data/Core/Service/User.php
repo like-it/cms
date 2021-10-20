@@ -79,7 +79,32 @@ class User extends Main {
     }
 
     public static function update(App $object){
-        dd('update User');
+        $uuid = $object->request('uuid');
+        $url = User::getDataUrl($object);
+        $data = $object->data_read($url);
+        if(!$data){
+            $error = [];
+            $error['error'] = 'Could not read node file...';
+            return new Response($error, Response::TYPE_JSON, 400);
+        }
+        $record = $data->get($uuid);
+        if($record){
+            if($object->request('password') && $object->request('password2')){
+                $is_valid = User::validatePasswords($object);
+                if($is_valid){
+                    dd('yue');
+                }
+//                $password = password_hash($object->request('password'),User::PASSWORD_ALGO, ['cost' => User::PASSWORD_COST]);
+            }
+
+//            $email = $object->request('email');
+
+//            return new Response($record, Response::TYPE_JSON);
+        } else {
+            $error = [];
+            $error['error'] = 'Could not find node with uuid: '. $uuid;
+            return new Response($error, Response::TYPE_JSON, 400);
+        }
     }
 
     public static function delete(App $object){
@@ -115,5 +140,33 @@ class User extends Main {
     private static function generateActivationCode(): string
     {
         return rand(1000, 9999) . '-' . rand(1000, 9999) . '-' .  rand(1000, 9999) . '-' .  rand(1000, 9999) . '-' .  rand(1000, 9999) . '-' .  rand(1000, 9999);
+    }
+
+    private static function validatePasswords($object): bool
+    {
+        $validate = Main::validate($object, User::getValidatorUrl($object));
+        $is_valid = false;
+        if($validate){
+            $is_valid = true;
+            foreach($validate->test['password'] as $type => $status_list){
+                foreach ($status_list as $nr => $status){
+                    if($status === false){
+                        $is_valid = false;
+                        break 2;
+                    }
+                }
+            }
+            if($is_valid){
+                foreach($validate->test['password2'] as $type => $status_list){
+                    foreach ($status_list as $nr => $status){
+                        if($status === false){
+                            $is_valid = false;
+                            break 2;
+                        }
+                    }
+                }
+            }
+        }
+        return $is_valid;
     }
 }
