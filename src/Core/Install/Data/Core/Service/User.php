@@ -42,8 +42,8 @@ class User extends Main {
                 $data->set($uuid . '.parameter.activation_code', User::generateActivationCode());
                 $data->set($uuid . '.parameter.activation_expiration_date', strtotime('+1 day'));
                 $data->write($url);
-                //store activation code in userParameter with activation expiration date...
                 //send activation email to user...
+                //install user gets activation screen directly without email
                 return new Response($data->get($uuid), Response::TYPE_JSON);
             } else {
                 return new Response($validate->test, Response::TYPE_JSON, 400);
@@ -55,8 +55,24 @@ class User extends Main {
         }
     }
 
-    public static function read(App $object){
-        dd('read User');
+    public static function read(App $object): Response
+    {
+        $uuid = $object->request('uuid');
+        $url = User::getDataUrl($object);
+        $data = $object->data_read($url);
+        if(!$data){
+            $error = [];
+            $error['error'] = 'Could not read node file...';
+            return new Response($error, Response::TYPE_JSON, 400);
+        }
+        $record = $data->get($uuid);
+        if($record){
+            return new Response($record, Response::TYPE_JSON);
+        } else {
+            $error = [];
+            $error['error'] = 'Could not find node with uuid: '. $uuid;
+            return new Response($error, Response::TYPE_JSON, 400);
+        }
     }
 
     public static function update(App $object){
