@@ -19,7 +19,13 @@ class User  {
         //$data = new Data();
         //$data->set('email', $object->request('email'));
 
-        $url = $object->data('controller.dir.data') . File::basename(__CLASS__) . $object->config('extension.json');
+        $url = $object->data('controller.dir.data') .
+            'Node' .
+            $object->config('ds') .
+            'Validator' .
+            $object->config('ds') .
+            File::basename(__CLASS__) .
+            $object->config('extension.json');
 
         d($url);
 
