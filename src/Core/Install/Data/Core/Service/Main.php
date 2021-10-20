@@ -55,7 +55,6 @@ class Main {
     }
 
     public static function validate(App $object, $url){
-        dd($url);
         $data = $object->data(sha1($url));
         if($data === null){
             $data = $object->parse_read($url, sha1($url));
