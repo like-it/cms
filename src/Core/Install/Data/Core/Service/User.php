@@ -4,6 +4,7 @@ namespace Host\Subdomain\Host\Extension\Service;
 
 use R3m\Io\App;
 use R3m\Io\Module\Core;
+use R3m\Io\Module\Data;
 use R3m\Io\Module\File;
 use R3m\Io\Module\Response;
 
