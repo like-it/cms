@@ -91,6 +91,7 @@ class User extends Main {
         if($record){
             if($object->request('password') && $object->request('password2')){
                 $is_valid = User::validatePasswords($object);
+                d($is_valid);
                 if($is_valid){
                     dd('yue');
                 }
