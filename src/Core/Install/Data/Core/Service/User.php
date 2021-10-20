@@ -67,6 +67,7 @@ class User extends Main {
         }
         $record = $data->get($uuid);
         if($record){
+            unset($record->password);
             return new Response($record, Response::TYPE_JSON);
         } else {
             $error = [];
