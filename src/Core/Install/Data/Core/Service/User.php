@@ -44,7 +44,9 @@ class User extends Main {
                 $data->write($url);
                 //send activation email to user...
                 //install user gets activation screen directly without email
-                return new Response($data->get($uuid), Response::TYPE_JSON);
+                $record = $data->get($uuid);
+                unset($record->password);
+                return new Response($record, Response::TYPE_JSON);
             } else {
                 return new Response($validate->test, Response::TYPE_JSON, 400);
             }
