@@ -18,7 +18,8 @@ class User extends Main {
     const PASSWORD_ALGO = PASSWORD_BCRYPT;
     const PASSWORD_COST = 13;
 
-    public static function create(App $object){
+    public static function create(App $object): Response
+    {
         $object->request('uuid', Core::uuid());
         $object->request('node.type', 'user');
         $validate = Main::validate($object, User::getValidatorUrl($object));
@@ -38,6 +39,8 @@ class User extends Main {
                 $data->set($uuid . '.email', $email);
                 $data->set($uuid . '.password', $password);
                 $data->set($uuid . '.isActive', false);
+                $data->set($uuid . '.parameter.activation_code', User::generateActivationCode());
+                $data->set($uuid . '.parameter.activation_expiration_date', strtotime('+1 day'));
                 $data->write($url);
                 //store activation code in userParameter with activation expiration date...
                 //send activation email to user...
@@ -68,26 +71,30 @@ class User extends Main {
         dd('list Users');
     }
 
-    private static function getValidatorUrl(App $object){
-        $url = $object->config('host.dir.root') .
+    private static function getValidatorUrl(App $object): string
+    {
+        return $object->config('host.dir.root') .
             'Node' .
             $object->config('ds') .
             'Validator' .
             $object->config('ds') .
             File::basename(__CLASS__) .
             $object->config('extension.json');
-        return $url;
     }
 
-    private static function getDataUrl(App $object){
-        $url = $object->config('host.dir.root') .
+    private static function getDataUrl(App $object): string
+    {
+        return $object->config('host.dir.root') .
             'Node' .
             $object->config('ds') .
             'List' .
             $object->config('ds') .
             File::basename(__CLASS__) .
             $object->config('extension.json');
-        return $url;
     }
 
+    private static function generateActivationCode(): string
+    {
+        return rand(1000, 9999) . '-' . rand(1000, 9999) . '-' .  rand(1000, 9999) . '-' .  rand(1000, 9999) . '-' .  rand(1000, 9999) . '-' .  rand(1000, 9999);
+    }
 }
