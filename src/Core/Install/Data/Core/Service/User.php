@@ -31,7 +31,7 @@ class User extends Main {
                 //we can create the user
                 dd('create User');
             } else {
-                return new Response($validate, Response::TYPE_JSON, 400);
+                return new Response($validate->test, Response::TYPE_JSON, 400);
             }
         } else {
             $error = [];
