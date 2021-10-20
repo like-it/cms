@@ -26,11 +26,17 @@ class User extends Main {
 
         $object->request('node.type', 'user');
         $validate = Main::validate($object, $url);
-
-        d($validate);
-
-        d($object->request());
-        dd('create User');
+        $validate = false;
+        if($validate){
+            if($validate->success === true){
+                //we can create the user
+                dd('create User');
+            }
+        } else {
+            $error = [];
+            $error['error'] = 'error: Validator did not received valid url...';
+            return $error;
+        }
     }
 
     public static function read(App $object){
