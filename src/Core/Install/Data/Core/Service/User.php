@@ -120,6 +120,7 @@ class User extends Main {
         if($record){
             $is_change = false;
             if($object->request('delete')){
+                d('yes');
                 $attribute_list = explode(',', $object->request('delete'));
                 foreach($attribute_list as $nr => $attribute){
                     $attribute = trim($attribute, ' ');
