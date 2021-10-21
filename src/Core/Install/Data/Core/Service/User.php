@@ -117,6 +117,7 @@ class User extends Main {
             );
         }
         $record = $data->get($uuid);
+        dd($record);
         if($record){
             $is_change = false;
             if($object->request('delete')){
