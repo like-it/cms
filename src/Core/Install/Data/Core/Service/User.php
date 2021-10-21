@@ -117,6 +117,7 @@ class User extends Main {
             );
         }
         $record = $data->get($uuid);
+        d($object->request());
         d($data->data());
         dd($record);
         if($record){
