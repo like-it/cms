@@ -117,6 +117,7 @@ class User extends Main {
             );
         }
         $record = $data->get($uuid);
+        d($data-data());
         dd($record);
         if($record){
             $is_change = false;
