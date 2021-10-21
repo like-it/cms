@@ -123,7 +123,7 @@ class User extends Main {
                 $attribute_list = explode(',', $object->request('attribute.delete'));
                 foreach($attribute_list as $nr => $attribute){
                     $attribute = trim($attribute, ' ');
-                    $data->delete($attribute);
+                    $data->delete($uuid . '.' . $attribute);
                     $is_change = true;
                 }
             }
