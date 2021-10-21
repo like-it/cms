@@ -18,6 +18,7 @@ class User extends Main {
     const PASSWORD_ALGO = PASSWORD_BCRYPT;
     const PASSWORD_COST = 13;
 
+
     public static function create(App $object): Response
     {
         $object->request('uuid', Core::uuid());
@@ -46,14 +47,25 @@ class User extends Main {
                 //install user gets activation screen directly without email
                 $record = $data->get($uuid);
                 unset($record->password);
-                return new Response($record, Response::TYPE_JSON);
+                return new Response(
+                    $record,
+                    Response::TYPE_JSON
+                );
             } else {
-                return new Response($validate->test, Response::TYPE_JSON, 400);
+                return new Response(
+                    $validate->test,
+                    Response::TYPE_JSON,
+                    Response::STATUS_ERROR
+                );
             }
         } else {
             $error = [];
             $error['error'] = 'Validator did not received valid url...';
-            return new Response($error, Response::TYPE_JSON, 400);
+            return new Response(
+                $error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
         }
     }
 
@@ -65,20 +77,32 @@ class User extends Main {
         if(!$data){
             $error = [];
             $error['error'] = 'Could not read node file...';
-            return new Response($error, Response::TYPE_JSON, 400);
+            return new Response(
+                $error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
         }
         $record = $data->get($uuid);
         if($record){
             unset($record->password);
-            return new Response($record, Response::TYPE_JSON);
+            return new Response(
+                $record,
+                Response::TYPE_JSON
+            );
         } else {
             $error = [];
             $error['error'] = 'Could not find node with uuid: '. $uuid;
-            return new Response($error, Response::TYPE_JSON, 400);
+            return new Response(
+                $error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
         }
     }
 
-    public static function update(App $object){
+    public static function update(App $object): Response
+    {
         $object->request('node.type', 'user');
         $uuid = $object->request('uuid');
         $url = User::getDataUrl($object);
@@ -86,7 +110,11 @@ class User extends Main {
         if(!$data){
             $error = [];
             $error['error'] = 'Could not read node file...';
-            return new Response($error, Response::TYPE_JSON, 400);
+            return new Response(
+                $error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
         }
         $record = $data->get($uuid);
         if($record){
@@ -100,7 +128,11 @@ class User extends Main {
                 } else {
                     $error = [];
                     $error['validate']['password'] = $validate->test['password'];
-                    return new Response($error, Response::TYPE_JSON, 400);
+                    return new Response(
+                        $error,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
                 }
             }
             if($object->request('email')){
@@ -111,19 +143,22 @@ class User extends Main {
                 } else {
                     $error = [];
                     $error['validate']['email'] = $validate->test['email'];
-                    return new Response($error, Response::TYPE_JSON, 400);
+                    return new Response(
+                        $error,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
                 }
             }
             if($object->request('isActive')){
                 $isActive = $object->request('isActive');
-                switch($isActive){
-                    case 1 :
-                    case '1' :
-                    case 'true' :
-                        $isActive = true;
-                    break;
-                    default:
-                        $isActive = false;
+                $isActive = match ($isActive) {
+                    1, '1', 'true' => true,
+                    default => false,
+                };
+                if($isActive === true){
+                    $data->set('delete', $uuid . '.parameter.activation_code');
+                    $data->set('delete', $uuid . '.parameter.activation_expiration_date');
                 }
                 $data->set($uuid . '.isActive', $isActive);
                 $is_change = true;
@@ -132,21 +167,62 @@ class User extends Main {
                 $data->write($url);
                 $record = $data->get($uuid);
                 unset($record->password);
-                return new Response($record, Response::TYPE_JSON);
+                return new Response(
+                    $record,
+                    Response::TYPE_JSON
+                );
             } else {
                 $error = [];
                 $error['error'] = 'Nothing has changed...';
-                return new Response($error, Response::TYPE_JSON, 400);
+                return new Response(
+                    $error,
+                    Response::TYPE_JSON,
+                    Response::STATUS_ERROR
+                );
             }
         } else {
             $error = [];
             $error['error'] = 'Could not find node with uuid: '. $uuid;
-            return new Response($error, Response::TYPE_JSON, 400);
+            return new Response($error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
         }
     }
 
-    public static function delete(App $object){
-        dd('delete User');
+    public static function delete(App $object): Response
+    {
+        $uuid = $object->request('uuid');
+        $url = User::getDataUrl($object);
+        $data = $object->data_read($url);
+        if(!$data){
+            $error = [];
+            $error['error'] = 'Could not read node file...';
+            return new Response(
+                $error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
+        }
+        $record = $data->get($uuid);
+        if($record){
+            $data->set($uuid . '.isDeleted', microtime(true));
+            $data->write($url);
+            $record = $data->get($uuid);
+            unset($record->password);
+            return new Response(
+                $record,
+                Response::TYPE_JSON
+            );
+        } else {
+            $error = [];
+            $error['error'] = 'Could not find node with uuid: ' . $uuid;
+            return new Response(
+                $error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
+        }
     }
 
     public static function list(App $object){
@@ -177,7 +253,17 @@ class User extends Main {
 
     private static function generateActivationCode(): string
     {
-        return rand(1000, 9999) . '-' . rand(1000, 9999) . '-' .  rand(1000, 9999) . '-' .  rand(1000, 9999) . '-' .  rand(1000, 9999) . '-' .  rand(1000, 9999);
+        return rand(1000, 9999) .
+            '-' .
+            rand(1000, 9999) .
+            '-' .
+            rand(1000, 9999) .
+            '-' .
+            rand(1000, 9999) .
+            '-' .
+            rand(1000, 9999) .
+            '-' .
+            rand(1000, 9999);
     }
 
     private static function validatePasswords($object)
@@ -215,6 +301,10 @@ class User extends Main {
         $is_valid = false;
         if($validate){
             $is_valid = true;
+            if(!array_key_exists($attribute, $validate->test)){
+                $validate->is_valid = $is_valid;
+                return $validate;
+            }
             foreach($validate->test[$attribute] as $type => $status_list){
                 foreach ($status_list as $nr => $status){
                     if($status === false){

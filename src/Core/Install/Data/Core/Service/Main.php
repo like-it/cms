@@ -10,6 +10,7 @@ use R3m\Io\Module\Validate;
 
 
 class Main {
+    const ERROR_STATUS = 400;
 
     protected static function criteria(App $object){
         $criteria = [];
@@ -27,10 +28,10 @@ class Main {
                 $value = null;
             }
             if($value === 'true'){
-                $value = 1;
+                $value = true;
             }
             elseif($value === 'false'){
-                $value = 0;
+                $value = false;
             }
             if(is_object($value)){
                 try {
