@@ -119,6 +119,14 @@ class User extends Main {
         $record = $data->get($uuid);
         if($record){
             $is_change = false;
+            if($object->request('delete')){
+                $attribute_list = explode(',', $object->request('delete'));
+                foreach($attribute_list as $nr => $attribute){
+                    $attribute = trim($attribute, ' ');
+                    $data->delete($attribute);
+                    $is_change = true;
+                }
+            }
             if($object->request('password') && $object->request('password2')){
                 $validate = User::validatePasswords($object);
                 if($validate->is_valid){
