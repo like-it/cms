@@ -165,8 +165,8 @@ class User extends Main {
                     default => false,
                 };
                 if($isActive === true){
-                    $data->set('delete', $uuid . '.parameter.activation_code');
-                    $data->set('delete', $uuid . '.parameter.activation_expiration_date');
+                    $data->delete($uuid . '.parameter.activation_code');
+                    $data->delete($uuid . '.parameter.activation_expiration_date');
                 }
                 $data->set($uuid . '.isActive', $isActive);
                 $is_change = true;
