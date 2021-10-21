@@ -117,14 +117,11 @@ class User extends Main {
             );
         }
         $record = $data->get($uuid);
-        d($object->request());
-        d($data->data());
-        dd($record);
         if($record){
             $is_change = false;
-            if($object->request('delete')){
+            if($object->request('attribute.delete')){
                 d('yes');
-                $attribute_list = explode(',', $object->request('delete'));
+                $attribute_list = explode(',', $object->request('attribute.delete'));
                 foreach($attribute_list as $nr => $attribute){
                     $attribute = trim($attribute, ' ');
                     $data->delete($attribute);
