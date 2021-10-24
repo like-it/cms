@@ -146,6 +146,7 @@ class User extends Main {
                     $value = null;
                 }
                 elseif(
+                    is_string($value) &&
                     substr($value, 0, 1) === '{' &&
                     substr($value, -1, 1) === '}'
                 ){
@@ -155,6 +156,7 @@ class User extends Main {
                     }
                 }
                 elseif(
+                    is_string($value) &&
                     substr($value, 0, 1) === '[' &&
                     substr($value, -1, 1) === ']'
                 ){
