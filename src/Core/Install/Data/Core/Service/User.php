@@ -134,7 +134,6 @@ class User extends Main {
                     continue;
                 }
                 $value = User::getValue($value);
-                $object->request($key, $value);
                 $validate = User::validateAttribute($object, $key);
                 if($validate->is_valid){
                     $data->set($uuid . '.' . $key, $value);
