@@ -16,6 +16,10 @@ class User extends Main {
     const PASSWORD_ALGO = PASSWORD_BCRYPT;
     const PASSWORD_COST = 13;
 
+    const DEFAULT_SORT = 'email';
+    const DEFAULT_ORDER = 'ASC';
+    const DEFAULT_LIMIT = 20;
+
     const REQUEST_DONT_UPDATE = [
         'request',
         'password',
@@ -224,9 +228,9 @@ class User extends Main {
     }
 
     public static function list(App $object){
-        $limit = $object->request('limit') ? $object->request('limit') : 20;
-        $sort = $object->request('sort') ? $object->request('sort') : 'email';
-        $order = $object->request('order') ? $object->request('order') : 'ASC';
+        $limit = $object->request('limit') ? $object->request('limit') : User::DEFAULT_LIMIT;
+        $sort = $object->request('sort') ? $object->request('sort') : User::DEFAULT_SORT;
+        $order = $object->request('order') ? $object->request('order') : User::DEFAULT_ORDER;
         $start = Main::page($object, $limit);
         $url = User::getDataUrl($object);
         $data = $object->data_read($url);
@@ -239,11 +243,11 @@ class User extends Main {
                 Response::STATUS_ERROR
             );
         } else {
-            $sort = explode(',', $sort);
+            $sort = explode(',', $sort, 2);
             foreach($sort as $key => $value){
                 $sort[$key] = trim($value, ' ');
             }
-            $order = explode(',', $order);
+            $order = explode(',', $order, 2);
             foreach($order as $key => $value){
                 $order[$key] = trim($value, ' ');
             }
