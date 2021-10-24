@@ -227,7 +227,40 @@ class User extends Main {
     }
 
     public static function list(App $object){
-        dd('list Users');
+        $limit = $object->request('limit') ? $object->request('limit') : 20;
+        $start = Main::page($object, $limit);
+        $url = User::getDataUrl($object);
+        $data = $object->data_read($url);
+        if(!$data){
+            $error = [];
+            $error['error'] = 'Could not read node file...';
+            return new Response(
+                $error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
+        } else {
+          $index=0;
+          $collect=false;
+          $result = new Data();
+          foreach($data->data() as $key => $record){
+              if($index === $start){
+                  $collect = true;
+              }
+              elseif($index >= $start + $limit){
+                  $collect = false;
+                  break;
+              }
+              if($collect){
+                  $result->set($key, $record);
+              }
+              $index++;
+          }
+            return new Response(
+                $result,
+                Response::TYPE_JSON,
+            );
+        }
     }
 
     public static function readAttribute(App $object): Response
@@ -248,7 +281,7 @@ class User extends Main {
         $record = $data->get($uuid);
         if($record){
             $node = $data->get($uuid . '.' . $attribute);
-            if($node){
+            if(isset($node)){
                 return new Response(
                     $node,
                     Response::TYPE_JSON
