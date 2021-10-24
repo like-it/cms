@@ -20,10 +20,14 @@ class User extends Main {
     const PASSWORD_COST = 13;
 
     const REQUEST_DONT_UPDATE = [
+        'request',
         'password',
         'password2',
         'uuid',
-        'attribute.delete'
+    ];
+
+    const REQUEST_DONT_EXPOSE = [
+        'password'
     ];
 
     public static function create(App $object): Response
@@ -129,7 +133,10 @@ class User extends Main {
                 if(in_array($key, User::REQUEST_DONT_UPDATE)){
                     continue;
                 }
-                if($value === 'true'){
+                if(is_numeric($value)){
+                    $value += 0;
+                }
+                elseif($value === 'true'){
                     $value = true;
                 }
                 elseif($value === 'false'){
@@ -168,15 +175,6 @@ class User extends Main {
                         Response::TYPE_JSON,
                         Response::STATUS_ERROR
                     );
-                }
-            }
-            //move to user attribute
-            if($object->request('attribute.delete')){
-                $attribute_list = explode(',', $object->request('attribute.delete'));
-                foreach($attribute_list as $nr => $attribute){
-                    $attribute = trim($attribute, ' ');
-                    $data->delete($uuid . '.' . $attribute);
-                    $is_change = true;
                 }
             }
             if($object->request('password') && $object->request('password2')){
@@ -259,6 +257,87 @@ class User extends Main {
 
     public static function list(App $object){
         dd('list Users');
+    }
+
+    public static function readAttribute(App $object): Response
+    {
+        $uuid = $object->request('uuid');
+        $attribute = $object->request('attribute');
+        $url = User::getDataUrl($object);
+        $data = $object->data_read($url);
+        if(!$data){
+            $error = [];
+            $error['error'] = 'Could not read node file...';
+            return new Response(
+                $error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
+        }
+        $record = $data->get($uuid);
+        if($record){
+            $node = $data->get($uuid . '.' . $attribute);
+            if($node){
+                return new Response(
+                    $node,
+                    Response::TYPE_JSON
+                );
+            } else {
+                $error = [];
+                $error['error'] = 'Could not find attribute (' . $attribute . ') in node with uuid: '. $uuid;
+                return new Response(
+                    $error,
+                    Response::TYPE_JSON,
+                    Response::STATUS_ERROR
+                );
+            }
+        } else {
+            $error = [];
+            $error['error'] = 'Could not find node with uuid: '. $uuid;
+            return new Response(
+                $error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
+        }
+    }
+
+    public static function deleteAttribute(App $object): Response
+    {
+        $uuid = $object->request('uuid');
+        $attribute_list = explode(',', $object->request('attribute'));
+        $url = User::getDataUrl($object);
+        $data = $object->data_read($url);
+        if(!$data){
+            $error = [];
+            $error['error'] = 'Could not read node file...';
+            return new Response(
+                $error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
+        }
+        $record = $data->get($uuid);
+        if($record){
+            foreach($attribute_list as $nr => $attribute){
+                $data->delete($uuid . '.' . $attribute);
+            }
+            $data->write($url);
+            $record = $data->get($uuid);
+            unset($record->password);
+            return new Response(
+                $record,
+                Response::TYPE_JSON
+            );
+        } else {
+            $error = [];
+            $error['error'] = 'Could not find node with uuid: ' . $uuid;
+            return new Response(
+                $error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
+        }
     }
 
     private static function getValidatorUrl(App $object): string

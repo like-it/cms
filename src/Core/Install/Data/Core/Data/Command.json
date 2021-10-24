@@ -19,12 +19,9 @@
     },
     "69a55262-d324-4990-b0f1-ba2767a72aad" : {
         "module" : "user",
-        "command" : "attribute",
         "path" : "/User/{$uuid}/{$attribute}",
         "method": [
             "GET",
-            "POST",
-            "PUT",
             "DELETE",
             "OPTIONS"
         ]

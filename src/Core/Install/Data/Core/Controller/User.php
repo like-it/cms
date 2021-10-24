@@ -17,31 +17,49 @@ class User extends View {
 
     public static function command(App $object){
         $uuid = $object->request('uuid');
-        if($uuid){
+        $attribute = $object->request('attribute');
+        if(
+            $uuid &&
+            $attribute
+        ){
             try {
                 switch(Handler::method()){
                     case Handler::GET :
-                        return Service::read($object);
-                    case Handler::PUT :
-                        return Service::update($object);
+                        return Service::readAttribute($object);
                     case Handler::DELETE :
-                        return Service::delete($object);
+                        return Service::deleteAttribute($object);
                 }
             } catch (Exception $exception){
                 return $exception;
             }
         } else {
-            try {
-                switch(Handler::method()){
-                    case Handler::GET :
-                        return Service::list($object);
-                    case Handler::POST :
-                        return Service::create($object);
+            if($uuid){
+                try {
+                    switch(Handler::method()){
+                        case Handler::GET :
+                            return Service::read($object);
+                        case Handler::PUT :
+                            return Service::update($object);
+                        case Handler::DELETE :
+                            return Service::delete($object);
+                    }
+                } catch (Exception $exception){
+                    return $exception;
                 }
-            } catch (Exception $exception){
-                return $exception;
+            } else {
+                try {
+                    switch(Handler::method()){
+                        case Handler::GET :
+                            return Service::list($object);
+                        case Handler::POST :
+                            return Service::create($object);
+                    }
+                } catch (Exception $exception){
+                    return $exception;
+                }
             }
         }
+
         /*
         $name = Index::name(__FUNCTION__, __CLASS__, '/');
         try {
