@@ -3,17 +3,14 @@ namespace Host\Subdomain\Host\Extension\Service;
 
 
 use R3m\Io\App;
-use R3m\Io\Exception\ObjectException;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
 use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
 use R3m\Io\Module\Response;
+use R3m\Io\Module\Sort;
 
-use Exception;
-use R3m\Io\Exception\LocateException;
-use R3m\Io\Exception\UrlEmptyException;
-use R3m\Io\Exception\UrlNotExistException;
+use R3m\Io\Exception\ObjectException;
 
 class User extends Main {
     const PASSWORD_ALGO = PASSWORD_BCRYPT;
@@ -228,6 +225,8 @@ class User extends Main {
 
     public static function list(App $object){
         $limit = $object->request('limit') ? $object->request('limit') : 20;
+        $sort = $object->request('sort') ? $object->request('sort') : 'email';
+        $order = $object->request('order') ? $object->request('order') : 'ASC';
         $start = Main::page($object, $limit);
         $url = User::getDataUrl($object);
         $data = $object->data_read($url);
@@ -240,22 +239,39 @@ class User extends Main {
                 Response::STATUS_ERROR
             );
         } else {
-          $index=0;
-          $collect=false;
-          $result = new Data();
-          foreach($data->data() as $key => $record){
-              if($index === $start){
-                  $collect = true;
-              }
-              elseif($index >= $start + $limit){
-                  $collect = false;
-                  break;
-              }
-              if($collect){
-                  $result->set($key, $record);
-              }
-              $index++;
-          }
+            $sort = explode(',', $sort);
+            foreach($sort as $key => $value){
+                $sort[$key] = trim($value, ' ');
+            }
+            $order = explode(',', $order);
+            foreach($order as $key => $value){
+                $order[$key] = trim($value, ' ');
+            }
+            $count = count($sort);
+            $list = [];
+            if($count === 1){
+                $list = Sort::list($data->data())->with([$sort[0] => $order[0]]);
+            }
+            elseif($count === 2){
+                $list = Sort::list($data->data())->with([$sort[0] => $order[0], $sort[1] => $order[1]]);
+            }
+            $index=0;
+            $collect=false;
+            $result = new Data();
+            foreach($list as $key => $record){
+                if($index === $start){
+                    $collect = true;
+                }
+                elseif($index >= $start + $limit){
+                    $collect = false;
+                    break;
+                }
+                if($collect){
+                    unset($record->password);
+                    $result->set($key, $record);
+                }
+                $index++;
+            }
             return new Response(
                 $result->data(),
                 Response::TYPE_JSON,
