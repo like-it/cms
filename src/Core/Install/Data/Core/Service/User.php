@@ -3,6 +3,7 @@ namespace Host\Subdomain\Host\Extension\Service;
 
 
 use R3m\Io\App;
+use R3m\Io\Exception\ObjectException;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
 use R3m\Io\Module\Dir;
@@ -18,12 +19,17 @@ class User extends Main {
     const PASSWORD_ALGO = PASSWORD_BCRYPT;
     const PASSWORD_COST = 13;
 
+    const REQUEST_DONT_UPDATE = [
+        'password',
+        'password2',
+        'uuid',
+        'attribute.delete'
+    ];
 
     public static function create(App $object): Response
     {
         $object->request('uuid', Core::uuid());
-        $object->request('node.type', 'user');
-        $validate = Main::validate($object, User::getValidatorUrl($object));
+        $validate = Main::validate($object, User::getValidatorUrl($object), 'user');
         if($validate){
             if($validate->success === true){
                 $url = User::getDataUrl($object);
@@ -103,7 +109,7 @@ class User extends Main {
 
     public static function update(App $object): Response
     {
-        $object->request('node.type', 'user');
+
         $uuid = $object->request('uuid');
         $url = User::getDataUrl($object);
         $data = $object->data_read($url);
@@ -119,7 +125,52 @@ class User extends Main {
         $record = $data->get($uuid);
         if($record){
             $is_change = false;
-            dd($object->request());
+            foreach($object->request() as $key => $value){
+                if(in_array($key, User::REQUEST_DONT_UPDATE)){
+                    continue;
+                }
+                if($value === 'true'){
+                    $value = true;
+                }
+                elseif($value === 'false'){
+                    $value = false;
+                }
+                elseif($value === 'null'){
+                    $value = null;
+                }
+                elseif(
+                    substr($value, 0, 1) === '{' &&
+                    substr($value, -1, 1) === '}'
+                ){
+                    try {
+                        $value = Core::object($value, Core::OBJECT_OBJECT);
+                    } catch (ObjectException $e) {
+                    }
+                }
+                elseif(
+                    substr($value, 0, 1) === '[' &&
+                    substr($value, -1, 1) === ']'
+                ){
+                    try {
+                        $value = Core::object($value, Core::OBJECT_ARRAY);
+                    } catch (ObjectException $e) {
+                    }
+                }
+                $validate = User::validateAttribute($object, $key);
+                if($validate->is_valid){
+                    $data->set($uuid . '.' . $key, $value);
+                    $is_change = true;
+                } else {
+                    $error = [];
+                    $error['validate'][$key] = $validate->test[$key];
+                    return new Response(
+                        $error,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                }
+            }
+            //move to user attribute
             if($object->request('attribute.delete')){
                 $attribute_list = explode(',', $object->request('attribute.delete'));
                 foreach($attribute_list as $nr => $attribute){
@@ -143,34 +194,6 @@ class User extends Main {
                         Response::STATUS_ERROR
                     );
                 }
-            }
-            if($object->request('email')){
-                $validate = User::validateAttribute($object, 'email');
-                if($validate->is_valid){
-                    $data->set($uuid . '.email', $object->request('email'));
-                    $is_change = true;
-                } else {
-                    $error = [];
-                    $error['validate']['email'] = $validate->test['email'];
-                    return new Response(
-                        $error,
-                        Response::TYPE_JSON,
-                        Response::STATUS_ERROR
-                    );
-                }
-            }
-            if($object->request('isActive')){
-                $isActive = $object->request('isActive');
-                $isActive = match ($isActive) {
-                    1, '1', 'true' => true,
-                    default => false,
-                };
-                if($isActive === true){
-                    $data->delete($uuid . '.parameter.activation_code');
-                    $data->delete($uuid . '.parameter.activation_expiration_date');
-                }
-                $data->set($uuid . '.isActive', $isActive);
-                $is_change = true;
             }
             if($is_change){
                 $data->write($url);
@@ -275,9 +298,9 @@ class User extends Main {
             rand(1000, 9999);
     }
 
-    private static function validatePasswords($object)
+    private static function validatePasswords($object, $type='user')
     {
-        $validate = Main::validate($object, User::getValidatorUrl($object));
+        $validate = Main::validate($object, User::getValidatorUrl($object), $type);
         $is_valid = false;
         if($validate){
             $is_valid = true;
@@ -304,9 +327,9 @@ class User extends Main {
         return $validate;
     }
 
-    private static function validateAttribute($object, $attribute)
+    private static function validateAttribute($object, $attribute, $type='user')
     {
-        $validate = Main::validate($object, User::getValidatorUrl($object));
+        $validate = Main::validate($object, User::getValidatorUrl($object), $type);
         $is_valid = false;
         if($validate){
             $is_valid = true;

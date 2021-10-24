@@ -55,13 +55,13 @@ class Main {
         return ($limit * $nr) - $limit;
     }
 
-    public static function validate(App $object, $url){
+    public static function validate(App $object, $url, $type){
         $data = $object->data(sha1($url));
         if($data === null){
             $data = $object->parse_read($url, sha1($url));
         }
         if($data){
-            $validate = $data->data($object->request('node.type') . '.validate');
+            $validate = $data->data($type . '.validate');
             if(empty($validate)){
                 return false;
             }
