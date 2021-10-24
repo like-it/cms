@@ -133,38 +133,8 @@ class User extends Main {
                 if(in_array($key, User::REQUEST_DONT_UPDATE)){
                     continue;
                 }
-                if(is_numeric($value)){
-                    $value += 0;
-                }
-                elseif($value === 'true'){
-                    $value = true;
-                }
-                elseif($value === 'false'){
-                    $value = false;
-                }
-                elseif($value === 'null'){
-                    $value = null;
-                }
-                elseif(
-                    is_string($value) &&
-                    substr($value, 0, 1) === '{' &&
-                    substr($value, -1, 1) === '}'
-                ){
-                    try {
-                        $value = Core::object($value, Core::OBJECT_OBJECT);
-                    } catch (ObjectException $e) {
-                    }
-                }
-                elseif(
-                    is_string($value) &&
-                    substr($value, 0, 1) === '[' &&
-                    substr($value, -1, 1) === ']'
-                ){
-                    try {
-                        $value = Core::object($value, Core::OBJECT_ARRAY);
-                    } catch (ObjectException $e) {
-                    }
-                }
+                $value = User::getValue($value);
+                $object->request($key, $value);
                 $validate = User::validateAttribute($object, $key);
                 if($validate->is_valid){
                     $data->set($uuid . '.' . $key, $value);
@@ -340,6 +310,52 @@ class User extends Main {
                 Response::STATUS_ERROR
             );
         }
+    }
+
+    private static function getValue($value=null){
+        if(is_object($value)){
+            foreach($value as $key_value => $value_value){
+                $value->{$key_value} = User::getValue($value_value);
+            }
+        }
+        elseif(is_array($value)){
+            foreach($value as $key_value => $value_value){
+                $value[$key_value] = User::getValue($value_value);
+            }
+        }
+        elseif(is_numeric($value)){
+            $value += 0;
+        }
+        elseif($value === 'true'){
+            $value = true;
+        }
+        elseif($value === 'false'){
+            $value = false;
+        }
+        elseif($value === 'null'){
+            $value = null;
+        }
+        elseif(
+            is_string($value) &&
+            substr($value, 0, 1) === '{' &&
+            substr($value, -1, 1) === '}'
+        ){
+            try {
+                $value = Core::object($value, Core::OBJECT_OBJECT);
+            } catch (ObjectException $e) {
+            }
+        }
+        elseif(
+            is_string($value) &&
+            substr($value, 0, 1) === '[' &&
+            substr($value, -1, 1) === ']'
+        ){
+            try {
+                $value = Core::object($value, Core::OBJECT_ARRAY);
+            } catch (ObjectException $e) {
+            }
+        }
+        return $value;
     }
 
     private static function getValidatorUrl(App $object): string
