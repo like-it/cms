@@ -257,7 +257,7 @@ class User extends Main {
               $index++;
           }
             return new Response(
-                $result,
+                $result->data(),
                 Response::TYPE_JSON,
             );
         }
