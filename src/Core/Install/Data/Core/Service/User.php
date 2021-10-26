@@ -247,7 +247,7 @@ class User extends Main {
             foreach($sort as $key => $value){
                 $sort[$key] = trim($value, ' ');
             }
-            $order = explode(',', $order, 2);
+            $order = explode(',', $order, 2 );
             foreach($order as $key => $value){
                 $order[$key] = trim($value, ' ');
             }

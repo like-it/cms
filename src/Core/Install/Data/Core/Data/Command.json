@@ -98,6 +98,14 @@
             "OPTIONS"
         ]
     },
+    "5a2392cc-be8c-4b52-acbb-f80c331a72fc" : {
+        "module" : "export",
+        "method": [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
+    },
     "92a63a25-71de-4d37-88cf-8bd98ab23b8d" : {
         "module" : "fileSystem",
         "command" : "read",
