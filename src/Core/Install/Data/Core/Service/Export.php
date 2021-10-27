@@ -35,7 +35,7 @@ class Export extends Main {
         ]);
         $read = $dir->read($object->config('project.dir.root'), true);
         foreach ($read as $nr => $file){
-            if($file->type == Dir::TYPE){
+            if($file->type === Dir::TYPE){
                 unset($read[$nr]);
             }
             $file->extension = File::extension($file->url);
@@ -43,10 +43,17 @@ class Export extends Main {
                 unset($read[$nr]);
             }
         }
-        $dir->ignore([]);
+        $dir->ignore([
+            '/Local/'
+        ]);
         $host = $dir->read($object->config('project.dir.host'), true);
         foreach($read as $file){
             $host[] = $file;
+        }
+        foreach($host as $nr => $file){
+            if($file->type === Dir::TYPE){
+                unset($host[$nr]);
+            }
         }
         dd($host);
     }
