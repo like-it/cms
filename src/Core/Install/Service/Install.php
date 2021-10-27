@@ -59,7 +59,7 @@ class Install {
                 $url = $object->config('project.dir.data') . 'Install' . $object->config('extension.json');
                 $data->write($url);
 
-                $user_service = '\\Host\\' . Install::SUBDOMAIN_CORE . '\\' . $host . '\\' . $extension . '\\Service\\User';
+                $user_service = '\\Host\\' . ucfirst(Install::SUBDOMAIN_CORE) . '\\' . ucfirst($host) . '\\' . ucfirst($extension) . '\\Service\\User';
                 $response = $user_service::create($object);
                 dd($response);
 
