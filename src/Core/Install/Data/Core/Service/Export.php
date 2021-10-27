@@ -26,7 +26,11 @@ class Export extends Main {
 
     private static function do(App $object){
         $dir = new Dir();
-        $read = $dir->read($object->config('project.dir.root'));
+        $read = $dir->read($object->config('project.dir.root'), true);
+        foreach ($read as $nr => $file){
+            $file->extension = File::extension($file->url);
+            d($file->extension);
+        }
         dd($read);
     }
 }
