@@ -43,8 +43,7 @@ class Export extends Main {
                 unset($read[$nr]);
             }
         }
-        dd($object->config());
-        $host = $dir->read($object->config('host.dir.root'), true);
+        $host = $dir->read($object->config('project.dir.host'), true);
         foreach($read as $file){
             $host[] = $file;
         }
