@@ -26,6 +26,11 @@ class Export extends Main {
 
     private static function do(App $object){
         $dir = new Dir();
+        $dir->ignore([
+            '/Application/composer.json',
+            '/Local/',
+            '/Data/Cache/'
+        ]);
         $read = $dir->read($object->config('project.dir.root'), true);
         foreach ($read as $nr => $file){
             if($file->type == Dir::TYPE){
