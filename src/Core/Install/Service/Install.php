@@ -6,6 +6,7 @@ use R3m\Io\App;
 
 use Exception;
 use R3m\Io\Module\Core;
+use R3m\Io\Module\Data;
 use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
 use R3m\Io\Module\Parse;
@@ -16,14 +17,13 @@ class Install {
     const SUBDOMAIN_CMS = 'cms';
 
     public static function start(App $object){
-        $email = $object->request('node.email');
-        $password = $object->request('node.password');
-        $password2 = $object->request('node.password2');
-        $domain = $object->request('node.domain');
+        $email = $object->request('email');
+        $password = $object->request('password');
+        $password2 = $object->request('password2');
+        $domain = $object->request('domain');
 
         $url = $object->data('controller.dir.data') . File::basename(__CLASS__) . $object->config('extension.json');
-        $object->request('node.type', 'user');
-        $validate = Install::validate($object, $url);
+        $validate = Install::validate($object, $url, 'user');
 
         if(
             property_exists($validate, 'success') &&
@@ -37,17 +37,32 @@ class Install {
             ){
                 $host = $explode[0];
                 $extension = $explode[1];
-//                $subdomain = Install::SUBDOMAIN_CMS;
+                $data = new Data();
+                $uuid = Core::uuid();
                 Install::Host($object, [
                     'host' => $host,
                     'extension' => $extension,
                     'subdomain' => Install::SUBDOMAIN_CORE
                 ]);
+                $data->set('domain.' . $uuid . '.host', $host);
+                $data->set('domain.' . $uuid . '.subdomain', Install::SUBDOMAIN_CORE);
+                $data->set('domain.' . $uuid . '.extension', $extension);
+                $uuid = Core::uuid();
                 Install::Host($object, [
                     'host' => $host,
                     'extension' => $extension,
                     'subdomain' => Install::SUBDOMAIN_CMS
                 ]);
+                $data->set('domain.' . $uuid . '.host', $host);
+                $data->set('domain.' . $uuid . '.subdomain', Install::SUBDOMAIN_CMS);
+                $data->set('domain.' . $uuid . '.extension', $extension);
+                $url = $object->data('project.dir.data') . 'Install' . $object->config('extension.json');
+                $data->write($url);
+
+                $user_service = '\\Host\\' . Install::SUBDOMAIN_CORE . '\\' . $host . '\\' . $extension . '\\Service\\User';
+                $response = $user_service::create($object);
+                dd($response);
+                
             }
         }
         elseif(
@@ -64,8 +79,8 @@ class Install {
                 ],[
                         '&quot;'
                 ], (json_encode($validate))),
-                'node.email' => $object->request('node.email'),
-                'node.domain' => $object->request('node.domain')
+                'email' => $object->request('email'),
+                'domain' => $object->request('domain')
             ];
             Install::redirect_post($url, $data);
 
@@ -90,13 +105,13 @@ class Install {
         Host::command_add($object, $options);
     }
 
-    public static function validate(App $object, $url){
+    public static function validate(App $object, $url, $type='user'){
         $data = $object->data(sha1($url));
         if($data === null){
             $data = $object->parse_read($url, sha1($url));
         }
         if($data){
-            $validate = $data->data($object->request('node.type') . '.validate');
+            $validate = $data->data($type . '.validate');
             try {
                 return Validate::validate($object, $validate);
             } catch (Exception $e) {
@@ -110,14 +125,14 @@ class Install {
         <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
             <script type="text/javascript">
-                function closethisasap() {
+                function redirect() {
 
-                    document.forms["redirectpost"].submit();
+                    document.forms["redirect_post"].submit();
                 }
             </script>
         </head>
-        <body onload="closethisasap();">
-        <form name="redirectpost" method="post" action="<?php echo $url; ?>">
+        <body onload="redirect();">
+        <form name="redirect_post" method="post" action="<?php echo $url; ?>">
             <?php
             if ( !is_null($data) ) {
                 foreach ($data as $k => $v) {

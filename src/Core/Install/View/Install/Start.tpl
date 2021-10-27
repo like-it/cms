@@ -105,11 +105,11 @@
                 </p>
                 {/if}
                 <label for="email">{__('install.email.label')}</label>
-                <input id="email" name="node.email" placeholder="{__('install.email.placeholder')}" value="{$request.node.email}"/><br>
+                <input id="email" name="email" placeholder="{__('install.email.placeholder')}" value="{$request.email}"/><br>
                 <label for="password">{__('install.password.label')}</label>
-                <input id="password" type="password" name="node.password" placeholder="{__('install.password.placeholder')}"/><br>
+                <input id="password" type="password" name="password" placeholder="{__('install.password.placeholder')}"/><br>
                 <label for="password-again">{__('install.password.again.label')}</label>
-                <input id="password-again" type="password" name="node.password2" placeholder="{__('install.password.again.placeholder')}"/><br>
+                <input id="password-again" type="password" name="password2" placeholder="{__('install.password.again.placeholder')}"/><br>
                 <h3>{__('install.domain.title')}</h3>
                 <p>
                     {__('install.domain.text')}
@@ -133,7 +133,7 @@
                     </p>
                 {/if}
                 <label for="domain">{__('install.domain.label')}</label>
-                <input id="domain" name="node.domain" placeholder="{__('install.domain.placeholder')}" value="{$request.node.domain}"/><br>
+                <input id="domain" name="domain" placeholder="{__('install.domain.placeholder')}" value="{$request.node.domain}"/><br>
                 <input type="submit" name="install" value="{__('install.button.submit')}"/><br>
             </fieldset>
         </form>
