@@ -29,8 +29,9 @@ class Export extends Main {
         $dir->ignore([
             '/Application/composer.json',
             '/Local/',
-            '/Data/Cache/',
-            '/vendor/'
+            '/Application/Data/Cache/',
+            '/Application/vendor/',
+            '/Application/Host/'
         ]);
         $read = $dir->read($object->config('project.dir.root'), true);
         foreach ($read as $nr => $file){
@@ -42,6 +43,10 @@ class Export extends Main {
                 unset($read[$nr]);
             }
         }
-        dd($read);
+        $host = $dir->read($object->config('host.dir.root'), true);
+        foreach($read as $file){
+            $host[] = $file;
+        }
+        dd($host);
     }
 }

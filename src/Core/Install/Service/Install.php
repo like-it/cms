@@ -85,7 +85,20 @@ class Install {
                     $object->request('uuid', $user->uuid);
                     $object->request('activation_code', $user->parameter->activation_code);
                     $response = $user_service::activate($object);
-                    dd($response);
+                    $user = $response->data();
+                    if(
+                        is_object($user) &&
+                        property_exists($user, 'isActive') &&
+                        $user->isActive === true
+                    ){
+                        //activated
+                    } else {
+                        //could not active user
+                        return $response;
+                    }
+                } else {
+                    //could not create user
+                    return $response;
                 }
             }
         }
