@@ -29,7 +29,8 @@ class Export extends Main {
         $dir->ignore([
             '/Application/composer.json',
             '/Local/',
-            '/Data/Cache/'
+            '/Data/Cache/',
+            '/vendor/'
         ]);
         $read = $dir->read($object->config('project.dir.root'), true);
         foreach ($read as $nr => $file){
