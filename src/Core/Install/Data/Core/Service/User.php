@@ -283,6 +283,49 @@ class User extends Main {
         }
     }
 
+    public static function activate(App $object){
+        $uuid = $object->request('uuid');
+        $activation_code = $object->request('activation_code');
+        $activation_time = time();
+        $url = User::getDataUrl($object);
+        $data = $object->data_read($url);
+        if(!$data){
+            $error = [];
+            $error['error'] = 'Could not read node file...';
+            return new Response(
+                $error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
+        }
+        $record = $data->get($uuid);
+        $code = $data->get($uuid . '.parameter.activation_code');
+        $expiration_date = $data->get($uuid . '.parameter.activation_expiration_date');
+        if(
+            $record &&
+            $activation_code == $code &&
+            $activation_time <= $expiration_date
+        ){
+            $data->set($uuid . '.isActive', true);
+            $data->delete($uuid . '.parameter.activation_code');
+            $data->delete($uuid . '.parameter.activation_expiration_date');
+            $data->write($url);
+            $record = $data->get($uuid);
+            return new Response(
+                $record,
+                Response::TYPE_JSON,
+            );
+        } else {
+            $error = [];
+            $error['error'] = 'Could not activate node with uuid: ' . $uuid;
+            return new Response(
+                $error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
+        }
+    }
+
     public static function readAttribute(App $object): Response
     {
         $uuid = $object->request('uuid');

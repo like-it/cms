@@ -73,8 +73,20 @@ class Install {
                 );
                 $user_service = '\\Host\\' . ucfirst(Install::SUBDOMAIN_CORE) . '\\' . ucfirst($host) . '\\' . ucfirst($extension) . '\\Service\\User';
                 $response = $user_service::create($object);
-                dd($response->data());
-
+                $user = $response->data();
+                if(
+                        is_object($user) &&
+                        property_exists($user, 'uuid') &&
+                        property_exists($user, 'email') &&
+                        property_exists($user, 'isActive') &&
+                        property_exists($user, 'parameter') &&
+                        property_exists($user->parameter, 'activation_code')
+                ){
+                    $object->request('uuid', $user->uuid);
+                    $object->request('activation_code', $user->parameter->activation_code);
+                    $response = $user_service::activate($object);
+                    dd($response);
+                }
             }
         }
         elseif(
