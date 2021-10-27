@@ -137,9 +137,9 @@ class Install {
         Host::clear($object, $options);
         Host::route_delete($object, $options);
         Host::domain_add($object, $options);
-        //Host::dir_create($object, $options);
-        //Host::file_create($object, $options);
-        //Host::command_add($object, $options);
+        Host::dir_create($object, $options);
+        Host::file_create($object, $options);
+        Host::command_add($object, $options);
     }
 
     public static function validate(App $object, $url, $type='user'){
