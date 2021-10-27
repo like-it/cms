@@ -22,7 +22,7 @@ class Install {
         $password2 = $object->request('password2');
         $domain = $object->request('domain');
 
-        $url = $object->data('controller.dir.data') . File::basename(__CLASS__) . $object->config('extension.json');
+        $url = $object->config('controller.dir.data') . File::basename(__CLASS__) . $object->config('extension.json');
         $validate = Install::validate($object, $url, 'user');
 
         if(
@@ -56,13 +56,13 @@ class Install {
                 $data->set('domain.' . $uuid . '.host', $host);
                 $data->set('domain.' . $uuid . '.subdomain', Install::SUBDOMAIN_CMS);
                 $data->set('domain.' . $uuid . '.extension', $extension);
-                $url = $object->data('project.dir.data') . 'Install' . $object->config('extension.json');
+                $url = $object->config('project.dir.data') . 'Install' . $object->config('extension.json');
                 $data->write($url);
 
                 $user_service = '\\Host\\' . Install::SUBDOMAIN_CORE . '\\' . $host . '\\' . $extension . '\\Service\\User';
                 $response = $user_service::create($object);
                 dd($response);
-                
+
             }
         }
         elseif(
