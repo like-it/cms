@@ -27,11 +27,11 @@ class Export extends Main {
     private static function do(App $object){
         $dir = new Dir();
         $dir->ignore([
-            '/Application/composer.json',
             '/Local/',
-            '/Application/Data/Cache/',
-            '/Application/vendor/',
-            '/Application/Host/'
+            $object->config('project.dir.root') . 'composer.json',
+            $object->config('project.dir.data') . 'Cache/',
+            $object->config('project.dir.vendor'),
+            $object->config('project.dir.host'),
         ]);
         $read = $dir->read($object->config('project.dir.root'), true);
         foreach ($read as $nr => $file){
@@ -43,6 +43,7 @@ class Export extends Main {
                 unset($read[$nr]);
             }
         }
+        $dir->ignore([]);
         $host = $dir->read($object->config('project.dir.host'), true);
         foreach($read as $file){
             $host[] = $file;
