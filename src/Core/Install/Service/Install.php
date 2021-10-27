@@ -58,7 +58,19 @@ class Install {
                 $data->set('domain.' . $uuid . '.extension', $extension);
                 $url = $object->config('project.dir.data') . 'Install' . $object->config('extension.json');
                 $data->write($url);
-
+                
+                $object->config(
+                        'host.dir.root',
+                        $object->config('project.dir.root') .
+                        'Host' .
+                        $object->config('ds') .
+                        ucfirst(Install::SUBDOMAIN_CORE) .
+                        $object->config('ds') .
+                        ucfirst($host) .
+                        $object->config('ds') .
+                        ucfirst($extension) .
+                        $object->config('ds')
+                );
                 $user_service = '\\Host\\' . ucfirst(Install::SUBDOMAIN_CORE) . '\\' . ucfirst($host) . '\\' . ucfirst($extension) . '\\Service\\User';
                 $response = $user_service::create($object);
                 dd($response);
