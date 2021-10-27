@@ -44,19 +44,19 @@ class Install {
                     'extension' => $extension,
                     'subdomain' => Install::SUBDOMAIN_CORE
                 ]);
-                $data->set('domain.' . $uuid . '.host', $host);
-                $data->set('domain.' . $uuid . '.subdomain', Install::SUBDOMAIN_CORE);
-                $data->set('domain.' . $uuid . '.extension', $extension);
+                $data->set($uuid . '.host', $host);
+                $data->set($uuid . '.subdomain', Install::SUBDOMAIN_CORE);
+                $data->set($uuid . '.extension', $extension);
                 $uuid = Core::uuid();
                 Install::Host($object, [
                     'host' => $host,
                     'extension' => $extension,
                     'subdomain' => Install::SUBDOMAIN_CMS
                 ]);
-                $data->set('domain.' . $uuid . '.host', $host);
-                $data->set('domain.' . $uuid . '.subdomain', Install::SUBDOMAIN_CMS);
-                $data->set('domain.' . $uuid . '.extension', $extension);
-                $url = $object->config('project.dir.data') . 'Install' . $object->config('extension.json');
+                $data->set($uuid . '.host', $host);
+                $data->set($uuid . '.subdomain', Install::SUBDOMAIN_CMS);
+                $data->set($uuid . '.extension', $extension);
+                $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
                 $data->write($url);
 
                 $object->config(
