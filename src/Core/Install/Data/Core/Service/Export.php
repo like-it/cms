@@ -28,8 +28,13 @@ class Export extends Main {
         $dir = new Dir();
         $read = $dir->read($object->config('project.dir.root'), true);
         foreach ($read as $nr => $file){
+            if($file->type == Dir::TYPE){
+                unset($read[$nr]);
+            }
             $file->extension = File::extension($file->url);
-            d($file->extension);
+            if($file->extension !== 'json'){
+                unset($read[$nr]);
+            }
         }
         dd($read);
     }
