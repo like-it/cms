@@ -9,6 +9,7 @@
 		"ext-mbstring": "*",
 		"ext-json": "*",
 		"ext-posix": "*",
+		"ext-zip": "*",
 		"r3m/framework" : "*"
 	},
 	"license" : "proprietary",

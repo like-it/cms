@@ -11,8 +11,10 @@ use R3m\Io\Module\Response;
 use R3m\Io\Module\Sort;
 
 use R3m\Io\Exception\ObjectException;
+use ZipArchive;
 
 class Export extends Main {
+    const VERSION = '1.0.0';
 
     public static function export(App $object): Response
     {
@@ -55,6 +57,27 @@ class Export extends Main {
                 unset($host[$nr]);
             }
         }
+        $target = 'Funda' . $object->config('ds') .  Export::VERSION . $object->config('ds');
+//        $zip = new ZipArchive();
+//        $res = $zip->open($target, ZipArchive::CREATE);
+        foreach($host as $file){
+            $location = $target . $file->url;
+            dd($location)l
+
+
+
+
+            $loc = explode($location, $node->url, 2);
+            $loc = implode('', $loc);
+            $zip->addFile($file->url, $loc);
+        }
+
+
+
+
+
+
+
         dd($host);
     }
 }

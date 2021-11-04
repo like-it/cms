@@ -39,27 +39,28 @@ class Install {
                 $extension = $explode[1];
                 $data = new Data();
                 $uuid = Core::uuid();
-                Install::Host($object, [
-                    'host' => $host,
-                    'extension' => $extension,
-                    'subdomain' => Install::SUBDOMAIN_CORE
-                ]);
-                $data->set($uuid . '.host', $host);
-                $data->set($uuid . '.subdomain', Install::SUBDOMAIN_CORE);
-                $data->set($uuid . '.extension', $extension);
-                $uuid = Core::uuid();
-                Install::Host($object, [
-                    'host' => $host,
-                    'extension' => $extension,
-                    'subdomain' => Install::SUBDOMAIN_CMS
-                ]);
-                $data->set($uuid . '.host', $host);
-                $data->set($uuid . '.subdomain', Install::SUBDOMAIN_CMS);
-                $data->set($uuid . '.extension', $extension);
-                $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
-                $data->write($url);
+                try {
+                    Install::Host($object, [
+                        'host' => $host,
+                        'extension' => $extension,
+                        'subdomain' => Install::SUBDOMAIN_CORE
+                    ]);
+                    $data->set($uuid . '.host', $host);
+                    $data->set($uuid . '.subdomain', Install::SUBDOMAIN_CORE);
+                    $data->set($uuid . '.extension', $extension);
+                    $uuid = Core::uuid();
+                    Install::Host($object, [
+                        'host' => $host,
+                        'extension' => $extension,
+                        'subdomain' => Install::SUBDOMAIN_CMS
+                    ]);
+                    $data->set($uuid . '.host', $host);
+                    $data->set($uuid . '.subdomain', Install::SUBDOMAIN_CMS);
+                    $data->set($uuid . '.extension', $extension);
+                    $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
+                    $data->write($url);
 
-                $object->config(
+                    $object->config(
                         'host.dir.root',
                         $object->config('project.dir.root') .
                         'Host' .
@@ -70,35 +71,38 @@ class Install {
                         $object->config('ds') .
                         ucfirst($extension) .
                         $object->config('ds')
-                );
-                $user_service = '\\Host\\' . ucfirst(Install::SUBDOMAIN_CORE) . '\\' . ucfirst($host) . '\\' . ucfirst($extension) . '\\Service\\User';
-                $response = $user_service::create($object);
-                $user = $response->data();
-                if(
+                    );
+                    $user_service = '\\Host\\' . ucfirst(Install::SUBDOMAIN_CORE) . '\\' . ucfirst($host) . '\\' . ucfirst($extension) . '\\Service\\User';
+                    $response = $user_service::create($object);
+                    $user = $response->data();
+                    if(
                         is_object($user) &&
                         property_exists($user, 'uuid') &&
                         property_exists($user, 'email') &&
                         property_exists($user, 'isActive') &&
                         property_exists($user, 'parameter') &&
                         property_exists($user->parameter, 'activation_code')
-                ){
-                    $object->request('uuid', $user->uuid);
-                    $object->request('activation_code', $user->parameter->activation_code);
-                    $response = $user_service::activate($object);
-                    $user = $response->data();
-                    if(
-                        is_object($user) &&
-                        property_exists($user, 'isActive') &&
-                        $user->isActive === true
                     ){
-                        //activated
+                        $object->request('uuid', $user->uuid);
+                        $object->request('activation_code', $user->parameter->activation_code);
+                        $response = $user_service::activate($object);
+                        $user = $response->data();
+                        if(
+                            is_object($user) &&
+                            property_exists($user, 'isActive') &&
+                            $user->isActive === true
+                        ){
+                            //activated
+                        } else {
+                            //could not active user
+                            return $response;
+                        }
                     } else {
-                        //could not active user
+                        //could not create user
                         return $response;
                     }
-                } else {
-                    //could not create user
-                    return $response;
+                } catch (Exception $exception){
+                    return $exception;
                 }
             }
         }
@@ -134,12 +138,16 @@ class Install {
             return;
         }
         $options = Host::options($object, $options);
-        Host::clear($object, $options);
-        Host::route_delete($object, $options);
-        Host::domain_add($object, $options);
-        Host::dir_create($object, $options);
-        Host::file_create($object, $options);
-        Host::command_add($object, $options);
+        try {
+            Host::clear($object, $options);
+            Host::route_delete($object, $options);
+            Host::domain_add($object, $options);
+            Host::dir_create($object, $options);
+            Host::file_create($object, $options);
+            Host::command_add($object, $options);
+        } catch (Exception $exception){
+            return $exception;
+        }
     }
 
     public static function validate(App $object, $url, $type='user'){
