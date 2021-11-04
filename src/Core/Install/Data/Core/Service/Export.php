@@ -15,11 +15,12 @@ use ZipArchive;
 
 class Export extends Main {
     const VERSION = '1.0.0';
+    const FILENAME = 'Funda';
 
     public static function export(App $object): Response
     {
-        $export = Export::do($object);
-        $zip = '';
+        $url = Export::do($object);
+        $zip = File::read($url);
         return new Response(
             $zip,
             Response::TYPE_FILE
@@ -32,6 +33,7 @@ class Export extends Main {
             '/Local/',
             $object->config('project.dir.root') . 'composer.json',
             $object->config('project.dir.data') . 'Cache/',
+            $object->config('project.dir.data') . 'Export/',
             $object->config('project.dir.vendor'),
             $object->config('project.dir.host'),
         ]);
@@ -57,27 +59,17 @@ class Export extends Main {
                 unset($host[$nr]);
             }
         }
-        $target = 'Funda' . $object->config('ds') .  Export::VERSION . $object->config('ds');
-//        $zip = new ZipArchive();
-//        $res = $zip->open($target, ZipArchive::CREATE);
+        $target = Export::FILENAME . $object->config('ds') .  Export::VERSION . $object->config('ds');
+        $dir = $object->config('host.dir.data'). 'Export' . $object->config('ds');
+        Dir::create($dir);
+        $url = $dir . $target;
+        $zip = new ZipArchive();
+        $res = $zip->open($url, ZipArchive::CREATE);
         foreach($host as $file){
-            $location = $target . $file->url;
-            dd($location);
-
-
-
-
-            $loc = explode($location, $node->url, 2);
-            $loc = implode('', $loc);
-            $zip->addFile($file->url, $loc);
+            $location = substr($target, 0, -1) . $file->url;
+            $zip->addFile($file->url, $location);
         }
-
-
-
-
-
-
-
-        dd($host);
+        $zip->close();
+        return $url;
     }
 }
