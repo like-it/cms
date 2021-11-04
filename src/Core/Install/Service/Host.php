@@ -168,9 +168,8 @@ class Host {
                 return false;
             }
             if(array_key_exists('subdomain', $options)){
-                dd($object->config());
                 $url =
-                    $object->config('host.dir.root') .
+                    $object->config('prooject.dir.host') .
                     ucfirst($options['subdomain']) .
                     $object->config('ds') .
                     ucfirst($options['host']) .
@@ -184,7 +183,7 @@ class Host {
                 File::delete($url);
             } else {
                 $url =
-                    $object->config('host.dir.root') .
+                    $object->config('project.dir.host') .
                     ucfirst($options['host']) .
                     $object->config('ds') .
                     ucfirst($options['extension']) .
