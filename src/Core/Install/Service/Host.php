@@ -4,11 +4,13 @@ namespace LikeIt\Cms\Core\Install\Service;
 use R3m\Io\App;
 
 use Exception;
+use R3m\Io\Exception\ObjectException;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
 use R3m\Io\Module\Parse;
 use R3m\Io\Module\Parse\Token;
+use R3m\Io\Module\Response;
 
 
 class Host {
@@ -154,6 +156,34 @@ class Host {
         return implode(PHP_EOL, $output);
     }
 
+    public static function view_delete(App $object, $options=[]){
+        try {
+            if(!array_key_exists('host', $options)){
+                return false;
+            }
+            if(!array_key_exists('extension', $options)){
+                return false;
+            }
+            if(!array_key_exists('view', $options)){
+                return false;
+            }
+            if(array_key_exists('subdomain', $options)){
+                $url = '\\Application\\Host\\' . ucfirst($options['subdomain']) . '\\' . ucfirst($options['host']) . '\\' . ucfirst($options['extension']) . '\\View\\' .  $options['view'];
+                File::delete($url);
+            } else {
+                $url = '\\Application\\Host\\' . ucfirst($options['host']) . '\\' . ucfirst($options['extension']) . '\\View\\' . $options['view'];
+                File::delete($url);
+            }
+            $array = [];
+            $array['url'] = $url;
+            $array['isDeleted'] = microtime(true);
+            return new Response(Core::object($array, Core::OBJECT_JSON), Response::TYPE_JSON);
+        } catch (ObjectException $exception){
+            return $exception;
+        }
+
+    }
+
     public static function domain_add(App $object, $options=[]){
         if(!array_key_exists('host', $options)){
             return;
@@ -253,6 +283,7 @@ class Host {
             'Data' .
             $object->config('ds') .
             'Command.json';
+        $options['view'] = 'Overview.tpl';
         return $options;
     }
 

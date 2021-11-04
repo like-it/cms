@@ -65,12 +65,7 @@ class Export extends Main {
         $url = $dir . Export::FILENAME . '-' . Export::VERSION . $object->config('extension.zip');
         $zip = new ZipArchive();
         $res = $zip->open($url, ZipArchive::CREATE);
-        $needle = $object->config('host.dir.view') . 'Overview.tpl';
-        dd($needle);
         foreach($host as $file){
-            if(stristr($file->url, $needle) !== false){
-                continue;
-            }
             $location = substr($target, 0, -1) . $file->url;
             $zip->addFile($file->url, $location);
         }
