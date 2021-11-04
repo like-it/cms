@@ -62,7 +62,7 @@ class Export extends Main {
 //        $res = $zip->open($target, ZipArchive::CREATE);
         foreach($host as $file){
             $location = $target . $file->url;
-            dd($location)l
+            dd($location);
 
 
 
