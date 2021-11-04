@@ -169,7 +169,7 @@ class Host {
             }
             if(array_key_exists('subdomain', $options)){
                 $url =
-                    $object->config('prooject.dir.host') .
+                    $object->config('project.dir.host') .
                     ucfirst($options['subdomain']) .
                     $object->config('ds') .
                     ucfirst($options['host']) .
