@@ -168,6 +168,7 @@ class Host {
                 return false;
             }
             if(array_key_exists('subdomain', $options)){
+                dd($obgject->config());
                 $url =
                     $object->config('host.dir.root') .
                     ucfirst($options['subdomain']) .
