@@ -168,11 +168,29 @@ class Host {
                 return false;
             }
             if(array_key_exists('subdomain', $options)){
-                $url = $object->config('host.dir.root') . ucfirst($options['subdomain']) . '\\' . ucfirst($options['host']) . '\\' . ucfirst($options['extension']) . '\\View\\' .  $options['view'];
+                $url =
+                    $object->config('host.dir.root') .
+                    ucfirst($options['subdomain']) .
+                    $object->config('ds') .
+                    ucfirst($options['host']) .
+                    $object->config('ds') .
+                    ucfirst($options['extension']) .
+                    $object->config('ds') .
+                    'View' .
+                    $object->config('ds') .
+                    $options['view'];
                 d($url);
                 File::delete($url);
             } else {
-                $url = $object->config('host.dir.root') . ucfirst($options['host']) . '\\' . ucfirst($options['extension']) . '\\View\\' . $options['view'];
+                $url =
+                    $object->config('host.dir.root') .
+                    ucfirst($options['host']) .
+                    $object->config('ds') .
+                    ucfirst($options['extension']) .
+                    $object->config('ds') .
+                    'View' .
+                    $object->config('ds') .
+                    $options['view'];
                 File::delete($url);
             }
             $array = [];
