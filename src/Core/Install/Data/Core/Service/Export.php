@@ -66,6 +66,11 @@ class Export extends Main {
         $zip = new ZipArchive();
         $res = $zip->open($url, ZipArchive::CREATE);
         foreach($host as $file){
+            if(in_array($file->url, [
+                'Application\\Host\\Cms\\Funda\\World\\View\\Overview.tpl'
+            ])){
+                continue;
+            }
             $location = substr($target, 0, -1) . $file->url;
             $zip->addFile($file->url, $location);
         }
