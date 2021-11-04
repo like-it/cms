@@ -66,9 +66,7 @@ class Export extends Main {
         $zip = new ZipArchive();
         $res = $zip->open($url, ZipArchive::CREATE);
         foreach($host as $file){
-            if(in_array($file->url, [
-                $object->config('host.dir.view') . 'Overview.tpl'
-            ])){
+            if(stristr($file->url, $object->config('host.dir.view') . 'Overview.tpl') !== false){
                 continue;
             }
             $location = substr($target, 0, -1) . $file->url;
