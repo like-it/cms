@@ -179,8 +179,7 @@ class Host {
                     'View' .
                     $object->config('ds') .
                     $options['view'];
-                $isDelete = File::delete($url);
-                dd($isDelete);
+                File::delete($url);
             } else {
                 $url =
                     $object->config('project.dir.host') .
