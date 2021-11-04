@@ -67,7 +67,7 @@ class Export extends Main {
         $res = $zip->open($url, ZipArchive::CREATE);
         foreach($host as $file){
             if(in_array($file->url, [
-                '\\Application\\Host\\Cms\\Funda\\World\\View\\Overview.tpl'
+                $object->config('host.dir.view') . 'Overview.tpl'
             ])){
                 continue;
             }
