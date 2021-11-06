@@ -19,13 +19,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
     <script src="http://script.universeorange.local:2603/Js/Priya/Priya.js"></script>
     <script type="module">
-        import { user } from "/Module/User.js";
-        import { upload } from "/Module/Upload.js";
+        import {$ldelim} user {$rdelim} from "/Module/User.js";
+        import {$ldelim} upload {$rdelim} from "/Module/Upload.js";
 
-        ready(() => {
+        ready(() => {$ldelim}
             user.set('user.token', '1234');
             upload.init();
-        });
+        {$rdelim});
     </script>
     </head>
 <body>
