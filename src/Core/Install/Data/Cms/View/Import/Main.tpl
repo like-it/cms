@@ -18,6 +18,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
     <script src="http://script.universeorange.local:2603/Js/Priya/Priya.js"></script>
+    <script src="/Js/Dropzone/5.9.2/min/dropzone.min.js?1.0.0"></script>
+    <link rel="stylesheet" href="/Js/Dropzone/5.9.2/min/dropzone.min.css?1.0.0">
     <script type="module">
         import {$ldelim} user {$rdelim} from "/Module/User.js";
         import {$ldelim} upload {$rdelim} from "/Module/Upload.js";
