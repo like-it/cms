@@ -17,7 +17,7 @@ class Index extends View {
             $url = Index::locate($object, $name);
             return Index::response($object, $url);
         } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception){
-            return $exception->getMessage() . "\n";
+            return $exception;
         }
     }
 }

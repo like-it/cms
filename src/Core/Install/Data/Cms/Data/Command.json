@@ -1,10 +1,17 @@
 {
-    "1" : {
+    "1498986b-f2a0-4bb2-9f2f-31f90069d2df" : {
         "module" : "user",
         "command" : "login",
         "method": [
-            "POST",
-            "OPTIONS"
+            "GET",
+            "POST"
+        ]
+    },
+    "f7f11f1b-9051-4256-b9b1-be7afb70960e" : {
+        "module" : "import",
+        "command" : "main",
+        "method": [
+            "GET"
         ]
     }
 }

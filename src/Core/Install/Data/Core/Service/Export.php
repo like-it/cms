@@ -1,7 +1,6 @@
 <?php
 namespace Host\Subdomain\Host\Extension\Service;
 
-
 use R3m\Io\App;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
@@ -27,7 +26,8 @@ class Export extends Main {
         );
     }
 
-    private static function do(App $object){
+    private static function do(App $object): string
+    {
         $dir = new Dir();
         $dir->ignore([
             '/Local/',
