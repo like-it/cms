@@ -25,7 +25,7 @@
         import {$ldelim} upload {$rdelim} from "/Module/Upload.js";
 
         ready(() => {$ldelim}
-            user.set('token', '1234');
+            user.data('user.token', '1234');
             upload.init();
         {$rdelim});
     </script>
