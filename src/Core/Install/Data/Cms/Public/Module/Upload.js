@@ -10,7 +10,7 @@ upload.init = () => {
     let upload = body.select('.upload');
     let token = user.token();
     if(!upload) {
-        upload = create('div', 'dropzone upload');
+        upload = priya.create('div', 'dropzone upload');
         upload.attribute('id', 'upload');
         upload.data('url', 'core.funda.local:2610/Import/');
         upload.data('upload-max-filesize', '1024 M');
