@@ -10,6 +10,7 @@
     "f7f11f1b-9051-4256-b9b1-be7afb70960e" : {
         "module" : "import",
         "command" : "main",
+        "path" : "Import/",
         "method": [
             "GET"
         ]
