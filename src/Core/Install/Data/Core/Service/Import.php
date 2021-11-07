@@ -37,8 +37,8 @@ class Import extends Main {
                 ;
                 Dir::create($target);
                 Import::unzip($file->tmp_name, $target);
-                Import::update_files($target);
-                Import::update_data($target);
+                Import::update_files($object, $target);
+                Import::update_data($object, $target);
             }
         }
     }
@@ -50,6 +50,28 @@ class Import extends Main {
     public static function update_files($target=''){
         $dir = new Dir();
         $read = $dir->read($target, true);
+        $version = false;
+        $is_next = false;
+        foreach($read as $nr => $file){
+            if($is_next === true){
+                $version = $file;
+                $is_next = false;
+            }
+            if($version){
+                if($file->type !== Dir::TYPE){
+                    $file->extension = File::extension($file->url);
+                    dd($file);
+                }
+            } else {
+                if(
+                    $file->type === Dir::TYPE &&
+                    $file->name === 'Funda'
+                ){
+                    $is_next = true;
+                    continue;
+                }
+            }
+        }
         dd($read);
     }
 
