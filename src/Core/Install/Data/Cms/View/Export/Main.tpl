@@ -34,7 +34,9 @@
                 a.click();
                 window.URL.revokeObjectURL(url);
             {$rdelim})
-            .catch(() => {});
+            .catch(() => {$ldelim}
+                
+            {$rdelim});
     </script>
     </head>
 <body>
