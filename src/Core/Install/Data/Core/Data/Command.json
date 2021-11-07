@@ -106,6 +106,14 @@
             "OPTIONS"
         ]
     },
+    "cd223710-bb97-48ac-85f6-120571065d54" : {
+        "module" : "import",
+        "method": [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
+    },
     "92a63a25-71de-4d37-88cf-8bd98ab23b8d" : {
         "module" : "fileSystem",
         "command" : "read",

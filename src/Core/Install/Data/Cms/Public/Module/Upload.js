@@ -15,7 +15,7 @@ upload.init = () => {
         upload.data('url', 'core.funda.local:2610/Import/');
         upload.data('upload-max-filesize', '1024 M');
         body.appendChild(upload);
-        console.log(token); 
+        console.log(token);
         if(token){
             let drop = new Dropzone(
                 '#' + upload.attribute('id'), {
