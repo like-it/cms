@@ -29,13 +29,13 @@
                 a.style.display = 'none';
                 a.href = url;
                 // the filename you want
-                a.download = 'funda-{$version}.zip';
+                a.download = "funda-{$version}.zip";
                 document.body.appendChild(a);
                 a.click();
                 window.URL.revokeObjectURL(url);
             {$rdelim})
             .catch(() => {$ldelim}
-                
+
             {$rdelim});
     </script>
     </head>
