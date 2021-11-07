@@ -11,6 +11,7 @@ use stdClass;
 use ZipArchive;
 
 class Import extends Main {
+    const FUNDA = 'Funda';
     const ALLOWED_EXTENSION = [
         'zip'
     ];
@@ -51,23 +52,29 @@ class Import extends Main {
         $dir = new Dir();
         $read = $dir->read($target, true);
         $version = false;
+        $funda = false;
         $is_next = false;
         foreach($read as $nr => $file){
             if($is_next === true){
                 $version = $file;
                 $is_next = false;
             }
-            if($version){
+            if($version && $funda){
                 if($file->type !== Dir::TYPE){
                     $file->extension = File::extension($file->url);
+                    $file_target = explode($funda->name . $object->config('ds') . $version->name . $object->config('ds'), $file->url, 2);
+                    if(array_key_exists(1, $file_target)){
+                        $file->target = $file_target[1];
+                    }
                     dd($file);
                 }
             } else {
                 if(
                     $file->type === Dir::TYPE &&
-                    $file->name === 'Funda'
+                    $file->name === Import::FUNDA
                 ){
                     $is_next = true;
+                    $funda = $file;
                     continue;
                 }
             }
