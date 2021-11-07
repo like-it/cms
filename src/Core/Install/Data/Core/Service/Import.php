@@ -2,6 +2,7 @@
 namespace Host\Subdomain\Host\Extension\Service;
 
 use R3m\Io\App;
+use R3m\Io\Exception\FileWriteException;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
@@ -61,45 +62,45 @@ class Import extends Main {
                 $fileList[] = $node;
             }
         }
-        d($dirList);
-        dd($fileList);
         foreach($dirList as $dir){
-            if(is_dir($dir->url) === false){
-                mkdir($dir->url, Dir::CHMOD, true);
+            if(Dir::is($dir->url) === false){
+                Dir::create($dir->url);
             }
         }
         $result = array();
         foreach($fileList as $node){
             $stats = $zip->statIndex($node->index);
             if(!empty($update)){
-                if(file_exists($node->url)){
-                    $mtime = filemtime($node->url);
+                if(File::exist($node->url)){
+                    $mtime = File::mtime($node->url);
                     if($stats['mtime'] <= $mtime){
                         $result['skip'][] = $node->url;
                         continue;
                     }
                 }
             }
-            $dir = dirname($node->url);
-            if(file_exists($dir) && !is_dir($dir)){
-                unlink($dir);
-                mkdir($dir, Dir::CHMOD, true);
+            $dir = Dir::name($node->url);
+            if(File::exist($dir) && !Dir::is($dir)){
+                File::delete($dir);
+                Dir::create($dir);
             }
-            if(file_exists($dir) === false){
-                mkdir($dir, Dir::CHMOD, true);
+            if(File::exist($dir) === false){
+                Dir::create($dir);
             }
-            if(file_exists($node->url)){
-                unlink($node->url);
+            if(File::exist($node->url)){
+                File::delete($node->url);
             }
-            $file = new File();
-            $write = $file->write($node->url, $zip->getFromIndex($node->index));
-            if($write !== false){
-                chmod($node->url, File::CHMOD);
-                touch($node->url, $stats['mtime']);
-            } else {
-                $result['error'][] = $node->url;
+            try {
+                $write = File::write($node->url, $zip->getFromIndex($node->index));
+                if($write !== false){
+                    File::chmod($node->url, File::CHMOD);
+                    touch($node->url, $stats['mtime']);
+                    $result['unpack'][] = $node->url;
+                } else {
+                    $result['error'][] = $node->url;
+                }
+            } catch (FileWriteException $e) {
             }
-            $result['unpack'][] = $node->url;
         }
         $zip->close();
         return $result;
