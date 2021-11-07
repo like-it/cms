@@ -37,8 +37,20 @@ class Import extends Main {
                 ;
                 Dir::create($target);
                 Import::unzip($file->tmp_name, $target);
+                Import::update_files($target);
+                Import::update_data($target);
             }
         }
+    }
+
+    public static function update_data($target=''){
+
+    }
+
+    public static function update_files($target=''){
+        $dir = new Dir();
+        $read = $dir->read($target, true);
+        dd($read);
     }
 
     public static function unzip($url='', $target=''){
