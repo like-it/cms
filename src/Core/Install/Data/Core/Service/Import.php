@@ -6,7 +6,7 @@ use R3m\Io\Module\Core;
 use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
 use R3m\Io\Module\Response;
-
+use stdClass;
 use ZipArchive;
 
 class Import extends Main {
