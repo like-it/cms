@@ -3,7 +3,9 @@ namespace Host\Subdomain\Host\Extension\Service;
 
 use R3m\Io\App;
 use R3m\Io\Exception\FileWriteException;
+use R3m\Io\Exception\ObjectException;
 use R3m\Io\Module\Core;
+use R3m\Io\Module\Data;
 use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
 use R3m\Io\Module\Response;
@@ -41,13 +43,26 @@ class Import extends Main {
                 Dir::create($target);
                 Import::unzip($file->tmp_name, $target);
                 Import::update_files($object, $target);
-                Import::update_data($object, $target);
             }
         }
     }
 
-    public static function update_data(App $object, $target=''){
-
+    public static function update_data(App $object, $file){
+        if(File::exist($file->target)){
+            $data = $object->data_read($file->url);
+            $original = $object->data_read($file->target);
+            if($data && $original){
+                try {
+                    //Merge objects into 1.
+                    $merge = Core::object_merge($original->data(), $data->data());
+                    $original->data($merge);
+                    $original->write($file->target);
+                } catch (ObjectException $e) {
+                }
+            }
+        } else {
+            File::copy($file->url, $file->target);
+        }
     }
 
     public static function update_files(App $object, $target=''){
@@ -67,14 +82,16 @@ class Import extends Main {
             ){
                 if($file->type !== Dir::TYPE){
                     $file->extension = File::extension($file->url);
-                    if(in_array($file->extension, Import::FILE_EXTENSION_DATA)){
-                        continue;
-                    }
                     $file_target = explode($funda->name . $object->config('ds') . $version->name, $file->url, 2);
                     if(array_key_exists(1, $file_target)){
                         $file->target = $file_target[1];
                     }
-                    dd($file);
+                    if(in_array($file->extension, Import::FILE_EXTENSION_DATA)){
+                        dd($file);
+                        Import::update_data($object, $file);
+                    } else {
+                        File::copy($file->url, $file->target);
+                    }
                 }
             } else {
                 if(
@@ -87,7 +104,6 @@ class Import extends Main {
                 }
             }
         }
-        dd($read);
     }
 
     public static function unzip($url='', $target=''){
