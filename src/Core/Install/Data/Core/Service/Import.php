@@ -5,7 +5,6 @@ use R3m\Io\App;
 use R3m\Io\Exception\FileWriteException;
 use R3m\Io\Exception\ObjectException;
 use R3m\Io\Module\Core;
-use R3m\Io\Module\Data;
 use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
 use R3m\Io\Module\Response;
@@ -42,8 +41,25 @@ class Import extends Main {
                 ;
                 Dir::create($target);
                 $result = Import::unzip($file->tmp_name, $target);
-                dd($result);
-                Import::update_files($object, $target);
+
+                if(array_key_exists('error', $result)){
+                    $error = [];
+                    $error['error'] = 'Could not unzip without errors:' . PHP_EOL;
+                    foreach($result['error'] as $url){
+                        $error['error'] .= $url . PHP_EOL;
+                    }
+                    return new Response(
+                        $error,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                } else {
+                    Import::update_files($object, $target);
+                    return new Response(
+                        'Import successful...',
+                        Response::TYPE_JSON,
+                    );
+                }
             }
         }
     }

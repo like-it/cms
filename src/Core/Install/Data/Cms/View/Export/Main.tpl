@@ -22,11 +22,11 @@
     <link rel="stylesheet" href="/Dropzone/5.9.2/min/dropzone.min.css?1.0.0">
     <script type="module">
         import {$ldelim} user {$rdelim} from "/Module/User.js";
-        import {$ldelim} upload {$rdelim} from "/Module/Import/Upload.js";
+        import {$ldelim} download {$rdelim} from "/Module/Export/Download.js";
 
         ready(() => {$ldelim}
             user.data('user.token', '1234');
-            upload.init();
+            download.init();
         {$rdelim});
     </script>
     </head>
