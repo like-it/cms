@@ -18,7 +18,7 @@
     "32bc6e5b-e7f3-44ea-a23e-2ea5c611cb7d" : {
         "module" : "export",
         "command" : "main",
-        "path" : "Import/",
+        "path" : "Export/",
         "method": [
             "GET"
         ]
