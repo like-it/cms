@@ -12,10 +12,12 @@ use ZipArchive;
 
 class Import extends Main {
     const FUNDA = 'Funda';
-    const ALLOWED_EXTENSION = [
+    const UPLOAD_ALLOWED_EXTENSION = [
         'zip'
     ];
-
+    const FILE_EXTENSION_DATA = [
+        'json'
+    ];
 
     public static function import(App $object): Response
     {
@@ -25,7 +27,7 @@ class Import extends Main {
             if(
                 in_array(
                     $file->extension,
-                    Import::ALLOWED_EXTENSION
+                    Import::UPLOAD_ALLOWED_EXTENSION
                 )
             ){
                 $uuid = Core::uuid();
@@ -65,12 +67,9 @@ class Import extends Main {
             ){
                 if($file->type !== Dir::TYPE){
                     $file->extension = File::extension($file->url);
-                    d($object->config());
-                    /*
-                    if($file->extension === $object->config('dictionary')){
-
+                    if(in_array($file->extension, Import::FILE_EXTENSION_DATA)){
+                        continue;
                     }
-                    */
                     $file_target = explode($funda->name . $object->config('ds') . $version->name, $file->url, 2);
                     if(array_key_exists(1, $file_target)){
                         $file->target = $file_target[1];
