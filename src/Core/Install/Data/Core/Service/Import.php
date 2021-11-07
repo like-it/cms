@@ -59,7 +59,10 @@ class Import extends Main {
                 $version = $file;
                 $is_next = false;
             }
-            if($version && $funda){
+            if(
+                $version &&
+                $funda
+            ){
                 if($file->type !== Dir::TYPE){
                     $file->extension = File::extension($file->url);
                     $file_target = explode($funda->name . $object->config('ds') . $version->name . $object->config('ds'), $file->url, 2);
