@@ -21,13 +21,20 @@
     <script src="/Dropzone/5.9.2/min/dropzone.min.js?1.0.0"></script>
     <link rel="stylesheet" href="/Dropzone/5.9.2/min/dropzone.min.css?1.0.0">
     <script type="module">
-        import {$ldelim} user {$rdelim} from "/Module/User.js";
-        import {$ldelim} download {$rdelim} from "/Module/Export/Download.js";
-
-        ready(() => {$ldelim}
-            user.data('user.token', '1234');
-            download.init();
-        {$rdelim});
+        fetch('http://core.funda.local:2610/Export/')
+            .then(resp => resp.blob())
+            .then(blob => {$ldelim}
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                // the filename you want
+                a.download = 'funda-{$version}.zip';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            {$rdelim})
+            .catch(() => {});
     </script>
     </head>
 <body>
