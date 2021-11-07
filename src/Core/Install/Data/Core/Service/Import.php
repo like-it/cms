@@ -43,11 +43,11 @@ class Import extends Main {
         }
     }
 
-    public static function update_data($target=''){
+    public static function update_data(App $object, $target=''){
 
     }
 
-    public static function update_files($target=''){
+    public static function update_files(App $object, $target=''){
         $dir = new Dir();
         $read = $dir->read($target, true);
         $version = false;
