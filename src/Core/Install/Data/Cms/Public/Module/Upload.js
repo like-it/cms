@@ -12,7 +12,7 @@ upload.init = () => {
     if(!upload) {
         upload = priya.create('div', 'dropzone upload');
         upload.attribute('id', 'upload');
-        upload.data('url', 'core.funda.local:2610/Import/');
+        upload.data('url', 'http://core.funda.local:2610/Import/');
         upload.data('upload-max-filesize', '1024 M');
         body.appendChild(upload);
         console.log(token);
