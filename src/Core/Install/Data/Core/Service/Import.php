@@ -41,7 +41,8 @@ class Import extends Main {
                     $object->config('ds')
                 ;
                 Dir::create($target);
-                Import::unzip($file->tmp_name, $target);
+                $result = Import::unzip($file->tmp_name, $target);
+                dd($result);
                 Import::update_files($object, $target);
             }
         }
@@ -87,7 +88,6 @@ class Import extends Main {
                         $file->target = $file_target[1];
                     }
                     if(in_array($file->extension, Import::FILE_EXTENSION_DATA)){
-                        d($file);
                         Import::update_data($object, $file);
                     } else {
                         File::copy($file->url, $file->target);
