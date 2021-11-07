@@ -87,7 +87,7 @@ class Import extends Main {
                         $file->target = $file_target[1];
                     }
                     if(in_array($file->extension, Import::FILE_EXTENSION_DATA)){
-                        dd($file);
+                        d($file);
                         Import::update_data($object, $file);
                     } else {
                         File::copy($file->url, $file->target);
