@@ -1,3 +1,6 @@
+{data.read(config('project.dir.data') + 'Config.json')}
+{d(config('version'))}
+{dd($version)}
 <!DOCTYPE html>
 <html>
 <head>
