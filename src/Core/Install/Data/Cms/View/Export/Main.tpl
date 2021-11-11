@@ -6,12 +6,12 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Funda | Import</title>
+    <title>Funda | Export</title>
     <meta name="revisit-after" content="7 days" />
     <meta name="rating" content="general" />
     <meta name="distribution" content="global" />
-    <meta name="keywords" content="funda, cms, import">
-    <meta name="description" content="Funda CMS Import">
+    <meta name="keywords" content="funda, cms, export">
+    <meta name="description" content="Funda CMS Export">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -20,21 +20,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
     <script src="http://script.universeorange.local:2603/Js/Priya/Priya.js"></script>
     <script type="module">
-        fetch('http://core.funda.local:2610/Export/')
-            .then(response => response.blob())
-            .then(blob => {
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = url;
-                a.download = "funda-{{config('version')}}.zip";
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-            })
-            .catch(() => {
+        import { user } from "/Module/User.js";
+        ready(() => {
+            user.data('user.token', '1234');
+            console.log(user.token());
+            fetch('http://core.funda.local:2610/Export/')
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = "funda-{{config('version')}}.zip";
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                })
+                .catch(() => {
 
-            });
+                });
+        });
+
     </script>
     </head>
 <body>
