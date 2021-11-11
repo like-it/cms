@@ -1,5 +1,4 @@
-{d(config('version'))}
-{dd('$this')}
+{R3M}
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,25 +19,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
     <script src="http://script.universeorange.local:2603/Js/Priya/Priya.js"></script>
-    <script src="/Dropzone/5.9.2/min/dropzone.min.js?1.0.0"></script>
-    <link rel="stylesheet" href="/Dropzone/5.9.2/min/dropzone.min.css?1.0.0">
     <script type="module">
         fetch('http://core.funda.local:2610/Export/')
-            .then(resp => resp.blob())
-            .then(blob => {$ldelim}
+            .then(response => response.blob())
+            .then(blob => {
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.style.display = 'none';
                 a.href = url;
-                // the filename you want
-                a.download = "funda-{$version}.zip";
+                a.download = "funda-{{config('version')}}.zip";
                 document.body.appendChild(a);
                 a.click();
                 window.URL.revokeObjectURL(url);
-            {$rdelim})
-            .catch(() => {$ldelim}
+            })
+            .catch(() => {
 
-            {$rdelim});
+            });
     </script>
     </head>
 <body>
