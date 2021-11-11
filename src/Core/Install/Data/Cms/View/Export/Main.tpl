@@ -24,7 +24,11 @@
         ready(() => {
             user.data('user.token', '1234');
             console.log(user.token());
-            fetch('http://core.funda.local:2610/Export/')
+            fetch('http://core.funda.local:2610/Export/', {
+                'headers' : {
+                    "Authorization" : "Bearer " + user.token()
+                }
+            })
                 .then(response => response.blob())
                 .then(blob => {
                     const url = window.URL.createObjectURL(blob);
