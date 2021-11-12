@@ -26,12 +26,12 @@
             user.data('user.token', 1234);
             if(user.token()){
                 download.init({
-                    url: "{{server.url('core')}}/Export/",
+                    url: "{{server.url('core')}}Export/",
                     filename: "funda-{{config('version')}}.zip",
                     token: user.token()
                 });
             } else {
-                console.log('redirect user.login');
+                redirect("{{server.url('cms')}}User/Login/")
             }
         });
 

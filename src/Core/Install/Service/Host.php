@@ -142,15 +142,15 @@ class Host {
             ){
                 $data->set(
                     'server.url.' . $options['name'] . '.development',
-                    'http://' . $options['subdomain'] . '.' . $options['host'] . '.local:' . $options['port']
+                    'http://' . $options['subdomain'] . '.' . $options['host'] . '.local:' . $options['port'] . '/'
                 );
                 $data->set(
                     'server.url.' . $options['name'] . '.staging',
-                    'http://' . $options['subdomain'] . '.' . $options['host'] . '.local:' . $options['port']
+                    'http://' . $options['subdomain'] . '.' . $options['host'] . '.local:' . $options['port'] . '/'
                 );
                 $data->set(
                     'server.url.' . $options['name'] . '.production',
-                    'https://' . $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension']
+                    'https://' . $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension'] . '/'
                 );
                 $data->write($url);
             }
@@ -162,15 +162,15 @@ class Host {
             ){
                 $data->set(
                     'server.url.' . $options['name'] . '.development',
-                    'http://' . $options['host'] . '.local:' . $options['port']
+                    'http://' . $options['host'] . '.local:' . $options['port'] . '/'
                 );
                 $data->set(
                     'server.url.' . $options['name'] . '.staging',
-                    'http://' . $options['host'] . '.local:' . $options['port']
+                    'http://' . $options['host'] . '.local:' . $options['port'] . '/'
                 );
                 $data->set(
                     'server.url.' . $options['name'] . '.production',
-                    'https://' . $options['host'] . '.' . $options['extension']
+                    'https://' . $options['host'] . '.' . $options['extension'] . '/'
                 );
                 $data->write($url);
             }
