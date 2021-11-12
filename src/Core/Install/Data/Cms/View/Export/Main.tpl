@@ -25,7 +25,7 @@
         ready(() => {
             if(user.token()){
                 download.init({
-                    url: "{server.url('core')}/Export/",
+                    url: "{{server.url('core')}}/Export/",
                     filename: "funda-{{config('version')}}.zip",
                     token: user.token()
                 });
