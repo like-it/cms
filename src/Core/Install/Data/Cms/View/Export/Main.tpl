@@ -21,7 +21,7 @@
     <script src="http://script.universeorange.local:2603/Js/Priya/Priya.js"></script>
     <script type="module">
         import download from "/Module/Export/Download.js";
-        import { user } from "/Module/User.js";
+        import user from "/Module/User.js";
         ready(() => {
             if(user.token()){
                 download.init({
