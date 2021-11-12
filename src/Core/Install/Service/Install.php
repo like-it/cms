@@ -147,6 +147,7 @@ class Install {
             Host::file_create($object, $options);
             Host::command_add($object, $options);
             Host::config_server_url($object, $options);
+            Host::route_dedouble($object, $options);
         } catch (Exception $exception){
             return $exception;
         }

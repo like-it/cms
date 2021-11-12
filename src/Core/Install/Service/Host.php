@@ -177,6 +177,20 @@ class Host {
         }
     }
 
+    public static function route_dedouble(App $object, $options){
+        $url = $object->config('project.dir.data') . 'Route.json';
+        $route = $object->data_read($url);
+        $list = [];
+        if($route){
+            foreach($route->data() as $uuid => $record){
+                if(property_exists($record, 'resource')){
+                    $list[$record->resource][] = $uuid;
+                }
+            }
+            dd($list);
+        }
+    }
+
 
     public static function key_create($add, $key=''){
         $tree = Token::tree($add->path);
