@@ -31,4 +31,4 @@ download.init = (filename) => {
     });
 }
 
-export { download }
+export default download;
