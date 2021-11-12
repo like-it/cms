@@ -187,7 +187,14 @@ class Host {
                     $list[$record->resource][] = $uuid;
                 }
             }
-            dd($list);
+            foreach($list as $resource => $sub_list){
+                foreach($sub_list as $nr => $uuid){
+                    if($nr > 0){
+                        $route->delete($uuid);
+                    }
+                }
+            }
+            $route->write($url);
         }
     }
 
