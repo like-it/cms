@@ -307,6 +307,8 @@ class Host {
             $object->config('ds') .
             'Command.json';
         $options['view'] = 'Overview.tpl';
+        $options['port'] = $_SERVER['port'];
+        dd($_SERVER);
         return $options;
     }
 
