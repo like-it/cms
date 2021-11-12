@@ -1,3 +1,4 @@
+{R3M}
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,13 +22,22 @@
     <script src="/Dropzone/5.9.2/min/dropzone.min.js?1.0.0"></script>
     <link rel="stylesheet" href="/Dropzone/5.9.2/min/dropzone.min.css?1.0.0">
     <script type="module">
-        import {$ldelim} user {$rdelim} from "/Module/User.js";
-        import {$ldelim} upload {$rdelim} from "/Module/Import/Upload.js";
+        import user from "/Module/User.js";
+        import upload from "/Module/Import/Upload.js";
 
-        ready(() => {$ldelim}
+        ready(() => {
             user.data('user.token', '1234');
-            upload.init();
-        {$rdelim});
+            if(user.token()){
+                upload.init({
+                    url : "{{server.url('core')}}Import/",
+                    token: user.token(),
+                    upload_max_filesize: "1024 M"
+                });
+            } else {
+                redirect("{{server.url('cms')}}User/Login/")
+            }
+
+        });
     </script>
     </head>
 <body>

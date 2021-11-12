@@ -28,7 +28,7 @@
                 download.init({
                     url: "{{server.url('core')}}Export/",
                     filename: "funda-{{config('version')}}.zip",
-                    token: user.token()
+                    token: user.token(),
                 });
             } else {
                 redirect("{{server.url('cms')}}User/Login/")

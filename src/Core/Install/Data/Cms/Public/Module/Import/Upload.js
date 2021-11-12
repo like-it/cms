@@ -2,20 +2,19 @@ import { user } from "/Module/User.js";
 
 let upload = {};
 
-upload.init = () => {
+upload.init = (config) => {
     const body = select('body');
     if(!body){
         return;
     }
     let upload = body.select('.upload');
-    let token = user.token();
+    let token = config.token;
     if(!upload) {
         upload = priya.create('div', 'dropzone upload');
         upload.attribute('id', 'upload');
-        upload.data('url', 'http://core.funda.local:2610/Import/');
-        upload.data('upload-max-filesize', '1024 M');
+        upload.data('url', config.url);
+        upload.data('upload-max-filesize', config.upload_max_filesize);
         body.appendChild(upload);
-        console.log(token);
         if(token){
             let drop = new Dropzone(
                 '#' + upload.attribute('id'), {
@@ -46,8 +45,7 @@ upload.init = () => {
                  */
             });
         }
-
     }
 }
 
-export { upload }
+export default upload;
