@@ -20,4 +20,4 @@ user.token = () => {
     return _('user').collection('user.token');
 }
 
-export { user }
+export default user;

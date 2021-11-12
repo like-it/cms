@@ -129,6 +129,11 @@ class Host {
         }
     }
 
+    public static function config_server_url(App $object, $options){
+        dd($options);
+    }
+
+
     public static function key_create($add, $key=''){
         $tree = Token::tree($add->path);
         foreach($tree as $nr => $record){

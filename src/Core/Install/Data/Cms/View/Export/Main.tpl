@@ -21,36 +21,20 @@
     <script src="http://script.universeorange.local:2603/Js/Priya/Priya.js"></script>
     <script type="module">
         import download from "/Module/Export/Download.js";
-        download.init("funda-{{config('version')}}.zip");
-        /*
         import { user } from "/Module/User.js";
         ready(() => {
-            user.data('user.token', '1234');
             if(user.token()){
-                fetch('http://core.funda.local:2610/Export/', {
-                    'headers' : {
-                        "Authorization" : "Bearer " + user.token()
-                    }
-                })
-                .then(response => response.blob())
-                .then(blob => {
-                    const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.style.display = 'none';
-                    a.href = url;
-                    a.download = "funda-{{config('version')}}.zip";
-                    document.body.appendChild(a);
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                })
-                .catch(() => {
-
+                download.init({
+                    url: "{server.url('core')}/Export/",
+                    filename: "funda-{{config('version')}}.zip",
+                    token: user.token()
                 });
             } else {
-
+                console.log('redirect user.login');
             }
         });
-        */
+
+
     </script>
     </head>
 <body>
