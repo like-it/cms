@@ -23,6 +23,7 @@
         import download from "/Module/Export/Download.js";
         import user from "/Module/User.js";
         ready(() => {
+            user.data('user.token', 1234);
             if(user.token()){
                 download.init({
                     url: "{{server.url('core')}}/Export/",
