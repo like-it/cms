@@ -22,7 +22,7 @@
     <script src="/Dropzone/5.9.2/min/dropzone.min.js?1.0.0"></script>
     <link rel="stylesheet" href="/Dropzone/5.9.2/min/dropzone.min.css?1.0.0">
     <script type="module">
-        import { user } from "/Module/User.js";
+        import user from "/Module/User.js";
         import upload from "/Module/Import/Upload.js";
 
         ready(() => {

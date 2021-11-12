@@ -1,5 +1,3 @@
-import { user } from "/Module/User.js";
-
 let upload = {};
 
 upload.init = (config) => {
