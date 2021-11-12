@@ -130,7 +130,51 @@ class Host {
     }
 
     public static function config_server_url(App $object, $options){
-        dd($options);
+        $url = $object->config('project.dir.data') . 'Config.json';
+        $data = $object->data_read($url);
+        if($data){
+            if(
+                array_key_exists('name', $options) &&
+                array_key_exists('subdomain', $options) &&
+                array_key_exists('host', $options) &&
+                array_key_exists('port', $options) &&
+                array_key_exists('extension', $options)
+            ){
+                $data->set(
+                    'server.url.' . $options['name'] . '.development',
+                    'http://' . $options['subdomain'] . '.' . $options['host'] . '.local:' . $options['port']
+                );
+                $data->set(
+                    'server.url.' . $options['name'] . '.staging',
+                    'http://' . $options['subdomain'] . '.' . $options['host'] . '.local:' . $options['port']
+                );
+                $data->set(
+                    'server.url.' . $options['name'] . '.production',
+                    'https://' . $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension']
+                );
+                $data->write($url);
+            }
+            elseif(
+                array_key_exists('name', $options) &&
+                array_key_exists('host', $options) &&
+                array_key_exists('port', $options) &&
+                array_key_exists('extension', $options)
+            ){
+                $data->set(
+                    'server.url.' . $options['name'] . '.development',
+                    'http://' . $options['host'] . '.local:' . $options['port']
+                );
+                $data->set(
+                    'server.url.' . $options['name'] . '.staging',
+                    'http://' . $options['host'] . '.local:' . $options['port']
+                );
+                $data->set(
+                    'server.url.' . $options['name'] . '.production',
+                    'https://' . $options['host'] . '.' . $options['extension']
+                );
+                $data->write($url);
+            }
+        }
     }
 
 
