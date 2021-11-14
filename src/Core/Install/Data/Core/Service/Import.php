@@ -55,12 +55,34 @@ class Import extends Main {
                     );
                 } else {
                     Import::update_files($object, $target);
+                    Import::route_dedouble($object);
                     return new Response(
                         'Import successful...',
                         Response::TYPE_JSON,
                     );
                 }
             }
+        }
+    }
+
+    public static function route_dedouble(App $object){
+        $url = $object->config('project.dir.data') . 'Route.json';
+        $route = $object->data_read($url);
+        $list = [];
+        if($route){
+            foreach($route->data() as $uuid => $record){
+                if(property_exists($record, 'resource')){
+                    $list[$record->resource][] = $uuid;
+                }
+            }
+            foreach($list as $resource => $sub_list){
+                foreach($sub_list as $nr => $uuid){
+                    if($nr > 0){
+                        $route->delete($uuid);
+                    }
+                }
+            }
+            $route->write($url);
         }
     }
 
