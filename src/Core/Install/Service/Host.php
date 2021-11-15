@@ -214,6 +214,12 @@ class Host {
         if(!array_key_exists('route.node', $options)){
             return;
         }
+        if(!array_key_exists('host', $options)){
+            return;
+        }
+        if(!array_key_exists('extension', $options)){
+            return;
+        }
         if(array_key_exists('subdomain', $options)){
             $url = $object->config('project.dir.host') .
                 ucfirst($options['subdomain']) .
@@ -237,7 +243,13 @@ class Host {
             'Route' .
             $object->config('extension.json');
         }
-        dd($url);
+        $data = $object->data_read($url);
+        if($data){
+            foreach($options['route.node'] as $node){
+                $data->delete($node);
+            }
+        }
+        dd($data);
     }
 
     public static function route_delete(App $object, $options=[]){
