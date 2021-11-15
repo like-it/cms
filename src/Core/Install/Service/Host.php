@@ -248,8 +248,8 @@ class Host {
             foreach($options['route.node'] as $node){
                 $data->delete($node);
             }
+            $data->write($url);
         }
-        dd($data);
     }
 
     public static function route_delete(App $object, $options=[]){
