@@ -18,7 +18,7 @@ class Index extends View {
             if(App::contentType($object) == App::CONTENT_TYPE_HTML){
                 $url = Index::locate($object, 'Main/Main');
                 $object->data('template.name', $name);
-                $object->data('template.dir', User::DIR);
+                $object->data('template.dir', Index::DIR);
                 $view = Index::response($object, $url);
             } else {
                 $url = Index::locate($object, $name);
