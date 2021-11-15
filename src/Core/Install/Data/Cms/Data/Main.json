@@ -1,7 +1,7 @@
 {
     "url" : "{$host.url}Main",
     "script" : [
-        "<script src=\"{server.url('script')}Js\/Priya\/Priya.js\"></script>"
+        "<script src=\"http:\/\/script.universeorange.local:2603\/Js\/Priya\/Priya.js\"></script>"
     ],
     "link" : [        
         "<link rel=\"stylesheet\" href=\"{$host.url|default:''}fontawesome\/5.15.2\/css\/all.css?{$version}\">",
