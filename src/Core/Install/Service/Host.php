@@ -209,6 +209,37 @@ class Host {
         return $key;
     }
 
+
+    public static function route_node_delete(App $object, $options=[]){
+        if(!array_key_exists('route.node', $options)){
+            return;
+        }
+        if(array_key_exists('subdomain', $options)){
+            $url = $object->config('project.dir.host') .
+                ucfirst($options['subdomain']) .
+                $object->config('ds') .
+                ucfirst($options['host']) .
+                $object->config('ds') .
+                ucfirst($options['extension']) .
+                $object->config('ds') .
+                'Data' .
+                $object->config('ds') .
+                'Route' .
+                $object->config('extension.json');
+        } else {
+            $url = $object->config('project.dir.host') .
+            ucfirst($options['host']) .
+            $object->config('ds') .
+            ucfirst($options['extension']) .
+            $object->config('ds') .
+            'Data' .
+            $object->config('ds') .
+            'Route' .
+            $object->config('extension.json');
+        }
+        dd($url);
+    }
+
     public static function route_delete(App $object, $options=[]){
         if(!array_key_exists('host', $options)){
             return;
@@ -375,6 +406,20 @@ class Host {
         if(array_key_exists('SERVER_PORT', $_SERVER)){
             $options['port'] = $_SERVER['SERVER_PORT'];
         }
+        $options['route.node'][] = array_key_exists('subdomain', $options) ?
+            $options['subdomain'] .
+            '-' .
+            $options['host'] .
+            '-' .
+            $options['extension'] .
+            '-' .
+            'index'
+            :
+            $options['host'] .
+            '-' .
+            $options['extension'] .
+            '-' .
+            'index';
         return $options;
     }
 

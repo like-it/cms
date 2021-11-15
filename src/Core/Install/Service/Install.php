@@ -142,6 +142,7 @@ class Install {
             Host::clear($object, $options);
             Host::route_delete($object, $options);
             Host::domain_add($object, $options);
+            Host::route_node_delete($object, $options);
             Host::view_delete($object, $options);
             Host::dir_create($object, $options);
             Host::file_create($object, $options);
