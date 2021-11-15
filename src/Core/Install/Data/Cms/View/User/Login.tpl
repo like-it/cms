@@ -1,5 +1,5 @@
 {R3M}
-{dd($controller)}
+{{dd($controller)}}
 <section name="user-login">
     <h1><i class="fas fa-sign-in-alt"></i>{{__('user.login.title')}}</h1>
     <div class="user-login">
