@@ -12,12 +12,20 @@ user.data = (attribute, value) => {
     return _('user').collection(attribute, value);
 }
 
-user.refreshToken = () => {
-    return _('user').collection('user.refresh.token');
+user.refreshToken = (refreshToken) => {
+    if(refreshToken){
+        localStorage.setItem('refreshToken', refreshToken);
+    } else {
+        return localStorage.getItem('refreshToken')
+    }
 }
 
-user.token = () => {
-    return _('user').collection('user.token');
+user.token = (token) => {
+    if(token){
+        localStorage.setItem('token', token);
+    } else {
+        return localStorage.getItem('token')
+    }
 }
 
 export default user;

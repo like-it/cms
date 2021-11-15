@@ -1,7 +1,17 @@
 {R3M}
 {{script('module')}}
+import user from "/Module/User.js"
 ready(() => {
-    console.log('token');
+    if(user.token()){
+        //validate token and get user
+    } else {
+        if(user.refreshToken()){
+            //validate refresh token and get user with new token
+        } else {
+            //redirect user login
+            redirect("{{route.get(route.prefix() + '-user-login')}}");
+        }
+    }
 });
 {{/script}}
 
