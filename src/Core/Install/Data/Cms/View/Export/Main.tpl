@@ -34,8 +34,6 @@
                 redirect("{{server.url('cms')}}User/Login/")
             }
         });
-
-
     </script>
     </head>
 <body>

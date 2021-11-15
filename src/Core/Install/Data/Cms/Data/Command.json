@@ -1,4 +1,13 @@
 {
+    "d6d5496b-245a-4322-a122-11c8534189c2" : {
+        "module" : "index",
+        "command" : "main",
+        "path" : "\/",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "1498986b-f2a0-4bb2-9f2f-31f90069d2df" : {
         "module" : "user",
         "command" : "login",
