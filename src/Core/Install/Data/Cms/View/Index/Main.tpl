@@ -1,9 +1,9 @@
-{script('module')}
+{R3M}
+{{script('module')}}
 ready(() => {
     console.log('token');
-
 });
-{/script}
+{{/script}}
 
 
 Under construction... <br>
