@@ -21,7 +21,7 @@
         "submodule" : "login",
         "command" : "blocked",
         "method": [
-            "GET",
+            "GET"
         ]
     },
     "f7f11f1b-9051-4256-b9b1-be7afb70960e" : {
