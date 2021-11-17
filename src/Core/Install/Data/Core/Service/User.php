@@ -371,13 +371,13 @@ class User extends Main {
             $count = UserLogger::count($object, $node, UserLogger::STATUS_INVALID_PASSWORD);
             if($count >= User::BLOCK_PASSWORD_COUNT){
                 UserLogger::log($object, $node, UserLogger::STATUS_BLOCKED);
-                throw new Exception('User is blocked for 15 minutes...');
+                return true;
             }
         } else {
             $count = UserLogger::count($object, null, UserLogger::STATUS_INVALID_EMAIL);
             if($count >= User::BLOCK_EMAIL_COUNT){
                 UserLogger::log($object, null, Logger::STATUS_BLOCKED);
-                throw new Exception('User is blocked for 15 minutes...');
+                return true;
             }
         }
         return false;

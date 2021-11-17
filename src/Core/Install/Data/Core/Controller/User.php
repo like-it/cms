@@ -77,7 +77,7 @@ class User extends View {
         try {
             $is_blocked = Service::is_blocked($object);
             if($is_blocked){
-                return $is_blocked;
+                throw new Exception('User is blocked for 15 minutes...', 400);
             }
             return Service::login($object);
         }
