@@ -71,13 +71,13 @@ login.post = (event) => {
         //end loading
         login.loader('end');
         if(
-            !is.empty(response.exception) &&
-            !is.empty(response.exception.message)
+            !is.empty(response.class) &&
+            response.class === 'exception'
         ){
-            if(!is.empty(response.exception.code)){
-                const code = response.exception.code;
+            if(!is.empty(response.code)){
+                const code = response.code;
                 switch(code){
-                    case 'user-blocked' :
+                    case 400 :
                         const route_blocked = login.get('route.frontend.blocked');
                         if(route_blocked){
                             setTimeout(function(){
@@ -89,7 +89,7 @@ login.post = (event) => {
             }
             const error = form.select('.user-login-error');
             if(error){
-                error.html(response.exception.message);
+                error.html(response.message);
             }
         } else if(!is.empty(response.user)){
             console.log(response);
