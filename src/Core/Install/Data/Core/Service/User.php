@@ -348,8 +348,10 @@ class User extends Main {
                 throw new Exception('Invalid password.');
             }
             UserLogger::log($object, $node, UserLogger::STATUS_SUCCESS);
+            $response = [];
+            $response['user'] = $node;
             return new Response(
-                $node,
+                $response,
                 Response::TYPE_JSON
             );
         } else {

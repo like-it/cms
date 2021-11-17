@@ -91,13 +91,14 @@ login.post = (event) => {
             if(error){
                 error.html(response.message);
             }
-        } else if(!is.empty(response.user)){
+        }
+        else if(!is.empty(response.user)){
             console.log(login.data());
-            const route_success = login.get('route.frontend.start');
             const error = form.select('.user-login-error');
             if(error){
                 error.html('');
             }
+            const route_success = login.get('route.frontend.start');
             if(route_success){
                 request(route_success, response);
             }
