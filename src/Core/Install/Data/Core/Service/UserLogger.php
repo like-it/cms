@@ -56,10 +56,11 @@ class UserLogger extends Main {
                 if (
                     property_exists($log, 'user') &&
                     property_exists($log, 'dateTime') &&
+                    property_exists($log->dateTime, 'date') &&
                     property_exists($log->user, 'uuid') &&
                     $log->user->uuid === $user->uuid
                 ) {
-                    $list[$log->dateTime][] = $log;
+                    $list[$log->dateTime->date][] = $log;
                 }
             }
             dd($list);
