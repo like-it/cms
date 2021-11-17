@@ -67,49 +67,31 @@ class UserLogger extends Main {
                 }
             }
             return $counter;
-        }
-
-
-
-            /*
-            $options = [];
-            $entityManager = Database::entityManager($object, $options);
-            $user_id = $user->getId();
-
-            $query = 'SELECT l 
-                FROM ' .
-                __CLASS__ . ' l 
-                WHERE l.user_id LIKE :user_id  AND 
-                l.status = :status AND 
-                l.dateTime >= :dateTime';
-
-            $result = $entityManager->createQuery($query)
-                ->setParameter('user_id', $user_id)
-                ->setParameter('status', $status)
-                ->setParameter('dateTime', $dateTime)
-                ->getResult();
-            return count($result);
         } else {
-            $options = [];
-            $entityManager = Database::entityManager($object, $options);
+            $counter = 0;
             $ipAddress = $_SERVER['REMOTE_ADDR'];
             $dateTime = date('Y-m-d H:i:s', strtotime(Logger::LOGIN_PERIOD));
-            $query = 'SELECT l 
-                FROM ' .
-                __CLASS__ . ' l 
-                WHERE l.user_id IS NULL AND
-                l.ipAddress = :ipAddress AND 
-                l.status = :status AND 
-                l.dateTime >= :dateTime';
-
-            $result = $entityManager->createQuery($query)
-                ->setParameter('ipAddress', $ipAddress)
-                ->setParameter('status', $status)
-                ->setParameter('dateTime', $dateTime)
-                ->getResult();
-            return count($result);
+            $url = UserLogger::getDataUrl($object);
+            $data = $object->data_read($url);
+            if (!$data) {
+                return $counter;
+            }
+            foreach ($data->data() as $uuid => $log) {
+                if (
+                    !property_exists($log, 'user') &&
+                    property_exists($log, 'ipAddress') &&
+                    property_exists($log, 'dateTime') &&
+                    property_exists($log->dateTime, 'date') &&
+                    property_exists($log, 'status') &&
+                    $log->status === $status &&
+                    $log->dateTime->date >= $dateTime &&
+                    $log->ipAddress === $ipAddress
+                ) {
+                    $counter++;
+                }
+            }
+            return $counter;
         }
-        */
     }
 
     private static function getDataUrl(App $object): string
