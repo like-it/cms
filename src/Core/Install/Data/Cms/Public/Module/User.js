@@ -1,15 +1,21 @@
+import login from "../User/Module/Login";
+
 let user = {};
 
-user.get = () => {
-    return _('user').collection();
+user.get = (attribute) => {
+    return _('user').collection(attribute);
 }
 
-user.set = (data) => {
-    _('user').collection('user', data);
+user.set = (attribute, value) => {
+    _('user').collection(attribute, value);
 }
 
-user.data = (attribute, value) => {
-    return _('user').collection(attribute, value);
+user.data = (data) => {
+    if(data){
+        _('user').collection(data);
+    } else {
+        return _('user').collection();
+    }
 }
 
 user.refreshToken = (refreshToken) => {
@@ -26,10 +32,6 @@ user.token = (token) => {
     } else {
         return localStorage.getItem('token')
     }
-}
-
-user.login = () => {
-    console.log('user.login')
 }
 
 export default user;

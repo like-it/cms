@@ -16,6 +16,14 @@
             "POST"
         ]
     },
+    "fa354ea6-f89e-4b6a-a25d-7797bfc0027a" : {
+        "module" : "user",
+        "submodule" : "login",
+        "command" : "blocked",
+        "method": [
+            "GET",
+        ]
+    },
     "f7f11f1b-9051-4256-b9b1-be7afb70960e" : {
         "module" : "import",
         "command" : "main",
