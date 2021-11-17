@@ -72,7 +72,7 @@ login.post = (event) => {
         login.loader('end');
         if(
             !is.empty(response.class) &&
-            response.class === 'exception'
+            response.class === 'Exception'
         ){
             if(!is.empty(response.code)){
                 const code = response.code;
