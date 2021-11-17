@@ -70,7 +70,7 @@ class UserLogger extends Main {
         } else {
             $counter = 0;
             $ipAddress = $_SERVER['REMOTE_ADDR'];
-            $dateTime = date('Y-m-d H:i:s', strtotime(Logger::LOGIN_PERIOD));
+            $dateTime = date('Y-m-d H:i:s', strtotime(UserLogger::LOGIN_PERIOD));
             $url = UserLogger::getDataUrl($object);
             $data = $object->data_read($url);
             if (!$data) {
