@@ -22,16 +22,24 @@ class User extends View {
             $uuid &&
             $attribute
         ){
-            try {
-                switch(Handler::method()){
-                    case Handler::GET :
-                        return Service::readAttribute($object);
-                    case Handler::DELETE :
-                        return Service::deleteAttribute($object);
+            if(
+                strtolower($uuid) === 'login' &&
+                strtolower($attribute) === 'process')
+            {
+                dd('found');
+            } else {
+                try {
+                    switch(Handler::method()){
+                        case Handler::GET :
+                            return Service::readAttribute($object);
+                        case Handler::DELETE :
+                            return Service::deleteAttribute($object);
+                    }
+                } catch (Exception $exception){
+                    return $exception;
                 }
-            } catch (Exception $exception){
-                return $exception;
             }
+
         } else {
             if($uuid){
                 try {
