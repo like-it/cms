@@ -370,7 +370,7 @@ class User extends Main {
         } else {
             $count = UserLogger::count($object, null, UserLogger::STATUS_INVALID_EMAIL);
             if($count >= User::BLOCK_EMAIL_COUNT){
-                UserLogger::log($object, null, Logger::STATUS_BLOCKED);
+                UserLogger::log($object, null, UserLogger::STATUS_BLOCKED);
                 return true;
             }
         }
