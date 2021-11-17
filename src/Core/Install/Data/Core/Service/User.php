@@ -348,6 +348,7 @@ class User extends Main {
                 throw new Exception('Invalid password.');
             }
             UserLogger::log($object, $node, UserLogger::STATUS_SUCCESS);
+            unset($node->password);
             $response = [];
             $response['user'] = $node;
             return new Response(

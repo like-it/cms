@@ -99,6 +99,7 @@ login.post = (event) => {
                 error.html('');
             }
             const route_success = login.get('route.frontend.start');
+            console.log(route_success);
             if(route_success){
                 request(route_success, response);
             }
