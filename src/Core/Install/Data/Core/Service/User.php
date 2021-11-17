@@ -16,6 +16,9 @@ class User extends Main {
     const PASSWORD_ALGO = PASSWORD_BCRYPT;
     const PASSWORD_COST = 13;
 
+    const BLOCK_EMAIL_COUNT = 5;
+    const BLOCK_PASSWORD_COUNT = 5;
+
     const DEFAULT_SORT = 'email';
     const DEFAULT_ORDER = 'ASC';
     const DEFAULT_LIMIT = 20;
@@ -114,7 +117,6 @@ class User extends Main {
 
     public static function update(App $object): Response
     {
-
         $uuid = $object->request('uuid');
         $url = User::getDataUrl($object);
         $data = $object->data_read($url);
@@ -326,37 +328,70 @@ class User extends Main {
         }
     }
 
-    public static function login(App $object, $options=[]){
-        $password = $object->request('password');
-
-        $url = User::getDataUrl($object);
-        $data = $object->data_read($url);
-        if(!$data){
+    public static function login(App $object){
+        $node = User::getUser($object);
+        if(
+            $node &&
+            property_exists($node, 'password')
+        ){
+            $password = $object->request('password');
+            $verify = password_verify($password, $node->password);
+            if(empty($verify)){
+                UserLogger::log($object, $node, UserLogger::STATUS_INVALID_PASSWORD);
+                $error = [];
+                $error['error'] = 'Invalid password.';
+                return new Response(
+                    $error,
+                    Response::TYPE_JSON,
+                    Response::STATUS_ERROR
+                );
+            }
+            UserLogger::log($object, $node, UserLogger::STATUS_SUCCESS);
+            return new Response(
+                $node,
+                Response::TYPE_JSON
+            );
+        } else {
+            UserLogger::log($object, null, UserLogger::STATUS_INVALID_EMAIL);
             $error = [];
-            $error['error'] = 'Could not read node file...';
+            $error['error'] = 'Invalid e-mail.';
             return new Response(
                 $error,
                 Response::TYPE_JSON,
                 Response::STATUS_ERROR
             );
-        } else {
-            dd($data);
-        }       
-        /*
-        $user = User::find($object, ['email' => $object->request('email')]);
-        if($user){
-            $verify = password_verify($password, $user->getPassword());
-            if(empty($verify)){
-                User::logger($object, $user, Logger::STATUS_INVALID_PASSWORD);
-                return $verify;
-            }
-            User::logger($object, $user, Logger::STATUS_SUCCESS);
-            return $user;
-        } else {
-            User::logger($object, null,Logger::STATUS_INVALID_EMAIL);
-            return false;
         }
-        */
+    }
+
+    public static function is_blocked(App $object): bool|Response
+    {
+        $node = User::getUser($object);
+        if($node){
+            $count = UserLogger::count($object, $node, UserLogger::STATUS_INVALID_PASSWORD);
+            if($count >= User::BLOCK_PASSWORD_COUNT){
+                UserLogger::log($object, $node, UserLogger::STATUS_BLOCKED);
+                $error = [];
+                $error['error'] = 'User is blocked for 15 minutes...';
+                return new Response(
+                    $error,
+                    Response::TYPE_JSON,
+                    Response::STATUS_ERROR
+                );
+            }
+        } else {
+            $count = UserLogger::count($object, null, UserLogger::STATUS_INVALID_EMAIL);
+            if($count >= User::BLOCK_EMAIL_COUNT){
+                UserLogger::log($object, null, Logger::STATUS_BLOCKED);
+                $error = [];
+                $error['error'] = 'User is blocked for 15 minutes...';
+                return new Response(
+                    $error,
+                    Response::TYPE_JSON,
+                    Response::STATUS_ERROR
+                );
+            }
+        }
+        return false;
     }
 
     public static function readAttribute(App $object): Response
@@ -437,6 +472,30 @@ class User extends Main {
                 Response::TYPE_JSON,
                 Response::STATUS_ERROR
             );
+        }
+    }
+
+    private static function getUser(App $object): mixed
+    {
+        $email = $object->request('email');
+        $url = User::getDataUrl($object);
+        $data = $object->data_read($url);
+        if (!$data) {
+            return false;
+        } else {
+            $node = false;
+            foreach ($data->data() as $uuid => $record) {
+                if (
+                    property_exists($record, 'isActive') &&
+                    property_exists($record, 'email') &&
+                    $record->isActive === true &&
+                    $record->email === $email
+                ) {
+                    $node = $record;
+                    break;
+                }
+            }
+            return $node;
         }
     }
 
