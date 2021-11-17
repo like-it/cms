@@ -45,25 +45,28 @@ class UserLogger extends Main {
             $user !== null &&
             property_exists($user, 'uuid')
         ) {
+            $counter = 0;
             $dateTime = date('Y-m-d H:i:s', strtotime(UserLogger::LOGIN_PERIOD));
             $url = UserLogger::getDataUrl($object);
             $data = $object->data_read($url);
             if (!$data) {
-                return 0;
+                return $counter;
             }
-            $list = [];
             foreach ($data->data() as $uuid => $log) {
                 if (
                     property_exists($log, 'user') &&
                     property_exists($log, 'dateTime') &&
                     property_exists($log->dateTime, 'date') &&
                     property_exists($log->user, 'uuid') &&
-                    $log->user->uuid === $user->uuid
+                    $log->user->uuid === $user->uuid &&
+                    property_exists($log, 'status') &&
+                    $log->status === $status &&
+                    $log->dateTime->date >= $dateTime
                 ) {
-                    $list[$log->dateTime->date][] = $log;
+                    $counter++;
                 }
             }
-            dd($list);
+            return $counter;
         }
 
 
