@@ -326,6 +326,39 @@ class User extends Main {
         }
     }
 
+    public static function login(App $object, $options=[]){
+        $password = $object->request('password');
+
+        $url = User::getDataUrl($object);
+        $data = $object->data_read($url);
+        if(!$data){
+            $error = [];
+            $error['error'] = 'Could not read node file...';
+            return new Response(
+                $error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
+        } else {
+            dd($data);
+        }       
+        /*
+        $user = User::find($object, ['email' => $object->request('email')]);
+        if($user){
+            $verify = password_verify($password, $user->getPassword());
+            if(empty($verify)){
+                User::logger($object, $user, Logger::STATUS_INVALID_PASSWORD);
+                return $verify;
+            }
+            User::logger($object, $user, Logger::STATUS_SUCCESS);
+            return $user;
+        } else {
+            User::logger($object, null,Logger::STATUS_INVALID_EMAIL);
+            return false;
+        }
+        */
+    }
+
     public static function readAttribute(App $object): Response
     {
         $uuid = $object->request('uuid');

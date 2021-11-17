@@ -5,6 +5,7 @@ namespace Host\Subdomain\Host\Extension\Controller;
 use R3m\Io\App;
 use R3m\Io\Module\Handler;
 use R3m\Io\Module\View;
+use R3m\Io\Module\Response;
 use Host\Subdomain\Host\Extension\Service\User as Service;
 
 use Exception;
@@ -15,31 +16,24 @@ use R3m\Io\Exception\UrlNotExistException;
 class User extends View {
     const DIR = __DIR__ . DIRECTORY_SEPARATOR;    
 
-    public static function command(App $object){
+    public static function command(App $object): Exception|Response
+    {
         $uuid = $object->request('uuid');
         $attribute = $object->request('attribute');
         if(
             $uuid &&
             $attribute
         ){
-            if(
-                strtolower($uuid) === 'login' &&
-                strtolower($attribute) === 'process')
-            {
-                dd('found');
-            } else {
-                try {
-                    switch(Handler::method()){
-                        case Handler::GET :
-                            return Service::readAttribute($object);
-                        case Handler::DELETE :
-                            return Service::deleteAttribute($object);
-                    }
-                } catch (Exception $exception){
-                    return $exception;
+            try {
+                switch(Handler::method()){
+                    case Handler::GET :
+                        return Service::readAttribute($object);
+                    case Handler::DELETE :
+                        return Service::deleteAttribute($object);
                 }
+            } catch (Exception $exception){
+                return $exception;
             }
-
         } else {
             if($uuid){
                 try {
@@ -77,5 +71,9 @@ class User extends View {
             return $exception->getMessage() . "\n";
         }
         */
+    }
+
+    public static function login(App $object){
+        Service::login($object);
     }
 }
