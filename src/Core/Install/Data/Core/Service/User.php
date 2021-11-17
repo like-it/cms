@@ -20,6 +20,8 @@ class User extends Main {
     const BLOCK_EMAIL_COUNT = 5;
     const BLOCK_PASSWORD_COUNT = 5;
 
+    const EXCEPTION_BLOCKED = 400;
+
     const DEFAULT_SORT = 'email';
     const DEFAULT_ORDER = 'ASC';
     const DEFAULT_LIMIT = 20;
