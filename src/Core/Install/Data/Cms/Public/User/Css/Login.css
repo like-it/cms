@@ -1,0 +1,116 @@
+section[name="user-login"] {
+    width: 400px;
+    height: 250px;
+    position: absolute;
+    left: calc(50% - 200px);
+    top: calc(50% - 125px);
+    background: rgba(245, 245, 245, 1);
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+section[name="user-login"] h1 {
+    display: block;
+    width: calc(100% - 40px);
+    height: 20px;
+    font-size: 20px;
+    margin: 0;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: rgba(255, 124, 13, 1);
+    border-top-left-radius: 25px;
+}
+
+section[name="user-login"] label {
+    display: block;
+    float: left;
+    clear: both;
+    width: 15px;
+    height: 15px;
+    padding: 7.5px;
+    border: 1px solid rgba(175, 175, 175, 1);
+    margin-bottom: 5px;
+}
+
+section[name="user-login"] input {
+    height: 25px;
+    padding-top: 5px;
+    padding-bottom: 0;
+    margin-bottom: 5px;
+    border: 1px solid rgba(175, 175, 175, 1);
+    border-left: 0;
+}
+
+section[name="user-login"] input[type="submit"] {
+    border: 1px solid rgba(175, 175, 175, 1);
+    background-color: rgba(0, 124, 198, 1);
+    color: rgba(255, 255, 255, 1);
+    font-weight: 300;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 40px;
+}
+
+section[name="user-login"] button {
+    border: 1px solid rgba(175, 175, 175, 1);
+    background-color: rgba(0, 124, 198, 1);
+    color: rgba(255, 255, 255, 1);
+    font-weight: 300;
+    padding: 10px;
+    height: 40px;
+}
+
+section[name="user-login"] .password-forgot {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+section[name="user-login"] input[type="text"],
+section[name="user-login"] input[type="password"] {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+section[name="user-login"] .user-login {
+    padding: 25px;
+    height: calc(100% - 90px);
+}
+
+section[name="user-login"] p.version,
+section[name="user-login"] p.loading {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: 10px;
+}
+
+section[name="user-login"] .fa-exclamation-circle {
+    font-size: 48px;
+    float: left;
+    margin-right: 10px;
+}
+
+section[name="user-login"] .error {
+    color: rgba(255, 0, 0, 1);
+}
+
+section[name="user-login"] form {
+    height: calc(100% - 20px);
+}
+
+section[name="user-login"] .user-login-error {
+    color: rgba(255, 0, 0, 1);
+}
+
+section[name="user-login"] .success {
+    text-align: center;
+    margin-top: 50px;
+}
+
+section[name="user-login"] i.fa-circle-notch {
+    font-size: 48px;
+}

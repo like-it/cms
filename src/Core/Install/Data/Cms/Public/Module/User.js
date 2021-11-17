@@ -28,4 +28,8 @@ user.token = (token) => {
     }
 }
 
+user.login = () => {
+    console.log('user.login')
+}
+
 export default user;

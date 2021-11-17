@@ -1,0 +1,104 @@
+.dialog {
+    position: absolute;
+}
+
+.dialog.debug {
+    top: calc(50% - calc(650px / 2));
+    left: calc(50% - calc(750px / 2));
+    text-align: left;
+    height: 650px;
+    width: 750px;
+    z-index: 999999999;
+    animation: fade-in 0.5s;
+    display: none;
+}
+
+.dialog.debug.display-block {
+    display: block;
+}
+
+.dialog.debug .body pre {
+    padding: 20px;
+    border-bottom: 1px solid rgba(215, 215, 215, 1);
+}
+
+.dialog.debug .body {
+    -webkit-touch-callout: text;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+    overflow: auto;
+}
+
+.dialog.debug .head {
+    background-color: rgba(175, 175, 175, 1);
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+}
+
+.dialog.debug .head span {
+    float: left;
+}
+
+.dialog.debug .head .icon {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 2px;
+    font-size: 26px;
+}
+
+.dialog.debug .head h2{
+    margin: 0;
+    padding: 0;
+}
+
+.dialog.debug .menu {
+    background-color: rgba(215, 215, 215, 1);
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+}
+
+.dialog.debug .body {
+    background-color: rgba(255, 255, 255, 1);
+    width: calc(100% - 2px);
+    height: calc(100% - 122px);
+    overflow: auto;
+    border: 1px solid rgba(175, 175, 175, 1);
+}
+
+
+.dialog.debug .body .tab {
+    display: none;
+}
+
+.dialog.debug .body .tab.selected {
+    display: block;
+}
+
+.dialog.debug .footer {
+    background-color: rgba(215, 215, 215, 1);
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+}
+
+.dialog.debug .tab-head {
+    list-style-type: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.dialog.debug .tab-head li {
+    float: left;
+    margin: 0;
+    padding: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: default;
+}
