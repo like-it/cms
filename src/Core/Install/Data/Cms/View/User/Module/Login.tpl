@@ -15,8 +15,12 @@ ready(() => {
     () => {
 
         login.init({
-            "route.frontend.blocked" : "{{route.get(route.prefix() + '-user-login-blocked')}}",
-            "route.frontend.start" : "{{route.get(route.prefix() + '-index-main')}}"
+            "route" : {
+                "frontend" : {
+                    "blocked" : "{{route.get(route.prefix() + '-user-login-blocked')}}",
+                    "start" : "{{route.get(route.prefix() + '-index-main')}}"
+                }
+            }
         });
         console.log('user login');
     });
