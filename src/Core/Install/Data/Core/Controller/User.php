@@ -74,10 +74,16 @@ class User extends View {
     }
 
     public static function login(App $object){
-        $is_blocked = Service::is_blocked($object);
-        if($is_blocked){
-            return $is_blocked;
+        try {
+            $is_blocked = Service::is_blocked($object);
+            if($is_blocked){
+                return $is_blocked;
+            }
+            return Service::login($object);
         }
-        return Service::login($object);
+        catch (Exception $exception){
+            return $exception;
+        }
+
     }
 }

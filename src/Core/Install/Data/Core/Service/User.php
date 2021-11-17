@@ -2,6 +2,7 @@
 namespace Host\Subdomain\Host\Extension\Service;
 
 
+use Exception;
 use R3m\Io\App;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
@@ -363,32 +364,20 @@ class User extends Main {
         }
     }
 
-    public static function is_blocked(App $object): bool|Response
+    public static function is_blocked(App $object): bool|Exception
     {
         $node = User::getUser($object);
         if($node){
             $count = UserLogger::count($object, $node, UserLogger::STATUS_INVALID_PASSWORD);
             if($count >= User::BLOCK_PASSWORD_COUNT){
                 UserLogger::log($object, $node, UserLogger::STATUS_BLOCKED);
-                $error = [];
-                $error['error'] = 'User is blocked for 15 minutes...';
-                return new Response(
-                    $error,
-                    Response::TYPE_JSON,
-                    Response::STATUS_ERROR
-                );
+                throw new Exception('User is blocked for 15 minutes...');
             }
         } else {
             $count = UserLogger::count($object, null, UserLogger::STATUS_INVALID_EMAIL);
             if($count >= User::BLOCK_EMAIL_COUNT){
                 UserLogger::log($object, null, Logger::STATUS_BLOCKED);
-                $error = [];
-                $error['error'] = 'User is blocked for 15 minutes...';
-                return new Response(
-                    $error,
-                    Response::TYPE_JSON,
-                    Response::STATUS_ERROR
-                );
+                throw new Exception('User is blocked for 15 minutes...');
             }
         }
         return false;
