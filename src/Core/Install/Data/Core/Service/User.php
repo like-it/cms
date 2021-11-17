@@ -331,7 +331,11 @@ class User extends Main {
         }
     }
 
-    public static function login(App $object){
+    /**
+     * @throws Exception
+     */
+    public static function login(App $object): Response
+    {
         $node = User::getUser($object);
         if(
             $node &&
@@ -341,13 +345,7 @@ class User extends Main {
             $verify = password_verify($password, $node->password);
             if(empty($verify)){
                 UserLogger::log($object, $node, UserLogger::STATUS_INVALID_PASSWORD);
-                $error = [];
-                $error['error'] = 'Invalid password.';
-                return new Response(
-                    $error,
-                    Response::TYPE_JSON,
-                    Response::STATUS_ERROR
-                );
+                throw new Exception('Invalid password.');
             }
             UserLogger::log($object, $node, UserLogger::STATUS_SUCCESS);
             return new Response(
@@ -356,17 +354,11 @@ class User extends Main {
             );
         } else {
             UserLogger::log($object, null, UserLogger::STATUS_INVALID_EMAIL);
-            $error = [];
-            $error['error'] = 'Invalid e-mail.';
-            return new Response(
-                $error,
-                Response::TYPE_JSON,
-                Response::STATUS_ERROR
-            );
+            throw new Exception('Invalid e-mail.');
         }
     }
 
-    public static function is_blocked(App $object): bool|Exception
+    public static function is_blocked(App $object): bool
     {
         $node = User::getUser($object);
         if($node){
