@@ -9,8 +9,9 @@ ready(() => {
         const data = {
             "token" : user.token()
         };
+        header('authorization', 'Bearer ' + user.token());
         request(url, data, (url, response) => {
-
+            console.log(response);
         });
         //validate token and get user
     } else {
