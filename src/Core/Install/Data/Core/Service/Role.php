@@ -13,30 +13,24 @@ use R3m\Io\Module\Sort;
 
 use R3m\Io\Exception\ObjectException;
 
-class User extends Main {
-    const PASSWORD_ALGO = PASSWORD_BCRYPT;
-    const PASSWORD_COST = 13;
-
-    const BLOCK_EMAIL_COUNT = 5;
-    const BLOCK_PASSWORD_COUNT = 5;
-
-    const EXCEPTION_BLOCKED = 400;
-
-    const DEFAULT_SORT = 'email';
-    const DEFAULT_ORDER = 'ASC';
-    const DEFAULT_LIMIT = 20;
-
-    const REQUEST_DONT_UPDATE = [
-        'request',
-        'password',
-        'password2',
-        'uuid',
+class Role extends Main {
+    const DEFAULT_ROLES = [
+        'ROLE_IS_ADMIN',
+        'ROLE_IS_SUBSCRIBER',
+        'ROLE_IS_CONTRIBUTOR',
+        'ROLE_IS_AUTHOR',
+        'ROLE_IS_EDITOR',
+        'ROLE_IS_TRANSLATOR'
     ];
 
-    const REQUEST_DONT_EXPOSE = [
-        'password'
-    ];
+    public static function install(App $object){
+        d('install');
+dd($object->request());
 
+    }
+
+
+    /*
     public static function create(App $object): Response
     {
         $object->request('uuid', Core::uuid());
@@ -330,57 +324,10 @@ class User extends Main {
             );
         }
     }
+    */
 
-    /**
-     * @throws Exception
-     */
-    public static function login(App $object): Response
-    {
-        $node = User::getUser($object);
-        if(
-            $node &&
-            property_exists($node, 'password')
-        ){
-            $password = $object->request('password');
-            $verify = password_verify($password, $node->password);
-            if(empty($verify)){
-                UserLogger::log($object, $node, UserLogger::STATUS_INVALID_PASSWORD);
-                throw new Exception('Invalid password.');
-            }
-            UserLogger::log($object, $node, UserLogger::STATUS_SUCCESS);
-            unset($node->password);
-//            $node->token = User::token($object);
-            $response = [];
-            $response['user'] = $node;
-            return new Response(
-                $response,
-                Response::TYPE_JSON
-            );
-        } else {
-            UserLogger::log($object, null, UserLogger::STATUS_INVALID_EMAIL);
-            throw new Exception('Invalid e-mail.');
-        }
-    }
 
-    public static function is_blocked(App $object): bool
-    {
-        $node = User::getUser($object);
-        if($node){
-            $count = UserLogger::count($object, $node, UserLogger::STATUS_INVALID_PASSWORD);
-            if($count >= User::BLOCK_PASSWORD_COUNT){
-                UserLogger::log($object, $node, UserLogger::STATUS_BLOCKED);
-                return true;
-            }
-        } else {
-            $count = UserLogger::count($object, null, UserLogger::STATUS_INVALID_EMAIL);
-            if($count >= User::BLOCK_EMAIL_COUNT){
-                UserLogger::log($object, null, UserLogger::STATUS_BLOCKED);
-                return true;
-            }
-        }
-        return false;
-    }
-
+    /*
     public static function readAttribute(App $object): Response
     {
         $uuid = $object->request('uuid');
@@ -462,7 +409,7 @@ class User extends Main {
         }
     }
 
-    private static function getUser(App $object)
+    private static function getUser(App $object): mixed
     {
         $email = $object->request('email');
         $url = User::getDataUrl($object);
@@ -532,7 +479,8 @@ class User extends Main {
         return $value;
     }
 
-    private static function getValidatorUrl(App $object) {
+    private static function getValidatorUrl(App $object): string
+    {
         return $object->config('host.dir.root') .
             'Node' .
             $object->config('ds') .
@@ -542,7 +490,19 @@ class User extends Main {
             $object->config('extension.json');
     }
 
-    private static function generateActivationCode(){
+    private static function getDataUrl(App $object): string
+    {
+        return $object->config('host.dir.root') .
+            'Node' .
+            $object->config('ds') .
+            'List' .
+            $object->config('ds') .
+            File::basename(__CLASS__) .
+            $object->config('extension.json');
+    }
+
+    private static function generateActivationCode(): string
+    {
         return rand(1000, 9999) .
             '-' .
             rand(1000, 9999) .
@@ -607,4 +567,5 @@ class User extends Main {
         $validate->is_valid = $is_valid;
         return $validate;
     }
+    */
 }

@@ -1,15 +1,12 @@
 <?php
 namespace LikeIt\Cms\Core\Install\Service;
 
-use JetBrains\PhpStorm\NoReturn;
 use R3m\Io\App;
 
 use Exception;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
-use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
-use R3m\Io\Module\Parse;
 use R3m\Io\Module\Validate;
 
 class Install {
@@ -72,7 +69,21 @@ class Install {
                         ucfirst($extension) .
                         $object->config('ds')
                     );
-                    $user_service = '\\Host\\' . ucfirst(Install::SUBDOMAIN_CORE) . '\\' . ucfirst($host) . '\\' . ucfirst($extension) . '\\Service\\User';
+                    $role_service = '\\Host\\' .
+                        ucfirst(Install::SUBDOMAIN_CORE) .
+                        '\\' .
+                        ucfirst($host) .
+                        '\\' .
+                        ucfirst($extension) .
+                        '\\Service\\User';
+                    $role_service::install($object);
+                    $user_service = '\\Host\\' .
+                        ucfirst(Install::SUBDOMAIN_CORE) .
+                        '\\' .
+                        ucfirst($host) .
+                        '\\' .
+                        ucfirst($extension) .
+                        '\\Service\\User';
                     $response = $user_service::create($object);
                     $user = $response->data();
                     if(

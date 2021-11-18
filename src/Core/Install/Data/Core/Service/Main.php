@@ -6,6 +6,7 @@ use Exception;
 use R3m\Io\App;
 use R3m\Io\Exception\ObjectException;
 use R3m\Io\Module\Core;
+use R3m\Io\Module\File;
 use R3m\Io\Module\Validate;
 
 
@@ -72,5 +73,16 @@ class Main {
             }
         }
         return false;
+    }
+
+    public static function getDataUrl(App $object)
+    {
+        return $object->config('host.dir.root') .
+            'Node' .
+            $object->config('ds') .
+            'List' .
+            $object->config('ds') .
+            File::basename(get_called_class()) .
+            $object->config('extension.json');
     }
 }

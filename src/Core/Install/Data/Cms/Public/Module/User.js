@@ -1,5 +1,3 @@
-import login from "../User/Module/Login";
-
 let user = {};
 
 user.get = (attribute) => {

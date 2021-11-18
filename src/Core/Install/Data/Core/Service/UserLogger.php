@@ -93,18 +93,4 @@ class UserLogger extends Main {
             return $counter;
         }
     }
-
-    private static function getDataUrl(App $object): string
-    {
-        return $object->config('host.dir.root') .
-            'Node' .
-            $object->config('ds') .
-            'List' .
-            $object->config('ds') .
-            File::basename(__CLASS__) .
-            $object->config('extension.json');
-    }
-
-
-    
 }
