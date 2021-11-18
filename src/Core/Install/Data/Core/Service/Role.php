@@ -37,7 +37,7 @@ class Role extends Main {
             $data->set($uuid . '.uuid', $uuid);
             $data->set($uuid . '.name', $role);
             if($role === Role::IS_ADMIN){
-                $is_admin = $data->get($uuid);
+                $is_admin = $uuid;
             }
         }
         $dirname = dirname($url);
