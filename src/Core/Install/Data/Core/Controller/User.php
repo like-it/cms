@@ -54,8 +54,12 @@ class User extends View {
                         case Handler::GET :
                             return Service::list($object);
                         case Handler::POST :
-                            dd($object->request());
-                            return Service::create($object);
+                            if(stristr($object->request(), 'user/current') !== false){
+                                return Service::current($object);
+                            } else {
+                                return Service::create($object);
+                            }
+
                     }
                 } catch (Exception $exception){
                     return $exception;

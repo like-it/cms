@@ -366,6 +366,10 @@ class User extends Main {
         }
     }
 
+    public static function current(App $object){
+        dd('decode token');
+    }
+
     public static function is_blocked(App $object): bool
     {
         $node = User::getUser($object);
