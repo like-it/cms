@@ -38,7 +38,7 @@
         "module" : "user",
         "command" : "current",
         "method": [
-            "POST",
+            "GET",
             "OPTIONS"
         ]
     },
@@ -47,7 +47,7 @@
         "subModule" : "refresh",
         "command" : "token",
         "method": [
-            "POST",
+            "GET",
             "OPTIONS"
         ]
     },
