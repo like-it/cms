@@ -23,12 +23,25 @@ class Role extends Main {
         'ROLE_IS_TRANSLATOR'
     ];
 
+    const IS_ADMIN = 'ROLE_IS_ADMIN';
+
     public static function install(App $object){
         $url = Role::getDataUrl($object);
-        d($url);
-        d('install');
-dd($object->request());
-
+        $data = $object->data_read($url);
+        if(!$data){
+            $data = new Data();
+        }
+        $is_admin = false;
+        foreach(Role::DEFAULT_ROLES as $nr => $role){
+            $uuid = Core::uuid();
+            $data->set($uuid . '.uuid', $uuid);
+            $data->set($uuid . '.name', $role);
+            if($role === Role::IS_ADMIN){
+                $is_admin = $data->get($uuid);
+            }
+        }
+        $data->write($url);
+        return $is_admin;
     }
 
 

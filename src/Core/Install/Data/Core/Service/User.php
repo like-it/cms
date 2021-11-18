@@ -53,12 +53,16 @@ class User extends Main {
                 $uuid = $object->request('uuid');
                 $password = password_hash($object->request('password'),User::PASSWORD_ALGO, ['cost' => User::PASSWORD_COST]);
                 $email = $object->request('email');
+                $role = $object->request('role');
                 $data->set($uuid . '.uuid', $uuid);
                 $data->set($uuid . '.email', $email);
                 $data->set($uuid . '.password', $password);
                 $data->set($uuid . '.isActive', false);
                 $data->set($uuid . '.parameter.activation_code', User::generateActivationCode());
                 $data->set($uuid . '.parameter.activation_expiration_date', strtotime('+1 day'));
+                if($role){
+                    $data->set($uuid . '.role', $role);
+                }
                 $data->write($url);
                 //send activation email to user...
                 //install user gets activation screen directly without email
