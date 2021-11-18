@@ -40,6 +40,8 @@ class Role extends Main {
                 $is_admin = $data->get($uuid);
             }
         }
+        $dirname = dirname($url);
+        Dir::create($dirname);
         $data->write($url);
         return $is_admin;
     }
