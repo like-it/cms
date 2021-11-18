@@ -11,12 +11,12 @@ ready(() => {
         };
         request(url, data, (url, response) => {
 
-        };
+        });
         //validate token and get user
     } else {
         if(user.refreshToken()){
             console.log('refreshToken: ' + user.refreshToken());
-            const url = "{{server.url('core')}}User/Current/";
+            const url = "{{server.url('core')}}User/Refresh/Token/";
             const data = {
                 "refreshToken" : user.refreshToken()
             };
@@ -29,7 +29,7 @@ ready(() => {
                     user.refreshToken(response.user.refreshToken);
                 }
                 console.log(response);
-            };
+            });
             //validate refresh token and get user with new token
         } else {
             //redirect user login
