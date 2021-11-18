@@ -54,7 +54,7 @@ class User extends View {
                         case Handler::GET :
                             return Service::list($object);
                         case Handler::POST :
-                            dd($object->config());
+                            dd($object->request());
                             return Service::create($object);
                     }
                 } catch (Exception $exception){
