@@ -77,7 +77,9 @@ class Install {
                         ucfirst($extension) .
                         '\\Service\\Role';
                     $role_is_admin = $role_service::install($object);
-                    $object->request('role' [ $role_is_admin-> ]);
+                    if(property_exists($role_is_admin, 'uuid')){
+                        $object->request('role' [ $role_is_admin->uuid ]);
+                    }
                     $user_service = '\\Host\\' .
                         ucfirst(Install::SUBDOMAIN_CORE) .
                         '\\' .
