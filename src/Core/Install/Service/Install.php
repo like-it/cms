@@ -75,7 +75,7 @@ class Install {
                         ucfirst($host) .
                         '\\' .
                         ucfirst($extension) .
-                        '\\Service\\User';
+                        '\\Service\\Role';
                     $role_service::install($object);
                     $user_service = '\\Host\\' .
                         ucfirst(Install::SUBDOMAIN_CORE) .
