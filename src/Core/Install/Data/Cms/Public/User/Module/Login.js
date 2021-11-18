@@ -99,6 +99,8 @@ login.post = (event) => {
                 error.html('');
             }
             const route_success = login.get('route.frontend.start');
+            localStorage.setItem('token', response.user.token);
+            localStorage.setItem('refreshToken', response.user.refreshToken);
             localStorage.setItem('token', '1234');
             console.log(route_success);
             if(route_success){
