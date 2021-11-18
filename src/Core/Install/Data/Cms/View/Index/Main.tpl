@@ -5,10 +5,31 @@ import user from "/Module/User.js";
 ready(() => {
     if(user.token()){
         console.log('token: ' + user.token());
+        const url = "{{server.url('core')}}User/Current/";
+        const data = {
+            "token" : user.token()
+        };
+        request(url, data, (url, response) => {
+
+        };
         //validate token and get user
     } else {
         if(user.refreshToken()){
-            console.log('refreshToken: ' + user.token());
+            console.log('refreshToken: ' + user.refreshToken());
+            const url = "{{server.url('core')}}User/Current/";
+            const data = {
+                "refreshToken" : user.refreshToken()
+            };
+            request(url, data, (url, response) => {
+                //should get new token | refreshToken
+                if(response?.user?.token){
+                    user.token(response.user.token);
+                }
+                if(response?.user?.refreshToken){
+                    user.refreshToken(response.user.refreshToken);
+                }
+                console.log(response);
+            };
             //validate refresh token and get user with new token
         } else {
             //redirect user login

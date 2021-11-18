@@ -34,6 +34,23 @@
             "OPTIONS"
         ]
     },
+    "05445de7-bd55-4e28-83c1-5799fb2c165c" : {
+        "module" : "user",
+        "command" : "current",
+        "method": [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "55b51165-7405-44b8-a10b-25238c69f74d" : {
+        "module" : "user",
+        "subModule" : "refresh",
+        "command" : "token",
+        "method": [
+            "POST",
+            "OPTIONS"
+        ]
+    },
     "cea7754e-d924-4e50-8b53-7786f8185d6d" : {
         "module" : "user",
         "command" : "logout",
