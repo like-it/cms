@@ -7,6 +7,14 @@
             "OPTIONS"
         ]
     },
+    "05445de7-bd55-4e28-83c1-5799fb2c165c" : {
+        "module" : "user",
+        "command" : "current",
+        "method": [
+            "GET",
+            "OPTIONS"
+        ]
+    },
     "7bc142d4-0578-4309-9714-d079332363ee" : {
         "module" : "user",
         "path" : "/User/{$uuid}/",
@@ -31,14 +39,6 @@
         "command" : "login",
         "method": [
             "POST",
-            "OPTIONS"
-        ]
-    },
-    "05445de7-bd55-4e28-83c1-5799fb2c165c" : {
-        "module" : "user",
-        "command" : "current",
-        "method": [
-            "GET",
             "OPTIONS"
         ]
     },
