@@ -24,6 +24,8 @@ class Role extends Main {
     ];
 
     public static function install(App $object){
+        $url = Role::getDataUrl($object);
+        d($url);
         d('install');
 dd($object->request());
 
