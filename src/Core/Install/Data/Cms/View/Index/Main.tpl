@@ -1,13 +1,14 @@
 {R3M}
 {{require($controller.dir.view + $controller.title + '/Init.tpl')}}
 {{script('module')}}
-import user from "/Module/User.js"
+import user from "/Module/User.js";
 ready(() => {
     if(user.token()){
-        console.log(user.token());
+        console.log('token: ' + user.token());
         //validate token and get user
     } else {
         if(user.refreshToken()){
+            console.log('refreshToken: ' + user.token());
             //validate refresh token and get user with new token
         } else {
             //redirect user login
