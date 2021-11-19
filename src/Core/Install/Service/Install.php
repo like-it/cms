@@ -6,6 +6,7 @@ use R3m\Io\App;
 use Exception;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
+use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
 use R3m\Io\Module\Validate;
 
@@ -87,6 +88,11 @@ class Install {
                         '\\' .
                         ucfirst($extension) .
                         '\\Service\\User';
+                    Install::certificate($object);
+                    install::certificate_config($object);
+                    $user_service::install($object);
+
+
                     $response = $user_service::create($object);
                     $user = $response->data();
                     if(
@@ -142,6 +148,55 @@ class Install {
         } else {
             //validate error return to install
         }
+    }
+
+    private static function certificate_config(App $object){
+        dd($object->request());
+        $data = $object->data_read($object->config('project.dir.data') . 'Config' . $object->config('extension.json'));
+        if($data){
+            $data->set('token.private_key', "{config('project.dir.data')}Pem\/Token_key.pem");
+            $data->set('token.certificate', "{config('project.dir.data')}Pem\/Token_key.pem");
+            $data->set('token.passhrase', '');
+            $data->set('issued_at','now');
+            $data->set('identified_by', 'fa00753423af0041B00B');
+            $data->set('can_only_be_used_after', 'now');
+            $data->set('expires_at', '+9 hours');
+            $data->set('issued_by', 'http:\/\/backend.universeorange.com');
+            $data->set('permitted_for', 'http:\/\/admin.universeorange.local');
+            /*
+            "token": {
+                "private_key": "{config('project.dir.data')}Pem\/token_key.pem",
+                "certificate": "{config('project.dir.data')}Pem\/token_cert.pem",
+                "passphrase": "^6B4d6eb2527",
+                "issued_by": "http:\/\/backend.universeorange.com",
+                "issued_at": "now",
+                "permitted_for": "http:\/\/admin.universeorange.local",
+                "identified_by": "faaf0041B00B",
+                "can_only_be_used_after": "now",
+                "expires_at": "+9 hours"
+            }
+            */
+        }
+    }
+
+    private static function certificate(App $object){
+        Dir::create($object->config('project.dir.data') . 'Pem' . $object->config('ds'));
+        File::copy(
+            $object->config('controller.dir.data') . 'Pem' . $object->config('ds') . 'Token_cert.pem',
+            $object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'Token_cert.pem'
+        );
+        File::copy(
+            $object->config('controller.dir.data') . 'Pem' . $object->config('ds') . 'Token_key.pem',
+            $object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'Token_key.pem'
+        );
+        File::copy(
+            $object->config('controller.dir.data') . 'Pem' . $object->config('ds') . 'RefreshToken_cert.pem',
+            $object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'RefreshToken_cert.pem'
+        );
+        File::copy(
+            $object->config('controller.dir.data') . 'Pem' . $object->config('ds') . 'RefreshToken_key.pem',
+            $object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'RefreshToken_key.pem'
+        );
     }
 
     public static function host(App $object, $options=[]){

@@ -92,6 +92,6 @@ class User extends View {
     }
 
     public static function current(App $object){
-        d('need token');
+        return Service::current($object);
     }
 }

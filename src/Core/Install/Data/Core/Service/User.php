@@ -370,6 +370,22 @@ class User extends Main {
         dd('decode token');
     }
 
+    public static function install(App $object){
+
+    }
+
+    public static function expose(App $object){
+        if(!$object->config('token.private_key')){
+            //create
+        }
+        if(!$object->config('token.certificate')){
+            //create
+        }
+        $options = [];
+        $configuration = Jwt::configuration($object);
+        $token = Jwt::get($object, $configuration, $options);
+    }
+
     public static function is_blocked(App $object): bool
     {
         $node = User::getUser($object);
