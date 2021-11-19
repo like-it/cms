@@ -43,6 +43,7 @@ class Install {
                         'extension' => $extension,
                         'subdomain' => Install::SUBDOMAIN_CORE
                     ]);
+                    $object->request('domains.core', Install::SUBDOMAIN_CORE . '.' . $host . '.' . $extension);
                     $data->set($uuid . '.host', $host);
                     $data->set($uuid . '.subdomain', Install::SUBDOMAIN_CORE);
                     $data->set($uuid . '.extension', $extension);
@@ -52,6 +53,7 @@ class Install {
                         'extension' => $extension,
                         'subdomain' => Install::SUBDOMAIN_CMS
                     ]);
+                    $object->request('domains.cms', Install::SUBDOMAIN_CMS . '.' . $host . '.' . $extension);
                     $data->set($uuid . '.host', $host);
                     $data->set($uuid . '.subdomain', Install::SUBDOMAIN_CMS);
                     $data->set($uuid . '.extension', $extension);
