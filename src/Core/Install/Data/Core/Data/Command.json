@@ -7,30 +7,12 @@
             "OPTIONS"
         ]
     },
-    "0c3e7b89-9100-46c4-abdd-7eb76732166e" : {
+    "325c705e-a545-4f79-87db-51ea729c70cf" : {
         "module" : "user",
-        "method": [
+        "submodule" : "refresh",
+        "command" : "token",
+        "method" : [
             "GET",
-            "POST",
-            "OPTIONS"
-        ]
-    },
-    "7bc142d4-0578-4309-9714-d079332363ee" : {
-        "module" : "user",
-        "path" : "/User/{$uuid}/",
-        "method": [
-            "GET",
-            "PUT",
-            "DELETE",
-            "OPTIONS"
-        ]
-    },
-    "69a55262-d324-4990-b0f1-ba2767a72aad" : {
-        "module" : "user",
-        "path" : "/User/{$uuid}/{$attribute}",
-        "method": [
-            "GET",
-            "DELETE",
             "OPTIONS"
         ]
     },
@@ -39,15 +21,6 @@
         "command" : "login",
         "method": [
             "POST",
-            "OPTIONS"
-        ]
-    },
-    "55b51165-7405-44b8-a10b-25238c69f74d" : {
-        "module" : "user",
-        "subModule" : "refresh",
-        "command" : "token",
-        "method": [
-            "GET",
             "OPTIONS"
         ]
     },
@@ -90,20 +63,30 @@
             "OPTIONS"
         ]
     },
-    "325c705e-a545-4f79-87db-51ea729c70cf" : {
+    "0c3e7b89-9100-46c4-abdd-7eb76732166e" : {
         "module" : "user",
-        "submodule" : "refresh",
-        "command" : "token",
-        "method" : [
+        "method": [
             "GET",
+            "POST",
             "OPTIONS"
         ]
     },
-    "8adeece0-6590-4bfe-b3c3-545dea80d9ca" : {
+    "7bc142d4-0578-4309-9714-d079332363ee" : {
         "module" : "user",
-        "command" : "current",
-        "method" : [
+        "path" : "/User/{$uuid}/",
+        "method": [
             "GET",
+            "PUT",
+            "DELETE",
+            "OPTIONS"
+        ]
+    },
+    "69a55262-d324-4990-b0f1-ba2767a72aad" : {
+        "module" : "user",
+        "path" : "/User/{$uuid}/{$attribute}",
+        "method": [
+            "GET",
+            "DELETE",
             "OPTIONS"
         ]
     },
