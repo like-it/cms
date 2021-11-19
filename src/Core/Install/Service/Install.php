@@ -153,31 +153,28 @@ class Install {
     }
 
     private static function certificate_config(App $object){
-        dd($object->request());
-        $data = $object->data_read($object->config('project.dir.data') . 'Config' . $object->config('extension.json'));
+        $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
+        $data = $object->data_read($url);
         if($data){
             $data->set('token.private_key', "{config('project.dir.data')}Pem\/Token_key.pem");
             $data->set('token.certificate', "{config('project.dir.data')}Pem\/Token_key.pem");
             $data->set('token.passhrase', '');
-            $data->set('issued_at','now');
-            $data->set('identified_by', 'fa00753423af0041B00B');
-            $data->set('can_only_be_used_after', 'now');
-            $data->set('expires_at', '+9 hours');
-            $data->set('issued_by', 'http:\/\/backend.universeorange.com');
-            $data->set('permitted_for', 'http:\/\/admin.universeorange.local');
-            /*
-            "token": {
-                "private_key": "{config('project.dir.data')}Pem\/token_key.pem",
-                "certificate": "{config('project.dir.data')}Pem\/token_cert.pem",
-                "passphrase": "^6B4d6eb2527",
-                "issued_by": "http:\/\/backend.universeorange.com",
-                "issued_at": "now",
-                "permitted_for": "http:\/\/admin.universeorange.local",
-                "identified_by": "faaf0041B00B",
-                "can_only_be_used_after": "now",
-                "expires_at": "+9 hours"
-            }
-            */
+            $data->set('token.issued_at','now');
+            $data->set('token.identified_by', 'fa00753423af0041B00B');
+            $data->set('token.can_only_be_used_after', 'now');
+            $data->set('token.expires_at', '+9 hours');
+            $data->set('token.issued_by', $object->request('domains.core'));
+            $data->set('token.permitted_for', $object->request('domains.cms'));
+            $data->set('refresh.token.private_key', "{config('project.dir.data')}Pem\/Token_key.pem");
+            $data->set('refresh.token.certificate', "{config('project.dir.data')}Pem\/Token_key.pem");
+            $data->set('refresh.token.passhrase', '');
+            $data->set('refresh.token.issued_at','now');
+            $data->set('refresh.token.identified_by', 'fa00753423af0041B00B');
+            $data->set('refresh.token.can_only_be_used_after', 'now');
+            $data->set('refresh.token.expires_at', '+24 hours');
+            $data->set('refresh.token.issued_by', $object->request('domains.core'));
+            $data->set('refresh.token.permitted_for', $object->request('domains.cms'));
+            $data->write($url);
         }
     }
 

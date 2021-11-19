@@ -54,26 +54,24 @@ class Jwt {
         'refresh.token.expires.at' => 'refresh.token.expires_at'
     ];
 
-    /*
+
     public static function get(App $object, Configuration $configuration, $options=[]){
         $url = $object->config('project.dir.data') . 'Config.json';
         $config  = $object->parse_read($url, sha1($url));
 
         $user = false;
         if(array_key_exists('user', $options)){
-            $user = $options['user']->toArray($object, new Parse($object));
-            //$user['key'] = Jwt::createKey($object);
-            unset($user['password']);
-            unset($user['profile']);
-            unset($user['parameter']);
-            unset($user['refreshToken']);
+            unset($user->password);
+            unset($user->profile);
+            unset($user->parameter);
+            unset($user->refreshToken);
         }
         $now = new DateTimeImmutable();
         return $configuration->builder()
             // Configures the issuer (iss claim)
             ->issuedBy($config->get('token.issued_by'))
             // Configures the audience (aud claim)
-            ->permittedFor($config->get('token.permitted_for'))
+//            ->permittedFor($config->get('token.permitted_for'))
             // Configures the id (jti claim)
             ->identifiedBy($config->get('token.identified_by'))
             // Configures the time that the token was issue (iat claim)
@@ -83,11 +81,11 @@ class Jwt {
             // Configures the expiration time of the token (exp claim)
             ->expiresAt($now->modify($config->get('token.expires_at')))
             // Configures a new header
-            ->withHeader('user', $user)
+            ->withClaim('user', $user)
             // Builds a new token
             ->getToken($configuration->signer(), $configuration->signingKey());
     }
-    */
+
 
     /*
     public static function refresh_get(App $object, Configuration $configuration, $options=[]){
