@@ -1,17 +1,17 @@
 {
-    "0c3e7b89-9100-46c4-abdd-7eb76732166e" : {
-        "module" : "user",
-        "method": [
-            "GET",
-            "POST",
-            "OPTIONS"
-        ]
-    },
     "05445de7-bd55-4e28-83c1-5799fb2c165c" : {
         "module" : "user",
         "command" : "current",
         "method": [
             "GET",
+            "OPTIONS"
+        ]
+    },
+    "0c3e7b89-9100-46c4-abdd-7eb76732166e" : {
+        "module" : "user",
+        "method": [
+            "GET",
+            "POST",
             "OPTIONS"
         ]
     },
