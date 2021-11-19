@@ -155,6 +155,9 @@ class Install {
     private static function certificate_config(App $object){
         $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
         $data = $object->data_read($url);
+        if(!$data){
+            $data = new Data();
+        }
         if($data){
             $data->set('token.private_key', "{config('project.dir.data')}Pem/Token_key.pem");
             $data->set('token.certificate', "{config('project.dir.data')}Pem/Token_key.pem");
@@ -164,7 +167,7 @@ class Install {
             $data->set('token.can_only_be_used_after', 'now');
             $data->set('token.expires_at', '+9 hours');
             $data->set('token.issued_by', $object->request('domains.core'));
-            $data->set('token.permitted_for', $object->request('domains.cms'));
+//            $data->set('token.permitted_for', $object->request('domains.cms'));
             $data->set('refresh.token.private_key', "{config('project.dir.data')}Pem/RefreshToken_key.pem");
             $data->set('refresh.token.certificate', "{config('project.dir.data')}Pem/RefreshToken_key.pem");
             $data->set('refresh.token.passhrase', '');
@@ -173,7 +176,7 @@ class Install {
             $data->set('refresh.token.can_only_be_used_after', 'now');
             $data->set('refresh.token.expires_at', '+24 hours');
             $data->set('refresh.token.issued_by', $object->request('domains.core'));
-            $data->set('refresh.token.permitted_for', $object->request('domains.cms'));
+//            $data->set('refresh.token.permitted_for', $object->request('domains.cms'));
             $data->write($url);
         }
     }
