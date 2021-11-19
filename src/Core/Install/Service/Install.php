@@ -154,6 +154,7 @@ class Install {
         $options = Host::options($object, $options);
         try {
             Host::clear($object, $options);
+            return;
             Host::route_delete($object, $options);
             Host::domain_add($object, $options);
             Host::route_node_delete($object, $options);
