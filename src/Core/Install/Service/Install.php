@@ -156,8 +156,8 @@ class Install {
         $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
         $data = $object->data_read($url);
         if($data){
-            $data->set('token.private_key', "{config('project.dir.data')}Pem\/Token_key.pem");
-            $data->set('token.certificate', "{config('project.dir.data')}Pem\/Token_key.pem");
+            $data->set('token.private_key', "{config('project.dir.data')}Pem/Token_key.pem");
+            $data->set('token.certificate', "{config('project.dir.data')}Pem/Token_key.pem");
             $data->set('token.passhrase', '');
             $data->set('token.issued_at','now');
             $data->set('token.identified_by', 'fa00753423af0041B00B');
@@ -165,8 +165,8 @@ class Install {
             $data->set('token.expires_at', '+9 hours');
             $data->set('token.issued_by', $object->request('domains.core'));
             $data->set('token.permitted_for', $object->request('domains.cms'));
-            $data->set('refresh.token.private_key', "{config('project.dir.data')}Pem\/RefreshToken_key.pem");
-            $data->set('refresh.token.certificate', "{config('project.dir.data')}Pem\/RefreshToken_key.pem");
+            $data->set('refresh.token.private_key', "{config('project.dir.data')}Pem/RefreshToken_key.pem");
+            $data->set('refresh.token.certificate', "{config('project.dir.data')}Pem/RefreshToken_key.pem");
             $data->set('refresh.token.passhrase', '');
             $data->set('refresh.token.issued_at','now');
             $data->set('refresh.token.identified_by', 'fa00753423af0041B00B');
