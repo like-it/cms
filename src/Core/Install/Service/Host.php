@@ -39,6 +39,9 @@ class Host {
         return true;
     }
 
+    /**
+     * @throws Exception
+     */
     public static function command_add(App $object, $options=[]){
         if(!array_key_exists('host', $options)){
             return;
@@ -54,6 +57,7 @@ class Host {
         }
         if(array_key_exists('subdomain', $options)){
             $route = $object->data_read($options['route']);
+            d($route);
             $command = $object->data_read($options['command']);
             if(
                 $route &&
@@ -72,7 +76,15 @@ class Host {
                         if(!property_exists($add, 'path')){
                             $add->path = ucfirst($add->module) . '/';
                         }
-                        $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . 'command';
+                        $key = strtolower($options['subdomain']) .
+                            '-' .
+                            strtolower($options['host']) .
+                            '-' .
+                            strtolower($options['extension']) .
+                            '-' .
+                            strtolower($add->module) .
+                            '-' .
+                            'command';
                         $key = Host::key_create($add, $key);
                         $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . 'command';
                     }
@@ -85,10 +97,18 @@ class Host {
                         if(!property_exists($add, 'path')){
                             $add->path = ucfirst($add->module) . '/' . ucfirst($add->command) . '/';
                         }
-                        $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->command;
+                        $key =
+                            strtolower($options['subdomain']) .
+                            '-' .
+                            strtolower($options['host']) .
+                            '-' .
+                            strtolower($options['extension']) .
+                            '-' .
+                            strtolower($add->module) .
+                            '-' .
+                            strtolower($add->command);
                         $key = Host::key_create($add, $key);
                         $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->command;
-
                     }
                     elseif(
                         property_exists($add, 'module') &&
@@ -99,7 +119,18 @@ class Host {
                         if(!property_exists($add, 'path')){
                             $add->path = ucfirst($add->module) . '/' . ucfirst($add->submodule) . '/' . ucfirst($add->command) . '/';
                         }
-                        $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->submodule . '-' . $add->command;
+                        $key =
+                            strtolower($options['subdomain']) .
+                            '-' .
+                            strtolower($options['host']) .
+                            '-' .
+                            strtolower($options['extension']) .
+                            '-' .
+                            strtolower($add->module) .
+                            '-' .
+                            strtolower($add->submodule) .
+                            '-' .
+                            strtolower($add->command);
                         $key = Host::key_create($add, $key);
                         $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->submodule . '_' . $add->command;
                     }
@@ -112,7 +143,20 @@ class Host {
                         if(!property_exists($add, 'path')) {
                             $add->path = ucfirst($add->module) . '/' . ucfirst($add->submodule) . '/' . ucfirst($add->command) . '/' . ucfirst($add->subcommand) . '/';
                         }
-                        $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->submodule . '-' . $add->command . '-' . $add->subcommand;
+                        $key =
+                            strtolower($options['subdomain']) .
+                            '-' .
+                            strtolower($options['host']) .
+                            '-' .
+                            strtolower($options['extension']) .
+                            '-' .
+                            strtolower($add->module) .
+                            '-' .
+                            strtolower($add->submodule) .
+                            '-' .
+                            strtolower($add->command) .
+                            '-' .
+                            strtolower($add->subcommand);
                         $key = Host::key_create($add, $key);
                         $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->submodule . '_' . $add->command . '_' . $add->subcommand;
                     } else {
