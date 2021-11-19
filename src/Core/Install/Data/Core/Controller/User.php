@@ -89,6 +89,9 @@ class User extends View {
         catch (Exception $exception){
             return $exception;
         }
+    }
 
+    public static function current(App $object){
+        d('need token');
     }
 }
