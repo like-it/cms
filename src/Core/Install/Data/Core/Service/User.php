@@ -13,6 +13,7 @@ use Lcobucci\JWT\Validation\Constraint\LooseValidAt;
 use Lcobucci\JWT\Validation\Constraint\PermittedFor;
 use Lcobucci\JWT\Validation\Constraint\SignedWith;
 use Lcobucci\JWT\Validation\Constraint\StrictValidAt;
+use Lcobucci\JWT\Signer\Rsa\Sha256;
 use R3m\Io\App;
 use R3m\Io\Exception\AuthorizationException;
 use R3m\Io\Module\Core;
@@ -411,7 +412,7 @@ class User extends Main {
             new IssuedBy($config->get('token.issued_by')),
             new IdentifiedBy($config->get('token.identified_by')),
             new PermittedFor($config->get('token.permitted_for')),
-            new SignedWith(new Signer\Rsa\Sha256(), LocalFileReference::file($config->get('token.certificate'))),
+            new SignedWith(new Sha256(), LocalFileReference::file($config->get('token.certificate'))),
             new StrictValidAt($clock),
             new LooseValidAt($clock)
         );
