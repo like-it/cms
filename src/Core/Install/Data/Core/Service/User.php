@@ -4,6 +4,7 @@ namespace Host\Subdomain\Host\Extension\Service;
 
 use Exception;
 use R3m\Io\App;
+use R3m\Io\Exception\AuthorizationException;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
 use R3m\Io\Module\Dir;
@@ -373,8 +374,22 @@ class User extends Main {
         }
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public static function current(App $object){
-        dd('decode token');
+        $token = '';
+        if(array_key_exists('HTTP_AUTHORIZATION', $_SERVER)){
+            $token = $_SERVER['HTTP_AUTHORIZATION'];
+        }
+        elseif(array_key_exists('REDIRECT_HTTP_AUTHORIZATION', $_SERVER)){
+            $token = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+        }
+        $token = substr($token , 7);
+        if(!$token){
+            throw new AuthorizationException('Please provide a valid token...');
+        }
+        dd($token);
     }
 
     public static function install(App $object){
