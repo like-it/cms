@@ -356,6 +356,7 @@ class User extends Main {
             $options = [];
             $options['user'] = $node;
             $node->token = Jwt::get($object, $configuration, $options);
+            dd($node);
             $options['refresh'] = true;
             $configuration = Jwt::configuration($object, $options);
 //            $node->refreshToken = Jwt::refresh_get($object, $configuration, $options);
