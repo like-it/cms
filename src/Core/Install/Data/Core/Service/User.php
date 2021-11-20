@@ -352,7 +352,7 @@ class User extends Main {
      */
     public static function login(App $object): Response
     {
-        $node = User::getUser($object);
+        $node = User::getUserByEmail($object);
         if(
             $node &&
             property_exists($node, 'password')
@@ -423,7 +423,20 @@ class User extends Main {
         $claims = $token_unencrypted->claims();
         if($claims->has('user')){
             $user =  $claims->get('user');
-            dd($user);
+            $uuid = false;
+            $email = false;
+            if(array_key_exists('uuid', $user)){
+                $uuid = $user['uuid'];
+            }
+            if(array_key_exists('email', $user)){
+                $email = $user['email'];
+            }
+            if($uuid && $email){
+                $user = User::getUserByEmail($object);
+                d($uuid);
+                dd($user);
+            }
+
             if(!property_exists($user, 'isActive')){
                 throw new AuthorizationException('User is not active...');
             }
@@ -468,7 +481,7 @@ class User extends Main {
 
     public static function is_blocked(App $object): bool
     {
-        $node = User::getUser($object);
+        $node = User::getUserByEmail($object);
         if($node){
             $count = UserLogger::count($object, $node, UserLogger::STATUS_INVALID_PASSWORD);
             if($count >= User::BLOCK_PASSWORD_COUNT){
@@ -566,7 +579,7 @@ class User extends Main {
         }
     }
 
-    private static function getUser(App $object)
+    private static function getUserByEmail(App $object)
     {
         $email = $object->request('email');
         $url = User::getDataUrl($object);
@@ -579,6 +592,7 @@ class User extends Main {
                 if (
                     property_exists($record, 'isActive') &&
                     property_exists($record, 'email') &&
+                    !property_exists($record, 'isDeleted') &&
                     $record->isActive === true &&
                     $record->email === $email
                 ) {
