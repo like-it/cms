@@ -175,6 +175,9 @@ class Host {
     public static function config_server_url(App $object, $options){
         $url = $object->config('project.dir.data') . 'Config.json';
         $data = $object->data_read($url);
+        if(!$data){
+            $data = new Data();
+        }
         if($data){
             if(
                 array_key_exists('name', $options) &&

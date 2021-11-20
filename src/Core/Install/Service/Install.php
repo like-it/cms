@@ -14,6 +14,11 @@ class Install {
     const SUBDOMAIN_CORE = 'core';
     const SUBDOMAIN_CMS = 'cms';
 
+    const PASSPHRASE = '';
+    const NOW = 'now';
+    const TOKEN_EXPIRE = '+9 hours';
+    const REFRESH_TOKEN_EXPIRE = '+24 hours';
+
     public static function start(App $object){
         $email = $object->request('email');
         $password = $object->request('password');
@@ -159,24 +164,27 @@ class Install {
             $data = new Data();
         }
         if($data){
+            $token_identified_by = Core::uuid();
+            $refresh_token_identified_by = Core::uuid();
+            $permitted_for = Core::uuid();
             $data->set('token.private_key', "{config('project.dir.data')}Pem/Token_key.pem");
             $data->set('token.certificate', "{config('project.dir.data')}Pem/Token_key.pem");
-            $data->set('token.passhrase', '');
-            $data->set('token.issued_at','now');
-            $data->set('token.identified_by', 'fa00753423af0041B00B');
-            $data->set('token.can_only_be_used_after', 'now');
-            $data->set('token.expires_at', '+9 hours');
+            $data->set('token.passhrase', Install::PASSPHRASE);
+            $data->set('token.issued_at', Install::NOW);
+            $data->set('token.identified_by', $token_identified_by);
+            $data->set('token.permitted_for', $permitted_for);
+            $data->set('token.can_only_be_used_after', Install::NOW);
+            $data->set('token.expires_at', Install::TOKEN_EXPIRE);
             $data->set('token.issued_by', $object->request('domains.core'));
-//            $data->set('token.permitted_for', $object->request('domains.cms'));
             $data->set('refresh.token.private_key', "{config('project.dir.data')}Pem/RefreshToken_key.pem");
             $data->set('refresh.token.certificate', "{config('project.dir.data')}Pem/RefreshToken_key.pem");
-            $data->set('refresh.token.passhrase', '');
-            $data->set('refresh.token.issued_at','now');
-            $data->set('refresh.token.identified_by', 'fa00753423af0041B00B');
-            $data->set('refresh.token.can_only_be_used_after', 'now');
-            $data->set('refresh.token.expires_at', '+24 hours');
+            $data->set('refresh.token.passhrase', Install::PASSPHRASE);
+            $data->set('refresh.token.issued_at', Install::NOW);
+            $data->set('refresh.token.identified_by', $refresh_token_identified_by);
+            $data->set('refresh.token.permitted_for', $permitted_for);
+            $data->set('refresh.token.can_only_be_used_after', Install::NOW);
+            $data->set('refresh.token.expires_at', Install::REFRESH_TOKEN_EXPIRE);
             $data->set('refresh.token.issued_by', $object->request('domains.core'));
-//            $data->set('refresh.token.permitted_for', $object->request('domains.cms'));
             $data->write($url);
         }
     }
