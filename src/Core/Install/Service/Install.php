@@ -168,7 +168,7 @@ class Install {
             $refresh_token_identified_by = Core::uuid();
             $permitted_for = Core::uuid();
             $data->set('token.private_key', "{config('project.dir.data')}Pem/Token_key.pem");
-            $data->set('token.certificate', "{config('project.dir.data')}Pem/Token_key.pem");
+            $data->set('token.certificate', "{config('project.dir.data')}Pem/Token_cert.pem");
             $data->set('token.passhrase', Install::PASSPHRASE);
             $data->set('token.issued_at', Install::NOW);
             $data->set('token.identified_by', $token_identified_by);
@@ -177,7 +177,7 @@ class Install {
             $data->set('token.expires_at', Install::TOKEN_EXPIRE);
             $data->set('token.issued_by', $object->request('domains.core'));
             $data->set('refresh.token.private_key', "{config('project.dir.data')}Pem/RefreshToken_key.pem");
-            $data->set('refresh.token.certificate', "{config('project.dir.data')}Pem/RefreshToken_key.pem");
+            $data->set('refresh.token.certificate', "{config('project.dir.data')}Pem/RefreshToken_cert.pem");
             $data->set('refresh.token.passhrase', Install::PASSPHRASE);
             $data->set('refresh.token.issued_at', Install::NOW);
             $data->set('refresh.token.identified_by', $refresh_token_identified_by);
