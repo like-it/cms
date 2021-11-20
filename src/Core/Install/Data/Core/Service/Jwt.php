@@ -121,6 +121,7 @@ class Jwt {
     public static function configuration(App $object, $options=[]){
         $url = $object->config('project.dir.data') . 'Config.json';
         $config  = $object->parse_read($url, sha1($url));
+        dd($config->data());
         if(
             array_key_exists('refresh', $options) &&
             $options['refresh'] === true
