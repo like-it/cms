@@ -195,18 +195,22 @@ class Install {
             $object->config('controller.dir.data') . 'Pem' . $object->config('ds') . 'Token_cert.pem',
             $object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'Token_cert.pem'
         );
+        File::chmod($object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'Token_cert.pem', File::CHMOD);
         File::copy(
             $object->config('controller.dir.data') . 'Pem' . $object->config('ds') . 'Token_key.pem',
             $object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'Token_key.pem'
         );
+        File::chmod($object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'Token_key.pem', File::CHMOD);
         File::copy(
             $object->config('controller.dir.data') . 'Pem' . $object->config('ds') . 'RefreshToken_cert.pem',
             $object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'RefreshToken_cert.pem'
         );
+        File::chmod($object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'RefreshToken_cert.pem', File::CHMOD);
         File::copy(
             $object->config('controller.dir.data') . 'Pem' . $object->config('ds') . 'RefreshToken_key.pem',
             $object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'RefreshToken_key.pem'
         );
+        File::chmod($object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'RefreshToken_key.pem', File::CHMOD);
     }
 
     public static function host(App $object, $options=[]){
