@@ -3,7 +3,6 @@ namespace Host\Subdomain\Host\Extension\Service;
 
 
 use Exception;
-use Host\Backend\Universeorange\Com\Jwt\Model\Jwt;
 use Lcobucci\Clock\SystemClock;
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer\Key\LocalFileReference;
