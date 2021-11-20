@@ -358,7 +358,7 @@ class User extends Main {
             $node->token = Jwt::get($object, $configuration, $options);
             $options['refresh'] = true;
             $configuration = Jwt::configuration($object, $options);
-            $node->refreshToken = Jwt::refresh_get($object, $configuration, $options);
+//            $node->refreshToken = Jwt::refresh_get($object, $configuration, $options);
             $response = [];
             $response['user'] = $node;
             return new Response(
