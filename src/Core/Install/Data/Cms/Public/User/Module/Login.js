@@ -1,3 +1,5 @@
+import user from "/Module/User.js";
+
 let login = {};
 
 login.get = (attribute) => {
@@ -99,10 +101,16 @@ login.post = (event) => {
                 error.html('');
             }
             const route_success = login.get('route.frontend.start');
-            localStorage.setItem('token', response.user.token);
-            localStorage.setItem('refreshToken', response.user.refreshToken);
-            localStorage.setItem('token', '1234');
+            localStorage.setItem('token', response.user?.token);
+            localStorage.setItem('refreshToken', response.user?.refreshToken);
+
+            const node = response.user;
+            delete node.token;
+            delete node.refreshToken;
+
+            console.log(node);
             console.log(route_success);
+            user.data(node);
             if(route_success){
                 request(route_success, response);
             }
