@@ -11,7 +11,7 @@
 		"ext-posix": "*",
 		"ext-zip": "*",
 		"r3m/framework" : "*",
-		"lcobucci/jwt": "^4.1"
+		"lcobucci/jwt": "*"
 	},
 	"license" : "proprietary",
 	"authors" : [{
