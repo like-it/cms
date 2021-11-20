@@ -10,7 +10,8 @@
 		"ext-json": "*",
 		"ext-posix": "*",
 		"ext-zip": "*",
-		"r3m/framework" : "*"
+		"r3m/framework" : "*",
+		"lcobucci/jwt": "^4.1"
 	},
 	"license" : "proprietary",
 	"authors" : [{
