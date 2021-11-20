@@ -95,7 +95,6 @@ login.post = (event) => {
             }
         }
         else if(!is.empty(response.user)){
-            console.log(login.data());
             const error = form.select('.user-login-error');
             if(error){
                 error.html('');
@@ -103,15 +102,13 @@ login.post = (event) => {
             const route_success = login.get('route.frontend.start');
             localStorage.setItem('token', response.user?.token);
             localStorage.setItem('refreshToken', response.user?.refreshToken);
-
             const node = response.user;
             delete node.token;
             delete node.refreshToken;
-
-            console.log(node);
-            console.log(route_success);
             user.data(node);
             if(route_success){
+                const title = 'test';
+                window.history.pushState(route_success, title, route_success);
                 request(route_success, response);
             }
         }
