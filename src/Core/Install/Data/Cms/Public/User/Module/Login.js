@@ -107,8 +107,7 @@ login.post = (event) => {
             delete node.refreshToken;
             user.data(node);
             if(route_success){
-                const title = 'test';
-                window.history.pushState(route_success, title, route_success);
+                window.history.pushState(route_success, route_success, route_success);
                 request(route_success, response);
             }
         }
