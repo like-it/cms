@@ -4,6 +4,7 @@
  */
 namespace Host\Subdomain\Host\Extension\Service;
 
+use stdClass;
 use DateTimeImmutable;
 use DateTimeZone;
 
@@ -58,9 +59,9 @@ class Jwt {
     public static function get(App $object, Configuration $configuration, $options=[]){
         $url = $object->config('project.dir.data') . 'Config.json';
         $config  = $object->parse_read($url, sha1($url));
-
         $user = false;
         if(array_key_exists('user', $options)){
+            $user = $options['user'];
             unset($user->password);
             unset($user->profile);
             unset($user->parameter);
@@ -71,7 +72,7 @@ class Jwt {
             // Configures the issuer (iss claim)
             ->issuedBy($config->get('token.issued_by'))
             // Configures the audience (aud claim)
-//            ->permittedFor($config->get('token.permitted_for'))
+            ->permittedFor($config->get('token.permitted_for'))
             // Configures the id (jti claim)
             ->identifiedBy($config->get('token.identified_by'))
             // Configures the time that the token was issue (iat claim)
@@ -80,22 +81,22 @@ class Jwt {
             ->canOnlyBeUsedAfter($now->modify($config->get('token.can_only_be_used_after')))
             // Configures the expiration time of the token (exp claim)
             ->expiresAt($now->modify($config->get('token.expires_at')))
-            // Configures a new header
+            // Configures a new claim
             ->withClaim('user', $user)
             // Builds a new token
             ->getToken($configuration->signer(), $configuration->signingKey());
     }
 
-
-    /*
     public static function refresh_get(App $object, Configuration $configuration, $options=[]){
         $url = $object->config('project.dir.data') . 'Config.json';
         $config  = $object->parse_read($url, sha1($url));
         $user = false;
-        if(array_key_exists('user', $options)){
-            $array = $options['user']->toArray($object, new Parse($object));
-            $user = [];
-            $user['uuid'] = $array['uuid'];
+        if(
+            array_key_exists('user', $options) &&
+            property_exists($options['user'], 'uuid')
+        ){
+            $user = new stdClass();
+            $user->uuid = $options['user']->uuid;
         }
         $now = new DateTimeImmutable();
         return $configuration->builder()
@@ -116,7 +117,6 @@ class Jwt {
             // Builds a new token
             ->getToken($configuration->signer(), $configuration->signingKey());
     }
-    */
 
     public static function configuration(App $object, $options=[]){
         $url = $object->config('project.dir.data') . 'Config.json';
