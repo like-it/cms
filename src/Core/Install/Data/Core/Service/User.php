@@ -432,6 +432,7 @@ class User extends Main {
                 $email = $user['email'];
             }
             if($uuid && $email){
+                $object->request('email', $email);
                 $user = User::getUserByEmail($object);
                 d($uuid);
                 dd($user);
@@ -583,7 +584,6 @@ class User extends Main {
     {
         $email = $object->request('email');
         $url = User::getDataUrl($object);
-        d($url);
         $data = $object->data_read($url);
         if (!$data) {
             return false;
