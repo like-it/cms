@@ -4,33 +4,25 @@
  */
 namespace Host\Subdomain\Host\Extension\Service;
 
+use R3m\Io\Exception\AuthorizationException;
 use stdClass;
 use DateTimeImmutable;
-use DateTimeZone;
-
-use Lcobucci\Clock\SystemClock;
-//use Lcobucci\JWT\Token\Signature;
 use R3m\Io\App;
-use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
-use R3m\Io\Module\File;
-use R3m\Io\Module\Parse;
-
-use R3m\Io\Exception\AuthenticationException;
-use R3m\Io\Exception\AuthorizationException;
 
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer;
 use Lcobucci\JWT\Signer\Key\LocalFileReference;
-use Lcobucci\JWT\Signer\Key\InMemory;
+use Lcobucci\Clock\SystemClock;
 use Lcobucci\JWT\UnencryptedToken;
-
 use Lcobucci\JWT\Validation\Constraint\IdentifiedBy;
 use Lcobucci\JWT\Validation\Constraint\IssuedBy;
+use Lcobucci\JWT\Validation\Constraint\LooseValidAt;
 use Lcobucci\JWT\Validation\Constraint\PermittedFor;
 use Lcobucci\JWT\Validation\Constraint\SignedWith;
 use Lcobucci\JWT\Validation\Constraint\StrictValidAt;
-use Lcobucci\JWT\Validation\Constraint\LooseValidAt;
+use Lcobucci\JWT\Signer\Rsa\Sha256;
+
 
 class Jwt {
 
@@ -118,7 +110,8 @@ class Jwt {
             ->getToken($configuration->signer(), $configuration->signingKey());
     }
 
-    public static function configuration(App $object, $options=[]){
+    public static function configuration(App $object, $options=[]): Configuration
+    {
         $url = $object->config('project.dir.data') . 'Config.json';
         $config  = $object->parse_read($url, sha1($url));
         if(
@@ -130,7 +123,6 @@ class Jwt {
                 new Signer\Rsa\Sha256(),
                 LocalFileReference::file($config->get('refresh.token.private_key')),
                 LocalFileReference::file($config->get('refresh.token.certificate'))
-//            InMemory::plainText($config->get('jwt.passphrase'))
             );
         } else {
             $configuration = Configuration::forAsymmetricSigner(
@@ -145,124 +137,8 @@ class Jwt {
         return $configuration;
     }
 
-    public static function request(App $object){
-        $request = new Data($object->request());
-        $data = new Data();
-        foreach(Jwt::FIELD as $key => $attribute){
-            if($request->get($key)){
-                $data->set($attribute, $request->get($key));
-            }
-        }
-        return $data;
-    }
-
-    /*
-    public static function refresh_token(App $object, $options=[]){
-        //bug returns {}
-        $token = '';
-        if(isset($_SERVER['HTTP_AUTHORIZATION'])){
-            $token = $_SERVER['HTTP_AUTHORIZATION'];
-        } elseif(isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])){
-            $token = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
-        }
-        $token = substr($token , 7);
-        if(empty($token)){
-            $error = [];
-            $error['error'] = [];
-            $error['error']['authentication'] = 'Authentication failure...';
-            return $error;
-        }
-        elseif($token==='null'){
-            $error = [];
-            $error['error'] = [];
-            $error['error']['authentication'] = 'Token failure...';
-            return $error;
-        }
-        $url = $object->config('project.dir.data') . 'Config.json';
-        $config  = $object->parse_read($url, sha1($url));
-        $options['refresh'] = true;
-        $configuration = Jwt::configuration($object, $options);
-        assert($configuration instanceof Configuration);
-        $token_unencrypted = $configuration->parser()->parse($token);
-        assert($token_unencrypted instanceof UnencryptedToken);
-        $clock = SystemClock::fromUTC(); // use the clock for issuing and validation
-        //dd($config->get('refresh.token.certificate'));
-        $configuration->setValidationConstraints(
-            new IssuedBy($config->get('refresh.token.issued_by')),
-            new IdentifiedBy($config->get('refresh.token.identified_by')),
-            new PermittedFor($config->get('refresh.token.permitted_for')),
-            new SignedWith(new Signer\Rsa\Sha256(), LocalFileReference::file($config->get('refresh.token.certificate'))),
-            new StrictValidAt($clock),
-            new LooseValidAt($clock)
-        );
-        $constraints = $configuration->validationConstraints();
-        if (! $configuration->validator()->validate($token_unencrypted, ...$constraints)) {
-            $error = [];
-            $error['error'] = [];
-            $error['error']['authentication'] = 'Authentication failure...';
-            return $error;
-        }
-//        die('endtest');
-        $headers = $token_unencrypted->headers();
-        if($headers->has('user')){
-            $user =  $headers->get('user');
-            if(array_key_exists('uuid', $user)){
-                $user = User::find($object, $user);
-                $refreshToken = sha1($token);
-                if(!password_verify($refreshToken, $user->getRefreshToken())){
-                    $error = [];
-                    $error['error'] = [];
-                    $error['error']['authentication'] = 'Authentication failure...';
-                    return $error;
-                }
-                if(!$user->getIsActive()){
-                    $error = [];
-                    $error['error'] = [];
-                    $error['error']['authentication'] = 'User is not active...';
-                    return $error;
-                }
-                if($user->getIsDeleted()){
-                    $error = [];
-                    $error['error'] = [];
-                    $error['error']['authentication'] = 'User is deleted...';
-                    return $error;
-                }
-                $options_expose = [];
-                $options_expose['user'] = $user;
-                $options_expose['response'] = 'json';
-                $expose = $user->expose($object, $options_expose);
-                if($expose == '{}'){
-                    $error = [];
-                    $error['error'] = [];
-                    $error['error']['authentication'] = 'User is gone...';
-                    return $error;
-                }
-                return $expose;
-            } else {
-                $error = [];
-                $error['error'] = [];
-                $error['error']['authentication'] = 'No Uuid found in user...';
-                return $error;
-            }
-        } else {
-            $error = [];
-            $error['error'] = [];
-            $error['error']['authentication'] = 'Header failure...';
-            return $error;
-        }
-    }
-
-    public static function authenticate(App $object, $options=[]){
-        $token = '';
-        if(isset($_SERVER['HTTP_AUTHORIZATION'])){
-            $token = $_SERVER['HTTP_AUTHORIZATION'];
-        } elseif(isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])){
-            $token = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
-        }
-        $token = substr($token , 7);
-        if(empty($token)){
-            throw new AuthenticationException('Authentication failure...');
-        }
+    public static function decryptToken(App $object, $token){
+        $options = [];
         $url = $object->config('project.dir.data') . 'Config.json';
         $config  = $object->parse_read($url, sha1($url));
         $configuration = Jwt::configuration($object, $options);
@@ -274,34 +150,26 @@ class Jwt {
             new IssuedBy($config->get('token.issued_by')),
             new IdentifiedBy($config->get('token.identified_by')),
             new PermittedFor($config->get('token.permitted_for')),
-            new SignedWith(new Signer\Rsa\Sha256(), LocalFileReference::file($config->get('token.certificate'))),
+            new SignedWith(new Sha256(), LocalFileReference::file($config->get('token.certificate'))),
             new StrictValidAt($clock),
             new LooseValidAt($clock)
         );
         $constraints = $configuration->validationConstraints();
         if (!$configuration->validator()->validate($token_unencrypted, ...$constraints)) {
-            $error = [];
-            $error['error'] = [];
-            $error['error']['authentication'] = 'Authentication failure...';
-            return $error;
+            throw new AuthorizationException('Authentication failure...');
         }
-        $headers = $token_unencrypted->headers();
-        if($headers->has('user')){
-            $user =  $headers->get('user');
-            if(empty($user['isActive'])){
-                throw new AuthenticationException('User is not active...');
-            }
-            if(!empty($user['isDeleted'])){
-                throw new AuthenticationException('User is deleted...');
-            }
-            if(count($user['role']) == 0){
-                throw new AuthenticationException('User has no roles...');
-            }
-            $user['token'] = $token;
-            //$user = User::addRefreshToken($object, $user);
-            //$user = User::addKey($object, $user);
-            return $user;
-        }
+        return $token_unencrypted;
     }
-    */
+
+    public static function request(App $object): Data
+    {
+        $request = new Data($object->request());
+        $data = new Data();
+        foreach(Jwt::FIELD as $key => $attribute){
+            if($request->get($key)){
+                $data->set($attribute, $request->get($key));
+            }
+        }
+        return $data;
+    }
 }

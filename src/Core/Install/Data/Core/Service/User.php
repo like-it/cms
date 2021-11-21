@@ -2,20 +2,8 @@
 namespace Host\Subdomain\Host\Extension\Service;
 
 
-use Exception;
-use Lcobucci\Clock\SystemClock;
-use Lcobucci\JWT\Configuration;
-use Lcobucci\JWT\Signer\Key\LocalFileReference;
-use Lcobucci\JWT\UnencryptedToken;
-use Lcobucci\JWT\Validation\Constraint\IdentifiedBy;
-use Lcobucci\JWT\Validation\Constraint\IssuedBy;
-use Lcobucci\JWT\Validation\Constraint\LooseValidAt;
-use Lcobucci\JWT\Validation\Constraint\PermittedFor;
-use Lcobucci\JWT\Validation\Constraint\SignedWith;
-use Lcobucci\JWT\Validation\Constraint\StrictValidAt;
-use Lcobucci\JWT\Signer\Rsa\Sha256;
+
 use R3m\Io\App;
-use R3m\Io\Exception\AuthorizationException;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
 use R3m\Io\Module\Dir;
@@ -23,6 +11,8 @@ use R3m\Io\Module\File;
 use R3m\Io\Module\Response;
 use R3m\Io\Module\Sort;
 
+use Exception;
+use R3m\Io\Exception\AuthorizationException;
 use R3m\Io\Exception\ObjectException;
 
 class User extends Main {
@@ -388,7 +378,8 @@ class User extends Main {
     /**
      * @throws AuthorizationException
      */
-    public static function current(App $object){
+    public static function current(App $object): Response
+    {
         $token = '';
         if(array_key_exists('HTTP_AUTHORIZATION', $_SERVER)){
             $token = $_SERVER['HTTP_AUTHORIZATION'];
@@ -400,26 +391,7 @@ class User extends Main {
         if(!$token){
             throw new AuthorizationException('Please provide a valid token...');
         }
-        $options = [];
-        $url = $object->config('project.dir.data') . 'Config.json';
-        $config  = $object->parse_read($url, sha1($url));
-        $configuration = Jwt::configuration($object, $options);
-        assert($configuration instanceof Configuration);
-        $token_unencrypted = $configuration->parser()->parse($token);
-        assert($token_unencrypted instanceof UnencryptedToken);
-        $clock = SystemClock::fromUTC(); // use the clock for issuing and validation
-        $configuration->setValidationConstraints(
-            new IssuedBy($config->get('token.issued_by')),
-            new IdentifiedBy($config->get('token.identified_by')),
-            new PermittedFor($config->get('token.permitted_for')),
-            new SignedWith(new Sha256(), LocalFileReference::file($config->get('token.certificate'))),
-            new StrictValidAt($clock),
-            new LooseValidAt($clock)
-        );
-        $constraints = $configuration->validationConstraints();
-        if (!$configuration->validator()->validate($token_unencrypted, ...$constraints)) {
-            throw new AuthorizationException('Authentication failure...');
-        }
+        $token_unencrypted = Jwt::decryptToken($object, $token);
         $claims = $token_unencrypted->claims();
         if($claims->has('user')){
             $user =  $claims->get('user');
@@ -434,34 +406,31 @@ class User extends Main {
             if($uuid && $email){
                 $object->request('email', $email);
                 $user = User::getUserByEmail($object);
-                d($uuid);
-                dd($user);
+                if(!property_exists($user, 'isActive')){
+                    throw new AuthorizationException('User is not active...');
+                }
+                if($user->isActive !== true){
+                    throw new AuthorizationException('User is not active...');
+                }
+                if(property_exists($user, 'isDeleted')){
+                    throw new AuthorizationException('User is deleted...');
+                }
+                if(!property_exists($user, 'role')){
+                    throw new AuthorizationException('User has no roles...');
+                }
+                if(count($user->role) === 0){
+                    throw new AuthorizationException('User has no roles...');
+                }
+                unset($user->password);
+                $response = [];
+                $response['user'] = $user;
+                return new Response(
+                    $response,
+                    Response::TYPE_JSON
+                );
             }
-
-            if(!property_exists($user, 'isActive')){
-                throw new AuthorizationException('User is not active...');
-            }
-            if($user->isActive !== true){
-                throw new AuthorizationException('User is not active...');
-            }
-            if(
-                property_exists($user, 'isDeleted') &&
-                !empty($user->isDeleted)
-            ){
-                throw new AuthorizationException('User is deleted...');
-            }
-            if(!property_exists($user, 'role')){
-                throw new AuthorizationException('User has no roles...');
-            }
-            if(count($user->role) === 0){
-                throw new AuthorizationException('User has no roles...');
-            }
-            return $user;
         }
-
-
-
-        dd($token);
+        throw new AuthorizationException('Authentication failure... (invalid claim)');
     }
 
     public static function install(App $object){
