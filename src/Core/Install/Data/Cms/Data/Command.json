@@ -8,6 +8,15 @@
             "POST"
         ]
     },
+    "85f0760c-3e7f-43f7-9211-7e0fb04693a0" : {
+        "module" : "navigation",
+        "command" : "main",
+        "path" : "Navigation",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "1498986b-f2a0-4bb2-9f2f-31f90069d2df" : {
         "module" : "user",
         "command" : "login",
@@ -27,7 +36,7 @@
     "f7f11f1b-9051-4256-b9b1-be7afb70960e" : {
         "module" : "import",
         "command" : "main",
-        "path" : "Import/",
+        "path" : "Import",
         "method": [
             "GET"
         ]
@@ -35,7 +44,7 @@
     "32bc6e5b-e7f3-44ea-a23e-2ea5c611cb7d" : {
         "module" : "export",
         "command" : "main",
-        "path" : "Export/",
+        "path" : "Export",
         "method": [
             "GET"
         ]

@@ -1,5 +1,5 @@
 {R3M}
-{{script('module')}}
+
 import login from "/User/Module/Login.js";
 import { version } from "/Module/Priya.js";
 import { root } from "/Module/Web.js";
@@ -18,11 +18,9 @@ ready(() => {
             "route" : {
                 "frontend" : {
                     "blocked" : "{{route.get(route.prefix() + '-user-login-blocked')}}",
-                    "start" : "{{route.get(route.prefix() + '-index-main')}}"
+                    "start" : "{{route.get(route.prefix() + '-navigation-main')}}"
                 }
             }
         });
-        console.log('user login');
     });
 });
-{{/script}}
