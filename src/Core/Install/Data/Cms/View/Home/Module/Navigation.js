@@ -14,7 +14,7 @@ ready(() => {
         request(active.data('url'), null, (url, response) => {
             if(active.data('frontend-url')){
                 response?.method !== null ? response.method : active.data('method');
-                response?.target !== null ? response.target : active.data('target') : ;
+                response?.target !== null ? response.target : active.data('target');
                 request(active.data('frontend-url'), response);
             }
         });
