@@ -5,6 +5,6 @@
 {{/script}}
 {{$request.method = 'replace'}}
 {{$request.target = 'body'}}
-
+{{import('Start.css')}}
 Under construction... <br>
 Greetings from Core Install Data.<br>
