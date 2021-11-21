@@ -110,7 +110,7 @@ class Jwt {
             // Configures the expiration time of the token (exp claim)
             ->expiresAt($now->modify($config->get('refresh.token.expires_at')))
             // Configures a new header
-            ->withHeader('user', $user)
+            ->withClaim('user', $user)
             // Builds a new token
             ->getToken($configuration->signer(), $configuration->signingKey());
     }
