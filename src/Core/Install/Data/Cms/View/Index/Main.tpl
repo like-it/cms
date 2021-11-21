@@ -3,9 +3,9 @@
 {{script('module')}}
 {{require($controller.dir.view + $controller.title + '/Module/Authorization.js')}}
 {{/script}}
-{$request.method = 'replace-with-or-append-to'}
-{$request.target = 'section[name="' + $section.name + '"]'}
-{$request.append.to = 'body'}
+{{$request.method = 'replace-with-or-append-to'}}
+{{$request.target = 'section[name="' + $section.name + '"]'}}
+{{$request.append.to = 'body'}}
 <section name="main">
     <div class="container mw-100 h-100">
         <div class="row h-100">
@@ -14,7 +14,7 @@
                 <nav class="nav flex-column">
                     <a
                         class="nav-link active"
-                        data-url="{server.url('core')}Home/Body/"
+                        data-url="{{server.url('core')}}Home/Body/"
                         data-method="replace-with"
                         data-target="section[name='main']"
                     >
@@ -22,7 +22,7 @@
                     </a>
                     <a
                         class="nav-link" h
-                        data-url="{server.url('core')}User/Profile/"
+                        data-url="{{server.url('core')}}User/Profile/"
                         data-method="replace-with"
                         data-target="section[name='main-content']"
                     >
@@ -30,7 +30,7 @@
                     </a>
                     <a
                         class="nav-link"
-                        data-url="{server.url('core')}User/List/"
+                        data-url="{{server.url('core')}}User/List/"
                         data-method="replace-with"
                         data-target="section[name='main-content']"
                     >
@@ -38,13 +38,13 @@
                     </a>
                     <a
                         class="nav-link"
-                        data-url="{server.url('core')}System/Information/"
+                        data-url="{{server.url('core')}}System/Information/"
                         data-method="replace-with"
                         data-target="section[name='main-content']"
                     >
                         <i class="fas fa-cog"></i> System
                     </a>
-                    <a class="nav-link" href="{server.url('cms')}User/Logout/"><i class="fas fa-sign-out-alt"></i> Log out</a>
+                    <a class="nav-link" href="{{server.url('cms')}}User/Logout/"><i class="fas fa-sign-out-alt"></i> Log out</a>
 
                     /*
                     <a class="nav-link active" aria-current="page" href="#">Active</a>
