@@ -17,14 +17,6 @@
             "POST"
         ]
     },
-    "1d3d8de7-a38d-4097-bc45-e91f57ffdbac" : {
-        "module" : "home",
-        "command" : "main",
-        "method": [
-            "GET",
-            "POST"
-        ]
-    },
     "1498986b-f2a0-4bb2-9f2f-31f90069d2df" : {
         "module" : "user",
         "command" : "login",
@@ -55,6 +47,22 @@
         "path" : "Export",
         "method": [
             "GET"
+        ]
+    },
+    "1d3d8de7-a38d-4097-bc45-e91f57ffdbac" : {
+        "module" : "home",
+        "command" : "main",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "6d514a96-de6d-4d3f-972e-cd4e1cee2a8f" : {
+        "module" : "home",
+        "command" : "body",
+        "method": [
+            "GET",
+            "POST"
         ]
     }
 }

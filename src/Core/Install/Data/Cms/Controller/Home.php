@@ -29,4 +29,14 @@ class Home extends View {
             return $exception;
         }
     }
+
+    public static function body(App $object){
+        $name = Home::name(__FUNCTION__, __CLASS__, '/');
+        try {
+            $url = Home::locate($object, $name);
+            return Home::response($object, $url);
+        } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception){
+            return $exception;
+        }
+    }
 }

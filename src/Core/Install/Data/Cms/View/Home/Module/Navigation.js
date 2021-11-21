@@ -11,7 +11,7 @@ ready(() => {
     const active = section.select('.active');
     if(active){
         header('authorization', 'bearer ' + user.token());
-        active.request(null, null, (url, response) => {
+        active.request(active.data('url'), null, (url, response) => {
             console.log(url);
             console.log(active.data('frontend-url'));
             console.log(response);
