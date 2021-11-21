@@ -100,6 +100,7 @@ login.post = (event) => {
                 error.html('');
             }
             const route_success = login.get('route.frontend.start');
+            console.log(route_success);
             localStorage.setItem('token', response.user?.token);
             localStorage.setItem('refreshToken', response.user?.refreshToken);
             const node = response.user;
