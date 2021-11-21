@@ -380,6 +380,7 @@ class User extends Main {
      */
     public static function current(App $object): Response
     {
+        throw new AuthorizationException('Refresh token test');
         $token = '';
         if(array_key_exists('HTTP_AUTHORIZATION', $_SERVER)){
             $token = $_SERVER['HTTP_AUTHORIZATION'];
