@@ -345,7 +345,9 @@ class User extends Main {
         $node = User::getUserByEmail($object);
         if(
             $node &&
-            property_exists($node, 'password')
+            property_exists($node, 'password') &&
+            property_exists($node, 'uuid') &&
+            property_exists($node, 'email')
         ){
             $password = $object->request('password');
             $verify = password_verify($password, $node->password);
@@ -358,11 +360,25 @@ class User extends Main {
             $options = [];
             $options['user'] = $node;
             $token = Jwt::get($object, $configuration, $options);
-            $node->token = $token->toString();
+            $token = $token->toString();
             $options['refresh'] = true;
             $configuration = Jwt::configuration($object, $options);
             $refreshToken = Jwt::refresh_get($object, $configuration, $options);
-            $node->refreshToken = $refreshToken->toString();
+            $refreshToken = $refreshToken->toString();
+            $node->refreshToken = sha1($refreshToken);
+            $cost = 13;
+            $node->refreshToken = password_hash($node->refreshToken, PASSWORD_BCRYPT, [
+                'cost' => $cost
+            ]);
+            $url = User::getDataUrl($object);
+            $data = $object->data_read($url);
+            if(!$data){
+                throw new Exception('Invalid user data...');
+            }
+            $data->set($node->uuid, $node);
+            $data->write($url);
+            $node->token = $token;
+            $node->refreshToken = $refreshToken;
             $response = [];
             $response['user'] = $node;
             return new Response(
@@ -467,7 +483,13 @@ class User extends Main {
                 $user = User::getUserByEmail($object);
 
                 //add password signature for refeshToken to validate...
-                
+                $refreshToken = sha1($token);
+                if(!property_exists($user, 'refreshToken')){
+                    throw new AuthorizationException('Refresh token not present...');
+                }
+                if(!password_verify($refreshToken, $user->refreshToken)){
+                    throw new AuthorizationException('Refresh token not valid...');
+                }
                 if(!property_exists($user, 'isActive')){
                     throw new AuthorizationException('User is not active...');
                 }
