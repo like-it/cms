@@ -628,7 +628,7 @@ class User extends Main {
         if(!$data){
             throw new Exception('Invalid user data...');
         }
-        $data->set($node->uuid, $node);
+        $data->set($node->uuid . '.refreshToken', $node->refreshToken);
         $data->write($url);
         $node->token = $token;
         $node->refreshToken = $refreshToken;
@@ -706,7 +706,8 @@ class User extends Main {
         return $value;
     }
 
-    private static function getValidatorUrl(App $object) {
+    private static function getValidatorUrl(App $object): string
+    {
         return $object->config('host.dir.root') .
             'Node' .
             $object->config('ds') .
@@ -716,7 +717,8 @@ class User extends Main {
             $object->config('extension.json');
     }
 
-    private static function generateActivationCode(){
+    private static function generateActivationCode(): string
+    {
         return rand(1000, 9999) .
             '-' .
             rand(1000, 9999) .
