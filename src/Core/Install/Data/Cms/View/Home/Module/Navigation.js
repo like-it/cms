@@ -1,4 +1,5 @@
 {R3M}
+import user from "/Module/User.js";
 import { getSectionByName} from "/Module/Section.js";
 
 ready(() => {
@@ -9,6 +10,7 @@ ready(() => {
     }
     const active = section.select('.active');
     if(active){
+        header('authorization', 'bearer ' + user.token());
         active.request();
     }
 

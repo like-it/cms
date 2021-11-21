@@ -15,7 +15,7 @@
                             class="nav-link active"
                             data-url="{{server.url('core')}}Home/Body/"
                             data-method="replace-with"
-                            data-target="section[name='main']"
+                            data-target="section[name='main-content']"
                         >
                             <i class="fas fa-home"></i> Home
                         </a>
