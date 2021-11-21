@@ -3,6 +3,10 @@ import user from "/Module/User.js";
 import { getSectionByName} from "/Module/Section.js";
 
 ready(() => {
+    const navigation = getSectionByName("navigation");
+    if(!navigation){
+        request("{{route.get(route.prefix() + '-navigation-main')}}");
+    }
     const section = getSectionByName("main-navigation");
     if(!section){
         console.warn('Cannot find section navigation...');
