@@ -190,6 +190,7 @@
         "command" : "body",
         "method" : [
             "GET",
+            "POST",
             "OPTIONS"
         ]
     }
