@@ -21,7 +21,7 @@ ready(() => {
                     request(url, null, (url, response) => {
 
                         if(!is.empty(response.user)){
-                            
+
                             if(response.user?.token){
 
                                 user.token(response.user.token);
@@ -58,6 +58,7 @@ ready(() => {
             request(url, null, (url, response) => {
 
                 if(!is.empty(response.user)){
+                    
                     if(response.user?.token){
 
                         user.token(response.user.token);
