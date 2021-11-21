@@ -13,9 +13,9 @@ use R3m\Io\Exception\UrlNotExistException;
 class Home extends View {
     const DIR = __DIR__ . DIRECTORY_SEPARATOR;    
 
-    public static function body(App $object){
+    public static function body(App $object): Response
+    {
         $data = [];
-        $data['target'] = 'main';
         return new Response($data, Response::TYPE_JSON);
     }
 }
