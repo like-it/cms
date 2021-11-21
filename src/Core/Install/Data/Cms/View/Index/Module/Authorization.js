@@ -32,6 +32,10 @@ ready(() => {
                             delete node?.token;
                             delete node?.refreshToken;
                             user.data(node);
+                        } else {
+
+                            //redirect user login
+                            redirect("{{route.get(route.prefix() + '-user-login')}}");
                         }
 
                     });
@@ -63,7 +67,12 @@ ready(() => {
                     delete node?.token;
                     delete node?.refreshToken;
                     user.data(node);
+                } else {
+
+                    //redirect user login
+                    redirect("{{route.get(route.prefix() + '-user-login')}}");
                 }
+
             });
         } else {
 
