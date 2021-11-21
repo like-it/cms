@@ -13,6 +13,9 @@ ready(() => {
         header('authorization', 'bearer ' + user.token());
         request(active.data('url'), null, (url, response) => {
             if(active.data('frontend-url')){
+                if(typeof response !== 'object'){
+                    response = {};
+                }
                 if(is.empty(response.method)){
                     response.method = active.data('method');
                 }
