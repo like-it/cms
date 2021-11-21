@@ -13,8 +13,8 @@ ready(() => {
         header('authorization', 'bearer ' + user.token());
         request(active.data('url'), null, (url, response) => {
             if(active.data('frontend-url')){
-                response?.method = null ? active.data('method') : response?.method;
-                response?.target = null ? active.data('target') : response?.target;
+                response?.method !== null ? response.method : active.data('method');
+                response?.target !== null ? response.target : active.data('target') : ;
                 request(active.data('frontend-url'), response);
             }
         });
