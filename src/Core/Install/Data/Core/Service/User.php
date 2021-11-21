@@ -2,7 +2,7 @@
 namespace Host\Subdomain\Host\Extension\Service;
 
 
-
+use stdClass;
 use R3m\Io\App;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
@@ -356,29 +356,7 @@ class User extends Main {
                 throw new Exception('Invalid password.');
             }
             UserLogger::log($object, $node, UserLogger::STATUS_SUCCESS);
-            $configuration = Jwt::configuration($object);
-            $options = [];
-            $options['user'] = $node;
-            $token = Jwt::get($object, $configuration, $options);
-            $token = $token->toString();
-            $options['refresh'] = true;
-            $configuration = Jwt::configuration($object, $options);
-            $refreshToken = Jwt::refresh_get($object, $configuration, $options);
-            $refreshToken = $refreshToken->toString();
-            $node->refreshToken = sha1($refreshToken);
-            $cost = 13;
-            $node->refreshToken = password_hash($node->refreshToken, PASSWORD_BCRYPT, [
-                'cost' => $cost
-            ]);
-            $url = User::getDataUrl($object);
-            $data = $object->data_read($url);
-            if(!$data){
-                throw new Exception('Invalid user data...');
-            }
-            $data->set($node->uuid, $node);
-            $data->write($url);
-            $node->token = $token;
-            $node->refreshToken = $refreshToken;
+            $node = User::getTokens($object, $node);
             $response = [];
             $response['user'] = $node;
             return new Response(
@@ -439,6 +417,7 @@ class User extends Main {
                     throw new AuthorizationException('User has no roles...');
                 }
                 unset($user->password);
+                unset($user->refreshToken);
                 $response = [];
                 $response['user'] = $user;
                 return new Response(
@@ -452,6 +431,7 @@ class User extends Main {
 
     /**
      * @throws AuthorizationException
+     * @throws Exception
      */
     public static function refresh_token(App $object): Response
     {
@@ -506,6 +486,7 @@ class User extends Main {
                     throw new AuthorizationException('User has no roles...');
                 }
                 unset($user->password);
+                $user = User::getTokens($object, $user);
                 //add token
                 //add refreshToken
                 $response = [];
@@ -521,18 +502,6 @@ class User extends Main {
 
     public static function install(App $object){
 
-    }
-
-    public static function expose(App $object){
-        if(!$object->config('token.private_key')){
-            //create
-        }
-        if(!$object->config('token.certificate')){
-            //create
-        }
-        $options = [];
-        $configuration = Jwt::configuration($object);
-        $token = Jwt::get($object, $configuration, $options);
     }
 
     public static function is_blocked(App $object): bool
@@ -633,6 +602,37 @@ class User extends Main {
                 Response::STATUS_ERROR
             );
         }
+    }
+
+    /**
+     * @throws Exception
+     */
+    private static function getTokens(App $object, stdClass $node): stdClass
+    {
+        $configuration = Jwt::configuration($object);
+        $options = [];
+        $options['user'] = $node;
+        $token = Jwt::get($object, $configuration, $options);
+        $token = $token->toString();
+        $options['refresh'] = true;
+        $configuration = Jwt::configuration($object, $options);
+        $refreshToken = Jwt::refresh_get($object, $configuration, $options);
+        $refreshToken = $refreshToken->toString();
+        $node->refreshToken = sha1($refreshToken);
+        $cost = 13;
+        $node->refreshToken = password_hash($node->refreshToken, PASSWORD_BCRYPT, [
+            'cost' => $cost
+        ]);
+        $url = User::getDataUrl($object);
+        $data = $object->data_read($url);
+        if(!$data){
+            throw new Exception('Invalid user data...');
+        }
+        $data->set($node->uuid, $node);
+        $data->write($url);
+        $node->token = $token;
+        $node->refreshToken = $refreshToken;
+        return $node;
     }
 
     private static function getUserByEmail(App $object)
