@@ -454,6 +454,7 @@ class User extends Main {
         $claims = $token_unencrypted->claims();
         if($claims->has('user')){
             $user =  $claims->get('user');
+            dd($user);
             $uuid = false;
             $email = false;
             if(array_key_exists('uuid', $user)){
