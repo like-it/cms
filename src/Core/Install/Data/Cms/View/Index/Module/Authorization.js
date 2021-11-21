@@ -14,6 +14,7 @@ ready(() => {
             } else {
 
                 if(user.refreshToken()){
+
                     //should get new token | refreshToken
                     const url = "{{server.url('core')}}User/Refresh/Token/";
                     header('authorization', 'Bearer ' + user.refreshToken());
@@ -28,6 +29,7 @@ ready(() => {
 
                                 user.refreshToken(response.user.refreshToken);
                             }
+
                             const node = response.user;
                             delete node?.token;
                             delete node?.refreshToken;
@@ -63,6 +65,7 @@ ready(() => {
 
                         user.refreshToken(response.user.refreshToken);
                     }
+                    
                     const node = response.user;
                     delete node?.token;
                     delete node?.refreshToken;
