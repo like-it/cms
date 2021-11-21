@@ -19,7 +19,9 @@ ready(() => {
                     const url = "{{server.url('core')}}User/Refresh/Token/";
                     header('authorization', 'Bearer ' + user.refreshToken());
                     request(url, null, (url, response) => {
+
                         if(!is.empty(response.user)){
+                            
                             if(response.user?.token){
 
                                 user.token(response.user.token);
@@ -65,7 +67,7 @@ ready(() => {
 
                         user.refreshToken(response.user.refreshToken);
                     }
-                    
+
                     const node = response.user;
                     delete node?.token;
                     delete node?.refreshToken;
