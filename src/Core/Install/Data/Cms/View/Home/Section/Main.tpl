@@ -15,8 +15,6 @@
                             class="nav-link active"
                             data-url="{{server.url('core')}}Home/Body/"
                             data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
-                            data-method="replace-with"
-                            data-target="section[name='main-content']"
                         >
                             <i class="fas fa-home"></i> Home
                         </a>
