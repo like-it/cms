@@ -3,6 +3,7 @@ namespace Host\Subdomain\Host\Extension\Controller;
 
 
 use R3m\Io\App;
+use R3m\Io\Exception\AuthorizationException;
 use R3m\Io\Module\Handler;
 use R3m\Io\Module\View;
 use R3m\Io\Module\Response;
@@ -92,10 +93,19 @@ class User extends View {
     }
 
     public static function current(App $object){
-        return Service::current($object);
+        try {
+            return Service::current($object);
+        } catch (Exception | AuthorizationException $exception){
+            return $exception;
+        }
+
     }
 
     public static function refresh_token(App $object){
-        return Service::refresh_token($object);
+        try {
+            return Service::refresh_token($object);
+        } catch (Exception | AuthorizationException $exception){
+            return $exception;
+        }
     }
 }
