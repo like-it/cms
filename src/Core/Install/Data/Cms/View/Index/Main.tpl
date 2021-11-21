@@ -1,6 +1,8 @@
 {R3M}
 {{require($controller.dir.view + $controller.title + '/Init.tpl')}}
-{{require($controller.dir.view + $controller.title + '/Module/Authorization.tpl')}}
+{{script('module')}}
+{{require($controller.dir.view + $controller.title + '/Module/Authorization.js')}}
+{{/script}}
 {{$request.method = 'replace'}}
 {{$request.target = 'body'}}
 
