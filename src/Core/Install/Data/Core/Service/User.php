@@ -454,7 +454,6 @@ class User extends Main {
         $claims = $token_unencrypted->claims();
         if($claims->has('user')){
             $user =  $claims->get('user');
-            dd($user);
             $uuid = false;
             $email = false;
             if(array_key_exists('uuid', $user)){
@@ -468,8 +467,7 @@ class User extends Main {
                 $user = User::getUserByEmail($object);
 
                 //add password signature for refeshToken to validate...
-
-
+                
                 if(!property_exists($user, 'isActive')){
                     throw new AuthorizationException('User is not active...');
                 }
