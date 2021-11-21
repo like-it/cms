@@ -14,6 +14,7 @@ use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer;
 use Lcobucci\JWT\Signer\Key\LocalFileReference;
 use Lcobucci\Clock\SystemClock;
+use Lcobucci\JWT\Token;
 use Lcobucci\JWT\UnencryptedToken;
 use Lcobucci\JWT\Validation\Constraint\IdentifiedBy;
 use Lcobucci\JWT\Validation\Constraint\IssuedBy;
@@ -22,7 +23,7 @@ use Lcobucci\JWT\Validation\Constraint\PermittedFor;
 use Lcobucci\JWT\Validation\Constraint\SignedWith;
 use Lcobucci\JWT\Validation\Constraint\StrictValidAt;
 use Lcobucci\JWT\Signer\Rsa\Sha256;
-
+use Lcobucci\JWT\Token\Plain;
 
 class Jwt {
 
@@ -48,7 +49,8 @@ class Jwt {
     ];
 
 
-    public static function get(App $object, Configuration $configuration, $options=[]){
+    public static function get(App $object, Configuration $configuration, $options=[]): Plain
+    {
         $url = $object->config('project.dir.data') . 'Config.json';
         $config  = $object->parse_read($url, sha1($url));
         $user = false;
@@ -79,16 +81,19 @@ class Jwt {
             ->getToken($configuration->signer(), $configuration->signingKey());
     }
 
-    public static function refresh_get(App $object, Configuration $configuration, $options=[]){
+    public static function refresh_get(App $object, Configuration $configuration, $options=[]): Plain
+    {
         $url = $object->config('project.dir.data') . 'Config.json';
         $config  = $object->parse_read($url, sha1($url));
         $user = false;
         if(
             array_key_exists('user', $options) &&
-            property_exists($options['user'], 'uuid')
+            property_exists($options['user'], 'uuid') &&
+            property_exists($options['user'], 'email')
         ){
             $user = new stdClass();
             $user->uuid = $options['user']->uuid;
+            $user->email = $options['user']->email;
         }
         $now = new DateTimeImmutable();
         return $configuration->builder()
@@ -137,7 +142,11 @@ class Jwt {
         return $configuration;
     }
 
-    public static function decryptToken(App $object, $token){
+    /**
+     * @throws AuthorizationException
+     */
+    public static function decryptToken(App $object, $token): Token|UnencryptedToken
+    {
         $options = [];
         $url = $object->config('project.dir.data') . 'Config.json';
         $config  = $object->parse_read($url, sha1($url));
@@ -161,7 +170,8 @@ class Jwt {
         return $token_unencrypted;
     }
 
-    public static function decryptRefreshToken(App $object, $token){
+    public static function decryptRefreshToken(App $object, $token): Token|UnencryptedToken
+    {
         $options = [
             'refresh' => true
         ];
