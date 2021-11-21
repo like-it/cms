@@ -14,57 +14,57 @@ ready(() => {
             } else {
 
                 if(user.refreshToken()){
-
-                    console.log('refreshToken: ' + user.refreshToken());
+                    //should get new token | refreshToken
                     const url = "{{server.url('core')}}User/Refresh/Token/";
                     header('authorization', 'Bearer ' + user.refreshToken());
                     request(url, null, (url, response) => {
+                        if(!is.empty(response.user)){
+                            if(response.user?.token){
 
-                        //should get new token | refreshToken
-                        if(response?.user?.token){
+                                user.token(response.user.token);
+                            }
 
-                            user.token(response.user.token);
+                            if(response?.user?.refreshToken){
+
+                                user.refreshToken(response.user.refreshToken);
+                            }
+                            const node = response.user;
+                            delete node.token;
+                            delete node.refreshToken;
+                            user.data(node);
                         }
 
-                        if(response?.user?.refreshToken){
-
-                            user.refreshToken(response.user.refreshToken);
-                        }
-
-                        console.log(response);
                     });
-
-                    //validate refresh token and get user with new token
                 }
 
             }
 
         });
-
     } else {
 
         if(user.refreshToken()){
 
-            console.log('refreshToken: ' + user.refreshToken());
+            //validate refresh token and get user with new token & refreshToken
             const url = "{{server.url('core')}}User/Refresh/Token/";
             header('authorization', 'Bearer ' + user.refreshToken());
             request(url, null, (url, response) => {
 
-                //should get new token | refreshToken
-                if(response?.user?.token){
+                if(!is.empty(response.user)){
+                    if(response.user?.token){
 
-                    user.token(response.user.token);
+                        user.token(response.user.token);
+                    }
+
+                    if(response?.user?.refreshToken){
+
+                        user.refreshToken(response.user.refreshToken);
+                    }
+                    const node = response.user;
+                    delete node.token;
+                    delete node.refreshToken;
+                    user.data(node);
                 }
-
-                if(response?.user?.refreshToken){
-
-                    user.refreshToken(response.user.refreshToken);
-                }
-
-                console.log(response);
             });
-
-            //validate refresh token and get user with new token
         } else {
 
             //redirect user login
