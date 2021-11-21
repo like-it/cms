@@ -376,7 +376,6 @@ class User extends Main {
                 throw new Exception('Invalid user data...');
             }
             $data->set($node->uuid, $node);
-            dd($node);
             $data->write($url);
             $node->token = $token;
             $node->refreshToken = $refreshToken;
