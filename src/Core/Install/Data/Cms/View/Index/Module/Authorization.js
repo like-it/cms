@@ -24,13 +24,13 @@ ready(() => {
                                 user.token(response.user.token);
                             }
 
-                            if(response?.user?.refreshToken){
+                            if(response.user?.refreshToken){
 
                                 user.refreshToken(response.user.refreshToken);
                             }
                             const node = response.user;
-                            delete node.token;
-                            delete node.refreshToken;
+                            delete node?.token;
+                            delete node?.refreshToken;
                             user.data(node);
                         }
 
@@ -55,13 +55,13 @@ ready(() => {
                         user.token(response.user.token);
                     }
 
-                    if(response?.user?.refreshToken){
+                    if(response.user?.refreshToken){
 
                         user.refreshToken(response.user.refreshToken);
                     }
                     const node = response.user;
-                    delete node.token;
-                    delete node.refreshToken;
+                    delete node?.token;
+                    delete node?.refreshToken;
                     user.data(node);
                 }
             });
