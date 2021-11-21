@@ -3,7 +3,7 @@
 {{$request.method = 'replace-with-or-append-to'}}
 {{$request.target = 'section[name="' + $section.name + '"]'}}
 {{$request.append.to = 'body'}}
-{{import($section.name + '.css')}}
+{{import('Main.css')}}
 <section name="{{$section.name}}">
     <div class="container mw-100 h-100">
         <div class="row h-100">
