@@ -94,4 +94,8 @@ class User extends View {
     public static function current(App $object){
         return Service::current($object);
     }
+
+    public static function refresh_token(App $object){
+        return Service::refresh_token($object);
+    }
 }

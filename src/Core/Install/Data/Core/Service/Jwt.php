@@ -161,6 +161,32 @@ class Jwt {
         return $token_unencrypted;
     }
 
+    public static function decryptRefreshToken(App $object, $token){
+        $options = [
+            'refresh' => true
+        ];
+        $url = $object->config('project.dir.data') . 'Config.json';
+        $config  = $object->parse_read($url, sha1($url));
+        $configuration = Jwt::configuration($object, $options);
+        assert($configuration instanceof Configuration);
+        $token_unencrypted = $configuration->parser()->parse($token);
+        assert($token_unencrypted instanceof UnencryptedToken);
+        $clock = SystemClock::fromUTC(); // use the clock for issuing and validation
+        $configuration->setValidationConstraints(
+            new IssuedBy($config->get('refresh.token.issued_by')),
+            new IdentifiedBy($config->get('refresh.token.identified_by')),
+            new PermittedFor($config->get('refresh.token.permitted_for')),
+            new SignedWith(new Sha256(), LocalFileReference::file($config->get('refresh.token.certificate'))),
+            new StrictValidAt($clock),
+            new LooseValidAt($clock)
+        );
+        $constraints = $configuration->validationConstraints();
+        if (!$configuration->validator()->validate($token_unencrypted, ...$constraints)) {
+            throw new AuthorizationException('Authentication failure...');
+        }
+        return $token_unencrypted;
+    }
+
     public static function request(App $object): Data
     {
         $request = new Data($object->request());

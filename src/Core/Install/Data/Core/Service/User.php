@@ -434,6 +434,70 @@ class User extends Main {
         throw new AuthorizationException('Authentication failure... (invalid claim)');
     }
 
+    /**
+     * @throws AuthorizationException
+     */
+    public static function refresh_token(App $object): Response
+    {
+        $token = '';
+        if(array_key_exists('HTTP_AUTHORIZATION', $_SERVER)){
+            $token = $_SERVER['HTTP_AUTHORIZATION'];
+        }
+        elseif(array_key_exists('REDIRECT_HTTP_AUTHORIZATION', $_SERVER)){
+            $token = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+        }
+        $token = substr($token , 7);
+        if(!$token){
+            throw new AuthorizationException('Please provide a valid token...');
+        }
+        $token_unencrypted = Jwt::decryptRefreshToken($object, $token);
+        $claims = $token_unencrypted->claims();
+        if($claims->has('user')){
+            $user =  $claims->get('user');
+            $uuid = false;
+            $email = false;
+            if(array_key_exists('uuid', $user)){
+                $uuid = $user['uuid'];
+            }
+            if(array_key_exists('email', $user)){
+                $email = $user['email'];
+            }
+            if($uuid && $email){
+                $object->request('email', $email);
+                $user = User::getUserByEmail($object);
+
+                //add password signature for refeshToken to validate...
+
+
+                if(!property_exists($user, 'isActive')){
+                    throw new AuthorizationException('User is not active...');
+                }
+                if($user->isActive !== true){
+                    throw new AuthorizationException('User is not active...');
+                }
+                if(property_exists($user, 'isDeleted')){
+                    throw new AuthorizationException('User is deleted...');
+                }
+                if(!property_exists($user, 'role')){
+                    throw new AuthorizationException('User has no roles...');
+                }
+                if(count($user->role) === 0){
+                    throw new AuthorizationException('User has no roles...');
+                }
+                unset($user->password);
+                //add token
+                //add refreshToken
+                $response = [];
+                $response['user'] = $user;
+                return new Response(
+                    $response,
+                    Response::TYPE_JSON
+                );
+            }
+        }
+        throw new AuthorizationException('Authentication failure... (invalid claim)');
+    }
+
     public static function install(App $object){
 
     }
