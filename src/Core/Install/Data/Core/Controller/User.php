@@ -95,7 +95,7 @@ class User extends View {
     public static function current(App $object){
         try {
             return Service::current($object);
-        } catch (Exception | AuthorizationException $exception){
+        } catch (AuthorizationException $exception){
             return $exception;
         }
 
