@@ -16,6 +16,6 @@ class Home extends View {
     public static function body(App $object){
         $data = [];
         $data['target'] = 'main';
-        return new Response($data, Response::JSON);
+        return new Response($data, Response::TYPE_JSON);
     }
 }
