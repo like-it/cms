@@ -99,17 +99,17 @@ login.post = (event) => {
             if(error){
                 error.html('');
             }
-            const route_success = login.get('route.frontend.start');
-            console.log(route_success);
+            const route = login.get('route.frontend.start');
+            console.log(route);
             localStorage.setItem('token', response.user?.token);
             localStorage.setItem('refreshToken', response.user?.refreshToken);
             const node = response.user;
             delete node.token;
             delete node.refreshToken;
             user.data(node);
-            if(route_success){
-                window.history.pushState(route_success, route_success, route_success);
-                request(route_success, response);
+            if(route){
+                //window.history.pushState(route, route, route);
+                request(route, response);
             }
         }
     });
