@@ -25,16 +25,22 @@ ready(() => {
 
                             user.token(response.user.token);
                         }
+
                         if(response?.user?.refreshToken){
 
                             user.refreshToken(response.user.refreshToken);
                         }
+
                         console.log(response);
                     });
+
                     //validate refresh token and get user with new token
                 }
+
             }
+
         });
+
     } else {
 
         if(user.refreshToken()){
@@ -49,17 +55,22 @@ ready(() => {
 
                     user.token(response.user.token);
                 }
+
                 if(response?.user?.refreshToken){
 
                     user.refreshToken(response.user.refreshToken);
                 }
+
                 console.log(response);
             });
+
             //validate refresh token and get user with new token
         } else {
 
             //redirect user login
             redirect("{{route.get(route.prefix() + '-user-login')}}");
         }
+
     }
+
 });
