@@ -2,7 +2,7 @@
 import { getSectionByName} from "/Module/Section.js";
 
 ready(() => {
-    const section = getSectionByName("{{$section.name}}-navigation");
+    const section = getSectionByName("main-navigation");
     if(!section){
         console.warn('Cannot find section navigation...');
         return;
