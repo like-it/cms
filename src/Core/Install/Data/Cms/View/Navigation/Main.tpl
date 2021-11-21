@@ -3,4 +3,7 @@
 {{script('module')}}
 {{require($controller.dir.view + $controller.title + '/Module/Authorization.js')}}
 {{/script}}
+{{script('module')}}
+{{require($controller.dir.view + $controller.title + '/Module/Navigation.js')}}
+{{/script}}
 {{require($controller.dir.view + $controller.title + '/Section/Main.tpl')}}

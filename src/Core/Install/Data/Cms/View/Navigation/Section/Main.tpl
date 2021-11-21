@@ -15,7 +15,7 @@
                         <a
                             class="nav-link active"
                             aria-current="page"
-                            data-url="{{server.url('core')}}Home/Main/"
+                            data-url="{{route.get(route.prefix() + '-home-main')}}"
                         >{{__('navbar.home')}}</a>
                     </li>
                     <li class="nav-item">
