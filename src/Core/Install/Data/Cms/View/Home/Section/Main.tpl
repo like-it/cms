@@ -1,9 +1,10 @@
 {R3M}
 {{$section.name = 'main'}}
+{{$section.title = 'Main'}}
 {{$request.method = 'replace-with-or-append-to'}}
 {{$request.target = 'section[name="' + $section.name + '"]'}}
 {{$request.append.to = 'body'}}
-{{import('Main.css')}}
+{{import($section.title +'.css')}}
 <section name="{{$section.name}}">
     <div class="container mw-100 h-100">
         <div class="row h-100">
@@ -68,7 +69,7 @@
                             <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
-                    /*
+
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingOne">
@@ -101,7 +102,7 @@
                             </div>
                         </div>
                     </div>
-                    */
+
                 </div>
             </section>
         </div>

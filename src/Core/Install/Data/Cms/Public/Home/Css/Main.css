@@ -8,13 +8,17 @@ section[name="main"] {
 section[name="main-navigation"] {
     float: left;
     height: 100%;
-    overflow: auto;;
+    overflow: auto;
+}
+
+section[name="main-navigation"] .active {
+    border-bottom: 1px solid rgba(255, 124, 13, 1);
 }
 
 section[name="main-content"] {
     float: left;
-    height: 100%;
-    overflow: auto;;
+    height: calc(100% - 10px);
+    overflow: auto;
 }
 
 a {
