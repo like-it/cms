@@ -14,6 +14,7 @@
                         <a
                             class="nav-link active"
                             data-url="{{server.url('core')}}Home/Body/"
+                            data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
                             data-method="replace-with"
                             data-target="section[name='main-content']"
                         >
@@ -46,6 +47,9 @@
                         <a class="nav-link" href="{{route.get(route.prefix() + '-user-logout')}}"><i class="fas fa-sign-out-alt"></i> Log out</a>
                     </nav>
                 </div>
+            </section>
+            <section name="main-content" class="col-10">
+                <h3>Loading...</h3>
             </section>
         </div>
     </div>
