@@ -16,15 +16,23 @@
                             data-url="{{server.url('core')}}Home/Body/"
                             data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
                         >
-                            <i class="fas fa-home"></i> Home
+                            <i class="fas fa-home"></i> {{__('Settings.link.import')}}
                         </a>
+                        <a
+                            class="nav-link"
+                            data-url="{{server.url('core')}}Home/Body/"
+                            data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
+                        >
+                            <i class="fas fa-home"></i> {{__('Settings.link.export')}}
+                        </a>
+                        /*
                         <a
                             class="nav-link" h
                             data-url="{{server.url('core')}}User/Profile/"
                             data-method="replace-with"
                             data-target="section[name='main-content']"
                         >
-                            <i class="fas fa-user"></i> Profile
+                            <i class="fas fa-user"></i> {{__('Home.link.profile')}}
                         </a>
                         <a
                             class="nav-link"
@@ -32,7 +40,7 @@
                             data-method="replace-with"
                             data-target="section[name='main-content']"
                         >
-                            <i class="fas fa-users"></i> Users
+                            <i class="fas fa-users"></i> {{__('Home.link.users')}}
                         </a>
                         <a
                             class="nav-link"
@@ -40,9 +48,10 @@
                             data-method="replace-with"
                             data-target="section[name='main-content']"
                         >
-                            <i class="fas fa-cog"></i> System
+                            <i class="fas fa-cog"></i> {{__('Home.link.system')}}
                         </a>
                         <a class="nav-link" href="{{route.get(route.prefix() + '-user-logout')}}"><i class="fas fa-sign-out-alt"></i> Log out</a>
+                        */
                     </nav>
                 </div>
             </section>
