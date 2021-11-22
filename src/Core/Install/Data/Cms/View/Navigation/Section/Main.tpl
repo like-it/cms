@@ -43,8 +43,17 @@
                     </li>
                 </ul>
                 <form class="d-flex">
-                    <input class="form-control me-2" type="{{__('navbar.search.type')}}" placeholder="{{__('navbar.search.placeholder')}}" aria-label="{{__('navbar.search.label')}}" name="q">
-                    <button class="btn btn-outline-success" type="submit">{{__('navbar.search')}}</button>
+                    <input
+                        class="form-control me-2"
+                        type="{{__('navbar.search.type')}}"
+                        placeholder="{{__('navbar.search.placeholder')}}"
+                        aria-label="{{__('navbar.search.label')}}"
+                        name="q"
+                    >
+                    <button
+                        class="btn btn-outline-success"
+                        type="submit"
+                    >{{__('navbar.search')}}</button>
                 </form>
             </div>
         </div>

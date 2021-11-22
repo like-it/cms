@@ -21,6 +21,8 @@ ready(() => {
     window.history.pushState(route, route, route);
     const settings = select("[data-url=\"" + route + "\"]");
     if(settings){
+        console.log(settings);
+        /*
         header('authorization', 'bearer ' + user.token());
         request(settings.data('url'), null, (url, response) => {
             if(settings.data('frontend-url')){
@@ -28,6 +30,7 @@ ready(() => {
             }
 
         });
+         */
     }
 
 });
