@@ -10,7 +10,7 @@
                 <i class="fas fa-home"></i> {{__('settings.link.main')}}
             </a>
             <a
-                    class="nav-link active"
+                    class="nav-link"
                     data-url="{{server.url('core')}}Home/Body/"
                     data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
             >
