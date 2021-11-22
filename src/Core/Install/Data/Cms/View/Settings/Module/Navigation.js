@@ -3,7 +3,7 @@ import user from "/Module/User.js";
 import { getSectionByName} from "/Module/Section.js";
 
 ready(() => {
-    
+
     const navigation = getSectionByName("navigation");
     if(!navigation){
 

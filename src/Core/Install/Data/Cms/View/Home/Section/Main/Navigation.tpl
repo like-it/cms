@@ -7,7 +7,7 @@
                     data-url="{{server.url('core')}}Home/Body/"
                     data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
             >
-                <i class="fas fa-home"></i> {{__('Home.link.home')}}
+                <i class="{{__('home.icon.home.class')}}"></i> {{__('home.link.home')}}
             </a>
             <a
                     class="nav-link" h
@@ -15,7 +15,7 @@
                     data-method="replace-with"
                     data-target="section[name='main-content']"
             >
-                <i class="fas fa-user"></i> {{__('Home.link.profile')}}
+                <i class="{{__('home.icon.profile.class')}}"></i> {{__('home.link.profile')}}
             </a>
             <a
                     class="nav-link"
@@ -23,7 +23,7 @@
                     data-method="replace-with"
                     data-target="section[name='main-content']"
             >
-                <i class="fas fa-users"></i> {{__('Home.link.users')}}
+                <i class="{{__('home.icon.users.class')}}"></i> {{__('home.link.users')}}
             </a>
             <a
                     class="nav-link"
@@ -31,13 +31,13 @@
                     data-method="replace-with"
                     data-target="section[name='main-content']"
             >
-                <i class="fas fa-cog"></i> {{__('Home.link.system')}}
+                <i class="{{__('home.icon.system.class')}}"></i> {{__('home.link.system')}}
             </a>
             <a
                     class="nav-link"
                     href="{{route.get(route.prefix() + '-user-logout')}}"
             >
-                <i class="fas fa-sign-out-alt"></i> {{__('Home.link.logout')}}
+                <i class="{{__('home.icon.logout.class')}}"></i> {{__('home.link.logout')}}
             </a>
         </nav>
     </div>
