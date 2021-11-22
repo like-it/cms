@@ -4,6 +4,13 @@
         <nav class="nav flex-column">
             <a
                     class="nav-link active"
+                    data-url="{{server.url('core')}}Settings/Body/"
+                    data-frontend-url="{{route.get(route.prefix() + '-settings-body')}}"
+            >
+                <i class="fas fa-home"></i> {{__('settings.link.main')}}
+            </a>
+            <a
+                    class="nav-link active"
                     data-url="{{server.url('core')}}Home/Body/"
                     data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
             >
@@ -11,7 +18,7 @@
             </a>
             <a
                     class="nav-link"
-                    data-url="{{server.url('core')}}Home/Body/"
+                    data-url="{{server.url('core')}}Settings/Export/"
                     data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
             >
                 <i class="fas fa-home"></i> {{__('settings.link.export')}}
