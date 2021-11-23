@@ -28,8 +28,8 @@ ready(() => {
             list.removeClass('active');
             node.addClass('active');
             console.log(node);
-            console.log(node.data('url'));
-            if(node.data('url')){
+            console.log(node.data('has', 'url'));
+            if(node.data('has', 'url')){
                 header('authorization', 'bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
 
