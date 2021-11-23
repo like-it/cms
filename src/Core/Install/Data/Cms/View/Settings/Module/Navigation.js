@@ -19,8 +19,34 @@ ready(() => {
 
     const route = "{{route.get(route.prefix() + '-settings-main')}}";
     window.history.pushState(route, route, route);
+    const list = section.select('a');
+    let index;
+    for(index=0; index < list.length; index++){
+        let node = list[index];
+        node.on('click', (event) => {
+
+            list.removeClass('active');
+            node.addClass('active');
+            header('authorization', 'bearer ' + user.token());
+            request(node.data('url'), null, (url, response) => {
+
+                if(node.data('frontend-url')){
+
+                    request(node.data('frontend-url'), response);
+                }
+
+            });
+        });
+    }
+    const active = section.select('.active');
+    if(active){
+        
+        active.trigger('click');
+    }
+    /*
     const settings = select("[data-url=\"" + route + "\"]");
     if(settings){
+
         console.log(settings);
         /*
         header('authorization', 'bearer ' + user.token());
@@ -30,7 +56,8 @@ ready(() => {
             }
 
         });
-         */
+
     }
+     */
 
 });
