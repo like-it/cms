@@ -10,7 +10,7 @@ download.init = (config) => {
     .then(blob => {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
-        a.style.display = 'none';
+        //a.style.display = 'none';
         a.href = url;
         a.download = config.filename;
         document.body.appendChild(a);

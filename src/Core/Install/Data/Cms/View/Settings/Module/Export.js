@@ -13,7 +13,7 @@ ready(() => {
         });
     } else {
 
-        redirect("{{route.get(route.prefix() + 'user-Login')}}");
+        redirect("{{route.get(route.prefix() + '-user-Login')}}");
     }
 
 });
