@@ -15,7 +15,7 @@
                 aria-expanded="false"
                 aria-controls="flush-collapse-one-editor-settings"
             >
-                Basic site settings
+                Editor settings
             </button>
         </h2>
         <div
