@@ -1,3 +1,4 @@
+{R3M}
 <div
     class="accordion accordion-flush"
     id="accordion-flush-export"
@@ -15,7 +16,7 @@
                 aria-expanded="false"
                 aria-controls="flush-collapse-one-export"
             >
-                Export
+                {{__('settings.body.export.title')}}
             </button>
         </h2>
         <div
@@ -25,7 +26,7 @@
             data-bs-parent="#accordion-flush-export"
         >
             <div class="accordion-body">
-                Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.
+                {{__('settings.body.export.body')}}
             </div>
         </div>
     </div>
