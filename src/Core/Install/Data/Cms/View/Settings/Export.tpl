@@ -3,7 +3,4 @@
 {{script('module')}}
 {{require($controller.dir.view + $controller.title + '/Module/Export.js')}}
 {{/script}}
-/*
-
-
-*/
+{{require($controller.dir.view + $controller.title + '/Section/Export/Content.tpl')}}
