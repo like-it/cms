@@ -193,5 +193,14 @@
             "POST",
             "OPTIONS"
         ]
+    },
+    "2bae618a-bf67-47a3-a40e-9e0cb444a83f" : {
+        "module" : "settings",
+        "command" : "body",
+        "method" : [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
     }
 }

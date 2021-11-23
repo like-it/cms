@@ -40,7 +40,7 @@ ready(() => {
     }
     const active = section.select('.active');
     if(active){
-        
+
         active.trigger('click');
     }
     /*
