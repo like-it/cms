@@ -3,53 +3,89 @@
     <div class="">
         <nav class="nav flex-column">
             <a
-                    class="nav-link active"
-                    data-url="{{server.url('core')}}Settings/Body/"
-                    data-frontend-url="{{route.get(route.prefix() + '-settings-body')}}"
+                class="nav-link"
+                data-url="{{server.url('core')}}Settings/Body/"
+                data-frontend-url="{{route.get(route.prefix() + '-settings-body')}}"
             >
-                <i class="fas fa-home"></i> {{__('settings.link.main')}}
+                <i class="{{__('settings.icon.account_settings.class')}}fas fa-home"></i> {{__('settings.link.account_settings')}}
             </a>
             <a
-                    class="nav-link"
-                    data-url="{{server.url('core')}}Home/Body/"
-                    data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
+                class="nav-link"
+                data-url="{{server.url('core')}}Settings/Body/"
+                data-frontend-url="{{route.get(route.prefix() + '-settings-body')}}"
             >
-                <i class="fas fa-home"></i> {{__('settings.link.import')}}
+                <i class="{{__('settings.icon.basic_site_settings.class')}}"></i> {{__('settings.link.basic_site_settings')}}
             </a>
             <a
-                    class="nav-link"
-                    data-url="{{server.url('core')}}Settings/Export/"
-                    data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
+                class="nav-link"
+                data-url="{{server.url('core')}}Settings/Body/"
+                data-frontend-url="{{route.get(route.prefix() + '-settings-body')}}"
             >
-                <i class="fas fa-home"></i> {{__('settings.link.export')}}
-            </a>
-            /*
-            <a
-                    class="nav-link" h
-                    data-url="{{server.url('core')}}User/Profile/"
-                    data-method="replace-with"
-                    data-target="section[name='main-content']"
-            >
-                <i class="fas fa-user"></i> {{__('Home.link.profile')}}
+                <i class="{{__('settings.icon.editor_settings.class')}}"></i> {{__('settings.link.editor_settings')}}
             </a>
             <a
-                    class="nav-link"
-                    data-url="{{server.url('core')}}User/List/"
-                    data-method="replace-with"
-                    data-target="section[name='main-content']"
+                class="nav-link"
+                data-url="{{server.url('core')}}Settings/Export/"
+                data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
             >
-                <i class="fas fa-users"></i> {{__('Home.link.users')}}
+                <i class="{{__('settings.icon.export.class')}}"></i> {{__('settings.link.export')}}
             </a>
             <a
-                    class="nav-link"
-                    data-url="{{server.url('core')}}System/Information/"
-                    data-method="replace-with"
-                    data-target="section[name='main-content']"
+                class="nav-link active"
+                data-url="{{server.url('core')}}Settings/Body/"
+                data-frontend-url="{{route.get(route.prefix() + '-settings-body')}}"
             >
-                <i class="fas fa-cog"></i> {{__('Home.link.system')}}
+                <i class="{{__('settings.icon.file_system.class')}}"></i> {{__('settings.link.file_system')}}
             </a>
-            <a class="nav-link" href="{{route.get(route.prefix() + '-user-logout')}}"><i class="fas fa-sign-out-alt"></i> Log out</a>
-            */
+            <a
+                class="nav-link"
+                data-url="{{server.url('core')}}Home/Body/"
+                data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
+            >
+                <i class="{{__('settings.icon.import.class')}}"></i> {{__('settings.link.import')}}
+            </a>
+            <a
+                class="nav-link"
+                data-url="{{server.url('core')}}Settings/Export/"
+                data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
+            >
+                <i class="{{__('settings.icon.loggers.class')}}"></i> {{__('settings.link.loggers')}}
+            </a>
+            <a
+                class="nav-link active"
+                data-url="{{server.url('core')}}Settings/Body/"
+                data-frontend-url="{{route.get(route.prefix() + '-settings-body')}}"
+            >
+                <i class="{{__('settings.icon.main.class')}}"></i> {{__('settings.link.main')}}
+            </a>
+            <a
+                class="nav-link"
+                data-url="{{server.url('core')}}Home/Body/"
+                data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
+            >
+                <i class="{{__('settings.icon.mode.class')}}"></i> {{__('settings.link.mode')}}
+            </a>
+            <a
+                class="nav-link"
+                data-url="{{server.url('core')}}Home/Body/"
+                data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
+            >
+                <i class="{{__('settings.icon.nodes.class')}}"></i> {{__('settings.link.nodes')}}
+            </a>
+            <a
+                class="nav-link"
+                data-url="{{server.url('core')}}Home/Body/"
+                data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
+            >
+                <i class="{{__('settings.icon.style_sheets_and_elements.class')}}"></i> {{__('settings.link.style_sheets_and_elements')}}
+            </a>
+            <a
+                class="nav-link"
+                data-url="{{server.url('core')}}Home/Body/"
+                data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
+            >
+                <i class="{{__('settings.icon.token_settings.class')}}"></i> {{__('settings.link.token_settings')}}
+            </a>
         </nav>
     </div>
 </section>
