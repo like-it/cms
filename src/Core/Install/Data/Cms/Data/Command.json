@@ -80,5 +80,13 @@
             "GET",
             "POST"
         ]
+    },
+    "f29a27e5-ffd6-4773-88a3-7aef655f7c69" : {
+        "module" : "settings",
+        "command" : "export",
+        "method": [
+            "GET",
+            "POST"
+        ]
     }
 }
