@@ -9,7 +9,7 @@
                             aria-current="true"
                             href="#"
                         >
-                            <i class="fas fa-spinner spin"></i>
+                            <i class="fas fa-spinner fa-spin"></i>
                         </a>
                     </li>
                 </ul>
