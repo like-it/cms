@@ -27,6 +27,7 @@ ready(() => {
 
             list.removeClass('active');
             node.addClass('active');
+            console.log(node);
             if(node.data('url')){
                 header('authorization', 'bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
@@ -39,6 +40,7 @@ ready(() => {
                 });
             }
             else if(node.data('frontend-url')){
+                
                 request(node.data('frontend-url'));
             }
 
