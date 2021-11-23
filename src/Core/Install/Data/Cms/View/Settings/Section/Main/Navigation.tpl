@@ -25,7 +25,6 @@
             </a>
             <a
                 class="nav-link"
-                data-url="{{server.url('core')}}Export/"
                 data-frontend-url="{{route.get(route.prefix() + '-settings-export')}}"
             >
                 <i class="{{__('settings.icon.export.class')}}"></i> {{__('settings.link.export')}}

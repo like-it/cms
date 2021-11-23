@@ -27,16 +27,21 @@ ready(() => {
 
             list.removeClass('active');
             node.addClass('active');
-            header('authorization', 'bearer ' + user.token());
-            request(node.data('url'), null, (url, response) => {
+            if(node.data('url')){
+                header('authorization', 'bearer ' + user.token());
+                request(node.data('url'), null, (url, response) => {
 
-                console.log(response);
-                if(node.data('frontend-url')){
+                    if(node.data('frontend-url')){
 
-                    request(node.data('frontend-url'), response);
-                }
+                        request(node.data('frontend-url'), response);
+                    }
 
-            });
+                });
+            }
+            else if(node.data('frontend-url')){
+                request(node.data('frontend-url'));
+            }
+
         });
     }
     const active = section.select('.active');
