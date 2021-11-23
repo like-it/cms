@@ -88,5 +88,14 @@
             "GET",
             "POST"
         ]
+    },
+    "21649b10-fe74-42af-b029-4b4bee91f0a0" : {
+        "module" : "settings",
+        "submodule" : "export",
+        "command" : "settings",
+        "method": [
+            "GET",
+            "POST"
+        ]
     }
 }

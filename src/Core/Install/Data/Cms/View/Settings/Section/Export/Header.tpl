@@ -4,13 +4,17 @@
         <li class="nav-item">
             <a
                 class="nav-link active"
-                aria-current="true"
-                href="#">
+                data-url="{{route.get(route.prefix()+ '-settings-export')}}"
+                href="#"
+            >
                 Export
             </a>
+        </li>
+        <li class="nav-item">
             <a
                 class="nav-link"
-                data-url="{{route.get(route.prefix()+ '-export-settings')}}">
+                data-url="{{route.get(route.prefix()+ '-settings-export-settings')}}"
+            >
                 Settings
             </a>
         </li>
