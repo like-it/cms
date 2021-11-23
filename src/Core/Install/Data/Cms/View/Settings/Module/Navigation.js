@@ -30,6 +30,7 @@ ready(() => {
             header('authorization', 'bearer ' + user.token());
             request(node.data('url'), null, (url, response) => {
 
+                console.log(response);
                 if(node.data('frontend-url')){
 
                     request(node.data('frontend-url'), response);
