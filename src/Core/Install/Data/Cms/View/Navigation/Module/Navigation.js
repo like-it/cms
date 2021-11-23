@@ -21,6 +21,8 @@ ready(() => {
         let node = list[index];
         console.log(node);
         node.on('click', (event) => {
+            list.removeClass('active');
+            node.addClass('active');
             header('authorization', 'bearer ' + user.token());
             request(node.data('url'), null, (url, response) => {
                 if(node.data('frontend-url')){
