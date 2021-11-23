@@ -12,7 +12,7 @@
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#flush-collapse-one-file-system"
-                aria-expanded="true"
+                aria-expanded="false"
                 aria-controls="flush-collapse-one-file-system"
             >
                 File system

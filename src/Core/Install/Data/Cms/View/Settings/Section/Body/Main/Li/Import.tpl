@@ -12,7 +12,7 @@
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#flush-collapse-one-import"
-                aria-expanded="true"
+                aria-expanded="false"
                 aria-controls="flush-collapse-one-import"
             >
                 Import
