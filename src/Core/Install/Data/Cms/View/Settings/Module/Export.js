@@ -39,7 +39,7 @@ ready(() => {
 
         });
     }
-    
+
     const link = section.select('#export');
     if(link){
 
