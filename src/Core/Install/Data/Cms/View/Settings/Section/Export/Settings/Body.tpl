@@ -1,6 +1,6 @@
 {R3M}
 {{$version = config('version')}}
-{{if(is.empty($version)}}
+{{if(is.empty($version))}}
     {{$version = '0.0.1'}}
 {{/if}}
 <form name="config-version" data-url="{{server.url('core')}}Config/Version/" method="post">
