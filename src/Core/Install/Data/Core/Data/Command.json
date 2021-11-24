@@ -212,5 +212,14 @@
             "POST",
             "OPTIONS"
         ]
+    },
+    "fc3ba8ba-f02d-4bdb-93de-6a444a63565a" : {
+        "module" : "config",
+        "command" : "version",
+        "method" : [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
     }
 }
