@@ -23,28 +23,36 @@ ready(() => {
     console.log(list);
     let index;
     for(index=0; index < list.length; index++){
+
         let node = list[index];
         node.on('click', (event) => {
+            if(node.hasClass('active')){
 
-            list.removeClass('active');
-            node.addClass('active');
-            console.log(node);
-            console.log(node.data('has', 'url'));
-            if(node.data('has', 'url')){
-                header('authorization', 'bearer ' + user.token());
-                request(node.data('url'), null, (url, response) => {
+            } else {
 
-                    if(node.data('frontend-url')){
+                list.removeClass('active');
+                node.addClass('active');
+                console.log(node);
+                console.log(node.data('has', 'url'));
+                if(node.data('has', 'url')){
+                    header('authorization', 'bearer ' + user.token());
+                    request(node.data('url'), null, (url, response) => {
 
-                        request(node.data('frontend-url'), response);
-                    }
+                        if(node.data('frontend-url')){
 
-                });
+                            request(node.data('frontend-url'), response);
+                        }
+
+                    });
+                }
+                else if(node.data('frontend-url')){
+
+                    console.log('clicked');
+                    request(node.data('frontend-url'));
+                }
+
             }
-            else if(node.data('frontend-url')){
-                console.log('clicked');
-                request(node.data('frontend-url'));
-            }
+
 
         });
     }
