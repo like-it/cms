@@ -202,5 +202,15 @@
             "POST",
             "OPTIONS"
         ]
+    },
+    "32c6a6ea-7d05-4241-bdb7-59368025b7d7" : {
+        "module" : "settings",
+        "submodule" : "export",
+        "command" : "settings",
+        "method" : [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
     }
 }

@@ -18,4 +18,10 @@ class Settings extends View {
         $data = [];
         return new Response($data, Response::TYPE_JSON);
     }
+
+    public static function export_settings(App $object): Response
+    {
+        $data = [];
+        return new Response($data, Response::TYPE_JSON);
+    }
 }
