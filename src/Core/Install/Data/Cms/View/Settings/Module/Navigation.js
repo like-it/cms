@@ -26,8 +26,25 @@ ready(() => {
 
         let node = list[index];
         node.on('click', (event) => {
+            
             if(node.hasClass('active')){
 
+                if(node.data('has', 'url')){
+                    header('authorization', 'bearer ' + user.token());
+                    request(node.data('url'), null, (url, response) => {
+
+                        if(node.data('frontend-url')){
+
+                            request(node.data('frontend-url'), response);
+                        }
+
+                    });
+                }
+                else if(node.data('frontend-url')){
+
+                    console.log('clicked');
+                    request(node.data('frontend-url'));
+                }
             } else {
 
                 list.removeClass('active');
