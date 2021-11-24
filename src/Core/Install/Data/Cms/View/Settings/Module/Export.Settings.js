@@ -14,7 +14,7 @@ ready(() => {
 
         event.preventDefault();
         header('authorization', 'Bearer ' + user.token());
-        request(form.data('url'), null, (url, response) => {
+        form.request(form.data('url'), null, (url, response) => {
 
             if(form.data('has', 'frontend-url')){
 
