@@ -20,6 +20,7 @@ ready(() => {
     const route = "{{route.get(route.prefix() + '-settings-main')}}";
     window.history.pushState(route, route, route);
     const list = section.select('a');
+    console.log(list);
     let index;
     for(index=0; index < list.length; index++){
         let node = list[index];
