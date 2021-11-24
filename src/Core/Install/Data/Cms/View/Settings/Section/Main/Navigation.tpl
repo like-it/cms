@@ -30,7 +30,7 @@
                 <i class="{{__('settings.icon.export.class')}}"></i> {{__('settings.link.export')}}
             </a>
             <a
-                class="nav-link active"
+                class="nav-link"
                 data-url="{{server.url('core')}}Settings/Body/"
                 data-frontend-url="{{route.get(route.prefix() + '-settings-body')}}"
             >
