@@ -7,8 +7,8 @@
 <section name="main-content" class="col-10">
     <div class="h-100">
         <div class="card h-100 overflow-auto">
-            {{require($controller.dir.view + $controller.title + '/Section/Export/Header.tpl')}}
-            {{require($controller.dir.view + $controller.title + '/Section/Export/Body.tpl')}}
+            {{require($controller.dir.view + $controller.title + '/Section/Export/Settings/Header.tpl')}}
+            {{require($controller.dir.view + $controller.title + '/Section/Export/Settings/Body.tpl')}}
         </div>
     </div>
 </section>
