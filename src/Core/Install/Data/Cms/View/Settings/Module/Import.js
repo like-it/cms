@@ -1,6 +1,6 @@
-import {root} from "../../../Public/Module/Web";
-
 {R3M}
+import { root } from "/Module/Web.js";
+import { version } from "/Module/Priya.js";
 import user from "/Module/User.js";
 import { getSectionByName } from "/Module/Section.js";
 import upload from "/Module/Import/Upload.js";
