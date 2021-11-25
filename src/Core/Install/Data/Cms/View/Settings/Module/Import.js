@@ -14,7 +14,8 @@ ready(() => {
 
     require(
         [
-            root() + 'Dropzone/5.9.2/Min/dropzone.min.js?' + version()
+            root() + 'Dropzone/5.9.2/Min/dropzone.min.js?' + version(),
+            root() + 'Dropzone/5.9.2/Min/dropzone.min.css?' + version()
         ],
         function(){
             if(user.token()){
