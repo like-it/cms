@@ -1,3 +1,5 @@
+import {root} from "../../../Public/Module/Web";
+
 {R3M}
 import user from "/Module/User.js";
 import { getSectionByName } from "/Module/Section.js";
@@ -9,6 +11,24 @@ ready(() => {
 
         return;
     }
+
+    require(
+        [
+            root() + 'Dropzone/5.9.2/Min/dropzone.min.js?' + version()
+        ],
+        function(){
+            if(user.token()){
+                upload.init({
+                    url : "{{server.url('core')}}Import/",
+                    token: user.token(),
+                    upload_max_filesize: "1024 M",
+                    target : "section[name=\"main-content\"] .card-body"
+                });
+            } else {
+                redirect("{{server.url('cms')}}User/Login/")
+            }
+        }
+    );
 
     const list = section.select('.nav-link');
     let index;
@@ -40,16 +60,7 @@ ready(() => {
         });
     }
 
-    if(user.token()){
-        upload.init({
-            url : "{{server.url('core')}}Import/",
-            token: user.token(),
-            upload_max_filesize: "1024 M",
-            target : "section[name=\"main-content\"] .card-body"
-        });
-    } else {
-        redirect("{{server.url('cms')}}User/Login/")
-    }
+
 
     /*
     const link = section.select('#export');
