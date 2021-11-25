@@ -25,7 +25,7 @@
             data-bs-parent="#accordion-flush-import"
         >
             <div class="accordion-body">
-                Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.
+                Import an entire project (.zip file/).
             </div>
         </div>
     </div>

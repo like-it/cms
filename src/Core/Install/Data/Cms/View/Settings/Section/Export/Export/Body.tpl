@@ -1,5 +1,5 @@
 {R3M}
 <div class="card-body h-100">
-    <h5 class="card-title">Export</h5>
-    <p class="card-text">Export the entire project as zip file <a id="export" href="#export">here</a>.</p>
+    <h5 class="card-title">{{__('settings.section.export.export.body.title')}}</h5>
+    <p class="card-text">{{__('settings.section.export.export.body.text')}}</p>
 </div>

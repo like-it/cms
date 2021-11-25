@@ -6,7 +6,7 @@
                 class="nav-link"
                 data-frontend-url="{{route.get(route.prefix()+ '-settings-export')}}"
             >
-                Export
+                {{__('settings.section.export.header.export')}}
             </a>
         </li>
         <li class="nav-item">
@@ -15,7 +15,7 @@
                 data-url="{{server.url('core')}}Settings/Export/Settings/"
                 data-frontend-url="{{route.get(route.prefix()+ '-settings-export-settings')}}"
             >
-                Settings
+                {{__('settings.section.export.header.settings')}}
             </a>
         </li>
     </ul>

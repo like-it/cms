@@ -1,6 +1,6 @@
 {R3M}
 <div class="card-body h-100">
-    <h5 class="card-title">Settings</h5>
+    <h5 class="card-title">{{__('settings.section.body.body.title')}}</h5>
     <ul>
         <li>
             {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Account settings.tpl')}}

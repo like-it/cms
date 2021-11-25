@@ -8,10 +8,10 @@
 {{/script}}
 <form name="config-version" data-url="{{server.url('core')}}Config/Version/" method="post">
 <div class="card-body h-100">
-    <h5 class="card-title">Settings</h5>
-    <p class="card-text">The exported zip file will have this version number.</p>
-    <label for="version">Version:</label>
+    <h5 class="card-title">{{__('settings.section.export.settings.body.title')}}</h5>
+    <p class="card-text">{{__('settings.section.export.settings.body.text')}}</p>
+    <label for="version">{{__('settings.section.export.settings.body.label')}}</label>
     <input id="version" name="version" value="{{$version}}"/>
-    <input type="submit" name="save" value="Save"/>
+    <input type="submit" name="save" value="{{__('settings.section.export.settings.body.save')}}"/>
 </div>
 </form>

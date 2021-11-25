@@ -6,7 +6,7 @@
                 class="nav-link active"
                 aria-current="true"
                 href="#">
-                Main
+                {{__('settings.section.body.header.main')}}
             </a>
         </li>
     </ul>
