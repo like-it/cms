@@ -38,8 +38,7 @@
             </a>
             <a
                 class="nav-link"
-                data-url="{{server.url('core')}}Home/Body/"
-                data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
+                data-frontend-url="{{route.get(route.prefix() + '-settings-import')}}"
             >
                 <i class="{{__('settings.icon.import.class')}}"></i> {{__('settings.link.import')}}
             </a>

@@ -1,7 +1,12 @@
 let upload = {};
 
 upload.init = (config) => {
-    const body = select('body');
+    let body;
+    if(is.empty(config.target)){
+        body = select('body');
+    } else {
+        body = select(config.target);
+    }
     if(!body){
         return;
     }
