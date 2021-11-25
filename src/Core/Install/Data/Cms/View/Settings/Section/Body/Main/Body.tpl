@@ -3,7 +3,7 @@
     <h5 class="card-title">{{__('settings.section.body.body.title')}}</h5>
     <ul>
         <li>
-            {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Account settings.tpl')}}
+            {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Account_settings.tpl')}}
         </li>
         <li>
             {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Basic site settings.tpl')}}
