@@ -30,7 +30,7 @@
             {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Nodes.tpl')}}
         </li>
         <li>
-            {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Style_sheets_&_elements.tpl')}}
+            {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Style_sheets_and_elements.tpl')}}
         </li>
         <li>
             {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Token_settings.tpl')}}
