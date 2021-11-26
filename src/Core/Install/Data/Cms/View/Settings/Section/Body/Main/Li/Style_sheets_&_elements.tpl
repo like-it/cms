@@ -15,17 +15,17 @@
                 aria-expanded="false"
                 aria-controls="flush-collapse-one-css"
             >
-                Style sheets & elements
+                {{__('settings.body.style_sheets_and_elements.title')}}
             </button>
         </h2>
         <div
             id="flush-collapse-one-css"
             class="accordion-collapse collapse"
             aria-labelledby="flush-heading-one-css"
-            data-bs-parent="#accordion-flush-csss"
+            data-bs-parent="#accordion-flush-css"
         >
             <div class="accordion-body">
-                Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.
+                {{__('settings.body.style_sheets_and_elements.body')}}
             </div>
         </div>
     </div>

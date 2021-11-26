@@ -15,7 +15,7 @@
                 aria-expanded="false"
                 aria-controls="flush-collapse-one-loggers"
             >
-                Loggers
+                {{__('settings.body.loggers.title')}}
             </button>
         </h2>
         <div
@@ -25,7 +25,7 @@
             data-bs-parent="#accordion-flush-loggers"
         >
             <div class="accordion-body">
-                Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.
+                {{__('settings.body.loggers.body')}}
             </div>
         </div>
     </div>

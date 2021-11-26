@@ -6,16 +6,16 @@
             {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Account_settings.tpl')}}
         </li>
         <li>
-            {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Basic site settings.tpl')}}
+            {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Basic_site_settings.tpl')}}
         </li>
         <li>
-            {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Editor settings.tpl')}}
+            {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Editor_settings.tpl')}}
         </li>
         <li>
             {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Export.tpl')}}
         </li>
         <li>
-            {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/File system.tpl')}}
+            {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/File_system.tpl')}}
         </li>
         <li>
             {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Import.tpl')}}
@@ -30,10 +30,10 @@
             {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Nodes.tpl')}}
         </li>
         <li>
-            {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Style sheets & elements.tpl')}}
+            {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Style_sheets_&_elements.tpl')}}
         </li>
         <li>
-            {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Token settings.tpl')}}
+            {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Li/Token_settings.tpl')}}
         </li>
     </ul>
 </div>

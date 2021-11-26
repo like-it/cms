@@ -16,7 +16,7 @@
                 aria-expanded="false"
                 aria-controls="flush-collapse-one-account-settings"
             >
-                {{__('settings.section.body.main.li.button.account_settings')}}
+                {{__('settings.body.account_settings.title')}}
             </button>
         </h2>
         <div
@@ -26,7 +26,8 @@
             data-bs-parent="#accordion-flush-account-settings"
         >
             <div class="accordion-body">
-                {{__('settings.section.body.main.li.body.account_settings')}}
+
+                {{__('settings.body.account_settings.body')}}
             </div>
         </div>
     </div>

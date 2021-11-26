@@ -15,7 +15,7 @@
                 aria-expanded="false"
                 aria-controls="flush-collapse-one-mode"
             >
-                Mode
+                {{__('settings.body.mode.title')}}
             </button>
         </h2>
         <div
@@ -25,7 +25,7 @@
             data-bs-parent="#accordion-flush-mode"
         >
             <div class="accordion-body">
-                Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.
+                {{__('settings.body.mode.body')}}
             </div>
         </div>
     </div>

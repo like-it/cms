@@ -15,7 +15,7 @@
                 aria-expanded="false"
                 aria-controls="flush-collapse-one-import"
             >
-                Import
+                {{__('settings.body.import.title')}}
             </button>
         </h2>
         <div
@@ -25,7 +25,7 @@
             data-bs-parent="#accordion-flush-import"
         >
             <div class="accordion-body">
-                Import an entire project (.zip file/).
+                {{__('settings.body.import.body')}}
             </div>
         </div>
     </div>

@@ -75,8 +75,6 @@
     "settings.section.import.header.main" : "Main",
     "settings.section.body.header.main" : "Main",
     "settings.section.body.body.title" : "Settings",
-    "settings.section.body.main.li.button.account_settings" : "Account settings",
-    "settings.section.body.main.li.body.account_settings" : "Placeholder2 content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.",
     "settings.section.export.header.export" : "Export",
     "settings.section.export.header.settings" : "Settings",
     "settings.section.export.settings.body.title" : "Settings",
