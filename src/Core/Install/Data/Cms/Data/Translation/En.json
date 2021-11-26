@@ -35,7 +35,7 @@
     "settings.body.file_system.title" : "File system",
     "settings.body.file_system.body" : "Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.",
     "settings.body.import.title" : "Import",
-    "settings.body.import.body" : "Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.",
+    "settings.body.import.body" : "Import an entire project from a zip file.",
     "settings.body.loggers.title" : "Loggers",
     "settings.body.loggers.body" : "Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.",
     "settings.body.mode.title" : "Mode",
@@ -83,7 +83,6 @@
     "settings.section.export.settings.body.save" : "Save",
     "settings.section.export.export.body.title" : "Export",
     "settings.section.export.export.body.text" : "Export the entire project as zip file <a id=\"export\" href=\"#export\">here</a>.",
-
     "user.blocked" : "User is blocked for 15 minutes.<br>Please try again later...",
     "user.e-mail" : "Email",
     "user.login.title" : "User login",
