@@ -25,7 +25,7 @@
             </a>
             <a
                     class="nav-link"
-                    data-frontend-url="{{route.get(route.prefix() + '-email-main')}}"
+                    data-frontend-url="{{route.get(route.prefix() + '-settings-email-main')}}"
             >
                 <i class="{{__('settings.icon.email.class')}}"></i> {{__('settings.link.email')}}
             </a>
