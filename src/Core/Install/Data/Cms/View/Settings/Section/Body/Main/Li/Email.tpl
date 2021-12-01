@@ -2,32 +2,32 @@
 <li>
     <div
         class="accordion accordion-flush"
-        id="accordion-flush-mode"
+        id="accordion-flush-export"
     >
         <div class="accordion-item">
             <h2
                 class="accordion-header"
-                id="flush-heading-one-mode"
+                id="flush-heading-one-export"
             >
                 <button
                     class="accordion-button collapsed"
                     type="button"
                     data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapse-one-mode"
+                    data-bs-target="#flush-collapse-one-export"
                     aria-expanded="false"
-                    aria-controls="flush-collapse-one-mode"
+                    aria-controls="flush-collapse-one-export"
                 >
-                    {{__('settings.body.mode.title')}}
+                    {{__('settings.body.email.title')}}
                 </button>
             </h2>
             <div
-                id="flush-collapse-one-mode"
+                id="flush-collapse-one-export"
                 class="accordion-collapse collapse"
-                aria-labelledby="flush-heading-one-mode"
-                data-bs-parent="#accordion-flush-mode"
+                aria-labelledby="flush-heading-one-export"
+                data-bs-parent="#accordion-flush-export"
             >
                 <div class="accordion-body">
-                    {{__('settings.body.mode.body')}}
+                    {{__('settings.body.email.body')}}
                 </div>
             </div>
         </div>
