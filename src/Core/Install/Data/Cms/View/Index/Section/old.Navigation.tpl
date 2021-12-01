@@ -12,9 +12,9 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a
-                                class="nav-link active"
-                                aria-current="page"
-                                data-url="{server.url('core')}Home/Main/"
+                            class="nav-link active"
+                            aria-current="page"
+                            data-url="{server.url('core')}Home/Main/"
                         >{__('navbar.home')}</a>
                     </li>
                     <li class="nav-item">
@@ -25,8 +25,8 @@
                     </li>
                     <li class="nav-item">
                         <a
-                                class="nav-link"
-                                data-url="{server.url('core')}Settings/Main/"
+                            class="nav-link"
+                            data-url="{server.url('core')}Settings/Main/"
                         >{__('navbar.settings')}</a>
                     </li>
                     <li class="nav-item">
