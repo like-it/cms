@@ -3,6 +3,7 @@
     <h5 class="card-title">{{__('settings.section.body.body.title')}}</h5>
     <ul>
         {{$read = dir.read($controller.dir.view + $controller.title + '/Section/Body/Main/Li/')}}
+        {{$read = sort($read, ["url" => "asc"])}}
         {{for.each($read as $nr => $file)}}
             {{require($file.url)}}
         {{/for.each}}
