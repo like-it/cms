@@ -29,23 +29,10 @@ upload.init = (config) => {
                 }
             );
             drop.on("sending", function (file, xhr, formData) {
-                //xhr.setRequestHeader('Authorization', 'Bearer ' + user.token());
-                /*
-                exception.authorization(() => {
 
-                });
-                 */
             });
             drop.on("complete", function (file) {
-                console.log('start unpacking...');
-                console.log(file);
-                /*
-                const refresh = section.select('.refresh');
-                if (!refresh) {
-                    return;
-                }
-                refresh.trigger('click');
-                 */
+
             });
         }
     }

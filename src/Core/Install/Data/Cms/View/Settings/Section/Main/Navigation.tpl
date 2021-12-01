@@ -7,7 +7,7 @@
                 data-url="{{server.url('core')}}Settings/Body/"
                 data-frontend-url="{{route.get(route.prefix() + '-settings-body')}}"
             >
-                <i class="{{__('settings.icon.account_settings.class')}}fas fa-home"></i> {{__('settings.link.account_settings')}}
+                <i class="{{__('settings.icon.account_settings.class')}}"></i> {{__('settings.link.account_settings')}}
             </a>
             <a
                 class="nav-link"
@@ -22,6 +22,12 @@
                 data-frontend-url="{{route.get(route.prefix() + '-settings-body')}}"
             >
                 <i class="{{__('settings.icon.editor_settings.class')}}"></i> {{__('settings.link.editor_settings')}}
+            </a>
+            <a
+                    class="nav-link"
+                    data-frontend-url="{{route.get(route.prefix() + '-email-main')}}"
+            >
+                <i class="{{__('settings.icon.email.class')}}"></i> {{__('settings.link.email')}}
             </a>
             <a
                 class="nav-link"
@@ -76,6 +82,13 @@
                 data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
             >
                 <i class="{{__('settings.icon.style_sheets_and_elements.class')}}"></i> {{__('settings.link.style_sheets_and_elements')}}
+            </a>
+            <a
+                    class="nav-link"
+                    data-url="{{server.url('core')}}Home/Body/"
+                    data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
+            >
+                <i class="{{__('settings.icon.templates.class')}}"></i> {{__('settings.link.templates')}}
             </a>
             <a
                 class="nav-link"

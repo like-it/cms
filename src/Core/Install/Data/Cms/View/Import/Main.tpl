@@ -25,7 +25,6 @@
         import user from "/Module/User.js";
         import upload from "/Module/Import/Upload.js";
         ready(() => {
-            user.data('user.token', '1234');
             if(user.token()){
                 upload.init({
                     url : "{{server.url('core')}}Import/",
