@@ -4,7 +4,6 @@ import login from "/User/Module/Login.js";
 import { version } from "/Module/Priya.js";
 import { root } from "/Module/Web.js";
 ready(() => {
-
     require(
     [
     root() + 'User/Css/Login.css?' + version(),
@@ -13,7 +12,6 @@ ready(() => {
     root() + 'Index/Css/Start.css?' + version(),
     ],
     () => {
-
         login.init({
             "route" : {
                 "frontend" : {
