@@ -130,6 +130,7 @@
                 <th scope="col">Port</th>
                 <th scope="col">From e-mail</th>
                 <th scope="col">From name</th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -139,6 +140,7 @@
                     <td>{{$account.port}}</td>
                     <td>{{$account.from.email}}</td>
                     <td>{{$account.from.name}}</td>
+                    <td><i class="far fa-envelope"></i></td>
                 </tr>
             {{/for.each}}
             </tbody>
