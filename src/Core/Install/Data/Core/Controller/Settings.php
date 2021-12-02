@@ -30,7 +30,7 @@ class Settings extends View {
     public static function email_add(App $object): Response
     {
         $data = [];
-        $data['request'] = $object->request();
+        $data['node'] = $object->request();
         return new Response($data, Response::TYPE_JSON);
     }
 }
