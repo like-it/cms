@@ -26,8 +26,16 @@ class Settings extends View {
 
     public static function email_settings(App $object): Response
     {
-        $data = [];
-        return new Response($data, Response::TYPE_JSON);
+        $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
+
+        $data = $object->data_read($url);
+        if(!$data){
+            $data = new Data();
+        }
+
+        $response = [];
+        $response['email'] = $data->data('email');
+        return new Response($response, Response::TYPE_JSON);
     }
 
     public static function email_add(App $object): Response
@@ -52,7 +60,7 @@ class Settings extends View {
             $test = $data->get('email');
             if(empty($test)){
                 $record->isDefault = true;
-            } 
+            }
             $data->set('email.' . $record->uuid, $record);
             $data->write($url);
         } catch (ObjectException $exception) {
