@@ -88,7 +88,7 @@ class Settings extends View {
         }
     }
 
-    /*
+
     public static function email_settings(App $object){
         $name = Settings::name(__FUNCTION__, __CLASS__, '/');
         try {
@@ -99,6 +99,7 @@ class Settings extends View {
         }
     }
 
+    /*
     public static function email_add(App $object){
         $name = Settings::name(__FUNCTION__, __CLASS__, '/');
         try {
