@@ -49,6 +49,10 @@ class Settings extends View {
 
         try {
             $record = Core::object($record, Core::OBJECT_OBJECT);
+            $test = $data->get('email');
+            if(empty($test)){
+                $record->isDefault = true;
+            }
             $data->set('email.' . $record->uuid, $record);
             $data->write($url);
         } catch (ObjectException $exception) {
