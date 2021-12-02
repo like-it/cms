@@ -129,6 +129,7 @@
                 <th scope="col">host</th>
                 <th scope="col">Port</th>
                 <th scope="col">From e-mail</th>
+                <th scope="col"></th>
                 <th scope="col">From name</th>
                 <th scope="col"></th>
             </tr>
@@ -140,8 +141,10 @@
                     <td>{{$account.port}}</td>
                     <td>
                         {{$account.from.email}}
-                        {{if($account.isDefault)}}
-                        <span style"float: right;">Default</span>
+                    </td>
+                    <td>
+                        {{if(!is.empty($account.isDefault))}}
+                        Default
                         {{/if}}
                     </td>
                     <td>{{$account.from.name}}</td>
