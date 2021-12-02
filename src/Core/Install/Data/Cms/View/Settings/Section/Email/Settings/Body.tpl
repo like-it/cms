@@ -123,21 +123,25 @@
         </div>
     </form>
     {{if(!is.empty($request.email))}}
-        <table>
+        <table class="table">
+            <thead>
             <tr>
-                <th>host</th>
-                <th>Port</th>
-                <th>From e-mail</th>
-                <th>From name</th>
+                <th scope="col">host</th>
+                <th scope="col">Port</th>
+                <th scope="col">From e-mail</th>
+                <th scope="col">From name</th>
             </tr>
-        {{for.each($request.email as $uuid => $account)}}
-            <tr>
-                <td>{{$account.host}}</td>
-                <td>{{$account.port}}</td>
-                <td>{{$account.from.email}}</td>
-                <td>{{$account.from.name}}</td>
-            </tr>
-        {{/for.each}}
+            </thead>
+            <tbody>
+            {{for.each($request.email as $uuid => $account)}}
+                <tr>
+                    <td scope="row">{{$account.host}}</td>
+                    <td>{{$account.port}}</td>
+                    <td>{{$account.from.email}}</td>
+                    <td>{{$account.from.name}}</td>
+                </tr>
+            {{/for.each}}
+            </tbody>
         </table>
     {{/if}}
 </div>
