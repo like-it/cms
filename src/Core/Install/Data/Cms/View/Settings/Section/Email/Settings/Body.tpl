@@ -122,5 +122,22 @@
         </button>
         </div>
     </form>
-    {{dd($request)}}
+    {{if(!is.empty($request.email))}}
+        <table>
+            <tr>
+                <th>host</th>
+                <th>Port</th>
+                <th>From e-mail</th>
+                <th>From name</th>
+            </tr>
+        {{for.each($request.email as $uuid => $account)}}
+            <tr>
+                <td>{{$account.host}}</td>
+                <td>{{$account.port}}</td>
+                <td>{{$account.from.email}}</td>
+                <td>{{$account.from.name}}</td>
+            </tr>
+        {{/for.each}}
+        </table>
+    {{/if}}
 </div>
