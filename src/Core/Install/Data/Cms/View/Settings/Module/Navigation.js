@@ -57,20 +57,4 @@ ready(() => {
     if(active){
         active.trigger('click');
     }
-    /*
-    const settings = select("[data-url=\"" + route + "\"]");
-    if(settings){
-
-        console.log(settings);
-        /*
-        header('authorization', 'bearer ' + user.token());
-        request(settings.data('url'), null, (url, response) => {
-            if(settings.data('frontend-url')){
-                request(settings.data('frontend-url'), response);
-            }
-
-        });
-
-    }
-     */
 });

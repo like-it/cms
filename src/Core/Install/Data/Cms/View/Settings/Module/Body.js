@@ -6,7 +6,7 @@ ready(() => {
     if(!section){
         return;
     }
-    const list = section.select('button');
+    const list = section.select('.collapsed button');
     let index;
     for(index=0; index < list.length; index++){
         let node = list[index];
