@@ -114,5 +114,14 @@
             "GET",
             "POST"
         ]
+    },
+    "d244d0af-dd6d-4dc4-a630-d88cb99b8305" : {
+        "module" : "settings",
+        "submodule" : "email",
+        "command" : "settings",
+        "method": [
+            "GET",
+            "POST"
+        ]
     }
 }
