@@ -139,10 +139,10 @@
                     <td scope="row">{{$account.host}}</td>
                     <td>{{$account.port}}</td>
                     <td>
-                        {{if($account.isDefault)}}
-                         <span>Default</span>
-                        {{/if}}
                         {{$account.from.email}}
+                        {{if($account.isDefault)}}
+                        <span style"float: right;">Default</span>
+                        {{/if}}
                     </td>
                     <td>{{$account.from.name}}</td>
                     <td><i class="far fa-envelope"></i></td>
