@@ -52,7 +52,7 @@ class Settings extends View {
             $test = $data->get('email');
             if(empty($test)){
                 $record->isDefault = true;
-            }
+            } 
             $data->set('email.' . $record->uuid, $record);
             $data->write($url);
         } catch (ObjectException $exception) {
