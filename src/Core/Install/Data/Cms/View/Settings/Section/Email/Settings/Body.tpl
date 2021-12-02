@@ -3,7 +3,7 @@
     <form
         name="settings-email-settings-form"
         method="post"
-        data-url="{{}}"
+        data-url="{{server.url('core')}}Settings/Email/Add/"
     >
         <label for="settings-email-host">Host:</label>
         <input id="settings-email-host" type="text" name="host" value="{{$request.host}}" /><br>
@@ -15,5 +15,6 @@
         <input id="settings-email-username" type="text" name="username" value="{{$request.username}}" /><br>
         <label for="settings-email-password">Password:</label>
         <input  id="settings-email-password" type="text" name="password" value="{{$request.password}}" /><br>
+        <input type="submit" value="Add" name="save"/>
     </form>
 </div>

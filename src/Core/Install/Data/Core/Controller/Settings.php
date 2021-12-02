@@ -20,4 +20,17 @@ class Settings extends View {
         $data = [];
         return new Response($data, Response::TYPE_JSON);
     }
+
+    public static function email_settings(App $object): Response
+    {
+        $data = [];
+        return new Response($data, Response::TYPE_JSON);
+    }
+
+    public static function email_add(App $object): Response
+    {
+        $data = [];
+        $data['request'] = $object->request();
+        return new Response($data, Response::TYPE_JSON);
+    }
 }
