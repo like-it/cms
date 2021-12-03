@@ -148,7 +148,11 @@
                         <i class="fas fa-award"></i>
                         {{/if}}
                     </td>
-                    <td><i class="far fa-envelope"></i></td>
+                    <td>
+                        <i class="far fa-edit"></i>
+                        <i class="far fa-trash-alt"></i>
+                        <i class="far fa-envelope"></i>
+                    </td>
                 </tr>
             {{/for.each}}
             </tbody>
