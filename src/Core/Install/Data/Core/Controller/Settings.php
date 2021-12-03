@@ -103,6 +103,7 @@ class Settings extends View {
                         $data = new Data();
                     }
                     $record = $data->get('email.' . $uuid);
+                    /*
                     if($data->get('email.' . $uuid . 'isDefault') === true){
                         $list = $data->get('email');
                         foreach($list as $node_uuid => $node){
@@ -112,7 +113,28 @@ class Settings extends View {
                             }
                         }
                     }
+                    */
                     $data->delete('email.' . $uuid);
+                    $test = $data->get('email');
+                    $has_default = false;
+                    foreach($test as $node_uuid => $node){
+                        if(
+                            property_exists($node, 'isDefault') &&
+                            $node->isDefault === true
+                        ){
+                            $has_default = true;
+                            break;
+                        }
+                    }
+                    if($has_default === false){
+                        $node = false;
+                        foreach($test as $node_uuid => $node){
+                            break;
+                        }
+                        if($node){
+                            $node->isDefault = true;
+                        }
+                    }
                     $data->write($url);
 
                     $response = [];
