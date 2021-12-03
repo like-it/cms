@@ -24,7 +24,9 @@
                     <td>{{$account.from.name}}</td>
                     <td>
                         {{if(!is.empty($account.isDefault))}}
-                        <i class="fas fa-award"></i>
+                        <i class="fas fa-award" title="Default account"></i>
+                        {else}
+                        <i class="fas fa-sign-out-alt" title="Make default account"></i>
                         {{/if}}
                     </td>
                     <td>
