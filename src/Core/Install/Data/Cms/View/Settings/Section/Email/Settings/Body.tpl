@@ -9,7 +9,6 @@
                 <th scope="col">Port</th>
                 <th scope="col">From e-mail</th>
                 <th scope="col">From name</th>
-                <th scope="col">Default</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -24,15 +23,16 @@
                     <td>{{$account.from.name}}</td>
                     <td>
                         {{if(!is.empty($account.isDefault))}}
-                        <i class="fas fa-award" title="Default account"></i>
+                        <i class="fas fa-award settings-email-settings-is-default" title="Default account"></i>
                         {{else}}
-                        <i class="fas fa-sign-out-alt" title="Make default account"></i>
+                        <i
+                            class="fas fa-sign-out-alt settings-email-account-default"
+                            title="Make default account"
+                            data-url="{{server.url('core')}}Settings/Email/Account/Default/{{$uuid}}"
+                        ></i>
                         {{/if}}
-                    </td>
-                    <td>
-                        <i class="far fa-edit"></i>
-                        <i class="far fa-trash-alt"></i>
-                        <i class="far fa-envelope"></i>
+                        <i class="far fa-edit settings-email-settings-edit"></i>
+                        <i class="far fa-trash-alt settings-email-settings-delete"></i>
                     </td>
                 </tr>
             {{/for.each}}

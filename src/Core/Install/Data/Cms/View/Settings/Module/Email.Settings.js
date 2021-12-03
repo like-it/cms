@@ -6,7 +6,7 @@ ready(() => {
     if(!section){
         return;
     }
-    const list = section.select('.nav-link');
+    let list = section.select('.nav-link');
     let index;
     for(index=0; index < list.length; index++){
         let node = list[index];
@@ -26,4 +26,22 @@ ready(() => {
             }
         });
     }
+    list = section.select('.settings-email-account-default');
+    for(index=0; index < list.length; index++){
+        let node = list[index];
+        node.on('click', (event) => {
+            if(node.data('has', 'url')){
+                request(node.data('url'), null, (url, response) => {
+                    console.log(url);
+                    console.log(response);
+                    const settings = section.select('.settings-email-settings');
+                    if(settings){
+                        settings.trigger('click');
+                    }
+                });
+            }
+
+        });
+    }
+
 });
