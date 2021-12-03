@@ -5,6 +5,7 @@ use R3m\Io\App;
 use R3m\Io\Exception\ObjectException;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
+use R3m\Io\Module\Handler;
 use R3m\Io\Module\Response;
 use R3m\Io\Module\View;
 
@@ -88,5 +89,40 @@ class Settings extends View {
         $record = $data->get('email.' . $object->request('uuid'));
         $data['node'] = $record;
         return new Response($data, Response::TYPE_JSON);
+    }
+
+    public static function email_command(App $object){
+        $uuid = $object->request('uuid');
+        try {
+            switch (Handler::method()) {
+                case 'DELETE' :
+                    $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
+
+                    $data = $object->data_read($url);
+                    if (!$data) {
+                        $data = new Data();
+                    }
+                    $record = $data->get('email.' . $uuid);
+                    $data->delete('email.' . $uuid);
+                    $data->write($url);
+
+                    $response = [];
+                    $response['node'] = $record;
+                    return new Response($response, Response::TYPE_JSON);
+                    break;
+                case 'GET' :
+                    dd('get');
+                    break;
+                case 'POST' :
+                    dd('post');
+                    break;
+            }
+        } catch (Exception $exception) {
+            return $exception;
+        }
+
+
+
+
     }
 }
