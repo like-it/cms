@@ -4,7 +4,6 @@
         name="settings-email-settings-form"
         method="post"
         data-url="{{server.url('core')}}Settings/Email/Add/"
-        data-frontend-url="{{route.get(route.prefix()+ '-settings-email-settings')}}"
     >
         <div class="mb-3">
             /*

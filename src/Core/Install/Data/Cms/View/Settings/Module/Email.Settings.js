@@ -6,21 +6,6 @@ ready(() => {
     if(!section){
         return;
     }
-    const form = section.select('form');
-    if(form){
-        form.on('submit', ( event ) => {
-            event.preventDefault();
-            form.request(null, null, (url, response) => {
-                console.log(url);
-                console.log(response);
-
-                const settings = section.select('.settings-email-settings');
-                if(settings){
-                    settings.trigger('click');
-                }
-            });
-        });
-    }
     const list = section.select('.nav-link');
     let index;
     for(index=0; index < list.length; index++){
