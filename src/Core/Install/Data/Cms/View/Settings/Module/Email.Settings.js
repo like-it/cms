@@ -72,7 +72,7 @@ ready(() => {
                     console.log(response);
                     request(node.data('frontend-url', response, (frontendUrl, frontendResponse) => {
                         console.log(frontendResponse);
-                    });
+                    }));
                     /*
                     const settings = section.select('.settings-email-settings');
                     if(settings){
