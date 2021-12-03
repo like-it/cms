@@ -7,9 +7,7 @@
 <section name="{{$section.name}}" class="col-10">
     <div class="h-100">
         <div class="card h-100 overflow-auto">
-            /*
             {{require($controller.dir.view + $controller.title + '/Section/Email/Add/Header.tpl')}}
-            */
             {{require($controller.dir.view + $controller.title + '/Section/Email/Edit/Body.tpl')}}
         </div>
     </div>

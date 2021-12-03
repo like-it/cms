@@ -20,11 +20,20 @@
         </li>
         <li class="nav-item">
             <a
-                    class="nav-link active settings-email-add"
+                    class="nav-link settings-email-add"
                     data-url="{{server.url('core')}}Settings/Email/Add/"
                     data-frontend-url="{{route.get(route.prefix()+ '-settings-email-add')}}"
             >
                 {{__('settings.section.email.header.add')}}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a
+                    class="nav-link active settings-email-edit-{{$request.node.uuid}}"
+                    data-url="{{server.url('core')}}Settings/Email/{{$request.node.uuid}}"
+                    data-frontend-url="{{route.get(route.prefix()+ '-settings-email-edit')}}"
+            >
+                {{$request.node.from.name}}
             </a>
         </li>
     </ul>
