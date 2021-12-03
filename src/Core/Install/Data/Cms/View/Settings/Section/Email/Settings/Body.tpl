@@ -25,7 +25,7 @@
                     <td>
                         {{if(!is.empty($account.isDefault))}}
                         <i class="fas fa-award" title="Default account"></i>
-                        {else}
+                        {{else}}
                         <i class="fas fa-sign-out-alt" title="Make default account"></i>
                         {{/if}}
                     </td>
