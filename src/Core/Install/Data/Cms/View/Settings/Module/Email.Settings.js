@@ -70,9 +70,9 @@ ready(() => {
             if(node.data('has', 'url')){
                 request(node.data('url'), null, (url, response) => {
                     console.log(response);
-                    request(node.data('frontend-url', response, (frontendUrl, frontendResponse) => {
+                    request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
                         console.log(frontendResponse);
-                    }));
+                    });
                     /*
                     const settings = section.select('.settings-email-settings');
                     if(settings){
