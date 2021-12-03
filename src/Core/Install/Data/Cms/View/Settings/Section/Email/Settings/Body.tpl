@@ -129,8 +129,8 @@
                 <th scope="col">host</th>
                 <th scope="col">Port</th>
                 <th scope="col">From e-mail</th>
-                <th scope="col"></th>
                 <th scope="col">From name</th>
+                <th scope="col">Default</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -142,12 +142,12 @@
                     <td>
                         {{$account.from.email}}
                     </td>
+                    <td>{{$account.from.name}}</td>
                     <td>
                         {{if(!is.empty($account.isDefault))}}
-                        Default
+                        <i class="fas fa-award"></i>
                         {{/if}}
                     </td>
-                    <td>{{$account.from.name}}</td>
                     <td><i class="far fa-envelope"></i></td>
                 </tr>
             {{/for.each}}
