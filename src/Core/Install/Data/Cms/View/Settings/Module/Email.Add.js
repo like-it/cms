@@ -13,6 +13,9 @@ ready(() => {
             form.request(null, null, (url, response) => {
                 console.log(url);
                 console.log(response);
+                if(form.data('has', 'frontend-url')){
+                    request(node.data('frontend-url'), response);
+                }
             });
         });
     }
