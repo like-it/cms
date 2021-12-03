@@ -232,6 +232,17 @@
             "OPTIONS"
         ]
     },
+    "1e2fc7a7-69d6-40a9-9369-6ce335a3582d" : {
+        "module" : "settings",
+        "submodule" : "email",
+        "command" : "account",
+        "subcommand" : "default",
+        "path": "Settings/Email/Account/Default/{$uuid}",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "fc3ba8ba-f02d-4bdb-93de-6a444a63565a" : {
         "module" : "config",
         "command" : "version",

@@ -132,16 +132,5 @@
             "GET",
             "POST"
         ]
-    },
-    "1e2fc7a7-69d6-40a9-9369-6ce335a3582d" : {
-        "module" : "settings",
-        "submodule" : "email",
-        "command" : "account",
-        "subcommand" : "default",
-        "path": "Settings/Email/Account/Default/{$uuid}",
-        "method": [
-            "GET",
-            "POST"
-        ]
     }
 }
