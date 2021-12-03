@@ -15,7 +15,7 @@ ready(() => {
                 console.log(response);
                 console.log(form.data('has', 'frontend-url'));
                 if(form.data('has', 'frontend-url')){
-                    request(node.data('frontend-url'), response);
+                    request(form.data('frontend-url'), response);
                 }
             });
         });
