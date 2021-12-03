@@ -103,6 +103,15 @@ class Settings extends View {
                         $data = new Data();
                     }
                     $record = $data->get('email.' . $uuid);
+                    if($data->get('email.' . $uuid . 'isDefault') === true){
+                        $list = $data->get('email');
+                        foreach($list as $node_uuid => $node){
+                            if($node && $uuid <> $node_uuid){
+                                $data->set('email' . $node_uuid . '.isDefault', true);
+                                break;
+                            }
+                        }
+                    }
                     $data->delete('email.' . $uuid);
                     $data->write($url);
 
