@@ -18,5 +18,14 @@
                 {{__('settings.section.email.header.settings')}}
             </a>
         </li>
+        <li class="nav-item">
+            <a
+                    class="nav-link"
+                    data-url="{{server.url('core')}}Settings/Email/Add/"
+                    data-frontend-url="{{route.get(route.prefix()+ '-settings-email-add')}}"
+            >
+                {{__('settings.section.email.header.add')}}
+            </a>
+        </li>
     </ul>
 </div>
