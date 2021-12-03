@@ -103,17 +103,6 @@ class Settings extends View {
                         $data = new Data();
                     }
                     $record = $data->get('email.' . $uuid);
-                    /*
-                    if($data->get('email.' . $uuid . 'isDefault') === true){
-                        $list = $data->get('email');
-                        foreach($list as $node_uuid => $node){
-                            if($node && $uuid <> $node_uuid){
-                                $data->set('email' . $node_uuid . '.isDefault', true);
-                                break;
-                            }
-                        }
-                    }
-                    */
                     $data->delete('email.' . $uuid);
                     $test = $data->get('email');
                     $has_default = false;
@@ -142,9 +131,19 @@ class Settings extends View {
                     return new Response($response, Response::TYPE_JSON);
                     break;
                 case 'GET' :
-                    dd('get');
+                    $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
+
+                    $data = $object->data_read($url);
+                    if (!$data) {
+                        $data = new Data();
+                    }
+                    $record = $data->get('email.' . $uuid);
+                    $response = [];
+                    $response['node'] = $record;
+                    return new Response($response, Response::TYPE_JSON);
                     break;
                 case 'POST' :
+                    d($object->request());
                     dd('post');
                     break;
             }
