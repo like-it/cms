@@ -1,5 +1,5 @@
 {R3M}
-//import user from "/Module/User.js";
+import user from "/Module/User.js";
 import { getSectionByName } from "/Module/Section.js";
 ready(() => {
     const section = getSectionByName('main-content');
