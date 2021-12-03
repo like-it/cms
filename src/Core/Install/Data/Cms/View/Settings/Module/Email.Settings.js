@@ -48,9 +48,12 @@ ready(() => {
         let node = list[index];
         node.on('click', (event) => {
             if(node.data('has', 'url')){
-                request(node.data('url'), null, (url, response) => {
-                    console.log(url);
-                    console.log(response);
+                let data = {
+                    request : {
+                        method : node.data('request-method') ? node.data('request-method') : "DELETE"
+                    }
+                };
+                request(node.data('url'), data, (url, response) => {
                     const settings = section.select('.settings-email-settings');
                     if(settings){
                         settings.trigger('click');
