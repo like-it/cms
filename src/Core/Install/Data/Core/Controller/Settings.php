@@ -71,7 +71,6 @@ class Settings extends View {
     }
 
     public static function email_account_default(App $object){
-        dd($object->request('uuid'));
         $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
 
         $data = $object->data_read($url);
@@ -82,19 +81,10 @@ class Settings extends View {
         foreach($test as $uuid => $record){
             unset($record->isDefault);
         }
+        $data->set('email.' . $object->request('uuid') . '.isDefault', true);
+        $data->write($url);
 
-
-        try {
-            $record = Core::object($record, Core::OBJECT_OBJECT);
-            $test = $data->get('email');
-            if(empty($test)){
-                $record->isDefault = true;
-            }
-            $data->set('email.' . $record->uuid, $record);
-            $data->write($url);
-        } catch (ObjectException $exception) {
-        }
-        $data = [];
+        $record = $data->get('email.' . $object->request('uuid'));
         $data['node'] = $record;
         return new Response($data, Response::TYPE_JSON);
         dd($object->request('uuid'));
