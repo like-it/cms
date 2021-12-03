@@ -69,4 +69,35 @@ class Settings extends View {
         $data['node'] = $record;
         return new Response($data, Response::TYPE_JSON);
     }
+
+    public static function email_account_default(App $object){
+        dd($object->request('uuid'));
+        $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
+
+        $data = $object->data_read($url);
+        if(!$data){
+            $data = new Data();
+        }
+        $test = $data->get('email');
+        foreach($test as $uuid => $record){
+            unset($record->isDefault);
+        }
+
+
+        try {
+            $record = Core::object($record, Core::OBJECT_OBJECT);
+            $test = $data->get('email');
+            if(empty($test)){
+                $record->isDefault = true;
+            }
+            $data->set('email.' . $record->uuid, $record);
+            $data->write($url);
+        } catch (ObjectException $exception) {
+        }
+        $data = [];
+        $data['node'] = $record;
+        return new Response($data, Response::TYPE_JSON);
+        dd($object->request('uuid'));
+
+    }
 }

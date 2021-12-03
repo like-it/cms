@@ -108,4 +108,5 @@ class Settings extends View {
             return $exception;
         }
     }
+
 }
