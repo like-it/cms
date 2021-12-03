@@ -3,7 +3,7 @@
     <form
         name="settings-email-settings-form"
         method="post"
-        data-url="{{server.url('core')}}Settings/Email/Add/"
+        data-url="{{server.url('core')}}Settings/Email/{{$request.node.uuid}}"
     >
         <div class="mb-3">
             /*
@@ -19,7 +19,7 @@
                 class="form-control"
                 type="text"
                 name="host"
-                value="{{$request.host}}"
+                value="{{$request.node.host}}"
                 placeholder="Host"
             /><br>
         </div>
@@ -37,7 +37,7 @@
                 class="form-control"
                 type="text"
                 name="port"
-                value="{{$request.port}}"
+                value="{{$request.node.port}}"
                 placeholder="Port"
             /><br>
         </div>
@@ -55,7 +55,7 @@
                 class="form-control"
                 type="text"
                 name="from.name"
-                value="{{$request.from.name}}"
+                value="{{$request.node.from.name}}"
                 placeholder="From name"
             /><br>
         </div>
@@ -73,7 +73,7 @@
                 class="form-control"
                 type="text"
                 name="from.email"
-                value="{{$request.from.email}}"
+                value="{{$request.node.from.email}}"
                 placeholder="From e-mail"
             /><br>
         </div>
@@ -91,7 +91,7 @@
                 class="form-control"
                 type="text"
                 name="username"
-                value="{{$request.username}}"
+                value="{{$request.node.username}}"
                 placeholder="Username"
             /><br>
         </div>
@@ -109,7 +109,7 @@
                 class="form-control"
                 type="password"
                 name="password"
-                value="{{$request.password}}"
+                value="{{$request.node.password}}"
                 placeholder="Password"
             />
             <br>
@@ -118,7 +118,7 @@
         <button
             type="submit"
             class="btn btn-primary">
-            Add
+            Update
         </button>
         </div>
     </form>
