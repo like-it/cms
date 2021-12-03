@@ -71,6 +71,7 @@ class Settings extends View {
     }
 
     public static function email_account_default(App $object){
+        // add security
         $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
 
         $data = $object->data_read($url);
@@ -87,7 +88,5 @@ class Settings extends View {
         $record = $data->get('email.' . $object->request('uuid'));
         $data['node'] = $record;
         return new Response($data, Response::TYPE_JSON);
-        dd($object->request('uuid'));
-
     }
 }

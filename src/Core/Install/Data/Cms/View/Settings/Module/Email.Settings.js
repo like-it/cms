@@ -43,5 +43,22 @@ ready(() => {
 
         });
     }
+    list = section.select('.settings-email-settings-delete');
+    for(index=0; index < list.length; index++){
+        let node = list[index];
+        node.on('click', (event) => {
+            if(node.data('has', 'url')){
+                request(node.data('url'), null, (url, response) => {
+                    console.log(url);
+                    console.log(response);
+                    const settings = section.select('.settings-email-settings');
+                    if(settings){
+                        settings.trigger('click');
+                    }
+                });
+            }
+
+        });
+    }
 
 });

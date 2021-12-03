@@ -29,10 +29,21 @@
                             class="fas fa-sign-out-alt settings-email-account-default"
                             title="Make default account"
                             data-url="{{server.url('core')}}Settings/Email/Account/Default/{{$uuid}}"
-                        ></i>
+                        >
+                        </i>
                         {{/if}}
-                        <i class="far fa-edit settings-email-settings-edit"></i>
-                        <i class="far fa-trash-alt settings-email-settings-delete"></i>
+                        <i
+                            class="far fa-edit settings-email-settings-edit"
+                            data-url="{{server.url('core')}}Settings/Email/{{$uuid}}"
+                            data-frontend-url="{{route.get(route.prefix() + '-settings-email-edit')}}"
+                        >
+                        </i>
+                        <i
+                            class="far fa-trash-alt settings-email-settings-delete"
+                            data-url="{{server.url('core')}}Settings/Email/{{$uuid}}"
+                            data-request-method="DELETE"
+                        >
+                        </i>
                     </td>
                 </tr>
             {{/for.each}}

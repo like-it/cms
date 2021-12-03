@@ -240,7 +240,19 @@
         "path": "Settings/Email/Account/Default/{$uuid}",
         "method": [
             "GET",
-            "POST"
+            "OPTIONS"
+        ]
+    },
+    "e5737e14-09c7-4a6d-b9bc-41234207a480" : {
+        "module" : "settings",
+        "submodule" : "email",
+        "command" : "command",
+        "path": "Settings/Email/{$uuid}",
+        "method": [
+            "GET",
+            "POST",
+            "DELETE",
+            "OPTIONS"
         ]
     },
     "fc3ba8ba-f02d-4bdb-93de-6a444a63565a" : {
