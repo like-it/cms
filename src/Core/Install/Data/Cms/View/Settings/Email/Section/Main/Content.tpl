@@ -11,9 +11,7 @@
             {{require($controller.dir.view + $controller.title + '/Email/Module/Menu.js')}}
             {{/script}}
             {{require($controller.dir.view + $controller.title + '/Email/Section/Menu/Header.tpl')}}
-            /*
             {{require($controller.dir.view + $controller.title + '/Email/Section/Main/Body.tpl')}}
-            */
         </div>
     </div>
 </section>
