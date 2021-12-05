@@ -5,7 +5,7 @@ import { getSectionByName } from "/Module/Section.js";
 let edit = {};
 
 edit.title = () => {
-    console.log("{{$request}}");
+    console.log("{{$request|json.encode}}");
 }
 
 edit.init = () => {
