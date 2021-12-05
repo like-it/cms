@@ -15,7 +15,16 @@ edit.title = () => {
     const a = create('a', 'nav-link settings-email-edit-' + "{{$request.node.uuid}}");
     a.data('frontend-url', "");
     a.data('url', "");
-    a.html("{{$request.node.from.name}}");
+    a.html("{{$request.node.from.name}} <i class=\"fas fa-window-close\"></i>");
+    const i = a.select('.fa-window-close');
+    i.on('click', (event) => {
+        event.stopPropagation();
+        li.remove();
+        const menuItem = section.select('.settings-email-settings');
+        if(menuItem){
+            menuItem.trigger('click');
+        }
+    });
     li.append(a);
     nav.append(li);
 }
