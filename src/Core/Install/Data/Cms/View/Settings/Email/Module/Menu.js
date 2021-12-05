@@ -19,6 +19,8 @@ menu.init = () => {
             if(node.data('has', 'url')){
                 list.removeClass('active');
                 node.addClass('active');
+                const body = section.select('.card-body');
+                body.addClass('display-none');
                 header('authorization', 'Bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
                     if(node.data('has', 'frontend-url')){
