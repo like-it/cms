@@ -1,5 +1,4 @@
 {R3M}
-<div class="card-body h-100">
-    <h5 class="card-title">{{__('settings.section.email.main.body.title')}}</h5>
-    <p class="card-text">{{__('settings.section.email.main.body.text')}}</p>
-</div>
+{{require($controller.dir.view + $controller.title + '/Init.tpl')}}
+{{$is.main.body = true}}
+{{require($controller.dir.view + $controller.title + '/Email/Section/Main/Body.tpl')}}

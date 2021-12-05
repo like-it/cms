@@ -72,6 +72,7 @@ class Settings extends View {
 
     public static function email_main(App $object){
         $name = Settings::name(__FUNCTION__, __CLASS__, '/');
+        dd($name);
         try {
             if(App::contentType($object) == App::CONTENT_TYPE_HTML){
                 $url = Settings::locate($object, 'Main/Main');
