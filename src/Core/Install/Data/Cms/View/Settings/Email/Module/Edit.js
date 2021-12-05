@@ -29,6 +29,9 @@ edit.title = () => {
             }
         });
     }
+    const ul = li.parent;
+    ul.removeClass('active');
+    a.addClass('active');
 }
 
 edit.init = () => {
