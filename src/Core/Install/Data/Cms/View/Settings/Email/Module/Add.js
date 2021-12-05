@@ -1,11 +1,26 @@
 {R3M}
 import user from "/Module/User.js";
 import { getSectionByName } from "/Module/Section.js";
-ready(() => {
+
+let add = {};
+
+add.body = () => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
     }
+    const body = section.select('.card-body');
+    body.addClass('display-none');
+    const selected = section.select('.card-body-add');
+    selected.removeClass('display-none');
+}
+
+add.init = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    add.body();
     const form = section.select('form');
     if(form){
         form.on('submit', ( event ) => {
@@ -19,4 +34,8 @@ ready(() => {
             });
         });
     }
+};
+
+ready(() => {
+    add.init();
 });
