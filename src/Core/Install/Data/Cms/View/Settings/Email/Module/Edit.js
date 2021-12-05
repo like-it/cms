@@ -34,11 +34,23 @@ edit.title = () => {
     a.addClass('active');
 }
 
+edit.body = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const body = section.select('.card-body');
+    body.addClass('display-none');
+    const selected = section.select('.card-body-' + "{{$request.node.uuid}}");
+    selected.removeClass('display-none');
+}
+
 edit.init = () => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
     }
+    edit.body();
     edit.title();
     const form = section.select('form');
     if(form){
