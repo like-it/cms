@@ -80,7 +80,7 @@ class Settings extends View {
             $data = new Data();
         }
         $targetDefault = $data->get('email.' . $object->request('uuid'));
-        if(!empty($targetDefault)){
+        if(empty($targetDefault)){
             $data = [];
             $data['error'] = 'Cannot find target default with uuid: ' . $object->request('uuid');
             return new Response(
