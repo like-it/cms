@@ -3,7 +3,7 @@
     {{$section.name = 'main-content'}}
     {{$section.title = 'Main-content'}}
     {{$request.method = 'replace-with-or-append-to'}}
-    {{$request.target = 'section[name="' + $section.name + '"] .card-body-{{$request.node.uuid}}'}}
+    {{$request.target = 'section[name="' + $section.name + '"] .card-body-' + $request.node.uuid}}
     {{$request.append.to = 'section[name="' + $section.name + '"] .card'}}
 {{/if}}
 {{script('module')}}
