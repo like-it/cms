@@ -115,10 +115,21 @@
             "POST"
         ]
     },
+    "4665a6b4-1554-4160-9ac2-26ce89bf1cc1" : {
+        "module" : "settings",
+        "submodule" : "email",
+        "command" : "main",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "d244d0af-dd6d-4dc4-a630-d88cb99b8305" : {
         "module" : "settings",
         "submodule" : "email",
         "command" : "settings",
+        "subcommand" : "body",
         "method": [
             "GET",
             "POST"
@@ -128,6 +139,7 @@
         "module" : "settings",
         "submodule" : "email",
         "command" : "add",
+        "subcommand" : "body",
         "method": [
             "GET",
             "POST"
@@ -137,6 +149,7 @@
         "module" : "settings",
         "submodule" : "email",
         "command" : "edit",
+        "subcommand" : "body",
         "method": [
             "GET",
             "POST"

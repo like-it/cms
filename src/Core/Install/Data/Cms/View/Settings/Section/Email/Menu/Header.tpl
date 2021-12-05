@@ -20,9 +20,8 @@
         </li>
         <li class="nav-item">
             <a
-                    class="nav-link settings-email-add"
-                    data-url="{{server.url('core')}}Settings/Email/Add/"
-                    data-frontend-url="{{route.get(route.prefix()+ '-settings-email-add-body')}}"
+                class="nav-link settings-email-add"
+                data-frontend-url="{{route.get(route.prefix()+ '-settings-email-add-body')}}"
             >
                 {{__('settings.section.email.header.add')}}
             </a>
