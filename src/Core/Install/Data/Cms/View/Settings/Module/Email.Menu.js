@@ -1,7 +1,6 @@
 {R3M}
 import user from "/Module/User.js";
 import { getSectionByName } from "/Module/Section.js";
-import download from "/Module/Export/Download.js";
 ready(() => {
     const section = getSectionByName('main-content');
     if(!section){
