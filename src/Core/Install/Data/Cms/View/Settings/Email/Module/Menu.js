@@ -17,6 +17,7 @@ menu.init = () => {
         let node = list[index];
         node.on('click', (event) => {
             if(node.data('has', 'url')){
+                const list = section.select('.nav-link');
                 list.removeClass('active');
                 node.addClass('active');
                 const body = section.select('.card-body');
@@ -29,6 +30,7 @@ menu.init = () => {
                 });
             }
             else if(node.data('has', 'frontend-url')){
+                const list = section.select('.nav-link');
                 list.removeClass('active');
                 node.addClass('active');
                 request(node.data('frontend-url'));
