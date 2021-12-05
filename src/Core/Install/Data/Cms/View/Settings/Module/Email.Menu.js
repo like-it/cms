@@ -25,6 +25,7 @@ ready(() => {
                 });
             }
             else if(node.data('has', 'frontend-url')){
+                console.log(node.data('frontend-url'));
                 request(node.data('frontend-url'));
             }
         });
