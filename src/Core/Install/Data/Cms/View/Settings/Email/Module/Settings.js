@@ -4,6 +4,10 @@ import { getSectionByName } from "/Module/Section.js";
 
 let settings = {};
 
+settings.title = (node) => {
+    console.log(node);
+}
+
 settings.edit = () => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -18,6 +22,7 @@ settings.edit = () => {
                 header('authorization', 'Bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
                     console.log(response);
+                    //settings.title(response); // in settings email edit
                     request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
                         console.log(frontendResponse);
                     });
