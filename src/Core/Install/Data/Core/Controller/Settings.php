@@ -79,16 +79,28 @@ class Settings extends View {
         if(!$data){
             $data = new Data();
         }
-        $test = $data->get('email');
-        foreach($test as $uuid => $record){
-            unset($record->isDefault);
-        }
-        $data->set('email.' . $object->request('uuid') . '.isDefault', true);
-        $data->write($url);
+        $targetDefault = $data->get('email.' . $object->request('uuid'));
+        if(!empty($targetDefault)){
+            $data = [];
+            $data['error'] = 'Cannot find target default with uuid: ' . $object->request('uuid');
+            return new Response(
+                $data,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
+        } else {
+            $test = $data->get('email');
+            foreach($test as $uuid => $record){
+                unset($record->isDefault);
+            }
+            $data->set('email.' . $object->request('uuid') . '.isDefault', true);
+            $data->write($url);
 
-        $record = $data->get('email.' . $object->request('uuid'));
-        $data['node'] = $record;
-        return new Response($data, Response::TYPE_JSON);
+            $record = $data->get('email.' . $object->request('uuid'));
+            $data = [];
+            $data['node'] = $record;
+            return new Response($data, Response::TYPE_JSON);
+        }
     }
 
     public static function email_command(App $object){
