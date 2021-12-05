@@ -30,7 +30,10 @@ edit.title = () => {
         });
     }
     const ul = li.parentNode;
-    ul.removeClass('active');
+    const active = ul.select('.active');
+    if(active){
+        active.removeClass('active');
+    }
     a.addClass('active');
 }
 
