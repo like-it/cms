@@ -24,6 +24,8 @@ ready(() => {
                 });
             }
             else if(node.data('has', 'frontend-url')){
+                list.removeClass('active');
+                node.addClass('active');
                 console.log(node.data('frontend-url'));
                 request(node.data('frontend-url'));
             }
