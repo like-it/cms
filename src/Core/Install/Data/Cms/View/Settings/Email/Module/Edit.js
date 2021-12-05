@@ -1,11 +1,23 @@
 {R3M}
 import user from "/Module/User.js";
+import create from "/Module/Create.js";
 import { getSectionByName } from "/Module/Section.js";
 
 let edit = {};
 
 edit.title = () => {
-    console.log({{$request|json.encode}});
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const nav = section.select('.nav');
+    const li = create('li', 'nav-item');
+    const a = create('a', 'nav-link settings-email-edit-' + "{{$request.node.uuid}}");
+    a.data('frontend-url', "");
+    a.data('url', "");
+    a.html("{{$request.node.from.name}}");
+    li.append(a);
+    nav.append(li);
 }
 
 edit.init = () => {

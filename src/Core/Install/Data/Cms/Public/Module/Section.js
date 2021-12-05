@@ -6,4 +6,7 @@ let getSectionByName = (name) => {
     return select('section[name="' +  name +'"]');
 }
 
-export { getSectionById, getSectionByName }
+export {
+    getSectionById,
+    getSectionByName
+};
