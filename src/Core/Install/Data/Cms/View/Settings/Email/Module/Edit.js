@@ -29,7 +29,7 @@ edit.title = () => {
             }
         });
     }
-    const ul = li.parent;
+    const ul = li.parentNode;
     ul.removeClass('active');
     a.addClass('active');
 }
