@@ -8,11 +8,11 @@
     <div class="h-100">
         <div class="card h-100 overflow-auto">
             {{script('module')}}
-            {{require($controller.dir.view + $controller.title + '/Module/Email.Menu.js')}}
+            {{require($controller.dir.view + $controller.title + '/Email/Module/Menu.js')}}
             {{/script}}
-            {{require($controller.dir.view + $controller.title + '/Section/Email/Menu/Header.tpl')}}
+            {{require($controller.dir.view + $controller.title + '/Email/Section/Menu/Header.tpl')}}
             /*
-            {{require($controller.dir.view + $controller.title + '/Section/Email/Main/Body.tpl')}}
+            {{require($controller.dir.view + $controller.title + '/Email/Section/Main/Body.tpl')}}
             */
         </div>
     </div>
