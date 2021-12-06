@@ -47,9 +47,7 @@ settings.delete = () => {
                 request(node.data('url'), data, (url, response) => {
                     const menuItem = section.select('.settings-email-settings');
                     if(menuItem){
-                        let event = new MouseEvent("dblclick");
-                        event.detail = 2;
-                        menuItem.dispatchEvent(event);
+                        menuItem.dispatchEvent(new MouseEvent("dblclick"));
                     }
                 });
             }
@@ -72,8 +70,7 @@ settings.default = () => {
                 request(node.data('url'), null, (url, response) => {
                     const menuItem = section.select('.settings-email-settings');
                     if(menuItem){
-                        let event = new MouseEvent("dblclick");
-                        menuItem.dispatchEvent(event);
+                        menuItem.dispatchEvent(new MouseEvent("dblclick"));
                     }
                 });
             }
