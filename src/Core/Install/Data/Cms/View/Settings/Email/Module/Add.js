@@ -32,47 +32,52 @@ add.form = (menu) => {
             event.preventDefault();
             header('authorization', 'Bearer ' + user.token());
             form.request(null, null, (url, response) => {
-                console.log(menu?.select);
-                if(
-                    is.array(menu?.select)
-                ){
-                    let index;
-                    for(index=0; index < menu.select.length; index++){
-                        let item = menu.select[index];
-                        if(
-                            item?.name &&
-                            item?.event
-                        ){
-                            const menuItem = section.select(item.name);
-                            if(menuItem){
-                                // let selected = section.select('.card-body-add');
-                                if(
-                                    // selected &&
-                                    item?.hidden
-                                ){
-                                    menuItem.data('is-hidden', item?.hidden);
+                if(response?.error){
+                    console.log(response.error);
+                } else {
+                    console.log(menu?.select);
+                    if(
+                        is.array(menu?.select)
+                    ){
+                        let index;
+                        for(index=0; index < menu.select.length; index++){
+                            let item = menu.select[index];
+                            if(
+                                item?.name &&
+                                item?.event
+                            ){
+                                const menuItem = section.select(item.name);
+                                if(menuItem){
+                                    // let selected = section.select('.card-body-add');
+                                    if(
+                                        // selected &&
+                                        item?.hidden
+                                    ){
+                                        menuItem.data('is-hidden', item?.hidden);
+                                    }
+                                    menuItem.dispatchEvent(item.event);
                                 }
-                                menuItem.dispatchEvent(item.event);
+                            }
+                        }
+
+                        /*
+                        if(menuItem){
+                            menuItem.trigger('click');
+                        }
+                         */
+                    } else {
+                        if(
+                            menu?.select &&
+                            menu?.event
+                        ){
+                            const menuItem = section.select(menu.select);
+                            if(menuItem){
+                                menuItem.dispatchEvent(menu.event);
                             }
                         }
                     }
-
-                    /*
-                    if(menuItem){
-                        menuItem.trigger('click');
-                    }
-                     */
-                } else {
-                    if(
-                        menu?.select &&
-                        menu?.event
-                    ){
-                        const menuItem = section.select(menu.select);
-                        if(menuItem){
-                            menuItem.dispatchEvent(menu.event);
-                        }
-                    }
                 }
+
             });
         });
     }

@@ -73,8 +73,10 @@ class Settings extends Main {
                     $data['node'] = $record;
                     return new Response($data, Response::TYPE_JSON);
                 } else {
+                    $data = [];
+                    $data['error'] = $validate->test;
                     return new Response(
-                        $validate->test,
+                        $data,
                         Response::TYPE_JSON,
                         Response::STATUS_ERROR
                     );
