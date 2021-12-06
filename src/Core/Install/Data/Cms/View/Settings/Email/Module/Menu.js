@@ -41,15 +41,8 @@ menu.init = () => {
             node.addClass('active');
             const body = section.select('.card-body');
             body.addClass('display-none');
-            if(event.detail === 1 && node.hasClass('settings-email-main')){
-                const selected = section.select('.card-body-main');
-                menu.is_selected(selected, node);
-            }
-            else if(event.detail === 1 && node.hasClass('settings-email-settings')) {
-                const selected = section.select('.card-body-settings');
-                menu.is_selected(selected, node);
-            } else if(event.detail === 1 && node.hasClass('settings-email-add')){
-                const selected = section.select('.card-body-add');
+            if(event.detail === 1){
+                const selected = section.select(node.data('selected'));
                 menu.is_selected(selected, node);
             } else {
                 menu.is_selected(false, node);
