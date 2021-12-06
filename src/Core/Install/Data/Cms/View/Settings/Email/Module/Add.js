@@ -28,7 +28,9 @@ add.form = () => {
             form.request(null, null, (url, response) => {
                 const menuItem = section.select('.settings-email-settings');
                 if(menuItem){
-                    menuItem.trigger('dblclick');
+                    const clickEvent  = document.createEvent ('MouseEvents');
+                    clickEvent.initEvent ('dblclick', true, true);
+                    menuItem.dispatchEvent (clickEvent);
                 }
             });
         });
