@@ -53,6 +53,14 @@ menu.click = () => {
             }
         });
         node.on('dblclick', (event) => {
+            const list = section.select('.nav-link');
+            list.removeClass('active');
+            node.addClass('active');
+            const body = section.select('.card-body');
+            console.log(body);
+            if(body){
+                body.addClass('d-none');
+            }
             console.log('dblclick');
             menu.is_selected(false, node);
         });

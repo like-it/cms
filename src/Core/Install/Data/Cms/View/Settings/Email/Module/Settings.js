@@ -73,7 +73,6 @@ settings.default = (menu) => {
             if(node.data('has', 'url')){
                 header('authorization', 'Bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
-                    console.log(menu);
                     if(
                         menu?.select &&
                         menu?.event
