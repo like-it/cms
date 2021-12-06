@@ -1,6 +1,5 @@
 {R3M}
 {{if($request.error)}}
-{{dd($request)}}
 {{/if}}
 {{if($is.add.body)}}
     {{$section.name = 'main-content'}}
@@ -36,7 +35,7 @@
                 value="{{$request.node.host}}"
                 placeholder="Host"
             /><br>
-            {{if($request.error.validate_string_length === false)}}
+            {{if($request.error.host.validate_string_length === false)}}
                 <span class="error error-host validate-string-length">
                     3 character minimum.
                 </span>
