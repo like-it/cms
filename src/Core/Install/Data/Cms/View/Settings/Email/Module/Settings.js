@@ -4,10 +4,6 @@ import { getSectionByName } from "/Module/Section.js";
 
 let settings = {};
 
-settings.title = (node) => {
-    console.log(node);
-}
-
 settings.edit = () => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -21,10 +17,8 @@ settings.edit = () => {
             if(node.data('has', 'url')){
                 header('authorization', 'Bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
-                    console.log(response);
-                    //settings.title(response); // in settings email edit
                     request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-                        console.log(frontendResponse);
+
                     });
                 });
             }
@@ -53,7 +47,7 @@ settings.delete = () => {
                 request(node.data('url'), data, (url, response) => {
                     const menuItem = section.select('.settings-email-settings');
                     if(menuItem){
-                        menuItem.trigger('click');
+                        menuItem.trigger('dblclick');
                     }
                 });
             }
@@ -74,11 +68,9 @@ settings.default = () => {
             if(node.data('has', 'url')){
                 header('authorization', 'Bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
-                    console.log(url);
-                    console.log(response);
                     const menuItem = section.select('.settings-email-settings');
                     if(menuItem){
-                        menuItem.trigger('click');
+                        menuItem.trigger('dblclick');
                     }
                 });
             }
@@ -86,8 +78,13 @@ settings.default = () => {
     }
 };
 
-ready(() => {
+settings.init = () => {
     settings.default();
     settings.edit();
     settings.delete();
+}
+
+ready(() => {
+    settings.init();
+
 });

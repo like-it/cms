@@ -72,13 +72,11 @@ edit.body = () => {
     selected.removeClass('display-none');
 }
 
-edit.init = () => {
+edit.form = () => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
     }
-    edit.body();
-    edit.title();
     const form = section.select('form');
     if(form){
         form.on('submit', ( event ) => {
@@ -87,11 +85,17 @@ edit.init = () => {
             form.request(null, null, (url, response) => {
                 const menuItem = section.select('.settings-email-settings');
                 if(menuItem){
-                    menuItem.trigger('click');
+                    menuItem.trigger('dblclick');
                 }
             });
         });
     }
+}
+
+edit.init = () => {
+    edit.body();
+    edit.title();
+    edit.form();
 };
 
 ready(() => {

@@ -24,13 +24,11 @@ menu.is_selected = (selected, node) => {
     }
 };
 
-menu.init = () => {
+menu.click = () => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
     }
-    //const route = "{{route.get(route.prefix() + '-settings-email-main')}}";
-    //window.history.pushState(route, route, route);
     const list = section.select('.nav-link');
     let index;
     for(index=0; index < list.length; index++){
@@ -40,15 +38,27 @@ menu.init = () => {
             list.removeClass('active');
             node.addClass('active');
             const body = section.select('.card-body');
-            body.addClass('display-none');
+            if(body){
+                body.addClass('display-none');
+            }
             if(event.detail === 1){
                 const selected = section.select(node.data('selected'));
-                menu.is_selected(selected, node);
+                if(selected){
+                    menu.is_selected(selected, node);
+                } else {
+                    menu.is_selected(false, node);
+                }
             } else {
                 menu.is_selected(false, node);
             }
         });
     }
+}
+
+menu.init = () => {
+    //const route = "{{route.get(route.prefix() + '-settings-email-main')}}";
+    //window.history.pushState(route, route, route);
+    menu.click();
 }
 
 ready(() => {
