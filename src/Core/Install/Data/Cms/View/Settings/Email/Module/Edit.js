@@ -11,8 +11,14 @@ edit.title = () => {
         return;
     }
     const is_link = section.select('.settings-email-edit-' + "{{$request.node.uuid}}");
-    console.log(is_link);
     if(is_link){
+        const nav = section.select('.nav');
+        const active = nav.select('.active');
+        if(active){
+            active.removeClass('active');
+        }
+        is_link.addClass('active');
+        edit.body();
         return;
     }
     const nav = section.select('.nav');
@@ -35,10 +41,6 @@ edit.title = () => {
         } else {
             //reload from data url & frontend url
         }
-        console.log(event.detail);
-
-
-
     });
     const i = a.select('.fa-window-close');
     if(i){
