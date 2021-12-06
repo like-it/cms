@@ -26,6 +26,7 @@ add.form = (menu) => {
             event.preventDefault();
             header('authorization', 'Bearer ' + user.token());
             form.request(null, null, (url, response) => {
+                console.log(menu?.select);
                 if(
                     is.array(menu?.select)
                 ){
