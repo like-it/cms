@@ -11,6 +11,7 @@ edit.title = () => {
         return;
     }
     const is_link = section.select('.settings-email-edit-' + "{{$request.node.uuid}}");
+    console.log(is_link);
     if(is_link){
         return;
     }
