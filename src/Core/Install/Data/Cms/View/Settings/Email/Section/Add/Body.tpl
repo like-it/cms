@@ -29,7 +29,11 @@
             */
             <input
                 id="settings-email-host"
+                {{if($request.error.host.validate_string_length.0 === false)}}
                 class="form-control"
+                {{else}}
+                class="form-control error error-host"
+                {{/if}}
                 type="text"
                 name="host"
                 value="{{$request.host}}"
@@ -52,12 +56,21 @@
             */
             <input
                 id="settings-email-port"
+                {{if($request.error.port.validate_string_has_number.0 === false)}}
                 class="form-control"
+                {{else}}
+                class="form-control error error-host"
+                {{/if}}
                 type="text"
                 name="port"
                 value="{{$request.port}}"
                 placeholder="Port"
             /><br>
+            {{if($request.error.port.validate_string_has_number.0 === false)}}
+                <span class="error error-host validate-string-has-number">
+                    The port should be a number.
+                </span>
+            {{/if}}
         </div>
         <div class="mb-3">
             /*
