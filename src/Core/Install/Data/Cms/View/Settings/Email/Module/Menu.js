@@ -4,6 +4,26 @@ import { getSectionByName } from "/Module/Section.js";
 
 let menu = {};
 
+menu.is_selected = (selected, node) => {
+    if(selected){
+        //select
+        selected.removeClass('display-none');
+    } else {
+        //load
+        if(node.data('has', 'url')){
+            header('authorization', 'Bearer ' + user.token());
+            request(node.data('url'), null, (url, response) => {
+                if(node.data('has', 'frontend-url')){
+                    request(node.data('frontend-url'), response);
+                }
+            });
+        }
+        else if(node.data('has', 'frontend-url')){
+            request(node.data('frontend-url'));
+        }
+    }
+};
+
 menu.init = () => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -16,64 +36,28 @@ menu.init = () => {
     for(index=0; index < list.length; index++){
         let node = list[index];
         node.on('click', (event) => {
-            if(event.detail === 1 && node.hasClass('settings-email-add')){
-                const list = section.select('.nav-link');
-                list.removeClass('active');
-                node.addClass('active');
-                const body = section.select('.card-body');
-                body.addClass('display-none');
-                const selected = section.select('.card-body-add');
-                if(selected){
-                    //select
-                    selected.removeClass('display-none');
-                } else {
-                    //load
-                    if(node.data('has', 'url')){
-                        header('authorization', 'Bearer ' + user.token());
-                        request(node.data('url'), null, (url, response) => {
-                            if(node.data('has', 'frontend-url')){
-                                request(node.data('frontend-url'), response);
-                            }
-                        });
-                    }
-                    else if(node.data('has', 'frontend-url')){
-                        request(node.data('frontend-url'));
-                    }
-                }
-            } else {
-                if(node.data('has', 'url')){
-                    const list = section.select('.nav-link');
-                    list.removeClass('active');
-                    node.addClass('active');
-                    const body = section.select('.card-body');
-                    body.addClass('display-none');
-                    header('authorization', 'Bearer ' + user.token());
-                    request(node.data('url'), null, (url, response) => {
-                        if(node.data('has', 'frontend-url')){
-                            request(node.data('frontend-url'), response);
-                        }
-                    });
-                }
-                else if(node.data('has', 'frontend-url')){
-                    const list = section.select('.nav-link');
-                    list.removeClass('active');
-                    node.addClass('active');
-                    const body = section.select('.card-body');
-                    body.addClass('display-none');
-                    request(node.data('frontend-url'));
-                }
+            const list = section.select('.nav-link');
+            list.removeClass('active');
+            node.addClass('active');
+            const body = section.select('.card-body');
+            body.addClass('display-none');
+            if(event.detail === 1 && node.hasClass('settings-email-main')){
+                const selected = section.select('.card-body-main');
+                menu.is_selected(selected, node);
             }
-
+            else if(event.detail === 1 && node.hasClass('settings-email-settings')) {
+                const selected = section.select('.card-body-settings');
+                menu.is_selected(selected, node);
+            } else if(event.detail === 1 && node.hasClass('settings-email-add')){
+                const selected = section.select('.card-body-add');
+                menu.is_selected(selected, node);
+            } else {
+                menu.is_selected(false, node);
+            }
         });
     }
 }
 
-
 ready(() => {
     menu.init();
-    /*
-    if(!is.empty(list)){
-        list[0].trigger('click');
-    }
-     */
 });

@@ -22,6 +22,11 @@ section[name="main-content"] {
     overflow: auto;
 }
 
+section[name="main-content"] .nav .fa-window-close {
+    margin-left: 10px;
+    color: rgba(200, 0, 0, 1);
+}
+
 a {
     cursor: pointer;
 }
