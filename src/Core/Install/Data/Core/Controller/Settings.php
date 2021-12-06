@@ -5,12 +5,15 @@ use R3m\Io\App;
 use R3m\Io\Exception\ObjectException;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
+use R3m\Io\Module\File;
 use R3m\Io\Module\Handler;
 use R3m\Io\Module\Response;
 use R3m\Io\Module\View;
 
+use Host\Subdomain\Host\Extension\Service\Main;
 
-class Settings extends View {
+
+class Settings extends Main {
     const DIR = __DIR__ . DIRECTORY_SEPARATOR;    
 
     public static function body(App $object): Response
@@ -58,6 +61,8 @@ class Settings extends View {
 
         try {
             $record = Core::object($record, Core::OBJECT_OBJECT);
+            $validate = Main::validate($object, Settings::email_getValidatorUrl($object), 'user');
+            dd($validate);
             $test = $data->get('email');
             if(empty($test)){
                 $record->isDefault = true;
@@ -69,6 +74,15 @@ class Settings extends View {
         $data = [];
         $data['node'] = $record;
         return new Response($data, Response::TYPE_JSON);
+    }
+
+    private static function email_getValidatorUrl(App $object): string
+    {
+        return $object->config('host.dir.data') .
+            'Validator' .
+            $object->config('ds') .
+            'Email' .
+            $object->config('extension.json');
     }
 
     public static function email_account_default(App $object){
