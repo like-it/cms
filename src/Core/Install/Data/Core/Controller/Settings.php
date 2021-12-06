@@ -58,22 +58,31 @@ class Settings extends Main {
         $record['from']['email'] = $object->request('from.email');
         $record['username'] = $object->request('username');
         $record['password'] = $object->request('password');
-
         try {
             $record = Core::object($record, Core::OBJECT_OBJECT);
             $validate = Main::validate($object, Settings::email_getValidatorUrl($object), 'email');
-            dd($validate);
-            $test = $data->get('email');
-            if(empty($test)){
-                $record->isDefault = true;
+            if($validate) {
+                if ($validate->success === true) {
+                    $test = $data->get('email');
+                    if(empty($test)){
+                        $record->isDefault = true;
+                    }
+                    $data->set('email.' . $record->uuid, $record);
+                    $data->write($url);
+                    $data = [];
+                    $data['node'] = $record;
+                    return new Response($data, Response::TYPE_JSON);
+                } else {
+                    return new Response(
+                        $validate->test,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                }
             }
-            $data->set('email.' . $record->uuid, $record);
-            $data->write($url);
         } catch (ObjectException $exception) {
         }
-        $data = [];
-        $data['node'] = $record;
-        return new Response($data, Response::TYPE_JSON);
+
     }
 
     private static function email_getValidatorUrl(App $object): string
