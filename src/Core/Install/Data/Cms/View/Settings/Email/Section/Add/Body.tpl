@@ -35,7 +35,7 @@
                 value="{{$request.node.host}}"
                 placeholder="Host"
             /><br>
-            {{if($request.error.host.validate_string_length === false)}}
+            {{if($request.error.host.validate_string_length.0 === false)}}
                 <span class="error error-host validate-string-length">
                     3 character minimum.
                 </span>
