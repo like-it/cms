@@ -13,7 +13,11 @@ add.body = () => {
     console.log(body);
     body.addClass('d-none');
     const selected = section.select('.card-body-add');
-    selected.removeClass('d-none');
+    if(selected.data('is-hidden')){
+        console.log('is-hidden');
+    } else {
+        selected.removeClass('d-none');
+    }
 }
 
 add.form = (menu) => {
@@ -40,10 +44,15 @@ add.form = (menu) => {
                         ){
                             const menuItem = section.select(item.name);
                             if(menuItem){
+                                const selected = section.select('.card-body-add');
+                                if(selected){
+                                    selected.data('is-hidden', item?.hidden);
+                                }
                                 menuItem.dispatchEvent(item.event);
                             }
                         }
                     }
+
                     /*
                     if(menuItem){
                         menuItem.trigger('click');
@@ -71,7 +80,8 @@ add.init = () => {
         select : [
             {
                 name : ".settings-email-add",
-                event : new MouseEvent("dblclick")
+                event : new MouseEvent("dblclick"),
+                hidden : true
             },
             {
                 name : ".settings-email-settings",
