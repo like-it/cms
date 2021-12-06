@@ -45,13 +45,13 @@ class Settings extends Main {
     public static function email_add(App $object): Response
     {
         $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
-
+        $object->request('uuid', Core::uuid());
         $data = $object->data_read($url);
         if(!$data){
             $data = new Data();
         }
         $record = [];
-        $record['uuid'] = Core::uuid();
+        $record['uuid'] = $object->request('uuid');
         $record['host'] = $object->request('host');
         $record['port'] = $object->request('port');
         $record['from']['name'] = $object->request('from.name');
