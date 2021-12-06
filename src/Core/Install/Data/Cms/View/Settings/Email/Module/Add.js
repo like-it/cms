@@ -10,6 +10,8 @@ add.body = () => {
         return;
     }
     const body = section.select('.card-body');
+    const menu = section.select(body.data('menu'));
+    console.log(menu);
     console.log(body);
     body.addClass('d-none');
     const selected = section.select('.card-body-add');
@@ -44,12 +46,12 @@ add.form = (menu) => {
                         ){
                             const menuItem = section.select(item.name);
                             if(menuItem){
-                                let selected = section.select('.card-body-add');
+                                // let selected = section.select('.card-body-add');
                                 if(
-                                    selected &&
+                                    // selected &&
                                     item?.hidden
                                 ){
-                                    selected.data('is-hidden', item?.hidden);
+                                    menuItem.data('is-hidden', item?.hidden);
                                 }
                                 menuItem.dispatchEvent(item.event);
                             }

@@ -9,7 +9,7 @@
 {{script('module')}}
     {{require($controller.dir.view + $controller.title + '/Email/Module/Add.js')}}
 {{/script}}
-<div class="card-body h-100 card-body-add">
+<div class="card-body h-100 card-body-add" data-menu=".settings-email-add">
     <form
         name="settings-email-settings-form"
         method="post"
