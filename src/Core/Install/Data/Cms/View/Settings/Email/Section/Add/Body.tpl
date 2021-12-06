@@ -1,4 +1,7 @@
 {R3M}
+{{if($request.error)}}
+{{dd($request)}}
+{{/if}}
 {{if($is.add.body)}}
     {{$section.name = 'main-content'}}
     {{$section.title = 'Main-content'}}
