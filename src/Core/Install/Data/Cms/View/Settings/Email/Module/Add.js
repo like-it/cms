@@ -15,25 +15,29 @@ add.body = () => {
     selected.removeClass('display-none');
 }
 
-add.init = () => {
+add.form = () => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
     }
-    add.body();
     const form = section.select('form');
     if(form){
         form.on('submit', ( event ) => {
             event.preventDefault();
             header('authorization', 'Bearer ' + user.token());
             form.request(null, null, (url, response) => {
-                const settings = section.select('.settings-email-settings');
-                if(settings){
-                    settings.trigger('click');
+                const menuItem = section.select('.settings-email-settings');
+                if(menuItem){
+                    menuItem.trigger('click');
                 }
             });
         });
     }
+}
+
+add.init = () => {
+    add.body();
+    add.form();
 };
 
 ready(() => {
