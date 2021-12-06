@@ -32,12 +32,12 @@
                 class="form-control"
                 type="text"
                 name="host"
-                value="{{$request.node.host}}"
+                value="{{$request.host}}"
                 placeholder="Host"
             /><br>
             {{if($request.error.host.validate_string_length.0 === false)}}
                 <span class="error error-host validate-string-length">
-                    3 character minimum.
+                    Minimum 3 characters required.
                 </span>
             {{/if}}
         </div>
