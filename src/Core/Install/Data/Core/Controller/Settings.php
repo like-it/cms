@@ -61,7 +61,7 @@ class Settings extends Main {
 
         try {
             $record = Core::object($record, Core::OBJECT_OBJECT);
-            $validate = Main::validate($object, Settings::email_getValidatorUrl($object), 'user');
+            $validate = Main::validate($object, Settings::email_getValidatorUrl($object), 'email');
             dd($validate);
             $test = $data->get('email');
             if(empty($test)){
