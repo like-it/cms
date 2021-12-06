@@ -73,7 +73,7 @@ settings.default = () => {
                     const menuItem = section.select('.settings-email-settings');
                     if(menuItem){
                         let event = new MouseEvent("dblclick");
-                        event.detail = 2;
+                        console.log(event);
                         menuItem.dispatchEvent(event);
                     }
                 });
