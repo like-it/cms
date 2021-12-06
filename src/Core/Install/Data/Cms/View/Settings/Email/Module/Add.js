@@ -27,12 +27,30 @@ add.form = (menu) => {
             header('authorization', 'Bearer ' + user.token());
             form.request(null, null, (url, response) => {
                 if(
-                    menu?.select &&
-                    menu?.event
+                    is.array(menu?.select)
                 ){
-                    const menuItem = section.select(menu.select);
-                    if(menuItem){
-                        menuItem.dispatchEvent(menu.event);
+                    let index;
+                    for(index=0; index < menu.select.length; index++){
+                        let item = menu.select[index];
+                        if(
+                            item?.name &&
+                            item?.event
+                        ){
+                            const menuItem = section.select(item.select);
+                            if(menuItem){
+                                menuItem.dispatchEvent(item.event);
+                            }
+                        }
+                    }
+                } else {
+                    if(
+                        menu?.select &&
+                        menu?.event
+                    ){
+                        const menuItem = section.select(menu.select);
+                        if(menuItem){
+                            menuItem.dispatchEvent(menu.event);
+                        }
                     }
                 }
             });
@@ -43,8 +61,16 @@ add.form = (menu) => {
 add.init = () => {
     add.body();
     add.form({
-        select : ".settings-email-settings",
-        event : new MouseEvent("dblclick")
+        select : [
+            {
+                name : ".settings-email-add",
+                event : new MouseEvent("dblclick")
+            },
+            {
+                name : ".settings-email-settings",
+                event : new MouseEvent("dblclick")
+            }
+        ]
     });
 };
 
