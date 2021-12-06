@@ -34,7 +34,7 @@ add.form = (menu) => {
             form.request(null, null, (url, response) => {
                 if(response?.error){
                     data.push({
-                        name: error,
+                        name: "error",
                         value: response.error
                     });
                     request(form.data('url-error'), data, ( urlError, responseError ) => {
