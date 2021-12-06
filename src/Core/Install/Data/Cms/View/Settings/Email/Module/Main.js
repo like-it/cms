@@ -9,9 +9,9 @@ main.body = () => {
         return;
     }
     const body = section.select('.card-body');
-    body.addClass('display-none');
+    body.addClass('d-none');
     const selected = section.select('.card-body-main');
-    selected.removeClass('display-none');
+    selected.removeClass('d-none');
 }
 
 main.init = () => {

@@ -10,9 +10,9 @@ add.body = () => {
         return;
     }
     const body = section.select('.card-body');
-    body.addClass('display-none');
+    body.addClass('d-none');
     const selected = section.select('.card-body-add');
-    selected.removeClass('display-none');
+    selected.removeClass('d-none');
 }
 
 add.form = () => {

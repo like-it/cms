@@ -67,9 +67,9 @@ edit.body = () => {
         return;
     }
     const body = section.select('.card-body');
-    body.addClass('display-none');
+    body.addClass('d-none');
     const selected = section.select('.card-body-' + "{{$request.node.uuid}}");
-    selected.removeClass('display-none');
+    selected.removeClass('d-none');
 }
 
 edit.form = () => {

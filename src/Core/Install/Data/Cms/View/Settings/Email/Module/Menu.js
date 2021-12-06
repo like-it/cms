@@ -42,7 +42,7 @@ menu.click = () => {
             const body = section.select('.card-body');
             console.log(body);
             if(body){
-                body.addClass('display-none');
+                body.addClass('d-none');
             }
             if(event.detail === 1){
                 const selected = section.select(node.data('selected'));
