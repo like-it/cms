@@ -9,15 +9,14 @@ add.body = () => {
     if(!section){
         return;
     }
+    const menu = section.select('.settings-email-add');
     const body = section.select('.card-body');
-    const menu = section.select(body.data('menu'));
-    console.log(menu);
-    console.log(body);
     body.addClass('d-none');
-    const selected = section.select('.card-body-add');
-    if(selected.data('is-hidden')){
+    if(menu.data('is-hidden')){
         console.log('is-hidden');
+        menu.data('delete', 'is-hidden');
     } else {
+        const selected = section.select('.card-body-add');
         selected.removeClass('d-none');
     }
 }
