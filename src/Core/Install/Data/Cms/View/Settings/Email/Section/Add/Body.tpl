@@ -9,6 +9,7 @@
 {{script('module')}}
     {{require($controller.dir.view + $controller.title + '/Email/Module/Add.js')}}
 {{/script}}
+{{d($request)}}
 <div class="card-body h-100 card-body-add" data-menu=".settings-email-add">
     <form
         name="settings-email-settings-form"
@@ -29,7 +30,7 @@
                 class="form-control"
                 type="text"
                 name="host"
-                value="{{$request.host}}"
+                value="{{$request.node.host}}"
                 placeholder="Host"
             /><br>
             {{if($request.error.validate_string_length === false)}}

@@ -30,8 +30,13 @@ add.form = (menu) => {
         form.on('submit', ( event ) => {
             event.preventDefault();
             header('authorization', 'Bearer ' + user.token());
+            let data = form.data('serialize');
             form.request(null, null, (url, response) => {
                 if(response?.error){
+                    data.error = response.error;
+                    request(form.data('url-error'), data, ( urlError, responseError ) => {
+
+                    });
                     console.log(response.error);
                 } else {
                     console.log(menu?.select);
