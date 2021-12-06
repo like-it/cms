@@ -32,12 +32,11 @@
                 value="{{$request.host}}"
                 placeholder="Host"
             /><br>
-            /*
-            {{if($request.error.)
-            <span class="error error-host">
-            {{d($request)}}
-            </span>
-            */
+            {{if($request.error.validate_string_length === false)}}
+                <span class="error error-host validate-string-length">
+                    3 character minimum.
+                </span>
+            {{/if}}
         </div>
         <div class="mb-3">
             /*
