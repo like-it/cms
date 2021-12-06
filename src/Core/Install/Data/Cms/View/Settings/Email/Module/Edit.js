@@ -10,6 +10,10 @@ edit.title = () => {
     if(!section){
         return;
     }
+    const is_link = section.select('.settings-email-edit-' + "{{$request.node.uuid}}");
+    if(is_link){
+        return;
+    }
     const nav = section.select('.nav');
     const li = create('li', 'nav-item');
     const a = create('a', 'nav-link settings-email-edit-' + "{{$request.node.uuid}}");
