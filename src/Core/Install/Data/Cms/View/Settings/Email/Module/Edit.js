@@ -10,6 +10,7 @@ edit.title = () => {
     if(!section){
         return;
     }
+    console.log({{$request|json.encode}});
     const nav = section.select('.nav');
     const li = create('li', 'nav-item');
     const a = create('a', 'nav-link settings-email-edit-' + "{{$request.node.uuid}}");
@@ -19,6 +20,11 @@ edit.title = () => {
     li.append(a);
     nav.append(li);
     a.on('click', (event) => {
+        if(event.detail === 1){
+
+        } else {
+            //reload from data url & frontend url
+        }
         console.log(event.detail);
 
 
