@@ -18,6 +18,12 @@ edit.title = () => {
     a.html("{{$request.node.from.name}} <i class=\"fas fa-window-close\"></i>");
     li.append(a);
     nav.append(li);
+    a.on('click', (event) => {
+        console.log(event.detail);
+
+
+
+    });
     const i = a.select('.fa-window-close');
     if(i){
         i.on('click', (event) => {
