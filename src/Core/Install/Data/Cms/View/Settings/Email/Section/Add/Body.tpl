@@ -14,6 +14,7 @@
         name="settings-email-settings-form"
         method="post"
         data-url="{{server.url('core')}}Settings/Email/Add/"
+        data-url-error="{{route.get(route.prefix() + '-settings-email-add-body')}}"
     >
         <div class="mb-3">
             /*
