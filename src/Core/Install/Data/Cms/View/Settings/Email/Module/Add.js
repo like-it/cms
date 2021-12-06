@@ -37,7 +37,7 @@ add.form = (menu) => {
                             item?.name &&
                             item?.event
                         ){
-                            const menuItem = section.select(item.select);
+                            const menuItem = section.select(item.name);
                             if(menuItem){
                                 menuItem.dispatchEvent(item.event);
                             }
