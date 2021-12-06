@@ -13,7 +13,6 @@ add.body = () => {
     const body = section.select('.card-body');
     body.addClass('d-none');
     if(menu.data('is-hidden')){
-        console.log('is-hidden');
         menu.data('delete', 'is-hidden');
     } else {
         const selected = section.select('.card-body-add');

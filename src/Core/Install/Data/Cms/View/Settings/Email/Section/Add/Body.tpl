@@ -32,6 +32,9 @@
                 value="{{$request.host}}"
                 placeholder="Host"
             /><br>
+            <span class="error error-host">
+            {{d($request)}}
+            </span>
         </div>
         <div class="mb-3">
             /*
