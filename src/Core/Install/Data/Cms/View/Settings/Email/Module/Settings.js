@@ -26,7 +26,7 @@ settings.edit = () => {
     }
 }
 
-settings.delete = () => {
+settings.delete = (menu) => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
@@ -45,9 +45,14 @@ settings.delete = () => {
                 };
                 header('authorization', 'Bearer ' + user.token());
                 request(node.data('url'), data, (url, response) => {
-                    const menuItem = section.select('.settings-email-settings');
-                    if(menuItem){
-                        menuItem.dispatchEvent(new MouseEvent("dblclick"));
+                    if(
+                        menu?.select &&
+                        menu?.event
+                    ){
+                        const menuItem = section.select(menu.select);
+                        if(menuItem){
+                            menuItem.dispatchEvent(menu.event);
+                        }
                     }
                 });
             }
@@ -55,7 +60,7 @@ settings.delete = () => {
     }
 }
 
-settings.default = () => {
+settings.default = (menu) => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
@@ -68,9 +73,14 @@ settings.default = () => {
             if(node.data('has', 'url')){
                 header('authorization', 'Bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
-                    const menuItem = section.select('.settings-email-settings');
-                    if(menuItem){
-                        menuItem.dispatchEvent(new MouseEvent("dblclick"));
+                    if(
+                        menu?.select &&
+                        menu?.event
+                    ){
+                        const menuItem = section.select(menu.select);
+                        if(menuItem){
+                            menuItem.dispatchEvent(menu.event);
+                        }
                     }
                 });
             }
@@ -79,9 +89,15 @@ settings.default = () => {
 };
 
 settings.init = () => {
-    settings.default();
+    settings.default({
+        select : ".settings-email-settings",
+        event : new MouseEvent("dblclick")
+    });
     settings.edit();
-    settings.delete();
+    settings.delete({
+        select: ".settings-email-settings",
+        event: new MouseEvent("dblclick")
+    });
 }
 
 ready(() => {

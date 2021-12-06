@@ -72,7 +72,7 @@ edit.body = () => {
     selected.removeClass('d-none');
 }
 
-edit.form = () => {
+edit.form = (menu) => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
@@ -83,9 +83,14 @@ edit.form = () => {
             event.preventDefault();
             header('authorization', 'Bearer ' + user.token());
             form.request(null, null, (url, response) => {
-                const menuItem = section.select('.settings-email-settings');
-                if(menuItem){
-                    menuItem.dispatchEvent(new MouseEvent("dblclick"));
+                if(
+                    menu?.select &&
+                    menu?.event
+                ){
+                    const menuItem = section.select(menu.select);
+                    if(menuItem){
+                        menuItem.dispatchEvent(menu.event);
+                    }
                 }
             });
         });
@@ -95,7 +100,10 @@ edit.form = () => {
 edit.init = () => {
     edit.body();
     edit.title();
-    edit.form();
+    edit.form({
+        select : ".settings-email-settings",
+        event : new MouseEvent("dblclick")
+    });
 };
 
 ready(() => {

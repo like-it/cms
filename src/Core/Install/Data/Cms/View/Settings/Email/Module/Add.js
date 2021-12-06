@@ -15,7 +15,7 @@ add.body = () => {
     selected.removeClass('d-none');
 }
 
-add.form = () => {
+add.form = (menu) => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
@@ -26,9 +26,14 @@ add.form = () => {
             event.preventDefault();
             header('authorization', 'Bearer ' + user.token());
             form.request(null, null, (url, response) => {
-                const menuItem = section.select('.settings-email-settings');
-                if(menuItem){
-                    menuItem.dispatchEvent(new MouseEvent("dblclick"));
+                if(
+                    menu?.select &&
+                    menu?.event
+                ){
+                    const menuItem = section.select(menu.select);
+                    if(menuItem){
+                        menuItem.dispatchEvent(menu.event);
+                    }
                 }
             });
         });
@@ -37,7 +42,10 @@ add.form = () => {
 
 add.init = () => {
     add.body();
-    add.form();
+    add.form({
+        select : ".settings-email-settings",
+        event : new MouseEvent("dblclick")
+    });
 };
 
 ready(() => {
