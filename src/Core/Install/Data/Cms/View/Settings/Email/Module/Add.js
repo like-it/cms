@@ -10,6 +10,7 @@ add.body = () => {
         return;
     }
     const body = section.select('.card-body');
+    console.log(body);
     body.addClass('d-none');
     const selected = section.select('.card-body-add');
     selected.removeClass('d-none');
@@ -43,6 +44,11 @@ add.form = (menu) => {
                             }
                         }
                     }
+                    /*
+                    if(menuItem){
+                        menuItem.trigger('click');
+                    }
+                     */
                 } else {
                     if(
                         menu?.select &&
