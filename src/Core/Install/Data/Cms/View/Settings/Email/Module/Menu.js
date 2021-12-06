@@ -7,7 +7,7 @@ let menu = {};
 menu.is_selected = (selected, node) => {
     if(selected){
         //select
-        selected.removeClass('display-none');
+        selected.removeClass('d-none');
     } else {
         //load
         if(node.data('has', 'url')){
