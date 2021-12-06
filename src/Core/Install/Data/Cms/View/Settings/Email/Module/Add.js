@@ -44,8 +44,11 @@ add.form = (menu) => {
                         ){
                             const menuItem = section.select(item.name);
                             if(menuItem){
-                                const selected = section.select('.card-body-add');
-                                if(selected){
+                                let selected = section.select('.card-body-add');
+                                if(
+                                    selected &&
+                                    item?.hidden
+                                ){
                                     selected.data('is-hidden', item?.hidden);
                                 }
                                 menuItem.dispatchEvent(item.event);
