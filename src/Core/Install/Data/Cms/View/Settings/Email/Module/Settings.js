@@ -69,7 +69,6 @@ settings.default = () => {
                 header('authorization', 'Bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
                     const menuItem = section.select('.settings-email-settings');
-                    console.log(menuItem);
                     if(menuItem){
                         menuItem.trigger('dblclick');
                     }

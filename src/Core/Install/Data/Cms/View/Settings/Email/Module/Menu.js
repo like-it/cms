@@ -48,6 +48,7 @@ menu.click = () => {
                 const selected = section.select(node.data('selected'));
                 menu.is_selected(selected, node);
             } else {
+                console.log('dblclick');
                 menu.is_selected(false, node);
             }
         });
