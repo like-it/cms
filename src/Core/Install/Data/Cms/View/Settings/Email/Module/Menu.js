@@ -26,10 +26,12 @@ menu.is_selected = (selected, node) => {
 
 menu.click = () => {
     const section = getSectionByName('main-content');
+    console.log(section);
     if(!section){
         return;
     }
     const list = section.select('.nav-link');
+    console.log(list);
     let index;
     for(index=0; index < list.length; index++){
         let node = list[index];
@@ -38,16 +40,13 @@ menu.click = () => {
             list.removeClass('active');
             node.addClass('active');
             const body = section.select('.card-body');
+            console.log(body);
             if(body){
                 body.addClass('display-none');
             }
             if(event.detail === 1){
                 const selected = section.select(node.data('selected'));
-                if(selected){
-                    menu.is_selected(selected, node);
-                } else {
-                    menu.is_selected(false, node);
-                }
+                menu.is_selected(selected, node);
             } else {
                 menu.is_selected(false, node);
             }
