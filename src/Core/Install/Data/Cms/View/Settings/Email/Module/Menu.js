@@ -52,6 +52,10 @@ menu.click = () => {
                 menu.is_selected(false, node);
             }
         });
+        node.on('dblclick', (event) => {
+            console.log('dblclick');
+            menu.is_selected(false, node);
+        });
     }
 }
 
