@@ -35,7 +35,7 @@
         {{if($request.error.username.validate_string_length.0 === false)}}
             The username is required.<br>
         {{/if}}
-        /*
+
         {{if($request.error.password.validate_string_length.0 === false)}}
             The password should be at least 8 characters long.<br>
         {{/if}}
@@ -48,6 +48,7 @@
         {{if($request.error.password.validate_string_has_lowercase.0 === false)}}
             The password should contain a lowercase character.<br>
         {{/if}}
+        /*
         {{if($request.error.password.validate_string_has_symbol.0 === false)}}
             The password should contain a symbol character.<br>
              `, ~, !, @, #, $, %, ^, &, *, (, ), -, _, +, =, {, }, [, ], ;, :, ', ", |, ?, \, /, <, >, ', ' & '.'<br>
