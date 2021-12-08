@@ -250,7 +250,7 @@
         "path": "Settings/Email/{$uuid}",
         "method": [
             "GET",
-            "POST",
+            "PUT",
             "DELETE",
             "OPTIONS"
         ]
