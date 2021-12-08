@@ -103,7 +103,7 @@
             /><br>
             {{if(
                 is.empty($request.error.from_email) ||
-                $request.error.from_email.is_email.0 === true
+                $request.error.from_email.validate_is_email.0 === true
             )}}
                 {{$class = 'form-control'}}
             {{else}}
@@ -114,7 +114,7 @@
                 class="{{$class}}"
                 type="text"
                 name="from_email"
-                value="{{$request.from.email}}"
+                value="{{$request.from_email}}"
                 placeholder="From e-mail"
             /><br>
             {{if(
