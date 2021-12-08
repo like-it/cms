@@ -16,6 +16,6 @@
         {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Field/Password.tpl')}}
     </div>
     <div class="mb-3">
-        {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Button/Add.tpl')}}
+        {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Button/Update.tpl')}}
     </div>
 </form>
