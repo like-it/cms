@@ -97,13 +97,13 @@
                 id="settings-email-from-name"
                 class="form-control"
                 type="text"
-                name="from.name"
-                value="{{$request.from.name}}"
+                name="from_name"
+                value="{{$request.from_name}}"
                 placeholder="From name"
             /><br>
             {{if(
-                is.empty($request.error.from.email) ||
-                $request.error.from.email.is_email.0 === true
+                is.empty($request.error.from_email) ||
+                $request.error.from_email.is_email.0 === true
             )}}
                 {{$class = 'form-control'}}
             {{else}}
@@ -113,7 +113,7 @@
                 id="settings-email-from-email"
                 class="{{$class}}"
                 type="text"
-                name="from.email"
+                name="from_email"
                 value="{{$request.from.email}}"
                 placeholder="From e-mail"
             /><br>
