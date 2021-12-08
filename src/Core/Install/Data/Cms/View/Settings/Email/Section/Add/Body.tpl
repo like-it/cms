@@ -12,5 +12,5 @@
     {{require($controller.dir.view + $controller.title + '/Email/Module/Add.js')}}
 {{/script}}
 <div class="card-body h-100 card-body-add" data-menu=".settings-email-add">
-{{require($controller.dir.view + $controller.title + '/Email/Section/Form/Form.tpl', [])}}
+{{require($controller.dir.view + $controller.title + '/Email/Section/Form/Add.tpl', [])}}
 </div>
