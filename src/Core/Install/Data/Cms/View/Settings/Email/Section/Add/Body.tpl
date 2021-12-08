@@ -52,10 +52,7 @@
         {{if($request.error.password.validate_string_has_symbol.0 === false)}}
             The password should contain a symbol character.<br>
             {literal}
-             `, ~, !, @, #, $, %, ^, &, *, (, ), -, _, +, =, {, }, [, ], ;, :, ', ", |, ?, \, /, <, >, ', ' & '.'<br>
-             {/literal}
-             {literal}
-             test2
+             `, ~, !, @, #, $, %, ^, &, *, (, ), -, _, +, =, {, }, [, ], ;, :, ', ", |, ?, \, /, <, >, ', ' and '.'<br>
              {/literal}
         {{/if}}
 
@@ -63,6 +60,102 @@
             </p>
             </div>
         {{/if}}
+        <div class="mb-3">
+            {{if(
+                is.empty($request.error.host) ||
+                $request.error.host.validate_string_length.0 === true
+            )}}
+                {{$class = 'form-control'}}
+            {{else}}
+                {{$class = 'form-control alert alert-danger'}}
+            {{/if}}
+            <input
+                id="settings-email-host"
+                class="{{$class}}"
+                type="text"
+                name="host"
+                value="{{$request.host}}"
+                placeholder="Host"
+            /><br>
+            {{if(
+                is.empty($request.error.port) ||
+                $request.error.port.validate_string_has_number.0 === true
+            )}}
+                {{$class = 'form-control'}}
+            {{else}}
+                {{$class = 'form-control alert alert-danger'}}
+            {{/if}}
+            <input
+                id="settings-email-port"
+                class="{{$class}}"
+                type="text"
+                name="port"
+                value="{{$request.port}}"
+                placeholder="Port"
+            /><br>
+            <input
+                id="settings-email-from-name"
+                class="form-control"
+                type="text"
+                name="from.name"
+                value="{{$request.from.name}}"
+                placeholder="From name"
+            /><br>
+            {{if(
+                is.empty($request.error.from.email) ||
+                $request.error.from.email.is_email.0 === true
+            )}}
+                {{$class = 'form-control'}}
+            {{else}}
+                {{$class = 'form-control alert alert-danger'}}
+            {{/if}}
+            <input
+                id="settings-email-from-email"
+                class="{{$class}}"
+                type="text"
+                name="from.email"
+                value="{{$request.from.email}}"
+                placeholder="From e-mail"
+            /><br>
+            {{if(
+                is.empty($request.error.username) ||
+                $request.error.username.validate_string_length.0 === true
+            )}}
+                {{$class = 'form-control'}}
+            {{else}}
+                {{$class = 'form-control alert alert-danger'}}
+            {{/if}}
+            <input
+                id="settings-email-username"
+                class="{{$class}}"
+                type="text"
+                name="username"
+                value="{{$request.username}}"
+                placeholder="Username"
+            /><br>
+            {{if(
+                is.empty($request.error.password) ||
+                (
+                    $request.error.password.validate_string_length.0 === true &&
+                    $request.error.password.validate_string_has_number.0 === true &&
+                    $request.error.password.validate_string_has_uppercase.0 === true &&
+                    $request.error.password.validate_string_has_lowercase.0 === true &&
+                    $request.error.password.validate_string_has_symbol.0 === true
+                )
+            )}}
+                {{$class = 'form-control'}}
+            {{else}}
+                {{$class = 'form-control alert alert-danger'}}
+            {{/if}}
+            <input
+                id="settings-email-password"
+                class="form-control"
+                type="password"
+                name="password"
+                value="{{$request.password}}"
+                placeholder="Password"
+            /><br>
+        </div>
         <div class="mb-3">
         <button
             type="submit"
