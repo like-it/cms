@@ -149,7 +149,7 @@
             {{/if}}
             <input
                 id="settings-email-password"
-                class="form-control"
+                class="{{$class}}"
                 type="password"
                 name="password"
                 value="{{$request.password}}"
