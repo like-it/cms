@@ -19,7 +19,7 @@
                     "string.has.number": ">=1"
                 }
             ],
-            "from.email" : [
+            "from_email" : [
                 {
                     "is.email" : true
                 }
