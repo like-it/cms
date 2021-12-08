@@ -66,7 +66,11 @@ add.form = (menu) => {
     if(!section){
         return;
     }
-    const form = section.select('form');
+    const selected = section.select('.card-body-add');
+    if(!selected){
+        return;
+    }
+    const form = selected.select('form');
     if(form){
         form.on('submit', ( event ) => {
             event.preventDefault();
