@@ -29,7 +29,7 @@
         {{if($request.error.port.validate_string_has_number.0 === false)}}
             The Port should be a number between 1 - 65536.<br>
         {{/if}}
-        {{if($request.error.email.validate_is_email.0 === false)}}
+        {{if($request.error.from_email.validate_is_email.0 === false)}}
             The From e-mail should be an e-mail address.<br>
         {{/if}}
         {{if($request.error.username.validate_string_length.0 === false)}}
