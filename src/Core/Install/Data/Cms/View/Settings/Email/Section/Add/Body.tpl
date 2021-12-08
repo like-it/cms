@@ -52,7 +52,7 @@
         {{if($request.error.password.validate_string_has_symbol.0 === false)}}
             The password should contain a symbol character.<br>
             {{literal}}
-             `, ~, !, @, #, $, %, ^, &, *, (, ), -, _, +, =, {, }, [, ], ;, :, ', ", |, ?, \, /, <, >, ', ' & '.'<br>
+             `, ~, !, @, #, $, %, ^, &, *, (, ), -, _, +, =, {{, }}, [, ], ;, :, ', ", |, ?, \, /, <, >, ', ' & '.'<br>
              {{/literal}}
         {{/if}}
 
