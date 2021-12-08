@@ -54,8 +54,8 @@ class Settings extends Main {
         $record['uuid'] = $object->request('uuid');
         $record['host'] = $object->request('host');
         $record['port'] = $object->request('port');
-        $record['from']['name'] = $object->request('from.name');
-        $record['from']['email'] = $object->request('from.email');
+        $record['from']['name'] = $object->request('from_name');
+        $record['from']['email'] = $object->request('from_email');
         $record['username'] = $object->request('username');
         $record['password'] = $object->request('password');
         try {
