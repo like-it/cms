@@ -186,14 +186,15 @@
                 Password:
             </label>
             */
+            /*
             {{if(
                 is.empty($request.error.password) ||
                 (
-                $request.error.password.validate_string_length.0 === true &&
-                $request.error.password.validate_string_has_number.0 === true &&
-                $request.error.password.validate_string_has_uppercase.0 === true &&
-                $request.error.password.validate_string_has_lowercase.0 === true &&
-                $request.error.password.validate_string_has_symbol.0 === true
+                    $request.error.password.validate_string_length.0 === true &&
+                    $request.error.password.validate_string_has_number.0 === true &&
+                    $request.error.password.validate_string_has_uppercase.0 === true &&
+                    $request.error.password.validate_string_has_lowercase.0 === true &&
+                    $request.error.password.validate_string_has_symbol.0 === true
                 )
             )}}
                 {{$class = 'form-control'}}
@@ -208,6 +209,7 @@
                 value="{{$request.password}}"
                 placeholder="Password"
             />
+            */
             <br>
         </div>
         <div class="mb-3">
