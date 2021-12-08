@@ -18,7 +18,44 @@
         data-url="{{server.url('core')}}Settings/Email/Add/"
         data-url-error="{{route.get(route.prefix() + '-settings-email-add-body')}}"
     >
+        {{if(!is.empty($request.error))}}
+            <div class="mb-3">
+                <p class="alert alert-danger">
+        {{/if}}
+            {{if($request.error.host.validate_string_length.0 === false)}}
+                The Host should consist of 3 characters minimum.<br>
+            {{/if}}
+            {{if($request.error.port.validate_string_has_number.0 === false)}}
+                The Port should be a number between 1 - 65536.<br>
+            {{/if}}
+            {{if($request.error.email.validate_is_email.0 === false)}}
+                The From e-mail should be an e-mail address.<br>
+            {{/if}}
+            {{if($request.error.username.validate_string_length.0 === false)}}
+                The username is required.<br>
+            {/if}
+            {{if($request.error.password.validate_string_length.0 === false)}}
+                The password should be at least 8 characters long.<br>
+            {/if}
+            {{if($request.error.password.validate_string_has_number.0 === false)}}
+                The password should contain a number.<br>
+            {/if}
+            {{if($request.error.password.validate_string_has_uppercase.0 === false)}}
+                The password should contain an uppercase character.<br>
+            {/if}
+            {{if($request.error.password.validate_string_has_lowercase.0 === false)}}
+                The password should contain a lowercase character.<br>
+            {/if}
+            {{if($request.error.password.validate_string_has_symbol.0 === false)}}
+                The password should contain a symbol character.<br>
+                 `,~,!,@,#,$,%,^,&,*,(,),-,_,+,=,{,},[,],;,:,',",|,\,/,<,>,',','.','?',<br>
+            {/if}
+        {{if(!is.empty($request.error))}}
+            </p>
+            </div>
+        {{/if}}
         <div class="mb-3">
+
             /*
             <label
                 for="settings-email-host"
@@ -27,23 +64,22 @@
                 Host:
             </label>
             */
+            {{if(
+                is.empty($request.error.host) ||
+                $request.error.host.validate_string_length.0 === true
+            )}}
+                {{$class = 'form-control'}}
+            {{else}}
+                {{$class = 'form-control alert alert-danger'}}
+            {{/if}}
             <input
                 id="settings-email-host"
-                {{if($request.error.host.validate_string_length.0 === false)}}
-                class="form-control"
-                {{else}}
-                class="form-control error error-host"
-                {{/if}}
+                class="{{$class}}"
                 type="text"
                 name="host"
                 value="{{$request.host}}"
                 placeholder="Host"
             /><br>
-            {{if($request.error.host.validate_string_length.0 === false)}}
-                <span class="error error-host validate-string-length">
-                    Minimum 3 characters required.
-                </span>
-            {{/if}}
         </div>
         <div class="mb-3">
             /*
@@ -54,23 +90,22 @@
                 Port:
             </label>
             */
+            {{if(
+                is.empty($request.error.port) ||
+                $request.error.port.validate_string_has_number.0 === true
+            )}}
+                {{$class = 'form-control'}}
+            {{else}}
+                {{$class = 'form-control alert alert-danger'}}
+            {{/if}}
             <input
                 id="settings-email-port"
-                {{if($request.error.port.validate_string_has_number.0 === false)}}
-                class="form-control"
-                {{else}}
-                class="form-control error error-host"
-                {{/if}}
+                class="{{$class}}"
                 type="text"
                 name="port"
                 value="{{$request.port}}"
                 placeholder="Port"
             /><br>
-            {{if($request.error.port.validate_string_has_number.0 === false)}}
-                <span class="error error-host validate-string-has-number">
-                    The port should be a number.
-                </span>
-            {{/if}}
         </div>
         <div class="mb-3">
             /*
@@ -99,9 +134,17 @@
                 From e-mail:
             </label>
             */
+            {{if(
+                is.empty($request.error.from.email) ||
+                $request.error.from.email.is_email.0 === true
+            )}}
+                {{$class = 'form-control'}}
+            {{else}}
+                {{$class = 'form-control alert alert-danger'}}
+            {{/if}}
             <input
                 id="settings-email-from-email"
-                class="form-control"
+                class="{{$class}}"
                 type="text"
                 name="from.email"
                 value="{{$request.from.email}}"
@@ -117,9 +160,17 @@
                 Username:
             </label>
             */
+            {{if(
+                is.empty($request.error.username) ||
+                $request.error.username.validate_string_length.0 === true
+            )}}
+                {{$class = 'form-control'}}
+            {{else}}
+                {{$class = 'form-control alert alert-danger'}}
+            {{/if}}
             <input
                 id="settings-email-username"
-                class="form-control"
+                class="{{$class}}"
                 type="text"
                 name="username"
                 value="{{$request.username}}"
@@ -135,6 +186,20 @@
                 Password:
             </label>
             */
+            {{if(
+                is.empty($request.error.password) ||
+                (
+                $request.error.password.validate_string_length.0 === true &&
+                $request.error.password.validate_string_has_number.0 === true &&
+                $request.error.password.validate_string_has_uppercase.0 === true &&
+                $request.error.password.validate_string_has_lowercase.0 === true &&
+                $request.error.password.validate_string_has_symbol.0 === true
+                )
+            )}}
+                {{$class = 'form-control'}}
+            {{else}}
+                {{$class = 'form-control alert alert-danger'}}
+            {{/if}}
             <input
                 id="settings-email-password"
                 class="form-control"
