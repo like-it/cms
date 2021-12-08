@@ -22,7 +22,7 @@
             <div class="mb-3">
                 <p class="alert alert-danger">
         {{/if}}
-        /*
+
         {{if($request.error.host.validate_string_length.0 === false)}}
             The Host should consist of 3 characters minimum.<br>
         {{/if}}
@@ -35,6 +35,7 @@
         {{if($request.error.username.validate_string_length.0 === false)}}
             The username is required.<br>
         {{/if}}
+        /*
         {{if($request.error.password.validate_string_length.0 === false)}}
             The password should be at least 8 characters long.<br>
         {{/if}}
