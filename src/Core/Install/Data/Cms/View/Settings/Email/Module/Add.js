@@ -20,6 +20,47 @@ add.body = () => {
     }
 }
 
+add.change = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const form = section.select('form');
+    if(!form){
+        return;
+    }
+    let input = form.select('input[type="text"]');
+    if(is.nodeList(input)){
+        let index;
+        for(index=0; index < input.length; index++){
+            let node = input[index];
+            node.on('change', (event) => {
+                node.removeClass('alert-danger');
+            });
+        }
+    } else {
+        let node = input;
+        node.on('change', (event) => {
+            node.removeClass('alert-danger');
+        });
+    }
+    input = form.select('input[type="password"]');
+    if(is.nodeList(input)){
+        let index;
+        for(index=0; index < input.length; index++){
+            let node = input[index];
+            node.on('change', (event) => {
+                node.removeClass('alert-danger');
+            });
+        }
+    } else {
+        let node = input;
+        node.on('change', (event) => {
+            node.removeClass('alert-danger');
+        });
+    }
+}
+
 add.form = (menu) => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -92,6 +133,7 @@ add.form = (menu) => {
 
 add.init = () => {
     add.body();
+    add.change();
     add.form({
         select : [
             {

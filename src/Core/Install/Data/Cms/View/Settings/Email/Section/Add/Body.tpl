@@ -52,7 +52,7 @@
         {{if($request.error.password.validate_string_has_symbol.0 === false)}}
             The password should contain a symbol character.<br>
             {literal}
-             `, ~, !, @, #, $, %, ^, &, *, (, ), -, _, +, =, {, }, [, ], ;, :, ', ", |, ?, \, /, <, >, ', ' and '.'<br>
+             Valid symbols are ` ~ ! @ # $ % ^ & * ( ) - _ + = { } [ ] ; : ' " | ? \ / < > , .<br>
              {/literal}
         {{/if}}
 
@@ -67,7 +67,7 @@
             )}}
                 {{$class = 'form-control'}}
             {{else}}
-                {{$class = 'form-control alert alert-danger'}}
+                {{$class = 'form-control alert-danger'}}
             {{/if}}
             <input
                 id="settings-email-host"
@@ -83,7 +83,7 @@
             )}}
                 {{$class = 'form-control'}}
             {{else}}
-                {{$class = 'form-control alert alert-danger'}}
+                {{$class = 'form-control alert-danger'}}
             {{/if}}
             <input
                 id="settings-email-port"
@@ -107,7 +107,7 @@
             )}}
                 {{$class = 'form-control'}}
             {{else}}
-                {{$class = 'form-control alert alert-danger'}}
+                {{$class = 'form-control alert-danger'}}
             {{/if}}
             <input
                 id="settings-email-from-email"
@@ -123,7 +123,7 @@
             )}}
                 {{$class = 'form-control'}}
             {{else}}
-                {{$class = 'form-control alert alert-danger'}}
+                {{$class = 'form-control alert-danger'}}
             {{/if}}
             <input
                 id="settings-email-username"
@@ -145,7 +145,7 @@
             )}}
                 {{$class = 'form-control'}}
             {{else}}
-                {{$class = 'form-control alert alert-danger'}}
+                {{$class = 'form-control alert-danger'}}
             {{/if}}
             <input
                 id="settings-email-password"
