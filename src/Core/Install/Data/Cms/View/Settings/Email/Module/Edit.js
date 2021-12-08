@@ -150,7 +150,7 @@ edit.init = () => {
     edit.form({
         select : [
             {
-                name : ".settings-email-{{$request.node.uuid}} i",
+                name : ".settings-email-edit-{{$request.node.uuid}} i",
                 event : new MouseEvent("click"),
                 hidden : true
             },
