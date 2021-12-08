@@ -247,7 +247,7 @@
         "module" : "settings",
         "submodule" : "email",
         "command" : "command",
-        "path": "Settings/Email/{$uuid}",
+        "path": "Settings/Email/{$node.uuid}",
         "method": [
             "GET",
             "PUT",
