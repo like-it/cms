@@ -75,7 +75,7 @@
                 type="text"
                 name="host"
                 value="{{$request.host}}"
-                placeholder="Host"
+                placeholder="Host*"
             /><br>
             {{if(
                 is.empty($request.error.port) ||
@@ -91,7 +91,7 @@
                 type="text"
                 name="port"
                 value="{{$request.port}}"
-                placeholder="Port"
+                placeholder="Port*"
             /><br>
             <input
                 id="settings-email-from-name"
@@ -115,7 +115,7 @@
                 type="text"
                 name="from_email"
                 value="{{$request.from_email}}"
-                placeholder="From e-mail"
+                placeholder="From e-mail*"
             /><br>
             {{if(
                 is.empty($request.error.username) ||
@@ -131,7 +131,7 @@
                 type="text"
                 name="username"
                 value="{{$request.username}}"
-                placeholder="Username"
+                placeholder="Username*"
             /><br>
             {{if(
                 is.empty($request.error.password) ||
@@ -153,7 +153,7 @@
                 type="password"
                 name="password"
                 value="{{$request.password}}"
-                placeholder="Password"
+                placeholder="Password*"
             /><br>
         </div>
         <div class="mb-3">
