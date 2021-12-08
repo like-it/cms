@@ -22,6 +22,7 @@
             <div class="mb-3">
                 <p class="alert alert-danger">
         {{/if}}
+        /*
         {{if($request.error.host.validate_string_length.0 === false)}}
             The Host should consist of 3 characters minimum.<br>
         {{/if}}
@@ -50,6 +51,7 @@
             The password should contain a symbol character.<br>
              `, ~, !, @, #, $, %, ^, &, *, (, ), -, _, +, =, {, }, [, ], ;, :, ', ", |, ?, \, /, <, >, ', ' & '.'<br>
         {{/if}}
+        */
         {{if(!is.empty($request.error))}}
             </p>
             </div>
