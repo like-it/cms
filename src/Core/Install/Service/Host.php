@@ -249,7 +249,7 @@ class Host {
         $tree = Token::tree($add->path);
         foreach($tree as $nr => $record){
             if($record['type'] === Token::TYPE_VARIABLE){
-                $key .= '-' . $record['variable']['attribute'];
+                $key .= '-' . str_replace('.', '-', $record['variable']['attribute']);
             }
         }
         return $key;
