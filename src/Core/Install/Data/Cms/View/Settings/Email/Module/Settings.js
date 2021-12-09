@@ -269,15 +269,11 @@ settings.init = () => {
 
 ready(() => {
     require(
-        [
-            root() + 'Dialog/Css/Dialog.css?' + version(),
-        ],
-        () => {
-            settings.init();
-        });
-
-
-
-
-
+    [
+        root() + 'Dialog/Css/Dialog.css?' + version(),
+        root() + 'Dialog/Css/Dialog.Delete.css?' + version()
+    ],
+    () => {
+        settings.init();
+    });
 });
