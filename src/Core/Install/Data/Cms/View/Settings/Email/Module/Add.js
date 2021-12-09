@@ -137,7 +137,7 @@ add.focus = () => {
     if(!section){
         return;
     }
-    const selected = section.select('.card-body-' + "{{$request.node.uuid}}");
+    const selected = section.select('.card-body-add');
     if(!selected){
         return;
     }
