@@ -144,6 +144,7 @@ settings.delete = (target) => {
                     section: section,
                     target: target,
                 });
+                /*
                 if(node.data('has', 'url')){
                     let data = {
                         request : {
@@ -155,6 +156,7 @@ settings.delete = (target) => {
                         menu.dispatch(section, target);
                     });
                 }
+                 */
             });
         }
     } else {
@@ -162,6 +164,12 @@ settings.delete = (target) => {
         if(node){
             node.on('click', (event) => {
                 //make dialog delete with are you sure.
+                settings.deleteDialog({
+                    node: node,
+                    section: section,
+                    target: target,
+                });
+                /*
                 if(node.data('has', 'url')){
                     let data = {
                         request : {
@@ -173,6 +181,7 @@ settings.delete = (target) => {
                         menu.dispatch(section, target);
                     });
                 }
+                 */
             });
         }
     }
