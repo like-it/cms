@@ -1,7 +1,7 @@
 {R3M}
 import user from "/Module/User.js";
 import menu from "/Module/Menu.js";
-import menu from "/Module/Create.js";
+import create from "/Module/Create.js";
 import { getSectionByName } from "/Module/Section.js";
 
 let settings = {};
