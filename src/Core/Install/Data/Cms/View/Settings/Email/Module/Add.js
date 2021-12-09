@@ -41,9 +41,11 @@ add.change = () => {
         }
     } else {
         let node = input;
-        node.on('change', (event) => {
-            node.removeClass('alert-danger');
-        });
+        if(node){
+            node.on('change', (event) => {
+                node.removeClass('alert-danger');
+            });
+        }
     }
     input = form.select('input[type="password"]');
     if(is.nodeList(input)){
@@ -56,9 +58,11 @@ add.change = () => {
         }
     } else {
         let node = input;
-        node.on('change', (event) => {
-            node.removeClass('alert-danger');
-        });
+        if(node){
+            node.on('change', (event) => {
+                node.removeClass('alert-danger');
+            });
+        }
     }
 }
 

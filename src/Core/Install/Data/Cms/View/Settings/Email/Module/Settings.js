@@ -28,16 +28,18 @@ settings.doubleClick = () => {
         }
     } else {
         let node = list;
-        node.on('dblclick', (event) => {
-            if(node.data('has', 'url')){
-                header('authorization', 'Bearer ' + user.token());
-                request(node.data('url'), null, (url, response) => {
-                    request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+        if(node){
+            node.on('dblclick', (event) => {
+                if(node.data('has', 'url')){
+                    header('authorization', 'Bearer ' + user.token());
+                    request(node.data('url'), null, (url, response) => {
+                        request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
 
+                        });
                     });
-                });
-            }
-        });
+                }
+            });
+        }
     }
 }
 
@@ -64,16 +66,18 @@ settings.edit = () => {
         }
     } else {
         let node = list;
-        node.on('click', (event) => {
-            if(node.data('has', 'url')){
-                header('authorization', 'Bearer ' + user.token());
-                request(node.data('url'), null, (url, response) => {
-                    request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+        if(node){
+            node.on('click', (event) => {
+                if(node.data('has', 'url')){
+                    header('authorization', 'Bearer ' + user.token());
+                    request(node.data('url'), null, (url, response) => {
+                        request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
 
+                        });
                     });
-                });
-            }
-        });
+                }
+            });
+        }
     }
 }
 
@@ -104,20 +108,22 @@ settings.delete = (target) => {
         }
     } else {
         let node = list;
-        node.on('click', (event) => {
-            //make dialog delete with are you sure.
-            if(node.data('has', 'url')){
-                let data = {
-                    request : {
-                        method : node.data('request-method') ? node.data('request-method') : "DELETE"
-                    }
-                };
-                header('authorization', 'Bearer ' + user.token());
-                request(node.data('url'), data, (url, response) => {
-                    menu.dispatch(section, target);
-                });
-            }
-        });
+        if(node){
+            node.on('click', (event) => {
+                //make dialog delete with are you sure.
+                if(node.data('has', 'url')){
+                    let data = {
+                        request : {
+                            method : node.data('request-method') ? node.data('request-method') : "DELETE"
+                        }
+                    };
+                    header('authorization', 'Bearer ' + user.token());
+                    request(node.data('url'), data, (url, response) => {
+                        menu.dispatch(section, target);
+                    });
+                }
+            });
+        }
     }
 }
 
@@ -142,14 +148,16 @@ settings.default = (target) => {
         }
     } else {
         let node = list;
-        node.on('click', (event) => {
-            if(node.data('has', 'url')){
-                header('authorization', 'Bearer ' + user.token());
-                request(node.data('url'), null, (url, response) => {
-                    menu.dispatch(section, target);
-                });
-            }
-        });
+        if(node){
+            node.on('click', (event) => {
+                if(node.data('has', 'url')){
+                    header('authorization', 'Bearer ' + user.token());
+                    request(node.data('url'), null, (url, response) => {
+                        menu.dispatch(section, target);
+                    });
+                }
+            });
+        }
     }
 };
 
