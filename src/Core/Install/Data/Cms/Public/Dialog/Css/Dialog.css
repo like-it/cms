@@ -118,6 +118,7 @@
     width: 50%;
     right: 25%;
     height: 150px;
+    top: calc(50% - 75px);
 }
 
 .dialog .body {
