@@ -1,6 +1,9 @@
 <tbody>
 {{for.each($request.nodeList as $uuid => $node)}}
-<tr>
+<tr
+    data-url="{{server.url('core')}}Settings/Email/{{$uuid}}"
+    data-frontend-url="{{route.get(route.prefix() + '-settings-email-edit-body')}}"
+>
     {{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Table/Td/Node/Host.tpl')}}
     {{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Table/Td/Node/Port.tpl')}}
     {{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Table/Td/Node/From.Email.tpl')}}

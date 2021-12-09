@@ -4,6 +4,28 @@ import { getSectionByName } from "/Module/Section.js";
 
 let settings = {};
 
+settings.doubleClick = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    let list = section.select('.card-body-settings tr');
+    let index;
+    for(index=0; index < list.length; index++){
+        let node = list[index];
+        node.on('dblclick', (event) => {
+            if(node.data('has', 'url')){
+                header('authorization', 'Bearer ' + user.token());
+                request(node.data('url'), null, (url, response) => {
+                    request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+
+                    });
+                });
+            }
+        });
+    }
+}
+
 settings.edit = () => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -89,6 +111,7 @@ settings.default = (menu) => {
 };
 
 settings.init = () => {
+    settings.doubleClick();
     settings.default({
         select : ".settings-email-settings",
         event : new MouseEvent("dblclick")
