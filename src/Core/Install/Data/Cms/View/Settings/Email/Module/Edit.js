@@ -159,8 +159,9 @@ edit.onUpdate = () => {
     if(!input){
         return;
     }
+    console.log(input);
     input.on('change', (event) => {
-        const link = section.select('settings-email-edit-' + "{{$request.node.uuid}}");
+        const link = section.select('.settings-email-edit-' + "{{$request.node.uuid}}");
         if(link){
             const title = link.select('.title');
             if(title){
@@ -169,7 +170,7 @@ edit.onUpdate = () => {
         }
     });
     input.on('keypress', (event) => {
-        const link = section.select('settings-email-edit-' + "{{$request.node.uuid}}");
+        const link = section.select('.settings-email-edit-' + "{{$request.node.uuid}}");
         if(link){
             const title = link.select('.title');
             if(title){
