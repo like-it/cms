@@ -1,6 +1,6 @@
 {R3M}
 <input
-    id="settings-email-host"
+    id="settings-email-update"
     type="hidden"
     name="request-method"
     value="PUT"
