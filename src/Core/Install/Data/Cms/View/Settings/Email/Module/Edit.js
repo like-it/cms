@@ -92,6 +92,7 @@ edit.form = (menu) => {
                         name: "error",
                         value: response.error
                     });
+                    console.log(form.data('url-error'));
                     request(form.data('url-error'), data, ( urlError, responseError ) => {
 
                     });
