@@ -13,6 +13,7 @@ $request.error.password.validate_string_has_symbol.0 === true
 {{else}}
 {{$class = 'form-control alert-danger'}}
 {{/if}}
+<label for="settings-email-from-password">Password*</label>
 <input
     id="settings-email-password"
     class="{{$class}}"

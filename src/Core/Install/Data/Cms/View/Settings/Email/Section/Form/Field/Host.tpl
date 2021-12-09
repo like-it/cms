@@ -7,6 +7,7 @@ $request.error.host.validate_string_length.0 === true
 {{else}}
 {{$class = 'form-control alert-danger'}}
 {{/if}}
+<label for="settings-email-from-host">Host*</label>
 <input
     id="settings-email-host"
     class="{{$class}}"

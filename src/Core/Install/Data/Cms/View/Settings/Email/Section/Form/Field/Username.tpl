@@ -7,6 +7,7 @@ $request.error.username.validate_string_length.0 === true
 {{else}}
 {{$class = 'form-control alert-danger'}}
 {{/if}}
+<label for="settings-email-from-username">Username*</label>
 <input
     id="settings-email-username"
     class="{{$class}}"
