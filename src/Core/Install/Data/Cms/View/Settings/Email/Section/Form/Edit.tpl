@@ -8,6 +8,7 @@
 >
     {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Error.tpl')}}
     <div class="mb-3">
+        {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Field/Uuid.tpl')}}
         {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Field/Update.tpl')}}
         {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Field/Host.tpl')}}
         {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Field/Port.tpl')}}
