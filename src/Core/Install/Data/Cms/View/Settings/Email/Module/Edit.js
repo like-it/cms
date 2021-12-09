@@ -26,7 +26,7 @@ edit.title = () => {
     const a = create('a', 'nav-link settings-email-edit-' + "{{$request.node.uuid}}");
     a.data('frontend-url', "");
     a.data('url', "");
-    a.html("{{$request.node.from_name}} <i class=\"fas fa-window-close\"></i>");
+    a.html("<span class='title'>{{$request.node.from_email}}</span><i class=\"fas fa-window-close\"></i>");
     li.append(a);
     nav.append(li);
     a.on('click', (event) => {
@@ -142,6 +142,47 @@ edit.form = (menu) => {
     }
 }
 
+edit.onUpdate = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const selected = section.select('.card-body-' + "{{$request.node.uuid}}");
+    if(!selected){
+        return;
+    }
+    const form = selected.select('form');
+    if(!form){
+        return;
+    }
+    const input = form.select('input[name="node.from_email"]');
+    if(!input){
+        return;
+    }
+    input.on('change', (event) => {
+        const link = section.select('settings-email-edit-' + "{{$request.node.uuid}}");
+        if(link){
+            const title = link.select('.title');
+            if(title){
+                title.html(input.value);
+            }
+        }
+    });
+    input.on('keypress', (event) => {
+        const link = section.select('settings-email-edit-' + "{{$request.node.uuid}}");
+        if(link){
+            const title = link.select('.title');
+            if(title){
+                title.html(input.value);
+            }
+        }
+    });
+
+
+
+
+}
+
 edit.init = () => {
     edit.body();
     edit.title();
@@ -158,6 +199,7 @@ edit.init = () => {
             }
         ]
     });
+    edit.onUpdate();
 };
 
 ready(() => {
