@@ -121,7 +121,7 @@
     top: calc(50% - 75px);
 }
 
-.dialog .body {
+.dialog-delete .body {
     height: 70px;
     background: rgba(255, 255, 255, 1);
 }
