@@ -113,16 +113,16 @@ settings.deleteDialog = (data) => {
     }
     const section = data.section;
     const dialog = create('div', data.className);
-    const header = create('div', 'head mb-3');
+    const header = create('div', 'head');
     const body = create('div', 'body mb-3');
-    const footer = create('div', 'footer mb-3');
+    const footer = create('div', 'footer');
     header.html('<h1>' + data?.title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
     if(!is.empty(data.node.data('name'))){
-        body.html('<p>Are you sure you want to delete this item: ' + data.node.data('name') + '.<br></p>');
+        body.html('<p>Are you sure you want to delete this item: ' + data.node.data('name') + '?<br></p>');
     } else {
-        body.html('<p>Are you sure you want to delete this item.<br></p>');
+        body.html('<p>Are you sure you want to delete this item?<br></p>');
     }
-    footer.html('<span><button type="button" class="btn btn-primary">Yes</button></span><span><button type="button" class="btn btn-primary">No</button></span>');
+    footer.html('<div class="w-50"><button type="button" class="btn btn-primary button-submit">Yes</button></div><div class="w-50"><button type="button" class="btn btn-primary button-cancel">No</button></div>');
     dialog.appendChild(header);
     dialog.appendChild(body);
     dialog.appendChild(footer);
