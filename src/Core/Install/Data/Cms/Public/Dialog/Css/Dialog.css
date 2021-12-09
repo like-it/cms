@@ -120,6 +120,11 @@
     height: 150px;
 }
 
+.dialog .body {
+    height: 70px;
+    background: rgba(255, 255, 255, 1);
+}
+
 .dialog .footer {
     width: 100%;
     height: 40px;

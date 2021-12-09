@@ -114,7 +114,7 @@ settings.deleteDialog = (data) => {
     const section = data.section;
     const dialog = create('div', data.className);
     const header = create('div', 'head');
-    const body = create('div', 'body mb-3');
+    const body = create('div', 'body');
     const footer = create('div', 'footer');
     header.html('<h1>' + data?.title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
     if(!is.empty(data.node.data('name'))){
