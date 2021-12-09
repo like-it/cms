@@ -159,7 +159,6 @@ edit.onUpdate = () => {
     if(!input){
         return;
     }
-    console.log(input);
     input.on('change', (event) => {
         const link = section.select('.settings-email-edit-' + "{{$request.node.uuid}}");
         if(link){
@@ -178,10 +177,6 @@ edit.onUpdate = () => {
             }
         }
     });
-
-
-
-
 }
 
 edit.init = () => {
