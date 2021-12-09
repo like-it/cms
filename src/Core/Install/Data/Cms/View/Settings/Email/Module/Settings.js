@@ -122,7 +122,7 @@ settings.deleteDialog = (data) => {
     } else {
         body.html('<p>Are you sure you want to delete this item?<br></p>');
     }
-    footer.html('<div class="w-50"><button type="button" class="btn btn-primary button-submit">Yes</button></div><div class="w-50"><button type="button" class="btn btn-primary button-cancel">No</button></div>');
+    footer.html('<div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">Yes</button></div><div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-cancel">No</button></div>');
     dialog.appendChild(header);
     dialog.appendChild(body);
     dialog.appendChild(footer);
