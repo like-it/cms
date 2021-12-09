@@ -63,19 +63,10 @@ class User extends View {
                 }
             }
         }
-
-        /*
-        $name = Index::name(__FUNCTION__, __CLASS__, '/');
-        try {
-            $url = Index::locate($object, $name);
-            return Index::response($object, $url);
-        } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception){
-            return $exception->getMessage() . "\n";
-        }
-        */
     }
 
-    public static function login(App $object){
+    public static function login(App $object): Exception|Response
+    {
         try {
             $is_blocked = Service::is_blocked($object);
             if($is_blocked){
@@ -88,7 +79,8 @@ class User extends View {
         }
     }
 
-    public static function current(App $object){
+    public static function current(App $object): Exception|AuthorizationException|Response
+    {
         try {
             return Service::current($object);
         } catch (AuthorizationException $exception){

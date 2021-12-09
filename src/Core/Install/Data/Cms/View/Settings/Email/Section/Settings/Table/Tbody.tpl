@@ -8,7 +8,7 @@
     {{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Table/Td/Node/From.Email.tpl')}}
     {{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Table/Td/Node/Host.tpl')}}
     {{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Table/Td/Node/Port.tpl')}}
-    {{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Table/Td/Options/Options.tpl')}}
+    {{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Table/Td/Node/Options.tpl')}}
 </tr>
 {{/for.each}}
 </tbody>

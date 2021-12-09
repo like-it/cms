@@ -1,6 +1,7 @@
 {R3M}
 import user from "/Module/User.js";
 import menu from "/Module/Menu.js";
+import menu from "/Module/Create.js";
 import { getSectionByName } from "/Module/Section.js";
 
 let settings = {};
@@ -81,6 +82,51 @@ settings.edit = () => {
     }
 }
 
+settings.deleteDialog = (data) => {
+    if(!data?.node){
+        return;
+    }
+    if(!data?.section){
+        const selection = data.node.data('select');
+        if(selection){
+            data.section = select(selection);
+            if(!data.section){
+                return;
+            }
+        } else {
+            return;
+        }
+    }
+    if(!data?.target){
+        return;
+    }
+    if(!data?.className){
+        data.className = 'dialog dialog-delete';
+    }
+    if(!data?.title){
+        data.title = 'Delete';
+    }
+    if(!is.empty(data.node.data('title'))){
+        data.title = data.node.data('title');
+    }
+    const section = data.section;
+    const dialog = create('div', data.className);
+    const header = create('div', 'dialog-header mb-3');
+    const body = create('div', 'dialog-body mb-3');
+    const footer = create('div', 'dialog-footer mb-3');
+    header.html('<h1>' + data?.title + '</h1><span><i class="fas fa-window-close"></i></span>');
+    if(is.empty(data.node.data('name'))){
+        body.html('<p>Are you sure you want to delete this item: ' + data.node?.data('name') + '.<br></p>');
+    } else {
+        body.html('<p>Are you sure you want to delete this item.<br></p>');
+    }
+    footer.html('<span><button type="button">Yes</button></span><span><button type="button">No</button></span>');
+    dialog.appendChild(header);
+    dialog.appendChild(body);
+    dialog.appendChild(footer);
+    section.appendChild(dialog);
+}
+
 settings.delete = (target) => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -93,6 +139,11 @@ settings.delete = (target) => {
             let node = list[index];
             node.on('click', (event) => {
                 //make dialog delete with are you sure.
+                settings.deleteDialog({
+                    node: node,
+                    section: section,
+                    target: target,
+                });
                 if(node.data('has', 'url')){
                     let data = {
                         request : {
