@@ -169,7 +169,7 @@ edit.onUpdate = () => {
             }
         }
     });
-    input.on('keypress', (event) => {
+    input.on('keyup', (event) => {
         const link = section.select('.settings-email-edit-' + "{{$request.node.uuid}}");
         if(link){
             const title = link.select('.title');
