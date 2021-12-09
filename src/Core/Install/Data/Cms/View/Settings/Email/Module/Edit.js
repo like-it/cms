@@ -26,7 +26,7 @@ edit.title = () => {
     const a = create('a', 'nav-link settings-email-edit-' + "{{$request.node.uuid}}");
     a.data('frontend-url', "");
     a.data('url', "");
-    a.html("{{$request.node.from.name}} <i class=\"fas fa-window-close\"></i>");
+    a.html("{{$request.node.from_name}} <i class=\"fas fa-window-close\"></i>");
     li.append(a);
     nav.append(li);
     a.on('click', (event) => {
@@ -97,7 +97,6 @@ edit.form = (menu) => {
                     });
                     console.log(response.error);
                 } else {
-                    console.log(menu?.select);
                     if(
                         is.array(menu?.select)
                     ){
@@ -110,9 +109,7 @@ edit.form = (menu) => {
                             ){
                                 const menuItem = section.select(item.name);
                                 if(menuItem){
-                                    // let selected = section.select('.card-body-add');
                                     if(
-                                        // selected &&
                                         item?.hidden
                                     ){
                                         menuItem.data('is-hidden', item?.hidden);
@@ -121,12 +118,6 @@ edit.form = (menu) => {
                                 }
                             }
                         }
-
-                        /*
-                        if(menuItem){
-                            menuItem.trigger('click');
-                        }
-                         */
                     } else {
                         if(
                             menu?.select &&
@@ -134,6 +125,11 @@ edit.form = (menu) => {
                         ){
                             const menuItem = section.select(menu.select);
                             if(menuItem){
+                                if(
+                                    menu?.hidden
+                                ){
+                                    menuItem.data('is-hidden', menu?.hidden);
+                                }
                                 menuItem.dispatchEvent(menu.event);
                             }
                         }
@@ -150,7 +146,7 @@ edit.init = () => {
     edit.form({
         select : [
             {
-                name : ".settings-email-edit-{{$request.node.uuid}} i",
+                name : ".settings-email-edit-{{$request.node.uuid}} .fa-window-close",
                 event : new MouseEvent("click"),
                 hidden : true
             },

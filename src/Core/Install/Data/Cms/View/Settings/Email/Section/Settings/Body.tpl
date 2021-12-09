@@ -10,8 +10,7 @@
     {{require($controller.dir.view + $controller.title + '/Email/Module/Settings.js')}}
 {{/script}}
 <div class="card-body h-100 card-body-settings">
-
-    {{if(!is.empty($request.email))}}
+    {{if(!is.empty($request.nodeList))}}
         <table class="table">
             <thead>
             <tr>
@@ -23,14 +22,14 @@
             </tr>
             </thead>
             <tbody>
-            {{for.each($request.email as $uuid => $account)}}
+            {{for.each($request.nodeList as $uuid => $account)}}
                 <tr>
                     <td scope="row">{{$account.host}}</td>
                     <td>{{$account.port}}</td>
                     <td>
-                        {{$account.from.email}}
+                        {{$account.from_email}}
                     </td>
-                    <td>{{$account.from.name}}</td>
+                    <td>{{$account.from_name}}</td>
                     <td>
                         {{if(!is.empty($account.isDefault))}}
                         <i class="fas fa-award settings-email-settings-is-default" title="Default account"></i>

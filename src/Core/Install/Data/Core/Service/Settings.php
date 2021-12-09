@@ -98,7 +98,7 @@ class Settings extends Main {
 
         $response = [];
         //make nodeList or list
-        $response['email'] = $data->data('email');
+        $response['nodeList'] = $data->data('email');
         return new Response($response, Response::TYPE_JSON);
     }
 

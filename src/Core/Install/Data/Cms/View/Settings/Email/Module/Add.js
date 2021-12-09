@@ -100,9 +100,7 @@ add.form = (menu) => {
                             ){
                                 const menuItem = section.select(item.name);
                                 if(menuItem){
-                                    // let selected = section.select('.card-body-add');
                                     if(
-                                        // selected &&
                                         item?.hidden
                                     ){
                                         menuItem.data('is-hidden', item?.hidden);
@@ -111,12 +109,6 @@ add.form = (menu) => {
                                 }
                             }
                         }
-
-                        /*
-                        if(menuItem){
-                            menuItem.trigger('click');
-                        }
-                         */
                     } else {
                         if(
                             menu?.select &&
@@ -124,6 +116,11 @@ add.form = (menu) => {
                         ){
                             const menuItem = section.select(menu.select);
                             if(menuItem){
+                                if(
+                                    menu?.hidden
+                                ){
+                                    menuItem.data('is-hidden', menu?.hidden);
+                                }
                                 menuItem.dispatchEvent(menu.event);
                             }
                         }
