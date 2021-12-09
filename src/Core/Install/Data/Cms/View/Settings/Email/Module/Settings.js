@@ -127,6 +127,12 @@ settings.deleteDialog = (data) => {
     dialog.appendChild(body);
     dialog.appendChild(footer);
     section.appendChild(dialog);
+    const close = header.select('.fa-window-close');
+    if(close){
+        close.on('click', (event) => {
+            dialog.remove();
+        });
+    }
     const submit = footer.select('.button-submit');
     const cancel = footer.select('.button-cancel');
     if(cancel){
