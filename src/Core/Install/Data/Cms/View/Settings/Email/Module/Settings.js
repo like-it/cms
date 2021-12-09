@@ -129,7 +129,7 @@ settings.deleteDialog = (data) => {
     dialog.appendChild(body);
     dialog.appendChild(footer);
     section.appendChild(dialog);
-    const close = header.select('.fa-window-close');
+    const close = head.select('.fa-window-close');
     if(close){
         close.on('click', (event) => {
             dialog.remove();
