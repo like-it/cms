@@ -113,13 +113,14 @@ settings.deleteDialog = (data) => {
     }
     const section = data.section;
     const target = data.target;
+    const node = data.node;
     const dialog = create('div', data.className);
     const header = create('div', 'head');
     const body = create('div', 'body');
     const footer = create('div', 'footer');
     header.html('<h1>' + data?.title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
-    if(!is.empty(data.node.data('name'))){
-        body.html('<p>Are you sure you want to delete this item: ' + data.node.data('name') + '?<br></p>');
+    if(!is.empty(node.data('name'))){
+        body.html('<p>Are you sure you want to delete this item: ' + node.data('name') + '?<br></p>');
     } else {
         body.html('<p>Are you sure you want to delete this item?<br></p>');
     }
