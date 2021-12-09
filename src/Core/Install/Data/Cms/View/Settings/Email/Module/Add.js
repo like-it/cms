@@ -132,6 +132,26 @@ add.form = (menu) => {
     }
 }
 
+add.focus = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const selected = section.select('.card-body-' + "{{$request.node.uuid}}");
+    if(!selected){
+        return;
+    }
+    const form = selected.select('form');
+    if(!form){
+        return;
+    }
+    const input = form.select('input[name="node.from_name"]');
+    if(!input){
+        return;
+    }
+    input.focus();
+}
+
 add.init = () => {
     add.body();
     add.change();
@@ -148,6 +168,7 @@ add.init = () => {
             }
         ]
     });
+    add.focus();
 };
 
 ready(() => {
