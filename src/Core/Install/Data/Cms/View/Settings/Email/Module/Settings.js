@@ -68,7 +68,7 @@ settings.delete = (target) => {
                 };
                 header('authorization', 'Bearer ' + user.token());
                 request(node.data('url'), data, (url, response) => {
-                    menu.dispatch(target);
+                    menu.dispatch(section, target);
                 });
             }
         });
@@ -88,7 +88,7 @@ settings.default = (target) => {
             if(node.data('has', 'url')){
                 header('authorization', 'Bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
-                    menu.dispatch(target);
+                    menu.dispatch(section, target);
                 });
             }
         });

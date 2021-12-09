@@ -100,7 +100,7 @@ edit.form = (target) => {
                     });
                     console.log(response.error);
                 } else {
-                    menu.dispatch(target);
+                    menu.dispatch(section, target);
                 }
             });
         });

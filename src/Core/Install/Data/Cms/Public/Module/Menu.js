@@ -1,6 +1,6 @@
 let menu = {};
 
-menu.dispatch = (data) => {
+menu.dispatch = (section, data) => {
     if(
         is.array(data?.select)
     ){
