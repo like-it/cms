@@ -115,17 +115,17 @@ settings.deleteDialog = (data) => {
     const target = data.target;
     const node = data.node;
     const dialog = create('div', data.className);
-    const header = create('div', 'head');
+    const head = create('div', 'head');
     const body = create('div', 'body');
     const footer = create('div', 'footer');
-    header.html('<h1>' + data?.title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
+    head.html('<h1>' + data?.title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
     if(!is.empty(node.data('name'))){
         body.html('<p>Are you sure you want to delete this item: ' + node.data('name') + '?<br></p>');
     } else {
         body.html('<p>Are you sure you want to delete this item?<br></p>');
     }
     footer.html('<div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">Yes</button></div><div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-cancel">No</button></div>');
-    dialog.appendChild(header);
+    dialog.appendChild(head);
     dialog.appendChild(body);
     dialog.appendChild(footer);
     section.appendChild(dialog);
