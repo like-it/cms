@@ -112,6 +112,7 @@ settings.deleteDialog = (data) => {
         data.title = data.node.data('title');
     }
     const section = data.section;
+    const target = data.target;
     const dialog = create('div', data.className);
     const header = create('div', 'head');
     const body = create('div', 'body');
@@ -134,6 +135,22 @@ settings.deleteDialog = (data) => {
         });
     }
     const submit = footer.select('.button-submit');
+    if(submit){
+        submit.on('click', (event) => {
+            if(node.data('has', 'url')){
+                let data = {
+                    request : {
+                        method : node.data('request-method') ? node.data('request-method') : "DELETE"
+                    }
+                };
+                header('authorization', 'Bearer ' + user.token());
+                request(node.data('url'), data, (url, response) => {
+                    menu.dispatch(section, target);
+                });
+            }
+            dialog.remove();
+        });
+    }
     const cancel = footer.select('.button-cancel');
     if(cancel){
         cancel.on('click', (event) => {
