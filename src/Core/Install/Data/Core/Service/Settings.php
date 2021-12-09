@@ -144,8 +144,6 @@ class Settings extends Main {
                     $test = $data->get('email');
                     if(empty($test) || Core::object_is_empty($test)){
                         $record->isDefault = true;
-                    } else {
-                        dd($test);
                     }
                     $data->set('email.' . $record->uuid, $record);
                     $data->write($url);
