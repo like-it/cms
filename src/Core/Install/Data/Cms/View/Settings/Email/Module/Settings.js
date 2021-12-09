@@ -3,6 +3,8 @@ import user from "/Module/User.js";
 import menu from "/Module/Menu.js";
 import create from "/Module/Create.js";
 import { getSectionByName } from "/Module/Section.js";
+import { version } from "/Module/Priya.js";
+import { root } from "/Module/Web.js";
 
 let settings = {};
 
@@ -111,10 +113,10 @@ settings.deleteDialog = (data) => {
     }
     const section = data.section;
     const dialog = create('div', data.className);
-    const header = create('div', 'dialog-header mb-3');
-    const body = create('div', 'dialog-body mb-3');
-    const footer = create('div', 'dialog-footer mb-3');
-    header.html('<h1>' + data?.title + '</h1><span><i class="fas fa-window-close"></i></span>');
+    const header = create('div', 'head mb-3');
+    const body = create('div', 'body mb-3');
+    const footer = create('div', 'footer mb-3');
+    header.html('<h1>' + data?.title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
     if(is.empty(data.node.data('name'))){
         body.html('<p>Are you sure you want to delete this item: ' + data.node?.data('name') + '.<br></p>');
     } else {
@@ -235,6 +237,16 @@ settings.init = () => {
 }
 
 ready(() => {
-    settings.init();
+    require(
+        [
+            root() + 'Dialog/Css/Dialog.css?' + version(),
+        ],
+        () => {
+            settings.init();
+        });
+
+
+
+
 
 });
