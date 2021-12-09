@@ -142,7 +142,7 @@ class Settings extends Main {
             if($validate) {
                 if ($validate->success === true) {
                     $test = $data->get('email');
-                    if(empty($test)){
+                    if(empty($test) || Core::object_is_empty($test)){
                         $record->isDefault = true;
                     }
                     $data->set('email.' . $record->uuid, $record);
