@@ -1,6 +1,7 @@
 {R3M}
 import user from "/Module/User.js";
 import create from "/Module/Create.js";
+import menu from "/Module/Menu.js";
 import { getSectionByName } from "/Module/Section.js";
 
 let edit = {};
@@ -72,7 +73,7 @@ edit.body = () => {
     selected.removeClass('d-none');
 }
 
-edit.form = (menu) => {
+edit.form = (target) => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
@@ -99,43 +100,7 @@ edit.form = (menu) => {
                     });
                     console.log(response.error);
                 } else {
-                    if(
-                        is.array(menu?.select)
-                    ){
-                        let index;
-                        for(index=0; index < menu.select.length; index++){
-                            let item = menu.select[index];
-                            if(
-                                item?.name &&
-                                item?.event
-                            ){
-                                const menuItem = section.select(item.name);
-                                if(menuItem){
-                                    if(
-                                        item?.hidden
-                                    ){
-                                        menuItem.data('is-hidden', item?.hidden);
-                                    }
-                                    menuItem.dispatchEvent(item.event);
-                                }
-                            }
-                        }
-                    } else {
-                        if(
-                            menu?.select &&
-                            menu?.event
-                        ){
-                            const menuItem = section.select(menu.select);
-                            if(menuItem){
-                                if(
-                                    menu?.hidden
-                                ){
-                                    menuItem.data('is-hidden', menu?.hidden);
-                                }
-                                menuItem.dispatchEvent(menu.event);
-                            }
-                        }
-                    }
+                    menu.dispatch(target);
                 }
             });
         });

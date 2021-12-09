@@ -1,5 +1,6 @@
 {R3M}
 import user from "/Module/User.js";
+import menu from "/Module/Menu.js";
 import { getSectionByName } from "/Module/Section.js";
 
 let settings = {};
@@ -48,7 +49,7 @@ settings.edit = () => {
     }
 }
 
-settings.delete = (menu) => {
+settings.delete = (target) => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
@@ -67,22 +68,14 @@ settings.delete = (menu) => {
                 };
                 header('authorization', 'Bearer ' + user.token());
                 request(node.data('url'), data, (url, response) => {
-                    if(
-                        menu?.select &&
-                        menu?.event
-                    ){
-                        const menuItem = section.select(menu.select);
-                        if(menuItem){
-                            menuItem.dispatchEvent(menu.event);
-                        }
-                    }
+                    menu.dispatch(target);
                 });
             }
         });
     }
 }
 
-settings.default = (menu) => {
+settings.default = (target) => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
@@ -95,15 +88,7 @@ settings.default = (menu) => {
             if(node.data('has', 'url')){
                 header('authorization', 'Bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
-                    if(
-                        menu?.select &&
-                        menu?.event
-                    ){
-                        const menuItem = section.select(menu.select);
-                        if(menuItem){
-                            menuItem.dispatchEvent(menu.event);
-                        }
-                    }
+                    menu.dispatch(target);
                 });
             }
         });

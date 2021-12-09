@@ -40,7 +40,6 @@ menu.click = () => {
             list.removeClass('active');
             node.addClass('active');
             const body = section.select('.card-body');
-            console.log(body);
             if(body){
                 body.addClass('d-none');
             }
@@ -48,7 +47,6 @@ menu.click = () => {
                 const selected = section.select(node.data('selected'));
                 menu.is_selected(selected, node);
             } else {
-                console.log('dblclick');
                 menu.is_selected(false, node);
             }
         });
@@ -57,11 +55,9 @@ menu.click = () => {
             list.removeClass('active');
             node.addClass('active');
             const body = section.select('.card-body');
-            console.log(body);
             if(body){
                 body.addClass('d-none');
             }
-            console.log('dblclick');
             menu.is_selected(false, node);
         });
     }
