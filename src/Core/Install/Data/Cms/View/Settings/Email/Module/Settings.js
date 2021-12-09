@@ -127,6 +127,13 @@ settings.deleteDialog = (data) => {
     dialog.appendChild(body);
     dialog.appendChild(footer);
     section.appendChild(dialog);
+    const submit = footer.select('.button-submit');
+    const cancel = footer.select('.button-cancel');
+    if(cancel){
+        cancel.on('click', (event) => {
+            dialog.remove();
+        });
+    }
 }
 
 settings.delete = (target) => {
