@@ -30,6 +30,7 @@
                     data-url="{{server.url('core')}}System/Information/"
                     data-method="replace-with"
                     data-target="section[name='main-content']"
+                    data-frontend-url="{{route.get(route.prefix() + '-system-information')}}"
             >
                 <i class="{{__('home.icon.system.class')}}"></i> {{__('home.link.system')}}
             </a>

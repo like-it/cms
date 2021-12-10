@@ -16,12 +16,57 @@ ready(() => {
     window.history.pushState(route, route, route);
     const active = section.select('.active');
     if(active){
-        header('authorization', 'bearer ' + user.token());
-        request(active.data('url'), null, (url, response) => {
-            if(active.data('frontend-url')){
-                request(active.data('frontend-url'), response);
+        if(active.data('url')){
+            header('authorization', 'bearer ' + user.token());
+            request(active.data('url'), null, (url, response) => {
+                if(active.data('frontend-url')){
+                    request(active.data('frontend-url'), response);
+                }
+            });
+        }
+        else if(active.data('frontend-url')){
+            request(active.data('frontend-url'));
+        }
+    }
+    const list = section.select('.nav-link');
+    if(is.nodeList(list)){
+        let index;
+        for(index=0; index < list.length; index++){
+            let node = list[index];
+            node.on('click', (event) => {
+                const list = section.select('.nav-link');
+                list.removeClass('active');
+                node.addClass('active');
+                if(node.data('url')){
+                    header('authorization', 'bearer ' + user.token());
+                    request(node.data('url'), null, (url, response) => {
+                        if(node.data('frontend-url')){
+                            request(node.data('frontend-url'), response);
+                        }
+                    });
+                }
+                else if(node.data('frontend-url')){
+                    request(node.data('frontend-url'));
+                }
+            });
+        }
+    } else {
+        let node = list;
+        node.on('click', (event) => {
+            const list = section.select('.nav-link');
+            list.removeClass('active');
+            node.addClass('active');
+            if(node.data('url')){
+                header('authorization', 'bearer ' + user.token());
+                request(node.data('url'), null, (url, response) => {
+                    if(node.data('frontend-url')){
+                        request(node.data('frontend-url'), response);
+                    }
+                });
+            }
+            else if(node.data('frontend-url')){
+                request(node.data('frontend-url'));
             }
         });
     }
-
 });
