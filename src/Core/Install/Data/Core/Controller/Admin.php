@@ -10,12 +10,10 @@
  */
 namespace Host\Subdomain\Host\Extension\Controller;
 
-use Exception;
 use R3m\Io\App;
-use R3m\Io\Module\Core;
-use R3m\Io\Module\Dir;
 use R3m\Io\Module\View;
-use R3m\Io\Module\Parse;
+
+use Exception;
 use R3m\Io\Exception\LocateException;
 use R3m\Io\Exception\UrlEmptyException;
 use R3m\Io\Exception\UrlNotExistException;
@@ -42,7 +40,7 @@ class Admin extends View{
         '{binary()} admin taskrunner               | Execute admin tasks'
     ];
 
-    public static function command($object){
+    public static function command(App $object){
         $command = $object->parameter($object, Admin::NAME, 1);
         if($command === null){
             $command = Admin::DEFAULT_COMMAND;
@@ -58,10 +56,10 @@ class Admin extends View{
         return Admin::{$command}($object);
     }
 
-    private static function info($object)
+    private static function info(App $object)
     {
         try {
-            $name = Admin::name(__FUNCTION__, Admin::NAME);
+            $name = Admin::name(__FUNCTION__, Admin::NAME, '/');
             $url = Admin::locate($object, $name);
             return Admin::response($object, $url);
         } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception) {
@@ -69,9 +67,9 @@ class Admin extends View{
         }
     }
 
-    private static function task($object){
+    private static function task(App $object){
         try {
-            $name = Admin::name(__FUNCTION__, Admin::NAME);
+            $name = Admin::name(__FUNCTION__, Admin::NAME, '/');
             $url = Admin::locate($object, $name);
             return Admin::response($object, $url);
         } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception) {
@@ -79,9 +77,9 @@ class Admin extends View{
         }
     }
 
-    private static function taskrunner($object){
+    private static function taskrunner(App $object){
         try {
-            $name = Admin::name(__FUNCTION__, Admin::NAME);
+            $name = Admin::name(__FUNCTION__, Admin::NAME, '/');
             $url = Admin::locate($object, $name);
             return Admin::response($object, $url);
         } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception) {
