@@ -634,7 +634,7 @@ class User extends Main {
         return $node;
     }
 
-    private static function getUserByEmail(App $object)
+    public static function getUserByEmail(App $object)
     {
         $email = $object->request('email');
         $url = User::getDataUrl($object);
