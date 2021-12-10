@@ -255,6 +255,13 @@
             "OPTIONS"
         ]
     },
+    "68afe695-6df8-49ef-a17f-0e3e989f6e11" : {
+        "module" : "admin",
+        "path": "admin",
+        "method": [
+            "CLI"
+        ]
+    },
     "fc3ba8ba-f02d-4bdb-93de-6a444a63565a" : {
         "module" : "config",
         "command" : "version",
