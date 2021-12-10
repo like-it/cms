@@ -42,7 +42,7 @@ class Admin extends View{
         '{binary()} admin taskrunner               | Execute admin tasks'
     ];
 
-    public static function run($object){
+    public static function command($object){
         $command = $object->parameter($object, Admin::NAME, 1);
         if($command === null){
             $command = Admin::DEFAULT_COMMAND;
