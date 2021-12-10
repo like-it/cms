@@ -11,11 +11,11 @@ add.body = () => {
         return;
     }
     const menu = section.select('.settings-email-add');
-    const body = section.select('.card-body');
-    body.addClass('d-none');
     if(menu.data('is-hidden')){
         menu.data('delete', 'is-hidden');
     } else {
+        const body = section.select('.card-body');
+        body.addClass('d-none');
         const selected = section.select('.card-body-add');
         selected.removeClass('d-none');
     }
@@ -94,7 +94,6 @@ add.form = (target) => {
                 } else {
                     menu.dispatch(section, target);
                 }
-
             });
         });
     }

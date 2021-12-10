@@ -177,19 +177,6 @@ settings.delete = (target) => {
                     section: section,
                     target: target,
                 });
-                /*
-                if(node.data('has', 'url')){
-                    let data = {
-                        request : {
-                            method : node.data('request-method') ? node.data('request-method') : "DELETE"
-                        }
-                    };
-                    header('authorization', 'Bearer ' + user.token());
-                    request(node.data('url'), data, (url, response) => {
-                        menu.dispatch(section, target);
-                    });
-                }
-                 */
             });
         }
     } else {
@@ -202,19 +189,6 @@ settings.delete = (target) => {
                     section: section,
                     target: target,
                 });
-                /*
-                if(node.data('has', 'url')){
-                    let data = {
-                        request : {
-                            method : node.data('request-method') ? node.data('request-method') : "DELETE"
-                        }
-                    };
-                    header('authorization', 'Bearer ' + user.token());
-                    request(node.data('url'), data, (url, response) => {
-                        menu.dispatch(section, target);
-                    });
-                }
-                 */
             });
         }
     }

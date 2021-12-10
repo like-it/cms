@@ -4,7 +4,7 @@ import { getSectionByName } from "/Module/Section.js";
 
 let menu = {};
 
-menu.is_selected = (selected, node) => {
+menu.is_selected = (node, selected) => {
     if(selected){
         //select
         selected.removeClass('d-none');
@@ -45,9 +45,9 @@ menu.click = () => {
             }
             if(event.detail === 1){
                 const selected = section.select(node.data('selected'));
-                menu.is_selected(selected, node);
+                menu.is_selected(node, selected);
             } else {
-                menu.is_selected(false, node);
+                menu.is_selected(node);
             }
         });
         node.on('dblclick', (event) => {
@@ -58,7 +58,7 @@ menu.click = () => {
             if(body){
                 body.addClass('d-none');
             }
-            menu.is_selected(false, node);
+            menu.is_selected(node);
         });
     }
 }
