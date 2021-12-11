@@ -8,7 +8,7 @@
     <div class="h-100">
         <div class="card h-100 overflow-auto">
             {{script('module')}}
-            {{require($controller.dir.view + $controller.title + '/Email/Module/Menu.js')}}
+            {{require($controller.dir.view + $controller.title + '/Information/Module/Menu.js')}}
             {{/script}}
             {{require($controller.dir.view + $controller.title + '/Information/Section/Menu/Header.tpl')}}
             {{require($controller.dir.view + $controller.title + '/Information/Section/Information/Body.tpl')}}
