@@ -154,5 +154,13 @@
             "GET",
             "POST"
         ]
+    },
+    "2e61686d-449a-444b-95e6-9e5b1687e528" : {
+        "module" : "system",
+        "command" : "information",
+        "method": [
+            "GET",
+            "POST"
+        ]
     }
 }

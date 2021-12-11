@@ -270,5 +270,13 @@
             "POST",
             "OPTIONS"
         ]
+    },
+    "fdbfeed4-8ad5-4fd0-94c7-224b00b9a1b8" : {
+        "module" : "system",
+        "command" : "information",
+        "method" : [
+            "GET",
+            "OPTIONS"
+        ]
     }
 }
