@@ -11,7 +11,7 @@
                 data-frontend-url="{{route.get(route.prefix()+ '-system-information-body')}}"
                 data-selected=".card-body-settings"
             >
-                {{__('settings.section.email.header.settings')}}
+                {{__('system.information.section.menu.header.information')}}
             </a>
         </li>
         <li class="nav-item">
@@ -20,7 +20,7 @@
                 data-frontend-url="{{route.get(route.prefix()+ '-system-update-body')}}"
                 data-selected=".card-body-add"
             >
-                {{__('settings.section.email.header.add')}}
+                {{__('system.information.section.menu.header.update')}}
             </a>
         </li>
     </ul>

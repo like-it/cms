@@ -21,7 +21,7 @@ add.body = () => {
     }
 }
 
-add.change = () => {
+add.onChange = () => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
@@ -121,7 +121,7 @@ add.focus = () => {
 
 add.init = () => {
     add.body();
-    add.change();
+    add.onChange();
     add.form({
         select : [
             {
