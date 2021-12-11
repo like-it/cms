@@ -1,4 +1,7 @@
 {R3M}
+{{script('module')}}
+    {{require($controller.dir.view + $controller.title + '/Information/Module/Menu.js')}}
+{{/script}}
 <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
         <li class="nav-item">
