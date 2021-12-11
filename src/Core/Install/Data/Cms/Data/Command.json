@@ -162,5 +162,14 @@
             "GET",
             "POST"
         ]
+    },
+    "2458e830-e39b-4280-a865-287d336bfab1" : {
+        "module" : "system",
+        "submodule" : "information",
+        "command" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
     }
 }
