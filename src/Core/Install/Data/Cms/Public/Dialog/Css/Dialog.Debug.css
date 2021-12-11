@@ -1,0 +1,9 @@
+.dialog.debug {
+    left: 25%;
+    width: 50%;
+    right: 25%;
+}
+
+.dialog.debug .body {
+    background: rgba(255, 255, 255, 1);
+}

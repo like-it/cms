@@ -8,7 +8,7 @@ import { root } from "/Module/Web.js";
 
 let settings = {};
 
-settings.doubleClick = () => {
+settings.onDoubleClick = () => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
@@ -229,7 +229,7 @@ settings.default = (target) => {
 };
 
 settings.init = () => {
-    settings.doubleClick();
+    settings.onDoubleClick();
     settings.default({
         select : ".settings-email-settings",
         event : new MouseEvent("dblclick")
