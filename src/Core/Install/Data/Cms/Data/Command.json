@@ -171,5 +171,14 @@
             "GET",
             "POST"
         ]
+    },
+    "e54ef453-32c0-4deb-97c9-7f2f8bd7b974": {
+        "module" : "system",
+        "submodule" : "update",
+        "command" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
     }
 }
