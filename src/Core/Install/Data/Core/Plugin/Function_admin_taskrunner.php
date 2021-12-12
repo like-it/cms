@@ -31,7 +31,6 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                     $claims = $token_unencrypted->claims();
                     if($claims->has('user')) {
                         $user = $claims->get('user');
-                        dd($user);
                         $uuid = false;
                         $email = false;
                         if (array_key_exists('uuid', $user)) {
@@ -44,6 +43,8 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                             $object->request('email', $email);
                             $user = \Host\Subdomain\Host\Extension\Service\User::getUserByEmail($object);
                         }
+                        dd($user);
+
 
                         if (
                             array_key_exists('email', $user) &&
