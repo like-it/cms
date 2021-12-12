@@ -1,3 +1,5 @@
+import {system} from "../../../../../../../../../../../old.cms.funda.world/Host/Cms/Funda/World/Public/System/Module/Js/System";
+
 {R3M}
 import user from "/Module/User.js";
 import url from "/Module/Url.js";
@@ -64,10 +66,14 @@ update.button = () => {
 }
 
 update.cms = (node) => {
-    node.output = '/Application/Data/Config.json';
     const read = "{{server.url('core')}}FileSystem/Read/?url=" + url.encode(node.output);
 
     request(read, null, (url, response) => {
+        /*
+        if(is.empty(response)){
+            setTimeout(system.update_cms, 5000);
+        }
+         */
         console.log(response);
     });
 
