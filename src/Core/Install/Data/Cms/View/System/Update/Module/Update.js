@@ -65,7 +65,7 @@ update.button = () => {
 
 update.cms = (node) => {
     node.output = '/Application/Data/Config.json';
-    const read = "{{server.url('core')}}FileSystem/Read/?node.url=" + url.encode(node.output);
+    const read = "{{server.url('core')}}FileSystem/Read/?url=" + url.encode(node.output);
 
     request(read, null, (url, response) => {
         console.log(response);

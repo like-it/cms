@@ -29,8 +29,7 @@ class FileSystem {
      */
     public static function read(App $object): Response
     {
-        dd($object->request());
-        $url = htmlspecialchars_decode($object->request('node.url'), ENT_HTML5);
+        $url = htmlspecialchars_decode($object->request('url'), ENT_HTML5);
         if(File::exist($url)){
             $extension = File::extension($url);
             $read = File::read($url);
