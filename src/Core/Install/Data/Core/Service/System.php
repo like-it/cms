@@ -1,6 +1,7 @@
 <?php
 namespace Host\Subdomain\Host\Extension\Service;
 
+use R3m\Io\Exception\AuthorizationException;
 use stdClass;
 use R3m\Io\App;
 use R3m\Io\Module\Core;
@@ -12,8 +13,16 @@ use R3m\Io\Exception\ObjectException;
 
 class System extends Main {
 
+    /**
+     * @throws AuthorizationException
+     */
     public static function update_cms(App $object): Response
     {
+        if(!array_key_exists('HTTP_AUTHORIZATION', $_SERVER)){
+            throw new AuthorizationException('Authorization token missing...');
+        }
+
+
         dd($_SERVER['HTTP_AUTHORIZATION']);
         $execute = '
             funda admin task "
