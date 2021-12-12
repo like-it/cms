@@ -12,14 +12,16 @@
     {{require($controller.dir.view + $controller.title + '/Update/Module/Update.js')}}
 {{/script}}
 <div class="card-body h-100 card-body-update" data-menu=".system-update">
-    Update button and cli output....
+    <p class="text-start">
+        {{implode('<br>', __('system.update.section.main.body.text'))}}
+    </p>
     <a
         class="btn btn-primary"
         data-url="{server.url('core')}System/Update/Cms/"
         data-method="replace"
         data-target=".system-console"
     >
-        {__('system.update.section.main.body.button.update')}
+        {{__('system.update.section.main.body.button.update')}}
     </a>
     <br><br>
     <div class="row">

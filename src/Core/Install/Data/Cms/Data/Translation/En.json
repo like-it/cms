@@ -103,7 +103,12 @@
     "system.information.section.menu.header.information" : "Information",
     "system.information.section.menu.header.update" : "Update",
     "system.information.section.information.body.title" : "Information",
-    "system.update.section.main.body.button.update" : "Update",
+    "system.update.section.main.body.button.update" : "Update CMS packages",
+    "system.update.section.main.body.text" : [
+        "Welcome to the update section.",
+        "You can choose to update the OS manually or wait for the automatic update process.",
+        "It is scheduled once a week on saturday at 10:00 in the morning."
+    ],
     "user.blocked" : "User is blocked for 15 minutes.<br>Please try again later...",
     "user.e-mail" : "Email",
     "user.login.title" : "User login",
