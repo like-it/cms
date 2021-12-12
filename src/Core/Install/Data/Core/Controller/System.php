@@ -3,6 +3,7 @@ namespace Host\Subdomain\Host\Extension\Controller;
 
 use Exception;
 use R3m\Io\App;
+use R3m\Io\Exception\AuthorizationException;
 use R3m\Io\Module\Handler;
 use R3m\Io\Module\Response;
 use R3m\Io\Module\View;
@@ -18,8 +19,12 @@ class System extends View {
         return new Response($data, Response::TYPE_JSON);
     }
 
-    public static function update_cms(App $object): Response
+    public static function update_cms(App $object): Exception|AuthorizationException|Response
     {
-        return Service::update_cms($object);
+        try {
+            return Service::update_cms($object);
+        } catch (AuthorizationException $exception) {
+            return $exception;
+        }
     }
 }
