@@ -20,7 +20,7 @@ class System extends Main {
         if(!array_key_exists('HTTP_AUTHORIZATION', $_SERVER)){
             throw new AuthorizationException('Authorization token missing...');
         }
-        $token = $_SERVER['HTTP_AUTHORIZATION'];
+        $token = substr($_SERVER['HTTP_AUTHORIZATION'], 7);
         $execute = '
             funda admin task "
                 composer update && 
