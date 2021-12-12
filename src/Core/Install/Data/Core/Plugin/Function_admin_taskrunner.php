@@ -11,6 +11,11 @@ use R3m\Io\Module\Parse;
 
 function function_admin_taskrunner(Parse $parse, Data $data){
     $object = $parse->object();
+
+    $host_dir_root = $object->config('host.dir.root');
+    dd($host_dir_root);
+
+
     while(true){
         $dir = new Dir();
         $read = $dir->read($object->config('project.dir.data') . 'Input' . $object->config('ds'), true);
