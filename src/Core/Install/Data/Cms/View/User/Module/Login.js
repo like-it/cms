@@ -8,8 +8,8 @@ ready(() => {
     [
     root() + 'User/Css/Login.css?' + version(),
     root() + 'User/Css/Password.Forgot.css?' + version(),
-    root() + 'Dialog/Css/dialog.css?' + version(),
-    root() + 'Dialog/Css/dialog.Debug.css?' + version(),
+    root() + 'Dialog/Css/Dialog.css?' + version(),
+    root() + 'Dialog/Css/Dialog.Debug.css?' + version(),
     root() + 'Index/Css/Start.css?' + version(),
     ],
     () => {
