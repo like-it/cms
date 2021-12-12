@@ -640,6 +640,7 @@ class User extends Main {
         $url = User::getDataUrl($object);
         $data = $object->data_read($url);
         if (!$data) {
+            d($url);
             echo 'no data';
             return false;
         } else {
