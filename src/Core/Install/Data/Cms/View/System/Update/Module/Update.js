@@ -69,6 +69,11 @@ update.cms = (node) => {
     const read = "{{server.url('core')}}FileSystem/Read/?url=" + url.encode(node.output);
 
     request(read, null, (url, response) => {
+        if(response.class === 'R3m\\Io\\Exception\\FileNotExistException'){
+            setTimeout(() => {
+                update.cms(node);
+            }, 5000);
+        }
         /*
         if(is.empty(response)){
             setTimeout(system.update_cms, 5000);
