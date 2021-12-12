@@ -47,9 +47,5 @@ class Settings extends View {
         } catch (Exception $exception) {
             return $exception;
         }
-
-
-
-
     }
 }
