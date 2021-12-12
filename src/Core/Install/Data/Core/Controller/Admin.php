@@ -83,6 +83,7 @@ class Admin extends View{
             $url = Admin::locate($object, $name);
             return Admin::response($object, $url);
         } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception) {
+            d($exception);
             return 'Command undefined.' . PHP_EOL;
         }
     }
