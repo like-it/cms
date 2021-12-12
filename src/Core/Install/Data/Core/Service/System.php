@@ -1,29 +1,26 @@
 <?php
 namespace Host\Subdomain\Host\Extension\Service;
 
-use R3m\Io\Exception\AuthorizationException;
-use stdClass;
 use R3m\Io\App;
 use R3m\Io\Module\Core;
-use R3m\Io\Module\Data;
+use R3m\Io\Module\Dir;
+use R3m\Io\Module\File;
 use R3m\Io\Module\Response;
 
-use R3m\Io\Exception\ObjectException;
-
+use R3m\Io\Exception\AuthorizationException;
+use R3m\Io\Exception\FileWriteException;
 
 class System extends Main {
 
     /**
-     * @throws AuthorizationException
+     * @throws AuthorizationException|FileWriteException
      */
     public static function update_cms(App $object): Response
     {
         if(!array_key_exists('HTTP_AUTHORIZATION', $_SERVER)){
             throw new AuthorizationException('Authorization token missing...');
         }
-
-
-        dd($_SERVER['HTTP_AUTHORIZATION']);
+        $token = $_SERVER['HTTP_AUTHORIZATION'];
         $execute = '
             funda admin task "
                 composer update && 
@@ -37,23 +34,13 @@ class System extends Main {
             $dir = Dir::name($task);
             $file = File::basename($task, '.task') . '.token';
             $url = $dir . $file;
-            try {
-                $array = [];
-                $array['output'] = $object->config('project.dir.data')  . 'Output' . $object->config('ds') . File::basename($task);
-                $array['written'] = File::write($url, $token);
-                $array['token'] = $token;
-                return Core::object($array);
-            } catch (\R3m\Io\Exception\FileWriteException | \R3m\Io\Exception\ObjectException $e) {
-            }
+            $record = [];
+            $record['output'] = $object->config('project.dir.data')  . 'Output' . $object->config('ds') . File::basename($task);
+            $record['written'] = File::write($url, $token);
+            //$record['token'] = $token;
+            $response = [];
+            $response['node'] = $record;
+            return new Response($response, Response::TYPE_JSON);
         }
-
-
-
-        $record = [];
-        $record['good'] = 'on you';
-
-        $response = [];
-        $response['node'] = $record;
-        return new Response($response, Response::TYPE_JSON);
     }
 }
