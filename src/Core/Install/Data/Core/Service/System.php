@@ -12,7 +12,7 @@ use R3m\Io\Exception\ObjectException;
 
 class System extends Main {
 
-    public static function update_cms(App $object, $uuid): Response
+    public static function update_cms(App $object): Response
     {
         $record = [];
         $record['good'] = 'on you';
