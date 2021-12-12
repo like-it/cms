@@ -2,6 +2,7 @@
     background-color: rgba(255, 124, 13, 1);
     height: 40px;
     width: 100%;
+    overflow: hidden;
 }
 
 .dialog .head h1 {
