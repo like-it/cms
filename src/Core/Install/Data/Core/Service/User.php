@@ -709,7 +709,6 @@ class User extends Main {
 
     private static function getValidatorUrl(App $object): string
     {
-        dd($object->config('host.dir.root'));
         return $object->config('host.dir.root') .
             'Node' .
             $object->config('ds') .
