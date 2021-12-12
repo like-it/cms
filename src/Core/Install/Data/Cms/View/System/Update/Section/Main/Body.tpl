@@ -17,7 +17,7 @@
     </p>
     <a
         class="btn btn-primary"
-        data-url="{server.url('core')}System/Update/Cms/"
+        data-url="{{server.url('core')}}System/Update/Cms/"
         data-method="replace"
         data-target=".system-console"
     >

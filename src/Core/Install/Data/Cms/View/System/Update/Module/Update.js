@@ -21,8 +21,43 @@ update.body = () => {
     }
 }
 
+update.button = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const body = section.select('.card-body-update');
+    if(!body){
+        return;
+    }
+    const list = body.select('.btn');
+    if(is.nodeList(list)){
+        let index;
+        for(index=0; index < list.length; index++){
+            let node = list[index];
+            node.on('click', (event) => {
+                request(node.data('url'), null, (url, response) => {
+                    console.log(url);
+                    console.log(response);
+                });
+            });
+        }
+    } else {
+        let node = list;
+        if(node){
+            node.on('click', (event) => {
+                request(node.data('url'), null, (url, response) => {
+                    console.log(url);
+                    console.log(response);
+                });
+            });
+        }
+    }
+}
+
 update.init = () => {
     update.body();
+    update.button();
 };
 
 ready(() => {
