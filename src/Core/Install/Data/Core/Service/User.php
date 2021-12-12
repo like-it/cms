@@ -639,6 +639,7 @@ class User extends Main {
         $email = $object->request('email');
         $url = User::getDataUrl($object);
         $data = $object->data_read($url);
+        d($data);
         if (!$data) {
             return false;
         } else {
