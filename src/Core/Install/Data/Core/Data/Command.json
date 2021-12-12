@@ -278,5 +278,14 @@
             "GET",
             "OPTIONS"
         ]
+    },
+    "3b23f264-0d77-4f3b-b26a-728fa2075dcc": {
+        "module" : "system",
+        "submodule" : "update",
+        "command" : "cms",
+        "method": [
+            "GET",
+            "OPTIONS"
+        ]
     }
 }
