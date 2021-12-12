@@ -45,5 +45,12 @@ navigation.init = () => {
 };
 
 ready(() => {
-    navigation.init();
+    require(
+        [
+            root() + 'Dialog/Css/Dialog.css?' + version(),
+            root() + 'Dialog/Css/Dialog.Debug.css?' + version()
+        ],
+        () => {
+            navigation.init();
+        });
 });
