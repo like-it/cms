@@ -36,6 +36,7 @@ update.button = () => {
         for(index=0; index < list.length; index++){
             let node = list[index];
             node.on('click', (event) => {
+                header('authorization', 'Bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
                     console.log(url);
                     console.log(response);
@@ -46,6 +47,7 @@ update.button = () => {
         let node = list;
         if(node){
             node.on('click', (event) => {
+                header('authorization', 'Bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
                     console.log(url);
                     console.log(response);
