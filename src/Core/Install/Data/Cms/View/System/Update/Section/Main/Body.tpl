@@ -21,7 +21,7 @@
         data-method="replace"
         data-target=".system-console"
     >
-        {{__('system.update.section.main.body.button.update')}}
+        {{__('system.update.section.main.body.button.update.cms')}}
     </a>
     <br><br>
     <div class="row">

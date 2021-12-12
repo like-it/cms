@@ -20,8 +20,11 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                 if(File::extension($file->url) === 'task'){
                     $url = Dir::name($file->url) . File::basename($file->url, '.task') . '.token';
                     if(!File::exist($url)){
-                        File::delete($file->url);
-                        continue;
+                        sleep(1);
+                        if(!File::exist($url)){
+                            File::delete($file->url);
+                            continue;
+                        }
                     }
                     $token = File::read($url);
                     $token_unencrypted = Jwt::decryptToken($object, $token);
