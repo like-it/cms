@@ -10,6 +10,8 @@
 
 .dialog.debug .body {
     background: rgba(255, 255, 255, 1);
+    max-height: 500px;
+    overflow: auto;
 }
 
 .dialog.debug .tab-body {
