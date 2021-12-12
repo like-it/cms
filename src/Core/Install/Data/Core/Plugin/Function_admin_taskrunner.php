@@ -41,6 +41,7 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                         }
                         if ($uuid && $email) {
                             $object->request('email', $email);
+                            d($email);
                             $user = \Host\Subdomain\Host\Extension\Service\User::getUserByEmail($object);
                         }
                         dd($user);
