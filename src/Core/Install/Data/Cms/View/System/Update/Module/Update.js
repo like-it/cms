@@ -1,6 +1,6 @@
 {R3M}
 import user from "/Module/User.js";
-import menu from "/Module/Menu.js";
+import url from "/Module/Url.js";
 import { getSectionByName } from "/Module/Section.js";
 
 let update = {};
@@ -64,9 +64,8 @@ update.button = () => {
 }
 
 update.cms = (node) => {
-    const url = "{{server.url('core')}}FileSystem/Read/?node.url={{url.encode(" + node.output +")}}";
+    const url = "{{server.url('core')}}FileSystem/Read/?node.url=" + url.encode(node.output);
     console.log(url);
-
 }
 
 
