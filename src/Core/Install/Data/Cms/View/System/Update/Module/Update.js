@@ -38,6 +38,9 @@ update.button = () => {
             node.on('click', (event) => {
                 header('authorization', 'Bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
+                    if(response?.node?.output){
+                        update.cms(response);
+                    }
                     console.log(url);
                     console.log(response);
                 });
@@ -49,6 +52,9 @@ update.button = () => {
             node.on('click', (event) => {
                 header('authorization', 'Bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
+                    if(response?.node?.output){
+                        update.cms(response.node);
+                    }
                     console.log(url);
                     console.log(response);
                 });
@@ -56,6 +62,13 @@ update.button = () => {
         }
     }
 }
+
+update.cms = (node) => {
+    const url = "{{server.url('core')}}FileSystem/Read/?node.url=" + node.output;
+    console.log(url);
+
+}
+
 
 update.init = () => {
     update.body();
