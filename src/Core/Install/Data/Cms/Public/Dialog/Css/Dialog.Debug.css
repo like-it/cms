@@ -4,6 +4,10 @@
     right: 25%;
 }
 
+.dialog.debug .head span {
+    float: left;
+}
+
 .dialog.debug .body {
     background: rgba(255, 255, 255, 1);
 }
