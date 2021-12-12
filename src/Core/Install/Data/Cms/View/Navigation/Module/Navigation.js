@@ -1,8 +1,12 @@
 {R3M}
 import user from "/Module/User.js";
 import { getSectionByName} from "/Module/Section.js";
+import { version } from "/Module/Priya.js";
+import { root } from "/Module/Web.js";
 
-ready(() => {
+let navigation = {};
+
+navigation.init = () => {
     const name = "{{$controller.name}}";
     console.log(name);
     const section = getSectionByName(name);
@@ -24,12 +28,29 @@ ready(() => {
             list.removeClass('active');
             node.addClass('active');
             header('authorization', 'bearer ' + user.token());
-            request(node.data('url'), null, (url, response) => {
-                if(node.data('frontend-url')){
-                    request(node.data('frontend-url'), response);
-                }
+            if(node.data('url')){
+                request(node.data('url'), null, (url, response) => {
+                    if(node.data('frontend-url')){
+                        request(node.data('frontend-url'), response);
+                    }
 
-            });
+                });
+            }
+            else if(node.data('frontend-url')){
+                request(node.data('frontend-url'));
+            }
+
         });
     }
+};
+
+ready(() => {
+    require(
+        [
+            root() + 'Dialog/Css/Dialog.css?' + version(),
+            root() + 'Dialog/Css/Dialog.Debug.css?' + version()
+        ],
+        () => {
+            navigation.init();
+        });
 });
