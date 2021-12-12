@@ -103,6 +103,7 @@
     "system.information.section.menu.header.information" : "Information",
     "system.information.section.menu.header.update" : "Update",
     "system.information.section.information.body.title" : "Information",
+    "system.update.section.main.body.button.update" : "Update",
     "user.blocked" : "User is blocked for 15 minutes.<br>Please try again later...",
     "user.e-mail" : "Email",
     "user.login.title" : "User login",
