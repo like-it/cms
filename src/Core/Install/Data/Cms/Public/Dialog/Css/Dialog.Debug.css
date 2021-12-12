@@ -14,7 +14,7 @@
     overflow: auto;
 }
 
-.dialog.debug body pre {
+.dialog.debug pre {
     margin-bottom: 0;
 }
 
