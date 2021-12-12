@@ -11,3 +11,11 @@
 .dialog.debug .body {
     background: rgba(255, 255, 255, 1);
 }
+
+.dialog.debug .tab-body {
+    display:none;
+}
+
+.dialog.debug .tab-body.selected {
+    display: block;
+}
