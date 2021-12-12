@@ -27,7 +27,7 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                         }
                     }
                     $token = File::read($url);
-                    $token_unencrypted = Jwt::decryptToken($object, $token);
+                    $token_unencrypted = \Host\Subdomain\Host\Extension\Service\Jwt::decryptToken($object, $token);
                     $claims = $token_unencrypted->claims();
                     if($claims->has('user')) {
                         $user = $claims->get('user');
@@ -41,7 +41,7 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                         }
                         if ($uuid && $email) {
                             $object->request('email', $email);
-                            $user = User::getUserByEmail($object);
+                            $user = \Host\Subdomain\Host\Extension\Service\User::getUserByEmail($object);
                         }
                         if (
                             array_key_exists('email', $user) &&
