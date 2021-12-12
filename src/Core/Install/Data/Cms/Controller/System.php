@@ -82,4 +82,16 @@ class System extends View {
         }
     }
 
+    public static function update_cms(App $object){
+        $name = System::name(__FUNCTION__, __CLASS__, '/');
+        $name = explode('.', $name);
+        $name = implode('/', $name);
+        try {
+            $url = System::locate($object, $name);
+            return System::response($object, $url);
+        } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception){
+            return $exception;
+        }
+    }
+
 }
