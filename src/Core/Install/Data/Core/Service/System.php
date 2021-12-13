@@ -12,6 +12,11 @@ use R3m\Io\Exception\FileWriteException;
 
 class System extends Main {
 
+
+    public static function update(App $object){
+        dd($object->request());
+    }
+
     /**
      * @throws AuthorizationException|FileWriteException
      */
