@@ -389,6 +389,7 @@ class Host {
             return false;
         }
         $dir = new Dir();
+        dd($object->config('controller.dir.data') . ucfirst($options['name']) . $object->config('ds'));
         $read = $dir->read($object->config('controller.dir.data') . ucfirst($options['name']) . $object->config('ds'), true);
         foreach($read as $nr => $file){
             if($file->type === File::TYPE){
