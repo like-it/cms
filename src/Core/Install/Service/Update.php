@@ -47,16 +47,19 @@ class Update {
         if(!array_key_exists('extension', $options)){
             return;
         }
+        if(!array_key_exists('name', $options)){
+            return false;
+        }
         $options = Host::options($object, $options);
         $result = [];
         try {
-            $result[] = 'Creating directories...';
+            $result[] = 'Creating (' . $options['name'] . ') directories...';
             Update::dir_create($object, $options);
-            $result[] = 'Copying files...';
+            $result[] = 'Copying (' . $options['name'] . ') files...';
             Update::file_create($object, $options);
-            $result[] = 'Adding commands...';
+            $result[] = 'Adding (' . $options['name'] . ') commands...';
             Host::command_add($object, $options);
-            $result[] = 'Dedouble routes...';
+            $result[] = 'Dedouble (' . $options['name'] . ') routes...';
             Host::route_dedouble($object, $options);
             $result[] = '';
             return implode("\n", $result);
