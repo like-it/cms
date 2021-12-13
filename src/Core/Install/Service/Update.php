@@ -35,7 +35,7 @@ class Update {
                 return $exception;
             }
         }
-        return new Response(implode("\n", $result_list), Response::TYPE_FILE);
+        return new Response(implode("\n", $result_list), Response::TYPE_HTML);
     }
 
     public static function host(App $object, $options=[]){
