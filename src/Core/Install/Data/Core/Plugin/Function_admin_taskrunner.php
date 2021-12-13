@@ -39,15 +39,11 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                         $object->config('ds') .
                         $sentence;
 
-                    dd($value);
-
+                    $object->config('host.dir.root', $value);
                 }
             }
-            dd($read);
         }
     }
-
-
     while(true){
         $dir = new Dir();
         $read = $dir->read($object->config('project.dir.data') . 'Input' . $object->config('ds'), true);
