@@ -74,17 +74,20 @@ update.cms = (node) => {
                 update.cms(node);
             }, 5000);
         }
-        /*
-        if(is.empty(response)){
-            setTimeout(system.update_cms, 5000);
+        const section = getSectionByName('main-content');
+        if(!section){
+            return;
         }
-         */
-        console.log(response);
+        const body = section.select('.card-body-update');
+        if(!body){
+            return;
+        }
+        const system = body.select('.system-console');
+        if(!system){
+            return;
+        }
+        system.html(response);
     });
-
-
-
-    console.log(read);
 }
 
 
