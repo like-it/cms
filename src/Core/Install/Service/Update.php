@@ -8,6 +8,7 @@ use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
 use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
+use R3m\Io\Module\Parse;
 use R3m\Io\Module\Response;
 use R3m\Io\Module\Validate;
 
@@ -52,7 +53,7 @@ class Update {
             $result[] = 'Creating directories...';
             Update::dir_create($object, $options);
             $result[] = 'Copying files...';
-            Host::file_create($object, $options);
+            Update::file_create($object, $options);
             $result[] = 'Adding commands...';
             Host::command_add($object, $options);
             $result[] = 'Dedouble routes...';
@@ -76,7 +77,6 @@ class Update {
         $dir = new Dir();
         $url = $object->config('project.dir.vendor') . 'like-it/cms/src/Core/Install/Data/' . ucfirst($options['name']) . $object->config('ds');
         $read = $dir->read($url, true);
-        dd($read);
         foreach($read as $nr => $file){
             if($file->type === File::TYPE){
                 continue;
@@ -99,6 +99,105 @@ class Update {
                 }
                 if(Dir::is($target) === false){
                     Dir::create($target);
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * @throws \R3m\Io\Exception\FileWriteException
+     */
+    public static function file_create(App $object, $options=[]): bool
+    {
+        if (!array_key_exists('name', $options)) {
+            return false;
+        }
+        if (!array_key_exists('host', $options)) {
+            return false;
+        }
+        if (!array_key_exists('extension', $options)) {
+            return false;
+        }
+        $dir = new Dir();
+        $url = $object->config('project.dir.vendor') . 'like-it/cms/src/Core/Install/Data/' . ucfirst($options['name']) . $object->config('ds');
+        $read = $dir->read($url, true);
+        foreach($read as $nr => $file){
+            if($file->type === Dir::TYPE){
+                continue;
+            }
+            $explode = explode($url, $file->url, 2);
+            if(array_key_exists(1, $explode)){
+                if(array_key_exists('subdomain', $options)) {
+                    $target = $object->config('project.dir.root') .
+                        'Host' . $object->config('ds') .
+                        ucfirst($options['subdomain']) . $object->config('ds') .
+                        ucfirst($options['host']) . $object->config('ds') .
+                        ucfirst($options['extension']) . $object->config('ds') .
+                        $explode[1];
+                    if(File::Extension($file->url) === 'php'){
+                        $read = File::read($file->url);
+                        $read = str_replace([
+                            '\\Subdomain\\Host\\Extension\\'
+                        ],[
+                            '\\'. ucfirst($options['subdomain']) . '\\' . ucfirst($options['host']) . '\\' . ucfirst($options['extension']) . '\\'
+                        ], $read);
+                        File::write($target, $read);
+                    }
+                    elseif(stristr($file->url, ucfirst($options['name']) . '/Data/Route.json') !== false){
+                        $read = $object->data_read($file->url);
+                        $parse = new Parse($object);
+                        $data = [
+                            'subdomain' => $options['subdomain'],
+                            'host' => $options['host'],
+                            'extension' => $options['extension']
+                        ];
+                        if ($read) {
+                            foreach ($read->data() as $key => $compile) {
+                                $parse_key = $parse->compile($key, $data);
+                                $compile = $parse->compile($compile, $data);
+                                $read->data('delete', $key);
+                                $read->data($parse_key, $compile);
+                            }
+                            $read->write($target);
+                        }
+                    } else {
+                        File::copy($file->url, $target);
+                    }
+                } else {
+                    $target = $object->config('project.dir.root') .
+                        'Host' . $object->config('ds') .
+                        ucfirst($options['host']) . $object->config('ds') .
+                        ucfirst($options['extension']) . $object->config('ds') .
+                        $explode[1];
+                    if(File::Extension($file->url) === 'php'){
+                        $read = File::read($file->url);
+                        $read = str_replace([
+                            '\\Subdomain\\Host\\Extension\\'
+                        ],[
+                            '\\' . ucfirst($options['host']) . '\\' . ucfirst($options['extension']) . '\\'
+                        ], $read);
+                        File::write($target, $read);
+                    }
+                    elseif(stristr($file->url, ucfirst($options['name']) . '/Data/Route.json') !== false) {
+                        $read = $object->data_read($file->url);
+                        $parse = new Parse($object);
+                        $data = [
+                            'host' => $options['host'],
+                            'extension' => $options['extension']
+                        ];
+                        if ($read) {
+                            foreach ($read->data() as $key => $compile) {
+                                $parse_key = $parse->compile($key, $data);
+                                $compile = $parse->compile($compile, $data);
+                                $read->data('delete', $key);
+                                $read->data($parse_key, $compile);
+                            }
+                            $read->write($target);
+                        }
+                    } else {
+                        File::copy($file->url, $target);
+                    }
                 }
             }
         }
