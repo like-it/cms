@@ -15,8 +15,7 @@ class System extends Main {
 
 
     public static function update(App $object){
-        $response = Update::start($object);
-        dd($response);
+        return Update::start($object);
     }
 
     /**
