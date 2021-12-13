@@ -75,17 +75,18 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                         if ($uuid && $email) {
                             $object->request('email', $email);
                             $user = \Host\Subdomain\Host\Extension\Service\User::getUserByEmail($object);
-                            if($user){
-                                $userRole = \Host\Subdomain\Host\Extension\Service\UserRole::get($object, $user);
-                                dd($userRole);
+                            if(!$user){
+                                File::delete($url);
+                                File::delete($file->url);
+                                continue;
                             }
                         }
-                        //object user needs role to check if it is admin role...
-                        if (
-                            array_key_exists('email', $user) &&
-                            array_key_exists('role', $user) &&
-                            in_array('ROLE_IS_ADMIN', $user['role'])
-                        ) {
+                        $is_admin = false;
+                        if($user){
+                            $userRole = \Host\Subdomain\Host\Extension\Service\UserRole::get($object, $user);
+                            $is_admin = \Host\Subdomain\Host\Extension\Service\UserRole::has($object, $userRole, 'ROLE_IS_ADMIN');
+                        }
+                        if($is_admin === true){
                             //we have permission to execute
                             $task = File::read($file->url);
                             $output = [];

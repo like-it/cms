@@ -19,9 +19,24 @@ class UserRole extends Main {
             $result = new Data();
             foreach($user->role as $nr => $uuid){
                 $result->set($uuid, $data->get($uuid));
+                $result->set($uuid . 'user.uuid', $user->uuid);
             }
             return $result->data();
         }
         return false;
     }
+
+    public static function has(App $object, $userRole, $name){
+        if(is_object($userRole)){
+            foreach ($userRole as $role_uuid => $record){
+                if(property_exists($record, 'name')){
+                    if($record->name === $name){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 }
