@@ -26,7 +26,7 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                     $sentence = Core::ucfirst_sentence(
                         $node->subdomain .
                         $object->config('ds') .
-                        $node->domain .
+                        $node->host .
                         $object->config('ds') .
                         $node->extension .
                         $object->config('ds'),
