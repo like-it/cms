@@ -3,6 +3,7 @@
 use Host\Subdomain\Host\Extension\Service\Jwt;
 use Host\Subdomain\Host\Extension\Service\User;
 use R3m\Io\App;
+use R3m\Io\Config;
 use R3m\Io\Module\Data;
 use R3m\Io\Module\Dir;
 use R3m\Io\Module\Core;
@@ -17,6 +18,31 @@ function function_admin_taskrunner(Parse $parse, Data $data){
         $read = File::read($object->config('project.dir.data') . 'Host' . $object->config('extension.json'));
         if($read){
             $read = Core::object($read);
+            foreach($read as $uuid => $node){
+                if(
+                    property_exists($node, 'is') &&
+                    property_exists($node->is, 'core')
+                ){
+                    $sentence = Core::ucfirst_sentence(
+                        $node->subdomain .
+                        $object->config('ds') .
+                        $node->domain .
+                        $object->config('ds') .
+                        $node->extension .
+                        $object->config('ds'),
+                        $object->config('ds')
+                    );
+                    $sentence = ltrim($sentence, $object->config('ds'));
+                    $value =
+                        $object->config('project.dir.root') .
+                        $object->config(Config::DICTIONARY . '.' . Config::HOST) .
+                        $object->config('ds') .
+                        $sentence;
+
+                    dd($value);
+
+                }
+            }
             dd($read);
         }
     }
