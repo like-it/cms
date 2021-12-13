@@ -24,6 +24,7 @@ class Update {
                     property_exists($record->is, 'installed') &&
                     $record->is->installed === true
                 ){
+                    dd($record);
                     $result_list[] = Update::Host($object, [
                         'host' => $record->host,
                         'extension' => $record->extension,
