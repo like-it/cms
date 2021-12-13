@@ -12,11 +12,6 @@ use R3m\Io\Module\Validate;
 
 class Update {
 
-    const PASSPHRASE = '';
-    const NOW = 'now';
-    const TOKEN_EXPIRE = '+9 hours';
-    const REFRESH_TOKEN_EXPIRE = '+24 hours';
-
     public static function start(App $object){
         $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
         $host_list = $object->data_read($url);
