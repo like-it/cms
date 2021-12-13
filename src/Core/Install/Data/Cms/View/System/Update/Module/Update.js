@@ -86,6 +86,7 @@ update.cms = (node) => {
         if(!system){
             return;
         }
+        system.removeClass('d-none');
         system.html(response);
     });
 }
