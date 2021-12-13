@@ -19,7 +19,6 @@ class Update {
         $result_list = [];
         foreach($host_list->data() as $uuid => $record){
             try {
-                dd($record);
                 if(
                     property_exists($record, 'is') &&
                     property_exists($record->is, 'installed') &&
