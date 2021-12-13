@@ -15,7 +15,7 @@ use Host\Subdomain\Host\Extension\Service\System as Service;
 
 class System extends View {
     const DIR = __DIR__ . DIRECTORY_SEPARATOR;
-    const NAME = 'Update';
+    const NAME = 'System';
 
     const COMMAND_INFO = 'info';
     const COMMAND_UPDATE = 'update';
