@@ -74,12 +74,14 @@ class Update {
             return false;
         }
         $dir = new Dir();
-        $read = $dir->read($object->config('project.dir.vendor') . 'like-it/cms/src/Core/Install/Data/' . ucfirst($options['name']) . $object->config('ds'), true);
+        $url = $object->config('project.dir.vendor') . 'like-it/cms/src/Core/Install/Data/' . ucfirst($options['name']) . $object->config('ds');
+        $read = $dir->read($url, true);
+        dd($read);
         foreach($read as $nr => $file){
             if($file->type === File::TYPE){
                 continue;
             }
-            $explode = explode($object->config('project.dir.vendor') . 'like-it/cms/src/Core/Install/Data/' . ucfirst($options['name']) . $object->config('ds'), $file->url, 2);
+            $explode = explode($url, $file->url, 2);
             if(array_key_exists(1, $explode)){
                 if(array_key_exists('subdomain', $options)){
                     $target = $object->config('project.dir.root') .
