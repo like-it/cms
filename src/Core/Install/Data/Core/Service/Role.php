@@ -46,6 +46,15 @@ class Role extends Main {
         return $is_admin;
     }
 
+    public static function getName(App $object, $uuid){
+        $url = Role::getDataUrl($object);
+        $data = $object->data_read($url);
+        if(!$data){
+            $data = new Data();
+        }
+        return $data->get($uuid . '.name');
+    }
+
 
     /*
     public static function create(App $object): Response

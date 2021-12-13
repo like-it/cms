@@ -74,12 +74,13 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                         }
                         if ($uuid && $email) {
                             $object->request('email', $email);
-                            d($email);
                             $user = \Host\Subdomain\Host\Extension\Service\User::getUserByEmail($object);
+                            if($user){
+                                $userRole = \Host\Subdomain\Host\Extension\Service\UserRole::get($object, $user);
+                                dd($userRole);
+                            }
                         }
-                        dd($user);
-
-
+                        //object user needs role to check if it is admin role...
                         if (
                             array_key_exists('email', $user) &&
                             array_key_exists('role', $user) &&
