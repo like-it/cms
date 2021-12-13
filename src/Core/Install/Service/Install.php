@@ -52,6 +52,7 @@ class Install {
                     $data->set($uuid . '.host', $host);
                     $data->set($uuid . '.subdomain', Install::SUBDOMAIN_CORE);
                     $data->set($uuid . '.extension', $extension);
+                    $data->set($uuid . '.is.core', true);
                     $uuid = Core::uuid();
                     Install::Host($object, [
                         'host' => $host,
@@ -98,8 +99,6 @@ class Install {
                     Install::certificate($object);
                     install::certificate_config($object);
                     $user_service::install($object);
-
-
                     $response = $user_service::create($object);
                     $user = $response->data();
                     if(
