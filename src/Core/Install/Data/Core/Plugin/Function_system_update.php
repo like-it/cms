@@ -12,5 +12,5 @@ use R3m\Io\Module\Parse;
 
 function function_system_update(Parse $parse, Data $data){
     $object = $parse->object();
-    \Host\Subdomain\Host\Extension\Service\System::update($object);
+    return \Host\Subdomain\Host\Extension\Service\System::update($object);
 }
