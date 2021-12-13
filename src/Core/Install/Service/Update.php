@@ -58,6 +58,7 @@ class Update {
             Host::command_add($object, $options);
             $result[] = 'Dedouble routes...';
             Host::route_dedouble($object, $options);
+            $result[] = '';
             return implode("\n", $result);
         } catch (Exception $exception){
             return $exception;
