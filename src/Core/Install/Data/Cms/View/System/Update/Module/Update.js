@@ -1,6 +1,5 @@
-import {system} from "../../../../../../../../../../../old.cms.funda.world/Host/Cms/Funda/World/Public/System/Module/Js/System";
-
 {R3M}
+import create from "/Module/Create.js";
 import user from "/Module/User.js";
 import url from "/Module/Url.js";
 import { getSectionByName } from "/Module/Section.js";
@@ -73,21 +72,24 @@ update.cms = (node) => {
             setTimeout(() => {
                 update.cms(node);
             }, 5000);
+        } else {
+            const section = getSectionByName('main-content');
+            if(!section){
+                return;
+            }
+            const body = section.select('.card-body-update');
+            if(!body){
+                return;
+            }
+            const system = body.select('.system-console');
+            if(!system){
+                return;
+            }
+            const pre = create('pre');
+            pre.html(response);
+            system.removeClass('d-none');
+            system.appendChild(pre);
         }
-        const section = getSectionByName('main-content');
-        if(!section){
-            return;
-        }
-        const body = section.select('.card-body-update');
-        if(!body){
-            return;
-        }
-        const system = body.select('.system-console');
-        if(!system){
-            return;
-        }
-        system.removeClass('d-none');
-        system.html(response);
     });
 }
 
