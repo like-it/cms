@@ -1,6 +1,7 @@
 <?php
 namespace Host\Subdomain\Host\Extension\Service;
 
+use LikeIt\Cms\Core\Install\Service\Install;
 use R3m\Io\App;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Dir;
@@ -15,6 +16,14 @@ class System extends Main {
 
     public static function update(App $object){
         dd($object->request());
+
+        Install::Host($object, [
+            'host' => $host,
+            'extension' => $extension,
+            'subdomain' => Install::SUBDOMAIN_CORE
+        ]);
+
+
     }
 
     /**
