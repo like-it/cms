@@ -13,7 +13,13 @@ function function_admin_taskrunner(Parse $parse, Data $data){
     $object = $parse->object();
 
     $host_dir_root = $object->config('host.dir.root');
-    dd($host_dir_root);
+    if(empty($host_dir_root)){
+        $read = File::read($object->config('project.dir.data') . 'Host' . $object->config('extension.json'));
+        if($read){
+            $read = Core::object($read);
+            dd($read);
+        }
+    }
 
 
     while(true){
