@@ -47,10 +47,10 @@ class Update {
         if(!array_key_exists('extension', $options)){
             return;
         }
-        if(!array_key_exists('name', $options)){
-            return false;
-        }
         $options = Host::options($object, $options);
+        if(!array_key_exists('name', $options)){
+            return;
+        }
         $result = [];
         try {
             $result[] = 'Creating (' . $options['name'] . ') directories...';
