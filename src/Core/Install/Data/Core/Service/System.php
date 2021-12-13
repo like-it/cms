@@ -25,7 +25,7 @@ class System extends Main {
             funda admin task "
                 composer update && 
                 funda cache:clear &&
-                funda info all
+                funda system update ' . $token . '
             "
         ';
         Core::execute($execute, $output);

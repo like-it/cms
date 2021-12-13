@@ -262,6 +262,13 @@
             "CLI"
         ]
     },
+    "55b1f34a-05c5-4140-951d-d293fa187b33" : {
+        "module" : "system",
+        "path": "system",
+        "method": [
+            "CLI"
+        ]
+    },
     "fc3ba8ba-f02d-4bdb-93de-6a444a63565a" : {
         "module" : "config",
         "command" : "version",
