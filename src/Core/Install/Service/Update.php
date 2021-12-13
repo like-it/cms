@@ -17,8 +17,7 @@ class Update {
         $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
         $host_list = $object->data_read($url);
         $result_list = [];
-        dd($host_list);
-        foreach($host_list as $uuid => $record){
+        foreach($host_list->data() as $uuid => $record){
             try {
                 dd($record);
                 if(
