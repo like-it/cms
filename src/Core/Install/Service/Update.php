@@ -50,7 +50,7 @@ class Update {
         $result = [];
         try {
             $result[] = 'Creating directories...';
-            Host::dir_create($object, $options);
+            Update::dir_create($object, $options);
             $result[] = 'Copying files...';
             Host::file_create($object, $options);
             $result[] = 'Adding commands...';
@@ -61,5 +61,45 @@ class Update {
         } catch (Exception $exception){
             return $exception;
         }
+    }
+
+    public static function dir_create(App $object, $options=[]){
+        if(!array_key_exists('name', $options)){
+            return false;
+        }
+        if(!array_key_exists('host', $options)){
+            return false;
+        }
+        if(!array_key_exists('extension', $options)){
+            return false;
+        }
+        $dir = new Dir();
+        $read = $dir->read($object->config('project.dir.vendor') . 'like-it/cms/src/Core/Install/Data/' . ucfirst($options['name']) . $object->config('ds'), true);
+        foreach($read as $nr => $file){
+            if($file->type === File::TYPE){
+                continue;
+            }
+            $explode = explode($object->config('project.dir.vendor') . 'like-it/cms/src/Core/Install/Data/' . ucfirst($options['name']) . $object->config('ds'), $file->url, 2);
+            if(array_key_exists(1, $explode)){
+                if(array_key_exists('subdomain', $options)){
+                    $target = $object->config('project.dir.root') .
+                        'Host' . $object->config('ds') .
+                        ucfirst($options['subdomain']) . $object->config('ds') .
+                        ucfirst($options['host']) . $object->config('ds') .
+                        ucfirst($options['extension']) . $object->config('ds') .
+                        $explode[1];
+                } else {
+                    $target = $object->config('project.dir.root') .
+                        'Host' . $object->config('ds') .
+                        ucfirst($options['host']) . $object->config('ds') .
+                        ucfirst($options['extension']) . $object->config('ds') .
+                        $explode[1];
+                }
+                if(Dir::is($target) === false){
+                    Dir::create($target);
+                }
+            }
+        }
+        return true;
     }
 }
