@@ -481,6 +481,9 @@ class Host {
         return $options;
     }
 
+    /**
+     * @throws \R3m\Io\Exception\FileWriteException
+     */
     public static function file_create(App $object, $options=[]): bool
     {
         if (!array_key_exists('name', $options)) {
@@ -533,45 +536,7 @@ class Host {
                             }
                             $read->write($target);
                         }
-                    }
-                    /*
-                    elseif(stristr($file->url, ucfirst($options['name']) . '/Data/Command.json') !== false){
-                        d(Dir::name($file->url));
-                        d(Dir::name($target));
-                        $read = $object->data_read(Dir::name($file->url) . 'Route.json');
-                        $target = Dir::name($target) . 'Route.json';
-                        d($target);
-                        $parse = new Parse($object);
-                        $data = [
-                            'subdomain' => $options['subdomain'],
-                            'host' => $options['host'],
-                            'extension' => $options['extension']
-                        ];
-                        if ($read) {
-                            foreach ($read->data() as $key => $compile) {
-                                $parse_key = $parse->compile($key, $data);
-                                $compile = $parse->compile($compile, $data);
-                                $read->data('delete', $key);
-                                $read->data($parse_key, $compile);
-                            }
-                            $read->write($target);
-                            $list = $object->data_read($file->url);
-                            foreach ($list->data() as $id => $add) {
-                                $add->host = [
-                                    $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension']
-                                ];
-                                $key = $options['subdomain'] . '-' . $options['host'] . '-' . $options['extension'] . '-' . $add->module . '-' . $add->command;
-                                $add->controller = "Host." . ucfirst($options['subdomain']) . '.' . ucfirst($options['host']) . '.' . ucfirst($options['extension']) . '.Controller.' . ucfirst($add->module) . '.' . $add->command;
-                                $add->path = ucfirst($add->module) . '/' . ucfirst($add->command) . '/';
-                                //$add->resource = $has_route->resource;
-                                //$data = $object->data_read($target);
-                                unset($add->module);
-                                unset($add->command);
-                                $read->data($key, $add);
-                                $read->write($target);
-                            }
-                        }
-                    }*/ else {
+                    } else {
                         File::copy($file->url, $target);
                     }
                 } else {
