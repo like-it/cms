@@ -220,7 +220,7 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                         File::delete($url);
                     }
                     File::delete($file->url);
-                    echo 'Task Delete url: ' . file->url . PHP_EOL;
+                    echo 'Task Delete url: ' . $file->url . PHP_EOL;
                 }
             }
             sleep(1);
