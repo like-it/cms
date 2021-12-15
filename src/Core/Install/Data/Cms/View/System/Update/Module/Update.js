@@ -69,25 +69,25 @@ update.cms = (node) => {
 
     request(read, null, (url, response) => {
         if(response.class === 'R3m\\Io\\Exception\\FileNotExistException'){
+            const section = getSectionByName('main-content');
+            if(!section){
+                return;
+            }
+            const body = section.select('.card-body-update');
+            if(!body){
+                return;
+            }
+            const system = body.select('.system-console');
+            if(!system){
+                return;
+            }
+            const pre = create('pre');
+            pre.html('Initializing update, please wait...' + "\n");
+            system.removeClass('d-none');
+            system.html('');
+            system.appendChild(pre);
             setTimeout(() => {
                 update.cms(node);
-                const section = getSectionByName('main-content');
-                if(!section){
-                    return;
-                }
-                const body = section.select('.card-body-update');
-                if(!body){
-                    return;
-                }
-                const system = body.select('.system-console');
-                if(!system){
-                    return;
-                }
-                const pre = create('pre');
-                pre.html('Initializing update, please wait...' + "\n");
-                system.removeClass('d-none');
-                system.html('');
-                system.appendChild(pre);
             }, 5000);
         } else {
             const section = getSectionByName('main-content');
