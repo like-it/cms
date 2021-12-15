@@ -78,6 +78,8 @@ class Admin extends View{
     }
 
     private static function taskrunner(App $object){
+        $command = App::parameter($object, 'taskrunner', 1);
+        $object->request('command', $command);
         try {
             $name = Admin::name(__FUNCTION__, Admin::NAME, '/');
             $url = Admin::locate($object, $name);
