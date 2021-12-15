@@ -10,6 +10,9 @@ use R3m\Io\Module\Core;
 use R3m\Io\Module\File;
 use R3m\Io\Module\Parse;
 
+/**
+ * @throws Exception
+ */
 function function_admin_taskrunner(Parse $parse, Data $data){
     $object = $parse->object();
     if(
@@ -17,6 +20,7 @@ function function_admin_taskrunner(Parse $parse, Data $data){
         $object->request('submodule') === 'taskrunner' &&
         $object->request('command') === 'stop'
     ){
+        echo $parse->compile('Stopping {binary()} admin taskrunner...' . PHP_EOL, $data);
         $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
         $config = $object->data_read($url);
         if(!$config){
