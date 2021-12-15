@@ -158,10 +158,16 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                 if ($file->type == File::TYPE) {
                     ob_start();
                     if (File::extension($file->url) === 'task') {
+                        echo 'Task url: ' . $file->url . ' found...' . PHP_EOL;
                         $url = Dir::name($file->url) . File::basename($file->url, '.task') . '.token';
                         if (!File::exist($url)) {
                             sleep(1);
                             if (!File::exist($url)) {
+                                $content = 'Token File url: ' . $url . ' doesn\'t exist.';
+                                $basename = File::basename($file->url);
+                                $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
+                                Dir::create($dir);
+                                File::write($dir . $basename, $content);
                                 File::delete($file->url);
                                 continue;
                             }
@@ -183,6 +189,11 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                                 $object->request('email', $email);
                                 $user = \Host\Subdomain\Host\Extension\Service\User::getUserByEmail($object);
                                 if (!$user) {
+                                    $content = 'Cannot find user...';
+                                    $basename = File::basename($file->url);
+                                    $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
+                                    Dir::create($dir);
+                                    File::write($dir . $basename, $content);
                                     File::delete($url);
                                     File::delete($file->url);
                                     continue;
@@ -214,7 +225,19 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                                 File::write($dir . $basename, $content);
                                 File::chown($dir, 'www-data', 'www-data', true);
                                 echo $content . PHP_EOL;
+                            } else {
+                                $content = 'No Administrator...';
+                                $basename = File::basename($file->url);
+                                $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
+                                Dir::create($dir);
+                                File::write($dir . $basename, $content);
                             }
+                        } else {
+                            $content = 'Invalid claim detected in token...';
+                            $basename = File::basename($file->url);
+                            $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
+                            Dir::create($dir);
+                            File::write($dir . $basename, $content);
                         }
                         echo 'Token Delete url: ' . $url . PHP_EOL;
                         File::delete($url);
