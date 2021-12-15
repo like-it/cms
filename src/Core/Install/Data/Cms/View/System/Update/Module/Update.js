@@ -65,6 +65,7 @@ update.button = () => {
 }
 
 update.cms = (node) => {
+    console.log(node);
     if(node?.output){
         const read = "{{server.url('core')}}FileSystem/Read/?url=" + url.encode(node.output);
     } else {
