@@ -70,6 +70,7 @@ update.cms = (node) => {
         const read = "{{server.url('core')}}FileSystem/Read/?url=" + url.encode(node.output);
     } else {
         console.warn('output is undefined in node.');
+        console.log(node);
         return;
     }
     request(read, null, (urlRead, response) => {
