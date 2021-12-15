@@ -40,7 +40,7 @@ update.button = () => {
                 header('authorization', 'Bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
                     if(response?.node?.output){
-                        update.cms(response);
+                        update.cms(response.node);
                     }
                     console.log(url);
                     console.log(response);
