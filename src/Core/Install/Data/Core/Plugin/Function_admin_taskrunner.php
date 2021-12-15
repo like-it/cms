@@ -24,6 +24,9 @@ function function_admin_taskrunner(Parse $parse, Data $data){
         }
         $pid = $config->data('admin.taskrunner.pid');
         if($pid){
+            if(!defined('SIGHUP')){
+                define('SIGHUP', 1);
+            }
             $kill = posix_kill($pid, SIGHUP);
             if($kill){
                 echo 'SIGHUP terminated the process with id: ' . $pid . PHP_EOL;
