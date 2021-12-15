@@ -20,8 +20,6 @@ function function_admin_taskrunner(Parse $parse, Data $data){
         $object->request('submodule') === 'taskrunner' &&
         $object->request('command') === 'stop'
     ){
-        $token = App::parameter($object, 'stop', 1);
-        dd($token);
         echo $parse->compile('Stopping {binary()} admin taskrunner...' . PHP_EOL, $data);
         $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
         $config = $object->data_read($url);
