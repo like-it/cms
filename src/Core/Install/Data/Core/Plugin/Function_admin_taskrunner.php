@@ -30,6 +30,8 @@ function function_admin_taskrunner(Parse $parse, Data $data){
             } else {
                 echo 'SIGHUP couldn\'t terminate the process with id: ' . $pid . PHP_EOL;
             }
+        } else {
+            echo 'No admin taskrunner process found...' . $pid . PHP_EOL;
         }
         $config->delete('admin.taskrunner.pid');
         $config->write($url);
