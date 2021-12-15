@@ -66,8 +66,9 @@ update.button = () => {
 
 update.cms = (node) => {
     console.log(node);
+    let read = false;
     if(node?.output){
-        const read = "{{server.url('core')}}FileSystem/Read/?url=" + url.encode(node.output);
+        read = "{{server.url('core')}}FileSystem/Read/?url=" + url.encode(node.output);
     } else {
         console.warn('output is undefined in node.');
         console.log(node);
