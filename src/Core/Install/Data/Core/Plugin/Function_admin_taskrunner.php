@@ -21,29 +21,66 @@ function function_admin_taskrunner(Parse $parse, Data $data){
         $object->request('command') === 'stop'
     ){
         $token = $object->request('token');
-        dd($token);
-        echo $parse->compile('Stopping {binary()} admin taskrunner...' . PHP_EOL, $data);
-        $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
-        $config = $object->data_read($url);
-        if(!$config){
-            exit();
-        }
-        $pid = $config->data('admin.taskrunner.pid');
-        if($pid){
-            if(!defined('SIGHUP')){
-                define('SIGHUP', 1);
+        $token_unencrypted = \Host\Subdomain\Host\Extension\Service\Jwt::decryptToken($object, $token);
+        $claims = $token_unencrypted->claims();
+        if ($claims->has('user')) {
+            $user = $claims->get('user');
+            $uuid = false;
+            $email = false;
+            if (array_key_exists('uuid', $user)) {
+                $uuid = $user['uuid'];
             }
-            $kill = posix_kill($pid, SIGHUP);
-            if($kill){
-                echo 'SIGHUP terminated the process with id: ' . $pid . PHP_EOL;
+            if (array_key_exists('email', $user)) {
+                $email = $user['email'];
+            }
+            if ($uuid && $email) {
+                $object->request('email', $email);
+                $user = \Host\Subdomain\Host\Extension\Service\User::getUserByEmail($object);
+                if (!$user) {
+                    echo 'Could not find user...' . PHP_EOL;
+                    return;
+                }
+            }
+            $is_admin = false;
+            if ($user) {
+                $is_admin = \Host\Subdomain\Host\Extension\Service\UserRole::has(
+                    $object,
+                    \Host\Subdomain\Host\Extension\Service\UserRole::get(
+                        $object,
+                        $user
+                    ),
+                    'ROLE_IS_ADMIN'
+                );
+            }
+            if ($is_admin === true) {
+                echo $parse->compile('Stopping {binary()} admin taskrunner...' . PHP_EOL, $data);
+                $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
+                $config = $object->data_read($url);
+                if (!$config) {
+                    exit();
+                }
+                $pid = $config->data('admin.taskrunner.pid');
+                if ($pid) {
+                    if (!defined('SIGHUP')) {
+                        define('SIGHUP', 1);
+                    }
+                    $kill = posix_kill($pid, SIGHUP);
+                    if ($kill) {
+                        echo 'SIGHUP terminated the process with id: ' . $pid . PHP_EOL;
+                    } else {
+                        echo 'SIGHUP couldn\'t terminate the process with id: ' . $pid . PHP_EOL;
+                    }
+                } else {
+                    echo 'No admin taskrunner process found...' . $pid . PHP_EOL;
+                }
+                $config->delete('admin.taskrunner.pid');
+                $config->write($url);
             } else {
-                echo 'SIGHUP couldn\'t terminate the process with id: ' . $pid . PHP_EOL;
+                echo 'You need to have the role administrator to fulfil this action.' . PHP_EOL;
             }
         } else {
-            echo 'No admin taskrunner process found...' . $pid . PHP_EOL;
+            echo 'Invalid claims detected in token.' . PHP_EOL;
         }
-        $config->delete('admin.taskrunner.pid');
-        $config->write($url);
     } else {
         $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
         $config = $object->data_read($url);
