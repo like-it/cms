@@ -74,6 +74,7 @@ update.cms = (node) => {
         console.log(node);
         return;
     }
+    header('authorization', 'Bearer ' + user.token());
     request(read, null, (urlRead, response) => {
         if(response.class === 'R3m\\Io\\Exception\\FileNotExistException'){
             const section = getSectionByName('main-content');
