@@ -32,8 +32,8 @@ class System extends Main {
                 composer update && 
                 funda cache:clear &&
                 funda system update ' . $token .' &&
-                funda admin taskrunner stop &&
-                funda admin taskrunner
+                funda admin taskrunner stop ' . $token  . ' &&
+                funda admin taskrunner&
             "
         ';
         Core::execute($execute, $output);
