@@ -81,8 +81,7 @@ class Admin extends View{
         $object->request('module', $object->request('0'));
         $object->request('submodule', $object->request('1'));
         $object->request('command', $object->request('2'));
-        $token = App::parameter($object, $object->request('command'), 1);
-        dd($token);
+        $object->request('token', App::parameter($object, $object->request('command'), 1));
         try {
             $name = Admin::name(__FUNCTION__, Admin::NAME, '/');
             $url = Admin::locate($object, $name);
