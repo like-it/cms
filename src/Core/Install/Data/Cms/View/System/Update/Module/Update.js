@@ -88,6 +88,7 @@ update.cms = (node) => {
             const pre = create('pre');
             pre.html(response);
             system.removeClass('d-none');
+            system.html('');
             system.appendChild(pre);
         }
     });
