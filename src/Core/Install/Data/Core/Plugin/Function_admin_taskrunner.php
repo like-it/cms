@@ -216,9 +216,11 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                                 echo $content . PHP_EOL;
                             }
                         }
+                        echo 'Token Delete url: ' . $url . PHP_EOL;
                         File::delete($url);
                     }
                     File::delete($file->url);
+                    echo 'Task Delete url: ' . file->url . PHP_EOL;
                 }
             }
             sleep(1);
