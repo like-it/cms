@@ -163,11 +163,7 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                         if (!File::exist($url)) {
                             sleep(1);
                             if (!File::exist($url)) {
-                                $content = 'Token File url: ' . $url . ' doesn\'t exist.';
-                                $basename = File::basename($file->url);
-                                $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
-                                Dir::create($dir);
-                                File::write($dir . $basename, $content);
+                                echo 'Token File url: ' . $url . ' doesn\'t exist.';
                                 File::delete($file->url);
                                 continue;
                             }
@@ -189,11 +185,7 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                                 $object->request('email', $email);
                                 $user = \Host\Subdomain\Host\Extension\Service\User::getUserByEmail($object);
                                 if (!$user) {
-                                    $content = 'Cannot find user...';
-                                    $basename = File::basename($file->url);
-                                    $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
-                                    Dir::create($dir);
-                                    File::write($dir . $basename, $content);
+                                    echo 'Cannot find user...';
                                     File::delete($url);
                                     File::delete($file->url);
                                     continue;
