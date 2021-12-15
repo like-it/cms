@@ -104,6 +104,7 @@
     "system.information.section.menu.header.update" : "Update",
     "system.information.section.information.body.title" : "Information",
     "system.update.section.main.body.button.update.cms" : "Update Core & CMS packages",
+    "system.update.section.main.body.button.admin.taskrunner.restart" : "Restart Admin Taskrunner",
     "system.update.section.main.body.text" : [
         "Welcome to the update section.",
         "You can choose to update the OS manually or wait for the automatic update process.",

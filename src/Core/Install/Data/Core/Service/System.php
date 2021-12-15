@@ -27,6 +27,10 @@ class System extends Main {
             throw new AuthorizationException('Authorization token missing...');
         }
         $token = substr($_SERVER['HTTP_AUTHORIZATION'], 7);
+        /**
+         * cannot stop taskrunner as its the proces this has to be a seperate button
+         */
+        /*
         $execute = '
             funda admin task "
                 composer update && 
@@ -34,6 +38,14 @@ class System extends Main {
                 funda system update ' . $token .' &&
                 funda admin taskrunner stop ' . $token  . ' &&
                 funda admin taskrunner&
+            "
+        ';
+        */
+        $execute = '
+            funda admin task "
+                composer update && 
+                funda cache:clear &&
+                funda system update ' . $token .'                
             "
         ';
         Core::execute($execute, $output);

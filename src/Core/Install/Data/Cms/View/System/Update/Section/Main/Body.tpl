@@ -23,6 +23,15 @@
     >
         {{__('system.update.section.main.body.button.update.cms')}}
     </a>
+    <br>
+    <a
+        class="btn btn-primary"
+        data-url="{{server.url('core')}}Admin/Taskrunner/Restart/"
+        data-method="replace"
+        data-target=".system-console"
+    >
+        {{__('system.update.section.main.body.button.admin.taskrunner.restart')}}
+    </a>
     <br><br>
     <div class="row">
         <div class="col-1"></div>
