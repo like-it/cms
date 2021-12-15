@@ -12,7 +12,14 @@ use R3m\Io\Module\Parse;
 
 function function_admin_taskrunner(Parse $parse, Data $data){
     $object = $parse->object();
-
+    dd($object->request());
+    $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
+    $config = $object->data_read($url);
+    if(!$config){
+        exit();
+    }
+    $config->data('admin.taskrunner.pid', posix_getpid());
+    $config->write($url);
     $host_dir_root = $object->config('host.dir.root');
     if(empty($host_dir_root)){
         $read = File::read($object->config('project.dir.data') . 'Host' . $object->config('extension.json'));
