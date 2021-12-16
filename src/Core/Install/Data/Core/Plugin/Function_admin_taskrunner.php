@@ -336,6 +336,20 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                 File::delete($url);
                 $execute = $parse->compile('{binary()} admin taskrunner&', $data);
                 Core::execute($execute);
+                $pid = $config->data('admin.taskrunner.pid');
+                if ($pid) {
+                    if (!defined('SIGHUP')) {
+                        define('SIGHUP', 1);
+                    }
+                    $kill = posix_kill($pid, SIGHUP);
+                    if ($kill) {
+                        //log 'SIGHUP terminated the process with id: ' . $pid . PHP_EOL;
+                    } else {
+                        //log 'SIGHUP couldn\'t terminate the process with id: ' . $pid . PHP_EOL;
+                    }
+                } else {
+                    //log 'No admin taskrunner process found...' . $pid . PHP_EOL;
+                }
                 exit();
             }
             sleep(1);
