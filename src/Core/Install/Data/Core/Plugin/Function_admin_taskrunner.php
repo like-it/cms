@@ -338,10 +338,10 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                 Core::execute($execute);
                 $pid = $config->data('admin.taskrunner.pid');
                 if ($pid) {
-                    if (!defined('SIGHUP')) {
-                        define('SIGHUP', 1);
+                    if (!defined('SIGTERM')) {
+                        define('SIGTERM', 15);
                     }
-                    $kill = posix_kill($pid, SIGHUP);
+                    $kill = posix_kill($pid, SIGTERM);
                     if ($kill) {
                         //log 'SIGHUP terminated the process with id: ' . $pid . PHP_EOL;
                     } else {
