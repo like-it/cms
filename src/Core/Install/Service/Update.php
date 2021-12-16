@@ -37,6 +37,7 @@ class Update {
                 return $exception;
             }
         }
+        $result_list[] = '';
         return new Response(implode("\n", $result_list), Response::TYPE_HTML);
     }
 
