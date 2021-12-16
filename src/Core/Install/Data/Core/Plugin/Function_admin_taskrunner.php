@@ -334,6 +334,9 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                 Dir::create($dir);
                 File::append($dir . $basename, $content);
                 File::delete($url);
+                $execute = $parse->compile('{binary()} admin taskrunner&', $data);
+                Core::execute($execute);
+                exit();
             }
             sleep(1);
         }
