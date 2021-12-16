@@ -18,7 +18,8 @@ function function_admin_taskrunner(Parse $parse, Data $data){
     if(
         $object->request('module') === 'admin' &&
         $object->request('submodule') === 'taskrunner' &&
-        $object->request('command') === 'stop'
+        $object->request('command') === 'stop' &&
+        !empty($object->request('token'))
     ){
         $token = $object->request('token');
         $token_unencrypted = \Host\Subdomain\Host\Extension\Service\Jwt::decryptToken($object, $token);
