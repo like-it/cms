@@ -158,7 +158,7 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                 if ($file->type == File::TYPE) {
                     ob_start();
                     if (File::extension($file->url) === 'task') {
-                        echo 'Task url: ' . $file->url . ' found...' . PHP_EOL;
+                        //echo 'Task url: ' . $file->url . ' found...' . PHP_EOL;
                         $url = Dir::name($file->url) . File::basename($file->url, '.task') . '.token';
                         if (!File::exist($url)) {
                             sleep(1);
