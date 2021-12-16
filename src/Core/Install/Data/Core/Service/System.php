@@ -49,9 +49,8 @@ class System extends Main {
                 funda system update ' . $token .'                
             "
         ';
-        
+
         Core::execute($execute, $output);
-        d($output);
         if(array_key_exists(0, $output)){
             $task = $output[0];
             $dir = Dir::name($task);
