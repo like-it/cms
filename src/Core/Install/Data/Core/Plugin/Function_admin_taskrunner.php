@@ -163,7 +163,7 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                 if(File::extension($file->url) !== 'token') {
                     continue;
                 }
-                $url = Dir::name($file->url) . File::basename($file->url, '.task') . '.task';
+                $url = Dir::name($file->url) . File::basename($file->url, '.token') . '.task';
                 if (!File::exist($url)) {
                     $content = 'Task File url: ' . $url . ' doesn\'t exist.';
                     $basename = File::basename($url);
