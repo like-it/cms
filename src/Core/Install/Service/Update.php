@@ -38,7 +38,8 @@ class Update {
             }
         }
         $result_list[] = '';
-        return new Response(implode("\n", $result_list), Response::TYPE_HTML);
+        $result_list[] = 'Update complete...' . PHP_EOL;
+        return new Response(implode(PHP_EOL, $result_list), Response::TYPE_HTML);
     }
 
     public static function host(App $object, $options=[]){
