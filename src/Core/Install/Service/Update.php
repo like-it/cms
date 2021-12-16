@@ -37,7 +37,6 @@ class Update {
                 return $exception;
             }
         }
-        $result_list[] = '';
         $result_list[] = 'Update complete...' . PHP_EOL;
         return new Response(implode(PHP_EOL, $result_list), Response::TYPE_HTML);
     }
