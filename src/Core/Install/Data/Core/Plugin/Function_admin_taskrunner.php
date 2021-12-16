@@ -158,12 +158,15 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                 if ($file->type == File::TYPE) {
                     ob_start();
                     if (File::extension($file->url) === 'task') {
-                        //echo 'Task url: ' . $file->url . ' found...' . PHP_EOL;
                         $url = Dir::name($file->url) . File::basename($file->url, '.task') . '.token';
                         if (!File::exist($url)) {
                             sleep(1);
                             if (!File::exist($url)) {
-                                echo 'Token File url: ' . $url . ' doesn\'t exist.';
+                                $content = 'Token File url: ' . $url . ' doesn\'t exist.';
+                                $basename = File::basename($file->url);
+                                $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
+                                Dir::create($dir);
+                                File::write($dir . $basename, $content);
                                 File::delete($file->url);
                                 continue;
                             }
@@ -185,7 +188,11 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                                 $object->request('email', $email);
                                 $user = \Host\Subdomain\Host\Extension\Service\User::getUserByEmail($object);
                                 if (!$user) {
-                                    echo 'Cannot find user...';
+                                    $content = 'Cannot find user...';
+                                    $basename = File::basename($file->url);
+                                    $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
+                                    Dir::create($dir);
+                                    File::write($dir . $basename, $content);
                                     File::delete($url);
                                     File::delete($file->url);
                                     continue;
@@ -218,15 +225,33 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                                 File::chown($dir, 'www-data', 'www-data', true);
                                 echo $content . PHP_EOL;
                             } else {
-                                echo 'No Administrator...' . PHP_EOL;
+                                $content = 'No Administrator...' . PHP_EOL;
+                                $basename = File::basename($file->url);
+                                $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
+                                Dir::create($dir);
+                                File::write($dir . $basename, $content);
                             }
                         } else {
-                            echo 'Invalid claim detected in token...' . PHP_EOL;
+                            $content = 'Invalid claim detected in token...' . PHP_EOL;
+                            $basename = File::basename($file->url);
+                            $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
+                            Dir::create($dir);
+                            File::write($dir . $basename, $content);
                         }
-                        echo 'Token Delete url: ' . $url . PHP_EOL;
+                        $content = 'Token Delete url: ' . $url . PHP_EOL;
+                        $basename = File::basename($file->url);
+                        $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
+                        Dir::create($dir);
+                        File::append($dir . $basename, $content);
+
+
                         File::delete($url);
                     }
-                    echo 'Task Delete url: ' . $file->url . PHP_EOL;
+                    $content = 'Token Delete url: ' . $url . PHP_EOL;
+                    $basename = File::basename($file->url);
+                    $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
+                    Dir::create($dir);
+                    File::append($dir . $basename, $content);
                     File::delete($file->url);
                 }
             }
