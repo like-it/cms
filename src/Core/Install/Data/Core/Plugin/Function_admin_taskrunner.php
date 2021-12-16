@@ -248,7 +248,7 @@ function function_admin_taskrunner(Parse $parse, Data $data){
 
                         File::delete($url);
                     }
-                    $content = 'Token Delete url: ' . $url . PHP_EOL;
+                    $content = 'Task Delete url: ' . $file->url . PHP_EOL;
                     $basename = File::basename($file->url);
                     $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
                     Dir::create($dir);
