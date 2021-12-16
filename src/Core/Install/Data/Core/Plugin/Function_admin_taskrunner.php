@@ -119,6 +119,7 @@ function function_admin_taskrunner(Parse $parse, Data $data){
         if (!$config) {
             exit();
         }
+        $pid = $config->data('admin.taskrunner.pid');
         $config->data('admin.taskrunner.pid', posix_getpid());
         $config->write($url);
         $host_dir_root = $object->config('host.dir.root');

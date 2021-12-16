@@ -78,6 +78,7 @@ class Admin extends View{
     }
 
     private static function taskrunner(App $object){
+        dd($object->request());
         $object->request('module', $object->request('0'));
         $object->request('submodule', $object->request('1'));
         $object->request('command', $object->request('2'));
