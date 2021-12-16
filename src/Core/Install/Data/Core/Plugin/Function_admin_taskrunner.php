@@ -218,24 +218,16 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                                 File::chown($dir, 'www-data', 'www-data', true);
                                 echo $content . PHP_EOL;
                             } else {
-                                $content = 'No Administrator...';
-                                $basename = File::basename($file->url);
-                                $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
-                                Dir::create($dir);
-                                File::write($dir . $basename, $content);
+                                echo 'No Administrator...' . PHP_EOL;
                             }
                         } else {
-                            $content = 'Invalid claim detected in token...';
-                            $basename = File::basename($file->url);
-                            $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
-                            Dir::create($dir);
-                            File::write($dir . $basename, $content);
+                            echo 'Invalid claim detected in token...' . PHP_EOL;
                         }
                         echo 'Token Delete url: ' . $url . PHP_EOL;
                         File::delete($url);
                     }
-                    File::delete($file->url);
                     echo 'Task Delete url: ' . $file->url . PHP_EOL;
+                    File::delete($file->url);
                 }
             }
             sleep(1);
