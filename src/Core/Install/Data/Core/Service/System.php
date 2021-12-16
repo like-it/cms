@@ -30,6 +30,7 @@ class System extends Main {
         /**
          * cannot stop taskrunner as its the proces this has to be a seperate button
          */
+        /*
         $execute = '
             funda admin task "
                 composer update && 
@@ -39,8 +40,8 @@ class System extends Main {
                 funda admin taskrunner stop ' . $token  . '                
             "
         ';
+        */
 
-        /*
         $execute = '
             funda admin task "
                 composer update && 
@@ -48,7 +49,7 @@ class System extends Main {
                 funda system update ' . $token .'                
             "
         ';
-        */
+        
         Core::execute($execute, $output);
         d($output);
         if(array_key_exists(0, $output)){
