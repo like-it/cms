@@ -9,7 +9,7 @@ ready(() => {
     const form = section.select('form');
     form.on('submit', (event) => {
         event.preventDefault();
-        header('authorization', 'Bearer ' + user.token());
+        header('Authorization', 'Bearer ' + user.token());
         form.request(form.data('url'), null, (url, response) => {
             if(form.data('has', 'frontend-url')){
                 request(form.data('frontend-url'), response);
@@ -24,7 +24,7 @@ ready(() => {
             if(node.data('has', 'url')){
                 list.removeClass('active');
                 node.addClass('active');
-                header('authorization', 'Bearer ' + user.token());
+                header('Authorization', 'Bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
                     if(node.data('has', 'frontend-url')){
                         request(node.data('frontend-url'), response);

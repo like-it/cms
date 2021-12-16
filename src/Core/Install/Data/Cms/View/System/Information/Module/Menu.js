@@ -11,7 +11,7 @@ menu.is_selected = (node, selected) => {
     } else {
         //load
         if(node.data('has', 'url')){
-            header('authorization', 'Bearer ' + user.token());
+            header('Authorization', 'Bearer ' + user.token());
             request(node.data('url'), null, (url, response) => {
                 if(node.data('has', 'frontend-url')){
                     request(node.data('frontend-url'), response);

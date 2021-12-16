@@ -20,7 +20,7 @@ settings.onDoubleClick = () => {
             let node = list[index];
             node.on('dblclick', (event) => {
                 if(node.data('has', 'url')){
-                    header('authorization', 'Bearer ' + user.token());
+                    header('Authorization', 'Bearer ' + user.token());
                     request(node.data('url'), null, (url, response) => {
                         request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
 
@@ -34,7 +34,7 @@ settings.onDoubleClick = () => {
         if(node){
             node.on('dblclick', (event) => {
                 if(node.data('has', 'url')){
-                    header('authorization', 'Bearer ' + user.token());
+                    header('Authorization', 'Bearer ' + user.token());
                     request(node.data('url'), null, (url, response) => {
                         request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
 
@@ -58,7 +58,7 @@ settings.edit = () => {
             let node = list[index];
             node.on('click', (event) => {
                 if(node.data('has', 'url')){
-                    header('authorization', 'Bearer ' + user.token());
+                    header('Authorization', 'Bearer ' + user.token());
                     request(node.data('url'), null, (url, response) => {
                         request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
 
@@ -72,7 +72,7 @@ settings.edit = () => {
         if(node){
             node.on('click', (event) => {
                 if(node.data('has', 'url')){
-                    header('authorization', 'Bearer ' + user.token());
+                    header('Authorization', 'Bearer ' + user.token());
                     request(node.data('url'), null, (url, response) => {
                         request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
 
@@ -206,7 +206,7 @@ settings.default = (target) => {
             let node = list[index];
             node.on('click', (event) => {
                 if(node.data('has', 'url')){
-                    header('authorization', 'Bearer ' + user.token());
+                    header('Authorization', 'Bearer ' + user.token());
                     request(node.data('url'), null, (url, response) => {
                         menu.dispatch(section, target);
                     });
@@ -218,7 +218,7 @@ settings.default = (target) => {
         if(node){
             node.on('click', (event) => {
                 if(node.data('has', 'url')){
-                    header('authorization', 'Bearer ' + user.token());
+                    header('Authorization', 'Bearer ' + user.token());
                     request(node.data('url'), null, (url, response) => {
                         menu.dispatch(section, target);
                     });

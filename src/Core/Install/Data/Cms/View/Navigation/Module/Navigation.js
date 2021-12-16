@@ -27,7 +27,7 @@ navigation.init = () => {
         node.on('click', (event) => {
             list.removeClass('active');
             node.addClass('active');
-            header('authorization', 'bearer ' + user.token());
+            header('Authorization', 'bearer ' + user.token());
             if(node.data('url')){
                 request(node.data('url'), null, (url, response) => {
                     if(node.data('frontend-url')){

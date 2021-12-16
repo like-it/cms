@@ -22,7 +22,7 @@ ready(() => {
         node.on('click', (event) => {
             if(node.hasClass('active')){
                 if(node.data('has', 'url')){
-                    header('authorization', 'bearer ' + user.token());
+                    header('Authorization', 'bearer ' + user.token());
                     request(node.data('url'), null, (url, response) => {
                         if(node.data('frontend-url')){
                             request(node.data('frontend-url'), response);
@@ -39,7 +39,7 @@ ready(() => {
                 console.log(node);
                 console.log(node.data('has', 'url'));
                 if(node.data('has', 'url')){
-                    header('authorization', 'bearer ' + user.token());
+                    header('Authorization', 'bearer ' + user.token());
                     request(node.data('url'), null, (url, response) => {
                         if(node.data('frontend-url')){
                             request(node.data('frontend-url'), response);

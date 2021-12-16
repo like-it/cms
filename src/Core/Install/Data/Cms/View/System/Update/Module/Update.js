@@ -37,7 +37,7 @@ update.button = () => {
         for(index=0; index < list.length; index++){
             let node = list[index];
             node.on('click', (event) => {
-                header('authorization', 'Bearer ' + user.token());
+                header('Authorization', 'Bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
                     if(response?.node?.output){
                         update.cms(response.node);
@@ -51,7 +51,7 @@ update.button = () => {
         let node = list;
         if(node){
             node.on('click', (event) => {
-                header('authorization', 'Bearer ' + user.token());
+                header('Authorization', 'Bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
                     if(response?.node?.output){
                         update.cms(response.node);
@@ -74,7 +74,7 @@ update.cms = (node) => {
         console.log(node);
         return;
     }
-    header('authorization', 'Bearer ' + user.token());
+    header('Authorization', 'Bearer ' + user.token());
     request(read, null, (urlRead, response) => {
         if(response.class === 'R3m\\Io\\Exception\\FileNotExistException'){
             const section = getSectionByName('main-content');

@@ -20,7 +20,7 @@ navigation.init = () => {
     window.history.pushState(route, route, route);
     const active = section.select('.active');
     if(active){
-        header('authorization', 'bearer ' + user.token());
+        header('Authorization', 'bearer ' + user.token());
         if(active.data('url')){
             request(active.data('url'), null, (url, response) => {
                 if(active.data('frontend-url')){

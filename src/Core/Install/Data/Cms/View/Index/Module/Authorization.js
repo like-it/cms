@@ -3,7 +3,7 @@ import user from "/Module/User.js";
 ready(() => {
     if(user.token()){
         const url = "{{server.url('core')}}User/Current/";
-        header('authorization', 'Bearer ' + user.token());
+        header('Authorization', 'Bearer ' + user.token());
         request(url, null, (url, response) => {
             if(!is.empty(response.user)){
                 user.data(response.user);
@@ -11,7 +11,7 @@ ready(() => {
                 if(user.refreshToken()){
                     //should get new token | refreshToken
                     const url = "{{server.url('core')}}User/Refresh/Token/";
-                    header('authorization', 'Bearer ' + user.refreshToken());
+                    header('Authorization', 'Bearer ' + user.refreshToken());
                     request(url, null, (url, response) => {
                         if(!is.empty(response.user)){
                             if(response.user?.token){
@@ -36,7 +36,7 @@ ready(() => {
         if(user.refreshToken()){
             //validate refresh token and get user with new token & refreshToken
             const url = "{{server.url('core')}}User/Refresh/Token/";
-            header('authorization', 'Bearer ' + user.refreshToken());
+            header('Authorization', 'Bearer ' + user.refreshToken());
             request(url, null, (url, response) => {
                 if(!is.empty(response.user)){
                     if(response.user?.token){

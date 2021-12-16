@@ -17,7 +17,7 @@ ready(() => {
     const active = section.select('.active');
     if(active){
         if(active.data('url')){
-            header('authorization', 'bearer ' + user.token());
+            header('Authorization', 'bearer ' + user.token());
             request(active.data('url'), null, (url, response) => {
                 if(active.data('frontend-url')){
                     request(active.data('frontend-url'), response);
@@ -38,7 +38,7 @@ ready(() => {
                 list.removeClass('active');
                 node.addClass('active');
                 if(node.data('url')){
-                    header('authorization', 'bearer ' + user.token());
+                    header('Authorization', 'bearer ' + user.token());
                     request(node.data('url'), null, (url, response) => {
                         if(node.data('frontend-url')){
                             request(node.data('frontend-url'), response);
@@ -57,7 +57,7 @@ ready(() => {
             list.removeClass('active');
             node.addClass('active');
             if(node.data('url')){
-                header('authorization', 'bearer ' + user.token());
+                header('Authorization', 'bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
                     if(node.data('frontend-url')){
                         request(node.data('frontend-url'), response);

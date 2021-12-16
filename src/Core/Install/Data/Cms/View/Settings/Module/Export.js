@@ -15,7 +15,7 @@ ready(() => {
             if(node.data('has', 'url')){
                 list.removeClass('active');
                 node.addClass('active');
-                header('authorization', 'Bearer ' + user.token());
+                header('Authorization', 'Bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
                     if(node.data('has', 'frontend-url')){
                         request(node.data('frontend-url'), response);
