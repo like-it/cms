@@ -78,11 +78,15 @@ class Admin extends View{
     }
 
     private static function taskrunner(App $object){
-        dd($object->request());
         $object->request('module', $object->request('0'));
-        $object->request('submodule', $object->request('1'));
-        $object->request('command', $object->request('2'));
+        if($object->request('2')){
+            $object->request('submodule', $object->request('1'));
+            $object->request('command', $object->request('2'));
+        } else {
+            $object->request('command', $object->request('1'));
+        }
         $object->request('token', App::parameter($object, $object->request('command'), 1));
+        dd($object->request());
         try {
             $name = Admin::name(__FUNCTION__, Admin::NAME, '/');
             $url = Admin::locate($object, $name);
