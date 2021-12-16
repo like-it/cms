@@ -79,7 +79,7 @@ class Admin extends View{
 
     private static function taskrunner(App $object){
         $object->request('module', $object->request('0'));
-        if($object->request('2')){
+        if($object->request('2') === 'stop'){
             $object->request('submodule', $object->request('1'));
             $object->request('command', $object->request('2'));
         } else {
