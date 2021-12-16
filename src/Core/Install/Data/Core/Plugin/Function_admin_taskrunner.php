@@ -156,105 +156,102 @@ function function_admin_taskrunner(Parse $parse, Data $data){
             $dir = new Dir();
             $read = $dir->read($object->config('project.dir.data') . 'Input' . $object->config('ds'), true);
             foreach ($read as $nr => $file) {
-                if ($file->type == File::TYPE) {
-                    ob_start();
-                    if (File::extension($file->url) === 'task') {
-                        $url = Dir::name($file->url) . File::basename($file->url, '.task') . '.token';
-                        if (!File::exist($url)) {
-                            sleep(1);
-                            if (!File::exist($url)) {
-                                $content = 'Token File url: ' . $url . ' doesn\'t exist.';
-                                $basename = File::basename($file->url);
-                                $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
-                                Dir::create($dir);
-                                File::write($dir . $basename, $content);
-                                File::delete($file->url);
-                                continue;
-                            }
-                        }
-                        $token = File::read($url);
-                        $token_unencrypted = \Host\Subdomain\Host\Extension\Service\Jwt::decryptToken($object, $token);
-                        $claims = $token_unencrypted->claims();
-                        if ($claims->has('user')) {
-                            $user = $claims->get('user');
-                            $uuid = false;
-                            $email = false;
-                            if (array_key_exists('uuid', $user)) {
-                                $uuid = $user['uuid'];
-                            }
-                            if (array_key_exists('email', $user)) {
-                                $email = $user['email'];
-                            }
-                            if ($uuid && $email) {
-                                $object->request('email', $email);
-                                $user = \Host\Subdomain\Host\Extension\Service\User::getUserByEmail($object);
-                                if (!$user) {
-                                    $content = 'Cannot find user...';
-                                    $basename = File::basename($file->url);
-                                    $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
-                                    Dir::create($dir);
-                                    File::write($dir . $basename, $content);
-                                    File::delete($url);
-                                    File::delete($file->url);
-                                    continue;
-                                }
-                            }
-                            $is_admin = false;
-                            if ($user) {
-                                $is_admin = \Host\Subdomain\Host\Extension\Service\UserRole::has(
-                                    $object,
-                                    \Host\Subdomain\Host\Extension\Service\UserRole::get(
-                                        $object,
-                                        $user
-                                    ),
-                                    'ROLE_IS_ADMIN'
-                                );
-                            }
-                            if ($is_admin === true) {
-                                //we have permission to execute
-                                $task = File::read($file->url);
-                                $output = [];
-                                Dir::change($object->config('project.dir.root'));
-                                Core::execute($task, $output);
-                                echo implode(PHP_EOL, $output);
-                                $content = ob_get_contents();
-                                ob_end_clean();
-                                $basename = File::basename($file->url);
-                                $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
-                                Dir::create($dir);
-                                File::write($dir . $basename, $content);
-                                File::chown($dir, 'www-data', 'www-data', true);
-                                echo $content . PHP_EOL;
-                            } else {
-                                $content = 'No Administrator...' . PHP_EOL;
-                                $basename = File::basename($file->url);
-                                $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
-                                Dir::create($dir);
-                                File::write($dir . $basename, $content);
-                            }
-                        } else {
-                            $content = 'Invalid claim detected in token...' . PHP_EOL;
-                            $basename = File::basename($file->url);
+                if ($file->type !== File::TYPE) {
+                    continue;
+                }
+                ob_start();
+                if(File::extension($file->url) !== 'token') {
+                    continue;
+                }
+                $url = Dir::name($file->url) . File::basename($file->url, '.task') . '.task';
+                if (!File::exist($url)) {
+                    $content = 'Task File url: ' . $url . ' doesn\'t exist.';
+                    $basename = File::basename($url);
+                    $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
+                    Dir::create($dir);
+                    File::write($dir . $basename, $content);
+                    File::delete($file->url);
+                    continue;
+                }
+                $token = File::read($file->url);
+                $token_unencrypted = \Host\Subdomain\Host\Extension\Service\Jwt::decryptToken($object, $token);
+                $claims = $token_unencrypted->claims();
+                if ($claims->has('user')) {
+                    $user = $claims->get('user');
+                    $uuid = false;
+                    $email = false;
+                    if (array_key_exists('uuid', $user)) {
+                        $uuid = $user['uuid'];
+                    }
+                    if (array_key_exists('email', $user)) {
+                        $email = $user['email'];
+                    }
+                    if ($uuid && $email) {
+                        $object->request('email', $email);
+                        $user = \Host\Subdomain\Host\Extension\Service\User::getUserByEmail($object);
+                        if (!$user) {
+                            $content = 'Cannot find user...';
+                            $basename = File::basename($url);
                             $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
                             Dir::create($dir);
                             File::write($dir . $basename, $content);
+                            File::delete($url);
+                            File::delete($file->url);
+                            continue;
                         }
-                        $content = 'Token Delete url: ' . $url . PHP_EOL;
-                        $basename = File::basename($file->url);
+                    }
+                    $is_admin = false;
+                    if ($user) {
+                        $is_admin = \Host\Subdomain\Host\Extension\Service\UserRole::has(
+                            $object,
+                            \Host\Subdomain\Host\Extension\Service\UserRole::get(
+                                $object,
+                                $user
+                            ),
+                            'ROLE_IS_ADMIN'
+                        );
+                    }
+                    if ($is_admin === true) {
+                        //we have permission to execute
+                        $task = File::read($url);
+                        $output = [];
+                        Dir::change($object->config('project.dir.root'));
+                        Core::execute($task, $output);
+                        echo implode(PHP_EOL, $output);
+                        $content = ob_get_contents();
+                        ob_end_clean();
+                        $basename = File::basename($url);
                         $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
                         Dir::create($dir);
-                        File::append($dir . $basename, $content);
-
-
-                        File::delete($url);
+                        File::write($dir . $basename, $content);
+                        File::chown($dir, 'www-data', 'www-data', true);
+                        echo $content . PHP_EOL;
+                    } else {
+                        $content = 'No Administrator...' . PHP_EOL;
+                        $basename = File::basename($url);
+                        $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
+                        Dir::create($dir);
+                        File::write($dir . $basename, $content);
                     }
-                    $content = 'Task Delete url: ' . $file->url . PHP_EOL;
-                    $basename = File::basename($file->url);
+                } else {
+                    $content = 'Invalid claim detected in token...' . PHP_EOL;
+                    $basename = File::basename($url);
                     $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
                     Dir::create($dir);
-                    File::append($dir . $basename, $content);
-                    File::delete($file->url);
+                    File::write($dir . $basename, $content);
                 }
+                $content = 'Token Delete url: ' . $file->url . PHP_EOL;
+                $basename = File::basename($file->url);
+                $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
+                Dir::create($dir);
+                File::append($dir . $basename, $content);
+                File::delete($file->url);
+                $content = 'Task Delete url: ' . $url . PHP_EOL;
+                $basename = File::basename($file->url);
+                $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
+                Dir::create($dir);
+                File::append($dir . $basename, $content);
+                File::delete($url);
             }
             sleep(1);
         }
