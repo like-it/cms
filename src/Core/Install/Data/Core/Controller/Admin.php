@@ -86,7 +86,6 @@ class Admin extends View{
             $object->request('command', $object->request('1'));
         }
         $object->request('token', App::parameter($object, $object->request('command'), 1));
-        dd($object->request());
         try {
             $name = Admin::name(__FUNCTION__, Admin::NAME, '/');
             $url = Admin::locate($object, $name);

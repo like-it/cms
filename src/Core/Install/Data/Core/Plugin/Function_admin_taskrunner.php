@@ -89,59 +89,6 @@ function function_admin_taskrunner(Parse $parse, Data $data){
         if (!$config) {
             exit();
         }
-        $token = $object->request('token');
-
-        if(!empty($token)) {
-            $token_unencrypted = \Host\Subdomain\Host\Extension\Service\Jwt::decryptToken($object, $token);
-            $claims = $token_unencrypted->claims();
-            if ($claims->has('user')) {
-                \Host\Subdomain\Host\Extension\Service\Host::dir_root($object);
-                $user = $claims->get('user');
-                $uuid = false;
-                $email = false;
-                if (array_key_exists('uuid', $user)) {
-                    $uuid = $user['uuid'];
-                }
-                if (array_key_exists('email', $user)) {
-                    $email = $user['email'];
-                }
-                if ($uuid && $email) {
-                    $object->request('email', $email);
-                    $user = \Host\Subdomain\Host\Extension\Service\User::getUserByEmail($object);
-                    if (!$user) {
-                        echo 'Could not find user...' . PHP_EOL;
-                        return;
-                    }
-                }
-                $is_admin = false;
-                if ($user) {
-                    $is_admin = \Host\Subdomain\Host\Extension\Service\UserRole::has(
-                        $object,
-                        \Host\Subdomain\Host\Extension\Service\UserRole::get(
-                            $object,
-                            $user
-                        ),
-                        'ROLE_IS_ADMIN'
-                    );
-                }
-                if ($is_admin === true) {
-                    $pid = $config->data('admin.taskrunner.pid');
-                    if ($pid) {
-                        if (!defined('SIGHUP')) {
-                            define('SIGHUP', 1);
-                        }
-                        $kill = posix_kill($pid, SIGHUP);
-                        if ($kill) {
-                            //log 'SIGHUP terminated the process with id: ' . $pid . PHP_EOL;
-                        } else {
-                            //log 'SIGHUP couldn\'t terminate the process with id: ' . $pid . PHP_EOL;
-                        }
-                    } else {
-                        //log 'No admin taskrunner process found...' . $pid . PHP_EOL;
-                    }
-                }
-            }
-        }
         $config->data('admin.taskrunner.pid', posix_getpid());
         $config->write($url);
         \Host\Subdomain\Host\Extension\Service\Host::dir_root($object);
