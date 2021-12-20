@@ -431,10 +431,10 @@ class User extends Main {
     public static function token(App $object){
         $configuration = Jwt::configuration($object);
         $node = User::getUserByEmail($object);
-        dd($node);
         $options = [];
         $options['user'] = $node;
         $token = Jwt::get($object, $configuration, $options);
+        dd($token);
     }
 
     /**
