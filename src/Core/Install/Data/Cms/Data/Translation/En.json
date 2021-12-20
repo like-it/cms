@@ -71,7 +71,7 @@
     "settings.link.export" : "Export",
     "settings.link.file_system" : "File system",
     "settings.link.import" : "Import",
-    "settings.link.loggers" : "Loggers",
+    "settings.link.logs_and_errors" : "Logs & errors",
     "settings.link.main" : "Main",
     "settings.link.mode" : "Mode",
     "settings.link.nodes" : "Nodes",
