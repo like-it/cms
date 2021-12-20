@@ -16,10 +16,6 @@ section[name="main-navigation"].col-12 {
     height: auto;
 }
 
-section[name="main-navigation"].col-md-2 {
-    height: 100%;
-}
-
 section[name="main-navigation"] .active {
     border-bottom: 1px solid rgba(255, 124, 13, 1);
 }
@@ -33,11 +29,6 @@ section[name="main-content"] {
 section[name="main-content"].col-12 {
     height: auto;
 }
-
-section[name="main-content"].col-md-10 {
-    height: calc(100% - 10px);
-}
-
 a {
     cursor: pointer;
 }
