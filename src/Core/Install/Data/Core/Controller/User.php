@@ -38,19 +38,19 @@ class User extends View {
         if(Handler::method() === Handler::METHOD_CLI){
             $command = $object->parameter($object, Admin::NAME, 1);
             if($command === null){
-                $command = Admin::DEFAULT_COMMAND;
+                $command = User::DEFAULT_COMMAND;
             }
-            if(!in_array($command, Admin::COMMAND)){
+            if(!in_array($command, User::COMMAND)){
                 $exception = str_replace(
-                    Admin::EXCEPTION_COMMAND_PARAMETER,
+                    User::EXCEPTION_COMMAND_PARAMETER,
                     $command,
-                    Admin::EXCEPTION_COMMAND
+                    User::EXCEPTION_COMMAND
                 );
                 throw new Exception($exception);
             }
             Host::dir_root($object);
             $object->request('email', App::parameter($object, $command, 1));
-            return Admin::{$command}($object);
+            return User::{$command}($object);
             /*
             $command = App::parameter($object, 'user', 1);
             switch($command){
