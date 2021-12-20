@@ -53,7 +53,7 @@
                 data-url="{{server.url('core')}}Settings/Export/"
                 data-frontend-url="{{route.get(route.prefix() + '-home-body')}}"
             >
-                <i class="{{__('settings.icon.loggers.class')}}"></i> {{__('settings.link.loggers')}}
+                <i class="{{__('settings.icon.loggers.class')}}"></i> {{__('settings.link.logs_and_errors')}}
             </a>
             <a
                 class="nav-link active"
