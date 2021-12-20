@@ -27,9 +27,11 @@ section[name="main-content"] {
     overflow: auto;
 }
 
+/*
 section[name="main-content"] .col-sm-12 {
     height: auto;
 }
+ */
 
 section[name="main-content"] .nav .fa-window-close {
     margin-left: 10px;
