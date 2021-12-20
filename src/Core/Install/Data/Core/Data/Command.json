@@ -269,6 +269,13 @@
             "CLI"
         ]
     },
+    "a3d71f30-9f11-4bec-bb9a-12cc5d48bf29" : {
+        "module" : "user",
+        "path": "user",
+        "method": [
+            "CLI"
+        ]
+    },
     "fc3ba8ba-f02d-4bdb-93de-6a444a63565a" : {
         "module" : "config",
         "command" : "version",

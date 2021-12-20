@@ -11,55 +11,62 @@ use Host\Subdomain\Host\Extension\Service\User as Service;
 use Exception;
 
 class User extends View {
-    const DIR = __DIR__ . DIRECTORY_SEPARATOR;    
+    const DIR = __DIR__ . DIRECTORY_SEPARATOR;
 
+    /**
+     * @throws Exception
+     */
     public static function command(App $object): Exception|Response
     {
-        $uuid = $object->request('uuid');
-        $attribute = $object->request('attribute');
-        if(
-            $uuid &&
-            $attribute
-        ){
-            try {
-                switch(Handler::method()){
-                    case Handler::GET :
-                        return Service::readAttribute($object);
-                    case Handler::DELETE :
-                        return Service::deleteAttribute($object);
-                }
-            } catch (Exception $exception){
-                return $exception;
-            }
+        if(Handler::method() === Handler::METHOD_CLI){
+            dd($object->request());
         } else {
-            if($uuid){
+            $uuid = $object->request('uuid');
+            $attribute = $object->request('attribute');
+            if(
+                $uuid &&
+                $attribute
+            ){
                 try {
                     switch(Handler::method()){
                         case Handler::GET :
-                            return Service::read($object);
-                        case Handler::PUT :
-                            return Service::update($object);
+                            return Service::readAttribute($object);
                         case Handler::DELETE :
-                            return Service::delete($object);
+                            return Service::deleteAttribute($object);
                     }
                 } catch (Exception $exception){
                     return $exception;
                 }
             } else {
-                try {
-                    switch(Handler::method()){
-                        case Handler::GET :
-                            return Service::list($object);
-                        case Handler::POST :
-                            if(stristr($object->request('request'), 'user/current') !== false){
-                                return Service::current($object);
-                            } else {
-                                return Service::create($object);
-                            }
-
+                if($uuid){
+                    try {
+                        switch(Handler::method()){
+                            case Handler::GET :
+                                return Service::read($object);
+                            case Handler::PUT :
+                                return Service::update($object);
+                            case Handler::DELETE :
+                                return Service::delete($object);
+                        }
+                    } catch (Exception $exception){
+                        return $exception;
                     }
-                } catch (Exception $exception){
-                    return $exception;
+                } else {
+                    try {
+                        switch(Handler::method()){
+                            case Handler::GET :
+                                return Service::list($object);
+                            case Handler::POST :
+                                if(stristr($object->request('request'), 'user/current') !== false){
+                                    return Service::current($object);
+                                } else {
+                                    return Service::create($object);
+                                }
+
+                        }
+                    } catch (Exception $exception){
+                        return $exception;
+                    }
                 }
             }
         }
