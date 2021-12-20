@@ -16,7 +16,7 @@ class User extends View {
     const NAME = 'User';
 
     const COMMAND_INFO = 'info';
-    const COMMAND_UPDATE = 'token';
+    const COMMAND_TOKEN = 'token';
     const COMMAND = [
         User::COMMAND_INFO,
         User::COMMAND_TOKEN,
@@ -36,7 +36,7 @@ class User extends View {
     public static function command(App $object): Exception|Response
     {
         if(Handler::method() === Handler::METHOD_CLI){
-            $command = $object->parameter($object, Admin::NAME, 1);
+            $command = $object->parameter($object, User::NAME, 1);
             if($command === null){
                 $command = User::DEFAULT_COMMAND;
             }
