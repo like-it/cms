@@ -21,6 +21,7 @@ function function_admin_taskrunner(Parse $parse, Data $data){
         $object->request('command') === 'stop' &&
         !empty($object->request('token'))
     ){
+        dd('stopping...');
         $token = $object->request('token');
         $token_unencrypted = \Host\Subdomain\Host\Extension\Service\Jwt::decryptToken($object, $token);
         $claims = $token_unencrypted->claims();
