@@ -25,37 +25,7 @@ function function_admin_taskrunner(Parse $parse, Data $data){
         $token_unencrypted = \Host\Subdomain\Host\Extension\Service\Jwt::decryptToken($object, $token);
         $claims = $token_unencrypted->claims();
         if ($claims->has('user')) {
-            $host_dir_root = $object->config('host.dir.root');
-            if(empty($host_dir_root)){
-                $read = File::read($object->config('project.dir.data') . 'Host' . $object->config('extension.json'));
-                if($read){
-                    $read = Core::object($read);
-                    foreach($read as $uuid => $node){
-                        if(
-                            property_exists($node, 'is') &&
-                            property_exists($node->is, 'core')
-                        ){
-                            $sentence = Core::ucfirst_sentence(
-                                $node->subdomain .
-                                $object->config('ds') .
-                                $node->host .
-                                $object->config('ds') .
-                                $node->extension .
-                                $object->config('ds'),
-                                $object->config('ds')
-                            );
-                            $sentence = ltrim($sentence, $object->config('ds'));
-                            $value =
-                                $object->config('project.dir.root') .
-                                $object->config(Config::DICTIONARY . '.' . Config::HOST) .
-                                $object->config('ds') .
-                                $sentence;
-
-                            $object->config('host.dir.root', $value);
-                        }
-                    }
-                }
-            }
+            \Host\Subdomain\Host\Extension\Service\Host::dir_root($object);
             $user = $claims->get('user');
             $uuid = false;
             $email = false;
@@ -125,37 +95,7 @@ function function_admin_taskrunner(Parse $parse, Data $data){
             $token_unencrypted = \Host\Subdomain\Host\Extension\Service\Jwt::decryptToken($object, $token);
             $claims = $token_unencrypted->claims();
             if ($claims->has('user')) {
-                $host_dir_root = $object->config('host.dir.root');
-                if (empty($host_dir_root)) {
-                    $read = File::read($object->config('project.dir.data') . 'Host' . $object->config('extension.json'));
-                    if ($read) {
-                        $read = Core::object($read);
-                        foreach ($read as $uuid => $node) {
-                            if (
-                                property_exists($node, 'is') &&
-                                property_exists($node->is, 'core')
-                            ) {
-                                $sentence = Core::ucfirst_sentence(
-                                    $node->subdomain .
-                                    $object->config('ds') .
-                                    $node->host .
-                                    $object->config('ds') .
-                                    $node->extension .
-                                    $object->config('ds'),
-                                    $object->config('ds')
-                                );
-                                $sentence = ltrim($sentence, $object->config('ds'));
-                                $value =
-                                    $object->config('project.dir.root') .
-                                    $object->config(Config::DICTIONARY . '.' . Config::HOST) .
-                                    $object->config('ds') .
-                                    $sentence;
-
-                                $object->config('host.dir.root', $value);
-                            }
-                        }
-                    }
-                }
+                \Host\Subdomain\Host\Extension\Service\Host::dir_root($object);
                 $user = $claims->get('user');
                 $uuid = false;
                 $email = false;
@@ -204,37 +144,7 @@ function function_admin_taskrunner(Parse $parse, Data $data){
         }
         $config->data('admin.taskrunner.pid', posix_getpid());
         $config->write($url);
-        $host_dir_root = $object->config('host.dir.root');
-        if(empty($host_dir_root)){
-            $read = File::read($object->config('project.dir.data') . 'Host' . $object->config('extension.json'));
-            if($read){
-                $read = Core::object($read);
-                foreach($read as $uuid => $node){
-                    if(
-                        property_exists($node, 'is') &&
-                        property_exists($node->is, 'core')
-                    ){
-                        $sentence = Core::ucfirst_sentence(
-                            $node->subdomain .
-                            $object->config('ds') .
-                            $node->host .
-                            $object->config('ds') .
-                            $node->extension .
-                            $object->config('ds'),
-                            $object->config('ds')
-                        );
-                        $sentence = ltrim($sentence, $object->config('ds'));
-                        $value =
-                            $object->config('project.dir.root') .
-                            $object->config(Config::DICTIONARY . '.' . Config::HOST) .
-                            $object->config('ds') .
-                            $sentence;
-
-                        $object->config('host.dir.root', $value);
-                    }
-                }
-            }
-        }
+        \Host\Subdomain\Host\Extension\Service\Host::dir_root($object);
         while(true) {
             $dir = new Dir();
             $read = $dir->read($object->config('project.dir.data') . 'Input' . $object->config('ds'), true);
