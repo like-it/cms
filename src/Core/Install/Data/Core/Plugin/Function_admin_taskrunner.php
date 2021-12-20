@@ -120,8 +120,8 @@ function function_admin_taskrunner(Parse $parse, Data $data){
             exit();
         }
         $token = $object->request('token');
+        dd($token);
         if($token) {
-            dd($token);
             $token_unencrypted = \Host\Subdomain\Host\Extension\Service\Jwt::decryptToken($object, $token);
             $claims = $token_unencrypted->claims();
             if ($claims->has('user')) {
