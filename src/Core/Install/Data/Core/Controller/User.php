@@ -13,7 +13,7 @@ use Exception;
 
 class User extends View {
     const DIR = __DIR__ . DIRECTORY_SEPARATOR;
-    const NAME = 'Uer';
+    const NAME = 'User';
 
     const COMMAND_INFO = 'info';
     const COMMAND_UPDATE = 'token';
