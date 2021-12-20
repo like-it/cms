@@ -4,7 +4,7 @@
 {{$request.method = 'replace-with-or-append-to'}}
 {{$request.target = 'section[name="' + $section.name + '"]'}}
 {{$request.append.to = 'body'}}
-<section name="main-content" class="col-10">
+<section name="main-content" class="col-10 col-sm-8">
     <div class="h-100">
         <div class="card h-100 overflow-auto">
             {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Header.tpl')}}
