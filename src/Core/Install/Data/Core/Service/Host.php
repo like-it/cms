@@ -1,19 +1,10 @@
 <?php
 namespace Host\Subdomain\Host\Extension\Service;
 
-
-use stdClass;
 use R3m\Io\App;
+use R3m\Io\Config;
 use R3m\Io\Module\Core;
-use R3m\Io\Module\Data;
-use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
-use R3m\Io\Module\Response;
-use R3m\Io\Module\Sort;
-
-use Exception;
-use R3m\Io\Exception\AuthorizationException;
-use R3m\Io\Exception\ObjectException;
 
 class Host extends Main
 {
