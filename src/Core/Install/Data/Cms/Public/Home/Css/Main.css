@@ -12,6 +12,10 @@ section[name="main-navigation"] {
     overflow: auto;
 }
 
+section[name="main-navigation"] col-12 {
+    height: auto;
+}
+
 section[name="main-navigation"] .active {
     border-bottom: 1px solid rgba(255, 124, 13, 1);
 }
@@ -20,6 +24,10 @@ section[name="main-content"] {
     float: left;
     height: calc(100% - 10px);
     overflow: auto;
+}
+
+section[name="main-content"] col-12 {
+    height: auto;
 }
 
 a {
