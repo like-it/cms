@@ -1,5 +1,5 @@
 {R3M}
-<section name="main-navigation" class="col-2 col-sm-4">
+<section name="main-navigation" class="col-2 col-sm-12">
     <div class="">
         <nav class="nav flex-column">
             <a
