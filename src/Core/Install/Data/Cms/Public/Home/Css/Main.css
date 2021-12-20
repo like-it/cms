@@ -29,6 +29,7 @@ section[name="main-content"] {
 section[name="main-content"].col-12 {
     height: auto;
 }
+
 a {
     cursor: pointer;
 }
