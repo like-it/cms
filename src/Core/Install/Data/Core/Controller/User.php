@@ -12,6 +12,22 @@ use Exception;
 
 class User extends View {
     const DIR = __DIR__ . DIRECTORY_SEPARATOR;
+    const NAME = 'User';
+
+    const COMMAND_INFO = 'info';
+    const COMMAND_UPDATE = 'token';
+    const COMMAND = [
+        User::COMMAND_INFO,
+        User::COMMAND_TOKEN,
+    ];
+    const DEFAULT_COMMAND = User::COMMAND_INFO;
+
+    const EXCEPTION_COMMAND_PARAMETER = '{$command}';
+    const EXCEPTION_COMMAND = 'invalid command (' . System::EXCEPTION_COMMAND_PARAMETER . ')' . PHP_EOL;
+
+    const INFO = [
+        '{binary()} user token <email>            | Request a login token with e-mail',
+    ];
 
     /**
      * @throws Exception
@@ -19,7 +35,14 @@ class User extends View {
     public static function command(App $object): Exception|Response
     {
         if(Handler::method() === Handler::METHOD_CLI){
-            dd($object->request());
+            $command = App::parameter($object, 'user', 1);
+            switch($command){
+                case 'token' :
+                    $object->request('email', App::parameter($object, $command, 1));
+                    return Service::token($object);
+                default:
+                    throw new Exception('Invalid command.');
+            }
         } else {
             $uuid = $object->request('uuid');
             $attribute = $object->request('attribute');

@@ -428,6 +428,15 @@ class User extends Main {
         throw new AuthorizationException('Authentication failure... (invalid claim)');
     }
 
+    public static function token(App $object){
+        $configuration = Jwt::configuration($object);
+        $list = User::list($object);
+        dd($list);
+        $options = [];
+        $options['user'] = $node;
+        $token = Jwt::get($object, $configuration, $options);
+    }
+
     /**
      * @throws AuthorizationException
      * @throws Exception
