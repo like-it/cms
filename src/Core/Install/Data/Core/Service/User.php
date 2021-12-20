@@ -434,7 +434,8 @@ class User extends Main {
         $options = [];
         $options['user'] = $node;
         $token = Jwt::get($object, $configuration, $options);
-        dd($token);
+        $token = $token->toString();
+        return new Response($token, Response::TYPE_FILE);
     }
 
     /**
