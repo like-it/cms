@@ -64,9 +64,6 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                 }
                 $pid = $config->data('admin.taskrunner.pid');
                 if ($pid) {
-                    $command = 'kill ' . $pid;
-                    echo $command . PHP_EOL;
-                    Core::detach($command);
                     if (!defined('SIGHUP')) {
                         define('SIGHUP', 1);
                     }
@@ -258,13 +255,6 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                             define('SIGTERM', 15);
                         }
                         $kill = posix_kill($pid, SIGTERM);
-                        $command = 'kill ' . $pid;
-                        $content = $command . PHP_EOL;
-                        $basename = File::basename($url);
-                        $dir = $object->config('project.dir.data') . 'Output' . $object->config('ds');
-                        Dir::create($dir);
-                        File::append($dir . $basename, $content);
-                        Core::detach($command);
                         if ($kill) {
                             //log 'SIGHUP terminated the process with id: ' . $pid . PHP_EOL;
                         } else {
