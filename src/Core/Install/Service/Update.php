@@ -43,9 +43,11 @@ class Update {
     }
 
     public static function installed(App $object){
-        $command = 'composer show';
+        $command = 'composer show -lo';
         $output = [];
         Core::execute($command, $output);
+        $url = $object->config('project.dir.data') . 'Installed' . $object->config('extension.json');
+
         dd($output);
     }
 
