@@ -62,7 +62,7 @@ class Update {
         $url = $object->config('project.dir.data') . 'Installed' . $object->config('extension.json');
 
         foreach($output as $nr => $line){
-            $explode = explode($list[$nr], $line);
+            $explode = explode($list[$nr]['name'], $line);
             if(array_key_exists(1, $explode)){
                 $temp = explode(' ', $explode[1], 3);
                 d($temp);
