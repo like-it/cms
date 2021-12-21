@@ -247,8 +247,8 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                     Dir::create($dir);
                     File::append($dir . $basename, $content);
                     File::delete($url);
-                    $execute = $parse->compile('{binary()} admin taskrunner&', $data);
-                    Core::execute($execute);
+                    $execute = $parse->compile('{binary()} admin taskrunner', $data);
+                    Core::detach($execute);
                     $pid = $config->data('admin.taskrunner.pid');
                     if ($pid) {
                         if (!defined('SIGTERM')) {
