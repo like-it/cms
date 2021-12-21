@@ -30,6 +30,16 @@ section[name="main-content"].col-12 {
     height: auto;
 }
 
+@media (min-width: 576px) {
+    section[name="main-navigation"].col-md-2 {
+        height: 100%;
+    }
+
+    section[name="main-content"].col-md-10 {
+        height: 100%;
+    }
+}
+
 a {
     cursor: pointer;
 }
