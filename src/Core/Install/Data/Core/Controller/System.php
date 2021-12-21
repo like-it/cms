@@ -63,6 +63,7 @@ class System extends View {
     }
 
     private static function update(App $object){
+        $object->request('force', App::parameter($object, 'force'));
         try {
             $name = System::name(__FUNCTION__, System::NAME, '/');
             $url = System::locate($object, $name);

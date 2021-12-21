@@ -15,9 +15,7 @@ use R3m\Io\Module\Validate;
 class Update {
 
     public static function start(App $object){
-        $object->request('force', App::parameter($object, 'force'));
-        d($object->request());
-        if(Update::hasUpdate($object)){
+        if(Update::hasUpdate($object) || $object->request('force') === true){
             $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
             $host_list = $object->data_read($url);
             $result_list = [];
