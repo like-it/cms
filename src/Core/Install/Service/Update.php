@@ -96,7 +96,7 @@ class Update {
         foreach($list as $nr => $record){
             if(
                 !empty($set[$record['name']]) &&
-                $set[$record['name']]['version'] != $record['version']
+                $set[$record['name']]->version != $record['version']
             ){
                 return true;
             }
