@@ -39,6 +39,7 @@ class Update {
                 }
             }
             $result_list[] = Update::installed($object);
+            $result_list[] = '';
             $result_list[] = 'Update complete...' . PHP_EOL;
             return new Response(implode(PHP_EOL, $result_list), Response::TYPE_HTML);
         } else {
