@@ -64,7 +64,7 @@ class Update {
         foreach($output as $nr => $line){
             $explode = explode($list[$nr]['name'], $line);
             if(array_key_exists(1, $explode)){
-                $temp = explode(' ', $explode[1], 3);
+                $temp = explode(' ', trim($explode[1], ' '), 3);
                 d($temp);
             }
         }
