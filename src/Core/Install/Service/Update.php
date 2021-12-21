@@ -39,7 +39,7 @@ class Update {
                 }
             }
             $result_list[] = 'Update complete...' . PHP_EOL;
-            Update::installed($object);
+            $result_list[] = Update::installed($object);
             return new Response(implode(PHP_EOL, $result_list), Response::TYPE_HTML);
         } else {
             $result = 'Nothing to update...' . PHP_EOL;
@@ -109,6 +109,10 @@ class Update {
         $url = $object->config('project.dir.data') . 'Installed' . $object->config('extension.json');
         $data = new Data($list);
         $data->write($url);
+        $result = [];
+        foreach($data->get() as $node){
+            dd($node);
+        }
     }
 
     public static function host(App $object, $options=[]){
