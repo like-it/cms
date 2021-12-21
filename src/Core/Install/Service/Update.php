@@ -61,6 +61,15 @@ class Update {
         Core::execute($command, $output);
         $url = $object->config('project.dir.data') . 'Installed' . $object->config('extension.json');
 
+        foreach($output as $nr => $line){
+            $explode = explode($list[$nr], $line);
+            if(array_key_exists(1, $explode)){
+                $temp = explode(' ', $explode[1], 3);
+                d($temp);
+            }
+        }
+
+
         d($list);
         dd($output);
     }
