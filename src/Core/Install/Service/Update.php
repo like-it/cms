@@ -111,8 +111,10 @@ class Update {
         $data->write($url);
         $result = [];
         foreach($data->get() as $node){
-            dd($node);
+            $result[] = $node['name']  . ' ' . $node['version'];
+            $result[] = ' - ' . $node['description'];
         }
+        return implode(PHP_EOL, $result);
     }
 
     public static function host(App $object, $options=[]){
