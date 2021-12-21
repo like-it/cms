@@ -59,17 +59,21 @@ class Update {
         $command = 'composer show';
         $output = [];
         Core::execute($command, $output);
-        $url = $object->config('project.dir.data') . 'Installed' . $object->config('extension.json');
-
         foreach($output as $nr => $line){
             $explode = explode($list[$nr]['name'], $line);
             if(array_key_exists(1, $explode)){
                 $temp = explode(' ', trim($explode[1], ' '), 3);
-                d($temp);
+                if(array_key_exists(2, $temp)){
+                    if(empty($temp[1])){
+                        $list[$nr]['version'] = $temp[0];
+                    } else {
+                        $list[$nr]['version'] = $temp[0] . ' ' . $temp[1];
+                    }
+                    $list[$nr]['description'] = trim($temp[2], ' ');
+                }
             }
         }
-
-
+        $url = $object->config('project.dir.data') . 'Installed' . $object->config('extension.json');
         d($list);
         dd($output);
     }
