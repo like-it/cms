@@ -15,32 +15,36 @@ use R3m\Io\Module\Validate;
 class Update {
 
     public static function start(App $object){
-        Update::hasUpdate($object);
-        $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
-        $host_list = $object->data_read($url);
-        $result_list = [];
-        foreach($host_list->data() as $uuid => $record){
-            try {
-                if(
-                    property_exists($record, 'is') &&
-                    property_exists($record->is, 'installed') &&
-                    $record->is->installed === true
-                ){
+        if(Update::hasUpdate($object)){
+            $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
+            $host_list = $object->data_read($url);
+            $result_list = [];
+            foreach($host_list->data() as $uuid => $record){
+                try {
+                    if(
+                        property_exists($record, 'is') &&
+                        property_exists($record->is, 'installed') &&
+                        $record->is->installed === true
+                    ){
 
-                    $result_list[] = Update::Host($object, [
-                        'host' => $record->host,
-                        'extension' => $record->extension,
-                        'subdomain' => $record->subdomain
-                    ]);
+                        $result_list[] = Update::Host($object, [
+                            'host' => $record->host,
+                            'extension' => $record->extension,
+                            'subdomain' => $record->subdomain
+                        ]);
+                    }
+
+                } catch (Exception $exception){
+                    return $exception;
                 }
-
-            } catch (Exception $exception){
-                return $exception;
             }
+            $result_list[] = 'Update complete...' . PHP_EOL;
+            Update::installed($object);
+            return new Response(implode(PHP_EOL, $result_list), Response::TYPE_HTML);
+        } else {
+            $result = 'Nothing to update...' . PHP_EOL;
+            return new Response($result, Response::TYPE_HTML);
         }
-        $result_list[] = 'Update complete...' . PHP_EOL;
-        Update::installed($object);
-        return new Response(implode(PHP_EOL, $result_list), Response::TYPE_HTML);
     }
 
     private static function getInstalledData(App $object){
@@ -77,22 +81,26 @@ class Update {
         return $list;
     }
 
-    public static function hasUpdate(App $object){
+    public static function hasUpdate(App $object): bool
+    {
         $list = Update::getInstalledData($object);
         $url = $object->config('project.dir.data') . 'Installed' . $object->config('extension.json');
         $data = $object->data_read($url);
         if(!$data){
             return true;
         }
+        $set = [];
+        foreach($data->get() as $node_nr => $node){
+            $set[$node->name] = $node;
+        }
         foreach($list as $nr => $record){
-            foreach($data->get() as $node_nr => $node){
-                d($node);
+            if(
+                !empty($set[$record['name']]) &&
+                $set[$record['name']]['version'] != $record['version']
+            ){
+                return true;
             }
         }
-
-        d($list);
-        dd($data);
-
         return false;
     }
 
@@ -101,8 +109,6 @@ class Update {
         $url = $object->config('project.dir.data') . 'Installed' . $object->config('extension.json');
         $data = new Data($list);
         $data->write($url);
-        d($data);
-        dd($output);
     }
 
     public static function host(App $object, $options=[]){
