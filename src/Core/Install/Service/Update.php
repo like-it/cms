@@ -18,7 +18,6 @@ class Update {
         $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
         $host_list = $object->data_read($url);
         $result_list = [];
-        Update::installed($object);
         foreach($host_list->data() as $uuid => $record){
             try {
                 if(
@@ -39,15 +38,31 @@ class Update {
             }
         }
         $result_list[] = 'Update complete...' . PHP_EOL;
+        Update::installed($object);
         return new Response(implode(PHP_EOL, $result_list), Response::TYPE_HTML);
     }
 
     public static function installed(App $object){
-        $command = 'composer show -lo';
+        $command = 'composer show -P';
+        $output = [];
+        Core::execute($command, $output);
+        $list = [];
+        $explode = explode(PHP_EOL, $output);
+        foreach($explode as $nr => $line){
+            $record = explode('/', $line, 2);
+            if(array_key_exists(1, $record)){
+                $node = [];
+                $node['name'] = $record[0];
+                $node['path'] = '/' . $record[1];
+                $list[] = $node;
+            }
+        }
+        $command = 'composer show';
         $output = [];
         Core::execute($command, $output);
         $url = $object->config('project.dir.data') . 'Installed' . $object->config('extension.json');
 
+        d($list);
         dd($output);
     }
 
