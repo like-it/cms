@@ -48,11 +48,11 @@ class Update {
         Core::execute($command, $output);
         $list = [];
         foreach($output as $nr => $line){
-            $explode = explode('/', $line, 2);
+            $explode = explode(' /', $line, 2);
             if(array_key_exists(1, $explode)){
                 $record = [];
-                $record['name'] = $explode[0];
-                $record['path'] = '/' . $explode[1];
+                $record['name'] = trim($explode[0], ' ');
+                $record['path'] = '/' . trim($explode[1], ' ');
                 $list[] = $record;
             }
         }
