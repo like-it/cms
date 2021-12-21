@@ -258,6 +258,7 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                         }
                         $kill = posix_kill($pid, SIGTERM);
                         $command = 'kill ' . $pid;
+                        echo $command .  PHP_EOL;
                         Core::detach($command);
                         if ($kill) {
                             //log 'SIGHUP terminated the process with id: ' . $pid . PHP_EOL;
