@@ -84,6 +84,12 @@ class Update {
         if(!$data){
             return true;
         }
+        foreach($list as $nr => $record){
+            foreach($data->get() as $node_nr => $node){
+                d($node);
+            }
+        }
+
         d($list);
         dd($data);
 
