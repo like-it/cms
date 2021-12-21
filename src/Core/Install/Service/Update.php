@@ -18,6 +18,7 @@ class Update {
         $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
         $host_list = $object->data_read($url);
         $result_list = [];
+        Update::installed($object);
         foreach($host_list->data() as $uuid => $record){
             try {
                 if(
@@ -38,7 +39,6 @@ class Update {
             }
         }
         $result_list[] = 'Update complete...' . PHP_EOL;
-        Update::installed($object);
         return new Response(implode(PHP_EOL, $result_list), Response::TYPE_HTML);
     }
 
