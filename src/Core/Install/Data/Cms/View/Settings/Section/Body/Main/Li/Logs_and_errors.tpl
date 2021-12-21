@@ -17,7 +17,7 @@
                     aria-expanded="false"
                     aria-controls="flush-collapse-one-loggers"
                 >
-                    {{__('settings.body.loggers.title')}}
+                    {{__('settings.body.logs_and_errors.title')}}
                 </button>
             </h2>
             <div
@@ -27,7 +27,7 @@
                 data-bs-parent="#accordion-flush-loggers"
             >
                 <div class="accordion-body">
-                    {{__('settings.body.loggers.body')}}
+                    {{__('settings.body.logs_and_errors.body')}}
                 </div>
             </div>
         </div>
