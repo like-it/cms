@@ -30,7 +30,7 @@ section[name="main-content"].col-12 {
     height: auto;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 768px) {
     section[name="main-navigation"].col-md-2 {
         height: 100%;
     }

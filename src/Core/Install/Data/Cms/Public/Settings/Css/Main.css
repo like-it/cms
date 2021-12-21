@@ -39,7 +39,7 @@ section[name="main-content"] .nav .fa-window-close:hover {
     color: rgba(255, 0, 0, 1);
 }
 
-@media (min-width: 576px) {
+@media (min-width: 768px) {
     section[name="main-navigation"].col-md-2 {
         height: 100%;
     }
