@@ -15,6 +15,7 @@ use R3m\Io\Module\Validate;
 class Update {
 
     public static function start(App $object){
+        Update::hasUpdate($object);
         $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
         $host_list = $object->data_read($url);
         $result_list = [];
@@ -42,7 +43,7 @@ class Update {
         return new Response(implode(PHP_EOL, $result_list), Response::TYPE_HTML);
     }
 
-    public static function installed(App $object){
+    private static function getInstalledData(App $object){
         $command = 'composer show -P';
         $output = [];
         Core::execute($command, $output);
@@ -73,6 +74,24 @@ class Update {
                 }
             }
         }
+        return $list;
+    }
+
+    public static function hasUpdate(App $object){
+        $list = Update::getInstalledData($object);
+        $url = $object->config('project.dir.data') . 'Installed' . $object->config('extension.json');
+        $data = $object->data_read($url);
+        if(!$data){
+            return true;
+        }
+        d($list);
+        dd($data);
+
+        return false;
+    }
+
+    public static function installed(App $object){
+        $list = Update::getInstalledData($object);
         $url = $object->config('project.dir.data') . 'Installed' . $object->config('extension.json');
         $data = new Data($list);
         $data->write($url);
