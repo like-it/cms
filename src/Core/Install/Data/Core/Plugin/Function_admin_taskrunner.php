@@ -64,6 +64,9 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                 }
                 $pid = $config->data('admin.taskrunner.pid');
                 if ($pid) {
+                    $command = 'kill ' . $pid;
+                    echo $command . PHP_EOL;
+                    Core::detach($command);
                     if (!defined('SIGHUP')) {
                         define('SIGHUP', 1);
                     }
@@ -137,9 +140,6 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                         } else {
                             //log 'SIGHUP couldn\'t terminate the process with id: ' . $pid . PHP_EOL;
                         }
-                        $command = 'kill ' . $pid;
-                        echo $command . PHP_EOL;
-                        Core::detach($command);
                     } else {
                         //log 'No admin taskrunner process found...' . $pid . PHP_EOL;
                     }
