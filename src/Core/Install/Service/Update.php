@@ -47,14 +47,13 @@ class Update {
         $output = [];
         Core::execute($command, $output);
         $list = [];
-        $explode = explode(PHP_EOL, $output);
-        foreach($explode as $nr => $line){
-            $record = explode('/', $line, 2);
-            if(array_key_exists(1, $record)){
-                $node = [];
-                $node['name'] = $record[0];
-                $node['path'] = '/' . $record[1];
-                $list[] = $node;
+        foreach($output as $nr => $line){
+            $explode = explode('/', $line, 2);
+            if(array_key_exists(1, $explode)){
+                $record = [];
+                $record['name'] = $explode[0];
+                $record['path'] = '/' . $explode[1];
+                $list[] = $record;
             }
         }
         $command = 'composer show';
