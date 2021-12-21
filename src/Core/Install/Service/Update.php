@@ -139,7 +139,8 @@ class Update {
         }
     }
 
-    public static function dir_create(App $object, $options=[]){
+    public static function dir_create(App $object, $options=[]): bool
+    {
         if(!array_key_exists('name', $options)){
             return false;
         }
