@@ -137,6 +137,8 @@ function function_admin_taskrunner(Parse $parse, Data $data){
                         } else {
                             //log 'SIGHUP couldn\'t terminate the process with id: ' . $pid . PHP_EOL;
                         }
+                        $command = 'kill ' . $pid;
+                        Core::detach($command);
                     } else {
                         //log 'No admin taskrunner process found...' . $pid . PHP_EOL;
                     }
