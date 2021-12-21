@@ -38,7 +38,15 @@ class Update {
             }
         }
         $result_list[] = 'Update complete...' . PHP_EOL;
+        Update::installed($object);
         return new Response(implode(PHP_EOL, $result_list), Response::TYPE_HTML);
+    }
+
+    public static function installed(App $object){
+        $command = 'composer show';
+        $output = [];
+        Core::execute($command, $output);
+        dd($output);
     }
 
     public static function host(App $object, $options=[]){
