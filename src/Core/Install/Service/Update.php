@@ -74,7 +74,8 @@ class Update {
             }
         }
         $url = $object->config('project.dir.data') . 'Installed' . $object->config('extension.json');
-        d($list);
+        $data = new Data($list);
+        d($data);
         dd($output);
     }
 
