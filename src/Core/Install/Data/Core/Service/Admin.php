@@ -166,7 +166,6 @@ class Admin extends Main
                             Dir::change($object->config('project.dir.root'));
                             Core::execute($task, $output);
                             File::write($dir_output . $basename, implode(PHP_EOL, $output));
-                            File::write($dir_output . 'test', implode(PHP_EOL, $output));
                         } else {
                             $content = 'No Administrator...' . PHP_EOL;
                             File::write($dir_output . $basename, $content);
