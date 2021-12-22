@@ -79,7 +79,7 @@ class System extends View {
         return new Response($data, Response::TYPE_JSON);
     }
 
-    public static function update_cms(App $object): Exception|AuthorizationException|Response
+    public static function update_cms(App $object)
     {
         try {
             return Service::update_cms($object);
