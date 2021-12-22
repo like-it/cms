@@ -40,10 +40,12 @@ class FileSystem {
 
     /**
      * @throws FileNotExistException
+     * @throws Exception
      */
-    public static function delete(App $object, $options=[])
+    public static function delete(App $object, $options=[]): Response
     {
         $url = htmlspecialchars_decode($object->request('url'), ENT_HTML5);
+        $nodeList = $object->request('nodeList');
         if(!empty($url)){
             if(File::exist($url)) {
                 $is_delete = false;
@@ -54,16 +56,35 @@ class FileSystem {
                 }
                 $result = [];
                 if($is_delete === true) {
-                    $result['isDeleted'] = time();
+                    $result[$url]['isDeleted'] = time();
                 } else {
-                    $result['isDeleted'] = false;
+                    $result[$url]['isDeleted'] = false;
                 }
                 return new Response($result, Response::TYPE_JSON);
             }
             throw new FileNotExistException('File (' . $url .') not exist...');
         }
-        $nodeList = $object->request('nodeList');
-        dd($nodeList);
+        elseif(!empty($nodeList)){
+            $result = [];
+            foreach($nodeList as $nr => $url){
+                if(File::exist($url)) {
+                    $is_delete = false;
+                    if (Dir::is($url)) {
+                        $is_delete = Dir::remove($url);
+                    } else {
+                        $is_delete = File::delete($url);
+                    }
+                    if($is_delete === true) {
+                        $result[$url]['isDeleted'] = time();
+                    } else {
+                        $result[$url]['isDeleted'] = false;
+                    }
+                }
+            }
+            return new Response($result, Response::TYPE_JSON);
+        } else {
+            throw new Exception('Delete needs an url or nodeList');
+        }
     }
 
 
