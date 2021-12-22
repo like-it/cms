@@ -120,9 +120,14 @@ update.cms = (node) => {
                     "request-method" : "DELETE",
                     "nodeList" : node.files
                 }
+                const pre = create('pre');
+                pre.html('Cleaning up process files...' + "\n");
+                system.appendChild(pre);
                 header('Authorization', 'Bearer ' + user.token());
                 request(url_delete, data, (urlDelete, response) => {
-
+                    const pre = create('pre');
+                    pre.html('Cleaning up completed...' + "\n");
+                    system.appendChild(pre);
                 });
             }
         }
