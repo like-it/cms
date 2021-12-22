@@ -111,10 +111,10 @@ class Admin extends Main
                         File::write($dir_output . $basename, $content);
                     }
                     $content = 'Token Delete url: ' . $file->url . PHP_EOL;
-                    File::append($dir_output . $basename, $content);
+                    File::append($dir_output . $basename,PHP_EOL . $content);
                     File::delete($file->url);
                     $content = 'Task Delete url: ' . $url . PHP_EOL;
-                    File::append($dir_output . $basename, $content);
+                    File::append($dir_output . $basename, PHP_EOL .$content);
                     File::delete($url);
                     File::touch($url_end);
                     File::chown(
