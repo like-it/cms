@@ -22,6 +22,15 @@ class FileSystem extends View {
         }
     }
 
+    public static function delete(App $object): Exception|Response
+    {
+        try {
+            return Service::delete($object);;
+        } catch (Exception | FileNotExistException $exception){
+            return $exception;
+        }
+    }
+
     /*
     public static function write(App $object){
         $name = FileSystem::name(__FUNCTION__, __CLASS__, '/');

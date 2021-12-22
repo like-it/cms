@@ -38,6 +38,36 @@ class FileSystem {
         throw new FileNotExistException('File (' . $url .') not exist...');
     }
 
+    /**
+     * @throws FileNotExistException
+     */
+    public static function delete(App $object, $options=[])
+    {
+        $url = htmlspecialchars_decode($object->request('url'), ENT_HTML5);
+        if(!empty($url)){
+            if(File::exist($url)) {
+                $is_delete = false;
+                if (Dir::is($url)) {
+                    $is_delete = Dir::remove($url);
+                } else {
+                    $is_delete = File::delete($url);
+                }
+                $result = [];
+                if($is_delete === true) {
+                    $result['isDeleted'] = time();
+                } else {
+                    $result['isDeleted'] = false;
+                }
+                return new Response($result, Response::TYPE_JSON);
+            }
+            throw new FileNotExistException('File (' . $url .') not exist...');
+        }
+        $nodeList = $object->request('nodeList');
+        dd($nodeList);
+    }
+
+
+
     /*
     public static function write(App $object, $options=[]){
         $url = $object->request('node.url');
