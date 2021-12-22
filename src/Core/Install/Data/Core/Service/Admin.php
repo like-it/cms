@@ -151,7 +151,6 @@ class Admin extends Main
                 }
                 if(File::extension($file->url) === 'task') {
                     $url_token = File::basename($file->url, '.task') . '.token';
-                    dd($url_token);
                     if(File::exist($url_token)){
                         continue;
                     }
