@@ -118,10 +118,10 @@ class Admin extends Main
                         $content = 'Invalid claim detected in token...' . PHP_EOL;
                         File::write($dir_output . $basename, $content);
                     }
-                    $content = 'Token Delete: ' . $basename . PHP_EOL;
+                    $content = 'Token Delete: ' . File::basename($file->url, '.token') . PHP_EOL;
                     File::append($dir_output . $basename,PHP_EOL . $content);
                     File::delete($file->url);
-                    $content = 'Task Delete: ' . $basename . PHP_EOL;
+                    $content = 'Task Delete: ' . File::basename($url, '.task') . PHP_EOL;
                     File::append($dir_output . $basename, PHP_EOL .$content);
                     File::delete($url);
                     File::touch($url_end);
