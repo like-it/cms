@@ -19,7 +19,6 @@ class Admin extends Main
         try {
             $task  = App::parameter($object, 'task', 1);
             $token = App::parameter($object, 'task', 2);
-            dd($token);
             $euid = posix_geteuid();
             $dir = $object->config('project.dir.data') .'Input' . $object->config('ds');
             $dir_part = $euid . $object->config('ds');
@@ -27,15 +26,13 @@ class Admin extends Main
             $uuid = Core::uuid();
             $url_part = $dir_part . $uuid . '.task';
             $url = $dir . $url_part;
-            $written = File::write($url, $task);
-            if($written === 0){
-                throw new FileWriteException('Empty file write');
-            }
+            $url_token = $dir .$dir_part . $uuid . '.token';
+            File::write($url, $task);
+            File::write($url_token, $token);
             return $dir . $url_part . PHP_EOL;
         } catch (FileWriteException $exception) {
             return $exception;
         }
-
     }
 
     public static function taskrunner(App $object){
