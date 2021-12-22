@@ -43,7 +43,10 @@ class Admin extends Main
                     $url_end = $dir_output . File::basename($file->url, '.token') . '.end';
                     $basename = File::basename($url);
                     if (!File::exist($url)) {
-                        $content = 'Task File url: ' . $url . ' doesn\'t exist.';
+                        $content = 'Task File for: ' . $basename . ' doesn\'t exist.' . PHP_EOL;
+                        foreach($read as $node){
+                            $content .= $node->url . PHP_EOL;
+                        }
                         File::write($dir_output . $basename, $content);
                         File::delete($file->url);
                         File::chown(
