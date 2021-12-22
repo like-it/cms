@@ -15,6 +15,27 @@ class Admin extends Main
 {
     const CRON_INTERVAL = 60;
 
+    public static function task(App $object){
+        try {
+            $task  = App::parameter($object, 'task', 1);
+            $euid = posix_geteuid();
+            $dir = $object->config('project.dir.data') .'Input' . $object->config('ds');
+            $dir_part = $euid . $object->config('ds');
+            Dir::create($dir . $dir_part);
+            $uuid = Core::uuid();
+            $url_part = $dir_part . $uuid . '.task';
+            $url = $dir . $url_part;
+            $written = File::write($url, $task);
+            if($written === 0){
+                throw new FileWriteException('Empty file write');
+            }
+            return $dir . $url_part . PHP_EOL;
+        } catch (FileWriteException $exception) {
+            return $exception;
+        }
+
+    }
+
     public static function taskrunner(App $object){
         $start = microtime(true);
         Host::dir_root($object);
