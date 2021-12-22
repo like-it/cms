@@ -115,7 +115,15 @@ update.cms = (node) => {
             system.removeClass('d-none');
             system.appendChild(pre);
             if(node?.files){
-                console.log(node.files);
+                const url_delete = "{{server.url('core')}}FileSystem/Delete/";
+                const data = {
+                    "request-method" : "DELETE",
+                    "nodeList" : node.files
+                }
+                header('Authorization', 'Bearer ' + user.token());
+                request(url_delete, data, (urlDelete, response) => {
+
+                });
             }
         }
     });
