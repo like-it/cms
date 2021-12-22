@@ -44,6 +44,41 @@ class Admin extends Main
         while(true) {
             $current = microtime(true);
             if($current - $start > Admin::CRON_INTERVAL){
+                $dir = new Dir();
+                $read = $dir->read(
+                    $object->config('project.dir.data') . 'Input' . $object->config('ds'),
+                    true
+                );
+                foreach ($read as $nr => $file) {
+                    if ($file->type !== File::TYPE) {
+                        continue;
+                    }
+                    if(File::extension($file->url) === 'task') {
+                        $url_token = File::basename($file->url, '.task') . '.token';
+                        if(File::exist($url_token)){
+                            continue;
+                        }
+                        try {
+                            $basename = File::basename($file->url);
+                            $url_begin = $dir_output . File::basename($file->url, '.token') . '.begin';
+                            $url_end = $dir_output . File::basename($file->url, '.token') . '.end';
+                            File::touch($url_begin);
+                            $content = 'Token file not found for task: ' . $basename . PHP_EOL;
+                            File::write($dir_output . $basename, $content);
+                            File::touch($url_end);
+                            File::chown(
+                                $dir_output,
+                                'www-data',
+                                'www-data',
+                                true
+                            );
+                            File::delete($file->url);
+                        }
+                        catch (FileWriteException $e) {
+                            File::delete($file->url);
+                        }
+                    }
+                }
                 exit();
             }
             $dir = new Dir();
@@ -164,41 +199,6 @@ class Admin extends Main
                 }
             }
             sleep(1);
-            $dir = new Dir();
-            $read = $dir->read(
-                $object->config('project.dir.data') . 'Input' . $object->config('ds'),
-                true
-            );
-            foreach ($read as $nr => $file) {
-                if ($file->type !== File::TYPE) {
-                    continue;
-                }
-                if(File::extension($file->url) === 'task') {
-                    $url_token = File::basename($file->url, '.task') . '.token';
-                    if(File::exist($url_token)){
-                        continue;
-                    }
-                    try {
-                        $basename = File::basename($file->url);
-                        $url_begin = $dir_output . File::basename($file->url, '.token') . '.begin';
-                        $url_end = $dir_output . File::basename($file->url, '.token') . '.end';
-                        File::touch($url_begin);
-                        $content = 'Token file not found for task: ' . $basename . PHP_EOL;
-                        File::write($dir_output . $basename, $content);
-                        File::touch($url_end);
-                        File::chown(
-                            $dir_output,
-                            'www-data',
-                            'www-data',
-                            true
-                        );
-                        File::delete($file->url);
-                    }
-                    catch (FileWriteException $e) {
-                        File::delete($file->url);
-                    }
-                }
-            }
         }
     }
 }
