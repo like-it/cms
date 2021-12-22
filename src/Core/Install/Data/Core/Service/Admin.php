@@ -15,7 +15,8 @@ class Admin extends Main
 {
     const CRON_INTERVAL = 60;
 
-    public static function task(App $object){
+    public static function task(App $object): null | string
+    {
         try {
             $task  = App::parameter($object, 'task', 1);
             $token = App::parameter($object, 'task', 2);
@@ -31,11 +32,12 @@ class Admin extends Main
             File::write($url_token, $token);
             return $dir . $url_part . PHP_EOL;
         } catch (FileWriteException $exception) {
-            return $exception;
+            return null;
         }
     }
 
-    public static function taskrunner(App $object){
+    public static function taskrunner(App $object): void
+    {
         $start = microtime(true);
         Host::dir_root($object);
         $dir_output = $object->config('project.dir.data') . 'Output' . $object->config('ds');

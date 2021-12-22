@@ -19,9 +19,9 @@ class System extends Main {
     }
 
     /**
-     * @throws AuthorizationException|FileWriteException
+     * @throws AuthorizationException
      */
-    public static function update_cms(App $object)
+    public static function update_cms(App $object): Response
     {
         if(!array_key_exists('HTTP_AUTHORIZATION', $_SERVER)){
             throw new AuthorizationException('Authorization token missing...');
@@ -35,19 +35,13 @@ class System extends Main {
             " ' . $token . '
         ';
         Core::execute($execute, $output);
-        /*
         if(array_key_exists(0, $output)){
             $task = $output[0];
-            $dir = Dir::name($task);
-            $file = File::basename($task, '.task') . '.token';
-            $url = $dir . $file;
             $record = [];
             $record['output'] = $object->config('project.dir.data')  . 'Output' . $object->config('ds') . File::basename($task);
-            $record['written'] = File::write($url, $token);
             $response = [];
             $response['node'] = $record;
             return new Response($response, Response::TYPE_JSON);
         }
-        */
     }
 }
