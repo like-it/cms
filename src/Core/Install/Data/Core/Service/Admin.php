@@ -7,7 +7,6 @@ use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
 
 use Exception;
-use R3m\Io\Exception\FileAppendException;
 use R3m\Io\Exception\AuthorizationException;
 use R3m\Io\Exception\FileWriteException;
 
@@ -186,7 +185,6 @@ class Admin extends Main
                 } catch(
                     Exception |
                     FileWriteException |
-                    FileAppendException |
                     AuthorizationException
                     $exception
                 ){
