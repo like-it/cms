@@ -21,7 +21,7 @@ class System extends Main {
     /**
      * @throws AuthorizationException|FileWriteException
      */
-    public static function update_cms(App $object): Response
+    public static function update_cms(App $object)
     {
         if(!array_key_exists('HTTP_AUTHORIZATION', $_SERVER)){
             throw new AuthorizationException('Authorization token missing...');
