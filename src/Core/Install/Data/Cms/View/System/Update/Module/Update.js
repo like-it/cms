@@ -114,6 +114,9 @@ update.cms = (node) => {
             pre.html(response);
             system.removeClass('d-none');
             system.appendChild(pre);
+            if(node?.files){
+                console.log(node.files);
+            }
         }
     });
 }

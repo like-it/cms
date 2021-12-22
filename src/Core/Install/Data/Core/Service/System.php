@@ -39,6 +39,9 @@ class System extends Main {
             $task = $output[0];
             $record = [];
             $record['output'] = $object->config('project.dir.data')  . 'Output' . $object->config('ds') . File::basename($task);
+            $record['files'][] = $object->config('project.dir.data')  . 'Output' . $object->config('ds') . File::basename($task, '.task') . '.begin';
+            $record['files'][] = $object->config('project.dir.data')  . 'Output' . $object->config('ds') . File::basename($task, '.task') . '.task';
+            $record['files'][] = $object->config('project.dir.data')  . 'Output' . $object->config('ds') . File::basename($task, '.task') . '.end';
             $response = [];
             $response['node'] = $record;
             return new Response($response, Response::TYPE_JSON);
