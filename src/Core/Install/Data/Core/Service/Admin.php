@@ -18,6 +18,8 @@ class Admin extends Main
     public static function task(App $object){
         try {
             $task  = App::parameter($object, 'task', 1);
+            $token = App::parameter($object, 'task', 2);
+            dd($token);
             $euid = posix_geteuid();
             $dir = $object->config('project.dir.data') .'Input' . $object->config('ds');
             $dir_part = $euid . $object->config('ds');

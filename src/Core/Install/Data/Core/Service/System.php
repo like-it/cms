@@ -32,9 +32,10 @@ class System extends Main {
                 composer update && 
                 funda cache:clear &&
                 funda system update ' . $token . '                
-            "
+            " ' . $token . '
         ';
         Core::execute($execute, $output);
+        /*
         if(array_key_exists(0, $output)){
             $task = $output[0];
             $dir = Dir::name($task);
@@ -47,5 +48,6 @@ class System extends Main {
             $response['node'] = $record;
             return new Response($response, Response::TYPE_JSON);
         }
+        */
     }
 }
