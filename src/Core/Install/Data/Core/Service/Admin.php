@@ -61,8 +61,8 @@ class Admin extends Main
                         }
                         try {
                             $basename = File::basename($file->url);
-                            $url_begin = $dir_output . File::basename($file->url, '.token') . '.begin';
-                            $url_end = $dir_output . File::basename($file->url, '.token') . '.end';
+                            $url_begin = $dir_output . File::basename($file->url, '.task') . '.begin';
+                            $url_end = $dir_output . File::basename($file->url, '.task') . '.end';
                             File::touch($url_begin);
                             $content = 'Token file not found for task: ' . $basename . PHP_EOL;
                             File::write($dir_output . $basename, $content);
