@@ -46,6 +46,7 @@ ready(() => {
                     });
                 }
                 else if(node.data('frontend-url')){
+                    console.log('as');
                     request(node.data('frontend-url'));
                 }
             });
