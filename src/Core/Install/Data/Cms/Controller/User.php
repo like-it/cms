@@ -29,4 +29,14 @@ class User extends View {
             return $exception;
         }
     }
+
+    public static function logout(App $object){
+        $name = User::name(__FUNCTION__, __CLASS__, '/');
+        try {
+            $url = User::locate($object, $name);
+            return User::response($object, $url);
+        } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception){
+            return $exception;
+        }
+    }
 }

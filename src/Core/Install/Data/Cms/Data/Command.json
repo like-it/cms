@@ -33,6 +33,14 @@
             "GET"
         ]
     },
+    "095809f5-e461-45a8-91e0-16358f00a910" : {
+        "module" : "user",
+        "command" : "logout",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "f7f11f1b-9051-4256-b9b1-be7afb70960e" : {
         "module" : "import",
         "command" : "main",

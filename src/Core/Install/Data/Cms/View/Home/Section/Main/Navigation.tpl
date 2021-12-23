@@ -34,7 +34,7 @@
             </a>
             <a
                     class="nav-link"
-                    href="{{route.get(route.prefix() + '-user-logout')}}"
+                    data-url="{{route.get(route.prefix() + '-user-logout')}}"
             >
                 <i class="{{__('home.icon.logout.class')}}"></i> {{__('home.link.logout')}}
             </a>
