@@ -29,7 +29,7 @@ class System extends Main {
         $token = substr($_SERVER['HTTP_AUTHORIZATION'], 7);
         $execute = '
             funda admin task "
-                composer update && 
+                composer update --quiet && 
                 funda cache:clear &&
                 funda system update ' . $token . '                
             " ' . $token . '
