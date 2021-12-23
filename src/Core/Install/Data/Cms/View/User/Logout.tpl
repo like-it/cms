@@ -2,7 +2,7 @@
 {{require($controller.dir.view + $controller.title + '/Init.tpl')}}
 {{script('module')}}
 /*
-{{require($controller.dir.view + $controller.title + '/Logout/Module/Logout.js')}}
+{{require($controller.dir.view + $controller.title + '/Module/Logout.js')}}
 {{/script}}
 */
-{{require($controller.dir.view + $controller.title + '/Logout/Section/Logout.tpl')}}
+{{require($controller.dir.view + $controller.title + '/Section/Logout.tpl')}}
