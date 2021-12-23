@@ -30,8 +30,10 @@ class User extends View {
         }
     }
 
-    public static function logout(App $object){
+    public static function logout_body(App $object){
         $name = User::name(__FUNCTION__, __CLASS__, '/');
+        $name = explode('.', $name);
+        $name = implode('/', $name);
         try {
             $url = User::locate($object, $name);
             return User::response($object, $url);
