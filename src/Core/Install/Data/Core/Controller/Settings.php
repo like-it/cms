@@ -48,4 +48,8 @@ class Settings extends View {
             return $exception;
         }
     }
+
+    public static function access_log(App $object){
+        dd('access log');
+    }
 }

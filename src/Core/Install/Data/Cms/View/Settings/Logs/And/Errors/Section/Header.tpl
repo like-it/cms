@@ -12,7 +12,7 @@
         <li class="nav-item">
             <a
                 class="nav-link"
-                data-url=""
+                data-url="{{server.url('core')}}Settings/Log/Access"
                 data-frontend-url=""
             >
                 {{__('settings.logs_and_errors.section.header.access_log')}}
@@ -21,7 +21,7 @@
         <li class="nav-item">
             <a
                 class="nav-link"
-                data-url=""
+                data-url="{{server.url('core')}}Settings/Log/Error"
                 data-frontend-url=""
             >
                 {{__('settings.logs_and_errors.section.header.error_log')}}
