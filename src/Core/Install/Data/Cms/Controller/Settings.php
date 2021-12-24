@@ -133,6 +133,8 @@ class Settings extends View {
 
     public static function logs_and_errors_main(App $object){
         $name = Settings::name(__FUNCTION__, __CLASS__, '/');
+        $name = explode('.', $name);
+        $name = implode('/', $name);
         try {
             $url = Settings::locate($object, $name);
             return Settings::response($object, $url);
