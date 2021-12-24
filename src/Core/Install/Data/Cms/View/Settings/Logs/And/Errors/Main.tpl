@@ -3,4 +3,4 @@
 {{script('module')}}
 {{require($controller.dir.view + $controller.title + '/Logs/And/Errors/Module/Main.js')}}
 {{/script}}
-{{require($controller.dir.view + $controller.title + '/Logs/And/Erors/Section/Content.tpl')}}
+{{require($controller.dir.view + $controller.title + '/Logs/And/Errors/Section/Content.tpl')}}
