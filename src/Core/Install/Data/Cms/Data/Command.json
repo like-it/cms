@@ -172,6 +172,15 @@
             "POST"
         ]
     },
+    "4e667d2c-7086-4618-af9d-9ff9fc8c44b1" : {
+        "module" : "settings",
+        "submodule" : "logs-and-errors",
+        "command" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "189aebee-3cba-4bc4-952d-988d4253e190" : {
         "module" : "settings",
         "submodule" : "logs-and-errors",

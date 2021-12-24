@@ -5,7 +5,7 @@
             <a
                 class="nav-link active"
                 aria-current="true"
-                href="#">
+                data-frontend-url="{{route.get(route.prefix() + '-logs-and-errors-body')}}">
                 {{__('settings.logs_and_errors.section.header.main')}}
             </a>
         </li>
@@ -15,7 +15,7 @@
                 data-url=""
                 data-frontend-url=""
             >
-                {{__('settings.logs_and_errors.section.header.access_log')}}Access log
+                {{__('settings.logs_and_errors.section.header.access_log')}}
             </a>
         </li>
         <li class="nav-item">
@@ -24,7 +24,7 @@
                 data-url=""
                 data-frontend-url=""
             >
-                {{__('settings.logs_and_errors.section.header.error_log')}}Error log
+                {{__('settings.logs_and_errors.section.header.error_log')}}
             </a>
         </li>
     </ul>
