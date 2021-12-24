@@ -8,11 +8,11 @@ ready(() => {
     if(!section){
         return;
     }
-    const header = section.select('.card-header');
-    if(!header){
+    const head = section.select('.card-header');
+    if(!head){
         return;
     }
-    const list = header.select('a');
+    const list = head.select('a');
     if(!list){
         return;
     }
