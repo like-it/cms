@@ -137,7 +137,6 @@ class Settings extends View {
         $name = implode('/', $name);
         try {
             $url = Settings::locate($object, $name);
-            dd($url);
             return Settings::response($object, $url);
         } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception){
             return $exception;
