@@ -5,7 +5,7 @@
             <a
                 class="nav-link active"
                 aria-current="true"
-                data-frontend-url="{{route.get(route.prefix() + '-logs-and-errors-body')}}">
+                data-frontend-url="{{route.get(route.prefix() + '-settings-logs-and-errors-body')}}">
                 {{__('settings.logs_and_errors.section.header.main')}}
             </a>
         </li>
