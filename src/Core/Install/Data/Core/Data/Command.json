@@ -213,6 +213,15 @@
             "OPTIONS"
         ]
     },
+    "62659b9a-3300-4f3b-a752-869c9d1c5acd" : {
+        "module" : "settings",
+        "submodule" : "log",
+        "command" : "access",
+        "method" : [
+            "GET",
+            "OPTIONS"
+        ]
+    },
     "5642e4a6-313e-40eb-9837-6af246c79a62" : {
         "module" : "settings",
         "submodule" : "email",

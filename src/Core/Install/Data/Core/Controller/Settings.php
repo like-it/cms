@@ -49,7 +49,7 @@ class Settings extends View {
         }
     }
 
-    public static function access_log(App $object){
-        dd('access log');
+    public static function log_access(App $object){
+        dd('log access');
     }
 }
