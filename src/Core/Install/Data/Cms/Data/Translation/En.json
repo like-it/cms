@@ -100,6 +100,14 @@
     "settings.section.export.settings.body.save" : "Save",
     "settings.section.export.export.body.title" : "Export",
     "settings.section.export.export.body.text" : "Export the entire project as zip file <a id=\"export\" href=\"#export\">here</a>.",
+    "settings.logs_and_errors.section.header.main" :  "Main",
+    "settings.logs_and_errors.section.header.access_log" :  "Access log",
+    "settings.logs_and_errors.section.header.error_log" :  "Error log",
+    "settings.logs_and_errors_section.main.body.title" : "Logs & errors",
+    "settings.logs_and_errors_section.main.body.text" : [
+        "this is a test",
+        "multiline"
+    ],
     "system.information.section.menu.header.information" : "Information",
     "system.information.section.menu.header.update" : "Update",
     "system.information.section.information.body.title" : "Information",
@@ -109,6 +117,7 @@
         "You can choose to update the OS manually or wait for the automatic update process.",
         "It is scheduled once a week on saturday at 10:00 in the morning."
     ],
+
     "user.blocked" : "User is blocked for 15 minutes.<br>Please try again later...",
     "user.e-mail" : "Email",
     "user.login.title" : "User login",

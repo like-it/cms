@@ -6,7 +6,25 @@
                 class="nav-link active"
                 aria-current="true"
                 href="#">
-                {{__('settings.section.import.header.import')}}Main
+                {{__('settings.logs_and_errors.section.header.main')}}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link"
+                data-url=""
+                data-frontend-url=""
+            >
+                {{__('settings.logs_and_errors.section.header.access_log')}}Access log
+            </a>
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link"
+                data-url=""
+                data-frontend-url=""
+            >
+                {{__('settings.logs_and_errors.section.header.error_log')}}Error log
             </a>
         </li>
     </ul>
