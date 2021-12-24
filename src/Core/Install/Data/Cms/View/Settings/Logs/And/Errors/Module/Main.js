@@ -1,5 +1,7 @@
 {R3M}
 import { getSectionByName } from "/Module/Section.js";
+import user from "/Module/User.js";
+
 ready(() => {
     console.log('ready logs & errors...');
     const section = getSectionByName('main-content');
@@ -21,6 +23,13 @@ ready(() => {
             node.on('click', (event) => {
                 if(node.data('url')){
                     console.log('has url');
+                    header('Authorization', 'Bearer ' + user.token());
+                    request(node.data('url'), null, ( responseUrl, response) => {
+                        console.log(response);
+                        if(node.data('frontend-url')){
+                            request(node.data('frontend-url', response));
+                        }
+                    });
                 }
                 else if(node.data('frontend-url')){
                     request(node.data('frontend-url'));
@@ -32,6 +41,8 @@ ready(() => {
         node.on('click', (event) => {
             if(node.data('url')){
                 console.log('has url');
+                header('Authorization', 'Bearer ' + user.token());
+
             }
             else if(node.data('frontend-url')){
                 request(node.data('frontend-url'));
