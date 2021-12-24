@@ -51,7 +51,7 @@
             <a
                 class="nav-link"
                 data-url="{{server.url('core')}}Settings/LogsAndErrors/AccessLog"
-                data-frontend-url="{{route.get(route.prefix() + '-settings-logs-and-errors-access-log')}}"
+                data-frontend-url="{{route.get(route.prefix() + '-settings-logs-and-errors-main')}}"
             >
                 <i class="{{__('settings.icon.logs_and_errors.class')}}"></i> {{__('settings.link.logs_and_errors')}}
             </a>

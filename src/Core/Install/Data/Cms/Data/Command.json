@@ -163,6 +163,15 @@
             "POST"
         ]
     },
+    "afc5d30b-e63b-4e12-9c06-6221f2e33c80" : {
+        "module" : "settings",
+        "submodule" : "logs-and-errors",
+        "command" : "main",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "189aebee-3cba-4bc4-952d-988d4253e190" : {
         "module" : "settings",
         "submodule" : "logs-and-errors",
