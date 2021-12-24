@@ -104,10 +104,7 @@
     "settings.logs_and_errors.section.header.access_log" :  "Access log",
     "settings.logs_and_errors.section.header.error_log" :  "Error log",
     "settings.logs_and_errors_section.main.body.title" : "Logs & errors",
-    "settings.logs_and_errors_section.main.body.text" : [
-        "this is a test",
-        "multiline"
-    ],
+    "settings.logs_and_errors_section.main.body.text" : "",
     "system.information.section.menu.header.information" : "Information",
     "system.information.section.menu.header.update" : "Update",
     "system.information.section.information.body.title" : "Information",
