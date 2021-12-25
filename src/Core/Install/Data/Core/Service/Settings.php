@@ -138,7 +138,7 @@ class Settings extends Main {
     /**
      * @throws ObjectException
      */
-    public static function log_access_read(App $object)
+    public static function log_access_read(App $object): Response
     {
         $url = $object->config('project.dir.root') .
             'Log' .
@@ -148,26 +148,14 @@ class Settings extends Main {
 
         $command = 'tail -100 ' . $url;
         $output = [];
-        $result = [];
+        $response = [];
+        $response['nodeList'] = [];
         Core::execute($command, $output);
         foreach($output as $nr => $line){
             $node = Settings::log_access_line_to_object($object, $line);
-            $result[$nr] = $node;
+            $response['nodeList'][$nr] = $node;
         }
-        d($result);
-        d($command);
-        dd($output);
-
-        /*
-        $data = $object->data_read($url);
-        if (!$data) {
-            $data = new Data();
-        }
-        $record = $data->get('email.' . $uuid);
-        $response = [];
-        $response['node'] = $record;
         return new Response($response, Response::TYPE_JSON);
-        */
     }
 
     /**
