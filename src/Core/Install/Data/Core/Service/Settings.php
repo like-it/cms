@@ -140,7 +140,7 @@ class Settings extends Main {
         $url = $object->config('project.dir.root') .
             'Log' .
             $object->config('ds') .
-            'Access' .
+            'access' .
             $object->config('extension.log');
 
         $command = 'tail -100 ' . $url;
