@@ -135,6 +135,9 @@ class Settings extends Main {
         }
     }
 
+    /**
+     * @throws ObjectException
+     */
     public static function log_access_read(App $object)
     {
         $url = $object->config('project.dir.root') .
@@ -145,10 +148,13 @@ class Settings extends Main {
 
         $command = 'tail -100 ' . $url;
         $output = [];
+        $result = [];
         Core::execute($command, $output);
         foreach($output as $nr => $line){
             $object = Settings::log_access_line_to_object($object, $line);
+            $result[$nr] = $object;
         }
+        d($result);
         d($command);
         dd($output);
 
@@ -164,13 +170,21 @@ class Settings extends Main {
         */
     }
 
+    /**
+     * @throws ObjectException
+     */
     private static function log_access_line_to_object(App $object, $line=''){
         $explode = explode('"', $line, 2);
         $array = [];
         if(array_key_exists(1, $explode)){
             $temp = explode('-', $explode[0]);
-            dd($temp);
+            $array['ipAddress'] = rtrim($temp[0], ' ');
+            $array['userId'] = trim($temp[1], ' ');
+            $time = rtrim(ltrim($temp[2], ' ['), ' ]');
+            $array['time'] = strtotime($time);
+            $array['date'] = date('Y-m-d H:i:s', $array['time']);
         }
+        return Core::object($array, Core::OBJECT_OBJECT);
     }
 
     private static function email_put(App $object, Data $data, stdClass $record, $url): Response
