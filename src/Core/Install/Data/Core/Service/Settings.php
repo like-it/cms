@@ -146,6 +146,7 @@ class Settings extends Main {
         $command = 'tail -100 ' . $url;
         $output = [];
         Core::execute($command, $output);
+        d($command);
         dd($output);
 
         /*
