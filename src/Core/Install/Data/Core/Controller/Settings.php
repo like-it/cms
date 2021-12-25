@@ -3,11 +3,13 @@ namespace Host\Subdomain\Host\Extension\Controller;
 
 use Exception;
 use R3m\Io\App;
+use R3m\Io\Exception\ObjectException;
 use R3m\Io\Module\Handler;
 use R3m\Io\Module\Response;
 use R3m\Io\Module\View;
 
 use Host\Subdomain\Host\Extension\Service\Settings as Service;
+use Host\Subdomain\Host\Extension\Service\Log;
 
 class Settings extends View {
     const DIR = __DIR__ . DIRECTORY_SEPARATOR;    
@@ -50,6 +52,10 @@ class Settings extends View {
     }
 
     public static function log_access(App $object){
-        return Service::log_access_read($object);
+        try {
+            return Log::access_read($object);
+        } catch (ObjectException $exception){
+            return $exception;
+        }
     }
 }
