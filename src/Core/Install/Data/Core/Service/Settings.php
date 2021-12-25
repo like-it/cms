@@ -179,14 +179,20 @@ class Settings extends Main {
         if(array_key_exists(1, $explode)){
             $temp = explode('-', $explode[0]);
             $array['ipAddress'] = rtrim($temp[0], ' ');
-            $array['userId'] = trim($temp[1], ' ');
+            $array['user'] = [];
+            $array['user']['id'] = trim($temp[1], ' ');
             $time = rtrim(ltrim($temp[2], ' ['), ' ]');
             $array['time'] = strtotime($time);
             $array['date'] = date('Y-m-d H:i:s', $array['time']) . ' +0000';
             $temp = explode(' ', $explode[1], 7);
-            dd($temp);
+            $array['method'] = $temp[0];
+            $array['path'] = $temp[1];
+            $array['protocol'] = $temp[2];
+            $array['status'] = $temp[3];
+            $array['size'] = $temp[4];
+            $array['referer'] = trim($temp[5], '"');
+            $array['user']['agent'] = trim($temp[6], '"');
         }
-        dd($explode);
         return Core::object($array, Core::OBJECT_OBJECT);
     }
 
