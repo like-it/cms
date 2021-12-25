@@ -182,7 +182,9 @@ class Settings extends Main {
             $array['userId'] = trim($temp[1], ' ');
             $time = rtrim(ltrim($temp[2], ' ['), ' ]');
             $array['time'] = strtotime($time);
-            $array['date'] = date('Y-m-d H:i:s', $array['time']);
+            $array['date'] = date('Y-m-d H:i:s', $array['time']) . ' +0000';
+            $temp = explode(' ', $explode[1], 4);
+            dd($temp);
         }
         dd($explode);
         return Core::object($array, Core::OBJECT_OBJECT);
