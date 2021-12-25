@@ -13,7 +13,7 @@
             <a
                 class="nav-link"
                 data-url="{{server.url('core')}}Settings/Log/Access"
-                data-frontend-url=""
+                data-frontend-url="{{route.get(route.prefix() + '-settings-logs-and-errors-log-access')}}"
             >
                 {{__('settings.logs_and_errors.section.header.access_log')}}
             </a>

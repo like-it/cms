@@ -145,7 +145,6 @@ class Settings extends Main {
             $object->config('ds') .
             'access' .
             $object->config('extension.log');
-
         $command = 'tail -100 ' . $url;
         $output = [];
         $response = [];

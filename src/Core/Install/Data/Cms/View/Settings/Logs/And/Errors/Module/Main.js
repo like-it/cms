@@ -21,8 +21,9 @@ ready(() => {
         for(index=0; index < list.length; index++){
             let node = list[index];
             node.on('click', (event) => {
+                list.removeClass('active');
+                node.addClass('active');
                 if(node.data('url')){
-                    console.log('has url');
                     header('Authorization', 'Bearer ' + user.token());
                     request(node.data('url'), null, ( responseUrl, response) => {
                         console.log(response);
@@ -39,6 +40,8 @@ ready(() => {
     } else {
         let node = list;
         node.on('click', (event) => {
+            list.removeClass('active');
+            node.addClass('active');
             if(node.data('url')){
                 console.log('has url');
                 header('Authorization', 'Bearer ' + user.token());
