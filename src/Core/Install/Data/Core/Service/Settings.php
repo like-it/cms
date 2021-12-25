@@ -151,8 +151,8 @@ class Settings extends Main {
         $result = [];
         Core::execute($command, $output);
         foreach($output as $nr => $line){
-            $object = Settings::log_access_line_to_object($object, $line);
-            $result[$nr] = $object;
+            $node = Settings::log_access_line_to_object($object, $line);
+            $result[$nr] = $node;
         }
         d($result);
         d($command);
