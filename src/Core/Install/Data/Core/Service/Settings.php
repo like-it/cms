@@ -168,7 +168,8 @@ class Settings extends Main {
         $explode = explode('"', $line, 2);
         $array = [];
         if(array_key_exists(1, $explode)){
-            dd($explode);
+            $temp = explode('-', $explode[0]);
+            dd($temp);
         }
     }
 
