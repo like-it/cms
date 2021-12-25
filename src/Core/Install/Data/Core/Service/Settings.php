@@ -184,6 +184,7 @@ class Settings extends Main {
             $array['time'] = strtotime($time);
             $array['date'] = date('Y-m-d H:i:s', $array['time']);
         }
+        dd($explode);
         return Core::object($array, Core::OBJECT_OBJECT);
     }
 
