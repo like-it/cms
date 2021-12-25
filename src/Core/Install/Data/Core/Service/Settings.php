@@ -135,6 +135,31 @@ class Settings extends Main {
         }
     }
 
+    public static function log_access_read(App $object)
+    {
+        $url = $object->config('project.dir.root') .
+            'Log' .
+            $object->config('ds') .
+            'Access' .
+            $object->config('extension.log');
+
+        $command = 'tail -100 ' . $url;
+        $output = [];
+        Core::execute($command, $output);
+        dd($output);
+
+        /*
+        $data = $object->data_read($url);
+        if (!$data) {
+            $data = new Data();
+        }
+        $record = $data->get('email.' . $uuid);
+        $response = [];
+        $response['node'] = $record;
+        return new Response($response, Response::TYPE_JSON);
+        */
+    }
+
     private static function email_put(App $object, Data $data, stdClass $record, $url): Response
     {
         try {

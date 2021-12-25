@@ -50,6 +50,6 @@ class Settings extends View {
     }
 
     public static function log_access(App $object){
-        dd('log access');
+        return Service::log_access_read($object);
     }
 }
