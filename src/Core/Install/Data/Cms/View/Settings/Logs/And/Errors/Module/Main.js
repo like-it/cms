@@ -25,10 +25,10 @@ ready(() => {
                 node.addClass('active');
                 if(node.data('url')){
                     header('Authorization', 'Bearer ' + user.token());
-                    request(node.data('url'), null, ( responseUrl, response) => {
+                    request(node.data('url'), null, (responseUrl, response) => {
                         console.log(response);
                         if(node.data('frontend-url')){
-                            request(node.data('frontend-url', response));
+                            request(node.data('frontend-url'), response);
                         }
                     });
                 }

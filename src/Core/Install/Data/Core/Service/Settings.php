@@ -148,11 +148,11 @@ class Settings extends Main {
         $command = 'tail -100 ' . $url;
         $output = [];
         $response = [];
-        $response['nodeList2'] = [];
+        $response['nodeList'] = [];
         Core::execute($command, $output);
         foreach($output as $nr => $line){
             $node = Settings::log_access_line_to_object($object, $line);
-            $response['nodeList2'][$nr] = $node;
+            $response['nodeList'][$nr] = $node;
         }
         return new Response($response, Response::TYPE_JSON);
     }
