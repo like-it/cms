@@ -175,8 +175,8 @@ class Settings extends Main {
             $array['method'] = $temp[0];
             $array['path'] = $temp[1];
             $array['protocol'] = $temp[2];
-            $array['status'] = $temp[3];
-            $array['size'] = $temp[4];
+            $array['status'] = $temp[3] + 0;
+            $array['size'] = $temp[4] + 0;
             $array['referer'] = trim($temp[5], '"');
             $array['user']['agent'] = trim($temp[6], '"');
         }
