@@ -183,7 +183,7 @@ class Settings extends Main {
             $time = rtrim(ltrim($temp[2], ' ['), ' ]');
             $array['time'] = strtotime($time);
             $array['date'] = date('Y-m-d H:i:s', $array['time']) . ' +0000';
-            $temp = explode(' ', $explode[1], 5);
+            $temp = explode(' ', $explode[1], 7);
             dd($temp);
         }
         dd($explode);
