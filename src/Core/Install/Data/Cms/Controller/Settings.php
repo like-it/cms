@@ -154,4 +154,18 @@ class Settings extends View {
             return $exception;
         }
     }
+
+    public static function logs_and_errors_log_access(App $object){
+        $name = Settings::name(__FUNCTION__, __CLASS__, '/');
+        $name = explode('.', $name);
+        $name = implode('/', $name);
+        try {
+            $url = Settings::locate($object, $name);
+            return Settings::response($object, $url);
+        } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception){
+            return $exception;
+        }
+    }
+
+
 }
