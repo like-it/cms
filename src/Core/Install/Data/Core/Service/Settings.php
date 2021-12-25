@@ -146,6 +146,9 @@ class Settings extends Main {
         $command = 'tail -100 ' . $url;
         $output = [];
         Core::execute($command, $output);
+        foreach($output as $nr => $line){
+            $object = Settings::log_access_line_to_object($object, $line);
+        }
         d($command);
         dd($output);
 
@@ -159,6 +162,14 @@ class Settings extends Main {
         $response['node'] = $record;
         return new Response($response, Response::TYPE_JSON);
         */
+    }
+
+    private static function log_access_line_to_object(App $object, $line=''){
+        $explode = explode('"', $line, 2);
+        $array = [];
+        if(array_key_exists(1, $explode)){
+            dd($explode);
+        }
     }
 
     private static function email_put(App $object, Data $data, stdClass $record, $url): Response
