@@ -184,15 +184,13 @@
     "189aebee-3cba-4bc4-952d-988d4253e190" : {
         "module" : "settings",
         "submodule" : "logs-and-errors",
-        "command" : "access",
-        "subcommand" : "log",
+        "command" : "log",
+        "subcommand" : "access",
         "method": [
             "GET",
             "POST"
         ]
     },
-
-
     "2e61686d-449a-444b-95e6-9e5b1687e528" : {
         "module" : "system",
         "command" : "information",
