@@ -4,6 +4,6 @@ import user from "/Module/User.js";
 
 ready(() => {
     console.log('body.js')
-    const request = "{{request()}}";
+    const request = "{{object(request(), 'json')}}";
     console.log(request);
 });
