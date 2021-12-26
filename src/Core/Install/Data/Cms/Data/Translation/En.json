@@ -39,7 +39,7 @@
     "settings.body.import.title" : "Import",
     "settings.body.import.body" : "Import an entire project from a zip file.",
     "settings.body.logs_and_errors.title" : "Logs & errors",
-    "settings.body.logs_and_errors.body" : "Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.",
+    "settings.body.logs_and_errors.body" : "Apache2 access & error logs can be viewed here...",
     "settings.body.mode.title" : "Mode",
     "settings.body.mode.body" : "Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.",
     "settings.body.nodes.title" : "Nodes",
