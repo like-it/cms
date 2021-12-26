@@ -58,4 +58,12 @@ class Settings extends View {
             return $exception;
         }
     }
+
+    public static function log_error(App $object){
+        try {
+            return Log::error_read($object);
+        } catch (ObjectException $exception){
+            return $exception;
+        }
+    }
 }

@@ -222,6 +222,15 @@
             "OPTIONS"
         ]
     },
+    "f5ddb40b-0559-4106-9d0e-1cf5cad52604" : {
+        "module" : "settings",
+        "submodule" : "log",
+        "command" : "error",
+        "method" : [
+            "GET",
+            "OPTIONS"
+        ]
+    },
     "5642e4a6-313e-40eb-9837-6af246c79a62" : {
         "module" : "settings",
         "submodule" : "email",

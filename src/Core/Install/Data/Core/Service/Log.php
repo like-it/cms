@@ -37,6 +37,29 @@ class Log extends Main {
     /**
      * @throws ObjectException
      */
+    public static function error_read(App $object): Response
+    {
+        $url = $object->config('project.dir.root') .
+            'Log' .
+            $object->config('ds') .
+            'error' .
+            $object->config('extension.log');
+        $command = 'tail -100 ' . $url;
+        $output = [];
+        $response = [];
+        $response['nodeList'] = [];
+        Core::execute($command, $output);
+        dd($output);
+        foreach($output as $nr => $line){
+            $node = Log::error_line_to_object($object, $line);
+            $response['nodeList'][$nr] = $node;
+        }
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws ObjectException
+     */
     private static function access_line_to_object(App $object, $line=''): stdClass
     {
         $explode = explode('"', $line, 2);

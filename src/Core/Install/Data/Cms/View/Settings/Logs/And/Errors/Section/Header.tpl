@@ -22,7 +22,7 @@
             <a
                 class="nav-link"
                 data-url="{{server.url('core')}}Settings/Log/Error"
-                data-frontend-url=""
+                data-frontend-url="{{route.get(route.prefix() + '-settings-logs-and-errors-log-error')}}"
             >
                 {{__('settings.logs_and_errors.section.header.error_log')}}
             </a>
