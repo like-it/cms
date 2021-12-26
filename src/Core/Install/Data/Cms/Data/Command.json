@@ -191,6 +191,16 @@
             "POST"
         ]
     },
+    "9ce46950-abd7-46b1-9a6c-a635fcc45157" : {
+        "module" : "settings",
+        "submodule" : "logs-and-errors",
+        "command" : "log",
+        "subcommand" : "error",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "2e61686d-449a-444b-95e6-9e5b1687e528" : {
         "module" : "system",
         "command" : "information",
