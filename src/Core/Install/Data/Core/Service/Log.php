@@ -110,7 +110,11 @@ class Log extends Main {
             $array['pid'] = intval(ltrim($explode[2], 'pid '));
             $temp = explode('] ', $explode[3], 2);
             $array['client'] =ltrim($temp[0], 'client ');
-            $array['message'] = $temp[1];
+            $temp2 = explode(', referer: ', $temp[1]);
+            $array['message'] = $temp2[0];
+            if(array_key_exists(1, $temp[2])){
+                $array['referer'] = $temp2[1];
+            }
         }
         return Core::object($array, Core::OBJECT_OBJECT);
     }
