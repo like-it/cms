@@ -41,12 +41,33 @@ section[name="main-content"] .nav .fa-window-close:hover {
 
 @media (min-width: 768px) {
     section[name="main-navigation"].col-md-2 {
-        height: 100%;
+        height: calc(100% - 20px);
     }
 
     section[name="main-content"].col-md-10 {
-        height: 100%;
+        height: calc(100% - 20px);
     }
+}
+
+td.status span {
+    display: block;
+    height: 25px;
+    width: 100px;
+}
+
+td.status .green {
+    background-color: forestgreen;
+    color: rgba(255, 255, 255, 1);
+}
+
+td.status .red {
+    background-color: firebrick;
+    color: rgba(255, 255, 255, 1);
+}
+
+td.status .purple {
+    background-color: purple;
+    color: rgba(255, 255, 255, 1);
 }
 
 a {

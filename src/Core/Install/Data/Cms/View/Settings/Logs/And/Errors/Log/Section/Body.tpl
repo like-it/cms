@@ -14,8 +14,20 @@
         <tbody>
         {{for.each($request.nodeList as $nr => $node)}}
             <tr>
-                <td>
-                    {{$node.status}}
+                <td class="status">
+                    {{if($node.status >= 200 && $node.status < 300)}}
+                    <span class="green">
+                        {{$node.status}}
+                    </span>
+                    {{else.if($node.status >= 400 && $node.status < 500)}}
+                    <span class="red">
+                        {{$node.status}}
+                    </span>
+                    {{else.if($node.status >= 500 && $node.status < 600)}}
+                    <span class="purple">
+                        {{$node.status}}
+                    </span>
+                    {{/if}}
                 </td>
                 <td>
                     {{$node.ipAddress}}
