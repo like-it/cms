@@ -37,7 +37,7 @@
                     {{$node.method}}
                 </td>
                 <td title="{{$node.path}}">
-                    {{$node.path|truncate:50}}
+                    {{$node.path|truncate:65}}
                 </td>
                 <td data-sort="{{$node.time}}">
                     {{$node.date}}
