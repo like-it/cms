@@ -103,11 +103,10 @@ class Log extends Main {
                 }
             }
             $date = explode(' ', $temp[0]);
+            $datetime = $date[2] . ' ' . $date[1] . ' ' . $year . ' ' . $date[3];
+            d($datetime);
 
-            dd($date);
-
-
-            $time = strtotime($year . ' ' . $date);
+            $time = strtotime($datetime);
             d($time);
             d(date('Y-m-d H:i:s', $time));
             d($temp);
