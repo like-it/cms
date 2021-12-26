@@ -1,8 +1,8 @@
 {R3M}
 {{require($controller.dir.view + $controller.title + '/Init.tpl')}}
 {{script('module')}}
-{{require($controller.dir.view + $controller.title + '/Logs/And/Errors/Log/Error/Module/Body.js')}}
+{{require($controller.dir.view + $controller.title + '/Logs/And/Errors/Log/Module/Error.js')}}
 {{/script}}
 {{$request.method = 'replace-with'}}
 {{$request.target = 'section[name="main-content"] .card-body'}}
-{{require($controller.dir.view + $controller.title + '/Logs/And/Errors/Log/Error/Section/Body.tpl')}}
+{{require($controller.dir.view + $controller.title + '/Logs/And/Errors/Log/Section/Error.tpl')}}

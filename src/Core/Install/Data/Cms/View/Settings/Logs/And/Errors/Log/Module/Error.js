@@ -3,7 +3,7 @@ import { getSectionByName } from "/Module/Section.js";
 import user from "/Module/User.js";
 
 ready(() => {
-    console.log('body.js')
+    console.log('error.js')
     //const request = {{object(request(), 'json')}};
     //console.log(request);
 });
