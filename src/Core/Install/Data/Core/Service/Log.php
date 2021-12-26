@@ -104,33 +104,13 @@ class Log extends Main {
             }
             $date = explode(' ', $temp[0]);
             $datetime = $date[2] . ' ' . $date[1] . ' ' . $year . ' ' . $date[3];
-            d($datetime);
-
-            $time = strtotime($datetime);
-            d($time);
-            d(date('Y-m-d H:i:s', $time));
-            d($temp);
-            dd($explode);
-
-
-            $temp = ltrim($explode[1], '[');
-
-
-
-            $array['ipAddress'] = rtrim($temp[0], ' ');
-            $array['user'] = [];
-            $array['user']['id'] = trim($temp[1], ' ');
-            $time = rtrim(ltrim($temp[2], ' ['), ' ]');
-            $array['time'] = strtotime($time);
-            $array['date'] = date('Y-m-d H:i:s', $array['time']) . ' +0000';
-            $temp = explode(' ', $explode[1], 7);
-            $array['method'] = $temp[0];
-            $array['path'] = $temp[1];
-            $array['protocol'] = $temp[2];
-            $array['status'] = $temp[3] + 0;
-            $array['size'] = $temp[4] + 0;
-            $array['referer'] = trim($temp[5], '"');
-            $array['user']['agent'] = trim($temp[6], '"');
+            $array['time'] = strtotime($datetime);
+            $array['date'] = date('Y-m-d H:i:s', $array['time']) . '.' . $microseconds . ' +0000';
+            $array['level'] = $explode[1];
+            $array['pid'] = intval(ltrim($explode[2], 'pid '));
+            $temp = explode('] ', $explode[3], 2);
+            $array['client'] =ltrim($temp[0], 'client ');
+            $array['message'] = $temp[1];
         }
         return Core::object($array, Core::OBJECT_OBJECT);
     }
