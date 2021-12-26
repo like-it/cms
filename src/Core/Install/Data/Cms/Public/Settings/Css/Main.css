@@ -52,7 +52,7 @@ section[name="main-content"] .nav .fa-window-close:hover {
 td.status span {
     display: block;
     height: 25px;
-    width: 100px;
+    padding: 5px;
 }
 
 td.status .green {
