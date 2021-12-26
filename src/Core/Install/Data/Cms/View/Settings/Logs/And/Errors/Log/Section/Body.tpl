@@ -8,6 +8,7 @@
             <th>Ip address</th>
             <th>Method</th>
             <th>Path</th>
+            <th>Date</th>
             <th>Size</th>
         </tr>
         </thead>
@@ -35,8 +36,11 @@
                 <td>
                     {{$node.method}}
                 </td>
-                <td>
-                    {{$node.path}}
+                <td title="{{$node.path}}">
+                    {{$node.path|truncate:50}}
+                </td>
+                <td data-sort="{{$node.time}}">
+                    {{$node.date}}
                 </td>
                 <td>
                     {{$node.size|file.size}}
