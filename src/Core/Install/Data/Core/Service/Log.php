@@ -112,7 +112,7 @@ class Log extends Main {
             $array['client'] =ltrim($temp[0], 'client ');
             $temp2 = explode(', referer: ', $temp[1]);
             $array['message'] = $temp2[0];
-            if(array_key_exists(1, $temp[2])){
+            if(array_key_exists(1, $temp2)){
                 $array['referer'] = $temp2[1];
             }
         }
