@@ -90,8 +90,22 @@ class Log extends Main {
     {
         $explode = explode('] [', $line, 4);
         $array = [];
+        $microseconds = '';
+        $year = '';
         if(array_key_exists(1, $explode)){
             $temp = ltrim($explode[0], '[');
+            $temp = explode('.', $temp, 2);
+            if(array_key_exists(1, $temp)){
+                $temp2 = explode(' ', $temp[1], 2);
+                $microseconds = $temp2[0];
+                if(array_key_exists(1, $temp2)){
+                    $year = $temp2[1];
+                }
+            }
+            $date = $temp[0];
+            $time = strtotime($year . ' ' . $date);
+            d($time);
+            d(date('Y-m-d H:i:s', $time));
             d($temp);
             dd($explode);
 
