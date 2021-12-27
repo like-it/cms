@@ -69,6 +69,7 @@ class System extends View {
             $url = System::locate($object, $name);
             return System::response($object, $url);
         } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception) {
+            d($exception);
             return 'Command undefined.' . PHP_EOL;
         }
     }
