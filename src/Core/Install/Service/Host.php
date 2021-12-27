@@ -43,9 +43,6 @@ class Host {
      * @throws Exception
      */
     public static function command_add(App $object, $options=[]){
-        if($options['subdomain'] === 'cms'){
-            dd($options);
-        }
         if(!array_key_exists('host', $options)){
             return;
         }
