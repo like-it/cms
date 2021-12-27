@@ -58,7 +58,6 @@ class Host {
         if(array_key_exists('subdomain', $options)){
             $route = $object->data_read($options['route']);
             $command = $object->data_read($options['command']);
-            dd($command);
             if(
                 $route &&
                 $command
@@ -224,6 +223,7 @@ class Host {
                     unset($add->subcommand);
                     $route->data($key, $add);
                 }
+                dd($route->data());
                 $route->write($options['route']);
             }
         }
