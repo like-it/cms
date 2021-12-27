@@ -217,6 +217,7 @@ class Install {
     }
 
     public static function host(App $object, $options=[]){
+        d($options);
         if(!array_key_exists('host', $options)){
             return;
         }
@@ -224,6 +225,7 @@ class Install {
             return;
         }
         $options = Host::options($object, $options);
+        d($options);
         try {
             Host::clear($object, $options);
             Host::route_delete($object, $options);
