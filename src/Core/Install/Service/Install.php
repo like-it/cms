@@ -225,37 +225,13 @@ class Install {
         }
         $options = Host::options($object, $options);
         try {
-            if($options['subdomain'] === 'cms'){
-                d($options);
-            }
             Host::clear($object, $options);
-            if($options['subdomain'] === 'cms'){
-                d($options);
-            }
             Host::route_delete($object, $options);
-            if($options['subdomain'] === 'cms'){
-                d($options);
-            }
             Host::domain_add($object, $options);
-            if($options['subdomain'] === 'cms'){
-                d($options);
-            }
             Host::route_node_delete($object, $options);
-            if($options['subdomain'] === 'cms'){
-                d($options);
-            }
             Host::view_delete($object, $options);
-            if($options['subdomain'] === 'cms'){
-                d($options);
-            }
             Host::dir_create($object, $options);
-            if($options['subdomain'] === 'cms'){
-                d($options);
-            }
             Host::file_create($object, $options);
-            if($options['subdomain'] === 'cms'){
-                d($options);
-            }
             Host::command_add($object, $options);
             Host::config_server_url($object, $options);
             Host::route_dedouble($object, $options);

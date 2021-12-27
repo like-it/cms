@@ -441,25 +441,20 @@ class Host {
     }
 
     public static function dir_create(App $object, $options=[]){
-        d('test');
         if(!array_key_exists('name', $options)){
             return false;
         }
-        d('test2');
         if(!array_key_exists('host', $options)){
             return false;
         }
-        d('test3');
         if(!array_key_exists('extension', $options)){
             return false;
         }
-        d('test4');
         $dir = new Dir();
         $read = $dir->read(
             $object->config('controller.dir.data') . ucfirst($options['name']) . $object->config('ds'),
             true
         );
-        d('test5');
         foreach($read as $nr => $file){
             if($file->type === File::TYPE){
                 continue;
@@ -480,13 +475,11 @@ class Host {
                         ucfirst($options['extension']) . $object->config('ds') .
                         $explode[1];
                 }
-                d($target);
                 if(Dir::is($target) === false){
                     Dir::create($target);
                 }
             }
         }
-        d('test6');
         return true;
     }
 
