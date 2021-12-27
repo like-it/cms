@@ -305,12 +305,27 @@ class Update {
         if (!array_key_exists('extension', $options)) {
             return false;
         }
-        dd($object->config('project.dir'));
         if(array_key_exists('subdomain', $options)) {
-
+            $dir = $object->config('project.dir.host') .
+                ucfirst($options['subdomain']) .
+                $object->config('ds') .
+                ucfirst($options['host']) .
+                $object->config('ds') .
+                ucfirst($options['extension']) .
+                $object->config('ds');
         } else {
-
+            $dir = $object->config('project.dir.host') .
+                ucfirst($options['host']) .
+                $object->config('ds') .
+                ucfirst($options['extension']) .
+                $object->config('ds');
         }
+        return File::chown(
+            $dir,
+            'www-data',
+            'www-data',
+            true
+        );
     }
 
 }
