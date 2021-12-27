@@ -10,6 +10,6 @@
     {{require($controller.dir.view + $controller.title + '/Basic/Site/Module/Main.js')}}
 {{/script}}
 <div class="card-body h-100 card-body-main">
-    <h5 class="card-title">{{__('settings.section.email.main.body.title')}}</h5>
-    <p class="card-text">{{__('settings.section.email.main.body.text')}}</p>
+    <h5 class="card-title">{{__('settings.section.basic.site.main.body.title')}}</h5>
+    <p class="card-text">{{implode("<br>\n", __('settings.section.basic.site.main.body.text'))}}</p>
 </div>
