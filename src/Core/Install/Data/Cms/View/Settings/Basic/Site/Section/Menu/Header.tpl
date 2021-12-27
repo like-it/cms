@@ -7,22 +7,23 @@
         <li class="nav-item">
             <a
                 class="nav-link active settings-email-main"
-                data-frontend-url="{{route.get(route.prefix()+ '-settings-email-main-body')}}"
+                data-frontend-url="{{route.get(route.prefix()+ '-settings-basic-site-main-body')}}"
                 data-selected=".card-body-main"
             >
-                {{__('settings.section.email.header.main')}}
+                {{__('settings.section.basic.site.header.main')}}
             </a>
         </li>
         <li class="nav-item">
             <a
                 class="nav-link settings-email-settings"
-                data-url="{{server.url('core')}}Settings/Email/Settings/"
-                data-frontend-url="{{route.get(route.prefix()+ '-settings-email-settings-body')}}"
+                data-url="{{server.url('core')}}Settings/Domains/"
+                data-frontend-url="{{route.get(route.prefix()+ '-settings-basic-site-domains-body')}}"
                 data-selected=".card-body-settings"
             >
-                {{__('settings.section.email.header.settings')}}
+                {{__('settings.section.basic.site.header.domains')}}
             </a>
         </li>
+        /*
         <li class="nav-item">
             <a
                 class="nav-link settings-email-add"
@@ -32,5 +33,6 @@
                 {{__('settings.section.email.header.add')}}
             </a>
         </li>
+        */
     </ul>
 </div>

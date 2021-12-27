@@ -7,7 +7,7 @@
     {{$request.append.to = 'section[name="' + $section.name + '"] .card'}}
 {{/if}}
 {{script('module')}}
-    {{require($controller.dir.view + $controller.title + '/Email/Module/Main.js')}}
+    {{require($controller.dir.view + $controller.title + '/Basic/Site/Module/Main.js')}}
 {{/script}}
 <div class="card-body h-100 card-body-main">
     <h5 class="card-title">{{__('settings.section.email.main.body.title')}}</h5>
