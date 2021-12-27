@@ -217,7 +217,6 @@ class Install {
     }
 
     public static function host(App $object, $options=[]){
-        d($options);
         if(!array_key_exists('host', $options)){
             return;
         }
@@ -225,7 +224,6 @@ class Install {
             return;
         }
         $options = Host::options($object, $options);
-        d($options);
         try {
             Host::clear($object, $options);
             Host::route_delete($object, $options);
@@ -234,6 +232,9 @@ class Install {
             Host::view_delete($object, $options);
             Host::dir_create($object, $options);
             Host::file_create($object, $options);
+            if($options['subdomain'] === 'cms'){
+                d($options);
+            }
             Host::command_add($object, $options);
             Host::config_server_url($object, $options);
             Host::route_dedouble($object, $options);
