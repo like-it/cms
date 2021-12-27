@@ -45,7 +45,9 @@ class Settings extends View {
     public static function basic_site_main(App $object){
         d(file_exists("/Application/Host/Cms/Funda/World/View/Settings/Basic/Site/Main.tpl"));
         $output = [];
-        Core::execute('cat /Application/Host/Cms/Funda/World/View/Settings/Basic/Site/Main.tpl', $output);
+        $command = 'cat /Application/Host/Cms/Funda/World/View/Settings/Basic/Site/Main.tpl';
+        Core::execute($command, $output);
+        d($command);
         d($output);
         dd(File::exist("/Application/Host/Cms/Funda/World/View/Settings/Basic/Site/Main.tpl"));
         $name = Settings::name(__FUNCTION__, __CLASS__, '/');
