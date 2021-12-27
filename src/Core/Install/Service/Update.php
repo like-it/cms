@@ -3,7 +3,6 @@ namespace LikeIt\Cms\Core\Install\Service;
 
 use R3m\Io\App;
 
-use Exception;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
 use R3m\Io\Module\Dir;
@@ -11,6 +10,9 @@ use R3m\Io\Module\File;
 use R3m\Io\Module\Parse;
 use R3m\Io\Module\Response;
 use R3m\Io\Module\Validate;
+
+use Exception;
+use R3m\Io\Exception\FileWriteException;
 
 class Update {
 
@@ -48,7 +50,8 @@ class Update {
         }
     }
 
-    private static function getInstalledData(App $object){
+    private static function getInstalledData(App $object): array
+    {
         $command = 'composer show -P';
         $output = [];
         Core::execute($command, $output);
@@ -105,7 +108,8 @@ class Update {
         return false;
     }
 
-    public static function installed(App $object){
+    public static function installed(App $object): string
+    {
         $list = Update::getInstalledData($object);
         $url = $object->config('project.dir.data') . 'Installed' . $object->config('extension.json');
         $data = new Data($list);
@@ -135,6 +139,8 @@ class Update {
             Update::dir_create($object, $options);
             $result[] = 'Copying (' . $options['name'] . ') files...';
             Update::file_create($object, $options);
+            $result[] = 'Changing owner of (' . $options['name'] . ') files...';
+            Update::file_set_owner($object, $options);
             $result[] = 'Adding (' . $options['name'] . ') commands...';
             Host::command_add($object, $options);
             $result[] = 'Dedouble (' . $options['name'] . ') routes...';
@@ -189,7 +195,8 @@ class Update {
     }
 
     /**
-     * @throws \R3m\Io\Exception\FileWriteException
+     * @throws FileWriteException
+     * @throws Exception
      */
     public static function file_create(App $object, $options=[]): bool
     {
@@ -286,4 +293,24 @@ class Update {
         }
         return true;
     }
+
+    public static function file_set_owner(App $object, $options=[]): bool
+    {
+        if (!array_key_exists('name', $options)) {
+            return false;
+        }
+        if (!array_key_exists('host', $options)) {
+            return false;
+        }
+        if (!array_key_exists('extension', $options)) {
+            return false;
+        }
+        dd($object->config('project.dir'));
+        if(array_key_exists('subdomain', $options)) {
+
+        } else {
+
+        }
+    }
+
 }
