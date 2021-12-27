@@ -58,9 +58,6 @@ class Host {
         if(array_key_exists('subdomain', $options)){
             $route = $object->data_read($options['route']);
             $command = $object->data_read($options['command']);
-            if($options['subdomain'] === 'cms'){
-                dd($command);
-            }
             if(
                 $route &&
                 $command
