@@ -89,6 +89,15 @@
             "POST"
         ]
     },
+    "475e407a-2433-4b2c-a7af-a29f87eaf276" : {
+        "module" : "settings",
+        "submodule" : "basic-site",
+        "command" : "main",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "f29a27e5-ffd6-4773-88a3-7aef655f7c69" : {
         "module" : "settings",
         "command" : "export",

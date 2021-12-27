@@ -11,8 +11,7 @@
             </a>
             <a
                 class="nav-link"
-                data-url="{{server.url('core')}}Settings/Body/"
-                data-frontend-url="{{route.get(route.prefix() + '-settings-body')}}"
+                data-frontend-url="{{route.get(route.prefix() + '-settings-basic-site-main')}}"
             >
                 <i class="{{__('settings.icon.basic_site_settings.class')}}"></i> {{__('settings.link.basic_site_settings')}}
             </a>
