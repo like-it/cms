@@ -223,7 +223,7 @@ class Host {
                     unset($add->subcommand);
                     $route->data($key, $add);
                 }
-                dd($route->data());
+                d($route->data());
                 $route->write($options['route']);
             }
         }
