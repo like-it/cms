@@ -83,6 +83,7 @@
     "settings.section.import.header.import" : "Import",
     "settings.section.body.header.main" : "Main",
     "settings.section.body.body.title" : "Settings",
+    "settings.section.account.settings.header.main" : "Main",
     "settings.section.basic.site.header.main" : "Main",
     "settings.section.basic.site.header.domains" : "Domains",
     "settings.section.basic.site.main.body.title" : "Basic site settings",
@@ -91,6 +92,7 @@
         "These settings are the mail server settings.",
         "If you don't provide the e-mail configuration, the system isn't capable of sending e-mails."
     ],
+
     "settings.section.email.header.main" : "Main",
     "settings.section.email.header.settings" : "Settings",
     "settings.section.email.header.add" : "Add e-mail",
