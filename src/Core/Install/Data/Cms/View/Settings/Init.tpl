@@ -1,4 +1,4 @@
-{R3m}
+{R3M}
 {{import.translation()}}
 {{$meta.author = __('meta.author')}}
 {{$meta.title = __('meta.title')}}
