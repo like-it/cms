@@ -1,4 +1,4 @@
-{R3m}
+{R3M}
 {{$route = 'settings-nodes-main'}}
 {{$frontend.url = route.get(route.prefix() + '-' + $route)}}
 {{$class = __('settings.icon.nodes.class')}}

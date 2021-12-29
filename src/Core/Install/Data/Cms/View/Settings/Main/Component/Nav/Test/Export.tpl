@@ -1,4 +1,4 @@
-{R3m}
+{R3M}
 {{$route = 'settings-export'}}
 {{$frontend.url = route.get(route.prefix() + '-' + $route)}}
 {{$class = __('settings.icon.export.class')}}

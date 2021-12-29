@@ -1,4 +1,4 @@
-{R3m}
+{R3M}
 {{$route = 'settings-style-sheets-and-elements-main'}}
 {{$frontend.url = route.get(route.prefix() + '-' + $route)}}
 {{$class = __('settings.icon.style_sheets_and_elements.class')}}

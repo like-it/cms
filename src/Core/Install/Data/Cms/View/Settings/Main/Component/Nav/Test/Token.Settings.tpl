@@ -1,4 +1,4 @@
-{R3m}
+{R3M}
 {{$route = 'settings-token-settings-main'}}
 {{$frontend.url = route.get(route.prefix() + '-' + $route)}}
 {{$class = __('settings.icon.token_settings.class')}}
