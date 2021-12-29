@@ -1,4 +1,4 @@
-{R3M}
+{R3m}
 {{$section.name = 'main'}}
 {{$section.title = 'Main'}}
 {{$request.method = 'replace-with-or-append-to'}}
