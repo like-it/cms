@@ -4,4 +4,4 @@
 {{$frontend.url = route.get(route.prefix() + '-' + $route)}}
 {{$class = __('settings.icon.main.class')}}
 {{$link = __('settings.link.main')}}
-{{require($controller.dir.view + $controller.dir.title + '/Main/Element/A.tpl')}}
+{{require($controller.dir.view + $controller.title + '/Main/Element/A.tpl')}}
