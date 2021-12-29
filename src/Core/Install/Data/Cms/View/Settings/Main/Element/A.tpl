@@ -1,5 +1,5 @@
 {R3M}
-{{if(!.is.empty($url))}}
+{{if(!is.empty($url))}}
 <a
     class="nav-link"
     data-url="{{$url}}"
