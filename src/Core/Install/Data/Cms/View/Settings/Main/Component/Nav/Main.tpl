@@ -1,5 +1,5 @@
 {R3M}
-{$url = server.url('core')}} + 'Settings/Body/'}}
+{$url = server.url('core') + 'Settings/Body/'}}
 {{$route = 'settings-body'}}
 {{$frontend.url = route.get(route.prefix() + '-' + $route)}}
 {{$class = __('settings.icon.main.class')}}
