@@ -1,7 +1,7 @@
 {R3M}
 {{if(!is.empty($url))}}
 <a
-    class="nav-link"
+    class="nav-link {{$is.active}}"
     data-url="{{$url}}"
     data-frontend-url="{{$frontend.url}}"
 >

@@ -4,4 +4,5 @@
 {{$frontend.url = route.get(route.prefix() + '-' + $route)}}
 {{$class = __('settings.icon.account_settings.class')}}
 {{$link = __('settings.link.account_settings')}}
+{{$is.active = true}}
 {{require($controller.dir.view + $controller.title + '/Main/Element/A.tpl')}}
