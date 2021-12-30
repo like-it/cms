@@ -3,4 +3,5 @@
 {{script('module')}}
 {{require($controller.dir.view + $controller.title + '/Module/Body.js')}}
 {{/script}}
+body...
 {{require($controller.dir.view + $controller.title + '/Section/Body/Main/Content.tpl')}}

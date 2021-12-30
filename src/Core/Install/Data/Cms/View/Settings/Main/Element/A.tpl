@@ -9,7 +9,7 @@
 </a>
 {{else}}
 <a
-    class="nav-link"
+    class="nav-link {{$is.active}}"
     data-frontend-url="{{$frontend.url}}"
 >
     <i class="{{$class}}"></i> {{$link}}
