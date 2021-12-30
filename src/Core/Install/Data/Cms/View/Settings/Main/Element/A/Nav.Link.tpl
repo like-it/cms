@@ -1,17 +1,17 @@
 {R3M}
-{{if(!is.empty($url))}}
+{{if(!is.empty($a.url))}}
 <a
-    class="nav-link {{$is.active}}"
-    data-url="{{$url}}"
-    data-frontend-url="{{$frontend.url}}"
+    class="nav-link {{$a.is.active}}"
+    data-url="{{$a.url}}"
+    data-frontend-url="{{$a.frontend.url}}"
 >
-    <i class="{{$class}}"></i> {{$link}}
+    <i class="{{$a.class}}"></i> {{$a.link}}
 </a>
 {{else}}
 <a
-    class="nav-link {{$is.active}}"
-    data-frontend-url="{{$frontend.url}}"
+    class="nav-link {{$a.is.active}}"
+    data-frontend-url="{{$a.frontend.url}}"
 >
-    <i class="{{$class}}"></i> {{$link}}
+    <i class="{{$a.class}}"></i> {{$a.link}}
 </a>
 {{/if}}
