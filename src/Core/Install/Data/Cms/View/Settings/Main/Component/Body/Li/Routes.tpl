@@ -1,5 +1,5 @@
 {R3M}
-{{$li.name = 'email'}}
+{{$li.name = 'routes'}}
 {{$li.translation = $li.name|replace:'-':'.'}}
 {{$li.id = 'accordion-flush-' + $li.name}}
 {{$li.flush.heading.1 = 'flush-heading-one-' + $li.name}}

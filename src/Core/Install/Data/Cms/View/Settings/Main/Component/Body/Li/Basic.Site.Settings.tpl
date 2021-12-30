@@ -1,7 +1,9 @@
 {R3M}
-{{$li.id = 'accordion-flush-basic-site-settings'}}
-{{$li.flush.heading.1 = 'flush-heading-one-basic-site-settings'}}
-{{$li.flush.collapse.1 = 'flush-collapse-one-basic-site-settings'}}
-{{$li.title = __('settings.main.component.body.li.basic.site.settings.title')}}
-{{$li.description = __('settings.main.component.body.li.basic.site.settings.body')}}
+{{$li.name = 'basic-site-settings'}}
+{{$li.translation = $li.name|replace:'-':'.'}}
+{{$li.id = 'accordion-flush-' + $li.name}}
+{{$li.flush.heading.1 = 'flush-heading-one-' + $li.name}}
+{{$li.flush.collapse.1 = 'flush-collapse-one-' + $li.name}}
+{{$li.title = __('settings.main.component.body.li.' + $li.translation +'.title')}}
+{{$li.description = __('settings.main.component.body.li.' + $li.translation + '.body')}}
 {{require($controller.dir.view + $controller.title + '/Main/Element/Li/Accordion.Flush.tpl')}}

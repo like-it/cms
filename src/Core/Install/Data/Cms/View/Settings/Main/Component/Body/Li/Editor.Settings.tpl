@@ -1,34 +1,9 @@
-<li>
-    <div
-        class="accordion accordion-flush"
-        id="accordion-flush-editor-settings"
-    >
-        <div class="accordion-item">
-            <h2
-                class="accordion-header"
-                id="flush-heading-one-editor-settings"
-            >
-                <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapse-one-editor-settings"
-                    aria-expanded="false"
-                    aria-controls="flush-collapse-one-editor-settings"
-                >
-                    {{__('settings.body.editor_settings.title')}}
-                </button>
-            </h2>
-            <div
-                id="flush-collapse-one-editor-settings"
-                class="accordion-collapse collapse"
-                aria-labelledby="flush-heading-one-editor-setings"
-                data-bs-parent="#accordion-flush-editor-settings"
-            >
-                <div class="accordion-body">
-                    {{__('settings.body.editor_settings.body')}}
-                </div>
-            </div>
-        </div>
-    </div>
-</li>
+{R3M}
+{{$li.name = 'editor-settings'}}
+{{$li.translation = $li.name|replace:'-':'.'}}
+{{$li.id = 'accordion-flush-' + $li.name}}
+{{$li.flush.heading.1 = 'flush-heading-one-' + $li.name}}
+{{$li.flush.collapse.1 = 'flush-collapse-one-' + $li.name}}
+{{$li.title = __('settings.main.component.body.li.' + $li.translation +'.title')}}
+{{$li.description = __('settings.main.component.body.li.' + $li.translation + '.body')}}
+{{require($controller.dir.view + $controller.title + '/Main/Element/Li/Accordion.Flush.tpl')}}

@@ -1,35 +1,9 @@
 {R3M}
-<li>
-    <div
-        class="accordion accordion-flush"
-        id="accordion-flush-import"
-    >
-        <div class="accordion-item">
-            <h2
-                class="accordion-header"
-                id="flush-heading-one-import"
-            >
-                <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapse-one-import"
-                    aria-expanded="false"
-                    aria-controls="flush-collapse-one-import"
-                >
-                    {{__('settings.body.import.title')}}
-                </button>
-            </h2>
-            <div
-                id="flush-collapse-one-import"
-                class="accordion-collapse collapse"
-                aria-labelledby="flush-heading-one-import"
-                data-bs-parent="#accordion-flush-import"
-            >
-                <div class="accordion-body">
-                    {{__('settings.body.import.body')}}
-                </div>
-            </div>
-        </div>
-    </div>
-</li>
+{{$li.name = 'import'}}
+{{$li.translation = $li.name|replace:'-':'.'}}
+{{$li.id = 'accordion-flush-' + $li.name}}
+{{$li.flush.heading.1 = 'flush-heading-one-' + $li.name}}
+{{$li.flush.collapse.1 = 'flush-collapse-one-' + $li.name}}
+{{$li.title = __('settings.main.component.body.li.' + $li.translation +'.title')}}
+{{$li.description = __('settings.main.component.body.li.' + $li.translation + '.body')}}
+{{require($controller.dir.view + $controller.title + '/Main/Element/Li/Accordion.Flush.tpl')}}

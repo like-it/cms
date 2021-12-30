@@ -1,35 +1,9 @@
 {R3M}
-<li>
-    <div
-        class="accordion accordion-flush"
-        id="accordion-flush-loggers"
-    >
-        <div class="accordion-item">
-            <h2
-                class="accordion-loggers"
-                id="flush-heading-one-loggers"
-            >
-                <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapse-one-loggers"
-                    aria-expanded="false"
-                    aria-controls="flush-collapse-one-loggers"
-                >
-                    {{__('settings.body.logs_and_errors.title')}}
-                </button>
-            </h2>
-            <div
-                id="flush-collapse-one-loggers"
-                class="accordion-collapse collapse"
-                aria-labelledby="flush-heading-one-loggers"
-                data-bs-parent="#accordion-flush-loggers"
-            >
-                <div class="accordion-body">
-                    {{__('settings.body.logs_and_errors.body')}}
-                </div>
-            </div>
-        </div>
-    </div>
-</li>
+{{$li.name = 'logs-and-errors'}}
+{{$li.translation = $li.name|replace:'-':'.'}}
+{{$li.id = 'accordion-flush-' + $li.name}}
+{{$li.flush.heading.1 = 'flush-heading-one-' + $li.name}}
+{{$li.flush.collapse.1 = 'flush-collapse-one-' + $li.name}}
+{{$li.title = __('settings.main.component.body.li.' + $li.translation +'.title')}}
+{{$li.description = __('settings.main.component.body.li.' + $li.translation + '.body')}}
+{{require($controller.dir.view + $controller.title + '/Main/Element/Li/Accordion.Flush.tpl')}}
