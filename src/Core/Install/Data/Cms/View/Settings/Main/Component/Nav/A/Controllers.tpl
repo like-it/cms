@@ -4,4 +4,4 @@
 {{$class = __('settings.icon.controllers.class')}}
 {{$link = __('settings.link.controllers')}}
 {{$is.active = ''}}
-{{require($controller.dir.view + $controller.title + '/Main/Element/A.tpl')}}
+{{require($controller.dir.view + $controller.title + '/Main/Element/A/Nav.Link.tpl')}}

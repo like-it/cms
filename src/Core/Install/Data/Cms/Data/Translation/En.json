@@ -24,32 +24,90 @@
     "home.link.users" : "Users",
     "home.link.system" : "System",
     "home.link.logout" : "Log out",
-    "settings.body.account_settings.title" : "Account settings",
-    "settings.body.account_settings.body" : "Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.",
-    "settings.body.basic_site_settings.title" : "Basic site settings",
-    "settings.body.basic_site_settings.body" : "Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.",
-    "settings.body.editor_settings.title" : "Editor settings",
-    "settings.body.editor_settings.body" : "Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.",
-    "settings.body.email.title" : "E-mail",
-    "settings.body.email.body" : "Configure e-mail settings, e-mail templates, mailing-lists & send e-mail messages.",
-    "settings.body.export.title" : "Export",
-    "settings.body.export.body" : "Export an entire project as a zip file.",
-    "settings.body.file_system.title" : "File system",
-    "settings.body.file_system.body" : "Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.",
-    "settings.body.import.title" : "Import",
-    "settings.body.import.body" : "Import an entire project from a zip file.",
-    "settings.body.logs_and_errors.title" : "Logs & errors",
-    "settings.body.logs_and_errors.body" : "Apache2 access & error logs can be viewed here...",
-    "settings.body.mode.title" : "Mode",
-    "settings.body.mode.body" : "Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.",
-    "settings.body.nodes.title" : "Nodes",
-    "settings.body.nodes.body" : "Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.",
-    "settings.body.style_sheets_and_elements.title" : "Style sheets & elements",
-    "settings.body.style_sheets_and_elements.body" : "Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.",
-    "settings.body.templates.title" : "Templates",
-    "settings.body.templates.body" : "Configure templates.",
-    "settings.body.token_settings.title" : "Token settings",
-    "settings.body.token_settings.body" : "Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.",
+    "settings.main.component.body.li.account.settings.title" : "Account settings",
+    "settings.main.component.body.li.account.settings.body" : [
+        "Account settings."
+    ],
+    "settings.main.component.body.li.basic.site.settings.title" : "Basic site settings",
+    "settings.main.component.body.li.basic.site.settings.body" : [
+        "Basic site settings."
+    ],
+    "settings.main.component.body.li.components.title" : "Components",
+    "settings.main.component.body.li.components.body" : [
+        "Manage document components."
+    ],
+    "settings.main.component.body.li.controllers.title" : "Controllers",
+    "settings.main.component.body.li.controllers.body" : [
+        "Add controllers to your domain."
+    ],
+    "settings.main.component.body.li.domains.title" : "Domains",
+    "settings.main.component.body.li.domains.body" : [
+        "Manage your domains & subdomains."
+    ],
+    "settings.main.component.body.li.editor.settings.title" : "Editor settings",
+    "settings.main.component.body.li.editor.settings.body" : [
+        "Configure how the editor behaves."
+    ],
+    "settings.main.component.body.li.elements.title" : "Elements",
+    "settings.main.component.body.li.elements.body" : [
+        "Manage document elements and style them."
+    ],
+    "settings.main.component.body.li.email.title" : "Email",
+    "settings.main.component.body.li.email.body" : [
+        "Configure e-mail settings, e-mail templates, mailing-lists & send e-mail messages."
+    ],
+    "settings.main.component.body.li.export.title" : "Export",
+    "settings.main.component.body.li.export.body" : [
+        "Export an entire project as a zip file."
+    ],
+    "settings.main.component.body.li.file.system.title" : "File system",
+    "settings.main.component.body.li.file.system.body" : [
+        "File system."
+    ],
+    "settings.main.component.body.li.import.title" : "Import",
+    "settings.main.component.body.li.import.body" : [
+        "Import an entire project from a zip file."
+    ],
+    "settings.main.component.body.li.logs.and.errors.title" : "Logs & Errors",
+    "settings.main.component.body.li.logs.and.errors.body" : [
+        "Apache2 access & error logs can be viewed here..."
+    ],
+    "settings.main.component.body.li.main.title" : "Main",
+    "settings.main.component.body.li.main.body" : [
+        "This list."
+    ],
+    "settings.main.component.body.li.mode.title" : "Mode",
+    "settings.main.component.body.li.mode.body" : [
+        "Switch environments: development, staging or production."
+    ],
+    "settings.main.component.body.li.modules.title" : "Modules",
+    "settings.main.component.body.li.modules.body" : [
+        "Document Javascript modules."
+    ],
+    "settings.main.component.body.li.nodes.title" : "Nodes",
+    "settings.main.component.body.li.nodes.body" : [
+        "Data nodes can be configured and managed here."
+    ],
+    "settings.main.component.body.li.routes.title" : "Routes",
+    "settings.main.component.body.li.routes.body" : [
+        "Manage routes, module & submodule, commands & subcommands, paths, methods."
+    ],
+    "settings.main.component.body.li.scripts.title" : "Scripts",
+    "settings.main.component.body.li.scripts.body" : [
+        "Handle document Javascript sources here."
+    ],
+    "settings.main.component.body.li.stylesheets.title" : "Stylesheets",
+    "settings.main.component.body.li.stylesheets.body" : [
+        "Handle document stylesheets and make beautiful pages."
+    ],
+    "settings.main.component.body.li.templates.title" : "Templates",
+    "settings.main.component.body.li.templates.body" : [
+        "Handle document templates."
+    ],
+    "settings.main.component.body.li.token.settings.title" : "Token settings",
+    "settings.main.component.body.li.token.settings.body" : [
+        "Logged in users have a token, here you can configure the settings."
+    ],
     "settings.icon.account_settings.class" : "fas fa-cog",
     "settings.icon.basic_site_settings.class" : "fas fa-cog",
     "settings.icon.components.class" : "fas fa-cog",

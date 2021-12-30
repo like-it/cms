@@ -5,4 +5,4 @@
 {{$class = __('settings.icon.editor_settings.class')}}
 {{$link = __('settings.link.editor_settings')}}
 {{$is.active = ''}}
-{{require($controller.dir.view + $controller.title + '/Main/Element/A.tpl')}}
+{{require($controller.dir.view + $controller.title + '/Main/Element/A/Nav.Link.tpl')}}
