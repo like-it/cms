@@ -89,6 +89,14 @@
             "POST"
         ]
     },
+    "7f0b1351-d1e3-4538-bcb1-90168b5b9f65" : {
+        "module" : "settings",
+        "command" : "domains",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "475e407a-2433-4b2c-a7af-a29f87eaf276" : {
         "module" : "settings",
         "submodule" : "basic-site",
