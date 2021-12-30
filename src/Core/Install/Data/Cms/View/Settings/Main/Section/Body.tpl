@@ -1,6 +1,6 @@
 {R3M}
 <div class="card-body h-100">
-    <h5 class="card-title">{{__('settings.section.body.body.title')}}</h5>
+    <h5 class="card-title">{{__('settings.section.body.title')}}</h5>
     <ul>
         {{$read = dir.read($controller.dir.view + $controller.title + '/Main/Component/Body/Li/')}}
         {{$read = sort($read, ["url" => "asc"])}}
