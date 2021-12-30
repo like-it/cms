@@ -1,6 +1,6 @@
 {R3M}
 {{$a.name = 'account-settings'}}
-{{$a.translation = $name|replace:'-':'.'}}
+{{$a.translation = $a.name|replace:'-':'.'}}
 {{$a.url = server.url('core') + 'Settings/Body/'}}
 {{$a.route = 'settings-body'}}
 {{$a.frontend.url = route.get(route.prefix() + '-' + $a.route)}}

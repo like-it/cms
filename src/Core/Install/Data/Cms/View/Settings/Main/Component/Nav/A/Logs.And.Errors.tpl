@@ -1,6 +1,6 @@
 {R3M}
 {{$a.name = 'logs-and-errors'}}
-{{$a.translation = $name|replace:'-':'.'}}
+{{$a.translation = $a.name|replace:'-':'.'}}
 {{$a.url = ''}}
 {{$a.route = 'settings-' + $a.name}}
 {{$a.frontend.url = route.get(route.prefix() + '-' + $a.route)}}
