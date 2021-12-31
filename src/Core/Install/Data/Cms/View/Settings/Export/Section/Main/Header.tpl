@@ -12,7 +12,6 @@
         <li class="nav-item">
             <a
                 class="nav-link"
-                data-url="{{server.url('core')}}Settings/Export/Settings/"
                 data-frontend-url="{{route.get(route.prefix()+ '-settings-export-settings')}}"
             >
                 {{__('settings.section.export.header.settings')}}
