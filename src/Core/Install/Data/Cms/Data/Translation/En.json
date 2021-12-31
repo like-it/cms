@@ -24,6 +24,7 @@
     "home.link.users" : "Users",
     "home.link.system" : "System",
     "home.link.logout" : "Log out",
+    "settings.import.component.header.a.main.link" : "Import",
     "settings.main.component.body.li.account.settings.title" : "Account settings",
     "settings.main.component.body.li.account.settings.body" : [
         "Account settings."

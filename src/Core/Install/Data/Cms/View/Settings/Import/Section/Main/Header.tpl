@@ -1,13 +1,6 @@
 {R3M}
 <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
-        <li class="nav-item">
-            <a
-                class="nav-link active"
-                aria-current="true"
-                href="#">
-                {{__('settings.section.import.header.import')}}
-            </a>
-        </li>
+        {{require($controller.dir.view + $controller.title + '/Import/Component/Header/Li/Main.tpl')}}
     </ul>
 </div>
