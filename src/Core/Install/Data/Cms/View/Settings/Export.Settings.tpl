@@ -5,4 +5,4 @@
 {{require($controller.dir.view + $controller.title + '/Module/Export.js')}}
 {{/script}}
 */
-{{require($controller.dir.view + $controller.title + '/Section/Export/Settings/Content.tpl')}}
+{{require($controller.dir.view + $controller.title + '/Export/Section/Settings/Content.tpl')}}
