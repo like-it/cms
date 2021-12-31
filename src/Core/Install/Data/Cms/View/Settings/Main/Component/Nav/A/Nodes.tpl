@@ -2,7 +2,7 @@
 {{$a.name = 'nodes'}}
 {{$a.translation = $a.name|replace:'-':'.'}}
 {{$a.url = ''}}
-{{$a.route = 'settings-' + $a.name}}
+{{$a.route = 'settings-' + $a.name + '-main'}}
 {{$a.frontend.url = route.get(route.prefix() + '-' + $a.route)}}
 {{$a.class = __('settings.main.component.nav.a.' + $a.translation +'.class')}}
 {{$a.link = __('settings.main.component.nav.a.' + $a.translation + '.link')}}

@@ -1,8 +1,8 @@
 {R3M}
 {{$a.name = 'account-settings'}}
 {{$a.translation = $a.name|replace:'-':'.'}}
-{{$a.url = server.url('core') + 'Settings/Body/'}}
-{{$a.route = 'settings-body'}}
+{{$a.url = ''}}
+{{$a.route = 'settings-' + $a.name + '-main'}}
 {{$a.frontend.url = route.get(route.prefix() + '-' + $a.route)}}
 {{$a.class = __('settings.main.component.nav.a.' + $a.translation +'.class')}}
 {{$a.link = __('settings.main.component.nav.a.' + $a.translation + '.link')}}
