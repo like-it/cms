@@ -8,7 +8,7 @@
 {{$a.data.frontend.url = route.get(route.prefix() + '-' + $a.route)}}
 {{$a.link = __('settings.import.component.header.a.' + $a.translation +'.link')}}
 <li class="nav-item">
-{{if(!is.empty($a.url))
+{{if(!is.empty($a.url))}}
     <a
         class="{{$a.class}}"
         {{$a.attribute}}
