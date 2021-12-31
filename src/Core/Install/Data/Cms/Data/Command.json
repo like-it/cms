@@ -126,7 +126,8 @@
     },
     "51d8d131-ac78-47dc-9141-404600b4e69c" : {
         "module" : "settings",
-        "command" : "import",
+        "submodule" : "import",
+        "command" : "main",
         "method": [
             "GET",
             "POST"
