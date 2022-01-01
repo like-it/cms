@@ -2,6 +2,7 @@
 {{if($init === true)}}
 {{require($prefix + 'Init.tpl')}}
 {{/if}}
+{{dd('$this')}}
 {{if(
 !is.empty($submodule) &&
 !is.empty($command)
