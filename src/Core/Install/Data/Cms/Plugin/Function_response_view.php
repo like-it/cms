@@ -13,6 +13,8 @@ function function_response_view(Parse $parse, Data $data, $options=[]){
     $url = $options['prefix'] .
         str_replace('-', $object->config('ds'), Core::ucfirst_sentence($options['submodule'], '-')) .
         $object->config('ds') .
+        'Plugin' .
+        $object->config('ds') .
         'Function' .
         $object->config('ds') .
         'View.tpl'
@@ -21,17 +23,5 @@ function function_response_view(Parse $parse, Data $data, $options=[]){
     $data_data->data(Core::object($options, Core::OBJECT_OBJECT));
     $require = function_require($parse, $data_data, $url);
 
-    d($require);
-
-
-
-
-
-    d($options);
-    dd($url);
-
-
-
-
-
+    return $require;
 }
