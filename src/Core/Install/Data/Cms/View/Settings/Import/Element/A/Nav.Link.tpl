@@ -1,0 +1,19 @@
+{R3M}
+{{if(!is.empty($a.url))}}
+    <a
+        class="{{$a.class}}"
+        {{$a.attribute}}
+        data-url="{{$a.data.url}}"
+        data-frontend-url="{{$a.data.frontend.url}}"
+    >
+        {{$a.link}}
+    </a>
+{{else}}
+    <a
+        class="{{$a.class}}"
+        {{$a.attribute}}
+        data-frontend-url="{{$a.data.frontend.url}}"
+    >
+        {{$a.link}}
+    </a>
+{{/if}}
