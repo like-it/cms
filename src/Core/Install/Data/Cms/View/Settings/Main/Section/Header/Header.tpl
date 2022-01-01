@@ -1,2 +1,2 @@
 {R3M}
-{{require($controller.dir.view + $controller.title + '/Import/Element/Div/Card.Header.tpl')}}
+{{require($controller.dir.view + $controller.title + '/Main/Element/Div/Card.Header.tpl')}}
