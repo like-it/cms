@@ -1,7 +1,7 @@
 {R3M}
 {{response.view([
 'init' => true,
-'script.module' => true,
+'script' => 'module',
 'module' => $controller.name,
 'submodule' => 'export',
 'command' => 'main',

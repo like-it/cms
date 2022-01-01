@@ -10,7 +10,7 @@
 {{$require.submodule = $submodule|uppercase.first.sentence:'-'|replace:'-':'/'}}
 {{$require.command = $command|uppercase.first.sentence:'-'|replace:'-':'/'}}
 {{dd('$this')}}
-{{if($script.module === true)}}
+{{if($script === 'module')}}
 {{script('module')}}
 {{require($prefix + $require.submodule + '/Module/' + $require.command + '.js')}}
 {{/script}}
