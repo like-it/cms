@@ -34,7 +34,7 @@ class Settings extends View {
         }
     }
 
-    public static function body_main(App $object){
+    public static function main_body(App $object){
         $name = Settings::name(__FUNCTION__, __CLASS__, '/');
         $name = explode('.', $name);
         $name = implode('/', $name);
