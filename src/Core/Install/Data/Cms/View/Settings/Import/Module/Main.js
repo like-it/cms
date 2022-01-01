@@ -8,11 +8,26 @@ import upload from "/Settings/Import/Module/Upload.js";
 let main = {};
 
 main.init = () => {
+    main.header();
+    main.select(0);
     main.upload();
-    main.navigation();
+
 }
 
-main.navigation = () => {
+main.select = (index) => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const list = section.select('.nav-link');
+    if(!is.empty(list[index])){
+        let node = list[index];
+        list.removeClass('active');
+        node.addClass('active');
+    }
+}
+
+main.header = () => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
