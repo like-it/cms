@@ -1,3 +1,8 @@
 {R3M}
-{{require($controller.dir.view + $controller.title + '/Init.tpl')}}
-{{require($controller.dir.view + $controller.title + '/Email/Section/Main/Content.tpl')}}
+{{response.view([
+'module' => $controller.name,
+'submodule' => 'email',
+'command' => 'main',
+'init' => true,
+'prefix' => $controller.dir.view + $controller.title + '/',
+])}}
