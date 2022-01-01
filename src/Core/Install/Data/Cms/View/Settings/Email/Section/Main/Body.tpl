@@ -1,7 +1,7 @@
 {R3M}
 {{if($is.main.body)}}
     {{$section.name = 'main-content'}}
-    {{$section.title = 'Main-content'}}
+    {{$section.title = 'Main-Content'}}
     {{$request.method = 'replace-with-or-append-to'}}
     {{$request.target = 'section[name="' + $section.name + '"] .card-body-main'}}
     {{$request.append.to = 'section[name="' + $section.name + '"] .card'}}
