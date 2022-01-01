@@ -35,7 +35,7 @@
                     <li class="nav-item">
                         <a
                             class="nav-link"
-                            data-url="{{route.get(route.prefix() + '-settings-main')}}"
+                            data-url="{{route.get(route.prefix() + '-settings-main-main')}}"
                         >{{__('navbar.settings')}}</a>
                     </li>
                     <li class="nav-item">
