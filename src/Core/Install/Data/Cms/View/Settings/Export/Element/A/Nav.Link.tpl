@@ -1,5 +1,5 @@
 {R3M}
-{{if(!is.empty($a.url))}}
+{{if(!is.empty($a.data.url))}}
     <a
         class="{{$a.class}}"
         data-url="{{$a.data.url}}"
