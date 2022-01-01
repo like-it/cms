@@ -1,5 +1,5 @@
 {R3M}
-{{$a.name = 'body'}}
+{{$a.name = 'main'}}
 {{$a.translation = $a.name|replace:'-':'.'}}
 {{$a.url = server.url('core') + 'Settings/Body/'}}
 {{$a.route = 'settings-' + $a.name + '-main'}}
