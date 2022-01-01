@@ -13,6 +13,8 @@ function function_response_view(Parse $parse, Data $data, $options=[]){
     $url = $options['prefix'] .
         str_replace('-', $object->config('ds'), Core::ucfirst_sentence($options['submodule'], '-')) .
         $object->config('ds') .
+        'Function' .
+        $object->config('ds') .
         'View.tpl'
     ;
     $data_data = clone($data);

@@ -1,3 +1,4 @@
+{R3M}
 {{if($init === true)}}
 {{require($prefix + 'Init.tpl')}}
 {{/if}}
