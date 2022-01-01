@@ -4,7 +4,7 @@
     {{$version = '0.0.1'}}
 {{/if}}
 {{script('module')}}
-{{require($controller.dir.view + $controller.title + '/Export/Module/Export.Settings.js')}}
+{{require($controller.dir.view + $controller.title + '/Export/Module/Settings.js')}}
 {{/script}}
 <form name="config-version" data-url="{{server.url('core')}}Config/Version/" method="post">
 <div class="card-body h-100">

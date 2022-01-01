@@ -2,7 +2,7 @@
 {{response.view([
 'module' => $controller.name,
 'submodule' => 'export',
-'command' => 'main',
+'command' => 'settings',
 'init' => true,
 'script' => 'module',
 'prefix' => $controller.dir.view + $controller.title + '/',
