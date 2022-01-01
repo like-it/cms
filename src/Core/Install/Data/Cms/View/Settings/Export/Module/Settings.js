@@ -1,21 +1,32 @@
 {R3M}
 import user from "/Module/User.js";
 import { getSectionByName } from "/Module/Section.js";
-ready(() => {
+
+let settings = {};
+
+settings.init = () => {
+    settings.header();
+    settings.select(1);
+    settings.form();
+};
+
+settings.select = (index) => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
     }
-    const form = section.select('form');
-    form.on('submit', (event) => {
-        event.preventDefault();
-        header('Authorization', 'Bearer ' + user.token());
-        form.request(form.data('url'), null, (url, response) => {
-            if(form.data('has', 'frontend-url')){
-                request(form.data('frontend-url'), response);
-            }
-        });
-    });
+    const list = section.select('.nav-link');
+    if(!is.empty(list[index])){
+        let node = list[index];
+        node.click();
+    }
+}
+
+settings.header = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
     const list = section.select('.nav-link');
     let index;
     for(index=0; index < list.length; index++){
@@ -36,4 +47,26 @@ ready(() => {
             }
         });
     }
+};
+
+settings.form = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const form = section.select('form');
+    form.on('submit', (event) => {
+        event.preventDefault();
+        header('Authorization', 'Bearer ' + user.token());
+        form.request(form.data('url'), null, (url, response) => {
+            if(form.data('has', 'frontend-url')){
+                request(form.data('frontend-url'), response);
+            }
+        });
+    });
+};
+
+
+ready(() => {
+    settings.init();
 });

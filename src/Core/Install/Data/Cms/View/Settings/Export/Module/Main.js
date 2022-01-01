@@ -2,7 +2,28 @@
 import user from "/Module/User.js";
 import { getSectionByName } from "/Module/Section.js";
 import download from "/Module/Export/Download.js";
-ready(() => {
+
+let main = {};
+
+main.init = () => {
+    main.header();
+    main.select(0);
+    main.link();
+};
+
+main.select = (index) => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const list = section.select('.nav-link');
+    if(!is.empty(list[index])){
+        let node = list[index];
+        node.click();
+    }
+}
+
+main.header = () => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
@@ -27,6 +48,13 @@ ready(() => {
             }
         });
     }
+};
+
+main.link = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
     const link = section.select('#export');
     if(link){
         link.on('click', (event) => {
@@ -41,4 +69,8 @@ ready(() => {
             }
         });
     }
+};
+
+ready(() => {
+    main.init();
 });
