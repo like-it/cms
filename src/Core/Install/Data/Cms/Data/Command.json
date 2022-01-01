@@ -109,7 +109,8 @@
     },
     "f29a27e5-ffd6-4773-88a3-7aef655f7c69" : {
         "module" : "settings",
-        "command" : "export",
+        "submodule" : "export",
+        "command" : "main",
         "method": [
             "GET",
             "POST"
