@@ -16,10 +16,17 @@ settings.select = (index) => {
         return;
     }
     const list = section.select('.nav-link');
-    if(!is.empty(list[index])){
-        let node = list[index];
-        list.removeClass('active');
-        node.addClass('active');
+    if(is.nodeList(list)){
+        if(!is.empty(list[index])){
+            let node = list[index];
+            list.removeClass('active');
+            node.addClass('active');
+        }
+    } else {
+        let node = list;
+        if(node){
+            node.addClass('active');
+        }
     }
 }
 
@@ -30,8 +37,27 @@ settings.header = () => {
     }
     const list = section.select('.nav-link');
     let index;
-    for(index=0; index < list.length; index++){
-        let node = list[index];
+    if(is.nodeList(list)){
+        for(index=0; index < list.length; index++){
+            let node = list[index];
+            node.on('click', (event) => {
+                if(node.data('has', 'url')){
+                    list.removeClass('active');
+                    node.addClass('active');
+                    header('Authorization', 'Bearer ' + user.token());
+                    request(node.data('url'), null, (url, response) => {
+                        if(node.data('has', 'frontend-url')){
+                            request(node.data('frontend-url'), response);
+                        }
+                    });
+                }
+                else if(node.data('has', 'frontend-url')){
+                    request(node.data('frontend-url'));
+                }
+            });
+        }
+    } else if (list){
+        let node = list;
         node.on('click', (event) => {
             if(node.data('has', 'url')){
                 list.removeClass('active');
@@ -48,7 +74,7 @@ settings.header = () => {
             }
         });
     }
-};
+}
 
 settings.form = () => {
     const section = getSectionByName('main-content');
