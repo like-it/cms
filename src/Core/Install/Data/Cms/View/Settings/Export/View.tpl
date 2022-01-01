@@ -1,5 +1,9 @@
-{{require($controller.dir.view + $controller.title + '/Init.tpl')}}
+{{if($init === true)}}
+{{require($prefix + 'Init.tpl')}}
+{{/if}}
+{{if($script.module === true)}}
 {{script('module')}}
-{{require($controller.dir.view + $controller.title + '/Export/Module/Main.js')}}
+{{require($prefix + 'Export/Module/Main.js')}}
 {{/script}}
-{{require($controller.dir.view + $controller.title + '/Export/Section/Main/Content.tpl')}}
+{{/if}}
+{{require($prefix + 'Export/Section/Main/Content.tpl')}}
