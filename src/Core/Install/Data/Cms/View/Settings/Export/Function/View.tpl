@@ -2,7 +2,6 @@
 {{if($init === true)}}
 {{require($prefix + 'Init.tpl')}}
 {{/if}}
-
 {{if(
 !is.empty($submodule) &&
 !is.empty($command)
@@ -15,7 +14,4 @@
 {{/script}}
 {{/if}}
 {{/if}}
-
-
-
 {{require($prefix + 'Export/Section/Main/Content.tpl')}}
