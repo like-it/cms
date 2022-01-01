@@ -16,7 +16,7 @@ function function_response_view(Parse $parse, Data $data, $options=[]){
         $object->config('ds') .
         'Function' .
         $object->config('ds') .
-        'View.tpl'
+        'Response.View.tpl'
     ;
     $data_data = clone($data);
     $data_data->data(Core::object($options, Core::OBJECT_OBJECT));

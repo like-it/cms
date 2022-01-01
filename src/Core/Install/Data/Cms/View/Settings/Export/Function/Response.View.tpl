@@ -16,4 +16,4 @@
 {{/script}}
 {{/if}}
 {{/if}}
-{{require($prefix + 'Export/Section/Main/Content.tpl')}}
+{{require($prefix + $require.submodule + '/Section/' + $require.command +'/Content.tpl')}}
