@@ -36,7 +36,7 @@ upload.init = (config) => {
             });
         }
     } else {
-        let input = select('dz-hidden-input');
+        let input = select('.dz-hidden-input');
         if(input){
             input.remove();
         }
