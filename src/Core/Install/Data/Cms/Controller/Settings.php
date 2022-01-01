@@ -14,8 +14,10 @@ use R3m\Io\Exception\UrlNotExistException;
 class Settings extends View {
     const DIR = __DIR__ . DIRECTORY_SEPARATOR;    
 
-    public static function main(App $object){
+    public static function main_main(App $object){
         $name = Settings::name(__FUNCTION__, __CLASS__, '/');
+        $name = explode('.', $name);
+        $name = implode('/', $name);
         try {
             if(App::contentType($object) == App::CONTENT_TYPE_HTML){
                 $url = Settings::locate($object, 'Main/Main');
@@ -32,8 +34,10 @@ class Settings extends View {
         }
     }
 
-    public static function body(App $object){
+    public static function body_main(App $object){
         $name = Settings::name(__FUNCTION__, __CLASS__, '/');
+        $name = explode('.', $name);
+        $name = implode('/', $name);
         try {
             $url = Settings::locate($object, $name);
             return Settings::response($object, $url);

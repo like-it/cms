@@ -75,6 +75,7 @@
     },
     "5b9b3b56-9518-40c4-a8f6-23143bd4184e" : {
         "module" : "settings",
+        "submodule" : "main",
         "command" : "main",
         "method": [
             "GET",
@@ -83,7 +84,8 @@
     },
     "05462e81-6a3d-47c4-a77d-3c3224b3956c" : {
         "module" : "settings",
-        "command" : "body",
+        "submodule" : "body",
+        "command" : "main",
         "method": [
             "GET",
             "POST"
