@@ -2,13 +2,14 @@
 {{if($init === true)}}
 {{require($prefix + 'Init.tpl')}}
 {{/if}}
-{{dd('$this')}}
+
 {{if(
 !is.empty($submodule) &&
 !is.empty($command)
 )}}
 {{$require.submodule = $submodule|uppercase.first.sentence:'-'|replace:'-':'/'}}
 {{$require.command = $command|uppercase.first.sentence:'-'|replace:'-':'/'}}
+{{dd('$this')}}
 {{if($script.module === true)}}
 {{script('module')}}
 {{require($prefix + $require.submodule + '/Module/' + $require.command + '.js')}}
