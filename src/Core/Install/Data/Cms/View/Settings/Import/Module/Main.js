@@ -5,14 +5,14 @@ import user from "/Module/User.js";
 import { getSectionByName } from "/Module/Section.js";
 import upload from "/Settings/Import/Module/Upload.js";
 
-let module = {};
+let main = {};
 
-module.init = () => {
-    module.upload();
-    module.navigation();
+main.init = () => {
+    main.upload();
+    main.navigation();
 }
 
-module.navigation = () => {
+main.navigation = () => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
@@ -39,7 +39,7 @@ module.navigation = () => {
     }
 }
 
-module.upload = () => {
+main.upload = () => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
@@ -65,5 +65,5 @@ module.upload = () => {
 }
 
 ready(() => {
-    module.init();
+    main.init();
 });

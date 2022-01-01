@@ -1,7 +1,7 @@
 {R3M}
 import user from "/Module/User.js";
 import { getSectionByName } from "/Module/Section.js";
-import download from "/Module/Export/Download.js";
+import download from "/Settings/Export/Module/Download.js";
 
 let main = {};
 
