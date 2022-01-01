@@ -85,7 +85,8 @@
     "05462e81-6a3d-47c4-a77d-3c3224b3956c" : {
         "module" : "settings",
         "submodule" : "main",
-        "command" : "body",
+        "command" : "main",
+        "subcommand" : "body",
         "method": [
             "GET",
             "POST"
