@@ -11,7 +11,6 @@ upload.init = (config) => {
         return;
     }
     let input = select('.dz-hidden-input');
-    console.log('input', input);
     if(input){
         input.remove();
     }
