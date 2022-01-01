@@ -2,7 +2,7 @@
 {{$a.name = 'main'}}
 {{$a.translation = $a.name|replace:'-':'.'}}
 {{$a.class = 'nav-link'}}
-{{$a.route = 'settings-main-' + $a.name}}
+{{$a.route = 'settings-' + $a.name + '-body'}}
 {{$a.data.url = ''}}
 {{$a.data.frontend.url = route.get(route.prefix() + '-' + $a.route)}}
 {{$a.link = __('settings.import.component.header.a.' + $a.translation +'.link')}}
