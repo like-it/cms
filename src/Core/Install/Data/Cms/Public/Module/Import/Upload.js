@@ -10,6 +10,10 @@ upload.init = (config) => {
     if(!body){
         return;
     }
+    let input = select('.dz-hidden-input');
+    if(input){
+        input.remove();
+    }
     let upload = body.select('.upload');
     let token = config.token;
     if(!upload) {
@@ -34,11 +38,6 @@ upload.init = (config) => {
             drop.on("complete", function (file) {
 
             });
-        }
-    } else {
-        let input = select('.dz-hidden-input');
-        if(input){
-            input.remove();
         }
     }
 }
