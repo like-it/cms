@@ -27,6 +27,7 @@
     "settings.export.component.header.a.main.link" : "Export",
     "settings.export.component.header.a.settings.link" : "Settings",
     "settings.import.component.header.a.main.link" : "Import",
+    "settings.main.component.header.a.main.link" : "Main",
     "settings.main.component.body.li.account.settings.title" : "Account settings",
     "settings.main.component.body.li.account.settings.body" : [
         "Account settings."
