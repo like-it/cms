@@ -1,5 +1,6 @@
 <?php
 
+use R3m\Io\Module\Core;
 use R3m\Io\Module\Parse;
 use R3m\Io\Module\Data;
 use R3m\Io\Config;
@@ -12,8 +13,6 @@ function function_response_view(Parse $parse, Data $data, $options=[]){
 
     $url = $options['prefix'] .
         str_replace('-', $object->config('ds'), Core::ucfirst_sentence($options['submodule'], '-')) .
-        $object->config('ds') .
-        'Plugin' .
         $object->config('ds') .
         'Function' .
         $object->config('ds') .
