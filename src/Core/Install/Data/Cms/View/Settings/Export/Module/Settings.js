@@ -18,7 +18,8 @@ settings.select = (index) => {
     const list = section.select('.nav-link');
     if(!is.empty(list[index])){
         let node = list[index];
-        node.click();
+        list.removeClass('active');
+        node.addClass('active');
     }
 }
 
