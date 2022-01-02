@@ -3,6 +3,7 @@
 {{$class = 'form-control'}}
 {{else}}
 {{$class = 'form-control alert-danger'}}
+{{$request.focus = 'node.port'}}
 {{/if}}
 <label for="settings-email-from-port">Port*</label>
 <input

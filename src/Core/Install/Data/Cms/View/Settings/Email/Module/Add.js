@@ -112,7 +112,13 @@ add.focus = () => {
     if(!form){
         return;
     }
-    const input = form.select('input[name="node.from_name"]');
+    const focus = "{{$request.focus}}";
+    let input;
+    if(focus){
+        input = form.select('input[name="' + focus +'"]');
+    } else {
+        input = form.select('input[name="node.from_name"]');
+    }
     if(!input){
         return;
     }
