@@ -16,7 +16,7 @@ menu.dispatch = (section, data) => {
                     if(
                         item?.hidden
                     ){
-                        menuItem.data('is-hidden', item?.hidden);
+                        menuItem.data('is-hidden', item.hidden);
                     }
                     menuItem.dispatchEvent(item.event);
                 }
@@ -32,7 +32,7 @@ menu.dispatch = (section, data) => {
                 if(
                     data?.hidden
                 ){
-                    menuItem.data('is-hidden', data?.hidden);
+                    menuItem.data('is-hidden', data.hidden);
                 }
                 menuItem.dispatchEvent(data.event);
             }
