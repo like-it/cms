@@ -12,10 +12,8 @@ add.body = () => {
     }
     const item = section.select('.settings-email-add');
     if(item.data('is-hidden')){
-        console.log('is hidden');
         item.data('delete', 'is-hidden');
     } else {
-        console.log('triggered again');
         const body = section.select('.card-body');
         body.addClass('d-none');
         const selected = section.select('.card-body-add');

@@ -7,7 +7,6 @@ let menu = {};
 menu.is_selected = (node, selected) => {
     if(selected){
         //select
-        console.log('is selected');
         selected.removeClass('d-none');
     } else {
         //load
