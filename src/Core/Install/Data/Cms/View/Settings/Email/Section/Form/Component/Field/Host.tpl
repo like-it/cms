@@ -3,6 +3,9 @@
 {{$class = 'form-control'}}
 {{else}}
 {{$class = 'form-control alert-danger'}}
+{{if(is.empty($request.focus))}}
+{{$request.focus = 'node.host'}}
+{{/if}}
 {{/if}}
 <label for="settings-email-from-host">Host*</label>
 <input

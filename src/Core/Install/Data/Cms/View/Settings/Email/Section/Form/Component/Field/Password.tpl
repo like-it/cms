@@ -9,6 +9,9 @@ request.error('password.validate_string_has_symbol') === false
 {{$class = 'form-control'}}
 {{else}}
 {{$class = 'form-control alert-danger'}}
+{{if(is.empty($request.focus))}}
+{{$request.focus = 'node.password'}}
+{{/if}}
 {{/if}}
 <label for="settings-email-from-password">Password*</label>
 <input

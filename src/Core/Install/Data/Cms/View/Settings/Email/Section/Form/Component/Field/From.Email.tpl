@@ -3,6 +3,9 @@
 {{$class = 'form-control'}}
 {{else}}
 {{$class = 'form-control alert-danger'}}
+{{if(is.empty($request.focus))}}
+{{$request.focus = 'node.from_email'}}
+{{/if}}
 {{/if}}
 <label for="settings-email-from-email">From e-mail*</label>
 <input
