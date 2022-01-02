@@ -5,10 +5,10 @@
     data-frontend-url="{{route.get(route.prefix() + '-settings-email-edit-body')}}"
 >
     {{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Body/Component/Td/From.Name.tpl')}}
-    {{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Body/Component/Td/Node/From.Email.tpl')}}
-    {{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Body/Component/Td/Node/Host.tpl')}}
-    {{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Body/Component/Td/Node/Port.tpl')}}
-    {{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Body/Component/Td/Node/Options.tpl')}}
+    {{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Body/Component/Td/From.Email.tpl')}}
+    {{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Body/Component/Td/Host.tpl')}}
+    {{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Body/Component/Td/Port.tpl')}}
+    {{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Body/Component/Td/Options.tpl')}}
 </tr>
 {{/for.each}}
 </tbody>
