@@ -137,6 +137,25 @@
             "POST"
         ]
     },
+    "e9ccd042-3c5e-4dac-a5c7-aef9df8f9046" : {
+        "module" : "settings",
+        "submodule" : "domains",
+        "command" : "main",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "02e7abff-bf43-4cbd-abde-3d6df9f53be3" : {
+        "module" : "settings",
+        "submodule" : "domains",
+        "command" : "main",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "0d24dbd8-6fa9-4041-83be-b4f457fd1949" : {
         "module" : "settings",
         "submodule" : "email",
