@@ -29,20 +29,19 @@ settings.onDoubleClick = () => {
                 }
             });
         }
-    } else {
+    } else if(list) {
         let node = list;
-        if(node){
-            node.on('dblclick', (event) => {
-                if(node.data('has', 'url')){
-                    header('Authorization', 'Bearer ' + user.token());
-                    request(node.data('url'), null, (url, response) => {
-                        request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+        node.on('dblclick', (event) => {
+            if(node.data('has', 'url')){
+                header('Authorization', 'Bearer ' + user.token());
+                request(node.data('url'), null, (url, response) => {
+                    request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
 
-                        });
                     });
-                }
-            });
-        }
+                });
+            }
+        });
+
     }
 }
 
@@ -151,6 +150,7 @@ settings.deleteDialog = (data) => {
             }
             dialog.remove();
         });
+        submit.focus();
     }
     const cancel = footer.select('.button-cancel');
     if(cancel){
