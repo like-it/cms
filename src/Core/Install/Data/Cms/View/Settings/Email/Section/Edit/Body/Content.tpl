@@ -1,5 +1,5 @@
 {R3M}
-{{if($is.edit.body)}}
+{{if($command === 'edit-body')}}
     {{$section.name = 'main-content'}}
     {{$section.title = 'Main-content'}}
     {{$request.method = 'replace-with-or-append-to'}}

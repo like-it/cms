@@ -1,7 +1,7 @@
 {R3M}
 {{if($request.error)}}
 {{/if}}
-{{if($is_add_body)}}
+{{if($command === 'add-body')}}
     {{$section.name = 'main-content'}}
     {{$section.title = 'Main-content'}}
     {{$request.method = 'replace-with-or-append-to'}}

@@ -5,6 +5,4 @@
 'command' => 'add-body',
 'init' => true,
 'prefix' => $controller.dir.view + $controller.title + '/',
-'is_add_body' => true,
-'request' => $request
 ])}}

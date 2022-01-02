@@ -1,4 +1,8 @@
 {R3M}
-{{require($controller.dir.view + $controller.title + '/Init.tpl')}}
-{{$is.edit.body = true}}
-{{require($controller.dir.view + $controller.title + '/Email/Section/Edit/Body.tpl')}}
+{{response.view([
+'module' => $controller.name,
+'submodule' => 'email',
+'command' => 'edit-body',
+'init' => true,
+'prefix' => $controller.dir.view + $controller.title + '/',
+])}}
