@@ -32,7 +32,7 @@ function function_response_view(Parse $parse, Data $data, $options=[]){
     $data_data->data(Core::object($options, Core::OBJECT_OBJECT));
     foreach($list as $url){
         if(File::exist($url)){
-            $require = function_require($parse, $parse->storage(), $url, $data_data);
+            $require = function_require($parse, $data_data, $url);
             return $require;
         }
     }
