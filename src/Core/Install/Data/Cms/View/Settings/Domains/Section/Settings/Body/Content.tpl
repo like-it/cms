@@ -10,5 +10,5 @@
     {{require($controller.dir.view + $controller.title + '/Email/Module/Settings.js')}}
 {{/script}}
 <div class="card-body h-100 card-body-settings">
-{{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Table/Table.tpl', [])}}
+{{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Body/Component/Table/Table.tpl', [])}}
 </div>

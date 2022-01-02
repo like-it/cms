@@ -228,7 +228,24 @@ settings.default = (target) => {
     }
 };
 
+settings.body = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const item = section.select('.settings-email-settings');
+    if(item.data('is-hidden')){
+        item.data('delete', 'is-hidden');
+    } else {
+        const body = section.select('.card-body');
+        body.addClass('d-none');
+        const selected = section.select('.card-body-settings');
+        selected.removeClass('d-none');
+    }
+}
+
 settings.init = () => {
+    settings.body();
     settings.onDoubleClick();
     settings.default({
         select : ".settings-email-settings",

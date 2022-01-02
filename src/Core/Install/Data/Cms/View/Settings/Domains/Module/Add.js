@@ -10,9 +10,9 @@ add.body = () => {
     if(!section){
         return;
     }
-    const menu = section.select('.settings-email-add');
-    if(menu.data('is-hidden')){
-        menu.data('delete', 'is-hidden');
+    const item = section.select('.settings-email-add');
+    if(item.data('is-hidden')){
+        item.data('delete', 'is-hidden');
     } else {
         const body = section.select('.card-body');
         body.addClass('d-none');
