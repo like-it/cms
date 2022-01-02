@@ -5,5 +5,4 @@
 'command' => 'main-body',
 'init' => true,
 'prefix' => $controller.dir.view + $controller.title + '/',
-'is.main.body' => true
 ])}}

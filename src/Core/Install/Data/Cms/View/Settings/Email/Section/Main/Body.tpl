@@ -1,5 +1,5 @@
 {R3M}
-{{if($is.main.body)}}
+{{if($command === 'main.body')}}
     {{$section.name = 'main-content'}}
     {{$section.title = 'Main-Content'}}
     {{$request.method = 'replace-with-or-append-to'}}
