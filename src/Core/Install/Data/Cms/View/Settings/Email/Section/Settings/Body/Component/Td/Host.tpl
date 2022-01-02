@@ -1,4 +1,4 @@
 {R3M}
-<td scope="row">
+<td>
     {{$node.host}}
 </td>

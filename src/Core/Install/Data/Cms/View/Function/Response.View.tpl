@@ -8,23 +8,23 @@
 )}}
 {{$require.submodule = $submodule|uppercase.first.sentence:'-'|replace:'-':'/'}}
 {{$require.command = $command|uppercase.first.sentence:'-'|replace:'-':'/'}}
+{{require($prefix + $require.submodule + '/Section/' + $require.command +'/Content.tpl')}}
 {{if($script === 'module')}}
 {{$script = []}}
 {{script('module')}}
 {{require($prefix + $require.submodule + '/Module/' + $require.command + '.js')}}
 {{/script}}
 {{/if}}
-{{require($prefix + $require.submodule + '/Section/' + $require.command +'/Content.tpl')}}
 {{else.if(
 !is.empty($command)
 )}}
 {{$require.command = $command|uppercase.first.sentence:'-'|replace:'-':'/'}}
+{{require($prefix + '/Section/' + $require.command +'/Content.tpl')}}
 {{if($script === 'module')}}
 {{$script = []}}
 {{script('module')}}
 {{require($prefix + '/Module/' + $require.command + '.js')}}
 {{/script}}
 {{/if}}
-{{require($prefix + '/Section/' + $require.command +'/Content.tpl')}}
 {{/if}}
 
