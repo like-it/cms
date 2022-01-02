@@ -1,10 +1,4 @@
 {R3M}
-{{response.view([
-'module' => $controller.name,
-'submodule' => 'email',
-'command' => 'add-body',
-'init' => true,
-'prefix' => $controller.dir.view + $controller.title + '/',
-'is.add.body' => true,
-'request' => $request
-])}}
+{{require($controller.dir.view + $controller.title + '/Init.tpl')}}
+{{$is.add.body = true}}
+{{require($controller.dir.view + $controller.title + '/Email/Section/Add/Body.tpl')}}
