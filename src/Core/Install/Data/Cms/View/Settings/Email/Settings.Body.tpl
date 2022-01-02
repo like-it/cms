@@ -1,4 +1,9 @@
 {R3M}
-{{require($controller.dir.view + $controller.title + '/Init.tpl')}}
-{{$is.settings.body = true}}
-{{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Body.tpl')}}
+{{response.view([
+'module' => $controller.name,
+'submodule' => 'email',
+'command' => 'settings-body',
+'init' => true,
+'prefix' => $controller.dir.view + $controller.title + '/',
+'is.settings.body' => true
+])}}
