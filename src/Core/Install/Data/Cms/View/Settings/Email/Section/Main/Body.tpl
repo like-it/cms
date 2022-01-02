@@ -11,5 +11,5 @@
 {{/script}}
 <div class="card-body h-100 card-body-main">
     <h5 class="card-title">{{__('settings.email.section.main.body.title')}}</h5>
-    <p class="card-text">{{implode("<br>\n", __('settings.email.section.main.body.title'))}}</p>
+    <p class="card-text">{{implode("<br>\n", __('settings.email.section.main.body.text'))}}</p>
 </div>
