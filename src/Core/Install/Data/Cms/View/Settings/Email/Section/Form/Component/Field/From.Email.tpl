@@ -1,8 +1,5 @@
 {R3M}
-{{if(
-is.empty($request.error.from_email) ||
-$request.error.from_email.validate_is_email.0 === true
-)}}
+{{if(request.error('from_email.validate_is_email') === false)}}
 {{$class = 'form-control'}}
 {{else}}
 {{$class = 'form-control alert-danger'}}
