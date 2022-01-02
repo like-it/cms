@@ -33,7 +33,7 @@
     "settings.email.section.main.body.title" : "E-mail",
     "settings.email.section.main.body.text" : [
         "At the settings tab you can configure the e-mail settings.",
-        "These settings are the mail server settings."
+        "These settings are the mail server settings.",
         "If you don't provide the e-mail configuration, the system isn't capable of sending e-mails."
     ],
     "settings.email.section.settings.table.component.thead.from.name" : "From name",
