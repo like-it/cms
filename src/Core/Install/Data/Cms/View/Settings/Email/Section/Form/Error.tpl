@@ -3,6 +3,9 @@
     <div class="mb-3">
         <p class="alert alert-danger">
 {{/if}}
+{{if(request.error('from_email.validate_is_email') === true)}}
+    The From e-mail should be an e-mail address.<br>
+{{/if}}
 {{if($request.error.from_email.validate_is_email.0 === false)}}
     The From e-mail should be an e-mail address.<br>
 {{/if}}

@@ -24,14 +24,12 @@ menu.is_selected = (node, selected) => {
     }
 };
 
-menu.click = () => {
+menu.onClick = () => {
     const section = getSectionByName('main-content');
-    console.log(section);
     if(!section){
         return;
     }
     const list = section.select('.nav-link');
-    console.log(list);
     let index;
     for(index=0; index < list.length; index++){
         let node = list[index];
@@ -66,7 +64,7 @@ menu.click = () => {
 menu.init = () => {
     //const route = "{{route.get(route.prefix() + '-settings-email-main')}}";
     //window.history.pushState(route, route, route);
-    menu.click();
+    menu.onClick();
 }
 
 ready(() => {

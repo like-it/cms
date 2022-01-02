@@ -8,14 +8,14 @@
 >
     {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Error.tpl')}}
     <div class="mb-3">
-        {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Field/From.Name.tpl')}}
-        {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Field/From.Email.tpl')}}
-        {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Field/Host.tpl')}}
-        {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Field/Port.tpl')}}
-        {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Field/Username.tpl')}}
-        {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Field/Password.tpl')}}
+        {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Component/Field/From.Name.tpl')}}
+        {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Component/Field/From.Email.tpl')}}
+        {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Component/Field/Host.tpl')}}
+        {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Component/Field/Port.tpl')}}
+        {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Component/Field/Username.tpl')}}
+        {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Component/Field/Password.tpl')}}
     </div>
     <div class="mb-3">
-        {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Button/Add.tpl')}}
+        {{require($controller.dir.view + $controller.title + '/Email/Section/Form/Component/Button/Add.tpl')}}
     </div>
 </form>
