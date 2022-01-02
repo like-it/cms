@@ -1,8 +1,5 @@
 {R3M}
-{{if(
-is.empty($request.error.host) ||
-$request.error.host.validate_string_length.0 === true
-)}}
+{{if(request.error('host.validate_string_length') === false)}}
 {{$class = 'form-control'}}
 {{else}}
 {{$class = 'form-control alert-danger'}}

@@ -1,8 +1,5 @@
 {R3M}
-{{if(
-is.empty($request.error.port) ||
-$request.error.port.validate_string_has_number.0 === true
-)}}
+{{if(request.error('port.validate_string_has_number') === false)}}
 {{$class = 'form-control'}}
 {{else}}
 {{$class = 'form-control alert-danger'}}

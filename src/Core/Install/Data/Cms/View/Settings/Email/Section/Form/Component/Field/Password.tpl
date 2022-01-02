@@ -1,13 +1,10 @@
 {R3M}
 {{if(
-is.empty($request.error.password) ||
-(
-$request.error.password.validate_string_length.0 === true &&
-$request.error.password.validate_string_has_number.0 === true &&
-$request.error.password.validate_string_has_uppercase.0 === true &&
-$request.error.password.validate_string_has_lowercase.0 === true &&
-$request.error.password.validate_string_has_symbol.0 === true
-)
+request.error('password.validate_string_length') === false &&
+request.error('password.validate_string_has_number') === false &&
+request.error('password.validate_string_has_uppercase') === false &&
+request.error('password.validate_string_has_lowercase') === false &&
+request.error('password.validate_string_has_symbol') === false
 )}}
 {{$class = 'form-control'}}
 {{else}}
