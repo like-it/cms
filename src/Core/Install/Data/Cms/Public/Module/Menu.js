@@ -17,6 +17,7 @@ menu.dispatch = (section, data) => {
                         item?.hidden
                     ){
                         menuItem.data('is-hidden', item.hidden);
+                        console.log(menuItem);
                     }
                     menuItem.dispatchEvent(item.event);
                 }
