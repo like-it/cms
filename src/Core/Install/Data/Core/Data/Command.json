@@ -203,6 +203,37 @@
             "OPTIONS"
         ]
     },
+    "427e9a39-ab46-4015-bb7f-3e37faa42ad0" : {
+        "module" : "settings",
+        "submodule" : "domains",
+        "command" : "settings",
+        "method" : [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "ad807b3e-c7b4-4c87-8c52-bce212777e89" : {
+        "module" : "settings",
+        "submodule" : "domains",
+        "command" : "add",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "1fa6325a-4a13-4966-97fd-10678dd330ef" : {
+        "module" : "settings",
+        "submodule" : "domains",
+        "command" : "command",
+        "path": "Settings/Domains/{$node.uuid}",
+        "method": [
+            "GET",
+            "PUT",
+            "DELETE",
+            "OPTIONS"
+        ]
+    },
     "32c6a6ea-7d05-4241-bdb7-59368025b7d7" : {
         "module" : "settings",
         "submodule" : "export",
