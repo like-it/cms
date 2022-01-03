@@ -4,8 +4,8 @@
 {{/script}}
 <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
-        {{require($controller.dir.view + $controller.title + '/Email/Section/Menu/Component/Li/Main.tpl')}}
-        {{require($controller.dir.view + $controller.title + '/Email/Section/Menu/Component/Li/Settings.tpl')}}
-        {{require($controller.dir.view + $controller.title + '/Email/Section/Menu/Component/Li/Add.tpl')}}
+        {{require($prefix + $require.submodule + '/Section/Menu/Component/Li/Main.tpl')}}
+        {{require($prefix + $require.submodule + '/Section/Menu/Component/Li/Settings.tpl')}}
+        {{require($prefix + $require.submodule + '/Section/Menu/Component/Li/Add.tpl')}}
     </ul>
 </div>
