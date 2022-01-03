@@ -1,14 +1,17 @@
 {R3M}
-{{$section.name = 'main-content'}}
-{{$section.title = 'Main-Content'}}
-{{$request.method = 'replace-with-or-append-to'}}
-{{$request.target = 'section[name="' + $section.name + '"]'}}
-{{$request.append.to = 'body'}}
-<section name="{{$section.name}}" class="col-12 col-md-10">
-    <div class="h-100">
-        <div class="card h-100 overflow-auto">
-            {{require($prefix + $require.submodule + '/Section/Menu/Header.tpl')}}
-            {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Body.tpl')}}
-        </div>
-    </div>
-</section>
+{{if(
+    $command === 'settings' &&
+    $subcommand === 'content'
+)}}
+    {{$section.name = 'main-content'}}
+    {{$section.title = 'Main-content'}}
+    {{$request.method = 'replace-with-or-append-to'}}
+    {{$request.target = 'section[name="' + $section.name + '"] .card-body-settings'}}
+    {{$request.append.to = 'section[name="' + $section.name + '"] .card'}}
+{{/if}}
+<div class="card-body h-100 card-body-{{$command}}">
+{{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Table/Table.tpl', [])}}
+</div>
+{{script('module')}}
+    {{require($prefix + '/Domains/Module/' + $require.command + '.js', [])}}
+{{/script}}
