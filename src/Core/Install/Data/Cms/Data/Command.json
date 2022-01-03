@@ -156,6 +156,36 @@
             "POST"
         ]
     },
+    "f84a8389-1958-4c68-b4e6-101096bc6e4c" : {
+        "module" : "settings",
+        "submodule" : "domains",
+        "command" : "settings",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "e3c59809-fdd4-47a2-ac7e-e24c809f33ad" : {
+        "module" : "settings",
+        "submodule" : "domains",
+        "command" : "add",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "d5c89f03-30b4-4ec2-8a43-73ea8149fc3c" : {
+        "module" : "settings",
+        "submodule" : "domains",
+        "command" : "edit",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "0d24dbd8-6fa9-4041-83be-b4f457fd1949" : {
         "module" : "settings",
         "submodule" : "email",
