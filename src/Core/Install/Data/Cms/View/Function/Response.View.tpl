@@ -13,7 +13,7 @@
 {{$require.command = $command|uppercase.first.sentence:'-'|replace:'-':'/'}}
 {{$require.subcommand = $subcommand|uppercase.first.sentence:'-'|replace:'-':'/'}}
 {{if(!is.empty($debug))}}
-{{dd('$this')}}
+{{dd('{$this}')}}
 {{/if}}
 {{require($prefix + $require.submodule + '/Section/' + $require.command +'/' + $require.subcommand + '.tpl')}}
 {{if($script === 'module')}}
