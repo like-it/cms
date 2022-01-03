@@ -11,7 +11,7 @@
 )}}
 {{$require.submodule = $submodule|uppercase.first.sentence:'-'|replace:'-':'/'}}
 {{$require.command = $command|uppercase.first.sentence:'-'|replace:'-':'/'}}
-{{$require.subcommand = $subcommand|uppercase.first.sentence:'-'|replace:'-':'/'}}
+{{$require.subcommand = $subcommand|uppercase.first.sentence:'-'|replace:'-':'.'}}
 {{if(!is.empty($debug))}}
 {{dd('{$this}')}}
 {{/if}}
@@ -27,7 +27,7 @@ is.empty($submodule) &&
 !is.empty($command)
 )}}
 {{$require.command = $command|uppercase.first.sentence:'-'|replace:'-':'/'}}
-{{$require.subcommand = $subcommand|uppercase.first.sentence:'-'|replace:'-':'/'}}
+{{$require.subcommand = $subcommand|uppercase.first.sentence:'-'|replace:'-':'.'}}
 {{require($prefix + '/Section/' + $require.command +'/' + $require.subcommand + '.tpl')}}
 {{if($script === 'module')}}
 {{$script = []}}
