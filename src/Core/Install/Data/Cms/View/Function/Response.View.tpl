@@ -36,5 +36,6 @@
             {{require($prefix + '/Module/' + $require.command + '.js')}}
         {{/script}}
         {{/if}}
+    {{/if}}
 {{/if}}
 
