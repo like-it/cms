@@ -9,9 +9,9 @@
     {{$request.target = 'section[name="' + $section.name + '"] .card-body-settings'}}
     {{$request.append.to = 'section[name="' + $section.name + '"] .card'}}
 {{/if}}
-<div class="card-body h-100 card-body-settings">
-{{require($controller.dir.view + $controller.title + '/Email/Section/Settings/Component/Table/Table.tpl', [])}}
+<div class="card-body h-100 card-body-{{$command}}">
+{{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Table/Table.tpl', [])}}
 </div>
 {{script('module')}}
-    {{require($controller.dir.view + $controller.title + '/Email/Module/Settings.js')}}
+    {{require($prefix + '/Domains/Module/' + $require.command + '.js', [])}}
 {{/script}}
