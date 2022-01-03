@@ -2,13 +2,17 @@
 {{if($init === true)}}
 {{require($prefix + 'Init.tpl')}}
 {{/if}}
+{{if(is.empty($subcommand))}}
+{{$subcommand = 'content'}}
+{{/if}}
 {{if(
 !is.empty($submodule) &&
 !is.empty($command)
 )}}
 {{$require.submodule = $submodule|uppercase.first.sentence:'-'|replace:'-':'/'}}
 {{$require.command = $command|uppercase.first.sentence:'-'|replace:'-':'/'}}
-{{require($prefix + $require.submodule + '/Section/' + $require.command +'/Content.tpl')}}
+{{$require.subcommand = $subcommand|uppercase.first.sentence:'-'|replace:'-':'/'}}
+{{require($prefix + $require.submodule + '/Section/' + $require.command +'/' + $require.subcommand + '.tpl')}}
 {{if($script === 'module')}}
 {{$script = []}}
 {{script('module')}}
@@ -16,10 +20,12 @@
 {{/script}}
 {{/if}}
 {{else.if(
+is.empty($submodule) &&
 !is.empty($command)
 )}}
 {{$require.command = $command|uppercase.first.sentence:'-'|replace:'-':'/'}}
-{{require($prefix + '/Section/' + $require.command +'/Content.tpl')}}
+{{$require.subcommand = $subcommand|uppercase.first.sentence:'-'|replace:'-':'/'}}
+{{require($prefix + '/Section/' + $require.command +'/' + $require.subcommand + '.tpl')}}
 {{if($script === 'module')}}
 {{$script = []}}
 {{script('module')}}
