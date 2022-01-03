@@ -9,7 +9,7 @@
     {{$request.target = 'section[name="' + $section.name + '"] .card-' + $command + '-' + $subcommand}}
     {{$request.append.to = 'section[name="' + $section.name + '"] .card'}}
 {{/if}}
-{{require($prefix + $require.submodule + '/Component/Html/Card.Main.Body.tpl')}}
+{{require($prefix + $require.submodule + '/Section/' + $require.command + 'Component/Html/Card.Main.Body.tpl')}}
 {{script('module')}}
     {{require($prefix + $require.submodule + '/Module/' + $require.command + '.js')}}
 {{/script}}
