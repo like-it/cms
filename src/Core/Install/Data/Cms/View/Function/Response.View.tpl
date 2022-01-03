@@ -1,4 +1,4 @@
-{R3M}
+{{R3M}}
 {{if($init === true)}}
 {{require($prefix + 'Init.tpl')}}
 {{/if}}
@@ -12,6 +12,9 @@
 {{$require.submodule = $submodule|uppercase.first.sentence:'-'|replace:'-':'/'}}
 {{$require.command = $command|uppercase.first.sentence:'-'|replace:'-':'/'}}
 {{$require.subcommand = $subcommand|uppercase.first.sentence:'-'|replace:'-':'/'}}
+{{if(!is.empty($debug))}}
+{{dd('$this')}}
+{{/if}}
 {{require($prefix + $require.submodule + '/Section/' + $require.command +'/' + $require.subcommand + '.tpl')}}
 {{if($script === 'module')}}
 {{$script = []}}
