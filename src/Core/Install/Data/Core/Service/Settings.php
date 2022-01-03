@@ -11,6 +11,133 @@ use R3m\Io\Exception\ObjectException;
 
 
 class Settings extends Main {
+    public static function domains_create(App $object): Response
+    {
+        $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
+        $object->request('node.uuid', Core::uuid());
+        $data = $object->data_read($url);
+        if(!$data){
+            $data = new Data();
+        }
+        //make record request node
+        $record = $object->request('node');
+        return Settings::email_put($object, $data, $record, $url);
+    }
+
+    public static function domains_read(App $object, $uuid): Response
+    {
+        $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
+
+        $data = $object->data_read($url);
+        if (!$data) {
+            $data = new Data();
+        }
+        $record = $data->get('email.' . $uuid);
+        $response = [];
+        $response['node'] = $record;
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    public static function domains_update(App $object, $uuid): Response
+    {
+        $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
+        $data = $object->data_read($url);
+        if(!$data){
+            $data = new Data();
+        }
+        $record = $object->request('node');
+        return Settings::email_put($object, $data, $record, $url);
+    }
+
+    public static function domains_delete(App $object, $uuid): Response
+    {
+        $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
+
+        $data = $object->data_read($url);
+        if (!$data) {
+            $data = new Data();
+        }
+        $record = $data->get('email.' . $uuid);
+        $data->delete('email.' . $uuid);
+        $test = $data->get('email');
+        $has_default = false;
+        foreach($test as $node_uuid => $node){
+            if(
+                property_exists($node, 'isDefault') &&
+                $node->isDefault === true
+            ){
+                $has_default = true;
+                break;
+            }
+        }
+        if($has_default === false){
+            $node = false;
+            foreach($test as $node_uuid => $node){
+                break;
+            }
+            if($node){
+                $node->isDefault = true;
+            }
+        }
+        $data->write($url);
+
+        $response = [];
+        $response['node'] = $record;
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    public static function domains_list(App $object): Response
+    {
+        $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
+
+        $data = $object->data_read($url);
+        if(!$data){
+            $data = new Data();
+        }
+
+        $response = [];
+        //make nodeList or list
+        $response['nodeList'] = $data->data();
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    private static function domains_put(App $object, Data $data, stdClass $record, $url): Response
+    {
+        try {
+            $validate = Main::validate($object, Settings::domains_getValidatorUrl($object), 'email');
+            if($validate) {
+                if ($validate->success === true) {
+                    $test = $data->get('email');
+                    if(empty($test) || Core::object_is_empty($test)){
+                        $record->isDefault = true;
+                    }
+                    $data->set('email.' . $record->uuid, $record);
+                    $data->write($url);
+                    $data = [];
+                    $data['node'] = $record;
+                    return new Response($data, Response::TYPE_JSON);
+                } else {
+                    $data = [];
+                    $data['error'] = $validate->test;
+                    return new Response(
+                        $data,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                }
+            }
+        } catch (ObjectException $exception) {
+        }
+    }
+
+    private static function domains_getValidatorUrl(App $object): string
+    {
+        return $object->config('host.dir.data') .
+            'Validator' .
+            $object->config('ds') .
+            'Domains' .
+            $object->config('extension.json');
+    }
 
     public static function email_create(App $object): Response
     {

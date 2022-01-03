@@ -20,6 +20,32 @@ class Settings extends View {
         return new Response($data, Response::TYPE_JSON);
     }
 
+    public static function domains_settings(App $object): Response
+    {
+        return Service::domains_list($object);
+    }
+
+    public static function domains_add(App $object): Response
+    {
+        return Service::domains_create($object);
+    }
+
+    public static function domains_command(App $object){
+        $uuid = $object->request('node.uuid');
+        try {
+            switch (Handler::method()) {
+                case 'DELETE' :
+                    return Service::domains_delete($object, $uuid);
+                case 'GET' :
+                    return Service::domains_read($object, $uuid);
+                case 'PUT' :
+                    return Service::domains_update($object, $uuid);
+            }
+        } catch (Exception $exception) {
+            return $exception;
+        }
+    }
+
     public static function email_settings(App $object): Response
     {
         return Service::email_list($object);
