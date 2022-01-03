@@ -1,8 +1,7 @@
 {{R3M}}
-{{dd('$this')}}
 {{if(
     $command === 'settings' &&
-    $subcommand === 'content'
+    $subcommand === 'body'
 )}}
     {{$section.name = 'main-content'}}
     {{$section.title = 'Main-content'}}
