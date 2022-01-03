@@ -1,5 +1,5 @@
 {{R3M}}
-{{dd('{$this}')}}
+{{dd('$this')}}
 {{if(
     $command === 'settings' &&
     $subcommand === 'content'
