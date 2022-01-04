@@ -1,7 +1,7 @@
 {{R3M}}
-{{$__.module = $module|uppercase.first.sentence:'-'|replace:'-':'.'}}
-{{$__.submodule = $submodule|uppercase.first.sentence:'-'|replace:'-':'.'}}
-{{$__.command = $command|uppercase.first.sentence:'-'|replace:'-':'.'}}
+{{$__.module = $module|replace:'-':'.'}}
+{{$__.submodule = $submodule|replace:'-':'.'}}
+{{$__.command = $command|replace:'-':'.'}}
 {{dd('{{$this}}')}}
 <div class="card-body h-100 card-body-{{$command}}">
     {{if(!is.empty($request.nodeList))}}
