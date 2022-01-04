@@ -10,13 +10,13 @@ add.body = () => {
     if(!section){
         return;
     }
-    const item = section.select('.settings-email-add');
+    const item = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}");
     if(item.data('is-hidden')){
         item.data('delete', 'is-hidden');
     } else {
         const body = section.select('.card-body');
         body.addClass('d-none');
-        const selected = section.select('.card-body-add');
+        const selected = section.select('.card-body-' + "{{$command}}");
         selected.removeClass('d-none');
     }
 }
@@ -39,13 +39,12 @@ add.onChange = () => {
                 node.removeClass('alert-danger');
             });
         }
-    } else {
+    } else if(input) {
         let node = input;
-        if(node){
-            node.on('change', (event) => {
-                node.removeClass('alert-danger');
-            });
-        }
+        node.on('change', (event) => {
+            node.removeClass('alert-danger');
+        });
+
     }
     input = form.select('input[type="password"]');
     if(is.nodeList(input)){
@@ -56,13 +55,26 @@ add.onChange = () => {
                 node.removeClass('alert-danger');
             });
         }
-    } else {
+    } else if(input){
         let node = input;
-        if(node){
+        node.on('change', (event) => {
+            node.removeClass('alert-danger');
+        });
+    }
+    input = form.select('select');
+    if(is.nodeList(input)){
+        let index;
+        for(index=0; index < input.length; index++){
+            let node = input[index];
             node.on('change', (event) => {
                 node.removeClass('alert-danger');
             });
         }
+    } else if(input) {
+        let node = input;
+        node.on('change', (event) => {
+            node.removeClass('alert-danger');
+        });
     }
 }
 
@@ -71,7 +83,7 @@ add.form = (target) => {
     if(!section){
         return;
     }
-    const selected = section.select('.card-body-add');
+    const selected = section.select('.card-body-' + "{{$command}}");
     if(!selected){
         return;
     }
@@ -90,7 +102,6 @@ add.form = (target) => {
                     request(form.data('url-error'), data, ( urlError, responseError ) => {
 
                     });
-                    console.log(response.error);
                 } else {
                     menu.dispatch(section, target);
                 }
@@ -104,7 +115,7 @@ add.focus = () => {
     if(!section){
         return;
     }
-    const selected = section.select('.card-body-add');
+    const selected = section.select('.card-body-' + "{{$command}}");
     if(!selected){
         return;
     }
@@ -117,7 +128,7 @@ add.focus = () => {
     if(focus){
         input = form.select('input[name="' + focus +'"]');
     } else {
-        input = form.select('input[name="node.from_name"]');
+        input = form.select('input[name="node.subdomain"]');
     }
     if(!input){
         return;
@@ -131,12 +142,12 @@ add.init = () => {
     add.form({
         select : [
             {
-                name : ".settings-email-add",
+                name : ".{{$module}}-{{$submodule}}-{{$command}}",
                 event : new MouseEvent("dblclick"),
                 hidden : true
             },
             {
-                name : ".settings-email-settings",
+                name : ".{{$module}}-{{$submodule}}-settings",
                 event : new MouseEvent("dblclick")
             }
         ]
