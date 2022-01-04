@@ -1,8 +1,8 @@
 {R3M}
-{{$field = 'host'}}
+{{$field = 'extension'}}
 {{$label = $field|uppercase.first + '*'}}
 {{$input.id = $module + '-' + $submodule + '-' + $field}}
-{{if(request.error('host.validate_string_length') === false)}}
+{{if(request.error('extension.validate_string_length') === false)}}
 {{$input.class = 'form-control'}}
 {{else}}
 {{$input.class = 'form-control alert-danger'}}

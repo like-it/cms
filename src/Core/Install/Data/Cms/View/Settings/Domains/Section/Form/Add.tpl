@@ -1,11 +1,8 @@
 {{R3M}}
 {{$fields = [
-'From.Name',
-'From.Email',
+'Subdomain',
 'Host',
-'Port',
-'Username',
-'Password'
+'Extension'
 ]}}
 <form
     name="{{$module}}-{{$submodule}}-{{$command}}-form"
