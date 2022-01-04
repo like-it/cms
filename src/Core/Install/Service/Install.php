@@ -52,6 +52,7 @@ class Install {
                     $data->set($uuid . '.host', $host);
                     $data->set($uuid . '.subdomain', Install::SUBDOMAIN_CORE);
                     $data->set($uuid . '.extension', $extension);
+                    $data->set($uuid . '.name', Install::SUBDOMAIN_CORE . '.' . $host . '.' . $extension);
                     $data->set($uuid . '.uuid', $uuid);
                     $data->set($uuid . '.is.core', true);
                     $data->set($uuid . '.is.installed', true);
@@ -65,6 +66,7 @@ class Install {
                     $data->set($uuid . '.host', $host);
                     $data->set($uuid . '.subdomain', Install::SUBDOMAIN_CMS);
                     $data->set($uuid . '.extension', $extension);
+                    $data->set($uuid . '.name', Install::SUBDOMAIN_CMS . '.' . $host . '.' . $extension);
                     $data->set($uuid . '.uuid', $uuid);
                     $data->set($uuid . '.is.installed', true);
                     $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
