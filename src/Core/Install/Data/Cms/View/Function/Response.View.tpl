@@ -6,7 +6,7 @@
 {{$subcommand = 'content'}}
 {{/if}}
 {{if(!is.empty($debug))}}
-    {{dd('{$this}')}}
+    {{dd('{{$this}}')}}
 {{else}}
     {{if(
         !is.empty($submodule) &&
