@@ -18,6 +18,14 @@
                 {
                     "string.length": ">=1"
                 }
+            ],
+            "theme" : [
+                {
+                    "in.array" : [
+                        "default",
+                        "blog"
+                    ]
+                }
             ]
         }
     }
