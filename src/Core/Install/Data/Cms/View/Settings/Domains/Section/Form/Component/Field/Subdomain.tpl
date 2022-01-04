@@ -14,5 +14,5 @@
     type="{{$input.type}}"
     name="{{$input.name}}"
     value="{{$input.value}}"
-    placeholder="{{input.placeholder}}"
+    placeholder="{{$input.placeholder}}"
 /><br>
