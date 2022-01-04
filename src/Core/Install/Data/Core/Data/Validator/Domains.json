@@ -1,0 +1,24 @@
+{
+    "domain": {
+        "validate": {
+            "uuid" : [
+                {
+                    "string.length": "==36"
+                },
+                {
+                    "is.uuid" : true
+                }
+            ],
+            "host" : [
+                {
+                    "string.length": ">=1"
+                }
+            ],
+            "extension" : [
+                {
+                    "string.length": ">=1"
+                }
+            ]
+        }
+    }
+}

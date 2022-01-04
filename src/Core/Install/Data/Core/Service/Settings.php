@@ -12,7 +12,7 @@ use R3m\Io\Exception\ObjectException;
 
 
 class Settings extends Main {
-    
+
     /**
      * @throws Exception
      */
