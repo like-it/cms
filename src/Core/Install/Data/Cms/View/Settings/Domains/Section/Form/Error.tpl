@@ -14,7 +14,7 @@
 ]}}
 {{for.each($errors as $error)}}
     {{if(request.error($error) === true)}}
-        {{__($__.module + '.' + $__.submodule + '.form.' + $error)}}<br>
+        {{__($__.module + '.' + $__.submodule + '.form.error.' + $error)}}<br>
     {{/if}}
 {{/for.each}}
 {{if(!is.empty($request.error))}}
