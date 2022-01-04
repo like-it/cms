@@ -5,6 +5,5 @@
 'command' => 'settings',
 'subcommand' => 'body',
 'init' => true,
-'debug' => true,
 'prefix' => $controller.dir.view + $controller.title + '/',
 ])}}
