@@ -1,8 +1,7 @@
 {{R3M}}
-{{$__.module = $module|replace:'-':'.'}}
-{{$__.submodule = $submodule|replace:'-':'.'}}
-{{$__.command = $command|replace:'-':'.'}}
-{{dd('{{$this}}')}}
+{{$__.module = $module|lowercase|replace:'-':'.'}}
+{{$__.submodule = $submodule|lowercase|replace:'-':'.'}}
+{{$__.command = $command|lowercase|replace:'-':'.'}}
 <div class="card-body h-100 card-body-{{$command}}">
     {{if(!is.empty($request.nodeList))}}
     <table class="table">
