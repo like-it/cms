@@ -10,6 +10,7 @@
     {{$request.append.to = 'section[name="' + $section.name + '"] .card'}}
 {{/if}}
 <div class="card-body h-100 card-body-{{$command}}">
+Body.tpl
 {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Table/Table.tpl', [])}}
 </div>
 {{script('module')}}
