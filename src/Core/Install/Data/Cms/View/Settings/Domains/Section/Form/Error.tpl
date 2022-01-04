@@ -6,13 +6,13 @@
 {{$__.module = $module|lowercase|replace:'-':'.'}}
 {{$__.submodule = $submodule|lowercase|replace:'-':'.'}}
 {{$__.command = $command|lowercase|replace:'-':'.'}}
-{{$request.error = [
+{{$errors = [
 'extension.validate_string_length',
 'host.validate_string_length',
 'theme.validate_in_array',
 'name.validate_is_unique_json'
 ]}}
-{{for.each($request.error as $error)}}
+{{for.each($errors as $error)}}
     {{if(request.error($error) === true)}}
         {{__($__.module + '.' + $__.submodule + '.form.' + $error)}}<br>
     {{/if}}
