@@ -13,7 +13,7 @@ use R3m\Io\Exception\ObjectException;
 class Settings extends Main {
     public static function domains_create(App $object): Response
     {
-        $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
+        $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
         $object->request('node.uuid', Core::uuid());
         $data = $object->data_read($url);
         if(!$data){
@@ -21,7 +21,7 @@ class Settings extends Main {
         }
         //make record request node
         $record = $object->request('node');
-        return Settings::email_put($object, $data, $record, $url);
+        return Settings::domains_put($object, $data, $record, $url);
     }
 
     public static function domains_read(App $object, $uuid): Response
@@ -104,14 +104,14 @@ class Settings extends Main {
     private static function domains_put(App $object, Data $data, stdClass $record, $url): Response
     {
         try {
-            $validate = Main::validate($object, Settings::domains_getValidatorUrl($object), 'email');
+            $validate = Main::validate($object, Settings::domains_getValidatorUrl($object), 'domain');
             if($validate) {
                 if ($validate->success === true) {
-                    $test = $data->get('email');
+                    $test = $data->get();
                     if(empty($test) || Core::object_is_empty($test)){
                         $record->isDefault = true;
                     }
-                    $data->set('email.' . $record->uuid, $record);
+                    $data->set($record->uuid, $record);
                     $data->write($url);
                     $data = [];
                     $data['node'] = $record;
