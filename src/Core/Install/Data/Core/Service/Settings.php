@@ -7,10 +7,15 @@ use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
 use R3m\Io\Module\Response;
 
+use Exception;
 use R3m\Io\Exception\ObjectException;
 
 
 class Settings extends Main {
+    
+    /**
+     * @throws Exception
+     */
     public static function domains_create(App $object): Response
     {
         $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
@@ -101,6 +106,9 @@ class Settings extends Main {
         return new Response($response, Response::TYPE_JSON);
     }
 
+    /**
+     * @throws Exception
+     */
     private static function domains_put(App $object, Data $data, stdClass $record, $url): Response
     {
         try {
@@ -125,6 +133,8 @@ class Settings extends Main {
                         Response::STATUS_ERROR
                     );
                 }
+            } else {
+                throw new Exception('Cannot validate domain at: ' . Settings::domains_getValidatorUrl($object));
             }
         } catch (ObjectException $exception) {
         }
