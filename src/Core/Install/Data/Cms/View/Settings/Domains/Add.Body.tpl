@@ -3,7 +3,7 @@
 'module' => $controller.name,
 'submodule' => 'domains',
 'command' => 'add',
-'subcommand' => 'body'
+'subcommand' => 'body',
 'init' => true,
 'prefix' => $controller.dir.view + $controller.title + '/',
 ])}}
