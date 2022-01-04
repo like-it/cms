@@ -2,7 +2,8 @@
 {{$fields = [
 'Subdomain',
 'Host',
-'Extension'
+'Extension',
+'Theme'
 ]}}
 <form
     name="{{$module}}-{{$submodule}}-{{$command}}-form"
