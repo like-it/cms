@@ -12,6 +12,9 @@
 {{if(request.error('theme.validate_in_array') === true)}}
     Please select a valid theme from the list.<br>
 {{/if}}
+{{if(request.error('name.validate_is_unique_json') === true)}}
+    Please provide an unique name which consist of subdomain, domain & extension.<br>
+{{/if}}
 {{if(!is.empty($request.error))}}
         </p>
     </div>
