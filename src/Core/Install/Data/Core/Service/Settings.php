@@ -25,8 +25,12 @@ class Settings extends Main {
             $data = new Data();
         }
         //make record request node
+        $object->request('node.name', $object->request('node.subdomain') ?
+            $object->request('node.subdomain') . '.' .  $object->request('node.host') . '.' . $object->request('node.extension')
+            :
+            $object->request('node.host') . '.' . $object->request('node.extension'));
         $record = $object->request('node');
-        dd($record);
+
         return Settings::domains_put($object, $data, $record, $url);
     }
 
