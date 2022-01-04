@@ -9,10 +9,7 @@
     {{$request.target = 'section[name="' + $section.name + '"] .card-body-settings'}}
     {{$request.append.to = 'section[name="' + $section.name + '"] .card'}}
 {{/if}}
-<div class="card-body h-100 card-body-{{$command}}">
-Body.tpl
-{{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Table/Table.tpl', [])}}
-</div>
+{{require($prefix + '/Domains/Section/' + $require.command + '/Component/Html/Card.Body.Settings.js')}}
 {{script('module')}}
-    {{require($prefix + '/Domains/Module/' + $require.command + '.js', [])}}
+    {{require($prefix + '/Domains/Module/' + $require.command + '.js')}}
 {{/script}}
