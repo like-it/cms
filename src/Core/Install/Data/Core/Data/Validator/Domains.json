@@ -31,7 +31,7 @@
                 {
                     "is.unique.json" : {
                         "list" : null,
-                        "url" : "{{config('project.dir.data)}}Host.json"
+                        "url" : "{{config('project.dir.data')}}Host.json"
                     }
                 }
             ]
