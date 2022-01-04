@@ -33,6 +33,10 @@
         "Domains, subdomains can be managed here.",
         "The core & cms domain are read-only and cannot be deleted."
     ],
+    "settings.domains.section.settings.component.thead.subdomain" : "Subdomain",
+    "settings.domains.section.settings.component.thead.host" : "Domain",
+    "settings.domains.section.settings.component.thead.extension" : "Extension",
+    "settings.domains.section.settings.component.thead.options" : "",
     "settings.email.component.header.a.main.link" : "Main",
     "settings.email.component.header.a.settings.link" : "Settings",
     "settings.email.component.header.a.add.link" : "Add e-mail",
