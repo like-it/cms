@@ -10,8 +10,8 @@ $subcommand === 'body'
     {{$request.append.to = 'section[name="' + $section.name + '"] .card'}}
 {{/if}}
 <div class="card-body h-100 card-body-{{$command}}" data-menu=".{{$module}}-{{$submodule}}-{{$command}}">
-{{require($prefix + $require.module + '/Section/Form/' + $require.command + '.tpl')}}
+{{require($prefix + $require.module + '/'+ $require.submodule + '/Section/Form/' + $require.command + '.tpl')}}
 </div>
 {{script('module')}}
-    {{require($controller.dir.view + $controller.title + '/Email/Module/Add.js')}}
+    {{require($prefix + $require.module + '/Module/' + $require.command + '.js')}}
 {{/script}}
