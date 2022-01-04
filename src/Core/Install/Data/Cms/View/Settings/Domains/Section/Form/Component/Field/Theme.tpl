@@ -3,7 +3,7 @@
 {{$label = $field|uppercase.first}}
 {{$label =  $label + '*'}}
 {{$select.id = $module + '-' + $submodule + '-' + $field}}
-{{if(request.error('theme.validate_string_length') === false)}}
+{{if(request.error('theme.validate_in_array') === false)}}
 {{$select.class = 'form-control'}}
 {{else}}
 {{$select.class = 'form-control alert-danger'}}
