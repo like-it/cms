@@ -21,6 +21,6 @@
         {{/for.each}}
     </div>
     <div class="mb-3">
-        {{require($prefix + $require.module +  '/' + $require.submodule + '/Section/Form/Component/Button/' + $require.subcommand + '.tpl')}}
+        {{require($prefix + $require.module +  '/' + $require.submodule + '/Section/Form/Component/Button/' + $require.command + '.tpl')}}
     </div>
 </form>
