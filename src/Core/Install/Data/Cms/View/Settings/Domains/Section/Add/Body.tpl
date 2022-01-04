@@ -13,5 +13,5 @@ $subcommand === 'body'
 {{require($prefix + $require.module + '/'+ $require.submodule + '/Section/Form/' + $require.command + '.tpl')}}
 </div>
 {{script('module')}}
-    {{require($prefix + $require.module + '/Module/' + $require.command + '.js')}}
+    {{require($prefix + $require.module + '/' + $require.submodule + '/Module/' + $require.command + '.js')}}
 {{/script}}
