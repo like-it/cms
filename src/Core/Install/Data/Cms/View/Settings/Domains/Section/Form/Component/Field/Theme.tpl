@@ -2,8 +2,9 @@
 {{$field = 'theme'}}
 {{$label = $field|uppercase.first}}
 {{$label =  $label + '*'}}
+{{$validate = 'validate_in_array'}}
 {{$select.id = $module + '-' + $submodule + '-' + $field}}
-{{if(request.error('theme.validate_in_array') === false)}}
+{{if(request.error($field + '.' + $validate) === false)}}
 {{$select.class = 'form-control'}}
 {{else}}
 {{$select.class = 'form-control alert-danger'}}

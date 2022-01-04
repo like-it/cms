@@ -1,9 +1,10 @@
 {R3M}
 {{$field = 'host'}}
 {{$label = 'Domains'}}
+{{$validate = 'validate_string_length'}}
 {{$label =  $label + '*'}}
 {{$input.id = $module + '-' + $submodule + '-' + $field}}
-{{if(request.error('host.validate_string_length') === false)}}
+{{if(request.error($field + '.' + $validate) === false)}}
 {{$input.class = 'form-control'}}
 {{else}}
 {{$input.class = 'form-control alert-danger'}}

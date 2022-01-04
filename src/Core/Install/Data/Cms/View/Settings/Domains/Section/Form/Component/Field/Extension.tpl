@@ -2,8 +2,9 @@
 {{$field = 'extension'}}
 {{$label = $field|uppercase.first}}
 {{$label =  $label + '*'}}
+{{$validate = 'validate_string_length'}}
 {{$input.id = $module + '-' + $submodule + '-' + $field}}
-{{if(request.error('extension.validate_string_length') === false)}}
+{{if(request.error($field + '.' + $validate) === false)}}
 {{$input.class = 'form-control'}}
 {{else}}
 {{$input.class = 'form-control alert-danger'}}
