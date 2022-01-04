@@ -1,7 +1,8 @@
-{R3M}
-{{if($request.error)}}
-{{/if}}
-{{if($command === 'add-body')}}
+{{R3M}}
+{{if(
+$command === 'add' &&
+$subcommand === 'body'
+)}}
     {{$section.name = 'main-content'}}
     {{$section.title = 'Main-content'}}
     {{$request.method = 'replace-with-or-append-to'}}
@@ -9,7 +10,7 @@
     {{$request.append.to = 'section[name="' + $section.name + '"] .card'}}
 {{/if}}
 <div class="card-body h-100 card-body-add" data-menu=".settings-email-add">
-{{require($controller.dir.view + $controller.title + '/Email/Section/Form/Add.tpl', [])}}
+{{require($prefix + $require.module + '/Section/Form/' + $require.command + '.tpl')}}
 </div>
 {{script('module')}}
     {{require($controller.dir.view + $controller.title + '/Email/Module/Add.js')}}
