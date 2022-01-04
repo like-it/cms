@@ -1,4 +1,4 @@
-{R3M}
+{{R3M}}
 {{$field = 'extension'}}
 {{$label = $field|uppercase.first}}
 {{$label =  $label + '*'}}

@@ -1,4 +1,4 @@
-{R3M}
+{{R3M}}
 {{$field = 'host'}}
 {{$label = 'Domains'}}
 {{$validate = 'validate_string_length'}}

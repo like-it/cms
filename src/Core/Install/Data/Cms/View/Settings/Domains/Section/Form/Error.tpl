@@ -3,18 +3,20 @@
     <div class="mb-3">
         <p class="alert alert-danger">
 {{/if}}
-{{if(request.error('host.validate_string_length') === true)}}
-    The domain should consist of 1 character minimum.<br>
-{{/if}}
-{{if(request.error('extension.validate_string_length') === true)}}
-    The extension should consist of 1 character minimum.<br>
-{{/if}}
-{{if(request.error('theme.validate_in_array') === true)}}
-    Please select a valid theme from the list.<br>
-{{/if}}
-{{if(request.error('name.validate_is_unique_json') === true)}}
-    Please provide an unique name which consist of subdomain, domain & extension.<br>
-{{/if}}
+{{$__.module = $module|lowercase|replace:'-':'.'}}
+{{$__.submodule = $submodule|lowercase|replace:'-':'.'}}
+{{$__.command = $command|lowercase|replace:'-':'.'}}
+{{$request.error = [
+'extension.validate_string_length',
+'host.validate_string_length',
+'theme.validate_in_array',
+'name.validate_is_unique_json'
+]}}
+{{for.each($request.error as $error)}}
+    {{if(request.error($error) === true)}}
+        {{__($__.module + '.' + $__.submodule + '.form.' + $error)}}<br>
+    {{/if}}
+{{/for.each}}
 {{if(!is.empty($request.error))}}
         </p>
     </div>

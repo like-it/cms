@@ -1,7 +1,7 @@
-{R3M}
+{{R3M}}
 <button
     type="submit"
     class="btn btn-primary"
 >
-    Add
+    {{__('settings.domains.section.form.component.button.add')}}
 </button>

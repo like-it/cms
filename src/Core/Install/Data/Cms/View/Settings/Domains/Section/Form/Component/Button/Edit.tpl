@@ -3,5 +3,5 @@
     type="submit"
     class="btn btn-primary"
 >
-    Update
+    {{__('settings.domains.section.form.component.button.edit')}}
 </button>
