@@ -26,6 +26,7 @@ class Settings extends Main {
         }
         //make record request node
         $record = $object->request('node');
+        dd($record);
         return Settings::domains_put($object, $data, $record, $url);
     }
 
