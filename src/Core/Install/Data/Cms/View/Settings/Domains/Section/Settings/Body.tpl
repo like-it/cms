@@ -9,7 +9,7 @@
     {{$request.target = 'section[name="' + $section.name + '"] .card-body-settings'}}
     {{$request.append.to = 'section[name="' + $section.name + '"] .card'}}
 {{/if}}
-{{require($prefix + '/Domains/Section/' + $require.command + '/Component/Html/Card.Body.Settings.js')}}
+{{require($prefix + '/Domains/Section/' + $require.command + '/Component/Html/Card.Body.Settings.tpl')}}
 {{script('module')}}
     {{require($prefix + '/Domains/Module/' + $require.command + '.js')}}
 {{/script}}
