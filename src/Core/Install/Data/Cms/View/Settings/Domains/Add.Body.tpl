@@ -1,4 +1,4 @@
-{R3M}
+{{R3M}}
 {{response.view([
 'module' => $controller.name,
 'submodule' => 'domains',
