@@ -1,5 +1,5 @@
 {{R3M}}
-{{$field = __($__.module + '.' + $__.submodule + '.section.form.component.field.theme')}}
+{{$field = 'theme'}}
 {{$label = $field|uppercase.first}}
 {{$label =  $label + '*'}}
 {{$validate = 'validate_in_array'}}
