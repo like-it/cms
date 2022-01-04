@@ -12,6 +12,7 @@
         !is.empty($submodule) &&
         !is.empty($command)
     )}}
+        {{$require.module = $module|uppercase.first.sentence:'-'|replace:'-':'/'}}
         {{$require.submodule = $submodule|uppercase.first.sentence:'-'|replace:'-':'/'}}
         {{$require.command = $command|uppercase.first.sentence:'-'|replace:'-':'/'}}
         {{$require.subcommand = $subcommand|uppercase.first.sentence:'-'|replace:'-':'.'}}
@@ -29,6 +30,7 @@
         is.empty($submodule) &&
         !is.empty($command)
     )}}
+        {{$require.module = $module|uppercase.first.sentence:'-'|replace:'-':'/'}}
         {{$require.command = $command|uppercase.first.sentence:'-'|replace:'-':'/'}}
         {{$require.subcommand = $subcommand|uppercase.first.sentence:'-'|replace:'-':'.'}}
         {{if(!is.empty($debug))}}
