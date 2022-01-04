@@ -1,7 +1,7 @@
 {R3M}
 {{$field = 'extension'}}
 {{$label = $field|uppercase.first}}
-{{$label += '*'}
+{{$label =  $label + '*'}}
 {{$input.id = $module + '-' + $submodule + '-' + $field}}
 {{if(request.error('extension.validate_string_length') === false)}}
 {{$input.class = 'form-control'}}

@@ -1,7 +1,7 @@
 {R3M}
 {{$field = 'host'}}
 {{$label = $field|uppercase.first}}
-{{$label += '*'}
+{{$label =  $label + '*'}}
 {{$input.id = $module + '-' + $submodule + '-' + $field}}
 {{if(request.error('host.validate_string_length') === false)}}
 {{$input.class = 'form-control'}}
