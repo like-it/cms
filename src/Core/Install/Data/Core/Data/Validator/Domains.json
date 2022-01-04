@@ -22,7 +22,7 @@
             "theme" : [
                 {
                     "in.array" : [
-                        "defaut",
+                        "default",
                         "blog"
                     ]
                 }
