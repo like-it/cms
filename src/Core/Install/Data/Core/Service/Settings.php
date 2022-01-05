@@ -48,6 +48,9 @@ class Settings extends Main {
         return new Response($response, Response::TYPE_JSON);
     }
 
+    /**
+     * @throws Exception
+     */
     public static function domains_update(App $object, $uuid): Response
     {
         $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
@@ -56,7 +59,7 @@ class Settings extends Main {
             $data = new Data();
         }
         $record = $object->request('node');
-        return Settings::email_put($object, $data, $record, $url);
+        return Settings::domains_put($object, $data, $record, $url);
     }
 
     public static function domains_delete(App $object, $uuid): Response
