@@ -36,6 +36,7 @@
     "settings.domains.section.settings.component.thead.subdomain" : "Subdomain",
     "settings.domains.section.settings.component.thead.host" : "Domain",
     "settings.domains.section.settings.component.thead.extension" : "Extension",
+    "settings.domains.section.settings.component.thead.theme" : "Theme",
     "settings.domains.section.settings.component.thead.options" : "",
     "settings.domains.section.form.component.button.add" : "Add",
     "settings.domains.section.form.component.button.edit" : "Update",

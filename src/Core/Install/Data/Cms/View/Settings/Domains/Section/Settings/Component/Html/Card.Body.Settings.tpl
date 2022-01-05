@@ -8,6 +8,7 @@
 'subdomain',
 'host',
 'extension',
+'theme',
 'options'
 ]}}
 {{$options = [
