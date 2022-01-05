@@ -43,6 +43,8 @@
     "settings.domains.section.settings.body.component.options.default.action.title" : "Make default domain",
     "settings.domains.section.settings.body.component.options.default.icon" : "fas fa-award",
     "settings.domains.section.settings.body.component.options.default.title" : "Default domain",
+    "settings.domains.section.settings.body.component.options.delete.icon" : "far fa-trash-alt",
+    "settings.domains.section.settings.body.component.options.edit.icon" : "far fa-edit",
     "settings.domains.section.settings.body.component.thead.subdomain" : "Subdomain",
     "settings.domains.section.settings.body.component.thead.host" : "Domain",
     "settings.domains.section.settings.body.component.thead.extension" : "Extension",

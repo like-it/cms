@@ -6,7 +6,8 @@ $__.submodule +
 '.section.' +
 $__.command +
 '.' +
-$__.subcommand + '.component.options.edit.icon'
+$__.subcommand +
+'.component.options.edit.icon'
 )}}
 <i
     class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-edit"

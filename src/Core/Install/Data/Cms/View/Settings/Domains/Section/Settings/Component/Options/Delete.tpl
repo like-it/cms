@@ -6,7 +6,8 @@ $__.submodule +
 '.section.' +
 $__.command +
 '.' +
-$__.subcommand + '.component.options.delete.icon'
+$__.subcommand +
+'.component.options.delete.icon'
 )}}
 <i
     class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-delete"
