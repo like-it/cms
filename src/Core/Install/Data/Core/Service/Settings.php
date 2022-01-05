@@ -50,7 +50,7 @@ class Settings extends Main {
 
     public static function domains_update(App $object, $uuid): Response
     {
-        $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
+        $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
         $data = $object->data_read($url);
         if(!$data){
             $data = new Data();
@@ -61,15 +61,15 @@ class Settings extends Main {
 
     public static function domains_delete(App $object, $uuid): Response
     {
-        $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
+        $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
 
         $data = $object->data_read($url);
         if (!$data) {
             $data = new Data();
         }
-        $record = $data->get('email.' . $uuid);
-        $data->delete('email.' . $uuid);
-        $test = $data->get('email');
+        $record = $data->get($uuid);
+        $data->delete($uuid);
+        $test = $data->get();
         $has_default = false;
         foreach($test as $node_uuid => $node){
             if(
