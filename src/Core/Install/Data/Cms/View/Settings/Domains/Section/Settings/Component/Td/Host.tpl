@@ -1,4 +1,4 @@
-{R3M}
+{{R3M}}
 <td>
     {{$node.host}}
 </td>

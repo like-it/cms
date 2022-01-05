@@ -1,4 +1,4 @@
-{R3M}
+{{R3M}}
 <td class="text-end">
     {{if(is.empty($node.is.installed))}}
         {{for.each($options as $option)}}
