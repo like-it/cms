@@ -13,6 +13,6 @@ $__.subcommand +
     class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-delete"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$uuid}}"
     data-request-method="DELETE"
-    data-name="{{$node.from_email}}"
+    data-name="{{$node.name}}"
 >
 </i>
