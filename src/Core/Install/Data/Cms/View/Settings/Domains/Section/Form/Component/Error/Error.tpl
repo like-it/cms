@@ -1,11 +1,8 @@
-{R3M}
+{{R3M}}
 {{if(!is.empty($request.error))}}
     <div class="mb-3">
         <p class="alert alert-danger">
 {{/if}}
-{{$__.module = $module|lowercase|replace:'-':'.'}}
-{{$__.submodule = $submodule|lowercase|replace:'-':'.'}}
-{{$__.command = $command|lowercase|replace:'-':'.'}}
 {{$errors = [
 'extension.validate_string_length',
 'host.validate_string_length',

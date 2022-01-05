@@ -1,7 +1,10 @@
 {{R3M}}
 {{$field = 'theme'}}
+{{$label = __($__.module + '.' + $__.submodule + '.section.form.component.field.' + $field)}}
+{{if(is.empty($label))}}
 {{$label = $field|uppercase.first}}
 {{$label =  $label + '*'}}
+{{/if}}
 {{$validate = 'validate_in_array'}}
 {{$select.id = $module + '-' + $submodule + '-' + $field}}
 {{if(request.error($field + '.' + $validate) === false)}}

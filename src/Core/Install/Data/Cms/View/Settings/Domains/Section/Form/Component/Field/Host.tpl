@@ -1,8 +1,11 @@
 {{R3M}}
 {{$field = 'host'}}
+{{$label = __($__.module + '.' + $__.submodule + '.section.form.component.field.' + $field)}}
+{{if(is.empty($label))}}
 {{$label = 'Domains'}}
-{{$validate = 'validate_string_length'}}
 {{$label =  $label + '*'}}
+{{/if}}
+{{$validate = 'validate_string_length'}}
 {{$input.id = $module + '-' + $submodule + '-' + $field}}
 {{if(request.error($field + '.' + $validate) === false)}}
 {{$input.class = 'form-control'}}
