@@ -25,7 +25,7 @@
     name="{{$select.name}}"
 >
     {{for.each($select.options as $value => $option)}}
-        {{if($select.selected === $value)}}}
+        {{if($select.selected === $value)}}
             <option value="{{$value}}" selected="selected">{{$option}}</option>
         {{else}}
             <option value="{{$value}}">{{$option}}</option>
