@@ -152,7 +152,6 @@ class Settings extends Main {
     private static function domains_put(App $object, Data $data, stdClass $record, $url): Response
     {
         try {
-            dd($object->request());
             $validate = Main::validate($object, Settings::domains_getValidatorUrl($object), 'domain');
             if($validate) {
                 if ($validate->success === true) {
