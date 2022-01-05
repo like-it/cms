@@ -1,5 +1,8 @@
 {R3M}
-{{if($command === 'edit-body')}}
+{{if(
+$command === 'edit' &&
+$subcommand === 'body'
+)}}
     {{$section.name = 'main-content'}}
     {{$section.title = 'Main-content'}}
     {{$request.method = 'replace-with-or-append-to'}}
@@ -7,8 +10,8 @@
     {{$request.append.to = 'section[name="' + $section.name + '"] .card'}}
 {{/if}}
 <div class="card-body h-100 card-body-{{$request.node.uuid}}">
-{{require($controller.dir.view + $controller.title + '/Email/Section/Form/Edit.tpl', [])}}
+{{require($prefix + $require.submodule + '/Section/Form/' + $require.command + '.tpl')}}
 </div>
 {{script('module')}}
-    {{require($controller.dir.view + $controller.title + '/Email/Module/Edit.js')}}
+    {{require($prefix + $require.submodule + '/Module/' + $require.command + '.js')}}
 {{/script}}
