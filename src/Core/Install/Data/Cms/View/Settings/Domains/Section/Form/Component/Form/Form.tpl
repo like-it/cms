@@ -8,7 +8,7 @@
 <form
     name="{{$module}}-{{$submodule}}-{{$command}}-form"
     method="post"
-    data-url="{{data.url}}"
+    data-url="{{$data.url}}"
     data-url-error="{{$data.url.error)}}"
 >
     {{require($prefix + $require.submodule + '/Section/Form/Component/Error/Error.tpl')}}
