@@ -26,7 +26,7 @@
         <tr
 
             data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$uuid}}"
-            data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-' + $command)}}"
+            data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-body')}}"
         >
             {{for.each($components as $component)}}
             {{$require.basename = $component|uppercase.first.sentence:'.'}}
