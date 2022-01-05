@@ -165,7 +165,7 @@ settings.delete = (target) => {
     if(!section){
         return;
     }
-    let list = section.select('.' + "{{$module}}" + '-' +  "{{$submodule}}" +  '-delete');
+    let list = section.select('.' + "{{$module}}" + '-' +  "{{$submodule}}" + '-' + "{{$command}}" + '-delete');
     if(is.nodeList(list)){
         let index;
         for(index=0; index < list.length; index++){
@@ -199,7 +199,7 @@ settings.default = (target) => {
     if(!section){
         return;
     }
-    let list = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-default');
+    let list = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-default-action');
     if(is.nodeList(list)){
         let index;
         for(index=0; index < list.length; index++){
@@ -213,18 +213,16 @@ settings.default = (target) => {
                 }
             });
         }
-    } else {
+    } else if (list) {
         let node = list;
-        if(node){
-            node.on('click', (event) => {
-                if(node.data('has', 'url')){
-                    header('Authorization', 'Bearer ' + user.token());
-                    request(node.data('url'), null, (url, response) => {
-                        menu.dispatch(section, target);
-                    });
-                }
-            });
-        }
+        node.on('click', (event) => {
+            if(node.data('has', 'url')){
+                header('Authorization', 'Bearer ' + user.token());
+                request(node.data('url'), null, (url, response) => {
+                    menu.dispatch(section, target);
+                });
+            }
+        });
     }
 };
 
