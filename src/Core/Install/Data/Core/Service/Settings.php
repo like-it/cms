@@ -36,13 +36,13 @@ class Settings extends Main {
 
     public static function domains_read(App $object, $uuid): Response
     {
-        $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
+        $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
 
         $data = $object->data_read($url);
         if (!$data) {
             $data = new Data();
         }
-        $record = $data->get('email.' . $uuid);
+        $record = $data->get($uuid);
         $response = [];
         $response['node'] = $record;
         return new Response($response, Response::TYPE_JSON);
@@ -109,6 +109,38 @@ class Settings extends Main {
         //make nodeList or list
         $response['nodeList'] = $data->data();
         return new Response($response, Response::TYPE_JSON);
+    }
+
+    public static function domains_default(App $object): Response
+    {
+        // add security to controller
+        $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
+        $data = $object->data_read($url);
+        if(!$data){
+            $data = new Data();
+        }
+        $targetDefault = $data->get($object->request('uuid'));
+        if(empty($targetDefault)){
+            $data = [];
+            $data['error'] = 'Cannot find target default with uuid: ' . $object->request('uuid');
+            return new Response(
+                $data,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
+        } else {
+            $test = $data->get();
+            foreach($test as $uuid => $record){
+                unset($record->isDefault);
+            }
+            $data->set($object->request('uuid') . '.isDefault', true);
+            $data->write($url);
+
+            $record = $data->get($object->request('uuid'));
+            $data = [];
+            $data['node'] = $record;
+            return new Response($data, Response::TYPE_JSON);
+        }
     }
 
     /**

@@ -30,6 +30,10 @@ class Settings extends View {
         return Service::domains_create($object);
     }
 
+    public static function domains_default(App $object){
+        return Service::domains_default($object);
+    }
+
     public static function domains_command(App $object){
         $uuid = $object->request('node.uuid');
         try {
