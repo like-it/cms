@@ -207,7 +207,10 @@ settings.default = (target) => {
             node.on('click', (event) => {
                 if(node.data('has', 'url')){
                     header('Authorization', 'Bearer ' + user.token());
-                    request(node.data('url'), null, (url, response) => {
+                    const data = {
+                        "request-method" : "POST"
+                    }
+                    request(node.data('url'), data, (url, response) => {
                         menu.dispatch(section, target);
                     });
                 }
@@ -218,7 +221,10 @@ settings.default = (target) => {
         node.on('click', (event) => {
             if(node.data('has', 'url')){
                 header('Authorization', 'Bearer ' + user.token());
-                request(node.data('url'), null, (url, response) => {
+                const data = {
+                    "request-method" : "POST"
+                }
+                request(node.data('url'), data, (url, response) => {
                     menu.dispatch(section, target);
                 });
             }
