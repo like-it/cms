@@ -58,6 +58,11 @@ class Settings extends Main {
         if(!$data){
             $data = new Data();
         }
+        //make record request node
+        $object->request('node.name', $object->request('node.subdomain') ?
+            $object->request('node.subdomain') . '.' .  $object->request('node.host') . '.' . $object->request('node.extension')
+            :
+            $object->request('node.host') . '.' . $object->request('node.extension'));
         $record = $object->request('node');
         return Settings::domains_put($object, $data, $record, $url);
     }
@@ -158,7 +163,8 @@ class Settings extends Main {
                     if(empty($test) || Core::object_is_empty($test)){
                         $record->isDefault = true;
                     }
-                    $data->set($record->uuid, $record);
+                    $original = $data->get($record->uuid);
+                    $data->set($record->uuid, Core::object_merge($original, $record));
                     $data->write($url);
                     $data = [];
                     $data['node'] = $record;
