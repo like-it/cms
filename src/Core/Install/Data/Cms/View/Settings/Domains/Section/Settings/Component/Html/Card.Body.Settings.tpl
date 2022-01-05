@@ -22,7 +22,7 @@
         <thead>
         <tr>
             {{for.each($components as $component)}}
-            <th scope="col">{{__($__.module + '.' + $__.submodule + '.section.' + $__.command + '.component.thead.' + $component)}}</th>
+            <th scope="col">{{__($__.module + '.' + $__.submodule + '.section.' + $__.command + '.' + $__.subcommand + '.component.thead.' + $component)}}</th>
             {{/for.each}}
         </tr>
         </thead>
