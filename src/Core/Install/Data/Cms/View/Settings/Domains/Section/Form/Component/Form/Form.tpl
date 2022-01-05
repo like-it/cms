@@ -4,7 +4,7 @@
 {{elseif($command === 'edit')}}
 {{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/'}}
 {{/if}}
-{{$data.url.error = route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-' + $subcommand}}
+{{$data.url.error = route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-' + $subcommand)}}
 <form
     name="{{$module}}-{{$submodule}}-{{$command}}-form"
     method="post"
