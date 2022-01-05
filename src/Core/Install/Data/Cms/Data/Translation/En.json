@@ -27,6 +27,7 @@
     "settings.domains.component.header.a.main.link" : "Main",
     "settings.domains.component.header.a.settings.link" : "Settings",
     "settings.domains.component.header.a.add.link" : "Add domain",
+    "settings.domains.module.settings.delete" : "Are you sure you want to delete this item",
     "settings.domains.section.main.body.main.title" : "Domains",
     "settings.domains.section.main.body.main.text" : [
         "Markdown in my translation?.",

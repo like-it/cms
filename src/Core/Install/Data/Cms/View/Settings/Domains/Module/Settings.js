@@ -50,7 +50,7 @@ settings.edit = () => {
     if(!section){
         return;
     }
-    let list = section.select('.settings-email-settings-edit');
+    let list = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-edit');
     if(is.nodeList(list)){
         let index;
         for(index=0; index < list.length; index++){
@@ -119,9 +119,9 @@ settings.deleteDialog = (data) => {
     const footer = create('div', 'footer');
     head.html('<h1>' + data?.title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
     if(!is.empty(node.data('name'))){
-        body.html('<p>Are you sure you want to delete this item: ' + node.data('name') + '?<br></p>');
+        body.html('<p>' + "{{__($__.module + '.' + $__.submodule + '.Module.' + $__.command + '.delete')}}" + ': ' + node.data('name') + '?<br></p>');
     } else {
-        body.html('<p>Are you sure you want to delete this item?<br></p>');
+        body.html('<p>' + "{{__($__.module + '.' + $__.submodule + '.Module.' + $__.command + '.delete')}}" + '?<br></p>');
     }
     footer.html('<div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">Yes</button></div><div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-cancel">No</button></div>');
     dialog.appendChild(head);
@@ -165,7 +165,7 @@ settings.delete = (target) => {
     if(!section){
         return;
     }
-    let list = section.select('.settings-email-settings-delete');
+    let list = section.select('.' + "{{$module}}" + '-' +  "{{$submodule}}" +  '-delete');
     if(is.nodeList(list)){
         let index;
         for(index=0; index < list.length; index++){
