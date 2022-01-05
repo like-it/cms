@@ -199,7 +199,7 @@ settings.default = (target) => {
     if(!section){
         return;
     }
-    let list = section.select('.settings-email-account-default');
+    let list = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-default');
     if(is.nodeList(list)){
         let index;
         for(index=0; index < list.length; index++){
