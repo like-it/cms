@@ -1,9 +1,4 @@
 {{R3M}}
-{{$__.module = $module|lowercase|replace:'-':'.'}}
-{{$__.submodule = $submodule|lowercase|replace:'-':'.'}}
-{{$__.command = $command|lowercase|replace:'-':'.'}}
-{{$data.module = $module|uppercase.first.sentence:'-'|replace:'-':'/'}}
-{{$data.submodule = $submodule|uppercase.first.sentence:'-'|replace:'-':'/'}}
 {{$components = [
 'subdomain',
 'host',
@@ -30,7 +25,7 @@
         {{for.each($request.nodeList as $uuid => $node)}}
         <tr
 
-            data-url="{{server.url('core') + $data.module + '/' + $data.submodule + '/'}}{{$uuid}}"
+            data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$uuid}}"
             data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-' + $command)}}"
         >
             {{for.each($components as $component)}}
