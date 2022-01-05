@@ -1,4 +1,4 @@
-{R3M}
+{{R3M}}
 {{if(
 $command === 'edit' &&
 $subcommand === 'body'
