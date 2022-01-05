@@ -162,7 +162,7 @@ edit.focus = () => {
     if(focus){
         input = form.select('input[name="' + focus +'"]');
     } else {
-        input = form.select('input[name="node.from_name"]');
+        input = form.select('input[name="node.subdomain"]');
     }
     if(!input){
         return;
@@ -176,12 +176,12 @@ edit.init = () => {
     edit.form({
         select : [
             {
-                name : ".settings-email-edit-{{$request.node.uuid}} .fa-window-close",
+                name : ".{{$module}}-{{$submodule}}-{{$command}}-{{$request.node.uuid}} .fa-window-close",
                 event : new MouseEvent("click"),
                 hidden : true
             },
             {
-                name : ".settings-email-settings",
+                name : ".{{$module}}-{{$submodule}}-settings",
                 event : new MouseEvent("dblclick")
             }
         ]

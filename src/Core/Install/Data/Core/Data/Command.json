@@ -222,6 +222,16 @@
             "OPTIONS"
         ]
     },
+    "66a76088-cfe5-42ea-9016-fd8c1536144a" : {
+        "module" : "settings",
+        "submodule" : "domains",
+        "command" : "default",
+        "path": "Settings/Domains/Default/{$uuid}",
+        "method": [
+            "POST",
+            "OPTIONS"
+        ]
+    },
     "1fa6325a-4a13-4966-97fd-10678dd330ef" : {
         "module" : "settings",
         "submodule" : "domains",
@@ -231,16 +241,6 @@
             "GET",
             "PUT",
             "DELETE",
-            "OPTIONS"
-        ]
-    },
-    "66a76088-cfe5-42ea-9016-fd8c1536144a" : {
-        "module" : "settings",
-        "submodule" : "domains",
-        "command" : "default",
-        "path": "Settings/Domains/Default/{$uuid}",
-        "method": [
-            "POST",
             "OPTIONS"
         ]
     },
