@@ -38,7 +38,7 @@ edit.title = () => {
                 active.removeClass('active');
             }
             a.addClass('active');
-            edit.body();
+            edit.body('show');
         } else {
             //reload from data url & frontend url
         }
@@ -71,9 +71,9 @@ edit.body = (action) => {
     if(!section){
         return;
     }
+    let body;
+    let selected;
     switch(action){
-        let body;
-        let selected;
         case 'show' :
             body = section.select('.card-body');
             body.addClass('d-none');
