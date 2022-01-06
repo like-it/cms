@@ -1,6 +1,6 @@
 {{R3M}}
 {{$field = 'host'}}
-{{$label = 'Domains'}}
+{{$label = 'Domain'}}
 {{$label =  $label + '*'}}
 {{$validate = 'validate_string_length'}}
 {{$input.id = $module + '-' + $submodule + '-' + $field}}
