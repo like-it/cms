@@ -50,7 +50,7 @@ edit.title = () => {
             li.remove();
             edit.body('remove');
             console.log("{{$command}}");
-            const menuItem = section.select('.'+ "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}");
+            const menuItem = section.select('.'+ "{{$module}}" + '-' + "{{$submodule}}" + '-' + 'settings');
             console.log(menuItem);
             if(menuItem){
                 menuItem.trigger('click');
