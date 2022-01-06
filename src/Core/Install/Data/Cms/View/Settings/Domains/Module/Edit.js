@@ -49,7 +49,9 @@ edit.title = () => {
             event.stopPropagation();
             li.remove();
             edit.body('remove');
+            console.log("{{$command}}");
             const menuItem = section.select('.'+ "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}");
+            console.log(menuItem);
             if(menuItem){
                 menuItem.trigger('click');
             }
