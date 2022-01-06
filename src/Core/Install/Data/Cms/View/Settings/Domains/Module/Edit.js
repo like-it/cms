@@ -11,7 +11,7 @@ edit.title = () => {
     if(!section){
         return;
     }
-    const is_link = section.select('.settings-email-edit-' + "{{$request.node.uuid}}");
+    const is_link = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + '-' + "{{$command}}" + "{{$request.node.uuid}}");
     if(is_link){
         const nav = section.select('.nav');
         const active = nav.select('.active');
@@ -24,7 +24,7 @@ edit.title = () => {
     }
     const nav = section.select('.nav');
     const li = create('li', 'nav-item');
-    const a = create('a', 'nav-link settings-email-edit-' + "{{$request.node.uuid}}");
+    const a = create('a', 'nav-link ' + "{{$module}}" + '-' + "{{$command}}" + '-' + "{{$request.node.uuid}}");
     a.data('frontend-url', "");
     a.data('url', "");
     a.html("<span class='title'>{{$request.node.name}}</span><i class=\"fas fa-window-close\"></i>");
@@ -48,6 +48,7 @@ edit.title = () => {
         i.on('click', (event) => {
             event.stopPropagation();
             li.remove();
+            edit.body('remove');
             const menuItem = section.select('.'+ "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}");
             if(menuItem){
                 menuItem.trigger('click');
@@ -62,15 +63,30 @@ edit.title = () => {
     a.addClass('active');
 }
 
-edit.body = () => {
+edit.body = (action) => {
+    if(is.empty(action)){
+        action = 'show';
+    }
     const section = getSectionByName('main-content');
     if(!section){
         return;
     }
-    const body = section.select('.card-body');
-    body.addClass('d-none');
-    const selected = section.select('.card-body-' + "{{$request.node.uuid}}");
-    selected.removeClass('d-none');
+    switch(action){
+        let body;
+        let selected;
+        case 'show' :
+            body = section.select('.card-body');
+            body.addClass('d-none');
+            selected = section.select('.card-body-' + "{{$request.node.uuid}}");
+            selected.removeClass('d-none');
+            break;
+        case 'remove' :
+            body = section.select('.card-body');
+            body.addClass('d-none');
+            selected = section.select('.card-body-' + "{{$request.node.uuid}}");
+            selected.remove();
+            break;
+    }
 }
 
 edit.form = (target) => {
