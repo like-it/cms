@@ -24,7 +24,7 @@ edit.title = () => {
     }
     const nav = section.select('.nav');
     const li = create('li', 'nav-item');
-    const a = create('a', 'nav-link ' + "{{$module}}" + '-' + "{{$command}}" + '-' + "{{$request.node.uuid}}");
+    const a = create('a', 'nav-link ' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.node.uuid}}");
     a.data('frontend-url', "");
     a.data('url', "");
     a.html("<span class='title'>{{$request.node.name}}</span><i class=\"fas fa-window-close\"></i>");
