@@ -273,6 +273,55 @@
             "POST"
         ]
     },
+    "71b60d6f-2f1a-417e-85e1-e7dc385c72c7" : {
+        "module" : "settings",
+        "submodule" : "theme",
+        "command" : "main",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "d069c4d7-4872-4ccf-8d74-6bf53b180999" : {
+        "module" : "settings",
+        "submodule" : "theme",
+        "command" : "main",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "969a2b46-a4e8-41ac-8263-404410373b90" : {
+        "module" : "settings",
+        "submodule" : "theme",
+        "command" : "settings",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "d1d0e3ce-7257-41ec-bdff-809ca195589d" : {
+        "module" : "settings",
+        "submodule" : "theme",
+        "command" : "add",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "9ec4513f-ab40-402d-9ac5-1f2c2033af33" : {
+        "module" : "settings",
+        "submodule" : "theme",
+        "command" : "edit",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "2e61686d-449a-444b-95e6-9e5b1687e528" : {
         "module" : "system",
         "command" : "information",

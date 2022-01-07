@@ -162,6 +162,66 @@ class Settings extends View {
         }
     }
 
+    public static function theme_main(App $object){
+        $name = Settings::name(__FUNCTION__, __CLASS__, '/');
+        $name = explode('.', $name);
+        $name = implode('/', $name);
+        try {
+            if(App::contentType($object) == App::CONTENT_TYPE_HTML){
+                $url = Settings::locate($object, 'Main/Main');
+                $object->data('template.name', $name);
+                $object->data('template.dir', Settings::DIR);
+                $view = Settings::response($object, $url);
+            } else {
+                $url = Settings::locate($object, $name);
+                $view = Settings::response($object, $url);
+            }
+            return $view;
+        } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception){
+            return $exception;
+        }
+    }
+
+    public static function theme_main_body(App $object){
+        $name = Settings::name(__FUNCTION__, __CLASS__, '/');
+        try {
+            $url = Settings::locate($object, $name);
+            return Settings::response($object, $url);
+        } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception){
+            return $exception;
+        }
+    }
+
+    public static function theme_settings_body(App $object){
+        $name = Settings::name(__FUNCTION__, __CLASS__, '/');
+        try {
+            $url = Settings::locate($object, $name);
+            return Settings::response($object, $url);
+        } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception){
+            return $exception;
+        }
+    }
+
+    public static function theme_add_body(App $object){
+        $name = Settings::name(__FUNCTION__, __CLASS__, '/');
+        try {
+            $url = Settings::locate($object, $name);
+            return Settings::response($object, $url);
+        } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception){
+            return $exception;
+        }
+    }
+
+    public static function theme_edit_body(App $object){
+        $name = Settings::name(__FUNCTION__, __CLASS__, '/');
+        try {
+            $url = Settings::locate($object, $name);
+            return Settings::response($object, $url);
+        } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception){
+            return $exception;
+        }
+    }
+
     public static function email_main(App $object){
         $name = Settings::name(__FUNCTION__, __CLASS__, '/');
         $name = explode('.', $name);
