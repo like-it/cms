@@ -9,6 +9,6 @@
         data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $section + '-' + $node)}}"
         data-selected=".card-body-{{$section}}"
     >
-        {{__($__.module + '.' . + $__.submodule + '.component.header.a.' + $__.section + '.' + '.link')}}
+        {{__($__.module + '.' + $__.submodule + '.component.header.a.' + $__.section + '.' + '.link')}}
     </a>
 </li>
