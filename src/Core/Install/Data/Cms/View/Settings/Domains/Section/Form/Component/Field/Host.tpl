@@ -14,7 +14,7 @@
         {{if(is.empty($request.focus))}}
             {{$request.focus = 'node.' + $field}}
         {{/if}}
-    {/if}}
+    {{/if}}
 {{/for.each}}
 {{$input.type = 'text'}}
 {{$input.name = 'node.' + $field}}
