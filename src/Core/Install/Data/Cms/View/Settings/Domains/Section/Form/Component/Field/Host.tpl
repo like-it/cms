@@ -2,16 +2,20 @@
 {{$field = 'host'}}
 {{$label = 'Domain'}}
 {{$label =  $label + '*'}}
-{{$validate = 'validate_string_length'}}
+{{$validates = [
+'validate_string_length',
+'validate_not_contains'
+]}}
 {{$input.id = $module + '-' + $submodule + '-' + $field}}
-{{if(request.error($field + '.' + $validate) === false)}}
 {{$input.class = 'form-control'}}
-{{else}}
-{{$input.class = 'form-control alert-danger'}}
-{{if(is.empty($request.focus))}}
-{{$request.focus = 'node.' + $field}}
-{{/if}}
-{{/if}}
+{{for.each($validates as $validate)}}
+    {{if(request.error($field + '.' + $validate) === true)}}
+        {{$input.class = 'form-control alert-danger'}}
+        {{if(is.empty($request.focus))}}
+            {{$request.focus = 'node.' + $field}}
+        {{/if}}
+    {/if}}
+{{/for.each}}
 {{$input.type = 'text'}}
 {{$input.name = 'node.' + $field}}
 {{$input.value = request('node.' + $field)}}
