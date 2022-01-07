@@ -14,6 +14,8 @@
 {{/if}}
 {{$select.name = 'node.' + $field}}
 {{$select.selected = request('node.' + $field)}}
+{{$select.url = config('project.dir.data') + 'Theme.json'}}
+{{dd(json.select($select.url, 'theme'))}}
 {{$select.options = [
     "default" => "Default",
     "blog" => "Blog"
