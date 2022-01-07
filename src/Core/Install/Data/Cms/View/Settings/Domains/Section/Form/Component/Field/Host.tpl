@@ -4,7 +4,7 @@
 {{$label =  $label + '*'}}
 {{$validates = [
 'validate_string_length',
-'validate_not_contains'
+'validate_contains_a_z'
 ]}}
 {{$input.id = $module + '-' + $submodule + '-' + $field}}
 {{$input.class = 'form-control'}}
