@@ -14,10 +14,7 @@
                     "string.length": ">=1"
                 },
                 {
-                    "string.not.contains": " "
-                },
-                {
-                    "string.not.contains": "."
+                    "string.contains": "[a-z]"
                 }
             ],
             "extension" : [
