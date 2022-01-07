@@ -1,0 +1,25 @@
+{
+    "theme": {
+        "validate": {
+            "uuid" : [
+                {
+                    "string.length": "==36"
+                },
+                {
+                    "is.uuid" : true
+                }
+            ],
+            "name" : [
+                {
+                    "string.length": ">=3"
+                },
+                {
+                    "is.unique.json" : {
+                        "list" : "theme",
+                        "url" : "{{config('project.dir.data')}}Theme.json"
+                    }
+                }
+            ]
+        }
+    }
+}
