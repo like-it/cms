@@ -7,7 +7,7 @@
 {{$input.name = 'node.' + $field }}
 {{$input.value = request('node.' + $field)}}
 {{$input.placeholder = $label }}
-<label for="{{$module}}-{{$submodule}}-{{$field}}">{{$label}}</label>
+<label for="{{$input.id}}">{{$label}}</label>
 <input
     id="{{$module}}-{{$submodule}}-{{$field}}"
     class="{{$input.class}}"

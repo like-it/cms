@@ -5,6 +5,7 @@
 {{/if}}
 {{$errors = [
 'extension.validate_string_length',
+'extension.validate_string_contains',
 'host.validate_string_length',
 'host.validate_string_contains',
 'theme.validate_in_array',

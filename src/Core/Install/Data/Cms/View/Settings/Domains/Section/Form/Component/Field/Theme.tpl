@@ -2,21 +2,24 @@
 {{$field = 'theme'}}
 {{$label = $field|uppercase.first}}
 {{$label =  $label + '*'}}
-{{$validate = 'validate_in_array'}}
+{{$validates = [
+'validate_in_list',
+]}}
 {{$select.id = $module + '-' + $submodule + '-' + $field}}
-{{if(request.error($field + '.' + $validate) === false)}}
 {{$select.class = 'form-control'}}
-{{else}}
-{{$select.class = 'form-control alert-danger'}}
-{{if(is.empty($request.focus))}}
-{{$request.focus = 'node.' + $field}}
-{{/if}}
-{{/if}}
+{{for.each($validates as $validate)}}
+    {{if(request.error($field + '.' + $validate) === true)}}
+        {{$select.class = 'form-control alert-danger'}}
+        {{if(is.empty($request.focus))}}
+            {{$request.focus = 'node.' + $field}}
+        {{/if}}
+    {{/if}}
+{{/for.each}}
 {{$select.name = 'node.' + $field}}
 {{$select.selected = request('node.' + $field)}}
 {{$select.url = config('project.dir.data') + 'Theme.json'}}
 {{$select.options = json.select($select.url, 'theme')}}
-<label for="{{$module}}-{{$submodule}}-{{$field}}">{{$label}}</label>
+<label for="{{$select.id}}">{{$label}}</label>
 <select
     id="{{$select.id}}"
     class="{{$select.class}}"
