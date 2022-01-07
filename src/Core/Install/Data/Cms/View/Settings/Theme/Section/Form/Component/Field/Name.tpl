@@ -1,5 +1,5 @@
 {{R3M}}
-{{$field = 'extension'}}
+{{$field = 'name'}}
 {{$label = $field|uppercase.first}}
 {{$label =  $label + '*'}}
 {{$validate = 'validate_string_length'}}

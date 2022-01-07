@@ -272,6 +272,37 @@
             "OPTIONS"
         ]
     },
+    "20309eba-c677-417e-8557-67f4fa6ddb80" : {
+        "module" : "settings",
+        "submodule" : "theme",
+        "command" : "settings",
+        "method" : [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "2ffeb005-f077-4ebf-9983-17636d609d92" : {
+        "module" : "settings",
+        "submodule" : "theme",
+        "command" : "add",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "322849b4-6380-4d14-a565-dd328e92a3b7" : {
+        "module" : "settings",
+        "submodule" : "theme",
+        "command" : "command",
+        "path": "Settings/Theme/{$node.uuid}",
+        "method": [
+            "GET",
+            "PUT",
+            "DELETE",
+            "OPTIONS"
+        ]
+    },
     "5642e4a6-313e-40eb-9837-6af246c79a62" : {
         "module" : "settings",
         "submodule" : "email",

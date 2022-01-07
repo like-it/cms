@@ -96,4 +96,30 @@ class Settings extends View {
             return $exception;
         }
     }
+
+    public static function theme_settings(App $object): Response
+    {
+        return Service::theme_list($object);
+    }
+
+    public static function theme_add(App $object): Response
+    {
+        return Service::theme_create($object);
+    }
+
+    public static function theme_command(App $object){
+        $uuid = $object->request('node.uuid');
+        try {
+            switch (Handler::method()) {
+                case 'DELETE' :
+                    return Service::theme_delete($object, $uuid);
+                case 'GET' :
+                    return Service::theme_read($object, $uuid);
+                case 'PUT' :
+                    return Service::theme_update($object, $uuid);
+            }
+        } catch (Exception $exception) {
+            return $exception;
+        }
+    }
 }

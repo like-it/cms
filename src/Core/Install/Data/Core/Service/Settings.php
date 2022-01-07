@@ -354,4 +354,119 @@ class Settings extends Main {
             'Email' .
             $object->config('extension.json');
     }
+
+    /**
+     * @throws Exception
+     */
+    public static function theme_create(App $object): Response
+    {
+        $url = $object->config('project.dir.data') . 'Theme' . $object->config('extension.json');
+        $object->request('node.uuid', Core::uuid());
+        $data = $object->data_read($url);
+        if(!$data){
+            $data = new Data();
+        }
+        $record = $object->request('node');
+
+        return Settings::theme_put($object, $data, $record, $url);
+    }
+
+    public static function theme_read(App $object, $uuid): Response
+    {
+        $url = $object->config('project.dir.data') . 'Theme' . $object->config('extension.json');
+
+        $data = $object->data_read($url);
+        if (!$data) {
+            $data = new Data();
+        }
+        $record = $data->get('theme.' . $uuid);
+        $response = [];
+        $response['node'] = $record;
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function theme_update(App $object, $uuid): Response
+    {
+        $url = $object->config('project.dir.data') . 'Theme' . $object->config('extension.json');
+        $data = $object->data_read($url);
+        if(!$data){
+            $data = new Data();
+        }
+        $record = $object->request('node');
+        return Settings::theme_put($object, $data, $record, $url);
+    }
+
+    public static function theme_delete(App $object, $uuid): Response
+    {
+        $url = $object->config('project.dir.data') . 'Theme' . $object->config('extension.json');
+
+        $data = $object->data_read($url);
+        if (!$data) {
+            $data = new Data();
+        }
+        $record = $data->get('theme.' . $uuid);
+        $data->delete('theme.' . $uuid);
+        $data->write($url);
+
+        $response = [];
+        $response['node'] = $record;
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    public static function theme_list(App $object): Response
+    {
+        $url = $object->config('project.dir.data') . 'Theme' . $object->config('extension.json');
+
+        $data = $object->data_read($url);
+        if(!$data){
+            $data = new Data();
+        }
+
+        $response = [];
+        $response['nodeList'] = $data->data('theme');
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws Exception
+     */
+    private static function theme_put(App $object, Data $data, stdClass $record, $url): Response
+    {
+        try {
+            $validate = Main::validate($object, Settings::theme_getValidatorUrl($object), 'theme');
+            if($validate) {
+                if ($validate->success === true) {
+                    $original = $data->get('theme.' . $record->uuid);
+                    $data->set('theme.' . $record->uuid, Core::object_merge($original, $record));
+                    $data->write($url);
+                    $data = [];
+                    $data['node'] = $record;
+                    return new Response($data, Response::TYPE_JSON);
+                } else {
+                    $data = [];
+                    $data['error'] = $validate->test;
+                    return new Response(
+                        $data,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                }
+            } else {
+                throw new Exception('Cannot validate theme at: ' . Settings::theme_getValidatorUrl($object));
+            }
+        } catch (ObjectException $exception) {
+        }
+    }
+
+    private static function theme_getValidatorUrl(App $object): string
+    {
+        return $object->config('host.dir.data') .
+            'Validator' .
+            $object->config('ds') .
+            'Theme' .
+            $object->config('extension.json');
+    }
 }

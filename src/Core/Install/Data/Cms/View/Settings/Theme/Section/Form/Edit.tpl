@@ -2,9 +2,6 @@
 {{$fields = [
 'Uuid',
 'Update',
-'Subdomain',
-'Host',
-'Extension',
-'Theme',
+'Name'
 ]}}
 {{require($prefix + $require.submodule + '/Section/Form/Component/Form/Form.tpl')}}
