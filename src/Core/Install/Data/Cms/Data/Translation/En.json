@@ -240,6 +240,10 @@
         "test",
         "testing..."
     ],
+    "settings.theme.section.main.body.title" : "Themes",
+    "settings.theme.section.main.body.text" : [
+        "Download themes to get you started."
+    ],
     "system.information.section.menu.header.information" : "Information",
     "system.information.section.menu.header.update" : "Update",
     "system.information.section.information.body.title" : "Information",
