@@ -14,7 +14,9 @@
                     "string.length": ">=1"
                 },
                 {
-                    "string.contains": "[a-z]"
+                    "string.contains": {
+                        "regex" : "^[A-Za-z0-9_-]+$"
+                    }
                 }
             ],
             "extension" : [
