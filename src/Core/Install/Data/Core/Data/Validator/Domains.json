@@ -24,7 +24,7 @@
                     "in.list.json" : {
                         "list" : "theme",
                         "url" : "{{config('project.dir.data')}}Theme.json"
-                    },
+                    }
                 }
             ],
             "name" : [
