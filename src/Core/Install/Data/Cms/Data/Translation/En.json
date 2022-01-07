@@ -38,6 +38,7 @@
     "settings.domains.section.form.component.button.edit" : "Update",
     "settings.domains.section.form.error.extension.validate_string_length" : "The extension is required.",
     "settings.domains.section.form.error.host.validate_string_length" : "The domain is required.",
+    "settings.domains.section.form.error.host.validate_string_contains" : "The domain name must just be [a-z0-9]_- (alphabetical, numeric, _ or -)",
     "settings.domains.section.form.error.theme.validate_in_array" : "Please select a valid theme from the list.",
     "settings.domains.section.form.error.name.validate_is_unique_json" : "Please provide an unique name which consist of subdomain, domain & extension.",
     "settings.domains.section.settings.body.component.options.default.action.icon" : "fas fa-sign-out-alt",
