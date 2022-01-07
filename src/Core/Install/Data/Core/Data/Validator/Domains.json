@@ -22,6 +22,11 @@
             "extension" : [
                 {
                     "string.length": ">=1"
+                },
+                {
+                    "string.contains": {
+                        "regex" : "^[A-Za-z0-9_-]+$^"
+                    }
                 }
             ],
             "theme" : [
