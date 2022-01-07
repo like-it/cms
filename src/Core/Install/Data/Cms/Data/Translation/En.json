@@ -249,6 +249,10 @@
     "settings.theme.section.main.body.text" : [
         "Download themes to get you started."
     ],
+    "settings.theme.section.settings.body.component.thead.name" : "Name",
+    "settings.theme.section.settings.body.component.thead.options" : "",
+    "settings.theme.section.settings.body.component.options.delete.icon" : "far fa-trash-alt",
+    "settings.theme.section.settings.body.component.options.edit.icon" : "far fa-edit",
     "system.information.section.menu.header.information" : "Information",
     "system.information.section.menu.header.update" : "Update",
     "system.information.section.information.body.title" : "Information",
