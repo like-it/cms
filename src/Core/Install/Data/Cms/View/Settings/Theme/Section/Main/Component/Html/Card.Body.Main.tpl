@@ -1,4 +1,5 @@
 {{R3M}}
+{{$__.node = $__.subcommand|replace:'content':'body'}}
 <div class="card-body h-100 card-body-main">
     <h5 class="card-title">{{__(
         $__.module +
@@ -7,7 +8,7 @@
         '.section.' +
         $__.command +
         '.' +
-        $__.subcommand|replace:'content':'body' +
+        $__.node +
         '.title'
     )}}</h5>
     <p class="card-text">{{implode(
@@ -19,7 +20,7 @@
         '.section.' +
         $__.command +
         '.' +
-        $__.subcommand|replace:'content':'body' +
+        $__.node + 
         '.text'
     ))}}
     </p>
