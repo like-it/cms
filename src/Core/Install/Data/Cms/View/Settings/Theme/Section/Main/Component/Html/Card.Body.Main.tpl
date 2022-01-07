@@ -13,15 +13,15 @@
     )}}</h5>
     <p class="card-text">{{implode(
         "<br>\n",
-        __(__(
+        __(
         $__.module +
         '.' +
         $__.submodule  +
         '.section.' +
         $__.command +
         '.' +
-        $__.node + 
+        $__.node +
         '.text'
-    ))}}
+    )}}
     </p>
 </div>
