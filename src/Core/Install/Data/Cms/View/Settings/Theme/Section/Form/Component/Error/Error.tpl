@@ -4,9 +4,7 @@
         <p class="alert alert-danger">
 {{/if}}
 {{$errors = [
-'extension.validate_string_length',
-'host.validate_string_length',
-'theme.validate_in_array',
+'name.validate_string_length',
 'name.validate_is_unique_json'
 ]}}
 {{for.each($errors as $error)}}
