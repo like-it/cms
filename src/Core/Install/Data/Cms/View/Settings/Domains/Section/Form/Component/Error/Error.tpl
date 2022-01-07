@@ -6,7 +6,7 @@
 {{$errors = [
 'extension.validate_string_length',
 'host.validate_string_length',
-'host.not_contains',
+'host.validate_string_contains',
 'theme.validate_in_array',
 'name.validate_is_unique_json'
 ]}}
