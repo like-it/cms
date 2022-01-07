@@ -243,6 +243,7 @@
     "settings.theme.component.header.a.main.link" : "Main",
     "settings.theme.component.header.a.settings.link" : "Settings",
     "settings.theme.component.header.a.add.link" : "Add template",
+    "settings.theme.module.settings.delete" : "Are you sure you want to delete this item",
     "settings.theme.section.form.error.name.validate_is_unique_json" : "The name should be unique.",
     "settings.theme.section.form.error.name.validate_string_length" : "The name is required and minimal 3 characters in length.",
     "settings.theme.section.main.body.title" : "Themes",
