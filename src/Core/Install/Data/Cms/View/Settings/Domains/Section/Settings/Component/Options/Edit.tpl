@@ -11,7 +11,7 @@ $__.subcommand +
 )}}
 <i
     class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-edit"
-    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$uuid}}"
+    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.uuid}}"
     data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-body')}}"
 >
 </i>

@@ -11,7 +11,7 @@ $__.subcommand +
 )}}
 <i
     class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-delete"
-    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$uuid}}"
+    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.uuid}}"
     data-request-method="DELETE"
     data-name="{{$node.name}}"
 >

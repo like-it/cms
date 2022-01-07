@@ -49,7 +49,7 @@
     <i
         class="{{$i.icon}} {{$module}}-{{$submodule}}-default-action"
         title="{{$i.title}}"
-        data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Default/{{$uuid}}"
+        data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Default/{{$node.uuid}}"
         data-request-method="POST"
     >
     </i>
