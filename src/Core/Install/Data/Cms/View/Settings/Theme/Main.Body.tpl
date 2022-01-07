@@ -3,7 +3,7 @@
 'module' => $controller.name,
 'submodule' => 'theme',
 'command' => 'main',
-'subcommand' => 'body'
+'subcommand' => 'body',
 'init' => true,
 'prefix' => $controller.dir.view + $controller.title + '/',
 ])}}
