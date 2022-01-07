@@ -25,6 +25,7 @@
                 },
                 {
                     "string.contains": {
+                        "debug" : true,
                         "regex" : "^[a-z0-9_-]+$^"
                     }
                 }
