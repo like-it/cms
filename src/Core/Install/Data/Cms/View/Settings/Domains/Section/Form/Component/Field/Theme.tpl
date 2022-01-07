@@ -15,11 +15,7 @@
 {{$select.name = 'node.' + $field}}
 {{$select.selected = request('node.' + $field)}}
 {{$select.url = config('project.dir.data') + 'Theme.json'}}
-{{dd(json.select($select.url, 'theme'))}}
-{{$select.options = [
-    "default" => "Default",
-    "blog" => "Blog"
-]}}
+{{$select.options = json.select($select.url, 'theme')}}
 <label for="{{$module}}-{{$submodule}}-{{$field}}">{{$label}}</label>
 <select
     id="{{$select.id}}"
@@ -28,9 +24,9 @@
 >
     {{for.each($select.options as $value => $option)}}
         {{if($select.selected === $value)}}
-            <option value="{{$value}}" selected="selected">{{$option}}</option>
+            <option value="{{$value}}" selected="selected">{{$option.name}}</option>
         {{else}}
-            <option value="{{$value}}">{{$option}}</option>
+            <option value="{{$value}}">{{$option.name}}</option>
         {{/if}}
     {{/for.each}}
 </select>
