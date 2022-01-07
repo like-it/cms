@@ -197,6 +197,8 @@
     "settings.main.component.nav.a.stylesheets.link" : "Stylesheets",
     "settings.main.component.nav.a.templates.icon.class" : "fas fa-cog",
     "settings.main.component.nav.a.templates.link" : "Templates",
+    "settings.main.component.nav.a.theme.icon.class" : "fas fa-cog",
+    "settings.main.component.nav.a.theme.link" : "Themes",
     "settings.main.component.nav.a.token.settings.icon.class" : "fas fa-cog",
     "settings.main.component.nav.a.token.settings.link" : "Token settings",
     "settings.section.import.body.title" : "Import",
