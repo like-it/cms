@@ -1,7 +1,7 @@
 {{R3M}}
 {{$section = 'main'}}
 {{$__.section = $section|lowercase|replace:'-':'.'}}
-{{$require.section = $section|uppercase.first.sentence:'-'|replace:'-':'.'}}
+{{$require.section = $section|uppercase.first.sentence:'-'|replace:'-':'/'}}
 {{$node = 'body'}}
 <li class="nav-item">
     <a
