@@ -11,7 +11,7 @@ edit.title = () => {
     if(!section){
         return;
     }
-    const is_link = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + '-' + "{{$command}}" + "{{$request.node.uuid}}");
+    const is_link = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.node.uuid}}");
     if(is_link){
         const nav = section.select('.nav');
         const active = nav.select('.active');
