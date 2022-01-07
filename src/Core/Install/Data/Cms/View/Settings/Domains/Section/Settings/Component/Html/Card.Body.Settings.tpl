@@ -1,13 +1,9 @@
 {{R3M}}
 {{$components = [
-'subdomain',
-'host',
-'extension',
-'theme',
+'name',
 'options'
 ]}}
 {{$options = [
-'default',
 'edit',
 'delete'
 ]}}
