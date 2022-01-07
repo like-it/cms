@@ -21,10 +21,10 @@
             ],
             "theme" : [
                 {
-                    "in.array" : [
-                        "default",
-                        "blog"
-                    ]
+                    "in.list.json" : {
+                        "list" : "theme",
+                        "url" : "{{config('project.dir.data')}}Theme.json"
+                    },
                 }
             ],
             "name" : [
