@@ -240,6 +240,9 @@
         "test",
         "testing..."
     ],
+    "settings.theme.component.header.a.main.link" : "Main",
+    "settings.theme.component.header.a.settings.link" : "Settings",
+    "settings.theme.component.header.a.add.link" : "Add template",
     "settings.theme.section.main.body.title" : "Themes",
     "settings.theme.section.main.body.text" : [
         "Download themes to get you started."
