@@ -1,7 +1,7 @@
 {{R3M}}
 {{response.view([
 'module' => $controller.name,
-'submodule' => 'domains',
+'submodule' => 'thme',
 'command' => 'main',
 'init' => true,
 'prefix' => $controller.dir.view + $controller.title + '/',
