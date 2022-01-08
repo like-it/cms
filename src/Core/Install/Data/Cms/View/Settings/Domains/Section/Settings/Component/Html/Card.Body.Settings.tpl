@@ -4,13 +4,13 @@
 'host',
 'extension',
 'theme',
+'default',
 'options'
 ]}}
 {{$options = [
 'edit',
 'component',
 'controller',
-'default',
 'module',
 'node',
 'route',
