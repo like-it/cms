@@ -7,8 +7,16 @@
 'options'
 ]}}
 {{$options = [
-'default',
 'edit',
+'component',
+'controller',
+'default',
+'module',
+'node',
+'route',
+'script',
+'stylesheet',
+'template',
 'delete'
 ]}}
 <div class="card-body h-100 card-body-{{$command}}">
