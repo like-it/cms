@@ -9,10 +9,25 @@ $__.command +
 $__.subcommand +
 '.component.options.delete.icon'
 )}}
-<i
-    class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-delete"
+{{$span.text = __(
+$__.module +
+'.' +
+$__.submodule +
+'.section.' +
+$__.command +
+'.' +
+$__.subcommand +
+'.component.options.delete.text'
+)}}
+<a
+    class="dropdown-item"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.uuid}}"
     data-request-method="DELETE"
-    data-name="{{$node.name}}"
 >
-</i>
+    <i
+        class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-delete"
+        data-name="{{$node.name}}"
+    >
+    </i>
+    <span>{{$span.text}}</span>
+</a>
