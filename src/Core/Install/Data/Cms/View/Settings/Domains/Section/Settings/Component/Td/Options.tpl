@@ -5,7 +5,7 @@
             <button
                 class="btn btn-secondary dropdown-toggle"
                 type="button"
-                id="dropdownMenuButton-{{$node.uuid}}"
+                id="dropdownMenuButton"
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
@@ -14,7 +14,7 @@
             </button>
             <div
                 class="dropdown-menu"
-                aria-labelledby="dropdownMenuButton-{{$node.uuid}}"
+                aria-labelledby="dropdownMenuButton"
             >
                 {{for.each($options as $option)}}
                     {{$require.basename = $option|uppercase.first.sentence:'.'}}
