@@ -2,7 +2,8 @@
     "url" : "{$host.url}Main",
     "script" : [
         "<script src=\"http:\/\/script.universeorange.local:2603\/Js\/Priya\/Priya.js\"></script>",
-        "<script src=\"{$host.url|default:'/'}Bootstrap\/5.1.0\/js\/bootstrap.js\"></script>"
+        "<script src=\"{$host.url|default:'/'}Bootstrap\/5.1.0\/js\/bootstrap.js\"></script>",
+        "<script src=\"{$host.url|default:'/'}Popper\/2.11.2\/Js\/popper.min.js\"></script>"
     ],
     "link" : [        
         "<link rel=\"stylesheet\" href=\"{$host.url|default:'/'}Fontawesome\/5.15.2\/css\/all.css?{$version}\">",
