@@ -11,6 +11,7 @@
 'edit',
 'component',
 'controller',
+'default',
 'module',
 'node',
 'route',
