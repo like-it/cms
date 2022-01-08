@@ -5,7 +5,7 @@
             <button
                 class="btn btn-secondary dropdown-toggle"
                 type="button"
-                id="dropdownMenuButton-{$node.uuid}"
+                id="dropdownMenuButton-{{$node.uuid}}"
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
@@ -14,15 +14,12 @@
             </button>
             <div
                 class="dropdown-menu"
-                aria-labelledby="dropdownMenuButton-{$node.uuid}"
+                aria-labelledby="dropdownMenuButton-{{$node.uuid}}"
             >
                 {{for.each($options as $option)}}
                     {{$require.basename = $option|uppercase.first.sentence:'.'}}
                     {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Options/' + $require.basename + '.tpl')}}
                 {{/for.each}}
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
             </div>
         </div>
 
