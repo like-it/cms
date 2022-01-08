@@ -1,6 +1,7 @@
 {{R3M}}
 <td class="text-end">
-    {{if(is.empty($node.is.installed))}}
+    {{if(is.empty($node.is.installed)) && is.empty($is.test)}}
+    {{$is.test = true}}
         <div class="dropdown">
             <button
                 class="btn btn-secondary dropdown-toggle"
