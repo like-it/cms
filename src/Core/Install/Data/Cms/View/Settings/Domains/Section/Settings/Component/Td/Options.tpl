@@ -1,8 +1,7 @@
 {{R3M}}
 <td class="text-end">
     {{if(is.empty($node.is.installed))}}
-    <div class="dropstart">
-        <div class="dropdown">
+        <div class="dropdown dropstart">
             <button
                 class="btn btn-secondary dropdown-toggle"
                 type="button"
@@ -15,7 +14,6 @@
             </button>
             <div
                 class="dropdown-menu"
-                data-popper-placement="left-start"
             >
                 {{for.each($options as $option)}}
                     {{$require.basename = $option|uppercase.first.sentence:'.'}}
@@ -23,7 +21,6 @@
                 {{/for.each}}
             </div>
         </div>
-    </div>
     {{/if}}
 
 </td>
