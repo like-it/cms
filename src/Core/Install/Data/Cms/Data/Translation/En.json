@@ -71,6 +71,7 @@
     "settings.domains.section.settings.body.component.thead.host" : "Domain",
     "settings.domains.section.settings.body.component.thead.extension" : "Extension",
     "settings.domains.section.settings.body.component.thead.theme" : "Theme",
+    "settings.domains.section.settings.body.component.thead.default" : "",
     "settings.domains.section.settings.body.component.thead.options" : "",
     "settings.email.component.header.a.main.link" : "Main",
     "settings.email.component.header.a.settings.link" : "Settings",
