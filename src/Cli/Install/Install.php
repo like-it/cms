@@ -1,6 +1,8 @@
 <?php
 namespace LikeIt\Cms\Cli\Install;
 
+use R3m\Io\App;
+use R3m\Io\Config;
 use R3m\Io\Module\File;
 
 $dir = __DIR__;
