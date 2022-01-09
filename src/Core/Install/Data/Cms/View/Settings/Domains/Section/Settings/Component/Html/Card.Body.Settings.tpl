@@ -18,6 +18,7 @@
 'script',
 'stylesheet',
 'template',
+'visit',
 'delete'
 ]}}
 <div class="card-body h-100 card-body-{{$command}}">
