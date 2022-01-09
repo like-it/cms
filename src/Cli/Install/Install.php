@@ -35,6 +35,10 @@ if(!File::exist($index_url)){
     $command = 'chown www-data:www-data ' . $app->config('project.dir.public') . ' -R';
     Core::execute($command, $output);
     echo implode(PHP_EOL, $output);
+    $source = $dir . $app->config('ds') . 'Data' . $app->config('ds') . '1.jpg';
+    $destination = $app->config('project.dir.public') . 'Image' . $app->config('ds') . 'Background' . $app->config('ds') . '1.jpg';
+    File::copy($source, $destination);
+
 }
 
 $route_url = $app->config('project.dir.data') . 'Route.json';
