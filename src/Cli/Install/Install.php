@@ -23,6 +23,14 @@ $config = new Config(
     ]
 );
 $app = new App($autoload, $config);
-if(!File::exist($app->config('project.dir.data')) . 'Route.json'){
+
+$index_url = $app->config('project.dir.public') . 'index.php';
+if(!File::exist($index_url)){
+    echo 'create index...';
+}
+
+$route_url = $app->config('project.dir.data') . 'Route.json';
+
+if(!File::exist($route_url)){
     echo 'create route...';
 }
