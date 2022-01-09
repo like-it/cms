@@ -1,8 +1,40 @@
 {{R3M}}
-{{$option = 'default'}}
 <td class="text-end">
     {{if(is.empty($node.is.installed))}}
-        {{$require.basename = $option|uppercase.first.sentence:'.'}}
-        {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Options/' + $require.basename + '.tpl')}}
+        {{$i.icon = __(
+        $__.module +
+        '.' +
+        $__.submodule +
+        '.section.' +
+        $__.command +
+        '.' +
+        $__.subcommand +
+        '.component.options.default.icon'
+        )}}
+        {{$i.title = __(
+        $__.module +
+        '.' +
+        $__.submodule +
+        '.section.' +
+        $__.command +
+        '.' +
+        $__.subcommand +
+        '.component.options.default.title'
+        )}}
+        {{$span.text = __(
+        $__.module +
+        '.' +
+        $__.submodule +
+        '.section.' +
+        $__.command +
+        '.' +
+        $__.subcommand +
+        '.component.options.default.text'
+        )}}
+    <i
+        class="{{$i.icon}} {{$module}}-{{$submodule}}-is-default"
+        title="{{$i.title}}"
+    >
+    </i>
     {{/if}}
 </td>
