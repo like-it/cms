@@ -67,6 +67,8 @@
     "settings.domains.section.settings.body.component.options.stylesheet.text" : "Stylesheets",
     "settings.domains.section.settings.body.component.options.template.icon" : "fas fa-cog",
     "settings.domains.section.settings.body.component.options.template.text" : "Templates",
+    "settings.domains.section.settings.body.component.options.visit.icon" : "fas fa-cog",
+    "settings.domains.section.settings.body.component.options.visit.text" : "Visit",
     "settings.domains.section.settings.body.component.thead.subdomain" : "Subdomain",
     "settings.domains.section.settings.body.component.thead.host" : "Domain",
     "settings.domains.section.settings.body.component.thead.extension" : "Extension",

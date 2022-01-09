@@ -26,7 +26,8 @@ $__.subcommand +
 {{/if}}
 <a
     class="dropdown-item item-visit"
-    data-frontend-url="{{$node.url}}"
+    href="{{$node.url}}"
+    target="_blank"
 >
     <i
         class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-edit"
