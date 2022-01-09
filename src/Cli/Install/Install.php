@@ -32,16 +32,17 @@ if(!File::exist($index_url)){
     $command = 'funda configure public create';
     Core::execute($command, $output);
     echo implode(PHP_EOL, $output);
+    echo PHP_EOL . PHP_EOL;
     $source = $dir . $app->config('ds') . 'Data' . $app->config('ds') . '1.jpg';
     $destination_dir = $app->config('project.dir.public') . 'Image' . $app->config('ds') . 'Background' . $app->config('ds');
     Dir::create($destination_dir);
     $destination_url = $destination_dir . '1.jpg';
-    File::copy($source, $destination_url)
+    File::copy($source, $destination_url);
     $output = [];
     $command = 'chown www-data:www-data ' . $app->config('project.dir.public') . ' -R';
     Core::execute($command, $output);
     echo implode(PHP_EOL, $output);;
-
+    echo PHP_EOL . PHP_EOL;
 }
 
 $route_url = $app->config('project.dir.data') . 'Route.json';
@@ -55,4 +56,5 @@ if(!File::exist($route_url)){
     $command = 'chown www-data:www-data ' . $route_url;
     Core::execute($command, $output);
     echo implode(PHP_EOL, $output);
+    echo PHP_EOL . PHP_EOL;
 }
