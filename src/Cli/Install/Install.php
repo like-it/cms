@@ -31,6 +31,10 @@ if(!File::exist($index_url)){
     $command = 'funda configure public create';
     Core::execute($command, $output);
     echo implode(PHP_EOL, $output);
+    $output = [];
+    $command = 'chown www-data:www-data ' . $app->config('project.dir.public') . ' -R';
+    Core::execute($command, $output);
+    echo implode(PHP_EOL, $output);
 }
 
 $route_url = $app->config('project.dir.data') . 'Route.json';
@@ -38,6 +42,10 @@ $route_url = $app->config('project.dir.data') . 'Route.json';
 if(!File::exist($route_url)){
     $output = [];
     $command = 'funda configure route resource "{\$project.dir.vendor}like-it/cms/Data/Route.json"';
+    Core::execute($command, $output);
+    echo implode(PHP_EOL, $output);
+    $output = [];
+    $command = 'chown www-data:www-data ' . $route_url;
     Core::execute($command, $output);
     echo implode(PHP_EOL, $output);
 }
