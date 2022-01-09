@@ -31,7 +31,7 @@
     '.component.options.default.action.text'
     )}}
     <a
-        class="dropdown-item"
+        class="dropdown-item item-default"
         data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Default/{{$node.uuid}}"
         data-request-method="POST"
     >

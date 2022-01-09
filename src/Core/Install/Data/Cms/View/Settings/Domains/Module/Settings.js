@@ -160,6 +160,64 @@ settings.deleteDialog = (data) => {
     }
 }
 
+settings.actions = (target) => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    let list = section.select('.dropdown-item');
+    if(is.nodeList(list)){
+        let index;
+        for(index=0; index < list.length; index++){
+            let node = list[index];
+            if(node.hasClass('item-delete')){
+                node.on('click', (event) => {
+                    //make dialog delete with are you sure.
+                    settings.deleteDialog({
+                        node: node,
+                        section: section,
+                        target: target,
+                    });
+                });
+            }
+            else if(node.hasClass('item-default')){
+                node.on('click', (event) => {
+                    if(node.data('has', 'url')){
+                        header('Authorization', 'Bearer ' + user.token());
+                        const data = {
+                            "request-method" : "POST"
+                        }
+                        request(node.data('url'), data, (url, response) => {
+                            menu.dispatch(section, target);
+                        });
+                    }
+                });
+            }
+            else {
+                node.on('click', (event) => {
+                    if(node.data('has', 'url') && node.data('has', 'frontend-url')){
+                        header('Authorization', 'Bearer ' + user.token());
+                        request(node.data('url'), null, (url, response) => {
+                            request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+
+                            });
+                        });
+                    }
+                    else if(node.data('has', 'frontend-url')){
+                        request(node.data('frontend-url'), null, (url, response) => {
+
+                        });
+                    }
+                });
+            }
+
+        }
+    }
+    else if(list){
+        let node = list;
+    }
+}
+
 settings.delete = (target) => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -251,6 +309,10 @@ settings.body = () => {
 settings.init = () => {
     settings.body();
     settings.onDoubleClick();
+    settings.actions({
+        select: ".{{$module}}-{{$submodule}}-{{$command}}",
+        event: new MouseEvent("dblclick")
+    });
     settings.default({
         select : ".{{$module}}-{{$submodule}}-{{$command}}",
         event : new MouseEvent("dblclick")

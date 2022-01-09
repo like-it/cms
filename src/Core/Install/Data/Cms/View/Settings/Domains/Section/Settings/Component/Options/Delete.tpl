@@ -20,7 +20,7 @@ $__.subcommand +
 '.component.options.delete.text'
 )}}
 <a
-    class="dropdown-item"
+    class="dropdown-item item-delete"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.uuid}}"
     data-request-method="DELETE"
 >

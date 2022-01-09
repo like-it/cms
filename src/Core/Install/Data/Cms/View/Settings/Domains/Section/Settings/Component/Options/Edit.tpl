@@ -20,7 +20,7 @@ $__.subcommand +
 '.component.options.edit.text'
 )}}
 <a
-    class="dropdown-item"
+    class="dropdown-item item-edit"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.uuid}}"
     data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-body')}}"
 >
