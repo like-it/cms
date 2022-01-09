@@ -15,6 +15,7 @@
             </button>
             <div
                 class="dropdown-menu"
+                data-popper-placement="left-start"
             >
                 {{for.each($options as $option)}}
                     {{$require.basename = $option|uppercase.first.sentence:'.'}}
