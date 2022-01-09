@@ -3,6 +3,7 @@ namespace LikeIt\Cms\Cli\Install;
 
 use R3m\Io\App;
 use R3m\Io\Config;
+use R3m\Io\Module\Core;
 use R3m\Io\Module\File;
 
 $dir = __DIR__;
@@ -26,11 +27,17 @@ $app = new App($autoload, $config);
 
 $index_url = $app->config('project.dir.public') . 'index.php';
 if(!File::exist($index_url)){
-    echo 'create index...';
+    $output = [];
+    $command = 'funda configure public create';
+    Core::execute($command, $output);
+    echo implode(PHP_EOL, $output);
 }
 
 $route_url = $app->config('project.dir.data') . 'Route.json';
 
 if(!File::exist($route_url)){
-    echo 'create route...';
+    $output = [];
+    $command = 'funda configure route resource "{\$project.dir.vendor}like-it/cms/Data/Route.json"';
+    Core::execute($command, $output);
+    echo implode(PHP_EOL, $output);
 }
