@@ -31,13 +31,15 @@ if(!File::exist($index_url)){
     $command = 'funda configure public create';
     Core::execute($command, $output);
     echo implode(PHP_EOL, $output);
+    $source = $dir . $app->config('ds') . 'Data' . $app->config('ds') . '1.jpg';
+    $destination_dir = $app->config('project.dir.public') . 'Image' . $app->config('ds') . 'Background' . $app->config('ds');
+    Dir::create($destination_dir);
+    $destination_url = $destination_dir . '1.jpg';
+    File::copy($source, $destination_url)
     $output = [];
     $command = 'chown www-data:www-data ' . $app->config('project.dir.public') . ' -R';
     Core::execute($command, $output);
-    echo implode(PHP_EOL, $output);
-    $source = $dir . $app->config('ds') . 'Data' . $app->config('ds') . '1.jpg';
-    $destination = $app->config('project.dir.public') . 'Image' . $app->config('ds') . 'Background' . $app->config('ds') . '1.jpg';
-    File::copy($source, $destination);
+    echo implode(PHP_EOL, $output);;
 
 }
 
