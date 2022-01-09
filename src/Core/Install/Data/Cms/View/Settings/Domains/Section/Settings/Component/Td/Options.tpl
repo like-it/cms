@@ -1,5 +1,5 @@
 {{R3M}}
-<td class="text-end">
+<td class="text-end dropstart">
     {{if(is.empty($node.is.installed))}}
         <div class="dropdown">
             <button
