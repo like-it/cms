@@ -19,10 +19,10 @@ $__.command +
 $__.subcommand +
 '.component.options.visit.text'
 )}}
-{{if(!is.empty($node.subdomain)}}
-{{$node.url = 'https://' + $node.subdomain + '.' + $node.host + '.' . $node.extension}}
+{{if(!is.empty($node.subdomain))}}
+{{$node.url = 'https://' + $node.subdomain + '.' + $node.host + '.' + $node.extension}}
 {{else}}
-{{$node.url = 'https://' + $node.host + '.' . $node.extension}}
+{{$node.url = 'https://' + $node.host + '.' + $node.extension}}
 {{/if}}
 <a
     class="dropdown-item item-visit"
