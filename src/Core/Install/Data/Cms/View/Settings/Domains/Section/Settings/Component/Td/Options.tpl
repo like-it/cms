@@ -13,7 +13,7 @@
                 Actions
             </button>
             <div
-                class="dropdown-menu"
+                class="dropdown-menu dropdown-menu-start"
             >
                 {{for.each($options as $option)}}
                     {{$require.basename = $option|uppercase.first.sentence:'.'}}
