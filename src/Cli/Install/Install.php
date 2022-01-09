@@ -17,12 +17,12 @@ if(!is_dir($dir_vendor)){
 
 $autoload = $dir_vendor . 'autoload.php';
 $autoload = require $autoload;
-$config = new R3m\Io\Config(
+$config = new Config(
     [
         'dir.vendor' => $dir_vendor
     ]
 );
-$app = new R3m\Io\App($autoload, $config);
+$app = new App($autoload, $config);
 if(!File::exist($app->config('project.dir.data')) . 'Route.json'){
     echo 'create route...';
 }
