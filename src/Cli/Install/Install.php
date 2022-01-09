@@ -8,13 +8,15 @@ $dir_vendor =
     'vendor' .
     DIRECTORY_SEPARATOR;
 
+var_dump($dir_vendor);
+die;
+
 if(!is_dir($dir_vendor)){
     echo 'Please start bash in the CLI...';
     return;
 }
 
-var_dump($dir_vendor);
-die;
+
 
 $autoload = $dir_vendor . 'autoload.php';
 $autoload = require $autoload;
