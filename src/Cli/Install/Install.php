@@ -3,7 +3,7 @@ namespace LikeIt\Cms\Cli\Install;
 
 $dir = __DIR__;
 $dir_vendor =
-    dirname($dir, 4) .
+    dirname($dir, 5) .
     DIRECTORY_SEPARATOR;
 
 var_dump($dir_vendor);
