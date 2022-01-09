@@ -313,6 +313,7 @@ settings.init = () => {
         select: ".{{$module}}-{{$submodule}}-{{$command}}",
         event: new MouseEvent("dblclick")
     });
+    /*
     settings.default({
         select : ".{{$module}}-{{$submodule}}-{{$command}}",
         event : new MouseEvent("dblclick")
@@ -322,6 +323,7 @@ settings.init = () => {
         select: ".{{$module}}-{{$submodule}}-{{$command}}",
         event: new MouseEvent("dblclick")
     });
+     */
 }
 
 ready(() => {
