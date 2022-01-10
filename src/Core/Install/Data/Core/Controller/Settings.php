@@ -25,12 +25,16 @@ class Settings extends View {
         return Service::domains_list($object);
     }
 
+    /**
+     * @throws Exception
+     */
     public static function domains_add(App $object): Response
     {
         return Service::domains_create($object);
     }
 
-    public static function domains_default(App $object){
+    public static function domains_default(App $object): Response
+    {
         return Service::domains_default($object);
     }
 
@@ -61,7 +65,8 @@ class Settings extends View {
     }
 
 
-    public static function email_account_default(App $object){
+    public static function email_account_default(App $object): Response
+    {
         return Service::email_account_default($object);
     }
 
@@ -102,6 +107,9 @@ class Settings extends View {
         return Service::theme_list($object);
     }
 
+    /**
+     * @throws Exception
+     */
     public static function theme_add(App $object): Response
     {
         return Service::theme_create($object);

@@ -13,7 +13,7 @@ use R3m\Io\Exception\FileNotExistException;
 class FileSystem extends View {
     const DIR = __DIR__ . DIRECTORY_SEPARATOR;
 
-    public static function read(App $object): Exception|Response
+    public static function read(App $object)
     {
         try {
             return Service::read($object);;
@@ -22,7 +22,7 @@ class FileSystem extends View {
         }
     }
 
-    public static function delete(App $object): Exception|Response
+    public static function delete(App $object)
     {
         try {
             return Service::delete($object);;
