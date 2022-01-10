@@ -8,7 +8,7 @@
 'extension.validate_string_contains',
 'host.validate_string_length',
 'host.validate_string_contains',
-'theme.validate_in_array',
+'theme.validate_in_list_json',
 'name.validate_is_unique_json'
 ]}}
 {{for.each($errors as $error)}}
