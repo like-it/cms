@@ -42,7 +42,7 @@ if(!File::exist($index_url)){
     $command = 'chown www-data:www-data ' . $app->config('project.dir.public') . ' -R';
     Core::execute($command, $output);
     echo implode(PHP_EOL, $output);;
-    echo PHP_EOL . PHP_EOL;
+    echo PHP_EOL;
 }
 
 $route_url = $app->config('project.dir.data') . 'Route.json';
@@ -56,6 +56,6 @@ if(!File::exist($route_url)){
     $command = 'chown www-data:www-data ' . $route_url;
     Core::execute($command, $output);
     echo implode(PHP_EOL, $output);
-    echo PHP_EOL . PHP_EOL;
+    echo PHP_EOL;
 }
 exit();
