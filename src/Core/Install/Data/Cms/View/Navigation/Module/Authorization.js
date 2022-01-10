@@ -1,6 +1,8 @@
 //{{R3M}}
 import user from "/Module/User.js";
 ready(() => {
+    console.log(user.token());
+    return;
     if(user.token()){
         const url = "{{server.url('core')}}User/Current/";
         header('Authorization', 'Bearer ' + user.token());
