@@ -25,7 +25,10 @@
     class="{{$select.class}}"
     name="{{$select.name}}"
 >
-    {{if(is.array($select.options))}}
+    {{if(
+        is.array($select.options) ||
+        is.object($select.options)
+    )}}
         {{for.each($select.options as $value => $option)}}
             {{if($select.selected === $value)}}
                 <option value="{{$value}}" selected="selected">{{$option.name}}</option>
