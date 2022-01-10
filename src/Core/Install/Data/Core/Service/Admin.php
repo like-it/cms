@@ -86,110 +86,112 @@ class Admin extends Main
                 $object->config('project.dir.data') . 'Input' . $object->config('ds'),
                 true
             );
-            foreach ($read as $nr => $file) {
-                if ($file->type !== File::TYPE) {
-                    continue;
-                }
-                if(File::extension($file->url) !== 'token') {
-                    continue;
-                }
-                try {
-                    $url = Dir::name($file->url) . File::basename($file->url, '.token') . '.task';
-                    $url_begin = $dir_output . File::basename($file->url, '.token') . '.begin';
-                    $url_end = $dir_output . File::basename($file->url, '.token') . '.end';
-                    $basename = File::basename($url);
-                    if (!File::exist($url)) {
-                        $content = 'Task File for: ' . $basename . ' doesn\'t exist.' . PHP_EOL;
-                        foreach($read as $node){
-                            $content .= $node->url . PHP_EOL;
+            if(is_array($read)){
+                foreach ($read as $nr => $file) {
+                    if ($file->type !== File::TYPE) {
+                        continue;
+                    }
+                    if(File::extension($file->url) !== 'token') {
+                        continue;
+                    }
+                    try {
+                        $url = Dir::name($file->url) . File::basename($file->url, '.token') . '.task';
+                        $url_begin = $dir_output . File::basename($file->url, '.token') . '.begin';
+                        $url_end = $dir_output . File::basename($file->url, '.token') . '.end';
+                        $basename = File::basename($url);
+                        if (!File::exist($url)) {
+                            $content = 'Task File for: ' . $basename . ' doesn\'t exist.' . PHP_EOL;
+                            foreach($read as $node){
+                                $content .= $node->url . PHP_EOL;
+                            }
+                            File::write($dir_output . $basename, $content);
+                            File::delete($file->url);
+                            File::chown(
+                                $dir_output,
+                                'www-data',
+                                'www-data',
+                                true
+                            );
+                            continue;
                         }
-                        File::write($dir_output . $basename, $content);
+                        elseif(File::exist($url_begin)){
+                            continue;
+                        }
+                        $token = File::read($file->url);
+                        $token_unencrypted = Jwt::decryptToken($object, $token);
+                        $claims = $token_unencrypted->claims();
+                        if ($claims->has('user')) {
+                            $user = $claims->get('user');
+                            $uuid = false;
+                            $email = false;
+                            if (array_key_exists('uuid', $user)) {
+                                $uuid = $user['uuid'];
+                            }
+                            if (array_key_exists('email', $user)) {
+                                $email = $user['email'];
+                            }
+                            if ($uuid && $email) {
+                                $object->request('email', $email);
+                                $user = User::getUserByEmail($object);
+                                if (!$user) {
+                                    $content = 'Cannot find user...';
+                                    File::write($dir_output . $basename, $content);
+                                    File::delete($url);
+                                    File::delete($file->url);
+                                    File::chown(
+                                        $dir_output,
+                                        'www-data',
+                                        'www-data',
+                                        true
+                                    );
+                                    continue;
+                                }
+                            }
+                            $is_admin = false;
+                            if ($user) {
+                                $is_admin = UserRole::has(
+                                    $object,
+                                    UserRole::get(
+                                        $object,
+                                        $user
+                                    ),
+                                    'ROLE_IS_ADMIN'
+                                );
+                            }
+                            if ($is_admin === true) {
+                                //we have permission to execute
+                                File::touch($url_begin);
+                                $task = File::read($url);
+                                $output = [];
+                                Dir::change($object->config('project.dir.root'));
+                                Core::execute($task, $output);
+                                File::write($dir_output . $basename, implode(PHP_EOL, $output));
+                            } else {
+                                $content = 'No Administrator...' . PHP_EOL;
+                                File::write($dir_output . $basename, $content);
+                            }
+                        } else {
+                            $content = 'Invalid claim detected in token...' . PHP_EOL;
+                            File::write($dir_output . $basename, $content);
+                        }
                         File::delete($file->url);
+                        File::delete($url);
+                        File::touch($url_end);
                         File::chown(
                             $dir_output,
                             'www-data',
                             'www-data',
                             true
                         );
-                        continue;
-                    }
-                    elseif(File::exist($url_begin)){
-                        continue;
-                    }
-                    $token = File::read($file->url);
-                    $token_unencrypted = Jwt::decryptToken($object, $token);
-                    $claims = $token_unencrypted->claims();
-                    if ($claims->has('user')) {
-                        $user = $claims->get('user');
-                        $uuid = false;
-                        $email = false;
-                        if (array_key_exists('uuid', $user)) {
-                            $uuid = $user['uuid'];
-                        }
-                        if (array_key_exists('email', $user)) {
-                            $email = $user['email'];
-                        }
-                        if ($uuid && $email) {
-                            $object->request('email', $email);
-                            $user = User::getUserByEmail($object);
-                            if (!$user) {
-                                $content = 'Cannot find user...';
-                                File::write($dir_output . $basename, $content);
-                                File::delete($url);
-                                File::delete($file->url);
-                                File::chown(
-                                    $dir_output,
-                                    'www-data',
-                                    'www-data',
-                                    true
-                                );
-                                continue;
-                            }
-                        }
-                        $is_admin = false;
-                        if ($user) {
-                            $is_admin = UserRole::has(
-                                $object,
-                                UserRole::get(
-                                    $object,
-                                    $user
-                                ),
-                                'ROLE_IS_ADMIN'
-                            );
-                        }
-                        if ($is_admin === true) {
-                            //we have permission to execute
-                            File::touch($url_begin);
-                            $task = File::read($url);
-                            $output = [];
-                            Dir::change($object->config('project.dir.root'));
-                            Core::execute($task, $output);
-                            File::write($dir_output . $basename, implode(PHP_EOL, $output));
-                        } else {
-                            $content = 'No Administrator...' . PHP_EOL;
-                            File::write($dir_output . $basename, $content);
-                        }
-                    } else {
-                        $content = 'Invalid claim detected in token...' . PHP_EOL;
-                        File::write($dir_output . $basename, $content);
-                    }
-                    File::delete($file->url);
-                    File::delete($url);
-                    File::touch($url_end);
-                    File::chown(
-                        $dir_output,
-                        'www-data',
-                        'www-data',
-                        true
-                    );
-                } catch(
+                    } catch(
                     Exception |
                     FileWriteException |
                     AuthorizationException
                     $exception
-                ){
-                    //add output file with $exception
-                    File::delete($file->url);
+                    ){
+                        //add output file with $exception
+                        File::delete($file->url);
+                    }
                 }
             }
             sleep(1);
