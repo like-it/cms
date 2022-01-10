@@ -5,8 +5,6 @@ ready(() => {
         const url = "{{server.url('core')}}User/Current/";
         header('Authorization', 'Bearer ' + user.token());
         request(url, null, (url, response) => {
-            console.log(response);
-            return;
             if(!is.empty(response.user)){
                 user.data(response.user);
             } else {
