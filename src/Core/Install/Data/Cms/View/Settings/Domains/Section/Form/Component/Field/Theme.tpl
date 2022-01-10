@@ -25,12 +25,15 @@
     class="{{$select.class}}"
     name="{{$select.name}}"
 >
-    {{for.each($select.options as $value => $option)}}
-        {{if($select.selected === $value)}}
-            <option value="{{$value}}" selected="selected">{{$option.name}}</option>
-        {{else}}
-            <option value="{{$value}}">{{$option.name}}</option>
-        {{/if}}
-    {{/for.each}}
+    {{if(is.array($select.options))}}
+        {{for.each($select.options as $value => $option)}}
+            {{if($select.selected === $value)}}
+                <option value="{{$value}}" selected="selected">{{$option.name}}</option>
+            {{else}}
+                <option value="{{$value}}">{{$option.name}}</option>
+            {{/if}}
+        {{/for.each}}
+    {{/if}}
+
 </select>
 <br>
