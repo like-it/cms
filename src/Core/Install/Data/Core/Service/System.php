@@ -1,6 +1,7 @@
 <?php
 namespace Host\Subdomain\Host\Extension\Service;
 
+use stdClass;
 use LikeIt\Cms\Core\Install\Service\Update;
 use R3m\Io\App;
 use R3m\Io\Module\Core;
@@ -12,6 +13,10 @@ use R3m\Io\Exception\AuthorizationException;
 use R3m\Io\Exception\FileWriteException;
 
 class System extends Main {
+
+    public static function install(App $object, stdClass $installation){
+
+    }
 
 
     public static function update(App $object){
