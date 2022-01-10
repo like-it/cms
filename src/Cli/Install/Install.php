@@ -7,6 +7,9 @@ use R3m\Io\Module\Core;
 use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
 
+echo 'Hello world!';
+
+/*
 $dir = __DIR__;
 $dir_vendor =
     dirname($dir, 5) .
@@ -58,5 +61,5 @@ if(!File::exist($route_url)){
     echo implode(PHP_EOL, $output);
     echo PHP_EOL;
 }
-echo $app->run($app);
 exit();
+*/
