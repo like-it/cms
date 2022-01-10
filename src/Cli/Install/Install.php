@@ -58,5 +58,5 @@ if(!File::exist($route_url)){
     echo implode(PHP_EOL, $output);
     echo PHP_EOL;
 }
-echo $app->run();
+echo $app->run($app);
 exit();
