@@ -27,7 +27,7 @@ class User extends View {
     const EXCEPTION_COMMAND = 'invalid command (' . System::EXCEPTION_COMMAND_PARAMETER . ')' . PHP_EOL;
 
     const INFO = [
-        '{binary()} user token <email>            | Request a login token with e-mail',
+        '{binary()} user token <email>             | Request a login token with e-mail',
     ];
 
     /**
