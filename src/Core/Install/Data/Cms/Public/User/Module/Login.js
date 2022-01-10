@@ -104,6 +104,8 @@ login.post = (event) => {
             localStorage.setItem('token', response.user?.token);
             localStorage.setItem('refreshToken', response.user?.refreshToken);
             const node = response.user;
+            console.log(node);
+            return;
             delete node.token;
             delete node.refreshToken;
             user.data(node);
