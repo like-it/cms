@@ -33,7 +33,7 @@ class User extends View {
     /**
      * @throws Exception
      */
-    public static function command(App $object): Exception|Response
+    public static function command(App $object)
     {
         if(Handler::method() === Handler::METHOD_CLI){
             $command = $object->parameter($object, User::NAME, 1);
@@ -114,7 +114,7 @@ class User extends View {
         }
     }
 
-    public static function login(App $object): Exception|Response
+    public static function login(App $object)
     {
         try {
             $is_blocked = Service::is_blocked($object);
@@ -128,7 +128,7 @@ class User extends View {
         }
     }
 
-    public static function current(App $object): Exception|AuthorizationException|Response
+    public static function current(App $object)
     {
         try {
             return Service::current($object);
