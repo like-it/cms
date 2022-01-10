@@ -238,7 +238,8 @@ class User extends Main {
         }
     }
 
-    public static function list(App $object){
+    public static function list(App $object): Response
+    {
         $limit = $object->request('limit') ? $object->request('limit') : User::DEFAULT_LIMIT;
         $sort = $object->request('sort') ? $object->request('sort') : User::DEFAULT_SORT;
         $order = $object->request('order') ? $object->request('order') : User::DEFAULT_ORDER;
@@ -294,7 +295,8 @@ class User extends Main {
         }
     }
 
-    public static function activate(App $object){
+    public static function activate(App $object): Response
+    {
         $uuid = $object->request('uuid');
         $activation_code = $object->request('activation_code');
         $activation_time = time();
@@ -428,7 +430,8 @@ class User extends Main {
         throw new AuthorizationException('Authentication failure... (invalid claim)');
     }
 
-    public static function token(App $object){
+    public static function token(App $object): Response
+    {
         $configuration = Jwt::configuration($object);
         $node = User::getUserByEmail($object);
         $options = [];

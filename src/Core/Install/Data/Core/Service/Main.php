@@ -13,7 +13,8 @@ use R3m\Io\Module\Validate;
 class Main {
     const ERROR_STATUS = 400;
 
-    protected static function criteria(App $object){
+    protected static function criteria(App $object): array
+    {
         $criteria = [];
         foreach($object->request() as $attribute => $value){
             if($attribute === 'request'){
@@ -45,7 +46,8 @@ class Main {
         return $criteria;
     }
 
-    protected static function page(App $object, $limit=20){
+    protected static function page(App $object, $limit=20): int
+    {
         $nr = $object->request('page');
         if(empty($nr)){
             $nr = 1;
@@ -75,7 +77,7 @@ class Main {
         return false;
     }
 
-    public static function getDataUrl(App $object)
+    public static function getDataUrl(App $object): string
     {
         //change to project.dir.root.node
         return $object->config('host.dir.root') .

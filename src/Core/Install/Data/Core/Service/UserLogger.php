@@ -18,7 +18,8 @@ class UserLogger extends Main {
 
     const LOGIN_PERIOD = '-15 Minutes';
 
-    public static function log(App $object, $user=null, $status=null){
+    public static function log(App $object, $user=null, $status=null): void
+    {
         $url = UserLogger::getDataUrl($object);
         $data = $object->data_read($url);
         if(!$data){
@@ -40,7 +41,8 @@ class UserLogger extends Main {
         $data->write($url);
     }
 
-    public static function count(App $object, $user=null, $status=null){
+    public static function count(App $object, $user=null, $status=null): int
+    {
         if(
             $user !== null &&
             property_exists($user, 'uuid')

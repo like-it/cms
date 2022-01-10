@@ -14,7 +14,7 @@ class Admin extends Main
 {
     const CRON_INTERVAL = 60;
 
-    public static function task(App $object): null | string
+    public static function task(App $object)
     {
         try {
             $task  = App::parameter($object, 'task', 1);
