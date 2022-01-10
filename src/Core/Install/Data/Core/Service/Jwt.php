@@ -49,7 +49,7 @@ class Jwt {
     ];
 
 
-    public static function get(App $object, Configuration $configuration, $options=[]): Plain
+    public static function get(App $object, Configuration $configuration, $options=[])
     {
         $url = $object->config('project.dir.data') . 'Config.json';
         $config  = $object->parse_read($url, sha1($url));
@@ -81,7 +81,7 @@ class Jwt {
             ->getToken($configuration->signer(), $configuration->signingKey());
     }
 
-    public static function refresh_get(App $object, Configuration $configuration, $options=[]): Plain
+    public static function refresh_get(App $object, Configuration $configuration, $options=[])
     {
         $url = $object->config('project.dir.data') . 'Config.json';
         $config  = $object->parse_read($url, sha1($url));
@@ -115,7 +115,7 @@ class Jwt {
             ->getToken($configuration->signer(), $configuration->signingKey());
     }
 
-    public static function configuration(App $object, $options=[]): Configuration
+    public static function configuration(App $object, $options=[])
     {
         $url = $object->config('project.dir.data') . 'Config.json';
         $config  = $object->parse_read($url, sha1($url));
@@ -145,7 +145,7 @@ class Jwt {
     /**
      * @throws AuthorizationException
      */
-    public static function decryptToken(App $object, $token): Token|UnencryptedToken
+    public static function decryptToken(App $object, $token)
     {
         $options = [];
         $url = $object->config('project.dir.data') . 'Config.json';
@@ -170,7 +170,7 @@ class Jwt {
         return $token_unencrypted;
     }
 
-    public static function decryptRefreshToken(App $object, $token): Token|UnencryptedToken
+    public static function decryptRefreshToken(App $object, $token)
     {
         $options = [
             'refresh' => true
