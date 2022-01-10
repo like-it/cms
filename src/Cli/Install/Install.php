@@ -31,7 +31,7 @@ $app = new App($autoload, $config);
 $index_url = $app->config('project.dir.public') . 'index.php';
 if(!File::exist($index_url)){
     $output = [];
-    $command = 'funda configure public create';
+    $command = 'funda configure public create Public';
     Core::execute($command, $output);
     echo implode(PHP_EOL, $output);
     echo PHP_EOL . PHP_EOL;
@@ -47,7 +47,7 @@ if(!File::exist($index_url)){
     echo PHP_EOL;
 }
 
-/*
+
 $route_url = $app->config('project.dir.data') . 'Route.json';
 
 if(!File::exist($route_url)){
@@ -62,4 +62,3 @@ if(!File::exist($route_url)){
     echo PHP_EOL;
 }
 exit();
-*/
