@@ -7,9 +7,8 @@ use R3m\Io\Module\Core;
 use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
 
-echo 'Hello world!';
 
-/*
+
 $dir = __DIR__;
 $dir_vendor =
     dirname($dir, 5) .
@@ -48,6 +47,7 @@ if(!File::exist($index_url)){
     echo PHP_EOL;
 }
 
+/*
 $route_url = $app->config('project.dir.data') . 'Route.json';
 
 if(!File::exist($route_url)){
