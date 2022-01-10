@@ -4,9 +4,11 @@
         {{$json.url = config('project.dir.data') + 'Theme.json'}}
         {{$themes = json.select($json.url, 'theme')}}
     {{/if}}
-    {{for.each($themes as $uuid => $theme)}}
-        {{if($uuid === $node.theme)}}
+    {{if(is.array($themes))}}
+        {{for.each($themes as $uuid => $theme)}}
+            {{if($uuid === $node.theme)}}
             {{$theme.name}}
-        {{/if}}
-    {{/for}}
+            {{/if}}
+        {{/for.each}}
+    {{/if}}
 </td>
