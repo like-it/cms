@@ -34,7 +34,7 @@ if(!File::exist($index_url)){
     $command = 'funda configure public create Public';
     Core::execute($command, $output);
     echo implode(PHP_EOL, $output);
-    echo PHP_EOL . PHP_EOL;
+    echo PHP_EOL;
     $source = $dir . $app->config('ds') . 'Data' . $app->config('ds') . '1.jpg';
     $destination_dir = $app->config('project.dir.public') . 'Image' . $app->config('ds') . 'Background' . $app->config('ds');
     Dir::create($destination_dir);
@@ -43,8 +43,6 @@ if(!File::exist($index_url)){
     $output = [];
     $command = 'chown www-data:www-data ' . $app->config('project.dir.public') . ' -R';
     Core::execute($command, $output);
-    echo implode(PHP_EOL, $output);;
-    echo PHP_EOL;
 }
 
 
