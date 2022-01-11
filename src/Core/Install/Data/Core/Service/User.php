@@ -41,6 +41,9 @@ class User extends Main {
 
     public static function create(App $object): Response
     {
+        if(empty($object->config('host.dir.root'))){
+            Host::dir_root($object);
+        }
         $object->request('uuid', Core::uuid());
         $validate = Main::validate($object, User::getValidatorUrl($object), 'user');
         if($validate){

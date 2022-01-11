@@ -20,6 +20,9 @@ class UserLogger extends Main {
 
     public static function log(App $object, $user=null, $status=null): void
     {
+        if(empty($object->config('host.dir.root'))){
+            Host::dir_root($object);
+        }
         $url = UserLogger::getDataUrl($object);
         $data = $object->data_read($url);
         if(!$data){
@@ -43,6 +46,9 @@ class UserLogger extends Main {
 
     public static function count(App $object, $user=null, $status=null): int
     {
+        if(empty($object->config('host.dir.root'))){
+            Host::dir_root($object);
+        }
         if(
             $user !== null &&
             property_exists($user, 'uuid')

@@ -24,5 +24,7 @@ function function_system_install(Parse $parse, Data $data, stdClass $installatio
     if(property_exists($installation, 'domain')){
         $object->request('domain', $installation->domain);
     }
+    //host dir root
+
     return \LikeIt\Cms\Core\Install\Service\Install::start($object);
 }
