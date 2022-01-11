@@ -10,6 +10,13 @@
             "POST"
         ]
     },
+    "cms-system-install": {
+        "path": "install",
+        "controller": "LikeIt.Cms.Core.Install.Controller.Install.cli",
+        "method": [
+            "CLI"
+        ]
+    },
     "cms-install-process": {
         "path": "\/Installation\/Process\/",
         "host": [
