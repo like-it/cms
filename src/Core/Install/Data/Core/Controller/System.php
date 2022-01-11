@@ -31,7 +31,6 @@ class System extends View {
     const EXCEPTION_COMMAND = 'invalid command (' . System::EXCEPTION_COMMAND_PARAMETER . ')' . PHP_EOL;
 
     const INFO = [
-        '{binary()} system install                 | Install the core & cms on one domain',
         '{binary()} system update                  | Performs a system update from package like-it/cms',
     ];
 
