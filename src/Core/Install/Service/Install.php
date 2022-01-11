@@ -72,12 +72,10 @@ class Install {
                     $data->set($uuid . '.is.installed', true);
                     $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
                     $data->write($url);
-                    dd(posix_getuid());
-                    /*
-                    if(){
+                    if(posix_getuid() === 0){
+                        File::chown($url, 'www-data', 'www-data');
 
                     }
-                    */
                     $object->config(
                         'host.dir.root',
                         $object->config('project.dir.root') .
@@ -207,21 +205,33 @@ class Install {
             $object->config('controller.dir.data') . 'Pem' . $object->config('ds') . 'Token_cert.pem',
             $object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'Token_cert.pem'
         );
+        if(posix_getuid() === 0){
+            File::chown($object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'Token_cert.pem', 'www-data', 'www-data');
+        }
         File::chmod($object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'Token_cert.pem', File::CHMOD);
         File::copy(
             $object->config('controller.dir.data') . 'Pem' . $object->config('ds') . 'Token_key.pem',
             $object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'Token_key.pem'
         );
+        if(posix_getuid() === 0){
+            File::chown($object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'Token_key.pem', 'www-data', 'www-data');
+        }
         File::chmod($object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'Token_key.pem', File::CHMOD);
         File::copy(
             $object->config('controller.dir.data') . 'Pem' . $object->config('ds') . 'RefreshToken_cert.pem',
             $object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'RefreshToken_cert.pem'
         );
+        if(posix_getuid() === 0){
+            File::chown($object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'RefreshToken_cert.pem', 'www-data', 'www-data');
+        }
         File::chmod($object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'RefreshToken_cert.pem', File::CHMOD);
         File::copy(
             $object->config('controller.dir.data') . 'Pem' . $object->config('ds') . 'RefreshToken_key.pem',
             $object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'RefreshToken_key.pem'
         );
+        if(posix_getuid() === 0){
+            File::chown($object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'RefreshToken_key.pem', 'www-data', 'www-data');
+        }
         File::chmod($object->config('project.dir.data') . 'Pem' . $object->config('ds') . 'RefreshToken_key.pem', File::CHMOD);
     }
 
