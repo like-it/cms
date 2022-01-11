@@ -17,7 +17,7 @@ class Install {
     const PASSPHRASE = '';
     const NOW = 'now';
     const TOKEN_EXPIRE = '+9 hours';
-    const REFRESH_TOKEN_EXPIRE = '+24 hours';
+    const REFRESH_TOKEN_EXPIRE = '+48 hours';
 
     public static function start(App $object){
         $email = $object->request('email');
@@ -72,7 +72,12 @@ class Install {
                     $data->set($uuid . '.is.installed', true);
                     $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
                     $data->write($url);
+                    dd(posix_getuid());
+                    /*
+                    if(){
 
+                    }
+                    */
                     $object->config(
                         'host.dir.root',
                         $object->config('project.dir.root') .
