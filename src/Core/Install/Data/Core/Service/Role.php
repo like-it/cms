@@ -26,6 +26,9 @@ class Role extends Main {
     const IS_ADMIN = 'ROLE_IS_ADMIN';
 
     public static function install(App $object){
+        if(empty($object->config('host.dir.root'))){
+            Host::dir_root($object);
+        }
         $url = Role::getDataUrl($object);
         $data = $object->data_read($url);
         if(!$data){
