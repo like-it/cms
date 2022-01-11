@@ -123,6 +123,7 @@ class Install {
                         $object->request('activation_code', $user->parameter->activation_code);
                         $response = $user_service::activate($object);
                         $user = $response->data();
+                        dd($user);
                         if(
                             is_object($user) &&
                             property_exists($user, 'isActive') &&
