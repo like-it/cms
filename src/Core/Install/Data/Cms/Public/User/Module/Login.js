@@ -45,11 +45,15 @@ login.loader = (type) => {
     switch (type){
         case 'start' :
             const submit = select('button[type="submit"]');
-            submit.html(submit.html() + '<i class="fas fa-spinner fa-spin"></i>');
+            if(submit){
+                submit.html(submit.html() + '<i class="fas fa-spinner fa-spin"></i>');
+            }
             break;
         case 'end' :
             const load = select('button[type="submit"] i');
-            load.remove();
+            if(load){
+                load.remove();
+            }
             break;
     }
 }
