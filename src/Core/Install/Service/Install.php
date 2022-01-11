@@ -29,6 +29,7 @@ class Install {
         $validate = Install::validate($object, $url, 'user');
 
         if(
+            is_object($validate) &&
             property_exists($validate, 'success') &&
             $validate->success === true
         ){
@@ -139,6 +140,7 @@ class Install {
             }
         }
         elseif(
+            is_object($validate) &&
             property_exists($validate, 'success') &&
             $validate->success === false
         ){
