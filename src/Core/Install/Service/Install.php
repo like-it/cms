@@ -122,8 +122,8 @@ class Install {
                         $object->request('uuid', $user->uuid);
                         $object->request('activation_code', $user->parameter->activation_code);
                         $response = $user_service::activate($object);
+                        dd($user_service::getDataUrl($object));
                         $user = $response->data();
-                        dd($user);
                         if(
                             is_object($user) &&
                             property_exists($user, 'isActive') &&
