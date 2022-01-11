@@ -110,6 +110,7 @@ class Install {
                     install::certificate_config($object);
                     $user_service::install($object);
                     $response = $user_service::create($object);
+                    dd($response);
                     $user = $response->data();
                     if(
                         is_object($user) &&
@@ -130,7 +131,7 @@ class Install {
                         ){
                             //activated
                         } else {
-                            //could not active user
+                            //could not activate user
                             return $response;
                         }
                     } else {
