@@ -44,9 +44,7 @@ menu.onClick = () => {
             if(event.detail === 1){
                 const selected = section.select(node.data('selected'));
                 menu.is_selected(node, selected);
-            } else {
-                menu.is_selected(node);
-            }
+            } 
         });
         node.on('dblclick', (event) => {
             const list = section.select('.nav-link');
