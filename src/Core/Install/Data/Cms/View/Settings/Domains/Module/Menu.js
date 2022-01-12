@@ -64,7 +64,7 @@ menu.onClick = () => {
 menu.init = () => {
     //const route = "{{route.get(route.prefix() + '-settings-email-main')}}";
     //window.history.pushState(route, route, route);
-    menu.onClick();
+    //menu.onClick();
 }
 
 ready(() => {
