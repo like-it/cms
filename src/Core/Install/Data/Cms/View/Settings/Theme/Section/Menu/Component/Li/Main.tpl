@@ -5,7 +5,7 @@
 {{$node = 'body'}}
 <li class="nav-item">
     <a
-        class="nav-link {{$module}}-{{$submodule}}-{{$section}}"
+        class="nav-link active {{$module}}-{{$submodule}}-{{$section}}"
         data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $section + '-' + $node)}}"
         data-selected=".card-body-{{$section}}"
     >
