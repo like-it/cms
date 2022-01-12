@@ -234,6 +234,7 @@ class Host {
         if(!$data){
             $data = new Data();
         }
+        dd($options);
         if($data){
             if(
                 array_key_exists('name', $options) &&
