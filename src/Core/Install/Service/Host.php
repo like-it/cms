@@ -234,7 +234,6 @@ class Host {
         if(!$data){
             $data = new Data();
         }
-        dd($options);
         if($data){
             if(
                 array_key_exists('name', $options) &&
@@ -521,6 +520,9 @@ class Host {
             $object->config('ds') .
             'Command.json';
         $options['view'] = 'Overview.tpl';
+        if($object->request('port')){
+            $options['port'] = $object->request('port');
+        }
         if(array_key_exists('SERVER_PORT', $_SERVER)){
             $options['port'] = $_SERVER['SERVER_PORT'];
         }

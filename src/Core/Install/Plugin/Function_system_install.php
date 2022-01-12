@@ -24,6 +24,9 @@ function function_system_install(Parse $parse, Data $data, stdClass $installatio
     if(property_exists($installation, 'domain')){
         $object->request('domain', $installation->domain);
     }
+    if(property_exists($installation, 'port')){
+        $object->request('port', $installation->port);
+    }
     //host dir root
     $result = \LikeIt\Cms\Core\Install\Service\Install::start($object);
     if(posix_getuid() === 0){
