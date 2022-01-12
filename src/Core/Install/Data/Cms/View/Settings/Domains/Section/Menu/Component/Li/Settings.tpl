@@ -1,11 +1,15 @@
-{R3M}
+{{R3M}}
+{{$section = 'settings'}}
+{{$__.section = $section|lowercase|replace:'-':'.'}}
+{{$require.section = $section|uppercase.first.sentence:'-'|replace:'-':'/'}}
+{{$node = 'body'}}
 <li class="nav-item">
     <a
-        class="nav-link settings-domains-settings"
-        data-url="{{server.url('core')}}Settings/Domains/Settings/"
-        data-frontend-url="{{route.get(route.prefix()+ '-settings-domains-settings-body')}}"
-        data-selected=".card-body-settings"
+        class="nav-link {{$module}}-{{$submodule}}-{{$section}}"
+        data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.section}}/"
+        data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $section + '-' + $node)}}"
+        data-selected=".card-body-{{$section}}"
     >
-        {{__('settings.domains.component.header.a.settings.link')}}
+        {{__($__.module + '.' + $__.submodule + '.component.header.a.' + $__.section + '.' + 'link')}}
     </a>
 </li>
