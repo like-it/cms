@@ -43,6 +43,7 @@ menu.onClick = () => {
             }
             if(event.detail === 1){
                 const selected = section.select(node.data('selected'));
+                console.log('selected', selected);
                 menu.is_selected(node, selected);
             }
         });
