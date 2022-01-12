@@ -1,6 +1,6 @@
 {R3M}
 {{script('module')}}
-{{require($controller.dir.view + $controller.title + '/Email/Module/Menu.js')}}
+{{require($prefix + 'Module/Menu.js')}}
 {{/script}}
 <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
