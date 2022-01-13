@@ -371,6 +371,147 @@ class Settings extends Main {
     /**
      * @throws Exception
      */
+    public static function routes_create(App $object): Response
+    {
+        $url = $object->config('controller.dir.data') . 'Command' . $object->config('extension.json');
+        dd($url);
+        $object->request('node.uuid', Core::uuid());
+        $data = $object->data_read($url);
+        if(!$data){
+            $data = new Data();
+        }
+        $record = $object->request('node');
+
+        return Settings::routes_put($object, $data, $record, $url);
+    }
+
+    public static function routes_read(App $object, $uuid): Response
+    {
+        $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
+
+        $data = $object->data_read($url);
+        if (!$data) {
+            $data = new Data();
+        }
+        $record = $data->get($uuid);
+        $response = [];
+        $response['node'] = $record;
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function routes_update(App $object, $uuid): Response
+    {
+        $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
+        $data = $object->data_read($url);
+        if(!$data){
+            $data = new Data();
+        }
+        //make record request node
+        $object->request('node.name', $object->request('node.subdomain') ?
+            $object->request('node.subdomain') . '.' .  $object->request('node.host') . '.' . $object->request('node.extension')
+            :
+            $object->request('node.host') . '.' . $object->request('node.extension'));
+        $record = $object->request('node');
+        return Settings::domains_put($object, $data, $record, $url);
+    }
+
+    public static function routes_delete(App $object, $uuid): Response
+    {
+        $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
+
+        $data = $object->data_read($url);
+        if (!$data) {
+            $data = new Data();
+        }
+        $record = $data->get($uuid);
+        $data->delete($uuid);
+        $test = $data->get();
+        $has_default = false;
+        foreach($test as $node_uuid => $node){
+            if(
+                property_exists($node, 'isDefault') &&
+                $node->isDefault === true
+            ){
+                $has_default = true;
+                break;
+            }
+        }
+        if($has_default === false){
+            $node = false;
+            foreach($test as $node_uuid => $node){
+                break;
+            }
+            if($node){
+                $node->isDefault = true;
+            }
+        }
+        $data->write($url);
+
+        $response = [];
+        $response['node'] = $record;
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    public static function routes_list(App $object): Response
+    {
+        $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
+
+        $data = $object->data_read($url);
+        if(!$data){
+            $data = new Data();
+        }
+
+        $response = [];
+        $response['nodeList'] = $data->data();
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws Exception
+     */
+    private static function routes_put(App $object, Data $data, stdClass $record, $url): Response
+    {
+        try {
+            $validate = Main::validate($object, Settings::routes_getValidatorUrl($object), 'command');
+            if($validate) {
+                if ($validate->success === true) {
+                    $original = $data->get($record->uuid);
+                    $data->set($record->uuid, Core::object_merge($original, $record));
+                    $data->write($url);
+                    $data = [];
+                    $data['node'] = $record;
+                    return new Response($data, Response::TYPE_JSON);
+                } else {
+                    $data = [];
+                    $data['error'] = $validate->test;
+                    return new Response(
+                        $data,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                }
+            } else {
+                throw new Exception('Cannot validate domain at: ' . Settings::domains_getValidatorUrl($object));
+            }
+        } catch (ObjectException $exception) {
+        }
+    }
+
+    private static function routes_getValidatorUrl(App $object): string
+    {
+        return $object->config('host.dir.data') .
+            'Validator' .
+            $object->config('ds') .
+            'Command' .
+            $object->config('extension.json');
+    }
+
+    /**
+     * @throws Exception
+     */
     public static function theme_create(App $object): Response
     {
         $url = $object->config('project.dir.data') . 'Theme' . $object->config('extension.json');

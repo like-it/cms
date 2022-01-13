@@ -1,0 +1,61 @@
+{
+    "command": {
+        "validate": {
+            "uuid" : [
+                {
+                    "string.length": "==36"
+                },
+                {
+                    "is.uuid" : true
+                }
+            ],
+            "module" : [
+                {
+                    "string.length": ">=1"
+                },
+                {
+                    "string.contains": {
+                        "regex" : "^[a-z0-9_-]+$^"
+                    }
+                }
+            ],
+            "submodule" : [
+                {
+                    "string.contains": {
+                        "regex" : "^[a-z0-9_-]+$^"
+                    }
+                }
+            ],
+            "command" : [
+                {
+                    "string.contains": {
+                        "regex" : "^[a-z0-9_-]+$^"
+                    }
+                }
+            ],
+            "subcommand" : [
+                {
+                    "string.contains": {
+                        "regex" : "^[a-z0-9_-]+$^"
+                    }
+                }
+            ],
+            "method" : [
+                {
+                    "in.list.json" : {
+                        "list" : "method",
+                        "url" : "{{config('framework.dir.data')}}Method.json"
+                    }
+                }
+            ],
+            "name" : [
+                {
+                    "is.unique.json" : {
+                        "list" : null,
+                        "url" : "{{config('controller.dir.data')}}Command.json"
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -102,6 +102,35 @@ class Settings extends View {
         }
     }
 
+    public static function routes_settings(App $object): Response
+    {
+        return Service::routes_list($object);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function routes_add(App $object): Response
+    {
+        return Service::routes_create($object);
+    }
+
+    public static function routes_command(App $object){
+        $uuid = $object->request('node.uuid');
+        try {
+            switch (Handler::method()) {
+                case 'DELETE' :
+                    return Service::routes_delete($object, $uuid);
+                case 'GET' :
+                    return Service::routes_read($object, $uuid);
+                case 'PUT' :
+                    return Service::routes_update($object, $uuid);
+            }
+        } catch (Exception $exception) {
+            return $exception;
+        }
+    }
+
     public static function theme_settings(App $object): Response
     {
         return Service::theme_list($object);
