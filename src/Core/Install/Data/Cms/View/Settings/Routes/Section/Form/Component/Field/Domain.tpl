@@ -30,6 +30,14 @@
         is.object($select.options)
     )}}
         {{for.each($select.options as $value => $option)}}
+            {{if(in.array(
+            $options.subdomain
+            [
+                'cms',
+                'core'
+            ]))}}
+                {{continue}}
+            {{/if}}
             {{if($select.selected === $value)}}
                 <option value="{{$value}}" selected="selected">{{$option.name}}</option>
             {{else}}
