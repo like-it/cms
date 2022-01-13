@@ -162,6 +162,19 @@ class Settings extends Main {
                     $test = $data->get();
                     if(empty($test) || Core::object_is_empty($test)){
                         $record->isDefault = true;
+                    } else {
+                        $has_default = false;
+                        foreach($test as $node){
+                            if(!property_exists($node, 'isDefault')){
+                                continue;
+                            } else {
+                                $has_default = true;
+                                break;
+                            }
+                        }
+                        if(empty($has_default)){
+                            $record->isDefault = true;
+                        }
                     }
                     $original = $data->get($record->uuid);
                     $data->set($record->uuid, Core::object_merge($original, $record));
