@@ -422,7 +422,16 @@ class Settings extends Main {
             $data = new Data();
         }
         $record = $object->request('node');
-        dd($record);
+        if($object->request('node.path.radio') === 'automatic'){
+            unset($record->path);
+        } else {
+            $record->path = $object->request('node.path.text');
+        }
+        if($object->request('node.controller.radio') === 'automatic'){
+            unset($record->controller);
+        } else {
+            $record->controller = $object->request('node.path.text');
+        }
         return Settings::routes_put($object, $data, $record, $url);
     }
 
@@ -535,7 +544,7 @@ class Settings extends Main {
                     );
                 }
             } else {
-                throw new Exception('Cannot validate domain at: ' . Settings::domains_getValidatorUrl($object));
+                throw new Exception('Cannot validate route at: ' . Settings::routes_getValidatorUrl($object));
             }
         } catch (ObjectException $exception) {
         }
