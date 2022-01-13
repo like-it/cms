@@ -1,38 +1,33 @@
 {{R3M}}
-{{$field = 'method'}}
+{{$field = 'path'}}
 {{$label = $field|uppercase.first}}
-{{$label =  $label + '*'}}
-{{$validates = [
-'validate_in_list_json',
-]}}
 {{$input.id = $module + '-' + $submodule + '-' + $field}}
 {{$input.class = 'form-control'}}
-{{for.each($validates as $validate)}}
-    {{if(request.error($field + '.' + $validate) === true)}}
-        {{$input.class = 'form-control alert-danger'}}
-        {{if(is.empty($request.focus))}}
-            {{$request.focus = 'node.' + $field}}
-        {{/if}}
-    {{/if}}
-{{/for.each}}
-{{$input.name = 'node.' + $field + '[]'}}
-{{$input.url = config('framework.dir.data') + 'Method.json'}}
-{{$input.options = json.select($input.url, 'method')}}
+{{$input.type = 'radio'}}
+{{$input.name = 'node.' + $field}}
 <label for="{{$input.id}}">{{$label}}</label>
-{{if(is.array($input.options) || is.object($input.options))}}
-    {{for.each($input.options as $nr => $method)}}
-        {{if($nr > 0)}}
-            {{$id = $input.id + '-' + $nr}}
-        {{else}}
-            {{$id = $input.id}}
-        {{/if}}
-        <input
-            type="checkbox"
-            id="{{$id}}"
-            name="{{$input.name}}"
-            value={{$method.name}}
-        />
-        <br>
-    {{/for.each}}
-{{/if}}
+<input
+    type="{{$input.type}}"
+    id="{{$input.id}}"
+    name="{{$input.name}}.{{$input.type}}"
+    selected="selected"
+    value="automatic"
+/>
+<input
+    type="{{$input.type}}"
+    id="{{$input.id}}"
+    name="{{$input.name}}.{{$input.type}}"
+    value="custom"
+/>
+{{$input.type = 'text'}}
+{{$input.value = request('node.' + $field) + '.' + $input.type}}
+{{$input.placeholder = $label}}
+<input
+    id="{{$input.id}}"
+    class="{{$input.class}}"
+    type="{{$input.type}}"
+    name="{{$input.name}}.{{$input.type}}"
+    value="{{$input.value}}"
+    placeholder="{{$input.placeholder}}"
+/>
 <br>
