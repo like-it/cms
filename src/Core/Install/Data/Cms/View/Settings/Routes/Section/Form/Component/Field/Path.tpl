@@ -5,27 +5,27 @@
 {{$input.class = 'form-control'}}
 {{$input.type = 'radio'}}
 {{$input.name = 'node.' + $field}}
-<label for="{{$input.id}}">{{$label}}</label><br>
+<label for="{{$input.id}}-automatic">{{$label}}</label><br>
 <input
     type="{{$input.type}}"
-    id="{{$input.id}}"
+    id="{{$input.id}}-automatic"
     name="{{$input.name}}.{{$input.type}}"
     checked="checked"
     value="automatic"
 />
-<span>
+<label for="{{$input.id}}-automatic">
     Automatic
-</span>
+</label>
 <br>
 <input
     type="{{$input.type}}"
-    id="{{$input.id}}"
+    id="{{$input.id}}-custom"
     name="{{$input.name}}.{{$input.type}}"
     value="custom"
 />
-<span>
+<label for="{{$input.id}}-custom">
     Custom
-</span>
+</label>
 <br>
 {{$input.type = 'text'}}
 {{$input.value = request('node.' + $field + '.' + $input.type)}}
