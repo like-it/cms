@@ -3,7 +3,7 @@
 {{$label = $field|uppercase.first}}
 {{$label =  $label + '*'}}
 {{$validates = [
-'validate_in_list',
+'validate_in_list_json',
 ]}}
 {{$select.id = $module + '-' + $submodule + '-' + $field}}
 {{$select.class = 'form-control'}}
