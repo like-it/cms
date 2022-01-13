@@ -40,14 +40,6 @@
                     }
                 }
             ],
-            "method" : [
-                {
-                    "in.list.json" : {
-                        "list" : "method",
-                        "url" : "{{config('framework.dir.data')}}Method.json"
-                    }
-                }
-            ],
             "name" : [
                 {
                     "is.unique.json" : {
