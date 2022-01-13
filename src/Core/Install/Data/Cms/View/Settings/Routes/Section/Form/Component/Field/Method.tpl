@@ -32,9 +32,9 @@
             name="{{$input.name}}"
             value={{$method.name}}
         />
-        <span class="checkbox-text">
+        <label for="{{$id}}" class="checkbox-text">
             {{$method.name}}
-        </span>
+        </label>
         <br>
     {{/for.each}}
 {{/if}}
