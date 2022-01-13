@@ -1,5 +1,6 @@
 {{R3M}}
 {{$fields = [
+'Domain',
 'Module',
 'Submodule',
 'Command',
