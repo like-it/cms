@@ -1,8 +1,11 @@
 {{R3M}}
 {{$fields = [
-'Subdomain',
-'Host',
-'Extension',
-'Theme'
+'Module',
+'Submodule',
+'Command',
+'SubCommand',
+'Method',
+'Path',
+'Controller'
 ]}}
 {{require($prefix + $require.submodule + '/Section/Form/Component/Form/Form.tpl')}}

@@ -1,5 +1,5 @@
 {{R3M}}
-{{$field = 'extension'}}
+{{$field = 'module'}}
 {{$label = $field|uppercase.first}}
 {{$label =  $label + '*'}}
 {{$validates = [

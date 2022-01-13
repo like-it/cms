@@ -105,7 +105,7 @@
     "settings.routes.section.main.component.html.title" : "Routes",
     "settings.routes.section.main.component.html.text" : [
         "Every address in the browser is a certain route.",
-        "Control pretty formed address here."
+        "Control pretty formed addresses here."
     ],
     "settings.routes.section.form.component.button.add" : "Add",
     "settings.routes.section.form.component.button.edit" : "Update",
@@ -147,7 +147,7 @@
     "settings.routes.section.settings.component.thead.extension" : "Extension",
     "settings.routes.section.settings.component.thead.theme" : "Theme",
     "settings.routes.section.settings.component.thead.default" : "",
-    "settings.routes.section.settings.scomponent.thead.options" : "",
+    "settings.routes.section.settings.component.thead.options" : "",
     "settings.main.component.header.a.main.link" : "Main",
     "settings.main.component.body.li.account.settings.title" : "Account settings",
     "settings.main.component.body.li.account.settings.body" : [

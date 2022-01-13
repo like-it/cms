@@ -1,25 +1,31 @@
 {{R3M}}
-{{$field = 'theme'}}
+{{$field = 'method'}}
 {{$label = $field|uppercase.first}}
 {{$label =  $label + '*'}}
 {{$validates = [
 'validate_in_list_json',
 ]}}
-{{$select.id = $module + '-' + $submodule + '-' + $field}}
-{{$select.class = 'form-control'}}
+{{$input.id = $module + '-' + $submodule + '-' + $field}}
+{{$input.class = 'form-control'}}
 {{for.each($validates as $validate)}}
     {{if(request.error($field + '.' + $validate) === true)}}
-        {{$select.class = 'form-control alert-danger'}}
+        {{$input.class = 'form-control alert-danger'}}
         {{if(is.empty($request.focus))}}
             {{$request.focus = 'node.' + $field}}
         {{/if}}
     {{/if}}
 {{/for.each}}
-{{$select.name = 'node.' + $field}}
-{{$select.selected = request('node.' + $field)}}
-{{$select.url = config('project.dir.data') + 'Theme.json'}}
-{{$select.options = json.select($select.url, 'theme')}}
+{{$input.name = 'node.' + $field + '[]'}}
+{{$input.url = config('framework.dir.data') + 'Method.json'}}
+{{dd($input.url)}}
+{{$input.options = json.select($select.url, 'method')}}
 <label for="{{$select.id}}">{{$label}}</label>
+<input
+    type="checkbox"
+    id=""
+    name="vehicle1"
+    value="Bike"
+>
 <select
     id="{{$select.id}}"
     class="{{$select.class}}"

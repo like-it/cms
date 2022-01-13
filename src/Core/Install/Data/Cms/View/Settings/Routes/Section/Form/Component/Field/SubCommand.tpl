@@ -1,9 +1,7 @@
 {{R3M}}
-{{$field = 'host'}}
-{{$label = 'Domain'}}
-{{$label =  $label + '*'}}
+{{$field = 'subcommand'}}
+{{$label = $field|uppercase.first}}
 {{$validates = [
-'validate_string_length',
 'validate_string_contains'
 ]}}
 {{$input.id = $module + '-' + $submodule + '-' + $field}}
