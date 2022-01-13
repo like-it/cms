@@ -153,7 +153,7 @@ class Settings extends Main {
     /**
      * @throws Exception
      */
-    private static function domains_put(App $object, Data $data, stdClass $record, $url): Response
+    private static function domains_put(App $object, Data $data, stdClass $record, $url)
     {
         try {
             $validate = Main::validate($object, Settings::domains_getValidatorUrl($object), 'domain');
@@ -330,7 +330,7 @@ class Settings extends Main {
         }
     }
 
-    private static function email_put(App $object, Data $data, stdClass $record, $url): Response
+    private static function email_put(App $object, Data $data, stdClass $record, $url)
     {
         try {
             $validate = Main::validate($object, Settings::email_getValidatorUrl($object), 'email');
@@ -373,7 +373,6 @@ class Settings extends Main {
      */
     public static function routes_create(App $object): Response
     {
-        dd($object->request());
         $domain = false;
         $domain_uuid = $object->request('node.domain');
         if($domain_uuid){
@@ -401,7 +400,7 @@ class Settings extends Main {
                 'Data' .
                 $object->config('ds') .
                 'Command' .
-                $object->config('extension.json')
+                $object->config('extension.json');
         }
         elseif(
             property_exists($domain, 'host') &&
@@ -415,7 +414,7 @@ class Settings extends Main {
                 'Data' .
                 $object->config('ds') .
                 'Command' .
-                $object->config('extension.json')
+                $object->config('extension.json');
         }
         $object->request('node.uuid', Core::uuid());
         $data = $object->data_read($url);
@@ -514,7 +513,7 @@ class Settings extends Main {
     /**
      * @throws Exception
      */
-    private static function routes_put(App $object, Data $data, stdClass $record, $url): Response
+    private static function routes_put(App $object, Data $data, stdClass $record, $url)
     {
         try {
             $validate = Main::validate($object, Settings::routes_getValidatorUrl($object), 'command');
@@ -629,7 +628,7 @@ class Settings extends Main {
     /**
      * @throws Exception
      */
-    private static function theme_put(App $object, Data $data, stdClass $record, $url): Response
+    private static function theme_put(App $object, Data $data, stdClass $record, $url)
     {
         try {
             $validate = Main::validate($object, Settings::theme_getValidatorUrl($object), 'theme');
