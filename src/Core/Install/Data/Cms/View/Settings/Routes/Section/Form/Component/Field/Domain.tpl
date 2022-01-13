@@ -36,7 +36,7 @@
                 'cms',
                 'core'
             ]))}}
-                {{continue}}
+                {{continue()}}
             {{/if}}
             {{if($select.selected === $value)}}
                 <option value="{{$value}}" selected="selected">{{$option.name}}</option>
