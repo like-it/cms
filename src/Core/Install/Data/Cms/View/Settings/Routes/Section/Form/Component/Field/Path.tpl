@@ -17,32 +17,22 @@
 {{/for.each}}
 {{$input.name = 'node.' + $field + '[]'}}
 {{$input.url = config('framework.dir.data') + 'Method.json'}}
-{{dd($input.url)}}
-{{$input.options = json.select($select.url, 'method')}}
-<label for="{{$select.id}}">{{$label}}</label>
-<input
-    type="checkbox"
-    id=""
-    name="vehicle1"
-    value="Bike"
->
-<select
-    id="{{$select.id}}"
-    class="{{$select.class}}"
-    name="{{$select.name}}"
->
-    {{if(
-        is.array($select.options) ||
-        is.object($select.options)
-    )}}
-        {{for.each($select.options as $value => $option)}}
-            {{if($select.selected === $value)}}
-                <option value="{{$value}}" selected="selected">{{$option.name}}</option>
-            {{else}}
-                <option value="{{$value}}">{{$option.name}}</option>
-            {{/if}}
-        {{/for.each}}
-    {{/if}}
-
-</select>
+{{$input.options = json.select($input.url, 'method')}}
+<label for="{{$input.id}}">{{$label}}</label>
+{{if(is.array($input.options) || is.object($input.options))}}
+    {{for.each($input.options as $nr => $method)}}
+        {{if($nr > 0)}}
+            {{$id = $input.id + '-' + $nr}}
+        {{else}}
+            {{$id = $input.id}}
+        {{/if}}
+        <input
+            type="checkbox"
+            id="{{$id}}"
+            name="{{$input.name}}"
+            value={{$method.name}}
+        />
+        <br>
+    {{/for.each}}
+{{/if}}
 <br>
