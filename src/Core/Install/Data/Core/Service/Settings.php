@@ -373,6 +373,7 @@ class Settings extends Main {
      */
     public static function routes_create(App $object): Response
     {
+        dd($object->request());
         $url = $object->config('controller.dir.data') . 'Command' . $object->config('extension.json');
         dd($url);
         $object->request('node.uuid', Core::uuid());
