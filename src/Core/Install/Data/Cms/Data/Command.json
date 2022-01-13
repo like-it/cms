@@ -273,6 +273,55 @@
             "POST"
         ]
     },
+    "439f48a-6547-4251-8127-0a879a8c45d2" : {
+        "module" : "settings",
+        "submodule" : "routes",
+        "command" : "main",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "472aec4-efea-4706-afaa-2bc8a04201a8" : {
+        "module" : "settings",
+        "submodule" : "routes",
+        "command" : "main",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "4ad9d28a-8f38-4124-b43f-494de0a8a95c" : {
+        "module" : "settings",
+        "submodule" : "routes",
+        "command" : "settings",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "e38e49d-e861-4dd7-8f2f-4d38c7382878" : {
+        "module" : "settings",
+        "submodule" : "routes",
+        "command" : "add",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "9432751-829f-496e-af75-5c6681a2b425" : {
+        "module" : "settings",
+        "submodule" : "routes",
+        "command" : "edit",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "71b60d6f-2f1a-417e-85e1-e7dc385c72c7" : {
         "module" : "settings",
         "submodule" : "theme",
