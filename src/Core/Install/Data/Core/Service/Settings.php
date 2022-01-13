@@ -374,15 +374,56 @@ class Settings extends Main {
     public static function routes_create(App $object): Response
     {
         dd($object->request());
-        $url = $object->config('controller.dir.data') . 'Command' . $object->config('extension.json');
-        dd($url);
+        $domain = false;
+        $domain_uuid = $object->request('node.domain');
+        if($domain_uuid){
+            $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
+            $data = $object->data_read($url);
+            if($data){
+                $domain = $data->get($domain_uuid);
+            }
+        }
+        if(!$domain){
+            throw Exception('No domain found.');
+        }
+        if(
+            property_exists($domain, 'subdomain') &&
+            property_exists($domain, 'host') &&
+            property_exists($domain, 'extension')
+        ){
+            $url = $object->config('project.dir.host') .
+                ucfirst($domain->subdomain) .
+                $object->config('ds') .
+                ucfirst($domain->host) .
+                $object->config('ds') .
+                ucfirst($domain->extension) .
+                $object->config('ds') .
+                'Data' .
+                $object->config('ds') .
+                'Command' .
+                $object->config('extension.json')
+        }
+        elseif(
+            property_exists($domain, 'host') &&
+            property_exists($domain, 'extension')
+        ){
+            $url = $object->config('project.dir.host') .
+                ucfirst($domain->host) .
+                $object->config('ds') .
+                ucfirst($domain->extension) .
+                $object->config('ds') .
+                'Data' .
+                $object->config('ds') .
+                'Command' .
+                $object->config('extension.json')
+        }
         $object->request('node.uuid', Core::uuid());
         $data = $object->data_read($url);
         if(!$data){
             $data = new Data();
         }
         $record = $object->request('node');
-
+        dd($record);
         return Settings::routes_put($object, $data, $record, $url);
     }
 
