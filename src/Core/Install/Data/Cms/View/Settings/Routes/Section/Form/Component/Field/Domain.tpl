@@ -31,7 +31,7 @@
     )}}
         {{for.each($select.options as $value => $option)}}
             {{if(in.array(
-            $options.subdomain
+            $options.subdomain,
             [
                 'cms',
                 'core'
