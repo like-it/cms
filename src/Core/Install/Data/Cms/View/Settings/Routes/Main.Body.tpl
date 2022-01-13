@@ -1,7 +1,7 @@
 {{R3M}}
 {{response.view([
 'module' => $controller.name,
-'submodule' => 'domains',
+'submodule' => 'routes',
 'command' => 'main',
 'subcommand' => 'body',
 'init' => true,
