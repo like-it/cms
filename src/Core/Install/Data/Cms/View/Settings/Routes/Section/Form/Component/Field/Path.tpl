@@ -20,7 +20,7 @@
     value="custom"
 />
 {{$input.type = 'text'}}
-{{$input.value = request('node.' + $field) + '.' + $input.type}}
+{{$input.value = request('node.' + $field + '.' + $input.type)}}
 {{$input.placeholder = $label}}
 <input
     id="{{$input.id}}"
