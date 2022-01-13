@@ -5,8 +5,6 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.' +
-$__.subcommand +
 '.component.options.controller.icon'
 )}}
 {{$span.text = __(
@@ -15,8 +13,6 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.' +
-$__.subcommand +
 '.component.options.controller.text'
 )}}
 <a

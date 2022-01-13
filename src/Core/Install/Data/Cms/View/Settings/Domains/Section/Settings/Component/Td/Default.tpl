@@ -7,8 +7,6 @@
         $__.submodule +
         '.section.' +
         $__.command +
-        '.' +
-        $__.subcommand +
         '.component.options.default.icon'
         )}}
         {{$i.title = __(
@@ -17,8 +15,6 @@
         $__.submodule +
         '.section.' +
         $__.command +
-        '.' +
-        $__.subcommand +
         '.component.options.default.title'
         )}}
     <i

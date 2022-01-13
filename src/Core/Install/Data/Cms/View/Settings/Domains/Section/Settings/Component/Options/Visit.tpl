@@ -5,8 +5,6 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.' +
-$__.subcommand +
 '.component.options.visit.icon'
 )}}
 {{$span.text = __(
@@ -15,8 +13,6 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.' +
-$__.subcommand +
 '.component.options.visit.text'
 )}}
 {{if(!is.empty($node.subdomain))}}

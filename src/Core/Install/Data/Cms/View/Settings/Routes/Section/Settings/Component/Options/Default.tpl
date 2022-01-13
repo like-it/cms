@@ -6,8 +6,6 @@
     $__.submodule +
     '.section.' +
     $__.command +
-    '.' +
-    $__.subcommand +
     '.component.options.default.action.icon'
     )}}
     {{$i.title = __(
@@ -16,8 +14,6 @@
     $__.submodule +
     '.section.' +
     $__.command +
-    '.' +
-    $__.subcommand +
     '.component.options.default.action.title'
     )}}
     {{$span.text = __(
@@ -26,8 +22,6 @@
     $__.submodule +
     '.section.' +
     $__.command +
-    '.' +
-    $__.subcommand +
     '.component.options.default.action.text'
     )}}
     <a
