@@ -303,6 +303,47 @@
             "OPTIONS"
         ]
     },
+    "12fd6498-d50e-4de3-ae54-541be1b50a58" : {
+        "module" : "settings",
+        "submodule" : "routes",
+        "command" : "settings",
+        "method" : [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "45c0539d-91c4-4932-8896-a234e182880c" : {
+        "module" : "settings",
+        "submodule" : "routes",
+        "command" : "add",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "c6ff7826-4f07-4f07-966f-6a6cac865079" : {
+        "module" : "settings",
+        "submodule" : "routes",
+        "command" : "default",
+        "path": "Settings/Domains/Default/{$uuid}",
+        "method": [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "5ff2bd20-9046-4966-9800-cf71424ec868" : {
+        "module" : "settings",
+        "submodule" : "routes",
+        "command" : "command",
+        "path": "Settings/Domains/{$node.uuid}",
+        "method": [
+            "GET",
+            "PUT",
+            "DELETE",
+            "OPTIONS"
+        ]
+    },
     "5642e4a6-313e-40eb-9837-6af246c79a62" : {
         "module" : "settings",
         "submodule" : "email",
