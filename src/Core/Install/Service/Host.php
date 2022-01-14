@@ -225,6 +225,8 @@ class Host {
                     unset($add->submodule);
                     unset($add->command);
                     unset($add->subcommand);
+                    unset($add->sort);
+                    unset($add->uuid);
                     $route->data($key, $add);
                 }
                 $route->write($options['route']);
