@@ -591,10 +591,18 @@ class Settings extends Main {
 
     private static function routes_command_to_route($object, $url_command, $url_route, $domain){
         $options = [];
-        dd($domain);
-
-
-        $result = \LikeIt\Cms\Core\Install\Service\Host::command_add($object, $options);
+        if(property_exists($domain, 'subdomain')){
+            $options['subdomain'] = $domain->subdomain;
+        }
+        if(property_exists($domain, 'host')){
+            $options['host'] = $domain->host;
+        }
+        if(property_exists($domain, 'extension')){
+            $options['extension'] = $domain->extension;
+        }
+        $options['route'] = $url_route;
+        $options['command'] = $url_command;
+        \LikeIt\Cms\Core\Install\Service\Host::command_add($object, $options);
     }
 
     private static function routes_getValidatorUrl(App $object): string
