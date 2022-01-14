@@ -1,7 +1,6 @@
 {{R3M}}
-{{$field = 'method'}}
-{{$label = $field|uppercase.first}}
-{{$label =  $label + '*'}}
+{{$field = 'method[]'}}
+{{$label = 'Method*'}}
 {{$validates = [
 'validate_in_list_json',
 ]}}
@@ -15,7 +14,7 @@
         {{/if}}
     {{/if}}
 {{/for.each}}
-{{$input.name = 'node.' + $field + '[]'}}
+{{$input.name = 'node.' + $field}}
 {{$input.url = config('framework.dir.data') + 'Method.json'}}
 {{$input.options = json.select($input.url, 'method')}}
 <label for="{{$input.id}}">{{$label}}</label><br>
