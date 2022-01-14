@@ -17,6 +17,7 @@
 {{$input.name = 'node.' + $field}}
 {{$input.url = config('framework.dir.data') + 'Method.json'}}
 {{$input.options = json.select($input.url, 'method')}}
+
 <label for="{{$input.id}}">{{$label}}</label><br>
 {{if(is.array($input.options) || is.object($input.options))}}
     {{for.each($input.options as $nr => $method)}}
@@ -25,12 +26,21 @@
         {{else}}
             {{$id = $input.id}}
         {{/if}}
+        {{if(in.array(
+            $method,
+            $request.node.method
+        ))}}
+           {{$input.checked = 'checked="checked"'}}
+       {{else}}
+            {{$input.checked = ''}}
+        {{/if}}
         <input
             type="checkbox"
             class="{{$input.class}}"
             id="{{$id}}"
             name="{{$input.name}}"
             value={{$method.name}}
+            {{$input.checked}}
         />
         <label for="{{$id}}" class="checkbox-text">
             {{$method.name}}
