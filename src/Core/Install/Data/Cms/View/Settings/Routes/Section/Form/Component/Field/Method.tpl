@@ -19,6 +19,7 @@
 {{$input.options = json.select($input.url, 'method')}}
 
 <label for="{{$input.id}}">{{$label}}</label><br>
+
 {{if(is.array($input.options) || is.object($input.options))}}
     {{for.each($input.options as $nr => $method)}}
         {{if($nr > 0)}}
@@ -32,6 +33,7 @@
             $method,
             $request.node.method
         ))}}
+         {{dd($request.node.method)}}
            {{$input.checked = 'checked="checked"'}}
        {{else}}
             {{$input.checked = ''}}
