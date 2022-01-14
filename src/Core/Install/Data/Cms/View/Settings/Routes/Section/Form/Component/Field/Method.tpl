@@ -26,7 +26,9 @@
         {{else}}
             {{$id = $input.id}}
         {{/if}}
-        {{if(in.array(
+        {{if(
+        is.array($request.node.method) &&
+        in.array(
             $method,
             $request.node.method
         ))}}
