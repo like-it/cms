@@ -13,6 +13,7 @@ use R3m\Io\Module\Response;
 
 use Exception;
 use R3m\Io\Exception\ObjectException;
+use R3m\Io\Module\Sort;
 
 class Host {
 
@@ -66,7 +67,8 @@ class Host {
                 $route &&
                 $command
             ){
-                foreach ($command->data() as $id => $add) {
+                $list = Sort::list($command->data())->with(['sort' => 'ASC']);
+                foreach ($list as $id => $add) {
                     $add->host = [
                         $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension']
                     ];
