@@ -390,7 +390,7 @@ class Settings extends Main {
             property_exists($domain, 'host') &&
             property_exists($domain, 'extension')
         ){
-            $url = $object->config('project.dir.host') .
+            $dir = $object->config('project.dir.host') .
                 ucfirst($domain->subdomain) .
                 $object->config('ds') .
                 ucfirst($domain->host) .
@@ -398,7 +398,10 @@ class Settings extends Main {
                 ucfirst($domain->extension) .
                 $object->config('ds') .
                 'Data' .
-                $object->config('ds') .
+                $object->config('ds');
+
+            $object->config('command.dir.data', $dir);
+            $url = $dir .
                 'Command' .
                 $object->config('extension.json');
 

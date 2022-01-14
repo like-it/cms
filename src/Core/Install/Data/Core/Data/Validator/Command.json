@@ -52,7 +52,7 @@
                 {
                     "is.unique.json" : {
                         "list" : null,
-                        "url" : "{{config('controller.dir.data')}}Command.json"
+                        "url" : "{{config('command.dir.data')}}Command.json"
                     }
                 }
             ]
