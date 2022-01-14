@@ -463,6 +463,16 @@ class Settings extends Main {
         if(empty($record->subcommand)){
             unset($record->subcommand);
         }
+        $record->name = $record->module;
+        if(property_exists($record, 'submodule')){
+            $record->name .= '-' + $record->submodule;
+        }
+        if(property_exists($record, 'command')){
+            $record->name .= '-' + $record->command;
+        }
+        if(property_exists($record, 'subcommand')){
+            $record->name .= '-' + $record->subcommand;
+        }
         return Settings::routes_put($object, $data, $record, $url, $route_url,$domain);
     }
 
