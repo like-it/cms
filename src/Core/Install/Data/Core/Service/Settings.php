@@ -432,6 +432,16 @@ class Settings extends Main {
         } else {
             $record->controller = $object->request('node.path.text');
         }
+        unset($record->domain);
+        if(empty($record->submodule)){
+            unset($record->submodule);
+        }
+        if(empty($record->command)){
+            unset($record->command);
+        }
+        if(empty($record->subcommand)){
+            unset($record->subcommand);
+        }
         return Settings::routes_put($object, $data, $record, $url);
     }
 
