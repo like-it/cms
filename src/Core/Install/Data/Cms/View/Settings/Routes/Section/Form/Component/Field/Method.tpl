@@ -30,7 +30,7 @@
         {{if(
         is.array($request.node.method) &&
         in.array(
-            $method,
+            $method.name,
             $request.node.method
         ))}}
            {{$input.checked = 'checked="checked"'}}
