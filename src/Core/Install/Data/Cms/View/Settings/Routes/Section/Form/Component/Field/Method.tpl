@@ -19,7 +19,7 @@
 {{$input.options = json.select($input.url, 'method')}}
 
 <label for="{{$input.id}}">{{$label}}</label><br>
-{{d($request.node.method)}}
+{{d($request)}}
 {{if(is.array($input.options) || is.object($input.options))}}
     {{for.each($input.options as $nr => $method)}}
         {{if($nr > 0)}}
