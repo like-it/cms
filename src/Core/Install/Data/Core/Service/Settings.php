@@ -401,6 +401,18 @@ class Settings extends Main {
                 $object->config('ds') .
                 'Command' .
                 $object->config('extension.json');
+
+            $route_url = $object->config('project.dir.host') .
+                ucfirst($domain->subdomain) .
+                $object->config('ds') .
+                ucfirst($domain->host) .
+                $object->config('ds') .
+                ucfirst($domain->extension) .
+                $object->config('ds') .
+                'Data' .
+                $object->config('ds') .
+                'Route' .
+                $object->config('extension.json');
         }
         elseif(
             property_exists($domain, 'host') &&
@@ -414,6 +426,15 @@ class Settings extends Main {
                 'Data' .
                 $object->config('ds') .
                 'Command' .
+                $object->config('extension.json');
+            $route_url = $object->config('project.dir.host') .
+                ucfirst($domain->host) .
+                $object->config('ds') .
+                ucfirst($domain->extension) .
+                $object->config('ds') .
+                'Data' .
+                $object->config('ds') .
+                'Route' .
                 $object->config('extension.json');
         }
         $object->request('node.uuid', Core::uuid());
@@ -442,7 +463,7 @@ class Settings extends Main {
         if(empty($record->subcommand)){
             unset($record->subcommand);
         }
-        return Settings::routes_put($object, $data, $record, $url);
+        return Settings::routes_put($object, $data, $record, $url, $route_url,$domain);
     }
 
     public static function routes_read(App $object, $uuid): Response
@@ -532,17 +553,25 @@ class Settings extends Main {
     /**
      * @throws Exception
      */
-    private static function routes_put(App $object, Data $data, stdClass $record, $url)
+    private static function routes_put(App $object, Data $data, stdClass $record, $url, $route_url, $domain)
     {
         try {
             $validate = Main::validate($object, Settings::routes_getValidatorUrl($object), 'command');
             if($validate) {
                 if ($validate->success === true) {
                     $original = $data->get($record->uuid);
+                    if(
+                        is_object($original) &&
+                        property_exists($original, 'sort') &&
+                        empty($original->sort)
+                    ){
+                        $record = Settings::routes_addSort($object, $data, $record);
+                    }
                     $data->set($record->uuid, Core::object_merge($original, $record));
                     $data->write($url);
                     $data = [];
                     $data['node'] = $record;
+                    Settings::routes_command_to_route($object, $url, $route_url, $domain);
                     return new Response($data, Response::TYPE_JSON);
                 } else {
                     $data = [];
@@ -560,6 +589,14 @@ class Settings extends Main {
         }
     }
 
+    private static function routes_command_to_route($object, $url_command, $url_route, $domain){
+        $options = [];
+        dd($domain);
+
+
+        $result = \LikeIt\Cms\Core\Install\Service\Host::command_add($object, $options);
+    }
+
     private static function routes_getValidatorUrl(App $object): string
     {
         return $object->config('host.dir.data') .
@@ -567,6 +604,14 @@ class Settings extends Main {
             $object->config('ds') .
             'Command' .
             $object->config('extension.json');
+    }
+
+    private static function routes_addSort(App $object, Data $data, stdClass $record){
+        $record->sort = 1;
+        foreach($data->get() as $nr => $node){
+            $record->sort++;
+        }
+        return $record;
     }
 
     /**
