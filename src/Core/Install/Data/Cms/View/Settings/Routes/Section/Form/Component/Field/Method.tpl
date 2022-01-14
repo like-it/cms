@@ -6,10 +6,10 @@
 'validate_in_list_json',
 ]}}
 {{$input.id = $module + '-' + $submodule + '-' + $field}}
-{{$input.class = 'form-control'}}
+{{$input.class = 'form-check-input'}}
 {{for.each($validates as $validate)}}
     {{if(request.error($field + '.' + $validate) === true)}}
-        {{$input.class = 'form-control alert-danger'}}
+        {{$input.class = 'form-check-input alert-danger'}}
         {{if(is.empty($request.focus))}}
             {{$request.focus = 'node.' + $field}}
         {{/if}}
