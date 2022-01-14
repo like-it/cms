@@ -28,6 +28,7 @@
         {{/if}}
         <input
             type="checkbox"
+            class="{{$input.class}}"
             id="{{$id}}"
             name="{{$input.name}}"
             value={{$method.name}}
