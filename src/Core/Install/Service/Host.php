@@ -68,7 +68,6 @@ class Host {
                 $command
             ){
                 $list = Sort::list($command->data())->with(['sort' => 'ASC']);
-                dd($list);
                 foreach ($list as $id => $add) {
                     $add->host = [
                         $options['subdomain'] . '.' . $options['host'] . '.' . $options['extension']
@@ -222,7 +221,7 @@ class Host {
                             '_' .
                             str_replace('-', '_', $add->subcommand);
                     } else {
-
+                        dd($list);
                         throw new exception('need module');
                     }
                     unset($add->module);
