@@ -4,6 +4,23 @@ import { getSectionByName } from "/Module/Section.js";
 
 let menu = {};
 
+menu.domain = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const domain = section.select('.nav-item-domain');
+    if(!domain){
+        return;
+    }
+    const url = domain.data('url');
+    console.log(url);
+
+
+
+
+}
+
 menu.is_selected = (node, selected) => {
     if(selected){
         //select
@@ -63,6 +80,7 @@ menu.init = () => {
     //const route = "{{route.get(route.prefix() + '-settings-email-main')}}";
     //window.history.pushState(route, route, route);
     menu.onClick();
+    menu.domain();
 }
 
 ready(() => {
