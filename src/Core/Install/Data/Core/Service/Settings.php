@@ -476,6 +476,13 @@ class Settings extends Main {
         if(property_exists($record, 'subcommand')){
             $record->name .= '-' . $record->subcommand;
         }
+        if(
+            !property_exists($record, 'submodule') &&
+            !property_exists($record, 'command') &&
+            !property_exists($record, 'subcommand')
+        ){
+            $record->name .= '-command';
+        }
         return Settings::routes_put($object, $data, $record, $url, $route_url,$domain);
     }
 
