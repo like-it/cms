@@ -231,6 +231,7 @@ class Host {
                     unset($add->sort);
                     $add->command = $add->uuid;
                     unset($add->uuid);
+                    unset($add->name);
                     $route->data($key, $add);
                 }
                 $route->write($options['route']);
