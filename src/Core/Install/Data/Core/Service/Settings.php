@@ -383,7 +383,7 @@ class Settings extends Main {
             }
         }
         if(!$domain){
-            throw Exception('No domain found.');
+            throw new Exception('No domain found.');
         }
         if(
             property_exists($domain, 'subdomain') &&
