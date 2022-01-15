@@ -4,7 +4,7 @@
 'Module',
 'Submodule',
 'Command',
-'SubCommand',
+'Subcommand',
 'Method',
 'Path',
 'Controller'
