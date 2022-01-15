@@ -4,8 +4,14 @@
 {{$require.section = $section|uppercase.first.sentence:'-'|replace:'-':'/'}}
 {{$node = 'body'}}
 <li class="nav-item">
-    <select name="menu-domain" class="form-control">
-        <option value="uuid">www.funda.world</option>
-        <option value="uuid">test</option>
-    </select>
+    <div class="dropdown">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+            www.funda.world
+        </button>
+        <ul class="dropdown-menu">
+            <li><span class="dropdown-item-text disabled">cms.funda.world</span></li>
+            <li><span class="dropdown-item-text disabled">core.funda.world</span></li>
+            <li><span class="dropdown-item-text">www.funda.world</span></li>
+        </ul>
+    </div>
 </li>
