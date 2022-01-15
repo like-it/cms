@@ -228,6 +228,7 @@ class Host {
                     unset($add->command);
                     unset($add->subcommand);
                     unset($add->sort);
+                    $add->command = $add->uuid;
                     unset($add->uuid);
                     $route->data($key, $add);
                 }
