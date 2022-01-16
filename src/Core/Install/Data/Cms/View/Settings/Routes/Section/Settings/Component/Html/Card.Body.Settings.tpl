@@ -1,24 +1,20 @@
 {{R3M}}
 {{$components = [
-'subdomain',
-'host',
-'extension',
-'theme',
-'default',
+'module',
+'submodule',
+'command',
+'subcommand',
+'path',
 'options'
+]}}
+{{$components.2 = [
+'controller',
+'method',
 ]}}
 {{$options = [
 'edit',
-'component',
+'view',
 'controller',
-'default',
-'module',
-'node',
-'route',
-'script',
-'stylesheet',
-'template',
-'visit',
 'delete'
 ]}}
 <div class="card-body h-100 card-body-{{$command}}">
@@ -39,6 +35,15 @@
             data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-body')}}"
         >
             {{for.each($components as $component)}}
+            {{$require.basename = $component|uppercase.first.sentence:'.'}}
+            {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Td/' + $require.basename + '.tpl')}}
+            {{/for.each}}
+        </tr>
+        <tr
+            data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$uuid}}"
+            data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-body')}}"
+        >
+            {{for.each($components.2 as $component)}}
             {{$require.basename = $component|uppercase.first.sentence:'.'}}
             {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Td/' + $require.basename + '.tpl')}}
             {{/for.each}}

@@ -1,4 +1,4 @@
 {{R3M}}
 <td scope="row">
-    {{$node.subdomain}}
+    {{$node.module}}
 </td>

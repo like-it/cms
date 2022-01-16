@@ -16,7 +16,7 @@ $__.command +
 '.component.options.controller.text'
 )}}
 <a
-    class="dropdown-item"
+    class="dropdown-item item-controller"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.uuid}}"
     data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-body')}}"
 >

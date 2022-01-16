@@ -5,7 +5,7 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.options.route.icon'
+'.component.options.view.icon'
 )}}
 {{$span.text = __(
 $__.module +
@@ -13,10 +13,10 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.options.route.text'
+'.component.options.view.text'
 )}}
 <a
-    class="dropdown-item"
+    class="dropdown-item item-view"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.uuid}}"
     data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-body')}}"
 >

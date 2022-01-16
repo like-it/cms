@@ -1,6 +1,7 @@
 <?php
 namespace Host\Subdomain\Host\Extension\Service;
 
+use R3m\Io\Module\Sort;
 use stdClass;
 use R3m\Io\App;
 use R3m\Io\Module\Core;
@@ -620,8 +621,9 @@ class Settings extends Main {
                 $data->set($node->command . '.route', $node);
             }
         }
+        $list = Sort::list($data->data())->with(['sort' => 'ASC', 'name' => 'ASC']);
         $response = [];
-        $response['nodeList'] = $data->data();
+        $response['nodeList'] = $list;
         return new Response($response, Response::TYPE_JSON);
     }
 
