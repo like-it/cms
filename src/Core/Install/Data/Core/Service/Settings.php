@@ -606,6 +606,7 @@ class Settings extends Main {
                 $data->has($node->command)
             ){
                 $data->set($node->command . '.route', $node);
+                $data->set($node->command . '.domain', $domain->uuid);
             }
         }
         $list = Sort::list($data->data())->with(['sort' => 'ASC', 'name' => 'ASC']);
