@@ -1,4 +1,8 @@
 {{R3M}}
 <td>
-    {{$node.route.path}}
+    {{if(is.set($node.route.path))}}
+        {{$node.route.path}}
+    {{else}}
+        {{$node.path}}
+    {{/if}}
 </td>
