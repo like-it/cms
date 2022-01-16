@@ -559,11 +559,9 @@ class Settings extends Main {
     {
         $domain = false;
         $domain_uuid = $object->request('node.domain');
-        d($_GET);
-        d($_POST);
-        d($_REQUEST);
-        dd($object->request());
-        dd($domain_uuid);
+        if(empty($domain_uuid)){
+            $domain_uuid = $object->request('node_domain');
+        }
         if($domain_uuid){
             $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
             $data = $object->data_read($url);
