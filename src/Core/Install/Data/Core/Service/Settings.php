@@ -591,11 +591,11 @@ class Settings extends Main {
      */
     public static function routes_list(App $object): Response
     {
-        $dir = Settings::domain_dir($object);
-        $url = $dir .
+        $domain = Settings::domain_get($object);
+        $url = $domain->dir .
             'Command' .
             $object->config('extension.json');
-        $route_url = $dir .
+        $route_url = $domain->dir .
             'Route' .
             $object->config('extension.json');
         $data = $object->data_read($url);
