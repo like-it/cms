@@ -48,6 +48,11 @@ menu.domain = () => {
                     if(event.target.hasClass('disabled')){
                         return;
                     }
+                    const active  = ul.select('a.active');
+                    if(active){
+                        active.removeClass('active');
+                    }
+                    a.addClass('active');
                     button.html(a.html());
                     input.value = a.data('uuid');
                 });
