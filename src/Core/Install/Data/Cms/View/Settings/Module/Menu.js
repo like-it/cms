@@ -1,5 +1,6 @@
 //{{R3M}}
 import user from "/Module/User.js";
+import create from "/Module/Create.js";
 import { getSectionByName } from "/Module/Section.js";
 
 let menu = {};
@@ -16,7 +17,28 @@ menu.domain = () => {
     const url = domain.data('url');
     header('Authorization', 'Bearer ' + user.token());
     request(url, null, (url, response) => {
-        console.log(response);
+        if(response?.nodeList){
+            let index;
+            const ul = domain.select('ul');
+            const button = domain.select('button');
+            for(index=0; index < response.nodeList; index++){
+                let node = response.nodeList[index];
+                let li = create('li');
+                let a;
+                if(node?.is?.installed){
+                    a = create('a', 'dropdown-item disabled')
+                }
+                if(node?.is?.default){
+                    a = create('a', 'dropdown-item active')
+                    button.html(node.name);
+                } else {
+                    a = create('a', 'dropdown-item')
+                }
+                a.html(node.name);
+                li.appendChild(a);
+                ul.appendChild(li);
+            }
+        }
     });
 }
 
