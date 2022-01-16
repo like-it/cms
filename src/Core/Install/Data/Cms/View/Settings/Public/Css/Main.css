@@ -49,28 +49,6 @@ section[name="main-content"] .nav .fa-window-close:hover {
     }
 }
 
-td.status span {
-    display: block;
-    height: 35px;
-    padding: 5px;
-    text-align: center;
-}
-
-td.status .green {
-    background-color: forestgreen;
-    color: rgba(255, 255, 255, 1);
-}
-
-td.status .red {
-    background-color: firebrick;
-    color: rgba(255, 255, 255, 1);
-}
-
-td.status .purple {
-    background-color: purple;
-    color: rgba(255, 255, 255, 1);
-}
-
-a {
-    cursor: pointer;
+section[name="main-content"] .nav-item-domain{
+    margin-right: 0.5rem;
 }
