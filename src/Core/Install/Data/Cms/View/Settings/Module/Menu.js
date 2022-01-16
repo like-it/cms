@@ -30,16 +30,24 @@ menu.domain = () => {
                     a = create('a', 'dropdown-item active')
                     button.html(node.name);
                     input.value = uuid;
+                    a.data('uuid', node.uuid);
                 } else {
                     if(node?.is?.installed){
                         a = create('a', 'dropdown-item disabled')
+                        a.data('uuid', node.uuid);
                     } else {
                         a = create('a', 'dropdown-item')
+                        a.data('uuid', node.uuid);
                     }
                 }
                 a.html(node.name);
-                a.data('uuid', node.uuid);
                 li.appendChild(a);
+                a.on('click', (event) => {
+                    if(event.target.hasClass('disabled')){
+                        // return;
+                    }
+                    input.value = a.data('uuid');
+                });
                 ul.appendChild(li);
             }
         }
