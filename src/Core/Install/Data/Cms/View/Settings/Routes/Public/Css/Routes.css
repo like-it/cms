@@ -34,14 +34,15 @@ section[name="main-content"].settings-routes .method-options {
 
 section[name="main-content"].settings-routes .method-patch {
     background: rgba(100, 28, 227, 1);
+    color: rgba(255, 255, 255, 1);
 }
 
 section[name="main-content"].settings-routes .method-post {
-    background: rgba(28, 121, 227, 1);
+    background: rgba(227, 135, 28, 1);
 }
 
 section[name="main-content"].settings-routes .method-put {
-    background: rgba(227, 135, 28, 1);
+    background: rgba(28, 121, 227, 1);
 }
 
 section[name="main-content"].settings-routes .method-trace {
