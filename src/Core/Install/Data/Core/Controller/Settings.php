@@ -1,15 +1,16 @@
 <?php
 namespace Host\Subdomain\Host\Extension\Controller;
 
-use Exception;
 use R3m\Io\App;
-use R3m\Io\Exception\ObjectException;
 use R3m\Io\Module\Handler;
 use R3m\Io\Module\Response;
 use R3m\Io\Module\View;
 
 use Host\Subdomain\Host\Extension\Service\Settings as Service;
 use Host\Subdomain\Host\Extension\Service\Log;
+
+use Exception;
+use R3m\Io\Exception\ObjectException;
 
 class Settings extends View {
     const DIR = __DIR__ . DIRECTORY_SEPARATOR;    
@@ -102,22 +103,25 @@ class Settings extends View {
         }
     }
 
-    public static function routes_settings(App $object): Response
+    public static function routes_settings(App $object)
     {
-        dd($object->request());
-        return Service::routes_list($object);
+        try {
+            return Service::routes_list($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
     }
 
-    /**
-     * @throws Exception
-     */
-    public static function routes_add(App $object): Response
+    public static function routes_add(App $object)
     {
-        return Service::routes_create($object);
+        try {
+            return Service::routes_create($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
     }
 
     public static function routes_command(App $object){
-        dd($object->request());
         $uuid = $object->request('node.uuid');
         try {
             switch (Handler::method()) {
