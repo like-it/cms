@@ -104,6 +104,7 @@ class Settings extends View {
 
     public static function routes_settings(App $object): Response
     {
+        dd($object->request());
         return Service::routes_list($object);
     }
 
@@ -116,6 +117,7 @@ class Settings extends View {
     }
 
     public static function routes_command(App $object){
+        dd($object->request());
         $uuid = $object->request('node.uuid');
         try {
             switch (Handler::method()) {
