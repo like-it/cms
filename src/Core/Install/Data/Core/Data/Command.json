@@ -326,7 +326,7 @@
         "module" : "settings",
         "submodule" : "routes",
         "command" : "default",
-        "path": "Settings/Domains/Default/{$uuid}",
+        "path": "Settings/Routes/Default/{$uuid}",
         "method": [
             "POST",
             "OPTIONS"
@@ -336,7 +336,7 @@
         "module" : "settings",
         "submodule" : "routes",
         "command" : "command",
-        "path": "Settings/Domains/{$node.uuid}",
+        "path": "Settings/Routes/{$node.uuid}",
         "method": [
             "GET",
             "PUT",
