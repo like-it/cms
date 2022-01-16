@@ -43,6 +43,7 @@ section[name="main-content"].settings-routes .method-post {
 
 section[name="main-content"].settings-routes .method-put {
     background: rgba(28, 121, 227, 1);
+    color: rgba(255, 255, 255, 1);
 }
 
 section[name="main-content"].settings-routes .method-trace {
