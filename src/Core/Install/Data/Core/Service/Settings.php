@@ -591,6 +591,7 @@ class Settings extends Main {
      */
     public static function routes_list(App $object): Response
     {
+        dd($object->request());
         $domain = Settings::domain_get($object);
         $url = $domain->dir .
             'Command' .
