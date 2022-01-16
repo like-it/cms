@@ -387,10 +387,6 @@ class Settings extends Main {
     public static function routes_create(App $object): Response
     {
         $domain = false;
-        d($_GET);
-        d($_POST);
-        d($_REQUEST);
-        dd($object->request());
         $domain_uuid = $object->request('node.domain');
         if($domain_uuid){
             $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
@@ -563,6 +559,9 @@ class Settings extends Main {
     {
         $domain = false;
         $domain_uuid = $object->request('node.domain');
+        d($_GET);
+        d($_POST);
+        d($_REQUEST);
         dd($object->request());
         dd($domain_uuid);
         if($domain_uuid){
