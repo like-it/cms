@@ -197,7 +197,7 @@ ready(() => {
     [
         root() + 'Dialog/Css/Dialog.css?' + version(),
         root() + 'Dialog/Css/Dialog.Delete.css?' + version(),
-        root() + 'Settings/Css/Routes.css?' + version()
+        root() + 'Settings/Routes/Css/Routes.css?' + version()
     ],
     () => {
         settings.init();
