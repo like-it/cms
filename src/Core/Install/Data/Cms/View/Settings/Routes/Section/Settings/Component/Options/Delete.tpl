@@ -17,7 +17,7 @@ $__.command +
 )}}
 <a
     class="dropdown-item item-delete"
-    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.uuid}}"
+    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.uuid}}/{{$node.domain}}"
     data-request-method="DELETE"
     data-name="{{$node.name}}"
 >

@@ -14,7 +14,6 @@
 'controller',
 'delete'
 ]}}
-{{dd($request)}}
 <div class="card-body h-100 card-body-{{$command}}">
     {{if(!is.empty($request.nodeList))}}
     <table class="table table-striped table-hover">
@@ -38,7 +37,7 @@
         {{for.each($request.nodeList as $uuid => $node)}}
         <tr
 
-            data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$uuid}}"
+            data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$uuid}}/{{$node.domain}}"
             data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-body')}}"
         >
             {{for.each($components as $component)}}

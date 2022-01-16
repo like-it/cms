@@ -17,11 +17,11 @@ $__.command +
 )}}
 <a
     class="dropdown-item item-view"
-    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.uuid}}"
-    data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-body')}}"
+    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.uuid}}/{{$node.domain}}"
+    data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-view-body')}}"
 >
     <i
-        class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-edit"
+        class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-view"
         data-name="{{$node.name}}"
     >
     </i>
