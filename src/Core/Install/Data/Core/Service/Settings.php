@@ -387,6 +387,7 @@ class Settings extends Main {
     public static function routes_create(App $object): Response
     {
         $domain = false;
+        dd($object->request());
         $domain_uuid = $object->request('node.domain');
         if($domain_uuid){
             $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
