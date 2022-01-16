@@ -1,6 +1,7 @@
 //{{R3M}}
 import user from "/Module/User.js";
 import create from "/Module/Create.js";
+import { stristr, str_replace } from "/Module/String.js";
 import { getSectionByName } from "/Module/Section.js";
 
 let menu = {};
