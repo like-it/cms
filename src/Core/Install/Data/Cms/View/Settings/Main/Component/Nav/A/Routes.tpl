@@ -4,6 +4,7 @@
 {{$a.route = 'settings-' + $a.name + '-main'}}
 {{$a.data.url = ''}}
 {{$a.data.frontend.url = route.get(route.prefix() + '-' + $a.route)}}
+{{dd($a)}}
 {{$a.icon.class = __('settings.main.component.nav.a.' + $a.translation +'.icon.class')}}
 {{$a.link = __('settings.main.component.nav.a.' + $a.translation + '.link')}}
 {{$a.class = 'nav-link'}}
