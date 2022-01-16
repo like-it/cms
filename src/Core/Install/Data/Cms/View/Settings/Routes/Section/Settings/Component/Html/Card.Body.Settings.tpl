@@ -7,7 +7,7 @@
 'path',
 'options'
 ]}}
-{{$components.2 = [
+{{$components2 = [
 'controller',
 'method',
 ]}}
@@ -23,7 +23,18 @@
         <thead>
         <tr>
             {{for.each($components as $component)}}
-            <th scope="col">{{__($__.module + '.' + $__.submodule + '.section.' + $__.command + '.' + $__.subcommand + '.component.thead.' + $component)}}</th>
+            <th scope="col">{{__(
+                $__.module +
+                '.' +
+                $__.submodule +
+                '.section.' +
+                $__.command +
+                '.' +
+                $__.subcommand +
+                '.component.thead.' +
+                $component
+            )}}
+            </th>
             {{/for.each}}
         </tr>
         </thead>
@@ -43,7 +54,7 @@
             data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$uuid}}"
             data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-body')}}"
         >
-            {{for.each($components.2 as $component)}}
+            {{for.each($components2 as $component)}}
             {{$require.basename = $component|uppercase.first.sentence:'.'}}
             {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Td/' + $require.basename + '.tpl')}}
             {{/for.each}}
