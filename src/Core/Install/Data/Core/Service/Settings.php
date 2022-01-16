@@ -221,6 +221,60 @@ class Settings extends Main {
             $object->config('extension.json');
     }
 
+    /**
+     * @throws Exception
+     */
+    private static function domain_get(App $object)
+    {
+        $domain = false;
+        $domain_uuid = $object->request('node.domain');
+        if(empty($domain_uuid)){
+            $domain_uuid = $object->request('node_domain');
+        }
+        if($domain_uuid){
+            $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
+            $data = $object->data_read($url);
+            if($data){
+                $domain = $data->get($domain_uuid);
+            }
+        }
+        if(!$domain){
+            throw new Exception('No domain found.');
+        }
+        if(
+            property_exists($domain, 'subdomain') &&
+            property_exists($domain, 'host') &&
+            property_exists($domain, 'extension')
+        ){
+            $dir = $object->config('project.dir.host') .
+                ucfirst($domain->subdomain) .
+                $object->config('ds') .
+                ucfirst($domain->host) .
+                $object->config('ds') .
+                ucfirst($domain->extension) .
+                $object->config('ds') .
+                'Data' .
+                $object->config('ds');
+        }
+        elseif(
+            property_exists($domain, 'host') &&
+            property_exists($domain, 'extension')
+        ){
+            $dir = $object->config('project.dir.host') .
+                ucfirst($domain->host) .
+                $object->config('ds') .
+                ucfirst($domain->extension) .
+                $object->config('ds') .
+                'Data' .
+                $object->config('ds');
+        } else {
+            throw new Exception('No host & extension found in domain.');
+        }
+        $object->config('command.dir.data', $dir);
+        $domain->dir = $dir;
+        return $domain;
+    }
+
     public static function email_create(App $object): Response
     {
         $url = $object->config('project.dir.data') . 'Config' . $object->config('extension.json');
@@ -387,53 +441,12 @@ class Settings extends Main {
      */
     public static function routes_create(App $object): Response
     {
-        $domain = false;
-        $domain_uuid = $object->request('node.domain');
-        if($domain_uuid){
-            $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
-            $data = $object->data_read($url);
-            if($data){
-                $domain = $data->get($domain_uuid);
-            }
-        }
-        if(!$domain){
-            throw new Exception('No domain found.');
-        }
-        if(
-            property_exists($domain, 'subdomain') &&
-            property_exists($domain, 'host') &&
-            property_exists($domain, 'extension')
-        ){
-            $dir = $object->config('project.dir.host') .
-                ucfirst($domain->subdomain) .
-                $object->config('ds') .
-                ucfirst($domain->host) .
-                $object->config('ds') .
-                ucfirst($domain->extension) .
-                $object->config('ds') .
-                'Data' .
-                $object->config('ds');
-            $object->config('command.dir.data', $dir);
-        }
-        elseif(
-            property_exists($domain, 'host') &&
-            property_exists($domain, 'extension')
-        ){
-            $dir = $object->config('project.dir.host') .
-                ucfirst($domain->host) .
-                $object->config('ds') .
-                ucfirst($domain->extension) .
-                $object->config('ds') .
-                'Data' .
-                $object->config('ds');
-            $object->config('command.dir.data', $dir);
-        }
-        $object->config('command.dir.data', $dir);
-        $url = $dir .
+        $domain = Settings::domain_get($object);
+        $url = $domain->dir .
             'Command' .
             $object->config('extension.json');
 
-        $route_url = $dir .
+        $route_url = $domain->dir .
             'Route' .
             $object->config('extension.json');
 
@@ -483,15 +496,35 @@ class Settings extends Main {
         return Settings::routes_put($object, $data, $record, $url, $route_url,$domain);
     }
 
+    /**
+     * @throws Exception
+     */
     public static function routes_read(App $object, $uuid): Response
     {
-        $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
-
+        $domain = Settings::domain_get($object);
+        $url = $domain->dir .
+            'Command' .
+            $object->config('extension.json');
+        $route_url = $domain->dir .
+            'Route' .
+            $object->config('extension.json');
         $data = $object->data_read($url);
         if (!$data) {
             $data = new Data();
         }
+        $route = $object->data_read($route_url);
         $record = $data->get($uuid);
+        if($route){
+            foreach($route->data() as $node){
+                if(
+                    property_exists($node, 'command') &&
+                    $node->command === $uuid
+                ){
+                    $record->route = $node;
+                    break;
+                }
+            }
+        }
         $response = [];
         $response['node'] = $record;
         return new Response($response, Response::TYPE_JSON);
@@ -558,50 +591,7 @@ class Settings extends Main {
      */
     public static function routes_list(App $object): Response
     {
-        $domain = false;
-        $domain_uuid = $object->request('node.domain');
-        if(empty($domain_uuid)){
-            $domain_uuid = $object->request('node_domain');
-        }
-        if($domain_uuid){
-            $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
-            $data = $object->data_read($url);
-            if($data){
-                $domain = $data->get($domain_uuid);
-            }
-        }
-        if(!$domain){
-            throw new Exception('No domain found.');
-        }
-        if(
-            property_exists($domain, 'subdomain') &&
-            property_exists($domain, 'host') &&
-            property_exists($domain, 'extension')
-        ) {
-            $dir = $object->config('project.dir.host') .
-                ucfirst($domain->subdomain) .
-                $object->config('ds') .
-                ucfirst($domain->host) .
-                $object->config('ds') .
-                ucfirst($domain->extension) .
-                $object->config('ds') .
-                'Data' .
-                $object->config('ds');
-        }
-        elseif(
-            property_exists($domain, 'host') &&
-            property_exists($domain, 'extension')
-        ) {
-            $dir = $object->config('project.dir.host') .
-                ucfirst($domain->host) .
-                $object->config('ds') .
-                ucfirst($domain->extension) .
-                $object->config('ds') .
-                'Data' .
-                $object->config('ds');
-        } else {
-            throw new Exception('No host & extension found in domain.');
-        }
+        $dir = Settings::domain_dir($object);
         $url = $dir .
             'Command' .
             $object->config('extension.json');

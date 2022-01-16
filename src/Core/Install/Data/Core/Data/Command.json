@@ -322,21 +322,11 @@
             "OPTIONS"
         ]
     },
-    "c6ff7826-4f07-4f07-966f-6a6cac865079" : {
-        "module" : "settings",
-        "submodule" : "routes",
-        "command" : "default",
-        "path": "Settings/Routes/Default/{$uuid}",
-        "method": [
-            "POST",
-            "OPTIONS"
-        ]
-    },
     "5ff2bd20-9046-4966-9800-cf71424ec868" : {
         "module" : "settings",
         "submodule" : "routes",
         "command" : "command",
-        "path": "Settings/Routes/{$node.uuid}",
+        "path": "Settings/Routes/{$node.uuid}/{$node.domain}",
         "method": [
             "GET",
             "PUT",
