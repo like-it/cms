@@ -5,11 +5,8 @@
 'command',
 'subcommand',
 'path',
-'options'
-]}}
-{{$components2 = [
-'controller',
 'method',
+'options'
 ]}}
 {{$options = [
 'edit',
@@ -44,15 +41,6 @@
             data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-body')}}"
         >
             {{for.each($components as $component)}}
-            {{$require.basename = $component|uppercase.first.sentence:'.'}}
-            {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Td/' + $require.basename + '.tpl')}}
-            {{/for.each}}
-        </tr>
-        <tr
-            data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$uuid}}"
-            data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-body')}}"
-        >
-            {{for.each($components2 as $component)}}
             {{$require.basename = $component|uppercase.first.sentence:'.'}}
             {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Td/' + $require.basename + '.tpl')}}
             {{/for.each}}
