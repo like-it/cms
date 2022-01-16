@@ -69,6 +69,7 @@ menu.is_selected = (node, selected) => {
                     return;
                 }
                 const domain = section.select('input[name="node.domain"]');
+                console.log('domain', domain);
                 if(!domain){
                     return;
                 }
