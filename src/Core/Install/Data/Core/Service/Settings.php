@@ -387,6 +387,9 @@ class Settings extends Main {
     public static function routes_create(App $object): Response
     {
         $domain = false;
+        d($_GET);
+        d($_POST);
+        d($_REQUEST);
         dd($object->request());
         $domain_uuid = $object->request('node.domain');
         if($domain_uuid){
