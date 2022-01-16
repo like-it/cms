@@ -17,6 +17,7 @@ menu.domain = () => {
     const url = domain.data('url');
     header('Authorization', 'Bearer ' + user.token());
     request(url, null, (url, response) => {
+        console.log(response);
         if(response?.nodeList){
             let index;
             const ul = domain.select('ul');
