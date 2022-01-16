@@ -6,7 +6,7 @@
 <li class="nav-item">
     <a
         class="nav-link {{$module}}-{{$submodule}}-{{$section}}"
-        data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.section}}/"
+        data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.section}}/?node.domain={node.domain}"
         data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $section + '-' + $node)}}"
         data-selected=".card-body-{{$section}}"
     >
