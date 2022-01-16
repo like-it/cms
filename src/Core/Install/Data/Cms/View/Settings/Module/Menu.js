@@ -34,7 +34,9 @@ menu.domain = () => {
                     a.data('uuid', node.uuid);
                 } else {
                     if(node?.is?.installed){
-                        a = create('a', 'dropdown-item disabled')
+                        //a = create('a', 'dropdown-item disabled')
+                        a = create('a', 'dropdown-item')
+                        a.data('uuid', node.uuid);
                     } else {
                         a = create('a', 'dropdown-item')
                         a.data('uuid', node.uuid);
