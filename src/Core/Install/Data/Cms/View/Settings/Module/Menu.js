@@ -64,8 +64,8 @@ menu.is_selected = (node, selected) => {
         if(node.data('has', 'url')){
             header('Authorization', 'Bearer ' + user.token());
             let url = node.data('url');
-            console.log(stristr(url, '{node.domain}'));
-            if(stristr(url, '{node.domain}') !== false){
+            console.log(stristr(url, "{node.domain}"));
+            if(stristr(url, "{node.domain}") !== false){
                 const section = getSectionByName('main-content');
                 if(!section){
                     return;
@@ -75,7 +75,7 @@ menu.is_selected = (node, selected) => {
                 if(!domain){
                     return;
                 }
-                url = str_replace('{node.domain}', domain.value, url);
+                url = str_replace("{node.domain}", domain.value, url);
             }
             request(url, null, (url, response) => {
                 if(node.data('has', 'frontend-url')){
