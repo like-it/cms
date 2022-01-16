@@ -138,9 +138,12 @@ class Settings extends Main {
         } else {
             $test = $data->get();
             foreach($test as $uuid => $record){
-                unset($record->isDefault);
+                if(!property_exists($record, 'is')){
+                    continue;
+                }
+                unset($record->is->default);
             }
-            $data->set($object->request('uuid') . '.isDefault', true);
+            $data->set($object->request('uuid') . '.is.default', true);
             $data->write($url);
 
             $record = $data->get($object->request('uuid'));
@@ -161,7 +164,10 @@ class Settings extends Main {
                 if ($validate->success === true) {
                     $test = $data->get();
                     if(empty($test) || Core::object_is_empty($test)){
-                        $record->isDefault = true;
+                        if(!property_exists($record, 'is')){
+                            $record->is = new stdClass();
+                        }
+                        $record->is->default = true;
                     } else {
                         $has_default = false;
                         foreach($test as $node){
@@ -173,7 +179,10 @@ class Settings extends Main {
                             }
                         }
                         if(empty($has_default)){
-                            $record->isDefault = true;
+                            if(!property_exists($record, 'is')){
+                                $record->is = new stdClass();
+                            }
+                            $record->is->default = true;
                         }
                     }
                     $original = $data->get($record->uuid);
