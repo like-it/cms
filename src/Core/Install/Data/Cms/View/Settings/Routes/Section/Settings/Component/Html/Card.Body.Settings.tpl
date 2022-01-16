@@ -14,6 +14,7 @@
 'controller',
 'delete'
 ]}}
+{{dd($request)}}
 <div class="card-body h-100 card-body-{{$command}}">
     {{if(!is.empty($request.nodeList))}}
     <table class="table table-striped table-hover">
