@@ -116,6 +116,8 @@
     "settings.routes.section.form.error.subcommand.validate_string_contains" : "The subcommand must just be [a-z0-9]_- (alphabetical, numeric, _ or -)",
     "settings.routes.section.form.error.method[].validate_in_list_json" : "Please select at least one method.",
     "settings.routes.section.form.error.name.validate_is_unique_json" : "Please provide an unique name which consist of module, submodule, command & subcommand.",
+    "settings.routes.section.settings.component.options.controller.icon" : "fas fa-cog",
+    "settings.routes.section.settings.component.options.controller.text" : "View controller",
     "settings.routes.section.settings.component.options.delete.icon" : "far fa-trash-alt",
     "settings.routes.section.settings.component.options.delete.text" : "Delete",
     "settings.routes.section.settings.component.options.edit.icon" : "far fa-edit",
