@@ -1,4 +1,4 @@
-{R3M}
+//{{R3M}}
 import user from "/Module/User.js";
 import { getSectionByName } from "/Module/Section.js";
 import download from "/Settings/Export/Module/Download.js";

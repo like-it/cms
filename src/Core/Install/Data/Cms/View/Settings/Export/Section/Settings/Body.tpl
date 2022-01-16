@@ -1,4 +1,4 @@
-{R3M}
+{{R3M}}
 {{$version = config('version')}}
 {{if(is.empty($version))}}
     {{$version = '0.0.1'}}
