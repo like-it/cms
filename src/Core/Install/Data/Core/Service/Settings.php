@@ -613,10 +613,12 @@ class Settings extends Main {
         }
         $route = $object->data_read($route_url);
         foreach($route->data() as $nr => $node){
-            if(property_exists($node, 'command')){
-                d($data->get($node->command));
+            if(
+                property_exists($node, 'command') &&
+                $data->has($node->command)
+            ){
+                $data->set($node->command . '.route', $node);
             }
-            dd($node);
         }
         $response = [];
         $response['nodeList'] = $data->data();
