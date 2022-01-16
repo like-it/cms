@@ -171,9 +171,13 @@ class Settings extends Main {
                     } else {
                         $has_default = false;
                         foreach($test as $node){
-                            if(!property_exists($node, 'isDefault')){
+                            if(!property_exists($node, 'is')){
                                 continue;
-                            } else {
+                            }
+                            elseif(!property_exists($node->is, 'default')){
+                                continue;
+                            }
+                            else {
                                 $has_default = true;
                                 break;
                             }
