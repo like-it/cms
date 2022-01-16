@@ -1,0 +1,48 @@
+section[name="main-content"].settings-routes .method {
+    display: inline-block;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid rgba(225, 225, 225, 1);
+}
+
+section[name="main-content"].settings-routes .method-cli {
+    background: rgba(33, 33, 33, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+section[name="main-content"].settings-routes .method-connect {
+    background: rgba(28, 226, 227, 1);
+}
+
+section[name="main-content"].settings-routes .method-delete {
+    background: rgba(227, 28, 28, 1);
+}
+
+section[name="main-content"].settings-routes .method-get {
+    background: rgba(137, 227, 28, 1);
+}
+
+section[name="main-content"].settings-routes .method-head {
+    background: rgba(227, 224, 28, 1);
+}
+
+section[name="main-content"].settings-routes .method-options {
+    background: rgba(208, 28, 227, 1);
+}
+
+section[name="main-content"].settings-routes .method-patch {
+    background: rgba(100, 28, 227, 1);
+}
+
+section[name="main-content"].settings-routes .method-post {
+    background: rgba(28, 121, 227, 1);
+}
+
+section[name="main-content"].settings-routes .method-put {
+    background: rgba(227, 135, 28, 1);
+}
+
+section[name="main-content"].settings-routes .method-trace {
+    background: rgba(227, 28, 131, 1);
+}
