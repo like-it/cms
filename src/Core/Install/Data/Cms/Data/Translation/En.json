@@ -126,6 +126,7 @@
     "settings.routes.section.settings.component.thead.submodule" : "Submodule",
     "settings.routes.section.settings.component.thead.command" : "Command",
     "settings.routes.section.settings.component.thead.subcommand" : "Subcommand",
+    "settings.routes.section.settings.component.thead.path" : "Path",
     "settings.routes.section.settings.component.thead.controller" : "Controller",
     "settings.routes.section.settings.component.thead.method" : "Methods",
     "settings.routes.section.settings.component.thead.default" : "",
