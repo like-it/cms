@@ -34,7 +34,6 @@ menu.domain = () => {
                 } else {
                     if(node?.is?.installed){
                         a = create('a', 'dropdown-item disabled')
-                        a.data('uuid', node.uuid);
                     } else {
                         a = create('a', 'dropdown-item')
                         a.data('uuid', node.uuid);
@@ -44,8 +43,9 @@ menu.domain = () => {
                 li.appendChild(a);
                 a.on('click', (event) => {
                     if(event.target.hasClass('disabled')){
-                        // return;
+                        return;
                     }
+                    button.html(a.html());
                     input.value = a.data('uuid');
                 });
                 ul.appendChild(li);
