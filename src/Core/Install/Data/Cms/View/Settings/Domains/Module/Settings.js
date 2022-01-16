@@ -45,44 +45,6 @@ settings.onDoubleClick = () => {
     }
 }
 
-settings.edit = () => {
-    const section = getSectionByName('main-content');
-    if(!section){
-        return;
-    }
-    let list = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-edit');
-    if(is.nodeList(list)){
-        let index;
-        for(index=0; index < list.length; index++){
-            let node = list[index];
-            node.on('click', (event) => {
-                if(node.data('has', 'url')){
-                    header('Authorization', 'Bearer ' + user.token());
-                    request(node.data('url'), null, (url, response) => {
-                        request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
-                        });
-                    });
-                }
-            });
-        }
-    } else {
-        let node = list;
-        if(node){
-            node.on('click', (event) => {
-                if(node.data('has', 'url')){
-                    header('Authorization', 'Bearer ' + user.token());
-                    request(node.data('url'), null, (url, response) => {
-                        request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
-                        });
-                    });
-                }
-            });
-        }
-    }
-}
-
 settings.deleteDialog = (data) => {
     if(!data?.node){
         return;
@@ -217,78 +179,6 @@ settings.actions = (target) => {
         let node = list;
     }
 }
-
-settings.delete = (target) => {
-    const section = getSectionByName('main-content');
-    if(!section){
-        return;
-    }
-    let list = section.select('.' + "{{$module}}" + '-' +  "{{$submodule}}" + '-' + "{{$command}}" + '-delete');
-    if(is.nodeList(list)){
-        let index;
-        for(index=0; index < list.length; index++){
-            let node = list[index];
-            node.on('click', (event) => {
-                //make dialog delete with are you sure.
-                settings.deleteDialog({
-                    node: node,
-                    section: section,
-                    target: target,
-                });
-            });
-        }
-    } else {
-        let node = list;
-        if(node){
-            node.on('click', (event) => {
-                //make dialog delete with are you sure.
-                settings.deleteDialog({
-                    node: node,
-                    section: section,
-                    target: target,
-                });
-            });
-        }
-    }
-}
-
-settings.default = (target) => {
-    const section = getSectionByName('main-content');
-    if(!section){
-        return;
-    }
-    let list = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-default-action');
-    if(is.nodeList(list)){
-        let index;
-        for(index=0; index < list.length; index++){
-            let node = list[index];
-            node.on('click', (event) => {
-                if(node.data('has', 'url')){
-                    header('Authorization', 'Bearer ' + user.token());
-                    const data = {
-                        "request-method" : "POST"
-                    }
-                    request(node.data('url'), data, (url, response) => {
-                        menu.dispatch(section, target);
-                    });
-                }
-            });
-        }
-    } else if (list) {
-        let node = list;
-        node.on('click', (event) => {
-            if(node.data('has', 'url')){
-                header('Authorization', 'Bearer ' + user.token());
-                const data = {
-                    "request-method" : "POST"
-                }
-                request(node.data('url'), data, (url, response) => {
-                    menu.dispatch(section, target);
-                });
-            }
-        });
-    }
-};
 
 settings.body = () => {
     const section = getSectionByName('main-content');
