@@ -1,6 +1,6 @@
 {{R3M}}
 <td class="text-end">
-    {{if(!is.empty($node.isDefault))}}
+    {{if(!is.empty($node.is.default))}}
         {{$i.icon = __(
         $__.module +
         '.' +
