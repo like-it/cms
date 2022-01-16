@@ -228,9 +228,6 @@ class Settings extends Main {
     {
         $domain = false;
         $domain_uuid = $object->request('node.domain');
-        if(empty($domain_uuid)){
-            $domain_uuid = $object->request('node_domain');
-        }
         if($domain_uuid){
             $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
             $data = $object->data_read($url);
@@ -591,7 +588,6 @@ class Settings extends Main {
      */
     public static function routes_list(App $object): Response
     {
-        dd($object->request());
         $domain = Settings::domain_get($object);
         $url = $domain->dir .
             'Command' .
