@@ -14,11 +14,10 @@ menu.domain = () => {
         return;
     }
     const url = domain.data('url');
-    console.log(url);
-
-
-
-
+    header('Authorization', 'Bearer ' + user.token());
+    request(url, null, (url, response) => {
+        console.log(response);
+    });
 }
 
 menu.is_selected = (node, selected) => {
