@@ -26,17 +26,19 @@ menu.domain = () => {
                 let node = response.nodeList[uuid];
                 let li = create('li');
                 let a;
-                if(node?.is?.installed){
-                    a = create('a', 'dropdown-item disabled')
-                }
                 if(node?.is?.default){
                     a = create('a', 'dropdown-item active')
                     button.html(node.name);
                     input.value = uuid;
                 } else {
-                    a = create('a', 'dropdown-item')
+                    if(node?.is?.installed){
+                        a = create('a', 'dropdown-item disabled')
+                    } else {
+                        a = create('a', 'dropdown-item')
+                    }
                 }
                 a.html(node.name);
+                a.data('uuid', node.uuid);
                 li.appendChild(a);
                 ul.appendChild(li);
             }
