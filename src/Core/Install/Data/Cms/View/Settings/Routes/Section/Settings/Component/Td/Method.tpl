@@ -7,8 +7,6 @@
         $__.submodule +
         '.section.' +
         $__.command +
-        '.' +
-        $__.subcommand +
         '.component.thead.' +
         'method'
         )}}
