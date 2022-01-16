@@ -17,13 +17,13 @@ menu.domain = () => {
     const url = domain.data('url');
     header('Authorization', 'Bearer ' + user.token());
     request(url, null, (url, response) => {
-        console.log(response);
         if(response?.nodeList){
-            let index;
+            let uuid;
             const ul = domain.select('ul');
             const button = domain.select('button');
-            for(index=0; index < response.nodeList; index++){
-                let node = response.nodeList[index];
+            const input = domain.select('input');
+            for(uuid in response.nodeList){
+                let node = response.nodeList[uuid];
                 let li = create('li');
                 let a;
                 if(node?.is?.installed){
@@ -32,6 +32,7 @@ menu.domain = () => {
                 if(node?.is?.default){
                     a = create('a', 'dropdown-item active')
                     button.html(node.name);
+                    input.value = uuid;
                 } else {
                     a = create('a', 'dropdown-item')
                 }
