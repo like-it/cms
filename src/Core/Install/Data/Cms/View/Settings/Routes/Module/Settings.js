@@ -45,44 +45,6 @@ settings.onDoubleClick = () => {
     }
 }
 
-settings.edit = () => {
-    const section = getSectionByName('main-content');
-    if(!section){
-        return;
-    }
-    let list = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-edit');
-    if(is.nodeList(list)){
-        let index;
-        for(index=0; index < list.length; index++){
-            let node = list[index];
-            node.on('click', (event) => {
-                if(node.data('has', 'url')){
-                    header('Authorization', 'Bearer ' + user.token());
-                    request(node.data('url'), null, (url, response) => {
-                        request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
-                        });
-                    });
-                }
-            });
-        }
-    } else {
-        let node = list;
-        if(node){
-            node.on('click', (event) => {
-                if(node.data('has', 'url')){
-                    header('Authorization', 'Bearer ' + user.token());
-                    request(node.data('url'), null, (url, response) => {
-                        request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
-                        });
-                    });
-                }
-            });
-        }
-    }
-}
-
 settings.deleteDialog = (data) => {
     if(!data?.node){
         return;
@@ -180,19 +142,6 @@ settings.actions = (target) => {
                     });
                 });
             }
-            else if(node.hasClass('item-default')){
-                node.on('click', (event) => {
-                    if(node.data('has', 'url')){
-                        header('Authorization', 'Bearer ' + user.token());
-                        const data = {
-                            "request-method" : "POST"
-                        }
-                        request(node.data('url'), data, (url, response) => {
-                            menu.dispatch(section, target);
-                        });
-                    }
-                });
-            }
             else {
                 node.on('click', (event) => {
                     if(node.data('has', 'url') && node.data('has', 'frontend-url')){
@@ -218,78 +167,6 @@ settings.actions = (target) => {
     }
 }
 
-settings.delete = (target) => {
-    const section = getSectionByName('main-content');
-    if(!section){
-        return;
-    }
-    let list = section.select('.' + "{{$module}}" + '-' +  "{{$submodule}}" + '-' + "{{$command}}" + '-delete');
-    if(is.nodeList(list)){
-        let index;
-        for(index=0; index < list.length; index++){
-            let node = list[index];
-            node.on('click', (event) => {
-                //make dialog delete with are you sure.
-                settings.deleteDialog({
-                    node: node,
-                    section: section,
-                    target: target,
-                });
-            });
-        }
-    } else {
-        let node = list;
-        if(node){
-            node.on('click', (event) => {
-                //make dialog delete with are you sure.
-                settings.deleteDialog({
-                    node: node,
-                    section: section,
-                    target: target,
-                });
-            });
-        }
-    }
-}
-
-settings.default = (target) => {
-    const section = getSectionByName('main-content');
-    if(!section){
-        return;
-    }
-    let list = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-default-action');
-    if(is.nodeList(list)){
-        let index;
-        for(index=0; index < list.length; index++){
-            let node = list[index];
-            node.on('click', (event) => {
-                if(node.data('has', 'url')){
-                    header('Authorization', 'Bearer ' + user.token());
-                    const data = {
-                        "request-method" : "POST"
-                    }
-                    request(node.data('url'), data, (url, response) => {
-                        menu.dispatch(section, target);
-                    });
-                }
-            });
-        }
-    } else if (list) {
-        let node = list;
-        node.on('click', (event) => {
-            if(node.data('has', 'url')){
-                header('Authorization', 'Bearer ' + user.token());
-                const data = {
-                    "request-method" : "POST"
-                }
-                request(node.data('url'), data, (url, response) => {
-                    menu.dispatch(section, target);
-                });
-            }
-        });
-    }
-};
-
 settings.body = () => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -313,24 +190,14 @@ settings.init = () => {
         select: ".{{$module}}-{{$submodule}}-{{$command}}",
         event: new MouseEvent("dblclick")
     });
-    /*
-    settings.default({
-        select : ".{{$module}}-{{$submodule}}-{{$command}}",
-        event : new MouseEvent("dblclick")
-    });
-    settings.edit();
-    settings.delete({
-        select: ".{{$module}}-{{$submodule}}-{{$command}}",
-        event: new MouseEvent("dblclick")
-    });
-     */
 }
 
 ready(() => {
     require(
     [
         root() + 'Dialog/Css/Dialog.css?' + version(),
-        root() + 'Dialog/Css/Dialog.Delete.css?' + version()
+        root() + 'Dialog/Css/Dialog.Delete.css?' + version(),
+        root() + 'Settings/Css/Routes.css?' + version()
     ],
     () => {
         settings.init();
