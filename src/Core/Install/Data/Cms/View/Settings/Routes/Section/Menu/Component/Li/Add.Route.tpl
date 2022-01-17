@@ -7,19 +7,18 @@
     <a
         class="nav-link {{$module}}-{{$submodule}}-{{$section}}"
         data-frontend-url="{{
-            route.get(
-                route.prefix() +
-                '-' +
-                $module +
-                '-' +
-                $submodule +
-                '-' +
-                $section +
-                '-' +
-                $node, [
-                    'node.domain' => "{node.domain}"
-                ]
-        )}}"
+        route.get(
+        route.prefix() +
+        '-' +
+        $module +
+        '-' +
+        $submodule +
+        '-' +
+        $section +
+        '-' +
+        $node, [
+        "{node.domain}"
+        ])}}"
         data-selected=".card-body-{{$section}}"
     >
         {{__($__.module + '.' + $__.submodule + '.component.header.a.' + $__.section + '.' + 'link')}}

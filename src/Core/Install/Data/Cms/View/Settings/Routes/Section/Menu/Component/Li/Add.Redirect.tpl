@@ -17,9 +17,8 @@
         $section +
         '-' +
         $node, [
-        'node.domain' => "{node.domain}"
-        ]
-        )}}"
+        "{node.domain}"
+        ])}}"
         data-selected=".card-body-{{$section}}"
     >
         {{__($__.module + '.' + $__.submodule + '.component.header.a.' + $__.section + '.' + 'link')}}
