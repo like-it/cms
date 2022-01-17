@@ -23,6 +23,7 @@ class Import extends Main {
     public static function import(App $object)
     {
         $upload = $object->upload();
+        dd($upload);
         foreach($upload->data() as $file){
             $file->extension = File::extension($file->name);
             if(
