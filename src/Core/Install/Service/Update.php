@@ -114,6 +114,7 @@ class Update {
         $url = $object->config('project.dir.data') . 'Installed' . $object->config('extension.json');
         $data = new Data($list);
         $data->write($url);
+        File::chown($url, 'www-data', 'www-data');
         $result = [];
         foreach($data->get() as $node){
             $result[] = $node['name']  . ' ' . $node['version'];
