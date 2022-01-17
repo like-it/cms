@@ -55,6 +55,11 @@ menu.domain = () => {
                     a.addClass('active');
                     button.html(a.html());
                     input.value = a.data('uuid');
+
+                    const menu_active = section.select('.nav-item.active');
+                    if(menu_active && menu_active.data('selected') === '.card-body-' + "{{$command}}"){
+                        menu_active.trigger('dblclick');
+                    }
                 });
                 ul.appendChild(li);
             }
