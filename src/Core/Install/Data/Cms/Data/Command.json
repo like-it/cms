@@ -324,6 +324,28 @@
             "POST"
         ]
     },
+    "e4408cd2-1275-46de-80ec-e005c959c9e4" : {
+        "module" : "settings",
+        "submodule" : "routes",
+        "command" : "add-route",
+        "subcommand" : "body",
+        "path" : "Settings/Routes/Add/Route/Body/",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "56c8cd2e-80e7-414d-9d3d-ea45ef3b784c" : {
+        "module" : "settings",
+        "submodule" : "routes",
+        "command" : "add-redirect",
+        "subcommand" : "body",
+        "path" : "Settings/Routes/Add/Redirect/Body/",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "9432751-829f-496e-af75-5c6681a2b425" : {
         "module" : "settings",
         "submodule" : "routes",
