@@ -2,7 +2,7 @@
 {{$section = 'add-redirect'}}
 {{$__.section = $section|lowercase|replace:'-':'.'}}
 {{$require.section = $section|uppercase.first.sentence:'-'|replace:'-':'/'}}
-{{$node = 'body'}}
+{{$node = 'body-node'}}
 <li class="nav-item">
     <a
         class="nav-link {{$module}}-{{$submodule}}-{{$section}}"
