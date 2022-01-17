@@ -313,6 +313,17 @@
             "POST"
         ]
     },
+    "e38e49d-e861-4dd7-8f2f-4d38c7382878" : {
+        "module" : "settings",
+        "submodule" : "routes",
+        "command" : "add-redirect",
+        "subcommand" : "body",
+        "path" : "Settings/Routes/Add/Redirect/Body/{$node.domain}",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "9432751-829f-496e-af75-5c6681a2b425" : {
         "module" : "settings",
         "submodule" : "routes",
