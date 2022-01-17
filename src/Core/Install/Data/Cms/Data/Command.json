@@ -317,7 +317,7 @@
         "module" : "settings",
         "submodule" : "routes",
         "command" : "add-redirect",
-        "subcommand" : "body",
+        "subcommand" : "body-node-domain",
         "path" : "Settings/Routes/Add/Redirect/Body/{$node.domain}",
         "method": [
             "GET",
