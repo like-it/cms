@@ -57,7 +57,6 @@ menu.domain = () => {
                     input.value = a.data('uuid');
 
                     const menu_active = section.select('.nav-link.active');
-                    console.log(menu_active);
                     if(menu_active && menu_active.data('selected') === '.card-body-' + "{{$command}}"){
                         menu_active.trigger('dblclick');
                     }
@@ -124,7 +123,20 @@ menu.onClick = () => {
                 menu.is_selected(node, selected);
             }
         });
+    }
+}
+
+menu.onDoubleClick = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const list = section.select('.nav-link');
+    let index;
+    for(index=0; index < list.length; index++){
+        let node = list[index];
         node.on('dblclick', (event) => {
+            console.log('dblclick');
             const list = section.select('.nav-link');
             list.removeClass('active');
             node.addClass('active');
@@ -141,6 +153,7 @@ menu.init = () => {
     //const route = "{{route.get(route.prefix() + '-settings-email-main')}}";
     //window.history.pushState(route, route, route);
     menu.onClick();
+    menu.onDoubleClick();
     menu.domain();
 }
 
