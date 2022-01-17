@@ -58,6 +58,7 @@ menu.domain = () => {
 
                     const menu_active = section.select('.nav-link.active');
                     if(menu_active && menu_active.data('selected') === '.card-body-' + "{{$command}}"){
+                        console.log('yes');
                         menu_active.trigger('dblclick');
                     }
                 });
