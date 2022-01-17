@@ -107,9 +107,27 @@ menu.onClick = () => {
         return;
     }
     const list = section.select('.nav-link');
-    let index;
-    for(index=0; index < list.length; index++){
-        let node = list[index];
+    if(is.nodeList(list)){
+        let index;
+        for(index=0; index < list.length; index++){
+            let node = list[index];
+            node.on('click', (event) => {
+                const list = section.select('.nav-link');
+                list.removeClass('active');
+                node.addClass('active');
+                const body = section.select('.card-body');
+                if(body){
+                    body.addClass('d-none');
+                }
+                if(event.detail === 1){
+                    const selected = section.select(node.data('selected'));
+                    menu.is_selected(node, selected);
+                }
+            });
+        }
+    }
+    else if(list){
+        let node = list;
         node.on('click', (event) => {
             const list = section.select('.nav-link');
             list.removeClass('active');
@@ -132,9 +150,25 @@ menu.onDoubleClick = () => {
         return;
     }
     const list = section.select('.nav-link');
-    let index;
-    for(index=0; index < list.length; index++){
-        let node = list[index];
+    if(is.nodeList(list)){
+        let index;
+        for(index=0; index < list.length; index++){
+            let node = list[index];
+            node.on('dblclick', (event) => {
+                console.log('dblclick');
+                const list = section.select('.nav-link');
+                list.removeClass('active');
+                node.addClass('active');
+                const body = section.select('.card-body');
+                if(body){
+                    body.addClass('d-none');
+                }
+                menu.is_selected(node);
+            });
+        }
+    }
+    else if(list){
+        let node = list;
         node.on('dblclick', (event) => {
             console.log('dblclick');
             const list = section.select('.nav-link');
