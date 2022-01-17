@@ -1,6 +1,6 @@
 {{R3M}}
 <td class="text-end">
-    {{if(is.empty($node.is.installed) && !is.empty($node.domain))}}
+    {{if(!is.empty($node.domain))}}
         <div class="dropdown dropstart">
             <button
                 class="btn btn-secondary dropdown-toggle"

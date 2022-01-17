@@ -23,44 +23,47 @@ class Import extends Main {
     public static function import(App $object)
     {
         $upload = $object->upload();
-        dd($upload);
-        foreach($upload->data() as $file){
-            $file->extension = File::extension($file->name);
-            if(
-                in_array(
-                    $file->extension,
-                    Import::UPLOAD_ALLOWED_EXTENSION
-                )
-            ){
-                $uuid = Core::uuid();
-                $target =
-                    $object->config('project.dir.data') .
-                    'Import' .
-                    $object->config('ds') .
-                    $uuid .
-                    $object->config('ds')
-                ;
-                Dir::create($target);
-                $result = Import::unzip($file->tmp_name, $target);
+        //add valid upload //add upload error
+        $data = $upload->data();
+        if(is_array($data) || is_object($data)){
+            foreach($data as $file){
+                $file->extension = File::extension($file->name);
+                if(
+                    in_array(
+                        $file->extension,
+                        Import::UPLOAD_ALLOWED_EXTENSION
+                    )
+                ){
+                    $uuid = Core::uuid();
+                    $target =
+                        $object->config('project.dir.data') .
+                        'Import' .
+                        $object->config('ds') .
+                        $uuid .
+                        $object->config('ds')
+                    ;
+                    Dir::create($target);
+                    $result = Import::unzip($file->tmp_name, $target);
 
-                if(array_key_exists('error', $result)){
-                    $error = [];
-                    $error['error'] = 'Could not unzip without errors:' . PHP_EOL;
-                    foreach($result['error'] as $url){
-                        $error['error'] .= $url . PHP_EOL;
+                    if(array_key_exists('error', $result)){
+                        $error = [];
+                        $error['error'] = 'Could not unzip without errors:' . PHP_EOL;
+                        foreach($result['error'] as $url){
+                            $error['error'] .= $url . PHP_EOL;
+                        }
+                        return new Response(
+                            $error,
+                            Response::TYPE_JSON,
+                            Response::STATUS_ERROR
+                        );
+                    } else {
+                        Import::update_files($object, $target);
+                        Import::route_dedouble($object);
+                        return new Response(
+                            'Import successful...',
+                            Response::TYPE_JSON,
+                        );
                     }
-                    return new Response(
-                        $error,
-                        Response::TYPE_JSON,
-                        Response::STATUS_ERROR
-                    );
-                } else {
-                    Import::update_files($object, $target);
-                    Import::route_dedouble($object);
-                    return new Response(
-                        'Import successful...',
-                        Response::TYPE_JSON,
-                    );
                 }
             }
         }
