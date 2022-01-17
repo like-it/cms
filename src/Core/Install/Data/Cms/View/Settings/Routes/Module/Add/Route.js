@@ -152,7 +152,7 @@ route.init = () => {
             }
         ]
     });
-    routefocus();
+    route.focus();
 };
 
 ready(() => {
