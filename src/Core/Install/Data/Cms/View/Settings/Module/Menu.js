@@ -73,11 +73,15 @@ menu.domain = () => {
 }
 
 menu.is_selected = (node, selected) => {
-    if(selected){
+    if(
+        selected &&
+        !node.data('reload')
+    ){
         //select
         selected.removeClass('d-none');
     } else {
         //load
+        node.data('delete', 'reload');
         if(node.data('has', 'url')){
             header('Authorization', 'Bearer ' + user.token());
             let url = node.data('url');
