@@ -307,6 +307,7 @@
         "submodule" : "routes",
         "command" : "add",
         "subcommand" : "body",
+        "path" : "Settings/Routes/Add/Body/{$node.domain}",
         "method": [
             "GET",
             "POST"
