@@ -2,7 +2,7 @@
 {{$section = 'add-route'}}
 {{$__.section = $section|lowercase|replace:'-':'.'}}
 {{$require.section = $section|uppercase.first.sentence:'-'|replace:'-':'/'}}
-{{$node = 'body-node'}}
+{{$node = 'body-node-domain'}}
 <li class="nav-item">
     <a
         class="nav-link {{$module}}-{{$submodule}}-{{$section}}"
