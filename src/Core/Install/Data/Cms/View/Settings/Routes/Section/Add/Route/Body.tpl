@@ -1,6 +1,6 @@
 {{R3M}}
 {{if(
-$command === 'add' &&
+$command === 'add-route' &&
 $subcommand === 'body'
 )}}
     {{$section.name = 'main-content'}}

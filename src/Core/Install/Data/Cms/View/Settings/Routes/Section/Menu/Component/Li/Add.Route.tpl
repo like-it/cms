@@ -1,5 +1,5 @@
 {{R3M}}
-{{$section = 'add'}}
+{{$section = 'add-route'}}
 {{$__.section = $section|lowercase|replace:'-':'.'}}
 {{$require.section = $section|uppercase.first.sentence:'-'|replace:'-':'/'}}
 {{$node = 'body'}}

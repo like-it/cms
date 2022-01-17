@@ -10,7 +10,9 @@
 'command.validate_string_contains',
 'subcommand.validate_string_contains',
 'method[].validate_in_list_json',
-'name.validate_is_unique_json'
+'name.validate_is_unique_json',
+'redirect.validate_string_length',
+'redirect.validate_string_contains',
 ]}}
 {{for.each($errors as $error)}}
     {{if(request.error($error) === true)}}

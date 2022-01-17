@@ -305,9 +305,9 @@
     "e38e49d-e861-4dd7-8f2f-4d38c7382878" : {
         "module" : "settings",
         "submodule" : "routes",
-        "command" : "add",
+        "command" : "add-route",
         "subcommand" : "body",
-        "path" : "Settings/Routes/Add/Body/{$node.domain}",
+        "path" : "Settings/Routes/Add/Route/Body/{$node.domain}",
         "method": [
             "GET",
             "POST"
