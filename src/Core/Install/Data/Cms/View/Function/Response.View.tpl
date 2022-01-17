@@ -20,6 +20,7 @@
         !is.empty($submodule) &&
         !is.empty($command)
     )}}
+        {{dd('no')}}
         {{require($prefix + $require.submodule + '/Section/' + $require.command +'/' + $require.subcommand + '.tpl')}}
         {{if($script === 'module')}}
             {{$script = []}}
@@ -31,9 +32,9 @@
         is.empty($submodule) &&
         !is.empty($command)
     )}}
+        {{dd('yes')}}
         {{require($prefix + '/Section/' + $require.command +'/' + $require.subcommand + '.tpl')}}
         {{if($script === 'module')}}
-            {{dd('yes')}}
             {{$script = []}}
             {{script('module')}}
             {{require($prefix + '/Module/' + $require.command + '.js')}}
