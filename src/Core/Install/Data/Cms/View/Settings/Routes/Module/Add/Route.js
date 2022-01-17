@@ -3,9 +3,9 @@ import user from "/Module/User.js";
 import menu from "/Module/Menu.js";
 import { getSectionByName } from "/Module/Section.js";
 
-let add = {};
+let route = {};
 
-add.body = () => {
+route.body = () => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
@@ -21,7 +21,7 @@ add.body = () => {
     }
 }
 
-add.onChange = () => {
+route.onChange = () => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
@@ -78,7 +78,7 @@ add.onChange = () => {
     }
 }
 
-add.form = (target) => {
+route.form = (target) => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
@@ -110,7 +110,7 @@ add.form = (target) => {
     }
 }
 
-add.focus = () => {
+route.focus = () => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
@@ -136,10 +136,10 @@ add.focus = () => {
     input.focus();
 }
 
-add.init = () => {
-    add.body();
-    add.onChange();
-    add.form({
+route.init = () => {
+    route.body();
+    route.onChange();
+    route.form({
         select : [
             {
                 name : ".{{$module}}-{{$submodule}}-{{$command}}",
@@ -152,9 +152,9 @@ add.init = () => {
             }
         ]
     });
-    add.focus();
+    routefocus();
 };
 
 ready(() => {
-    add.init();
+    route.init();
 });
