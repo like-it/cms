@@ -57,7 +57,7 @@ menu.domain = () => {
                     input.value = a.data('uuid');
 
                     const menu_active = section.select('.nav-link.active');
-                    if(menu_active && menu_active.data('selected') === '.card-body-' + "{{$command}}"){
+                    if(menu_active && menu_active.data('selected') === '.card-body-settings'){
                         console.log('yes');
                         menu_active.trigger('dblclick');
                     }
