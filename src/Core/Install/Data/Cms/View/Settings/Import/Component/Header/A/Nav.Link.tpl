@@ -1,4 +1,4 @@
-{R3M}
+{{R3M}}
 {{if(!is.empty($a.data.url))}}
     <a
         class="{{$a.class}}"
