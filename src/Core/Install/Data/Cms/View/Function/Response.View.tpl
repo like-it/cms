@@ -32,11 +32,12 @@
         !is.empty($command)
     )}}
         {{require($prefix + '/Section/' + $require.command +'/' + $require.subcommand + '.tpl')}}
+        {{dd('{{$this}}')}}
         {{if($script === 'module')}}
             {{$script = []}}
             {{script('module')}}
             {{require($prefix + '/Module/' + $require.command + '.js')}}
-        {{/script}}
+            {{/script}}
         {{/if}}
     {{/if}}
 {{/if}}
