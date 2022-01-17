@@ -1,5 +1,5 @@
 {{R3M}}
-{{if($command === 'add')}}
+{{if(in.array($command,['add-route', 'add-redirect'])}}
 {{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/' + $require.command + '/'}}
 {{elseif($command === 'edit')}}
 {{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/'}}
