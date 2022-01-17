@@ -26,7 +26,9 @@ class Import extends Main {
         //add valid upload //add upload error
         $data = $upload->data();
         if(is_array($data) || is_object($data)){
+            $has_data = false;
             foreach($data as $file){
+                $has_data = true;
                 $file->extension = File::extension($file->name);
                 if(
                     in_array(
@@ -65,6 +67,15 @@ class Import extends Main {
                         );
                     }
                 }
+            }
+            if(!$has_data){
+                $error = [];
+                $error['error'] = 'Cannot detect any upload...' . PHP_EOL;
+                return new Response(
+                    $error,
+                    Response::TYPE_JSON,
+                    Response::STATUS_ERROR
+                );
             }
         } else {
             $error = [];
