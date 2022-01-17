@@ -57,5 +57,61 @@
                 }
             ]
         }
+    },
+    "redirect": {
+        "validate": {
+            "uuid" : [
+                {
+                    "string.length": "==36"
+                },
+                {
+                    "is.uuid" : true
+                }
+            ],
+            "module" : [
+                {
+                    "string.length": ">=1"
+                },
+                {
+                    "string.contains": {
+                        "regex" : "^[a-z0-9_-]+$^"
+                    }
+                }
+            ],
+            "submodule" : [
+                {
+                    "string.contains": {
+                        "regex" : "^[a-z0-9_-]+$^"
+                    }
+                }
+            ],
+            "command" : [
+                {
+                    "string.contains": {
+                        "regex" : "^[a-z0-9_-]+$^"
+                    }
+                }
+            ],
+            "subcommand" : [
+                {
+                    "string.contains": {
+                        "regex" : "^[a-z0-9_-]+$^"
+                    }
+                }
+            ],
+            "name" : [
+                {
+                    "is.unique.json" : {
+                        "list" : null,
+                        "url" : "{{config('command.dir.data')}}Command.json"
+                    }
+                }
+            ],
+            "redirect" : [
+                {
+                    "string.length": ">=1"
+                }
+            ]
+        }
     }
 }
