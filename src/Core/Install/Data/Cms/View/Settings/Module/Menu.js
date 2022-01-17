@@ -100,12 +100,38 @@ menu.is_selected = (node, selected) => {
             }
             request(url, null, (url, response) => {
                 if(node.data('has', 'frontend-url')){
-                    request(node.data('frontend-url'), response);
+                    let url = node.data('frontend-url');
+                    if(stristr(url, "{node.domain}") !== false){
+                        const section = getSectionByName('main-content');
+                        if(!section){
+                            return;
+                        }
+                        const domain = section.select('input[name="node.domain"]');
+                        console.log('domain', domain);
+                        if(!domain){
+                            return;
+                        }
+                        url = str_replace("{node.domain}", domain.value, url);
+                    }
+                    request(url, response);
                 }
             });
         }
         else if(node.data('has', 'frontend-url')){
-            request(node.data('frontend-url'));
+            let url = node.data('frontend-url');
+            if(stristr(url, "{node.domain}") !== false){
+                const section = getSectionByName('main-content');
+                if(!section){
+                    return;
+                }
+                const domain = section.select('input[name="node.domain"]');
+                console.log('domain', domain);
+                if(!domain){
+                    return;
+                }
+                url = str_replace("{node.domain}", domain.value, url);
+            }
+            request(url);
         }
     }
 };
