@@ -66,6 +66,14 @@ class Import extends Main {
                     }
                 }
             }
+        } else {
+            $error = [];
+            $error['error'] = 'Cannot detect any upload...' . PHP_EOL;
+            return new Response(
+                $error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
         }
     }
 
