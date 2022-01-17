@@ -548,38 +548,24 @@ class Settings extends Main {
 
     public static function routes_delete(App $object, $uuid): Response
     {
-        $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
-
+        $domain = Settings::domain_get($object);
+        $url = $domain->dir .
+            'Command' .
+            $object->config('extension.json');
+        $route_url = $domain->dir .
+            'Route' .
+            $object->config('extension.json');
         $data = $object->data_read($url);
         if (!$data) {
             $data = new Data();
         }
         $record = $data->get($uuid);
         $data->delete($uuid);
-        $test = $data->get();
-        $has_default = false;
-        foreach($test as $node_uuid => $node){
-            if(
-                property_exists($node, 'isDefault') &&
-                $node->isDefault === true
-            ){
-                $has_default = true;
-                break;
-            }
-        }
-        if($has_default === false){
-            $node = false;
-            foreach($test as $node_uuid => $node){
-                break;
-            }
-            if($node){
-                $node->isDefault = true;
-            }
-        }
         $data->write($url);
 
         $response = [];
         $response['node'] = $record;
+        Settings::routes_command_to_route($object, $url, $route_url, $domain);
         return new Response($response, Response::TYPE_JSON);
     }
 
