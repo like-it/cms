@@ -63,7 +63,7 @@ menu.domain = () => {
                     const menu_settings = section.select('.nav-link[data-selected=".card-body-settings"]');
                     console.log(menu_settings);
                     if(menu_settings && !menu_settings.hasClass('active')){
-                        menu.data('reload', true);
+                        menu_settings.data('reload', true);
                     }
                 });
                 ul.appendChild(li);
