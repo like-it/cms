@@ -61,6 +61,7 @@ menu.domain = () => {
                         menu_active.trigger('dblclick');
                     }
                     const menu_settings = section.select('.nav-link[data-selected=".card-body-settings"]');
+                    console.log(menu_settings);
                     if(menu_settings && !menu_settings.hasClass('active')){
                         menu.data('reload', true);
                     }
