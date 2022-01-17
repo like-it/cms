@@ -20,7 +20,7 @@ class Import extends Main {
         'json'
     ];
 
-    public static function import(App $object): Response
+    public static function import(App $object)
     {
         $upload = $object->upload();
         foreach($upload->data() as $file){
