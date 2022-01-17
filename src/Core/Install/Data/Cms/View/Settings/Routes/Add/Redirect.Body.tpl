@@ -1,5 +1,6 @@
 {{R3M}}
 {{$prefix = $controller.dir.view + $controller.title + '/'}}
+{{require($prefix + 'Init.tpl')}}
 {{$module = $controller.name}}
 {{$submodule = 'routes'}}
 {{$command = 'add-redirect'}}
