@@ -313,7 +313,7 @@
             "POST"
         ]
     },
-    "e38e49d-e861-4dd7-8f2f-4d38c7382878" : {
+    "7ad0b59a-dc6e-482d-827e-8c94325c5769" : {
         "module" : "settings",
         "submodule" : "routes",
         "command" : "add-redirect",
