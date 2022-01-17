@@ -58,8 +58,11 @@ menu.domain = () => {
 
                     const menu_active = section.select('.nav-link.active');
                     if(menu_active && menu_active.data('selected') === '.card-body-settings'){
-                        console.log('yes');
                         menu_active.trigger('dblclick');
+                    }
+                    const menu_settings = section.select('.nav-link[data-selected=".card-body-settings"]');
+                    if(menu_settings && !menu_settings.hasClass('active')){
+                        menu.data('reload', true);
                     }
                 });
                 ul.appendChild(li);
