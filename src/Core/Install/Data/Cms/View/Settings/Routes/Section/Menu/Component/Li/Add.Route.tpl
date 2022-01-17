@@ -17,7 +17,7 @@
         $section +
         '-' +
         $node, [
-        "{literal}{node.domain}{/literal}"
+        "node.domain"
         ])}}"
         data-selected=".card-body-{{$section}}"
     >
