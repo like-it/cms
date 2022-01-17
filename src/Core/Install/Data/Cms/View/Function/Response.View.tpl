@@ -21,25 +21,11 @@
         !is.empty($command)
     )}}
         {{require($prefix + $require.submodule + '/Section/' + $require.command +'/' + $require.subcommand + '.tpl')}}
-        {{if($script === 'module')}}
-            {{$script = []}}
-            {{script('module')}}
-            {{require($prefix + $require.submodule + '/Module/' + $require.command + '.js')}}
-            {{/script}}
-        {{else}}
-            {{dd($script)}}
-        {{/if}}
     {{else.if(
         is.empty($submodule) &&
         !is.empty($command)
     )}}
         {{require($prefix + '/Section/' + $require.command +'/' + $require.subcommand + '.tpl')}}
-        {{if($script === 'module')}}
-            {{$script = []}}
-            {{script('module')}}
-            {{require($prefix + '/Module/' + $require.command + '.js')}}
-            {{/script}}
-        {{/if}}
     {{/if}}
 {{/if}}
 

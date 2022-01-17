@@ -4,6 +4,5 @@
 'submodule' => 'export',
 'command' => 'main',
 'init' => true,
-'script' => 'module',
 'prefix' => $controller.dir.view + $controller.title + '/',
 ])}}
