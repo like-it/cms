@@ -5,7 +5,7 @@ import create from "/Module/Create.js";
 import { getSectionByName } from "/Module/Section.js";
 import { version } from "/Module/Priya.js";
 import { root } from "/Module/Web.js";
-
+import { stristr, str_replace } from "/Module/String.js";
 let settings = {};
 
 settings.onDoubleClick = () => {
