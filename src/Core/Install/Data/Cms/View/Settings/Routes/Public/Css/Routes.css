@@ -1,3 +1,12 @@
+section[name="main-content"].settings-routes .actions {
+    position: relative;
+}
+
+section[name="main-content"].settings-routes .actions .fa-chevron-down {
+    position: absolute;
+    bottom: 1rem;
+}
+
 section[name="main-content"].settings-routes .method {
     display: inline-block;
     border-radius: 10px;
