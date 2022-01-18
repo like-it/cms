@@ -35,9 +35,13 @@
         </tr>
         </thead>
         <tbody>
+        {{$nr = 0 }}
+        {{$count = 0}}
+        {{for.each($request.nodeList as $uuid => $node)}}
+            {{$count++}}
+        {{/for.each}}
         {{for.each($request.nodeList as $uuid => $node)}}
         <tr
-
             data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$uuid}}/{{$node.domain}}"
             data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-body')}}"
         >
@@ -46,6 +50,7 @@
             {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Td/' + $require.basename + '.tpl')}}
             {{/for.each}}
         </tr>
+        {{$nr++}}
         {{/for.each}}
         </tbody>
     </table>
