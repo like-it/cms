@@ -326,6 +326,26 @@
     "5ff2bd20-9046-4966-9800-cf71424ec868" : {
         "module" : "settings",
         "submodule" : "routes",
+        "command" : "one_up",
+        "path": "Settings/Routes/1/Up/{$node.uuid}/{$node.domain}",
+        "method": [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "5ff2bd20-9046-4966-9800-cf71424ec868" : {
+        "module" : "settings",
+        "submodule" : "routes",
+        "command" : "one_down",
+        "path": "Settings/Routes/1/Down/{$node.uuid}/{$node.domain}",
+        "method": [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "5ff2bd20-9046-4966-9800-cf71424ec868" : {
+        "module" : "settings",
+        "submodule" : "routes",
         "command" : "command",
         "path": "Settings/Routes/{$node.uuid}/{$node.domain}",
         "method": [
