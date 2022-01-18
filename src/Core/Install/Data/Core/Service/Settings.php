@@ -618,7 +618,39 @@ class Settings extends Main {
             $data = new Data();
         }
         $record = $data->get($object->request('node.uuid'));
-        dd($record);
+        if(!$record){
+            $data = [];
+            $data['error'] = 'Could not find source node with uuid: ' . $object->request('node.uuid');
+            return new Response(
+                $data,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
+        }
+        $next = false;
+        $get_next = false;
+        foreach($data->get() as $uuid => $node){
+            if($uuid == $record->uuid){
+                $get_next = true;
+                continue;
+            }
+            if($get_next){
+                $next = $node;
+                $get_next = false;
+                break;
+            }
+        }
+        if(
+            $next &&
+            property_exists($next, 'uuid') &&
+            property_exists($record, 'uuid')
+        ){
+            $old_sort = $data->get($record->uuid . '.sort');
+            $data->set($record->uuid . '.sort', $data->get($next->uuid . '.sort'));
+            $data->set($next->uuid . '.sort', $old_sort);
+            $data->write($url);
+            Settings::routes_command_to_route($object, $url, $route_url, $domain);
+        }
     }
 
     /**
