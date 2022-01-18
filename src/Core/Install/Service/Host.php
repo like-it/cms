@@ -272,6 +272,8 @@ class Host {
                     $route->data($key, $add);
                 }
                 $route->write($options['route']);
+                $command = 'funda configure route resource ' . $options['route'];
+                Core::execute($command, $output);
             }
         }
     }
