@@ -3,8 +3,7 @@
     {{if($nr > 0)}}
         <i class="fas fa-chevron-up"></i><br>
     {{/if}}
-    {{$nr}} / {{$count}} <br>
-    {{if($nr < $count)}}
+    {{if($nr < $count - 1)}}
         <i class="fas fa-chevron-down"></i><br>
     {{/if}}
 </td>
