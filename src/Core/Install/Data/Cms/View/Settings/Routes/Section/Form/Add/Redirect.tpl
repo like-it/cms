@@ -5,6 +5,7 @@
 'Submodule',
 'Command',
 'Subcommand',
+'Method',
 'Path',
 "Redirect"
 ]}}
