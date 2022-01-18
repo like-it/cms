@@ -266,6 +266,9 @@ class Host {
                     $add->command = $add->uuid;
                     unset($add->uuid);
                     unset($add->name);
+                    if(property_exists($add, 'redirect')){
+                        unset($add->controller);
+                    }
                     $route->data($key, $add);
                 }
                 $route->write($options['route']);
