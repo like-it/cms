@@ -121,6 +121,24 @@ class Settings extends View {
         }
     }
 
+    public static function routes_one_up(App $object)
+    {
+        try {
+            return Service::routes_one_up($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function routes_one_down(App $object)
+    {
+        try {
+            return Service::routes_one_down($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
     public static function routes_command(App $object){
         $uuid = $object->request('node.uuid');
         try {

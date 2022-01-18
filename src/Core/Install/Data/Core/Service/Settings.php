@@ -604,6 +604,26 @@ class Settings extends Main {
     /**
      * @throws Exception
      */
+    public static function routes_one_down(App $object)
+    {
+        $domain = Settings::domain_get($object);
+        $url = $domain->dir .
+            'Command' .
+            $object->config('extension.json');
+        $route_url = $domain->dir .
+            'Route' .
+            $object->config('extension.json');
+        $data = $object->data_read($url);
+        if (!$data) {
+            $data = new Data();
+        }
+        $record = $data->get($object->request('node.uuid'));
+        dd($record);
+    }
+
+    /**
+     * @throws Exception
+     */
     private static function routes_put(App $object, Data $data, stdClass $record, $url, $route_url, $domain)
     {
         try {
