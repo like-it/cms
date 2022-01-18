@@ -9,4 +9,7 @@
             <span class="method method-{{$method|lowercase}}">{{$method}}</span>
         {{/for.each}}
     {{/if}}
+    {{if(!is.empty($node.route.redirect))}}
+        <span class="method method-redirect">REDIRECT</span>
+    {{/if}}
 </td>
