@@ -1,5 +1,6 @@
 {{R3M}}
 {{$components = [
+'actions',
 'module',
 'submodule',
 'command',
