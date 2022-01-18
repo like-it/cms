@@ -127,6 +127,51 @@ settings.actions = (target) => {
     if(!section){
         return;
     }
+    const actions = section.select('.actions');
+    if(!actions){
+        return;
+    }
+    const i = action.select('i');
+    if(is.nodeList(i)){
+        let index;
+        for(index=0; index < i.length; index++){
+            let node = i[index];
+            node.on('click', (event) => {
+                header('Authorization', 'Bearer ' + user.token());
+                request(node.data('url'), null, (url, response) => {
+                    console.log(response);
+                    menu.dispatch(section, target);
+                    /*
+                    request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+
+                    });
+                     */
+                });
+            });
+        }
+    } else if(i){
+        let node = i;
+        node.on('click', (event) => {
+            header('Authorization', 'Bearer ' + user.token());
+            request(node.data('url'), null, (url, response) => {
+                console.log(response);
+                menu.dispatch(section, target);
+                /*
+                request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+
+                });
+                 */
+            });
+        });
+    }
+}
+
+
+settings.options = (target) => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
     let list = section.select('.dropdown-item');
     if(is.nodeList(list)){
         let index;
@@ -187,6 +232,10 @@ settings.init = () => {
     settings.body();
     settings.onDoubleClick();
     settings.actions({
+        select: ".{{$module}}-{{$submodule}}-{{$command}}",
+        event: new MouseEvent("dblclick")
+    });
+    settings.options({
         select: ".{{$module}}-{{$submodule}}-{{$command}}",
         event: new MouseEvent("dblclick")
     });
