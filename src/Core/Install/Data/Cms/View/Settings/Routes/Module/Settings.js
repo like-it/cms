@@ -131,7 +131,7 @@ settings.actions = (target) => {
     if(!actions){
         return;
     }
-    const i = action.select('i');
+    const i = actions.select('i');
     if(is.nodeList(i)){
         let index;
         for(index=0; index < i.length; index++){
