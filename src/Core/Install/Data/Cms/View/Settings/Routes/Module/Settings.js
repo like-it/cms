@@ -137,8 +137,21 @@ settings.actions = (target) => {
         for(index=0; index < i.length; index++){
             let node = i[index];
             node.on('click', (event) => {
+                let url = node.data('url');
+                if(stristr(url, "{node.domain}") !== false){
+                    const section = getSectionByName('main-content');
+                    if(!section){
+                        return;
+                    }
+                    const domain = section.select('input[name="node.domain"]');
+                    console.log('domain', domain);
+                    if(!domain){
+                        return;
+                    }
+                    url = str_replace("{node.domain}", domain.value, url);
+                }
                 header('Authorization', 'Bearer ' + user.token());
-                request(node.data('url'), null, (url, response) => {
+                request(url, null, (url, response) => {
                     console.log(response);
                     menu.dispatch(section, target);
                     /*
@@ -152,8 +165,21 @@ settings.actions = (target) => {
     } else if(i){
         let node = i;
         node.on('click', (event) => {
+            let url = node.data('url');
+            if(stristr(url, "{node.domain}") !== false){
+                const section = getSectionByName('main-content');
+                if(!section){
+                    return;
+                }
+                const domain = section.select('input[name="node.domain"]');
+                console.log('domain', domain);
+                if(!domain){
+                    return;
+                }
+                url = str_replace("{node.domain}", domain.value, url);
+            }
             header('Authorization', 'Bearer ' + user.token());
-            request(node.data('url'), null, (url, response) => {
+            request(url, null, (url, response) => {
                 console.log(response);
                 menu.dispatch(section, target);
                 /*
