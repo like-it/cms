@@ -104,6 +104,39 @@ class Host {
                     }
                     elseif(
                         property_exists($add, 'module') &&
+                        !property_exists($add, 'command') &&
+                        property_exists($add, 'submodule') &&
+                        !property_exists($add,'subcommand')
+                    ) {
+                        if(!property_exists($add, 'path')){
+                            $add->path = ucfirst($add->module) .
+                                '/' .
+                                ucfirst($add->command) . '/';
+                        }
+                        $key =
+                            strtolower($options['subdomain']) .
+                            '-' .
+                            strtolower($options['host']) .
+                            '-' .
+                            strtolower($options['extension']) .
+                            '-' .
+                            strtolower($add->module) .
+                            '-' .
+                            strtolower($add->submodule);
+                        $key = Host::key_create($add, $key);
+                        $add->controller = "Host." .
+                            ucfirst($options['subdomain']) .
+                            '.' .
+                            ucfirst($options['host']) .
+                            '.' .
+                            ucfirst($options['extension']) .
+                            '.Controller.' .
+                            ucfirst(str_replace('-', '_', $add->module)) .
+                            '.' .
+                            str_replace('-', '_', $add->submodule);
+                    }
+                    elseif(
+                        property_exists($add, 'module') &&
                         property_exists($add, 'command') &&
                         !property_exists($add, 'submodule') &&
                         !property_exists($add,'subcommand')
