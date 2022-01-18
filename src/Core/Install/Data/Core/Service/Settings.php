@@ -694,6 +694,7 @@ class Settings extends Main {
         }
         $options['route'] = $url_route;
         $options['command'] = $url_command;
+        d('toggles');
         \LikeIt\Cms\Core\Install\Service\Host::command_add($object, $options);
     }
 
