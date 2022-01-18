@@ -323,20 +323,20 @@
             "OPTIONS"
         ]
     },
-    "5ff2bd20-9046-4966-9800-cf71424ec868" : {
+    "115c9f0e-00f6-4a35-b423-e3a3869d4934" : {
         "module" : "settings",
         "submodule" : "routes",
-        "command" : "one_up",
+        "command" : "one-up",
         "path": "Settings/Routes/1/Up/{$node.uuid}/{$node.domain}",
         "method": [
             "POST",
             "OPTIONS"
         ]
     },
-    "5ff2bd20-9046-4966-9800-cf71424ec868" : {
+    "895a9d2d-3f7a-4efa-a3ef-f76583bf0601" : {
         "module" : "settings",
         "submodule" : "routes",
-        "command" : "one_down",
+        "command" : "one-down",
         "path": "Settings/Routes/1/Down/{$node.uuid}/{$node.domain}",
         "method": [
             "POST",
