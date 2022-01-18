@@ -632,7 +632,7 @@ class Settings extends Main {
         }
         $previous = false;
         $get_previous = false;
-        $list = Sort::list($data->get())->with(['sort', 'ASC']);
+        $list = Sort::list($data->get())->with(['sort' => 'ASC']);
         foreach($list as $uuid => $node){
             if(
                 $uuid == $record->uuid &&
@@ -689,7 +689,7 @@ class Settings extends Main {
         }
         $next = false;
         $get_next = false;
-        $list = Sort::list($data->get())->with(['sort', 'ASC']);
+        $list = Sort::list($data->get())->with(['sort' => 'ASC']);
         dd($list);
         foreach($list as $uuid => $node){
             if($uuid == $record->uuid){
