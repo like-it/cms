@@ -126,6 +126,7 @@
     "settings.routes.section.settings.component.options.edit.text" : "Edit",
     "settings.routes.section.settings.component.options.view.icon" : "fas fa-cog",
     "settings.routes.section.settings.component.options.view.text" : "View details",
+    "settings.routes.section.settings.component.thead.actions" : "",
     "settings.routes.section.settings.component.thead.module" : "Module",
     "settings.routes.section.settings.component.thead.submodule" : "Submodule",
     "settings.routes.section.settings.component.thead.command" : "Command",
