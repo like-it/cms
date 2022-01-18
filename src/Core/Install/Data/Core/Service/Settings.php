@@ -678,6 +678,9 @@ class Settings extends Main {
         }
     }
 
+    /**
+     * @throws Exception
+     */
     private static function routes_command_to_route($object, $url_command, $url_route, $domain){
         $options = [];
         if(property_exists($domain, 'subdomain')){

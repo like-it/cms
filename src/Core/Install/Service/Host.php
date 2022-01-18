@@ -221,7 +221,8 @@ class Host {
                             '_' .
                             str_replace('-', '_', $add->subcommand);
                     } else {
-                        dd($list);
+                        d($add);
+                        d($list);
                         throw new exception('need module');
                     }
                     unset($add->module);
