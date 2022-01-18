@@ -604,6 +604,65 @@ class Settings extends Main {
     /**
      * @throws Exception
      */
+    public static function routes_one_up(App $object)
+    {
+        $domain = Settings::domain_get($object);
+        $url = $domain->dir .
+            'Command' .
+            $object->config('extension.json');
+        $route_url = $domain->dir .
+            'Route' .
+            $object->config('extension.json');
+        $data = $object->data_read($url);
+        if (!$data) {
+            $data = new Data();
+        }
+        $record = $data->get($object->request('node.uuid'));
+        if(
+            !$record ||
+            !property_exists($record, 'uuid')
+        ){
+            $data = [];
+            $data['error'] = 'Could not find source node with uuid: ' . $object->request('node.uuid');
+            return new Response(
+                $data,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
+        }
+        $previous = false;
+        $get_previous = false;
+        foreach($data->get() as $uuid => $node){
+            if(
+                $uuid == $record->uuid &&
+                $previous
+            ){
+                $get_previous = true;
+                break;
+            }
+            $previous = $node;
+        }
+        if(
+            $previous &&
+            $get_previous === true &&
+            property_exists($previous, 'uuid') &&
+            property_exists($record, 'uuid')
+        ){
+            $old_sort = $data->get($record->uuid . '.sort');
+            $data->set($record->uuid . '.sort', $data->get($previous->uuid . '.sort'));
+            $data->set($previous->uuid . '.sort', $old_sort);
+            $data->write($url);
+            $data = [];
+            $data['node'] = $record;
+            $data['after'] = $previous;
+            Settings::routes_command_to_route($object, $url, $route_url, $domain);
+            return new Response($data, Response::TYPE_JSON);
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
     public static function routes_one_down(App $object)
     {
         $domain = Settings::domain_get($object);
@@ -649,7 +708,11 @@ class Settings extends Main {
             $data->set($record->uuid . '.sort', $data->get($next->uuid . '.sort'));
             $data->set($next->uuid . '.sort', $old_sort);
             $data->write($url);
+            $data = [];
+            $data['node'] = $record;
+            $data['before'] = $next;
             Settings::routes_command_to_route($object, $url, $route_url, $domain);
+            return new Response($data, Response::TYPE_JSON);
         }
     }
 
