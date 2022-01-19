@@ -3,6 +3,7 @@ import user from "/Module/User.js";
 import create from "/Module/Create.js";
 import menu from "/Module/Menu.js";
 import { getSectionByName } from "/Module/Section.js";
+import { stristr, str_replace } from "/Module/String.js";
 
 let edit = {};
 
