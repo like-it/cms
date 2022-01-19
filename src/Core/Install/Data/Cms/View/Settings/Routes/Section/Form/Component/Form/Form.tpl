@@ -2,7 +2,7 @@
 {{if(in.array($command,['add-route', 'add-redirect']))}}
 {{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/' + $require.command + '/'}}
 {{elseif($command === 'edit')}}
-{{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/'}}
+{{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/' + $request.node.uuid + '/' + '{node.domain}'}}
 {{/if}}
 {{$data.error = route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-' + $subcommand)}}
 <form
