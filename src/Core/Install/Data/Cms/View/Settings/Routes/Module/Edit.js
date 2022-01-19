@@ -107,6 +107,7 @@ edit.form = (target) => {
             event.preventDefault();
             header('Authorization', 'Bearer ' + user.token());
             let data = form.data('serialize');
+            console.log(data);
             let url = form.data('url');
             if(stristr(url, "{node.domain}") !== false){
                 const section = getSectionByName('main-content');
