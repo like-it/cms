@@ -6,7 +6,7 @@
 {{$input.type = 'radio'}}
 {{$input.name = 'node.' + $field}}
 <label for="{{$input.id}}-automatic">{{$label}}</label><br>
-{{if(!is.empty(request('node.' + $field))}}
+{{if(!is.empty(request('node.' + $field)))}}
 <input
     type="{{$input.type}}"
     id="{{$input.id}}-automatic"
