@@ -106,7 +106,20 @@ edit.form = (target) => {
             event.preventDefault();
             header('Authorization', 'Bearer ' + user.token());
             let data = form.data('serialize');
-            form.request(null, null, (url, response) => {
+            let url = form.data('url');
+            if(stristr(url, "{node.domain}") !== false){
+                const section = getSectionByName('main-content');
+                if(!section){
+                    return;
+                }
+                const domain = section.select('input[name="node.domain"]');
+                console.log('domain', domain);
+                if(!domain){
+                    return;
+                }
+                url = str_replace("{node.domain}", domain.value, url);
+            }
+            form.request(url, data, (url, response) => {
                 if(response?.error){
                     data.push({
                         name: "error",
