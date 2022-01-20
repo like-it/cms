@@ -67,6 +67,7 @@ class Host {
                 $route &&
                 $command
             ){
+                $route->data('set');
                 $list = Sort::list($command->data())->with(['sort' => 'ASC']);
                 foreach ($list as $id => $add) {
                     $add->host = [

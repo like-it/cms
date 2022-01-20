@@ -585,6 +585,9 @@ class Settings extends Main {
         return Settings::routes_put($object, $data, $record, $url, $route_url, $domain);
     }
 
+    /**
+     * @throws Exception
+     */
     public static function routes_delete(App $object, $uuid): Response
     {
         $domain = Settings::domain_get($object);
