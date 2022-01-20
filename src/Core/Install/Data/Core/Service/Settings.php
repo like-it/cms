@@ -532,17 +532,55 @@ class Settings extends Main {
      */
     public static function routes_update(App $object, $uuid): Response
     {
-        $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
+        $domain = Settings::domain_get($object);
+        $url = $domain->dir .
+            'Command' .
+            $object->config('extension.json');
+        $route_url = $domain->dir .
+            'Route' .
+            $object->config('extension.json');
         $data = $object->data_read($url);
         if(!$data){
             $data = new Data();
         }
-        //make record request node
-        $object->request('node.name', $object->request('node.subdomain') ?
-            $object->request('node.subdomain') . '.' .  $object->request('node.host') . '.' . $object->request('node.extension')
-            :
-            $object->request('node.host') . '.' . $object->request('node.extension'));
-        $record = $object->request('node');
+        $record = $data->get($uuid);
+        if($object->request('node.path.radio') === 'automatic'){
+            unset($record->path);
+        } else {
+            $record->path = $object->request('node.path.text');
+        }
+        if($object->request('node.controller.radio') === 'automatic'){
+            unset($record->controller);
+        } else {
+            $record->controller = $object->request('node.path.text');
+        }
+        unset($record->domain);
+        if(empty($record->submodule)){
+            unset($record->submodule);
+        }
+        if(empty($record->command)){
+            unset($record->command);
+        }
+        if(empty($record->subcommand)){
+            unset($record->subcommand);
+        }
+        $record->name = $record->module;
+        if(property_exists($record, 'submodule')){
+            $record->name .= '-' . $record->submodule;
+        }
+        if(property_exists($record, 'command')){
+            $record->name .= '-' . $record->command;
+        }
+        if(property_exists($record, 'subcommand')){
+            $record->name .= '-' . $record->subcommand;
+        }
+        if(
+            !property_exists($record, 'submodule') &&
+            !property_exists($record, 'command') &&
+            !property_exists($record, 'subcommand')
+        ){
+            $record->name .= '-command';
+        }
         return Settings::domains_put($object, $data, $record, $url);
     }
 
