@@ -581,7 +581,7 @@ class Settings extends Main {
         ){
             $record->name .= '-command';
         }
-        return Settings::domains_put($object, $data, $record, $url);
+        return Settings::routes_put($object, $data, $record, $url);
     }
 
     public static function routes_delete(App $object, $uuid): Response
