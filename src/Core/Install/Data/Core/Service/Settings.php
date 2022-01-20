@@ -461,7 +461,7 @@ class Settings extends Main {
         if($object->request('node.controller.radio') === 'automatic'){
             unset($record->controller);
         } else {
-            $record->controller = $object->request('node.path.text');
+            $record->controller = $object->request('node.controller.text');
         }
         unset($record->domain);
         if(empty($record->submodule)){
@@ -552,7 +552,7 @@ class Settings extends Main {
         if($object->request('node.controller.radio') === 'automatic'){
             unset($record->controller);
         } else {
-            $record->controller = $object->request('node.path.text');
+            $record->controller = $object->request('node.controller.text');
         }
         unset($record->domain);
         if(empty($record->submodule)){
