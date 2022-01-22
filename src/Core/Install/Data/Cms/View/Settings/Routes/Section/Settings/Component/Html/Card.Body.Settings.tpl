@@ -69,14 +69,43 @@
             {{$page.to = $request.count}}
         {{/if}}
         {{$page.count = $request.count}}
+        {{$page.previous = $page.current - 1}}
+        {{if($page.previous < 1)}}
+            {{$page.previous = 1}}
+        {{/if}}
+        {{$page.next = $page.current + 1}}
+        {{$page.max = math.ceil($page.count / $page.size)}}
+        {{if($page.next > $page.max)}}
+            {{$page.next = $page.max}}
+        {{/if}}
         <tfoot>
         <tr>
             <td colspan="{{array.count($components)}}" class="text-end">
                 <span class="page">{{$page.start}}-{{$page.to}} of {{$page.count}}</span>
-                <i class="fas fa-angle-double-left"></i>
-                <i class="fas fa-angle-left"></i>
-                <i class="fas fa-angle-right"></i>
-                <i class="fas fa-angle-double-right"></i>
+                <i
+                    class="fas fa-angle-double-left"
+                    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.command}}/{node.domain}/?page=1"
+                    data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-body')}}"
+                >
+                </i>
+                <i
+                    class="fas fa-angle-left"
+                    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.command}}/{node.domain}/?page={{$page.previous}}"
+                    data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-body')}}"
+                >
+                </i>
+                <i
+                    class="fas fa-angle-right"
+                    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.command}}/{node.domain}/?page={{$page.next}}"
+                    data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-body')}}"
+                >
+                </i>
+                <i
+                    class="fas fa-angle-double-right"
+                    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.command}}/{node.domain}/?page={{$page.max}}"
+                    data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-body')}}"
+                >
+                </i>
             </td>
         </tr>
         </tfoot>
