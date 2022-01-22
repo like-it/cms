@@ -66,3 +66,11 @@ section[name="main-content"].settings-routes .method-redirect {
     background: rgba(255, 255, 255, 1);
     color:  rgba(28, 121, 227, 1);
 }
+
+section[name="main-content"].settings-routes tfoot i {
+    font-size: 20px;
+}
+
+section[name="main-content"].settings-routes tfoot i.disabled {
+    color: rgba(200, 200, 200, 1);
+}

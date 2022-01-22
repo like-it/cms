@@ -82,26 +82,46 @@
         <tr>
             <td colspan="{{array.count($components)}}" class="text-end">
                 <span class="page">{{$page.start}}-{{$page.to}} of {{$page.count}}</span>
+                {{if($page.current === 1)}}
+                {{$i.class = 'fas fa-angle-double-left disabled'}}
+                {{else}}
+                {{$i.class = 'fas fa-angle-double-left'}}
+                {{/if}}
                 <i
-                    class="fas fa-angle-double-left"
+                    class="{{$i.class}}"
                     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.command}}/{node.domain}/?page=1"
                     data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-body')}}"
                 >
                 </i>
+                {{if($page.current === 1)}}
+                {{$i.class = 'fas fa-angle-left disabled'}}
+                {{else}}
+                {{$i.class = 'fas fa-angle-left'}}
+                {{/if}}
                 <i
-                    class="fas fa-angle-left"
+                    class="{{$i.class}}"
                     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.command}}/{node.domain}/?page={{$page.previous}}"
                     data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-body')}}"
                 >
                 </i>
+                {{if($page.current === $page.max)}}
+                {{$i.class = 'fas fa-angle-right disabled'}}
+                {{else}}
+                {{$i.class = 'fas fa-angle-right'}}
+                {{/if}}
                 <i
-                    class="fas fa-angle-right"
+                    class="{{$i.class}}"
                     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.command}}/{node.domain}/?page={{$page.next}}"
                     data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-body')}}"
                 >
                 </i>
+                {{if($page.current === $page.max)}}
+                {{$i.class = 'fas fa-angle-double-right disabled'}}
+                {{else}}
+                {{$i.class = 'fas fa-angle-double-right'}}
+                {{/if}}
                 <i
-                    class="fas fa-angle-double-right"
+                    class="{{$i.class}}"
                     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.command}}/{node.domain}/?page={{$page.max}}"
                     data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-body')}}"
                 >
