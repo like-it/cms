@@ -67,8 +67,15 @@ section[name="main-content"].settings-routes .method-redirect {
     color:  rgba(28, 121, 227, 1);
 }
 
+section[name="main-content"].settings-routes tfoot td {
+    vertical-align: middle;
+}
+
+
 section[name="main-content"].settings-routes tfoot i {
-    font-size: 20px;
+    font-size: 40px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 section[name="main-content"].settings-routes tfoot i.disabled {
