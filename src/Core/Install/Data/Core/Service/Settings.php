@@ -543,7 +543,7 @@ class Settings extends Main {
         if(!$data){
             $data = new Data();
         }
-        $record = $data->get($uuid);
+        $record = $object->request('node');
         if($object->request('node.path.radio') === 'automatic'){
             unset($record->path);
         } else {
