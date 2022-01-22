@@ -60,8 +60,10 @@
         {{$nr++}}
         {{/for.each}}
         </tbody>
-        {{$page.start = 1}}
-        {{$page.to = 30}}
+        {{$page.current = 1}}
+        {{$page.size = 30}}
+        {{$page.start = $page.current * $page.size - $page.size + 1}}
+        {{$page.to = $page.current * $page.size}}
         {{if($request.count < $page.to)}}
             {{$page.to = $request.count}}
         {{/if}}
@@ -71,6 +73,8 @@
             <td colspan="{{array.count($components)}}" class="text-end">
                 <span class="page">{{$page.start}}-{{$page.to}} of {{$page.count}}</span>
                 <i class="fas fa-chevron-left"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-right"></i>
                 <i class="fas fa-chevron-right"></i>
             </td>
         </tr>
