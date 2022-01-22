@@ -41,10 +41,17 @@
             {{$count++}}
         {{/for.each}}
         {{for.each($request.nodeList as $uuid => $node)}}
+        {{if(!is.empty($node.redirect))}}
         <tr
             data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$uuid}}/{{$node.domain}}"
-            data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-body')}}"
+            data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-redirect-body')}}"
         >
+        {{else}}
+        <tr
+            data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$uuid}}/{{$node.domain}}"
+            data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-route-body')}}"
+        >
+        {{/if}}
             {{for.each($components as $component)}}
             {{$require.basename = $component|uppercase.first.sentence:'.'}}
             {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Td/' + $require.basename + '.tpl')}}
