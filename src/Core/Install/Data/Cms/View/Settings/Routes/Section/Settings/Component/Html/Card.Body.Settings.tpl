@@ -83,12 +83,14 @@
             <td colspan="{{array.count($components)}}" class="text-end">
                 <span class="page">{{$page.start}}-{{$page.to}} of {{$page.count}}</span>
                 {{if($page.current === 1)}}
-                {{$i.class = 'fas fa-angle-double-left disabled'}}
-                {{$i.data.url = ''}}
-                {{$i.data.frontend.url = ''}}
+                {{$i.class = 'fas fa-angle-double-left'}}
+                {{$button.class = 'btn btn-primary disabled'}}
+                {{$button.data.url = ''}}
+                {{$button.data.frontend.url = ''}}
                 {{else}}
                 {{$i.class = 'fas fa-angle-double-left'}}
-                {{$i.data.url =
+                {{$button.class = 'btn btn-primary'}}
+                {{$button.data.url =
                 server.url('core') +
                 $require.module +
                 '/' +
@@ -99,7 +101,7 @@
                 '{node.domain}' +
                 '/?page=1'
                 }}
-                {{$i.data.frontend.url =
+                {{$button.data.frontend.url =
                 route.get(route.prefix() +
                 '-' +
                 $module +
@@ -110,21 +112,25 @@
                 '-body'
                 )}}
                 {{/if}}
-                <button class="btn btn-primary">
+                <button
+                    class="{{$button.class}}"
+                    data-url="{{$button.data.url}}"
+                    data-frontend-url="{{$button.data.frontend.url}}"
+                >
                     <i
                         class="{{$i.class}}"
-                        data-url="{{$i.data.url}}"
-                        data-frontend-url="{{$i.data.frontend.url}}"
                     >
                     </i>
                 </button>
                 {{if($page.current === 1)}}
-                {{$i.class = 'fas fa-angle-left disabled'}}
-                {{$i.data.url = ''}}
-                {{$i.data.frontend.url = ''}}
+                {{$i.class = 'fas fa-angle-left'}}
+                {{$button.class = 'btn btn-primary disabled'}}
+                {{$button.data.url = ''}}
+                {{$button.data.frontend.url = ''}}
                 {{else}}
                 {{$i.class = 'fas fa-angle-left'}}
-                {{$i.data.url =
+                {{$button.class = 'btn btn-primary'}}
+                {{$button.data.url =
                 server.url('core') +
                 $require.module +
                 '/' +
@@ -136,7 +142,7 @@
                 '/?page=' +
                 $page.previous
                 }}
-                {{$i.data.frontend.url =
+                {{$button.data.frontend.url =
                 route.get(route.prefix() +
                 '-' +
                 $module +
@@ -147,21 +153,25 @@
                 '-body'
                 )}}
                 {{/if}}
-                <button class="btn btn-primary">
+                <button
+                    class="{{$button.class}}"
+                    data-url="{{$button.data.url}}"
+                    data-frontend-url="{{$button.data.frontend.url}}"
+                >
                     <i
                         class="{{$i.class}}"
-                        data-url="{{$i.data.url}}"
-                        data-frontend-url="{{$i.data.frontend.url}}"
                     >
                     </i>
                 </button>
                 {{if($page.current === $page.max)}}
-                {{$i.class = 'fas fa-angle-right disabled'}}
-                {{$i.data.url = ''}}
-                {{$i.data.frontend.url = ''}}
+                {{$i.class = 'fas fa-angle-right'}}
+                {{$button.class = 'btn btn-primary disabled'}}
+                {{$button.data.url = ''}}
+                {{$button.data.frontend.url = ''}}
                 {{else}}
                 {{$i.class = 'fas fa-angle-right'}}
-                {{$i.data.url =
+                {{$button.class = 'btn btn-primary'}}
+                {{$button.data.url =
                 server.url('core') +
                 $require.module +
                 '/' +
@@ -173,7 +183,7 @@
                 '/?page=' +
                 $page.next
                 }}
-                {{$i.data.frontend.url =
+                {{$button.data.frontend.url =
                 route.get(route.prefix() +
                 '-' +
                 $module +
@@ -184,21 +194,25 @@
                 '-body'
                 )}}
                 {{/if}}
-                <button class="btn btn-primary">
+                <button
+                    class="{{$button.class}}"
+                    data-url="{{$button.data.url}}"
+                    data-frontend-url="{{$button.data.frontend.url}}"
+                >
                     <i
                         class="{{$i.class}}"
-                        data-url="{{$i.data.url}}"
-                        data-frontend-url="{{$i.data.frontend.url}}"
                     >
                     </i>
                 </button>
                 {{if($page.current === $page.max)}}
-                {{$i.class = 'fas fa-angle-double-right disabled'}}
-                {{$i.data.url = ''}}
-                {{$i.data.frontend.url = ''}}
+                {{$i.class = 'fas fa-angle-double-right'}}
+                {{$button.class = 'btn btn-primary disabled'}}
+                {{$button.data.url = ''}}
+                {{$button.data.frontend.url = ''}}
                 {{else}}
                 {{$i.class = 'fas fa-angle-double-right'}}
-                {{$i.data.url =
+                {{$button.class = 'btn btn-primary'}}
+                {{$button.data.url =
                     server.url('core') +
                     $require.module +
                     '/' +
@@ -210,7 +224,7 @@
                     '/?page=' +
                     $page.max
                 }}
-                {{$i.data.frontend.url =
+                {{$button.data.frontend.url =
                     route.get(route.prefix() +
                     '-' +
                     $module +
@@ -221,11 +235,13 @@
                     '-body'
                 )}}
                 {{/if}}
-                <button class="btn btn-primary">
+                <button
+                    class="{{$button.class}}"
+                    data-url="{{$button.data.url}}"
+                    data-frontend-url="{{$button.data.frontend.url}}"
+                >
                     <i
                         class="{{$i.class}}"
-                        data-url="{{$i.data.url}}"
-                        data-frontend-url="{{$i.data.frontend.url}}"
                     >
                     </i>
                 </button>
