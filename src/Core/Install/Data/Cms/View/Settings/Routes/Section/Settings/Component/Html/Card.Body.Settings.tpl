@@ -60,6 +60,15 @@
         {{$nr++}}
         {{/for.each}}
         </tbody>
+        <tfoot>
+        <tr>
+            <td>
+                <span class="page">1-30 of 100</span>
+                <i class="fas fa-chevron-circle-left"></i>
+                <i class="fas fa-chevron-circle-right"></i>
+            </td>
+        </tr>
+        </tfoot>
     </table>
     {{/if}}
 </div>
