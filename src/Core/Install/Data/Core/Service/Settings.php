@@ -814,8 +814,6 @@ class Settings extends Main {
                         else if(empty($original)){
                             $record = Settings::routes_addSort($object, $data, $record);
                         }
-                        d($record);
-                        dd($original);
                         $data->set($record->uuid, Core::object_merge($original, $record));
                         $data->write($url);
                         $data = [];
