@@ -62,7 +62,8 @@
         </tbody>
         {{$page.current = 1}}
         {{$page.size = 30}}
-        {{$page.start = ((($page.current * $page.size) - $page.size) + 1)}}
+        {{$page.start = ($page.current * $page.size) - $page.size}}
+        {{$page.start += 1}}
         {{$page.to = ($page.current * $page.size)}}
         {{if($request.count < $page.to)}}
             {{$page.to = $request.count}}
