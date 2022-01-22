@@ -62,7 +62,7 @@
         </tbody>
         <tfoot>
         <tr>
-            <td>
+            <td colspan="{{array.count($components)}}" class="text-end">
                 <span class="page">1-30 of 100</span>
                 <i class="fas fa-chevron-circle-left"></i>
                 <i class="fas fa-chevron-circle-right"></i>
