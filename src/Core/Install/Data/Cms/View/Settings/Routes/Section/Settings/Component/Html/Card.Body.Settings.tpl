@@ -74,8 +74,8 @@
             <td colspan="{{array.count($components)}}" class="text-end">
                 <span class="page">{{$page.start}}-{{$page.to}} of {{$page.count}}</span>
                 <i class="fas fa-angle-double-left"></i>
-                <i class="fas fa-chevron-left"></i>
-                <i class="fas fa-chevron-right"></i>
+                <i class="fas fa-angle-left"></i>
+                <i class="fas fa-angle-right"></i>
                 <i class="fas fa-angle-double-right"></i>
             </td>
         </tr>
