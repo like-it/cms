@@ -60,12 +60,18 @@
         {{$nr++}}
         {{/for.each}}
         </tbody>
+        {{$page.start = 1}}
+        {{$page.to = 30}}
+        {{if($request.count < $page.to)}}
+            {{$page.to = $request.count}}
+        {{/if}}
+        {{$page.count = $request.count}}
         <tfoot>
         <tr>
             <td colspan="{{array.count($components)}}" class="text-end">
-                <span class="page">1-30 of 100</span>
-                <i class="fas fa-chevron-circle-left"></i>
-                <i class="fas fa-chevron-circle-right"></i>
+                <span class="page">{{$page.start}}-{{$page.to}} of {{$page.count}}</span>
+                <i class="fas fa-chevron-left"></i>
+                <i class="fas fa-chevron-right"></i>
             </td>
         </tr>
         </tfoot>
