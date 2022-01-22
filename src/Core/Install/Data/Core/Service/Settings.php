@@ -640,6 +640,7 @@ class Settings extends Main {
         $list = Sort::list($data->data())->with(['sort' => 'ASC', 'name' => 'ASC']);
         $response = [];
         $response['nodeList'] = $list;
+        $response['count'] = count($list);
         return new Response($response, Response::TYPE_JSON);
     }
 
