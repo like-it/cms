@@ -107,7 +107,6 @@ edit.form = (target) => {
             event.preventDefault();
             header('Authorization', 'Bearer ' + user.token());
             let data = form.data('serialize');
-            console.log(data);
             let url = form.data('url');
             if(stristr(url, "{node.domain}") !== false){
                 const section = getSectionByName('main-content');
@@ -121,6 +120,7 @@ edit.form = (target) => {
                 }
                 url = str_replace("{node.domain}", domain.value, url);
             }
+            console.log(url);
             form.request(url, data, (url, response) => {
                 if(response?.error){
                     data.push({
