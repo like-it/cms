@@ -7,7 +7,7 @@
         <i
             class="fas fa-chevron-up"
             data-request-method="POST"
-            data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.action}}/{{$uuid}}/{node.domain}"
+            data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.action}}/{{$node.uuid}}/{node.domain}"
         >
         </i>
         <br>
@@ -19,7 +19,7 @@
         <i
             class="fas fa-chevron-down"
             data-request-method="POST"
-            data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.action}}/{{$uuid}}/{node.domain}"
+            data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.action}}/{{$node.uuid}}/{node.domain}"
         >
         </i>
         <br>
