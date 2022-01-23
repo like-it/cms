@@ -204,7 +204,7 @@
                     >
                     </i>
                 </button>
-                {{if($page.current === (int) $page.max)}}
+                {{if($page.current == $page.max)}}
                 {{$i.class = 'fas fa-angle-double-right'}}
                 {{$button.class = 'btn btn-primary disabled'}}
                 {{$button.data.url = ''}}
