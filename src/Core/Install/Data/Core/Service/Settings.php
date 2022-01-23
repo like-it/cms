@@ -639,12 +639,29 @@ class Settings extends Main {
                 $data->set($node->command . '.domain', $domain->uuid);
             }
         }
+        if($object->request('page')){
+            $page = (int) $object->request('page');
+        } else {
+            $page = 1;
+        }
+        $limit = Limit::LIMIT;
+        $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
+        $settings =  $object->data_read($settings_url);
+        dd($settings);
+
+        if($object->request('limit')){
+            $limit = (int) $object->request('limit');
+            if($limit > Limit::MAX){
+                $limit = Limit::MAX;
+            }
+        }
         $response = [];
         $list = Sort::list($data->data())->with(['sort' => 'ASC', 'name' => 'ASC']);
         $response['count'] = count($list);
-        $list = Limit::list($list)->with(['page' => 1, 'limit' => Limit::LIMIT]);
+        $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
         $response['nodeList'] = $list;
         $response['limit'] = Limit::LIMIT;
+        $response['page'] = $page;
         return new Response($response, Response::TYPE_JSON);
     }
 
