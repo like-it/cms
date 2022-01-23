@@ -71,6 +71,8 @@
 {{$input.value = request('node.' + $field + '.' + $input.type)}}
 {{elseif(request('has', 'node.' + $field) && is.scalar(request('node.' + $field)))}}
 {{$input.value = request('node.' + $field)}}
+{{else}}
+{{$input.value = ''}}
 {{/if}}
 {{$input.placeholder = $label}}
 <input
