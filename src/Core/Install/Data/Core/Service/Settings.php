@@ -1,11 +1,13 @@
 <?php
 namespace Host\Subdomain\Host\Extension\Service;
 
-use R3m\Io\Module\Sort;
+
 use stdClass;
 use R3m\Io\App;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
+use R3m\Io\Module\Limit;
+use R3m\Io\Module\Sort;
 use R3m\Io\Module\Response;
 
 use Exception;
@@ -13,7 +15,6 @@ use R3m\Io\Exception\ObjectException;
 
 
 class Settings extends Main {
-    const PER_PAGE = 2;
 
     /**
      * @throws Exception
