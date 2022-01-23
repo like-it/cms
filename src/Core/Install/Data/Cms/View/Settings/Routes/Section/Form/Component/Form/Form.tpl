@@ -1,12 +1,13 @@
 {{R3M}}
 {{if(in.array($command,['add-route', 'add-redirect']))}}
 {{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/' + $require.command + '/'}}
+{{$data.error = route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-' + $subcommand + '-node-domain', ['node.domain' => '{node.domain}'])}}
 {{else.if($command === 'edit')}}
 {{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/' + $request.node.uuid + '/' + '{node.domain}'}}
 {{else.if(in.array($command,['edit-route', 'edit-redirect']))}}
 {{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/' + $request.node.uuid}}
-{{/if}}
 {{$data.error = route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-' + $subcommand, ['node.domain' => '{node.domain}'])}}
+{{/if}}
 <form
     name="{{$module}}-{{$submodule}}-{{$command}}-form"
     method="post"
