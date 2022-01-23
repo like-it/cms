@@ -6,6 +6,7 @@
 {{else.if(in.array($command,['edit-route', 'edit-redirect']))}}
 {{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/' + $request.node.uuid}}
 {{/if}}
+{{dd(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-' + $subcommand)}}
 {{$data.error = route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-' + $subcommand)}}
 <form
     name="{{$module}}-{{$submodule}}-{{$command}}-form"
