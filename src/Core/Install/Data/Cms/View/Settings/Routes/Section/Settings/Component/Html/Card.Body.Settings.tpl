@@ -65,7 +65,6 @@
         {{else}}
             {{$page.current = 1}}
         {{/if}}
-
         {{$page.size = 9}}
         {{$page.start = ($page.current * $page.size) - $page.size}}
         {{$page.start += 1}}
