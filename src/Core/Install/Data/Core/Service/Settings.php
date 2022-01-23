@@ -13,6 +13,7 @@ use R3m\Io\Exception\ObjectException;
 
 
 class Settings extends Main {
+    const PER_PAGE = 2;
 
     /**
      * @throws Exception
@@ -637,10 +638,12 @@ class Settings extends Main {
                 $data->set($node->command . '.domain', $domain->uuid);
             }
         }
-        $list = Sort::list($data->data())->with(['sort' => 'ASC', 'name' => 'ASC']);
         $response = [];
-        $response['nodeList'] = $list;
+        $list = Sort::list($data->data())->with(['sort' => 'ASC', 'name' => 'ASC']);
         $response['count'] = count($list);
+        $list = Limit::list($list)->with(['page' => 1, 'limit' => Limit::LIMIT]);
+        $response['nodeList'] = $list;
+        $response['limit'] = Limit::LIMIT;
         return new Response($response, Response::TYPE_JSON);
     }
 
