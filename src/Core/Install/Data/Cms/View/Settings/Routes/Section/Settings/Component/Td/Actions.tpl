@@ -1,6 +1,6 @@
 {{R3M}}
 <td scope="row" class="actions">
-    {{if($nr > 0)}}
+    {{if($nr > 0) || !is.empty($request.page)}}
         {{$action = '1-up'}}
         {{$__.action = $action|lowercase|replace:'-':'.'}}
         {{$require.action = $action|uppercase.first.sentence:'-'|replace:'-':'/'}}

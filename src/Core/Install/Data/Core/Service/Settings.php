@@ -661,8 +661,9 @@ class Settings extends Main {
         $response['count'] = count($list);
         $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
         $response['nodeList'] = $list;
-        $response['limit'] = Limit::LIMIT;
+        $response['limit'] = $limit;
         $response['page'] = $page;
+        $response['max'] = ceil($response['count'] / $response['limit']);
         return new Response($response, Response::TYPE_JSON);
     }
 
