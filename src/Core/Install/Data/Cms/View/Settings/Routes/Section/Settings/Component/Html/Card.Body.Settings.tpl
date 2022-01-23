@@ -61,7 +61,7 @@
         {{/for.each}}
         </tbody>
         {{$page.current = 1}}
-        {{$page.size = 2}}
+        {{$page.size = 9}}
         {{$page.start = ($page.current * $page.size) - $page.size}}
         {{$page.start += 1}}
         {{$page.to = ($page.current * $page.size)}}
