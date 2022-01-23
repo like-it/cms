@@ -15,28 +15,28 @@
                 },
                 {
                     "string.contains": {
-                        "regex" : "^[a-z0-9_-]+$^"
+                        "regex" : "^[a-z_-]+$^"
                     }
                 }
             ],
             "submodule" : [
                 {
                     "string.contains": {
-                        "regex" : "^[a-z0-9_-]+$^"
+                        "regex" : "^[a-z_-]+$^"
                     }
                 }
             ],
             "command" : [
                 {
                     "string.contains": {
-                        "regex" : "^[a-z0-9_-]+$^"
+                        "regex" : "^[a-z_-]+$^"
                     }
                 }
             ],
             "subcommand" : [
                 {
                     "string.contains": {
-                        "regex" : "^[a-z0-9_-]+$^"
+                        "regex" : "^[a-z_-]+$^"
                     }
                 }
             ],
