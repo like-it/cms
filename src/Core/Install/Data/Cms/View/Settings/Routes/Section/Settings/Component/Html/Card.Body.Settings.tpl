@@ -204,6 +204,7 @@
                     >
                     </i>
                 </button>
+                {{dd('{{$this}}')}}
                 {{if($page.current === $page.max)}}
                 {{$i.class = 'fas fa-angle-double-right'}}
                 {{$button.class = 'btn btn-primary disabled'}}
