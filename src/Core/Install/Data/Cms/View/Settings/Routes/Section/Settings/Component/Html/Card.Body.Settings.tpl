@@ -37,18 +37,18 @@
         <tbody>
         {{$nr = 0 }}
         {{$count = 0}}
-        {{for.each($request.nodeList as $uuid => $node)}}
+        {{for.each($request.nodeList as $node_nr => $node)}}
             {{$count++}}
         {{/for.each}}
-        {{for.each($request.nodeList as $uuid => $node)}}
+        {{for.each($request.nodeList as $node_nr => $node)}}
         {{if(!is.empty($node.redirect))}}
         <tr
-            data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$uuid}}/{{$node.domain}}"
+            data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.uuid}}/{{$node.domain}}"
             data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-redirect-body')}}"
         >
         {{else}}
         <tr
-            data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$uuid}}/{{$node.domain}}"
+            data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.uuid}}/{{$node.domain}}"
             data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-route-body')}}"
         >
         {{/if}}
