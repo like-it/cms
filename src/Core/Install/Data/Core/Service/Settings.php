@@ -647,8 +647,9 @@ class Settings extends Main {
         $limit = Limit::LIMIT;
         $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
         $settings =  $object->data_read($settings_url);
-        dd($settings);
-
+        if($settings->data('route.default.limit')){
+            $limit = $settings->data('route.default.limit');
+        }
         if($object->request('limit')){
             $limit = (int) $object->request('limit');
             if($limit > Limit::MAX){
