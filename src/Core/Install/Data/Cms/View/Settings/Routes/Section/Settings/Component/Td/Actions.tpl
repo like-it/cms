@@ -12,7 +12,7 @@
         </i>
         <br>
     {{/if}}
-    {{if($nr < $count - 1)}}
+    {{if($nr < $count - 1 || $request.max > $request.page)}}
         {{$action = '1-down'}}
         {{$__.action = $action|lowercase|replace:'-':'.'}}
         {{$require.action = $action|uppercase.first.sentence:'-'|replace:'-':'/'}}
