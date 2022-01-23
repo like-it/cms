@@ -244,6 +244,68 @@ settings.options = (target) => {
     }
 }
 
+settings.pagination = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const buttons = section.select('tfoot button');
+    if(!buttons){
+        return;
+    }
+    if(is.nodeList(buttons)){
+        let index;
+        for(index=0; index < buttons.length; index++){
+            let button = buttons[index];
+            button.on('click', () => {
+                let url = button.data('url');
+                if(stristr(url, "{node.domain}") !== false){
+                    const section = getSectionByName('main-content');
+                    if(!section){
+                        return;
+                    }
+                    const domain = section.select('input[name="node.domain"]');
+                    console.log('domain', domain);
+                    if(!domain){
+                        return;
+                    }
+                    url = str_replace("{node.domain}", domain.value, url);
+                }
+                header('Authorization', 'Bearer ' + user.token());
+                request(url, null, (url, response) => {
+                    request(button.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+
+                    });
+                });
+            });
+        }
+    }
+    else if(buttons){
+        let button = buttons;
+        button.on('click', () => {
+            let url = button.data('url');
+            if(stristr(url, "{node.domain}") !== false){
+                const section = getSectionByName('main-content');
+                if(!section){
+                    return;
+                }
+                const domain = section.select('input[name="node.domain"]');
+                console.log('domain', domain);
+                if(!domain){
+                    return;
+                }
+                url = str_replace("{node.domain}", domain.value, url);
+            }
+            header('Authorization', 'Bearer ' + user.token());
+            request(url, null, (url, response) => {
+                request(button.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+
+                });
+            });
+        });
+    }
+}
+
 settings.body = () => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -271,6 +333,7 @@ settings.init = () => {
         select: ".{{$module}}-{{$submodule}}-{{$command}}",
         event: new MouseEvent("dblclick")
     });
+    settings.pagination();
 }
 
 ready(() => {
