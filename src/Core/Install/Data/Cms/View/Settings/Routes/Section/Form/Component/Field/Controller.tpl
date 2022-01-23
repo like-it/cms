@@ -29,9 +29,10 @@
 </label>
 <br>
 {{$input.type = 'text'}}
+{{if(request('has', 'node.' + $field + '.' + $input.type))}}
 {{$input.value = request('node.' + $field + '.' + $input.type)}}
-{{if(is.empty($input.value))}}
-    {{$input.value = request('node.' + $field)}}
+{{elseif(request('has', 'node.' + $field) && is.scalar(request('node.' + $field)))}}
+{{$input.value = request('node.' + $field)}}
 {{/if}}
 {{$input.placeholder = $label}}
 <input
