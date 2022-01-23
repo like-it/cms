@@ -72,6 +72,7 @@
 {{elseif(request('has', 'node.' + $field) && is.scalar(request('node.' + $field)))}}
 {{$input.value = request('node.' + $field)}}
 {{/if}}
+{{dd(request())}}
 {{$input.placeholder = $label}}
 <input
         id="{{$input.id}}"
