@@ -140,6 +140,7 @@ settings.page = (type, section, data) => {
                     switch (type){
                         case 'current' :
                             page = data.page;
+                            console.log('current', page);
                             menuItem.data('page', page);
                             break;
                         case 'next' :
@@ -161,6 +162,11 @@ settings.page = (type, section, data) => {
                 let page = "{{request('page')}}";
                 page = parseInt(page);
                 switch (type){
+                    case 'current' :
+                        page = data.page;
+                        console.log('current', page);
+                        menuItem.data('page', page);
+                        break;
                     case 'next' :
                         page++;
                         menuItem.data('page', page);
