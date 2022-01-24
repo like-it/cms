@@ -16,7 +16,7 @@
         {{$action = '1-down'}}
         {{$__.action = $action|lowercase|replace:'-':'.'}}
         {{$require.action = $action|uppercase.first.sentence:'-'|replace:'-':'/'}}
-        {{if($request.max > $request.max && $nr == $count)}}
+        {{if($request.max > $request.max && $nr == $count - 1)}}
             <i
                 class="fas fa-chevron-down"
                 data-request-method="POST"
