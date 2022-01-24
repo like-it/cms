@@ -698,7 +698,7 @@ class Settings extends Main {
         }
         $previous = false;
         $get_previous = false;
-        $list = Sort::list($data->get())->with(['sort' => 'ASC']);
+        $list = Sort::list($data->get())->with(['sort' => 'ASC', 'name' => 'ASC']);
         foreach($list as $uuid => $node){
             if(
                 $uuid == $record->uuid &&
@@ -718,6 +718,11 @@ class Settings extends Main {
             $old_sort = $data->get($record->uuid . '.sort');
             $data->set($record->uuid . '.sort', $data->get($previous->uuid . '.sort'));
             $data->set($previous->uuid . '.sort', $old_sort);
+            $list = Sort::list($data->get())->with(['sort' => 'ASC', 'name' => 'ASC']);
+            $data = new Data();
+            foreach($list as $uuid => $node){
+                $data->set($uuid, $node);
+            }
             $data->write($url);
             $data = [];
             $data['node'] = $record;
@@ -775,6 +780,11 @@ class Settings extends Main {
             $old_sort = $data->get($record->uuid . '.sort');
             $data->set($record->uuid . '.sort', $data->get($next->uuid . '.sort'));
             $data->set($next->uuid . '.sort', $old_sort);
+            $list = Sort::list($data->get())->with(['sort' => 'ASC', 'name' => 'ASC']);
+            $data = new Data();
+            foreach($list as $uuid => $node){
+                $data->set($uuid, $node);
+            }
             $data->write($url);
             $data = [];
             $data['node'] = $record;
