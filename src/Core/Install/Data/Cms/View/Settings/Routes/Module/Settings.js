@@ -184,8 +184,14 @@ settings.actions = (target) => {
                 }
                 url = str_replace("{node.domain}", domain.value, url);
             }
+            let data;
+            if(node.data('request-method')){
+                data = {
+                    "request-method" : node.data('request-method')
+                }
+            }
             header('Authorization', 'Bearer ' + user.token());
-            request(url, null, (url, response) => {
+            request(url, data, (url, response) => {
                 console.log(response);
                 menu.dispatch(section, target);
                 /*
