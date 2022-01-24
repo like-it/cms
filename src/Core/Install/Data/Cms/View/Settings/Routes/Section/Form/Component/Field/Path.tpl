@@ -28,7 +28,7 @@
     Custom
 </label>
 <br>
-{{dd(is.scalar(request('node.' + $field)))}}
+{{dd((request('has', 'node.' + $field)))}}
 {{$input.type = 'text'}}
 {{if(request('has', 'node.' + $field + '.' + $input.type))}}
 {{$input.value = request('node.' + $field + '.' + $input.type)}}
