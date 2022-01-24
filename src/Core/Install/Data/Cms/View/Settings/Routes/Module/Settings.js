@@ -122,6 +122,32 @@ settings.deleteDialog = (data) => {
     }
 }
 
+settings.page = (type, section, data) => {
+    if(
+        is.array(data?.select)
+    ){
+        let index;
+        for(index=0; index < data.select.length; index++){
+            let item = data.select[index];
+            if(
+                item?.name
+            ){
+                const menuItem = section.select(item.name);
+                if(menuItem) {
+                    switch (type){
+                        case 'next' :
+                            let page = "{{request('page')}}";
+                            page = parseInt(page);
+                            page++;
+                            menuItem.data('page', page);
+                            break;
+                    }
+                }
+            }
+        }
+    }
+}
+
 settings.actions = (target) => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -159,6 +185,9 @@ settings.actions = (target) => {
                 header('Authorization', 'Bearer ' + user.token());
                 request(url, data, (url, response) => {
                     console.log(response);
+                    if(node.data('move-to-next-page')){
+                        settings.page('next', section, target);
+                    }
                     menu.dispatch(section, target);
                     /*
                     request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {

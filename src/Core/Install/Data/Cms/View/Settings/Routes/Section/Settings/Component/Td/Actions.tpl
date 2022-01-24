@@ -16,12 +16,22 @@
         {{$action = '1-down'}}
         {{$__.action = $action|lowercase|replace:'-':'.'}}
         {{$require.action = $action|uppercase.first.sentence:'-'|replace:'-':'/'}}
-        <i
-            class="fas fa-chevron-down"
-            data-request-method="POST"
-            data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.action}}/{{$node.uuid}}/{node.domain}"
-        >
-        </i>
+        {{if($request.max > $request.max && $nr == $count)}}
+            <i
+                class="fas fa-chevron-down"
+                data-request-method="POST"
+                data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.action}}/{{$node.uuid}}/{node.domain}"
+                data-move-to-next-page="true"
+            >
+            </i>
+        {{else}}
+            <i
+                class="fas fa-chevron-down"
+                data-request-method="POST"
+                data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.action}}/{{$node.uuid}}/{node.domain}"
+            >
+            </i>
+        {{/if}}
         <br>
     {{/if}}
 </td>
