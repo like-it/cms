@@ -138,6 +138,10 @@ settings.page = (type, section, data) => {
                     let page = "{{request('page')}}";
                     page = parseInt(page);
                     switch (type){
+                        case 'current' :
+                            page = data.page;
+                            menuItem.data('page', page);
+                            break;
                         case 'next' :
                             page++;
                             menuItem.data('page', page);
@@ -305,7 +309,7 @@ settings.options = (target) => {
     }
 }
 
-settings.pagination = () => {
+settings.pagination = (target) => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
@@ -331,6 +335,14 @@ settings.pagination = () => {
                         return;
                     }
                     url = str_replace("{node.domain}", domain.value, url);
+                }
+                if(node.data('has', 'page')){
+                    const section = getSectionByName('main-content');
+                    if(!section){
+                        return;
+                    }
+                    target.page = node.data('page');
+                    settings.page('current', section, target);
                 }
                 header('Authorization', 'Bearer ' + user.token());
                 request(url, null, (url, response) => {
@@ -394,7 +406,9 @@ settings.init = () => {
         select: ".{{$module}}-{{$submodule}}-{{$command}}",
         event: new MouseEvent("dblclick")
     });
-    settings.pagination();
+    settings.pagination({
+        select: ".{{$module}}-{{$submodule}}-{{$command}}"
+    });
 }
 
 ready(() => {

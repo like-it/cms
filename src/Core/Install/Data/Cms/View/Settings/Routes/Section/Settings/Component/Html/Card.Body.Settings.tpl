@@ -120,6 +120,7 @@
                     class="{{$button.class}}"
                     data-url="{{$button.data.url}}"
                     data-frontend-url="{{$button.data.frontend.url}}"
+                    data-page="1"
                 >
                     <i
                         class="{{$i.class}}"
@@ -161,6 +162,7 @@
                     class="{{$button.class}}"
                     data-url="{{$button.data.url}}"
                     data-frontend-url="{{$button.data.frontend.url}}"
+                    data-page="{{$page.previous}}"
                 >
                     <i
                         class="{{$i.class}}"
@@ -202,6 +204,7 @@
                     class="{{$button.class}}"
                     data-url="{{$button.data.url}}"
                     data-frontend-url="{{$button.data.frontend.url}}"
+                    data-page="{{$page.next}}"
                 >
                     <i
                         class="{{$i.class}}"
@@ -243,6 +246,7 @@
                     class="{{$button.class}}"
                     data-url="{{$button.data.url}}"
                     data-frontend-url="{{$button.data.frontend.url}}"
+                    data-page="{{$page.max}}"
                 >
                     <i
                         class="{{$i.class}}"
