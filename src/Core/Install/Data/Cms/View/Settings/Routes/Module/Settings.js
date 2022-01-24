@@ -145,6 +145,20 @@ settings.page = (type, section, data) => {
                 }
             }
         }
+    } else {
+        if(data?.select){
+            const menuItem = section.select(data.select);
+            if(menuItem){
+                switch (type){
+                    case 'next' :
+                        let page = "{{request('page')}}";
+                        page = parseInt(page);
+                        page++;
+                        menuItem.data('page', page);
+                        break;
+                }
+            }
+        }
     }
 }
 
