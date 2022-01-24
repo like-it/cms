@@ -98,6 +98,12 @@ menu.is_selected = (node, selected) => {
                 }
                 url = str_replace("{node.domain}", domain.value, url);
             }
+            if(node.data('page')){
+                let page = node.data('page');
+                page = parseInt(page);
+                url += '?page=' + page;
+                node.data('delete', 'page');
+            }
             request(url, null, (url, response) => {
                 if(node.data('has', 'frontend-url')){
                     let url = node.data('frontend-url');
