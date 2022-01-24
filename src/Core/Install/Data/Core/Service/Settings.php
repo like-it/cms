@@ -720,8 +720,11 @@ class Settings extends Main {
             $data->set($previous->uuid . '.sort', $old_sort);
             $list = Sort::list($data->get())->with(['sort' => 'ASC', 'name' => 'ASC']);
             $data = new Data();
+            $sort = 1;
             foreach($list as $uuid => $node){
+                $node->sort = $sort;
                 $data->set($uuid, $node);
+                $sort++;
             }
             $data->write($url);
             $data = [];
@@ -782,8 +785,11 @@ class Settings extends Main {
             $data->set($next->uuid . '.sort', $old_sort);
             $list = Sort::list($data->get())->with(['sort' => 'ASC', 'name' => 'ASC']);
             $data = new Data();
+            $sort = 1;
             foreach($list as $uuid => $node){
+                $node->sort = $sort;
                 $data->set($uuid, $node);
+                $sort++;
             }
             $data->write($url);
             $data = [];
