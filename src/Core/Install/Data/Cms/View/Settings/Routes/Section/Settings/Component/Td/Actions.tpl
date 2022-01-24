@@ -4,12 +4,23 @@
         {{$action = '1-up'}}
         {{$__.action = $action|lowercase|replace:'-':'.'}}
         {{$require.action = $action|uppercase.first.sentence:'-'|replace:'-':'/'}}
-        <i
-            class="fas fa-chevron-up"
-            data-request-method="POST"
-            data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.action}}/{{$node.uuid}}/{node.domain}"
-        >
-        </i>
+        {{if($nr === 0 && $request.page > 1)}}
+            <i
+                class="fas fa-chevron-up"
+                data-request-method="POST"
+                data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.action}}/{{$node.uuid}}/{node.domain}"
+                data-move-to-previous-page="true"
+            >
+            </i>
+        {{else}}
+            <i
+                class="fas fa-chevron-up"
+                data-request-method="POST"
+                data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.action}}/{{$node.uuid}}/{node.domain}"
+            >
+            </i>
+        {{/if}}
+
         <br>
     {{/if}}
     {{if($nr < $count - 1 || $request.max > $request.page)}}

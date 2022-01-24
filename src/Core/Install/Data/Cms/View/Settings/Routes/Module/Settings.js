@@ -135,11 +135,15 @@ settings.page = (type, section, data) => {
             ){
                 const menuItem = section.select(item.name);
                 if(menuItem) {
+                    let page = "{{request('page')}}";
+                    page = parseInt(page);
                     switch (type){
                         case 'next' :
-                            let page = "{{request('page')}}";
-                            page = parseInt(page);
                             page++;
+                            menuItem.data('page', page);
+                            break;
+                        case 'previous' :
+                            page--;
                             menuItem.data('page', page);
                             break;
                     }
@@ -150,11 +154,15 @@ settings.page = (type, section, data) => {
         if(data?.select){
             const menuItem = section.select(data.select);
             if(menuItem){
+                let page = "{{request('page')}}";
+                page = parseInt(page);
                 switch (type){
                     case 'next' :
-                        let page = "{{request('page')}}";
-                        page = parseInt(page);
                         page++;
+                        menuItem.data('page', page);
+                        break;
+                    case 'previous' :
+                        page--;
                         menuItem.data('page', page);
                         break;
                 }
@@ -202,6 +210,9 @@ settings.actions = (target) => {
                     console.log(response);
                     if(node.data('move-to-next-page')){
                         settings.page('next', section, target);
+                    }
+                    else if(node.data('move-to-previous-page')){
+                        settings.page('previous', section, target);
                     }
                     menu.dispatch(section, target);
                     /*
