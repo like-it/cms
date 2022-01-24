@@ -336,12 +336,12 @@ settings.pagination = (target) => {
                     }
                     url = str_replace("{node.domain}", domain.value, url);
                 }
-                if(node.data('has', 'page')){
+                if(button.data('has', 'page')){
                     const section = getSectionByName('main-content');
                     if(!section){
                         return;
                     }
-                    target.page = node.data('page');
+                    target.page = button.data('page');
                     settings.page('current', section, target);
                 }
                 header('Authorization', 'Bearer ' + user.token());
@@ -368,6 +368,14 @@ settings.pagination = (target) => {
                     return;
                 }
                 url = str_replace("{node.domain}", domain.value, url);
+            }
+            if(button.data('has', 'page')){
+                const section = getSectionByName('main-content');
+                if(!section){
+                    return;
+                }
+                target.page = button.data('page');
+                settings.page('current', section, target);
             }
             header('Authorization', 'Bearer ' + user.token());
             request(url, null, (url, response) => {
