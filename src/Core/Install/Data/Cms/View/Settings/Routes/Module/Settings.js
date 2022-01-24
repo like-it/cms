@@ -341,7 +341,9 @@ settings.pagination = (target) => {
                     if(!section){
                         return;
                     }
+                    console.log('settings.page');
                     target.page = button.data('page');
+                    target.page = parseInt(target.page);
                     settings.page('current', section, target);
                 }
                 header('Authorization', 'Bearer ' + user.token());
@@ -370,11 +372,13 @@ settings.pagination = (target) => {
                 url = str_replace("{node.domain}", domain.value, url);
             }
             if(button.data('has', 'page')){
+                console.log('settings.page');
                 const section = getSectionByName('main-content');
                 if(!section){
                     return;
                 }
                 target.page = button.data('page');
+                target.page = parseInt(target.page);
                 settings.page('current', section, target);
             }
             header('Authorization', 'Bearer ' + user.token());
