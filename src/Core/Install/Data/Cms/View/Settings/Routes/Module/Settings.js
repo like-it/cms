@@ -123,6 +123,7 @@ settings.deleteDialog = (data) => {
 }
 
 settings.page = (type, section, data) => {
+    console.log(data);
     if(
         is.array(data?.select)
     ){
