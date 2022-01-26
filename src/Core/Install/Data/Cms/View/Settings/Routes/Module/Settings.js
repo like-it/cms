@@ -13,7 +13,7 @@ settings.onDoubleClick = () => {
     if(!section){
         return;
     }
-    let list = section.select('.card-body-settings tr');
+    let list = section.select('.card-{{$subcommand}}-{{$command}} tr');
     if(is.nodeList(list)){
         let index;
         for(index=0; index < list.length; index++){
