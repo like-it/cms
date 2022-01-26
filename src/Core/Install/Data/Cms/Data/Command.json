@@ -349,7 +349,7 @@
     "9432751-829f-496e-af75-5c6681a2b425" : {
         "module" : "settings",
         "submodule" : "routes",
-        "command" : "edit",
+        "command" : "view",
         "subcommand" : "body",
         "method": [
             "GET",
