@@ -86,7 +86,7 @@
         </div>
     </div>
     {{/if}}
-    {{if(!is.empty($request.route.path))}}
+    {{if(!is.empty($request.node.route.path))}}
     <div class="row align-items-start">
         <div class="col">
             <span class="title">Route path</span><br>
@@ -96,8 +96,6 @@
         </div>
     </div>
     {{/if}}
-
-
     <div class="row align-items-start">
         <div class="col">
             <span class="title">Route Redirect</span><br>
