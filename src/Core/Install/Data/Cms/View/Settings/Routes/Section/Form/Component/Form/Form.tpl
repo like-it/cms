@@ -2,11 +2,11 @@
 {{if(in.array($command,['add-route', 'add-redirect']))}}
 {{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/' + $require.command + '/'}}
 {{$data.error = route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-' + $subcommand + '-node-domain', ['node.domain' => '{node.domain}'])}}
-{{else.if($command === 'edit')}}
-{{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/' + $request.node.uuid + '/' + '{node.domain}'}}
+{{$require.button = 'Add'}}
 {{else.if(in.array($command,['edit-route', 'edit-redirect']))}}
 {{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/' + $request.node.uuid}}
 {{$data.error = route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-' + $subcommand)}}
+{{$require.button = 'Edit'}}
 {{/if}}
 <form
     name="{{$module}}-{{$submodule}}-{{$command}}-form"
@@ -22,6 +22,6 @@
         {{/for.each}}
     </div>
     <div class="mb-3">
-        {{require($prefix + $require.submodule + '/Section/Form/Component/Button/' + $require.command + '.tpl')}}
+        {{require($prefix + $require.submodule + '/Section/Form/Component/Button/' + $require.button + '.tpl')}}
     </div>
 </form>
