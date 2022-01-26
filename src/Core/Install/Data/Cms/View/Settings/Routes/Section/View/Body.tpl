@@ -10,7 +10,7 @@ $subcommand === 'body'
     {{$request.append.to = 'section[name="' + $section.name + '"] .card'}}
 {{/if}}
 <div class="card-body h-100 card-body-view-{{$request.node.uuid}}">
-{{require($prefix + $require.submodule + '/Section/Form/' + $require.command + '.tpl')}}
+{{require($prefix + $require.submodule + '/Section/' + $require.command + '/' + $require.command + '.tpl')}}
 </div>
 {{script('module')}}
     {{require($prefix + $require.submodule + '/Module/' + $require.command + '.js')}}
