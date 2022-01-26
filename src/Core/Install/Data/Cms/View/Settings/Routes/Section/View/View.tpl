@@ -1,6 +1,16 @@
 {{R3M}}
 
 <div class="container">
+    {{if(!is.empty($request.node.uuid))}}
+    <div class="row align-items-start">
+        <div class="col">
+            <span class="title">Uuid</span><br>
+        </div>
+        <div class="col">
+            <span class="content">{{$request.node.uuid}}</span><br>
+        </div>
+    </div>
+    {{/if}}
     {{if(!is.empty($request.node.module))}}
     <div class="row align-items-start">
         <div class="col">
@@ -55,7 +65,7 @@
     {{if(!is.empty($request.node.sort))}}
     <div class="row align-items-start">
         <div class="col">
-            <span class="title">Internal sort</span><br>
+            <span class="title">Sort</span><br>
         </div>
         <div class="col">
             <span class="content">{{$request.node.sort}}</span><br>
