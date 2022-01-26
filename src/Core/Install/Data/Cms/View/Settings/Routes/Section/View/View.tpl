@@ -72,25 +72,25 @@
         </div>
     </div>
     {{/if}}
-    {{if(!is.empty($request.route.host))}}
+    {{if(!is.empty($request.node.route.host))}}
     <div class="row align-items-start">
         <div class="col">
             <span class="title">Route host</span><br>
         </div>
         <div class="col">
-        {{for.each($request.route.host as $host)}}
+        {{for.each($request.node.route.host as $host)}}
             <span class="content">{{$host}}</span><br>
         {{/for.each}}
         </div>
     </div>
     {{/if}}
-    {{if(!is.empty($request.route.method))}}
+    {{if(!is.empty($request.node.route.method))}}
     <div class="row align-items-start">
         <div class="col">
             <span class="title">Route method</span><br>
         </div>
         <div class="col">
-            {{for.each($request.route.method as $method)}}
+            {{for.each($request.node.route.method as $method)}}
             <span class="content">{{$method}}</span><br>
             {{/for.each}}
         </div>
