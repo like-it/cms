@@ -42,12 +42,68 @@
     </div>
     {{/if}}
     {{if(!is.empty($request.node.redirect))}}
+    {{if(!is.empty($request.node.name))}}
     <div class="row align-items-start">
         <div class="col">
-            <span class="title">Redirect</span><br>
+            <span class="title">Internal name</span><br>
         </div>
         <div class="col">
-            <span class="content">{{$request.node.redirect}}</span><br>
+            <span class="content">{{$request.node.name}}</span><br>
+        </div>
+    </div>
+    {{/if}}
+    {{if(!is.empty($request.node.sort))}}
+    <div class="row align-items-start">
+        <div class="col">
+            <span class="title">Internal sort</span><br>
+        </div>
+        <div class="col">
+            <span class="content">{{$request.node.sort}}</span><br>
+        </div>
+    </div>
+    {{/if}}
+    {{if(!is.empty($request.route.host))}}
+    <div class="row align-items-start">
+        <div class="col">
+            <span class="title">Route host</span><br>
+        </div>
+        <div class="col">
+        {{for.each($request.route.host as $host)}}
+            <span class="content">{{$host}}</span><br>
+        {{/for.each}}
+        </div>
+    </div>
+    {{/if}}
+    {{if(!is.empty($request.route.method))}}
+    <div class="row align-items-start">
+        <div class="col">
+            <span class="title">Route method</span><br>
+        </div>
+        <div class="col">
+            {{for.each($request.route.method as $method)}}
+            <span class="content">{{$method}}</span><br>
+            {{/for.each}}
+        </div>
+    </div>
+    {{/if}}
+    {{if(!is.empty($request.route.path))}}
+    <div class="row align-items-start">
+        <div class="col">
+            <span class="title">Route path</span><br>
+        </div>
+        <div class="col">
+            <span class="content">{{$request.node.route.path}}</span><br>
+        </div>
+    </div>
+    {{/if}}
+
+
+    <div class="row align-items-start">
+        <div class="col">
+            <span class="title">Route Redirect</span><br>
+        </div>
+        <div class="col">
+            <span class="content">{{$request.node.route.redirect}}</span><br>
         </div>
     </div>
     {{/if}}
