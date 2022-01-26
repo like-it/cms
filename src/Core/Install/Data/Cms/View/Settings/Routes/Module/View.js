@@ -76,14 +76,18 @@ view.body = (action) => {
         case 'show' :
             body = section.select('.card-body');
             body.addClass('d-none');
-            selected = section.select('.card-body-' + "{{$request.node.uuid}}");
-            selected.removeClass('d-none');
+            selected = section.select('.card-body-view-' + "{{$request.node.uuid}}");
+            if(selected){
+                selected.removeClass('d-none');
+            }
             break;
         case 'remove' :
             body = section.select('.card-body');
             body.addClass('d-none');
-            selected = section.select('.card-body-' + "{{$request.node.uuid}}");
-            selected.remove();
+            selected = section.select('.card-body-view-' + "{{$request.node.uuid}}");
+            if(selected){
+                selected.remove();
+            }
             break;
     }
 }
