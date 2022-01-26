@@ -10,15 +10,11 @@ view.body = () => {
     if(!section){
         return;
     }
-    const item = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}");
-    if(item.data('is-hidden')){
-        item.data('delete', 'is-hidden');
-    } else {
-        const body = section.select('.card-body');
-        body.addClass('d-none');
-        const selected = section.select('.card-' + "{{$subcommand}}" + '-' + "{{$command}}" + '-' + "{{$request.node.uuid}}");
-        selected.removeClass('d-none');
-    }
+    const body = section.select('.card-body');
+    body.addClass('d-none');
+    console.log('.card-' + "{{$subcommand}}" + '-' + "{{$command}}" + '-' + "{{$request.node.uuid}}");
+    const selected = section.select('.card-' + "{{$subcommand}}" + '-' + "{{$command}}" + '-' + "{{$request.node.uuid}}");
+    selected.removeClass('d-none');
 }
 
 
