@@ -51,7 +51,6 @@
         </div>
     </div>
     {{/if}}
-    {{if(!is.empty($request.node.redirect))}}
     {{if(!is.empty($request.node.name))}}
     <div class="row align-items-start">
         <div class="col">
@@ -69,16 +68,6 @@
         </div>
         <div class="col">
             <span class="content">{{$request.node.sort}}</span><br>
-        </div>
-    </div>
-    {{/if}}
-    {{if(!is.empty($request.node.route.controller))}}
-    <div class="row align-items-start">
-        <div class="col">
-            <span class="title">Route Controller</span><br>
-        </div>
-        <div class="col">
-            <span class="content">{{$request.node.route.controller}}</span><br>
         </div>
     </div>
     {{/if}}
@@ -116,6 +105,7 @@
         </div>
     </div>
     {{/if}}
+    {{if(!is.empty($request.node.redirect))}}
     <div class="row align-items-start">
         <div class="col">
             <span class="title">Route Redirect</span><br>
@@ -124,40 +114,15 @@
             <span class="content">{{$request.node.route.redirect}}</span><br>
         </div>
     </div>
-    {{else}}
-    {{if(!is.empty($request.node.route.host))}}
+    {{/if}}
+    {{if(!is.empty($request.node.route.controller))}}
     <div class="row align-items-start">
         <div class="col">
-            <span class="title">Route host</span><br>
+            <span class="title">Route Controller</span><br>
         </div>
         <div class="col">
-            {{for.each($request.node.route.host as $host)}}
-            <span class="content">{{$host}}</span><br>
-            {{/for.each}}
+            <span class="content">{{$request.node.route.controller}}</span><br>
         </div>
     </div>
-    {{/if}}
-    {{if(!is.empty($request.node.route.method))}}
-    <div class="row align-items-start">
-        <div class="col">
-            <span class="title">Route method</span><br>
-        </div>
-        <div class="col">
-            {{for.each($request.node.route.method as $method)}}
-            <span class="content">{{$method}}</span><br>
-            {{/for.each}}
-        </div>
-    </div>
-    {{/if}}
-    {{if(!is.empty($request.node.route.path))}}
-    <div class="row align-items-start">
-        <div class="col">
-            <span class="title">Route path</span><br>
-        </div>
-        <div class="col">
-            <span class="content">{{$request.node.route.path}}</span><br>
-        </div>
-    </div>
-    {{/if}}
     {{/if}}
 </div>
