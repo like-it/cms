@@ -3,7 +3,7 @@ import user from "/Module/User.js";
 import create from "/Module/Create.js";
 import menu from "/Module/Menu.js";
 import { getSectionByName } from "/Module/Section.js";
-import { stristr, str_replace } from "/Module/String.js";
+import { contains, replace } from "/Module/String.js";
 
 let edit = {};
 
@@ -107,19 +107,17 @@ edit.form = (target) => {
             event.preventDefault();
             header('Authorization', 'Bearer ' + user.token());
             let data = form.data('serialize');
-            console.log(data);
             let url = form.data('url');
-            if(stristr(url, "{node.domain}") !== false){
+            if(contains(url, "{node.domain}") !== false){
                 const section = getSectionByName('main-content');
                 if(!section){
                     return;
                 }
                 const domain = section.select('input[name="node.domain"]');
-                console.log('domain', domain);
                 if(!domain){
                     return;
                 }
-                url = str_replace("{node.domain}", domain.value, url);
+                url = replace("{node.domain}", domain.value, url);
             }
             form.request(url, data, (url, response) => {
                 if(response?.error){

@@ -5,7 +5,7 @@ import create from "/Module/Create.js";
 import { getSectionByName } from "/Module/Section.js";
 import { version } from "/Module/Priya.js";
 import { root } from "/Module/Web.js";
-import { stristr, str_replace } from "/Module/String.js";
+import { contains, replace } from "/Module/String.js";
 let settings = {};
 
 settings.onDoubleClick = () => {
@@ -330,7 +330,7 @@ settings.pagination = (target) => {
             let button = buttons[index];
             button.on('click', () => {
                 let url = button.data('url');
-                if(stristr(url, "{node.domain}") !== false){
+                if(contains(url, "{node.domain}") !== false){
                     const section = getSectionByName('main-content');
                     if(!section){
                         return;
@@ -340,7 +340,7 @@ settings.pagination = (target) => {
                     if(!domain){
                         return;
                     }
-                    url = str_replace("{node.domain}", domain.value, url);
+                    url = replace("{node.domain}", domain.value, url);
                 }
                 if(button.data('has', 'page')){
                     const section = getSectionByName('main-content');
@@ -365,7 +365,7 @@ settings.pagination = (target) => {
         let button = buttons;
         button.on('click', () => {
             let url = button.data('url');
-            if(stristr(url, "{node.domain}") !== false){
+            if(contains(url, "{node.domain}") !== false){
                 const section = getSectionByName('main-content');
                 if(!section){
                     return;
@@ -375,7 +375,7 @@ settings.pagination = (target) => {
                 if(!domain){
                     return;
                 }
-                url = str_replace("{node.domain}", domain.value, url);
+                url = replace("{node.domain}", domain.value, url);
             }
             if(button.data('has', 'page')){
                 console.log('settings.page');
