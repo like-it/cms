@@ -82,6 +82,7 @@ main.content = () => {
         return;
     }
     const list = section.select('button.collapsed');
+    console.log(list);
     let index;
     for(index=0; index < list.length; index++){
         let node = list[index];
