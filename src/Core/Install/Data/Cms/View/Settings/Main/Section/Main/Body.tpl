@@ -1,4 +1,4 @@
-{R3M}
+{{R3M}}
 <div class="card-body h-100">
     <h5 class="card-title">{{__('settings.section.body.title')}}</h5>
     <ul>
