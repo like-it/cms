@@ -45,6 +45,44 @@ settings.onDoubleClick = () => {
     }
 }
 
+settings.default = (target) => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    let list = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-default-action');
+    if(is.nodeList(list)){
+        let index;
+        for(index=0; index < list.length; index++){
+            let node = list[index];
+            node.on('click', (event) => {
+                if(node.data('has', 'url')){
+                    header('Authorization', 'Bearer ' + user.token());
+                    const data = {
+                        "request-method" : "POST"
+                    }
+                    request(node.data('url'), data, (url, response) => {
+                        menu.dispatch(section, target);
+                    });
+                }
+            });
+        }
+    } else if (list) {
+        let node = list;
+        node.on('click', (event) => {
+            if(node.data('has', 'url')){
+                header('Authorization', 'Bearer ' + user.token());
+                const data = {
+                    "request-method" : "POST"
+                }
+                request(node.data('url'), data, (url, response) => {
+                    menu.dispatch(section, target);
+                });
+            }
+        });
+    }
+};
+
 settings.body = () => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -64,6 +102,10 @@ settings.body = () => {
 settings.init = () => {
     settings.body();
     settings.onDoubleClick();
+    settings.default({
+        select : ".{{$module}}-{{$submodule}}-{{$command}}",
+        event : new MouseEvent("dblclick")
+    });
 }
 
 ready(() => {
