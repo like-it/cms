@@ -1,7 +1,6 @@
 {{R3M}}
 {{$read = parse.read(config('host.dir.data') + 'Main.json')}}<!DOCTYPE html>
-{{dd($read)}}
-    <html lang="en">
+<html lang="en">
         <head>
             <meta name="author" content="{{$html.head.author|default:''}}">
             <meta http-equiv="content-type" content="{{$html.head.content.type | default:'text/html; charset=UTF-8'}}">
