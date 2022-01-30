@@ -63,6 +63,7 @@ settings.body = () => {
 
 settings.init = () => {
     settings.body();
+    settings.onDoubleClick();
 }
 
 ready(() => {
