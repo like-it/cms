@@ -139,6 +139,20 @@ class Install {
                                 '\\Controller\\Settings';
 
                             $settings_controller::configure($object);
+                            $object->config(
+                                'host.dir.data',
+                                $object->config('project.dir.root') .
+                                'Host' .
+                                $object->config('ds') .
+                                ucfirst(Install::SUBDOMAIN_CORE) .
+                                $object->config('ds') .
+                                ucfirst($host) .
+                                $object->config('ds') .
+                                ucfirst($extension) .
+                                $object->config('ds') .
+                                'Data' .
+                                $object->config('ds')
+                            );
                             $object->request('node.name', 'Default');
                             $add = $settings_controller::theme_add($object);
                             $object->request('node.name', 'Blog');
