@@ -129,11 +129,19 @@ class Install {
                             $user->isActive === true
                         ){
                             //activated
-                            $service = '\\Host\\Subdomain\\Host\\Extension\\Controller\\Settings';
+
+                            $settings_controller = '\\Host\\' .
+                                ucfirst(Install::SUBDOMAIN_CORE) .
+                                '\\' .
+                                ucfirst($host) .
+                                '\\' .
+                                ucfirst($extension) .
+                                '\\Controller\\Settings';
+
                             $object->request('node.name', 'Default');
-                            $add = $service::theme_add($object);
+                            $add = $settings_controller::theme_add($object);
                             $object->request('node.name', 'Blog');
-                            $add = $service::theme_add($object);
+                            $add = $settings_controller::theme_add($object);
                         } else {
                             //could not activate user
                             return $response;
