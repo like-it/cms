@@ -60,7 +60,7 @@ settings.default = (target) => {
                     header('Authorization', 'Bearer ' + user.token());
                     const data = {
                         "request-method" : "POST"
-                    }
+                    };
                     request(node.data('url'), data, (url, response) => {
                         menu.dispatch(section, target);
                     });
@@ -74,7 +74,7 @@ settings.default = (target) => {
                 header('Authorization', 'Bearer ' + user.token());
                 const data = {
                     "request-method" : "POST"
-                }
+                };
                 request(node.data('url'), data, (url, response) => {
                     menu.dispatch(section, target);
                 });
