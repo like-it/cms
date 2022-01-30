@@ -1000,7 +1000,6 @@ class Settings extends Main {
                     $original = $data->get('theme.' . $record->uuid);
                     $data->set('theme.' . $record->uuid, Core::object_merge($original, $record));
                     $data->write($url);
-                    d($url);
                     $data = [];
                     $data['node'] = $record;
                     return new Response($data, Response::TYPE_JSON);
