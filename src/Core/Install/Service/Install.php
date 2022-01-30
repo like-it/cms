@@ -154,10 +154,10 @@ class Install {
                                 $object->config('ds')
                             );
                             $object->request('node.name', 'Default');
-                            $object->request('node.source', "{{config('project.dir.vendor)}}universeorange/theme-default/");
+                            $object->request('node.source', "{{config('project.dir.vendor')}}universeorange/theme-default/");
                             $add = $settings_controller::theme_add($object);
                             $object->request('node.name', 'Blog');
-                            $object->request('node.source', "{{config('project.dir.vendor)}}universeorange/theme-blog/");
+                            $object->request('node.source', "{{config('project.dir.vendor')}}universeorange/theme-blog/");
                             $add = $settings_controller::theme_add($object);
                         } else {
                             //could not activate user
