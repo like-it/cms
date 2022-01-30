@@ -1,4 +1,4 @@
-{R3M}
+{{R3M}}
 {{$request.method = 'replace-with-or-append-to'}}
 {{$request.target = 'section[name="' + $controller.name + '"]'}}
 {{$request.append.to = 'body'}}
