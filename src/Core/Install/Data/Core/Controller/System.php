@@ -27,11 +27,11 @@ class System extends View {
     ];
     const DEFAULT_COMMAND = System::COMMAND_INFO;
 
-    const EXCEPTION_COMMAND_PARAMETER = '{$command}';
+    const EXCEPTION_COMMAND_PARAMETER = '{{$command}}';
     const EXCEPTION_COMMAND = 'invalid command (' . System::EXCEPTION_COMMAND_PARAMETER . ')' . PHP_EOL;
 
     const INFO = [
-        '{binary()} system update                  | Performs a system update from package like-it/cms',
+        '{{binary()}} system update                  | Performs a system update from package like-it/cms',
     ];
 
     /**

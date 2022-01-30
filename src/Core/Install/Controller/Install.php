@@ -13,7 +13,7 @@ class Install extends View {
     const DIR = __DIR__ . DIRECTORY_SEPARATOR;
 
     const INFO = [
-        '{binary()} install                        | Install the core & cms on one domain from package like-it/cms'
+        '{{binary()}} install                        | Install the core & cms on one domain from package like-it/cms'
     ];
 
     public static function start(App $object){
