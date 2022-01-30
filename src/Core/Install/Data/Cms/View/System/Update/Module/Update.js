@@ -119,7 +119,7 @@ update.cms = (node) => {
                 const data = {
                     "request-method" : "DELETE",
                     "nodeList" : node.files
-                }
+                };
                 const pre = create('pre');
                 pre.html('Cleaning up process files...' + "\n");
                 system.appendChild(pre);
