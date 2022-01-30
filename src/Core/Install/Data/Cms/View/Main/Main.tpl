@@ -1,5 +1,6 @@
 {{R3M}}
 {{$read = parse.read(config('host.dir.data') + 'Main.json')}}<!DOCTYPE html>
+{{dd($read)}}
     <html lang="en">
         <head>
             <meta name="author" content="{{$html.head.author|default:''}}">
