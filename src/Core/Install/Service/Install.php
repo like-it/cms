@@ -138,6 +138,7 @@ class Install {
                                 ucfirst($extension) .
                                 '\\Controller\\Settings';
 
+                            $settings_controller::configure($object);
                             $object->request('node.name', 'Default');
                             $add = $settings_controller::theme_add($object);
                             $object->request('node.name', 'Blog');
