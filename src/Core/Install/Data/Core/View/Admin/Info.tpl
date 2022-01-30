@@ -1,2 +1,3 @@
-{binary()} admin task "<task>"            | Create an admin task
-{binary()} admin taskrunner               | Executes an admin task
+{{R3M}}
+{{binary()}} admin task "<task>"            | Create an admin task
+{{binary()}} admin taskrunner               | Executes an admin task
