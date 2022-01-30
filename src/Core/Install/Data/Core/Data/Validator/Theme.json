@@ -19,6 +19,17 @@
                         "url" : "{{config('project.dir.data')}}Theme.json"
                     }
                 }
+            ],
+            "source" : [
+                {
+                    "string.length": ">=3"
+                },
+                {
+                    "is.unique.json" : {
+                        "list" : "theme",
+                        "url" : "{{config('project.dir.data')}}Theme.json"
+                    }
+                }
             ]
         }
     }

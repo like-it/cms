@@ -5,7 +5,9 @@
 {{/if}}
 {{$errors = [
 'name.validate_string_length',
-'name.validate_is_unique_json'
+'name.validate_is_unique_json',
+'source.validate_string_length',
+'source.validate_is_unique_json'
 ]}}
 {{for.each($errors as $error)}}
     {{if(request.error($error) === true)}}
