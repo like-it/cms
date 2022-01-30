@@ -83,6 +83,44 @@ settings.default = (target) => {
     }
 };
 
+settings.edit = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    let list = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-edit');
+    if(is.nodeList(list)){
+        let index;
+        for(index=0; index < list.length; index++){
+            let node = list[index];
+            node.on('click', (event) => {
+                if(node.data('has', 'url')){
+                    header('Authorization', 'Bearer ' + user.token());
+                    request(node.data('url'), null, (url, response) => {
+                        request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+
+                        });
+                    });
+                }
+            });
+        }
+    } else {
+        let node = list;
+        if(node){
+            node.on('click', (event) => {
+                if(node.data('has', 'url')){
+                    header('Authorization', 'Bearer ' + user.token());
+                    request(node.data('url'), null, (url, response) => {
+                        request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+
+                        });
+                    });
+                }
+            });
+        }
+    }
+}
+
 settings.body = () => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -106,6 +144,7 @@ settings.init = () => {
         select : ".{{$module}}-{{$submodule}}-{{$command}}",
         event : new MouseEvent("dblclick")
     });
+    settings.edit();
 }
 
 ready(() => {
