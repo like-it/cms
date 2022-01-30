@@ -250,6 +250,7 @@ settings.body = () => {
 
 settings.init = () => {
     settings.body();
+    /*
     settings.onDoubleClick();
     settings.default({
         select : ".{{$module}}-{{$submodule}}-{{$command}}",
@@ -260,6 +261,7 @@ settings.init = () => {
         select: ".{{$module}}-{{$submodule}}-{{$command}}",
         event: new MouseEvent("dblclick")
     });
+     */
 }
 
 ready(() => {
