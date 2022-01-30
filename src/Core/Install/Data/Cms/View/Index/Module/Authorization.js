@@ -1,4 +1,4 @@
-{R3M}
+//{{R3M}}
 import user from "/Module/User.js";
 ready(() => {
     if(user.token()){
