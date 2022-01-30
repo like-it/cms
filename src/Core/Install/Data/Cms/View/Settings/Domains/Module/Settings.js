@@ -41,7 +41,6 @@ settings.onDoubleClick = () => {
                 });
             }
         });
-
     }
 }
 
@@ -148,7 +147,7 @@ settings.actions = (target) => {
                         header('Authorization', 'Bearer ' + user.token());
                         const data = {
                             "request-method" : "POST"
-                        }
+                        };
                         request(node.data('url'), data, (url, response) => {
                             menu.dispatch(section, target);
                         });
@@ -203,17 +202,6 @@ settings.init = () => {
         select: ".{{$module}}-{{$submodule}}-{{$command}}",
         event: new MouseEvent("dblclick")
     });
-    /*
-    settings.default({
-        select : ".{{$module}}-{{$submodule}}-{{$command}}",
-        event : new MouseEvent("dblclick")
-    });
-    settings.edit();
-    settings.delete({
-        select: ".{{$module}}-{{$submodule}}-{{$command}}",
-        event: new MouseEvent("dblclick")
-    });
-     */
 }
 
 ready(() => {
