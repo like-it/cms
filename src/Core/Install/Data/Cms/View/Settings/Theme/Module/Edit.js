@@ -112,10 +112,6 @@ edit.form = (target) => {
                         name: "error",
                         value: response.error
                     });
-                    data.push({
-                        name: "request-method",
-                        value: "POST"
-                    });
                     console.log(form.data('url-error'));
                     request(form.data('url-error'), data, ( urlError, responseError ) => {
 

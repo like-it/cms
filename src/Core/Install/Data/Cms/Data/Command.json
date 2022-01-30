@@ -402,7 +402,8 @@
         "subcommand" : "body",
         "method": [
             "GET",
-            "POST"
+            "POST",
+            "PUT"
         ]
     },
     "2e61686d-449a-444b-95e6-9e5b1687e528" : {
