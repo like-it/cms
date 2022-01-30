@@ -24,6 +24,7 @@
     "home.link.users" : "Users",
     "home.link.system" : "System",
     "home.link.logout" : "Log out",
+    "loading.section.main.content.title" : "Loading...",
     "settings.domains.component.header.a.main.link" : "Main",
     "settings.domains.component.header.a.settings.link" : "Settings",
     "settings.domains.component.header.a.add.link" : "Add domain",

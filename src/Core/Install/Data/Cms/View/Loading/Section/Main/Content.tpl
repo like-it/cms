@@ -1,3 +1,4 @@
+{{R3M}}
 <section name="main-content" class="col-10">
     <div class="h-100">
         <div class="card h-100 overflow-auto">
@@ -14,6 +15,6 @@
                     </li>
                 </ul>
             </div>
-            <h3>Loading...</h3>
+            <h3>{{__('loading.section.main.content.title')}}</h3>
         </div>
 </section>

@@ -1,4 +1,4 @@
-{R3M}
+{{R3M}}
 {{if($is.information.body)}}
     {{$section.name = 'main-content'}}
     {{$section.title = 'Main-content'}}

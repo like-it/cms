@@ -1,4 +1,4 @@
-{R3M}
+{{R3M}}
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://universeorange.com/font-awesome-5.14.0/css/all.css?0.0.1">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
-    <script src="http://script.universeorange.local:2603/Js/Priya/Priya.js"></script>
+    <script src="http://script.universeorange.local:2627/Js/Priya/Priya.js"></script>
     <script src="/Dropzone/5.9.2/min/dropzone.min.js?1.0.0"></script>
     <link rel="stylesheet" href="/Dropzone/5.9.2/min/dropzone.min.css?1.0.0">
     <script type="module">

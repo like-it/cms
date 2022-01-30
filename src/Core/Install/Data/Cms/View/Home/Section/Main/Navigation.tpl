@@ -1,4 +1,4 @@
-{R3M}
+{{R3M}}
 <section name="main-navigation" class="col-12 col-md-2">
     <div class="">
         <nav class="nav flex-column">

@@ -1,4 +1,4 @@
-{R3M}
+{{R3M}}
 {{script('module')}}
 {{require($controller.dir.view + $controller.title + '/Information/Module/Menu.js')}}
 {{/script}}
