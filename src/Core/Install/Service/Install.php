@@ -129,6 +129,16 @@ class Install {
                             $user->isActive === true
                         ){
                             //activated
+                            /*
+                             * look in folder Theme/Default * Theme/Blog
+                             */
+                            //create Default theme as zip file
+                            //create default domain www. ucfirst($host) . ucfirst($extension)
+                            //extract zip file k  Host/www. ucfirst($host) . ucfirst($extension)
+                            //from zip/Command.json
+                            //create default route / to controller Page function index
+                            //create controller Page
+                            //create view for command index
                         } else {
                             //could not activate user
                             return $response;
