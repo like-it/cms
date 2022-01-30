@@ -41,8 +41,10 @@ if(!File::exist($index_url)){
     $destination_url = $destination_dir . '1.jpg';
     File::copy($source, $destination_url);
     $output = [];
-    $command = 'chown www-data:www-data ' . $app->config('project.dir.public') . ' -R';
-    Core::execute($command, $output);
+    if(posix_getuid() === 0) {
+        $command = 'chown www-data:www-data ' . $app->config('project.dir.public') . ' -R';
+        Core::execute($command, $output);
+    }
 }
 
 
@@ -53,10 +55,12 @@ if(!File::exist($route_url)){
     $command = 'funda configure route resource "{\$project.dir.vendor}like-it/cms/Data/Route.json"';
     Core::execute($command, $output);
     echo implode(PHP_EOL, $output);
-    $output = [];
-    $command = 'chown www-data:www-data ' . $route_url;
-    Core::execute($command, $output);
-    echo implode(PHP_EOL, $output);
+    if(posix_getuid() === 0){
+        $output = [];
+        $command = 'chown www-data:www-data ' . $route_url;
+        Core::execute($command, $output);
+        echo implode(PHP_EOL, $output);
+    }
     echo PHP_EOL;
 }
 exit();

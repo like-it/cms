@@ -129,16 +129,11 @@ class Install {
                             $user->isActive === true
                         ){
                             //activated
-                            /*
-                             * look in folder Theme/Default * Theme/Blog
-                             */
-                            //create Default theme as zip file
-                            //create default domain www. ucfirst($host) . ucfirst($extension)
-                            //extract zip file k  Host/www. ucfirst($host) . ucfirst($extension)
-                            //from zip/Command.json
-                            //create default route / to controller Page function index
-                            //create controller Page
-                            //create view for command index
+                            $service = '\\Host\\Core\\' .  ucfirst($host) . '\\' . ucfirst($extension) . '\\Service\\Settings';
+                            $object->request('node.name', 'Default');
+                            $add = $service::theme_add($object);
+                            $object->request('node.name', 'Blog');
+                            $add = $service::theme_add($object);
                         } else {
                             //could not activate user
                             return $response;
