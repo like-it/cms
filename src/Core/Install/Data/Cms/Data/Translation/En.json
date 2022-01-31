@@ -216,7 +216,7 @@
     ],
     "settings.main.component.body.li.templates.title" : "Templates",
     "settings.main.component.body.li.templates.body" : [
-        "Handle document templates."
+        "Handle domain templates."
     ],
     "settings.main.component.body.li.token.settings.title" : "Token settings",
     "settings.main.component.body.li.token.settings.body" : [
