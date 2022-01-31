@@ -7,7 +7,7 @@
     $require.command +
     '/Component/Markdown/' +
     $require.module +
-    '.tpl'
+    '.md'
     )}})}}
     /*
     <h5 class="card-title">

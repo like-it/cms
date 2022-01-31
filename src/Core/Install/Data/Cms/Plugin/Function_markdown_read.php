@@ -5,11 +5,15 @@ use R3m\Io\Module\Parse;
 
 function function_markdown_read(Parse $parse, Data $data, $url = null){
     $object = $parse->object();
-    dd(File::extension($url));
-    if(File::exist($url) && File::extension($url) === '.md'){
+    if(File::exist($url) && File::extension($url) === 'md'){
         $read = File::read($url);
         $parsedown = new \Parsedown();
-        return $parsedown->text($read);
+        $string = $parsedown->text($read);
+        try {
+            return $parse->compile($string, $data);
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     } else {
         return 'File not found...';
     }
