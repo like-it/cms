@@ -1,9 +1,9 @@
 {{R3M}}
-{{if(in.array($command,['add-route', 'add-redirect']))}}
+{{if(in.array($command,['add-controller']))}}
 {{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/' + $require.command + '/'}}
 {{$data.error = route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-' + $subcommand + '-node-domain', ['node.domain' => '{node.domain}'])}}
 {{$require.button = 'Add'}}
-{{else.if(in.array($command,['edit-route', 'edit-redirect']))}}
+{{else.if(in.array($command,['edit-controller']))}}
 {{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/' + $request.node.uuid}}
 {{$data.error = route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-' + $subcommand)}}
 {{$require.button = 'Edit'}}
