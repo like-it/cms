@@ -6,7 +6,15 @@
     <div class="dropdown">
         <input type="hidden" name="node.domain" value="uuid" />
         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
-            Loading...
+            {{__(
+            $__.module +
+            '.' +
+            $__.submodule +
+            '.component.header.button.' +
+            $__.section +
+            '.' +
+            'link'
+            )}}
         </button>
         <ul class="dropdown-menu">
         </ul>

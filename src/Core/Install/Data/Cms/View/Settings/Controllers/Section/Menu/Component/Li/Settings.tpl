@@ -7,9 +7,28 @@
     <a
         class="nav-link {{$module}}-{{$submodule}}-{{$section}}"
         data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.section}}/{node.domain}"
-        data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $section + '-' + $node)}}"
+        data-frontend-url="{{
+        route.get(
+        route.prefix() +
+        '-' +
+        $module +
+        '-' +
+        $submodule +
+        '-' +
+        $section +
+        '-' +
+        $node
+        )}}"
         data-selected=".card-body-{{$section}}"
     >
-        {{__($__.module + '.' + $__.submodule + '.component.header.a.' + $__.section + '.' + 'link')}}
+        {{__(
+        $__.module +
+        '.' +
+        $__.submodule +
+        '.component.header.a.' +
+        $__.section +
+        '.' +
+        'link'
+        )}}
     </a>
 </li>
