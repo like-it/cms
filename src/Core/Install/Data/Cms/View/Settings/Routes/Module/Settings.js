@@ -197,7 +197,7 @@ settings.actions = (target) => {
             let node = i[index];
             node.on('click', (event) => {
                 let url = node.data('url');
-                if(stristr(url, "{node.domain}") !== false){
+                if(contains(url, "{node.domain}") !== false){
                     const section = getSectionByName('main-content');
                     if(!section){
                         return;
@@ -207,7 +207,7 @@ settings.actions = (target) => {
                     if(!domain){
                         return;
                     }
-                    url = str_replace("{node.domain}", domain.value, url);
+                    url = replace("{node.domain}", domain.value, url);
                 }
                 let data;
                 if(node.data('request-method')){
@@ -237,7 +237,7 @@ settings.actions = (target) => {
         let node = i;
         node.on('click', (event) => {
             let url = node.data('url');
-            if(stristr(url, "{node.domain}") !== false){
+            if(contains(url, "{node.domain}") !== false){
                 const section = getSectionByName('main-content');
                 if(!section){
                     return;
@@ -247,7 +247,7 @@ settings.actions = (target) => {
                 if(!domain){
                     return;
                 }
-                url = str_replace("{node.domain}", domain.value, url);
+                url = replace("{node.domain}", domain.value, url);
             }
             let data;
             if(node.data('request-method')){

@@ -204,7 +204,7 @@
     ],
     "settings.main.component.body.li.routes.title" : "Routes",
     "settings.main.component.body.li.routes.body" : [
-        "Manage routes, module & submodule, commands & subcommands, paths, methods."
+        "Manage routes, module & submodule, commands & subcommands, paths, methods & redirects."
     ],
     "settings.main.component.body.li.scripts.title" : "Scripts",
     "settings.main.component.body.li.scripts.body" : [
