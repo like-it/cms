@@ -1,4 +1,4 @@
-{R3M}
+{{R3M}}
 {{script('module')}}
 {{require($prefix + 'Module/Menu.js')}}
 {{/script}}
