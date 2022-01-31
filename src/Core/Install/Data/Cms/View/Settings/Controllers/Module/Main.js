@@ -10,7 +10,7 @@ main.body = () => {
     }
     const body = section.select('.card-body');
     body.addClass('d-none');
-    const selected = section.select('.card-' + 'body-' + "{{$command}}");
+    const selected = section.select('.card-' + "{{$command}}" + '-body');
     selected.removeClass('d-none');
 }
 
