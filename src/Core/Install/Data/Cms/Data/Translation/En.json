@@ -324,7 +324,7 @@
     "system.information.section.information.body.title" : "Information",
     "system.information.section.information.body.text" : [
         "Welcome to the system section.",
-        "You can manually update the system and the cms here.",
+        "You can manually update the system and the cms here."
     ],
     "system.update.section.main.body.button.update.cms" : "Update Core & CMS packages",
     "system.update.section.main.body.text" : [
