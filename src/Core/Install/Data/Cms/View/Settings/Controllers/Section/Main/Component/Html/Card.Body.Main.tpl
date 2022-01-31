@@ -8,7 +8,7 @@
     '/Component/Markdown/' +
     $require.module +
     '.md'
-    )}})}}
+    )}}
     /*
     <h5 class="card-title">
         {{__(

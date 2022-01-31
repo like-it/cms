@@ -15,7 +15,7 @@ function function_markdown_read(Parse $parse, Data $data, $url = null){
             return $e->getMessage();
         }
     } else {
-        return 'File not found...';
+        return 'File (' . $url . ') not found...';
     }
 
 }
