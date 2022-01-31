@@ -1,5 +1,5 @@
 {{R3M}}
-<div class="card-body h-100 card-body-{{$command}}">
+<div class="card-body h-100 card-{{$command}}-body">
     {{markdown.read(
     $prefix +
     $require.submodule +
