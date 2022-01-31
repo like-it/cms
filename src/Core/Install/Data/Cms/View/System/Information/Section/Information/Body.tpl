@@ -11,5 +11,5 @@
 {{/script}}
 <div class="card-body h-100 card-body-information">
     <h5 class="card-title">{{__('system.information.section.information.body.title')}}</h5>
-    <p class="card-text">this is system.information.section.body {{__('settings.section.email.main.body.text')}}</p>
+    <p class="card-text">{{implode("\n<br>", __('system.information.section.information.body.text'))}}</p>
 </div>
