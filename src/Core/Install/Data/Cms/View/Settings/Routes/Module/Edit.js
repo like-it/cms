@@ -50,9 +50,7 @@ edit.title = () => {
             event.stopPropagation();
             li.remove();
             edit.body('remove');
-            console.log("{{$command}}");
             const menuItem = section.select('.'+ "{{$module}}" + '-' + "{{$submodule}}" + '-' + 'settings');
-            console.log(menuItem);
             if(menuItem){
                 menuItem.trigger('click');
             }
@@ -120,17 +118,14 @@ edit.form = (target) => {
                 url = replace("{node.domain}", domain.value, url);
             }
             form.request(url, data, (url, response) => {
-                console.log(data);
                 if(response?.error){
                     data.push({
                         name: "error",
                         value: response.error
                     });
-                    console.log(form.data('url-error'));
                     request(form.data('url-error'), data, ( urlError, responseError ) => {
 
                     });
-                    console.log(response.error);
                 } else {
                     menu.dispatch(section, target);
                 }
