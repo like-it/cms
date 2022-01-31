@@ -1,9 +1,9 @@
 {{R3M}}
-{{if(in.array($command,['add-controller']))}}
+{{if(in.array($command,['add-' + $submodule]))}}
 {{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/' + $require.command + '/'}}
 {{$data.error = route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-' + $subcommand + '-node-domain', ['node.domain' => '{node.domain}'])}}
 {{$require.button = 'Add'}}
-{{else.if(in.array($command,['edit-controller']))}}
+{{else.if(in.array($command,['edit-' +  + $submodule]))}}
 {{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/' + $request.node.uuid}}
 {{$data.error = route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-' + $subcommand)}}
 {{$require.button = 'Edit'}}
