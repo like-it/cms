@@ -1,5 +1,5 @@
 {{R3M}}
-{{$field = 'redirect'}}
+{{$field = 'name'}}
 {{$label = $field|uppercase.first}}
 {{$label =  $label + '*'}}
 {{$validates = [
