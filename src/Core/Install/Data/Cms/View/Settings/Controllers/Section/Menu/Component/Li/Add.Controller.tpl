@@ -1,5 +1,5 @@
 {{R3M}}
-{{$section = 'add-redirect'}}
+{{$section = 'add-controller'}}
 {{$__.section = $section|lowercase|replace:'-':'.'}}
 {{$require.section = $section|uppercase.first.sentence:'-'|replace:'-':'/'}}
 {{$node = 'body-node-domain'}}
@@ -21,6 +21,14 @@
         ])}}"
         data-selected=".card-body-{{$section}}"
     >
-        {{__($__.module + '.' + $__.submodule + '.component.header.a.' + $__.section + '.' + 'link')}}
+        {{__(
+        $__.module +
+        '.' +
+        $__.submodule +
+        '.component.header.a.' +
+        $__.section +
+        '.' +
+        'link'
+        )}}
     </a>
 </li>
