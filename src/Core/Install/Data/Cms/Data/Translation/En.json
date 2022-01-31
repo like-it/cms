@@ -141,6 +141,7 @@
     "settings.routes.component.header.a.settings.link" : "Settings",
     "settings.routes.component.header.a.add.route.link" : "Add route",
     "settings.routes.component.header.a.add.redirect.link" : "Add redirect",
+    "settings.routes.component.header.button.domains.settings.link" : "Loading...",
     "settings.routes.module.settings.delete" : "Are you sure you want to delete this item",
     "settings.routes.section.main.component.html.title" : "Routes",
     "settings.routes.section.main.component.html.text" : [
