@@ -6,7 +6,7 @@
     '/Section/' +
     $require.command +
     '/Component/Markdown/' +
-    $require.module +
+    $require.submodule +
     '.md'
     )}}
     /*
