@@ -32,7 +32,7 @@
     "settings.controllers.module.settings.delete" : "Are you sure you want to delete this item",
     "settings.controllers.section.main.component.html.title" : "Controllers",
     "settings.controllers.section.main.component.html.text" : [
-        "Routes can go to controllers which are capable of initiating a service and / or respond with a template, script, style(CSS) even secured.",
+        "Routes can go to controllers which are capable of initiating a service and / or respond with a template, script, style(CSS) even protected by an access token.",
         "The url of the route goes to a controller and the selected controller is responding which its function (action)."
     ],
     "settings.controllers.section.form.component.button.add" : "Add",

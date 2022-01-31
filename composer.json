@@ -14,7 +14,8 @@
 		"lcobucci/jwt": "*",
 		"phpmailer/phpmailer": "*",
 		"universeorange/theme-default": "*",
-		"universeorange/theme-blog": "*"
+		"universeorange/theme-blog": "*",
+		"erusev/parsedown": "*"
 	},
 	"license" : "proprietary",
 	"authors" : [{

@@ -1,5 +1,6 @@
 {{R3M}}
 <div class="card-body h-100 card-body-{{$command}}">
+
     <h5 class="card-title">
         {{__(
         $__.module +
