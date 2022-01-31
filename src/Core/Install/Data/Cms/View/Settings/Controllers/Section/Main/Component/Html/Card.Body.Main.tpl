@@ -1,6 +1,15 @@
 {{R3M}}
 <div class="card-body h-100 card-body-{{$command}}">
-
+    {{markdown.read(
+    $prefix +
+    $require.submodule +
+    '/Section/' +
+    $require.command +
+    '/Component/Markdown/' +
+    $require.module +
+    '.tpl'
+    )}})}}
+    /*
     <h5 class="card-title">
         {{__(
         $__.module +
@@ -30,4 +39,5 @@
         ))}}
         {{/if}}
     </p>
+    */
 </div>
