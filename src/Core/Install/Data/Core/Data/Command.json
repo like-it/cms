@@ -73,7 +73,7 @@
     },
     "7bc142d4-0578-4309-9714-d079332363ee" : {
         "module" : "user",
-        "path" : "/User/{$uuid}/",
+        "path" : "/User/{{$uuid}}/",
         "method": [
             "GET",
             "PUT",
@@ -83,7 +83,7 @@
     },
     "69a55262-d324-4990-b0f1-ba2767a72aad" : {
         "module" : "user",
-        "path" : "/User/{$uuid}/{$attribute}",
+        "path" : "/User/{{$uuid}}/{{$attribute}}",
         "method": [
             "GET",
             "DELETE",
@@ -203,6 +203,38 @@
             "OPTIONS"
         ]
     },
+    "0fbb1e05-350b-465e-91a1-288ccb55d0a9" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "settings",
+        "path": "Settings/Controllers/Settings/{{$node.domain}}",
+        "method" : [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "838d8a75-823e-48ed-b29f-da8163fe59a9" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "add",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "7832c65f-1610-4818-b54b-56e57ae0093b" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "command",
+        "path": "Settings/Controllers/{{$node.uuid}}/{{$node.domain}}",
+        "method": [
+            "GET",
+            "PUT",
+            "DELETE",
+            "OPTIONS"
+        ]
+    },
     "427e9a39-ab46-4015-bb7f-3e37faa42ad0" : {
         "module" : "settings",
         "submodule" : "domains",
@@ -226,7 +258,7 @@
         "module" : "settings",
         "submodule" : "domains",
         "command" : "default",
-        "path": "Settings/Domains/Default/{$uuid}",
+        "path": "Settings/Domains/Default/{{$uuid}}",
         "method": [
             "POST",
             "OPTIONS"
@@ -236,7 +268,7 @@
         "module" : "settings",
         "submodule" : "domains",
         "command" : "command",
-        "path": "Settings/Domains/{$node.uuid}",
+        "path": "Settings/Domains/{{$node.uuid}}",
         "method": [
             "GET",
             "PUT",
@@ -295,7 +327,7 @@
         "module" : "settings",
         "submodule" : "theme",
         "command" : "command",
-        "path": "Settings/Theme/{$node.uuid}",
+        "path": "Settings/Theme/{{$node.uuid}}",
         "method": [
             "GET",
             "PUT",
@@ -307,7 +339,7 @@
         "module" : "settings",
         "submodule" : "routes",
         "command" : "settings",
-        "path": "Settings/Routes/Settings/{$node.domain}",
+        "path": "Settings/Routes/Settings/{{$node.domain}}",
         "method" : [
             "GET",
             "POST",
@@ -327,7 +359,7 @@
         "module" : "settings",
         "submodule" : "routes",
         "command" : "one-up",
-        "path": "Settings/Routes/1/Up/{$node.uuid}/{$node.domain}",
+        "path": "Settings/Routes/1/Up/{{$node.uuid}}/{{$node.domain}}",
         "method": [
             "POST",
             "OPTIONS"
@@ -337,7 +369,7 @@
         "module" : "settings",
         "submodule" : "routes",
         "command" : "one-down",
-        "path": "Settings/Routes/1/Down/{$node.uuid}/{$node.domain}",
+        "path": "Settings/Routes/1/Down/{{$node.uuid}}/{{$node.domain}}",
         "method": [
             "POST",
             "OPTIONS"
@@ -347,7 +379,7 @@
         "module" : "settings",
         "submodule" : "routes",
         "command" : "command",
-        "path": "Settings/Routes/{$node.uuid}/{$node.domain}",
+        "path": "Settings/Routes/{{$node.uuid}}/{{$node.domain}}",
         "method": [
             "GET",
             "PUT",
@@ -379,7 +411,7 @@
         "submodule" : "email",
         "command" : "account",
         "subcommand" : "default",
-        "path": "Settings/Email/Account/Default/{$uuid}",
+        "path": "Settings/Email/Account/Default/{{$uuid}}",
         "method": [
             "GET",
             "OPTIONS"
@@ -389,7 +421,7 @@
         "module" : "settings",
         "submodule" : "email",
         "command" : "command",
-        "path": "Settings/Email/{$node.uuid}",
+        "path": "Settings/Email/{{$node.uuid}}",
         "method": [
             "GET",
             "PUT",

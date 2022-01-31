@@ -92,15 +92,6 @@
             "POST"
         ]
     },
-    "7f0b1351-d1e3-4538-bcb1-90168b5b9f65" : {
-        "module" : "settings",
-        "submodule" : "domains",
-        "command" : "main",
-        "method": [
-            "GET",
-            "POST"
-        ]
-    },
     "475e407a-2433-4b2c-a7af-a29f87eaf276" : {
         "module" : "settings",
         "submodule" : "basic-site",
@@ -132,6 +123,67 @@
         "module" : "settings",
         "submodule" : "import",
         "command" : "main",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "6be68aa6-3e8c-4080-977d-545bc6680995" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "main",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "a42b4b91-abd1-4f3a-a8d8-31d5c33fc0d4" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "main",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "44a3330f-7327-4c11-8c89-322db3868c2f" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "settings",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "907bd5cc-6b8d-4cce-a13c-d7790ed3487f" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "add-controller",
+        "subcommand" : "body",
+        "path" : "Settings/Controllers/Add/Controller/Body/{$node.domain}",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "fc754249-03c7-4502-9c3b-58c5b8ff58f7" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "edit-controller",
+        "subcommand" : "body",
+        "path" : "Settings/Controllers/Edit/Controller/Body/",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "0296a749-6c5a-4948-9a40-1f0179ebf754" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "view",
+        "subcommand" : "body",
         "method": [
             "GET",
             "POST"
