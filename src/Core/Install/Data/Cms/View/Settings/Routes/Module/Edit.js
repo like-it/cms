@@ -120,6 +120,7 @@ edit.form = (target) => {
                 url = replace("{node.domain}", domain.value, url);
             }
             form.request(url, data, (url, response) => {
+                console.log(data);
                 if(response?.error){
                     data.push({
                         name: "error",
