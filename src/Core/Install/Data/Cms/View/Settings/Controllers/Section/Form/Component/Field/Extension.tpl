@@ -1,6 +1,7 @@
 {{R3M}}
 {{$field = 'extension'}}
-{{$label = $field|uppercase.first + '*'}}
+{{$label = $field|uppercase.first}}
+{{$label += '*'}}
 {{$input.id = $module + '-' + $submodule + '-' + $field}}
 {{$input.class = 'form-control'}}
 {{$input.type = 'radio'}}
