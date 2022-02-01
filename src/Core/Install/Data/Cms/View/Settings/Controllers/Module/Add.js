@@ -83,7 +83,7 @@ add.form = (target) => {
     if(!section){
         return;
     }
-    const selected = section.select('.card-body-' + "{{$command}}");
+    const selected = section.select('.card-' + "{{$command}}" + '-body');
     if(!selected){
         return;
     }
@@ -115,7 +115,7 @@ add.focus = () => {
     if(!section){
         return;
     }
-    const selected = section.select('.card-body-' + "{{$command}}");
+    const selected = section.select('.card-' + "{{$command}}" + '-body');
     if(!selected){
         return;
     }
