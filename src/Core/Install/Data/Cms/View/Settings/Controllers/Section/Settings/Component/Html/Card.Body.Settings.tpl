@@ -1,18 +1,16 @@
 {{R3M}}
 {{$components = [
 'actions',
-'module',
-'submodule',
-'command',
-'subcommand',
-'path',
-'method',
+'name',
+'url',
+'routes',
+'functions',
 'options'
 ]}}
 {{$options = [
 'edit',
 'view',
-'controller',
+'rename',
 'delete'
 ]}}
 <div class="card-body h-100 card-body-{{$command}}">
