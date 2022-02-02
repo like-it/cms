@@ -230,6 +230,18 @@ class Settings extends Main {
                         Response::STATUS_ERROR
                     );
                 } else {
+                    $source = $object->config('host.dir.data') .
+                        'Source' .
+                        $object->config('ds') .
+                        'Controller' .
+                        $object->config('extension.tpl');
+                    $parse = new Parse($object);
+                    $data = new Data($object->data());
+                    $data->set('domain', $domain);
+                    $string = $parse->compile(File::read($source), $data->get());
+                    $dir = Dir::name($object->request('url'));
+                    Dir::create($dir);
+                    File::write($object->request('url'), $string);
                     $data = [];
                     $data['node'] = $object->request('node');
                     return new Response($data, Response::TYPE_JSON);
