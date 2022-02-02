@@ -223,7 +223,9 @@ class Settings extends Main {
                     $data = [];
                     $data['error'] = [
                         'url' => [
-                            'validate_url' => false
+                            'validate_url' => [
+                                false
+                            ]
                         ]
                     ];
                     return new Response(
