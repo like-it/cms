@@ -207,7 +207,7 @@
         "module" : "settings",
         "submodule" : "controllers",
         "command" : "settings",
-        "path": "Settings/Controllers/Settings/{{$node.domain}}",
+        "path": "Settings/Controllers/Settings/{$node.domain}",
         "method" : [
             "GET",
             "POST",
