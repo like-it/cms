@@ -240,10 +240,11 @@ class Settings extends Main {
                     $parse = new Parse($object);
                     $data = new Data($object->data());
                     $data->set('domain', $domain);
-                    $string = $parse->compile(File::read($source), $data->get());
+                    $content = $parse->compile(File::read($source), $data->get());
                     $dir = Dir::name($object->request('url'));
                     Dir::create($dir);
-                    File::write($object->request('url'), $string);
+                    File::write($object->request('url'), $content);
+                    $object->request('node.content', $content);
                     $data = [];
                     $data['node'] = $object->request('node');
                     return new Response($data, Response::TYPE_JSON);
