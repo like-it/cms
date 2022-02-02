@@ -225,7 +225,7 @@ class Settings extends Main {
                 throw new Exception('Cannot validate controller at: ' . Settings::controllers_getValidatorUrl($object));
             }
         } catch (ObjectException $exception) {
-            return $exception;
+            throw new $exception();
         }
     }
 
