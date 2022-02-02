@@ -9,6 +9,7 @@ use R3m\Io\Module\Data;
 use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
 use R3m\Io\Module\Limit;
+use R3m\Io\Module\Parse;
 use R3m\Io\Module\Sort;
 use R3m\Io\Module\Response;
 
