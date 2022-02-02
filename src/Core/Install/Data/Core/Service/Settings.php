@@ -208,6 +208,7 @@ class Settings extends Main {
         $validate = Main::validate($object, Settings::controllers_getValidatorUrl($object), 'controller');
         if($validate) {
             if ($validate->success === true) {
+                $url = Dir::name($domain->dir) . 'Controller' . $object->config('ds') . $object->request('node.name') . $object->request('node.extension');
                 d($domain);
                 dd($object->request('node'));
                 $data = [];
