@@ -5,7 +5,7 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.options.controller.icon'
+'.component.options.rename.icon'
 )}}
 {{$span.text = __(
 $__.module +
@@ -13,12 +13,12 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.options.controller.text'
+'.component.options.rename.text'
 )}}
 <a
     class="dropdown-item item-controller"
-    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.uuid}}/{{$node.domain}}"
-    data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-body')}}"
+    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.name}}/{{$node.domain}}"
+    data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-rename-body')}}"
 >
     <i
         class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-controller"

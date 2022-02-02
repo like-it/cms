@@ -155,7 +155,10 @@ class Settings extends Main {
     {
         $domain = Settings::domain_get($object);
 
-        if(!property_exists($domain, 'dir')){
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
             throw new Exception('Domain dir not set...');
         }
 
@@ -168,6 +171,7 @@ class Settings extends Main {
             if($record->type !== File::TYPE){
                 continue;
             }
+            $record->domain = $domain->uuid;
             $key = sha1($record->url);
             $data->set($key, $record);
         }
