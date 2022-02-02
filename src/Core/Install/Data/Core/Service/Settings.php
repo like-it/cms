@@ -151,9 +151,55 @@ class Settings extends Main {
     /**
      * @throws Exception
      */
-    public static function controllers_list(App $object)
+    public static function controllers_list(App $object): Response
     {
         $domain = Settings::domain_get($object);
+
+        if(!property_exists($domain, 'dir')){
+            throw new Exception('Domain dir not set...');
+        }
+
+        $url = Dir::name($domain->dir) . $object->config('dictionary.controller') . $object->config('ds');
+
+        $dir = new Dir();
+        $data = new Data();
+        $read = $dir->read($url, true);
+        foreach($read as $nr => $record){
+            if($record->type !== File::TYPE){
+                continue;
+            }
+            $key = sha1($record->url);
+            $data->set($key, $record);
+        }
+        if($object->request('page')){
+            $page = (int) $object->request('page');
+        } else {
+            $page = 1;
+        }
+        $limit = Limit::LIMIT;
+        $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
+        $settings =  $object->data_read($settings_url);
+        if($settings->data('controller.default.limit')){
+            $limit = $settings->data('controller.default.limit');
+        }
+        if($object->request('limit')){
+            $limit = (int) $object->request('limit');
+            if($limit > Limit::MAX){
+                $limit = Limit::MAX;
+            }
+        }
+        dd($data->data());
+        $response = [];
+        $list = Sort::list($data->data())->with(['sort' => 'ASC', 'name' => 'ASC']);
+        $response['count'] = count($list);
+        $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
+        $response['nodeList'] = $list;
+        $response['limit'] = $limit;
+        $response['page'] = $page;
+        $response['max'] = ceil($response['count'] / $response['limit']);
+        return new Response($response, Response::TYPE_JSON);
+
+
 
         dd($domain);
 
