@@ -1,5 +1,6 @@
 {{R3M}}
 {{dd('{{$this}}')}
+    /*
 <?php
 namespace Host\Subdomain\Host\Extension\Controller;
 
@@ -32,3 +33,4 @@ class Index extends View {
         }
     }
 }
+*/
