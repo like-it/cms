@@ -1,33 +1,34 @@
 {
     "controller": {
         "validate": {
-            "name" : [
+            "name": [
                 {
                     "string.length": ">=1"
                 },
                 {
                     "string.contains": {
-                        "regex" : "^[a-zA-Z]+$^"
-                    }
-                },
-            ],
-            "extension" : [
-                {
-                    "string.length": ">=1"
-                },
-                {
-                    "string.contains": {
-                        "regex" : "^[a-z.]+$^"
+                        "regex": "^[a-zA-Z]+$^"
                     }
                 }
             ],
-            "domain" : [
+            "extension": [
+                {
+                    "string.length": ">=1"
+                },
+                {
+                    "string.contains": {
+                        "regex": "^[a-z.]+$^"
+                    }
+                }
+            ],
+            "domain": [
                 {
                     "string.length": "==36"
                 },
                 {
-                    "is.uuid" : true
+                    "is.uuid": true
                 }
             ]
         }
+    }
 }
