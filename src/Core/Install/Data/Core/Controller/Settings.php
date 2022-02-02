@@ -21,6 +21,40 @@ class Settings extends View {
         return new Response($data, Response::TYPE_JSON);
     }
 
+    public static function controllers_settings(App $object)
+    {
+        try {
+            return Service::routes_list($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function controllers_add(App $object)
+    {
+        try {
+            return Service::controllers_create($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function controllers_command(App $object){
+        $uuid = $object->request('node.uuid');
+        try {
+            switch (Handler::method()) {
+                case 'DELETE' :
+                    return Service::controllers_delete($object, $uuid);
+                case 'GET' :
+                    return Service::controllers_read($object, $uuid);
+                case 'PUT' :
+                    return Service::controllers_update($object, $uuid);
+            }
+        } catch (Exception $exception) {
+            return $exception;
+        }
+    }
+
     public static function domains_settings(App $object): Response
     {
         return Service::domains_list($object);

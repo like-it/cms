@@ -16,6 +16,277 @@ use R3m\Io\Exception\ObjectException;
 
 class Settings extends Main {
 
+
+    /**
+     * @throws Exception
+     */
+    public static function controllers_create(App $object): Response
+    {
+        $domain = Settings::domain_get($object);
+
+        dd($object->request());
+
+        return Settings::controllers_put($object, $data, $record, $url, $route_url,$domain);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function controllers_read(App $object, $uuid): Response
+    {
+        $domain = Settings::domain_get($object);
+        $url = $domain->dir .
+            'Command' .
+            $object->config('extension.json');
+        $route_url = $domain->dir .
+            'Route' .
+            $object->config('extension.json');
+        $data = $object->data_read($url);
+        if (!$data) {
+            $data = new Data();
+        }
+        $route = $object->data_read($route_url);
+        $record = $data->get($uuid);
+        if($route){
+            foreach($route->data() as $node){
+                if(
+                    property_exists($node, 'command') &&
+                    $node->command === $uuid
+                ){
+                    $record->route = $node;
+                    break;
+                }
+            }
+        }
+        $response = [];
+        $response['node'] = $record;
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function controllers_update(App $object, $uuid): Response
+    {
+        $domain = Settings::domain_get($object);
+        $url = $domain->dir .
+            'Command' .
+            $object->config('extension.json');
+        $route_url = $domain->dir .
+            'Route' .
+            $object->config('extension.json');
+        $data = $object->data_read($url);
+        if(!$data){
+            $data = new Data();
+        }
+        $record = $object->request('node');
+        if($object->request('node.path.radio') === 'automatic'){
+            unset($record->path);
+        } else {
+            $record->path = $object->request('node.path.text');
+        }
+        if($object->request('node.controller.radio') === 'automatic'){
+            unset($record->controller);
+        } else {
+            $record->controller = $object->request('node.controller.text');
+        }
+        unset($record->domain);
+        if(empty($record->submodule)){
+            unset($record->submodule);
+        }
+        if(empty($record->command)){
+            unset($record->command);
+        }
+        if(empty($record->subcommand)){
+            unset($record->subcommand);
+        }
+        $record->name = $record->module;
+        if(property_exists($record, 'submodule')){
+            $record->name .= '-' . $record->submodule;
+        }
+        if(property_exists($record, 'command')){
+            $record->name .= '-' . $record->command;
+        }
+        if(property_exists($record, 'subcommand')){
+            $record->name .= '-' . $record->subcommand;
+        }
+        if(
+            !property_exists($record, 'submodule') &&
+            !property_exists($record, 'command') &&
+            !property_exists($record, 'subcommand')
+        ){
+            $record->name .= '-command';
+        }
+
+        return Settings::controllers_put($object, $data, $record, $url, $route_url, $domain);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function controllers_delete(App $object, $uuid): Response
+    {
+        $domain = Settings::domain_get($object);
+        $url = $domain->dir .
+            'Command' .
+            $object->config('extension.json');
+        $route_url = $domain->dir .
+            'Route' .
+            $object->config('extension.json');
+        $data = $object->data_read($url);
+        if (!$data) {
+            $data = new Data();
+        }
+        $record = $data->get($uuid);
+        $data->delete($uuid);
+        $data->write($url);
+
+        $response = [];
+        $response['node'] = $record;
+        Settings::routes_command_to_route($object, $url, $route_url, $domain);
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function controllers_list(App $object): Response
+    {
+        $domain = Settings::domain_get($object);
+        $url = $domain->dir .
+            'Command' .
+            $object->config('extension.json');
+        $route_url = $domain->dir .
+            'Route' .
+            $object->config('extension.json');
+        $data = $object->data_read($url);
+        if(!$data){
+            $data = new Data();
+        }
+        $route = $object->data_read($route_url);
+        foreach($route->data() as $nr => $node){
+            if(
+                property_exists($node, 'command') &&
+                $data->has($node->command)
+            ){
+                $data->set($node->command . '.route', $node);
+                $data->set($node->command . '.domain', $domain->uuid);
+            }
+        }
+        if($object->request('page')){
+            $page = (int) $object->request('page');
+        } else {
+            $page = 1;
+        }
+        $limit = Limit::LIMIT;
+        $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
+        $settings =  $object->data_read($settings_url);
+        if($settings->data('route.default.limit')){
+            $limit = $settings->data('route.default.limit');
+        }
+        if($object->request('limit')){
+            $limit = (int) $object->request('limit');
+            if($limit > Limit::MAX){
+                $limit = Limit::MAX;
+            }
+        }
+        $response = [];
+        $list = Sort::list($data->data())->with(['sort' => 'ASC', 'name' => 'ASC']);
+        $response['count'] = count($list);
+        $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
+        $response['nodeList'] = $list;
+        $response['limit'] = $limit;
+        $response['page'] = $page;
+        $response['max'] = ceil($response['count'] / $response['limit']);
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws Exception
+     */
+    private static function controllers_put(App $object, Data $data, stdClass $record, $url, $route_url, $domain)
+    {
+        try {
+            if(property_exists($record, 'redirect')){
+                $validate = Main::validate($object, Settings::routes_getValidatorUrl($object), 'redirect');
+                if($validate) {
+                    if ($validate->success === true) {
+                        $original = $data->get($record->uuid);
+                        if(
+                            is_object($original) &&
+                            property_exists($original, 'sort') &&
+                            empty($original->sort)
+                        ){
+                            $record = Settings::routes_addSort($object, $data, $record);
+                        }
+                        else if(empty($original)){
+                            $record = Settings::routes_addSort($object, $data, $record);
+                        }
+                        $data->set($record->uuid, Core::object_merge($original, $record));
+                        $data->write($url);
+                        $data = [];
+                        $data['node'] = $record;
+                        Settings::routes_command_to_route($object, $url, $route_url, $domain);
+                        return new Response($data, Response::TYPE_JSON);
+                    } else {
+                        $data = [];
+                        $data['error'] = $validate->test;
+                        return new Response(
+                            $data,
+                            Response::TYPE_JSON,
+                            Response::STATUS_ERROR
+                        );
+                    }
+                } else {
+                    throw new Exception('Cannot validate route at: ' . Settings::routes_getValidatorUrl($object));
+                }
+            } else {
+                $validate = Main::validate($object, Settings::routes_getValidatorUrl($object), 'command');
+                if($validate) {
+                    if ($validate->success === true) {
+                        $original = $data->get($record->uuid);
+                        if(
+                            is_object($original) &&
+                            property_exists($original, 'sort') &&
+                            empty($original->sort)
+                        ){
+                            $record = Settings::routes_addSort($object, $data, $record);
+                        }
+                        else if(empty($original)){
+                            $record = Settings::routes_addSort($object, $data, $record);
+                        }
+                        $data->set($record->uuid, Core::object_merge($original, $record));
+                        $data->write($url);
+                        $data = [];
+                        $data['node'] = $record;
+                        Settings::routes_command_to_route($object, $url, $route_url, $domain);
+                        return new Response($data, Response::TYPE_JSON);
+                    } else {
+                        $data = [];
+                        $data['error'] = $validate->test;
+                        return new Response(
+                            $data,
+                            Response::TYPE_JSON,
+                            Response::STATUS_ERROR
+                        );
+                    }
+                } else {
+                    throw new Exception('Cannot validate route at: ' . Settings::routes_getValidatorUrl($object));
+                }
+            }
+        } catch (ObjectException $exception) {
+        }
+    }
+
+    private static function controllers_getValidatorUrl(App $object): string
+    {
+        return $object->config('host.dir.data') .
+            'Validator' .
+            $object->config('ds') .
+            'Controller' .
+            $object->config('extension.json');
+    }
+
     /**
      * @throws Exception
      */
