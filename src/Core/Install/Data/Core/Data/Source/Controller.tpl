@@ -14,16 +14,17 @@
 'Exception',
 'R3m\Io\Exception\LocateException',
 'R3m\Io\Exception\UrlEmptyException',
-'use R3m\Io\Exception\UrlNotExistException',
+'R3m\Io\Exception\UrlNotExistException',
 ]}}
 <?php
 namespace {{$namespace.php}};
 
 {{for.each($use as $usage)}}
 use {{$usage}};
-{{/for.each}
+{{/for.each}}
 
 class {{$node.name}} extends View {
+
     const DIR = __DIR__ . DIRECTORY_SEPARATOR;
 
 }
