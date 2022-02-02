@@ -7,6 +7,7 @@ use R3m\Io\App;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
 use R3m\Io\Module\Dir;
+use R3m\Io\Module\File;
 use R3m\Io\Module\Limit;
 use R3m\Io\Module\Sort;
 use R3m\Io\Module\Response;
