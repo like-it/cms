@@ -207,22 +207,9 @@ class Settings extends Main {
             $validate = Main::validate($object, Settings::controllers_getValidatorUrl($object), 'controller');
             if($validate) {
                 if ($validate->success === true) {
-                    $original = $data->get($record->uuid);
-                    if(
-                        is_object($original) &&
-                        property_exists($original, 'sort') &&
-                        empty($original->sort)
-                    ){
-                        $record = Settings::routes_addSort($object, $data, $record);
-                    }
-                    else if(empty($original)){
-                        $record = Settings::routes_addSort($object, $data, $record);
-                    }
-                    $data->set($record->uuid, Core::object_merge($original, $record));
-                    $data->write($url);
+                    dd($object->request('node'));
                     $data = [];
-                    $data['node'] = $record;
-                    Settings::routes_command_to_route($object, $url, $route_url, $domain);
+                    $data['node'] = $object->request('node');
                     return new Response($data, Response::TYPE_JSON);
                 } else {
                     $data = [];
@@ -234,9 +221,10 @@ class Settings extends Main {
                     );
                 }
             } else {
-                throw new Exception('Cannot validate route at: ' . Settings::routes_getValidatorUrl($object));
+                throw new Exception('Cannot validate controller at: ' . Settings::controllers_getValidatorUrl($object));
             }
         } catch (ObjectException $exception) {
+            return $exception;
         }
     }
 
