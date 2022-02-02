@@ -19,6 +19,7 @@ class Settings extends Main {
 
     /**
      * @throws Exception
+     * @throws ObjectException
      */
     public static function controllers_create(App $object): Response
     {
