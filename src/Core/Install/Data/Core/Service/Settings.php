@@ -209,6 +209,8 @@ class Settings extends Main {
         if($validate) {
             if ($validate->success === true) {
                 $url = Dir::name($domain->dir) . 'Controller' . $object->config('ds') . $object->request('node.name') . $object->request('node.extension');
+                d($url);
+                d($object->config());
                 d($domain);
                 dd($object->request('node'));
                 $data = [];
