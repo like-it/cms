@@ -209,14 +209,31 @@ class Settings extends Main {
         $validate = Main::validate($object, Settings::controllers_getValidatorUrl($object), 'controller');
         if($validate) {
             if ($validate->success === true) {
-                $url = Dir::name($domain->dir) . 'Controller' . $object->config('ds') . $object->request('node.name') . $object->request('node.extension');
-                d($url);
-                d($object->config());
-                d($domain);
-                dd($object->request('node'));
-                $data = [];
-                $data['node'] = $object->request('node');
-                return new Response($data, Response::TYPE_JSON);
+                $object->request(
+                    'url',
+                    Dir::name($domain->dir) .
+                    $object->config('dictionary.controller') .
+                    $object->config('ds') .
+                    $object->request('node.name') .
+                    $object->request('node.extension')
+                );
+                if(File::exist($object->request('url'))){
+                    $data = [];
+                    $data['error'] = [
+                        'url' => [
+                            'validate_url' => false
+                        ]
+                    ];
+                    return new Response(
+                        $data,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                } else {
+                    $data = [];
+                    $data['node'] = $object->request('node');
+                    return new Response($data, Response::TYPE_JSON);
+                }
             } else {
                 $data = [];
                 $data['error'] = $validate->test;
