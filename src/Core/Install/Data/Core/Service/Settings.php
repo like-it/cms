@@ -201,31 +201,28 @@ class Settings extends Main {
 
     /**
      * @throws Exception
+     * @throws ObjectException;
      */
     private static function controllers_put(App $object, $domain)
     {
-        try {
-            $validate = Main::validate($object, Settings::controllers_getValidatorUrl($object), 'controller');
-            if($validate) {
-                if ($validate->success === true) {
-                    dd($object->request('node'));
-                    $data = [];
-                    $data['node'] = $object->request('node');
-                    return new Response($data, Response::TYPE_JSON);
-                } else {
-                    $data = [];
-                    $data['error'] = $validate->test;
-                    return new Response(
-                        $data,
-                        Response::TYPE_JSON,
-                        Response::STATUS_ERROR
-                    );
-                }
+        $validate = Main::validate($object, Settings::controllers_getValidatorUrl($object), 'controller');
+        if($validate) {
+            if ($validate->success === true) {
+                dd($object->request('node'));
+                $data = [];
+                $data['node'] = $object->request('node');
+                return new Response($data, Response::TYPE_JSON);
             } else {
-                throw new Exception('Cannot validate controller at: ' . Settings::controllers_getValidatorUrl($object));
+                $data = [];
+                $data['error'] = $validate->test;
+                return new Response(
+                    $data,
+                    Response::TYPE_JSON,
+                    Response::STATUS_ERROR
+                );
             }
-        } catch (ObjectException $exception) {
-            throw new $exception();
+        } else {
+            throw new Exception('Cannot validate controller at: ' . Settings::controllers_getValidatorUrl($object));
         }
     }
 
