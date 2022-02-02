@@ -1,4 +1,9 @@
 {
+    "controller" : {
+        "default" : {
+            "limit" : 9
+        }
+    },
     "route" : {
         "default" : {
             "limit" : 9

@@ -188,9 +188,8 @@ class Settings extends Main {
                 $limit = Limit::MAX;
             }
         }
-        dd($data->data());
         $response = [];
-        $list = Sort::list($data->data())->with(['sort' => 'ASC', 'name' => 'ASC']);
+        $list = Sort::list($data->data())->with(['url' => 'ASC']);
         $response['count'] = count($list);
         $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
         $response['nodeList'] = $list;
@@ -198,61 +197,6 @@ class Settings extends Main {
         $response['page'] = $page;
         $response['max'] = ceil($response['count'] / $response['limit']);
         return new Response($response, Response::TYPE_JSON);
-
-
-
-        dd($domain);
-
-
-
-        /*
-        $url = $domain->dir .
-            'Command' .
-            $object->config('extension.json');
-        $route_url = $domain->dir .
-            'Route' .
-            $object->config('extension.json');
-        $data = $object->data_read($url);
-        if(!$data){
-            $data = new Data();
-        }
-        $route = $object->data_read($route_url);
-        foreach($route->data() as $nr => $node){
-            if(
-                property_exists($node, 'command') &&
-                $data->has($node->command)
-            ){
-                $data->set($node->command . '.route', $node);
-                $data->set($node->command . '.domain', $domain->uuid);
-            }
-        }
-        if($object->request('page')){
-            $page = (int) $object->request('page');
-        } else {
-            $page = 1;
-        }
-        $limit = Limit::LIMIT;
-        $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
-        $settings =  $object->data_read($settings_url);
-        if($settings->data('route.default.limit')){
-            $limit = $settings->data('route.default.limit');
-        }
-        if($object->request('limit')){
-            $limit = (int) $object->request('limit');
-            if($limit > Limit::MAX){
-                $limit = Limit::MAX;
-            }
-        }
-        $response = [];
-        $list = Sort::list($data->data())->with(['sort' => 'ASC', 'name' => 'ASC']);
-        $response['count'] = count($list);
-        $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
-        $response['nodeList'] = $list;
-        $response['limit'] = $limit;
-        $response['page'] = $page;
-        $response['max'] = ceil($response['count'] / $response['limit']);
-        return new Response($response, Response::TYPE_JSON);
-        */
     }
 
     /**
