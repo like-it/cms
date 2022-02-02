@@ -24,7 +24,7 @@ class Settings extends View {
     public static function controllers_settings(App $object)
     {
         try {
-            return Service::routes_list($object);
+            return Service::controllers_list($object);
         } catch (Exception $exception){
             return $exception;
         }

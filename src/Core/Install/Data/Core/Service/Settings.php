@@ -151,9 +151,15 @@ class Settings extends Main {
     /**
      * @throws Exception
      */
-    public static function controllers_list(App $object): Response
+    public static function controllers_list(App $object)
     {
         $domain = Settings::domain_get($object);
+
+        dd($domain);
+
+
+
+        /*
         $url = $domain->dir .
             'Command' .
             $object->config('extension.json');
@@ -200,6 +206,7 @@ class Settings extends Main {
         $response['page'] = $page;
         $response['max'] = ceil($response['count'] / $response['limit']);
         return new Response($response, Response::TYPE_JSON);
+        */
     }
 
     /**
