@@ -12,7 +12,7 @@
 <input
         type="{{$input.type}}"
         id="{{$input.id}}"
-        name="{{$input.name}}.{{$input.type}}"
+        name="{{$input.name}}"
         {{if(!is.empty($input.checked))}}
         checked="checked"
         {{/if}}

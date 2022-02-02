@@ -23,10 +23,7 @@ class Settings extends Main {
     public static function controllers_create(App $object): Response
     {
         $domain = Settings::domain_get($object);
-
-        dd($object->request());
-
-        return Settings::controllers_put($object, $data, $record, $url, $route_url,$domain);
+        return Settings::controllers_put($object, $domain);
     }
 
     /**
@@ -204,75 +201,40 @@ class Settings extends Main {
     /**
      * @throws Exception
      */
-    private static function controllers_put(App $object, Data $data, stdClass $record, $url, $route_url, $domain)
+    private static function controllers_put(App $object, $domain)
     {
         try {
-            if(property_exists($record, 'redirect')){
-                $validate = Main::validate($object, Settings::routes_getValidatorUrl($object), 'redirect');
-                if($validate) {
-                    if ($validate->success === true) {
-                        $original = $data->get($record->uuid);
-                        if(
-                            is_object($original) &&
-                            property_exists($original, 'sort') &&
-                            empty($original->sort)
-                        ){
-                            $record = Settings::routes_addSort($object, $data, $record);
-                        }
-                        else if(empty($original)){
-                            $record = Settings::routes_addSort($object, $data, $record);
-                        }
-                        $data->set($record->uuid, Core::object_merge($original, $record));
-                        $data->write($url);
-                        $data = [];
-                        $data['node'] = $record;
-                        Settings::routes_command_to_route($object, $url, $route_url, $domain);
-                        return new Response($data, Response::TYPE_JSON);
-                    } else {
-                        $data = [];
-                        $data['error'] = $validate->test;
-                        return new Response(
-                            $data,
-                            Response::TYPE_JSON,
-                            Response::STATUS_ERROR
-                        );
+            $validate = Main::validate($object, Settings::controllers_getValidatorUrl($object), 'controller');
+            if($validate) {
+                if ($validate->success === true) {
+                    $original = $data->get($record->uuid);
+                    if(
+                        is_object($original) &&
+                        property_exists($original, 'sort') &&
+                        empty($original->sort)
+                    ){
+                        $record = Settings::routes_addSort($object, $data, $record);
                     }
+                    else if(empty($original)){
+                        $record = Settings::routes_addSort($object, $data, $record);
+                    }
+                    $data->set($record->uuid, Core::object_merge($original, $record));
+                    $data->write($url);
+                    $data = [];
+                    $data['node'] = $record;
+                    Settings::routes_command_to_route($object, $url, $route_url, $domain);
+                    return new Response($data, Response::TYPE_JSON);
                 } else {
-                    throw new Exception('Cannot validate route at: ' . Settings::routes_getValidatorUrl($object));
+                    $data = [];
+                    $data['error'] = $validate->test;
+                    return new Response(
+                        $data,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
                 }
             } else {
-                $validate = Main::validate($object, Settings::routes_getValidatorUrl($object), 'command');
-                if($validate) {
-                    if ($validate->success === true) {
-                        $original = $data->get($record->uuid);
-                        if(
-                            is_object($original) &&
-                            property_exists($original, 'sort') &&
-                            empty($original->sort)
-                        ){
-                            $record = Settings::routes_addSort($object, $data, $record);
-                        }
-                        else if(empty($original)){
-                            $record = Settings::routes_addSort($object, $data, $record);
-                        }
-                        $data->set($record->uuid, Core::object_merge($original, $record));
-                        $data->write($url);
-                        $data = [];
-                        $data['node'] = $record;
-                        Settings::routes_command_to_route($object, $url, $route_url, $domain);
-                        return new Response($data, Response::TYPE_JSON);
-                    } else {
-                        $data = [];
-                        $data['error'] = $validate->test;
-                        return new Response(
-                            $data,
-                            Response::TYPE_JSON,
-                            Response::STATUS_ERROR
-                        );
-                    }
-                } else {
-                    throw new Exception('Cannot validate route at: ' . Settings::routes_getValidatorUrl($object));
-                }
+                throw new Exception('Cannot validate route at: ' . Settings::routes_getValidatorUrl($object));
             }
         } catch (ObjectException $exception) {
         }
