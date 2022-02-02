@@ -53,6 +53,8 @@
     "settings.controllers.section.settings.component.options.edit.text" : "Edit",
     "settings.controllers.section.settings.component.options.view.icon" : "fas fa-cog",
     "settings.controllers.section.settings.component.options.view.text" : "View details",
+    "settings.controllers.section.settings.component.options.rename.icon" : "fas fa-cog",
+    "settings.controllers.section.settings.component.options.rename.text" : "Rename",
     "settings.controllers.section.settings.component.thead.actions" : "",
     "settings.controllers.section.settings.component.thead.name" : "Name",
     "settings.controllers.section.settings.component.thead.url" : "Url",
