@@ -217,7 +217,7 @@ class Settings extends Main {
                     Dir::name($domain->dir) .
                     $object->config('dictionary.controller') .
                     $object->config('ds') .
-                    $object->request('node.name') .
+                    ucfirst($object->request('node.name')) .
                     $object->request('node.extension')
                 );
                 if(File::exist($object->request('url'))){
