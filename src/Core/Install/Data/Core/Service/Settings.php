@@ -2,6 +2,7 @@
 namespace Host\Subdomain\Host\Extension\Service;
 
 
+use R3m\Io\Exception\FileNotExistException;
 use stdClass;
 use R3m\Io\App;
 use R3m\Io\Module\Core;
@@ -33,19 +34,24 @@ class Settings extends Main {
 
     /**
      * @throws Exception
+     * @throws FileNotExistException
      */
     public static function controllers_read(App $object, $name): Response
     {
         $domain = Settings::domain_get($object);
         $url = $domain->dir . $object->config('dictionary.controller') . $object->config('ds') . $name;
-        $read = File::read($url);
-        $record = [];
-        $record['name'] = $name;
-        $record['content'] = $read;
-        $record['domain'] = $domain;
-        $response = [];
-        $response['node'] = $record;
-        return new Response($response, Response::TYPE_JSON);
+        if(File::exist($url)){
+            $read = File::read($url);
+            $record = [];
+            $record['name'] = $name;
+            $record['content'] = $read;
+            $record['domain'] = $domain;
+            $response = [];
+            $response['node'] = $record;
+            return new Response($response, Response::TYPE_JSON);
+        } else {
+            throw new FileNotExistException('File (' . $url .') not found...');
+        }
     }
 
     /**
