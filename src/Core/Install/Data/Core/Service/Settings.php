@@ -1,8 +1,6 @@
 <?php
 namespace Host\Subdomain\Host\Extension\Service;
 
-
-use R3m\Io\Exception\FileNotExistException;
 use stdClass;
 use R3m\Io\App;
 use R3m\Io\Module\Core;
@@ -16,8 +14,8 @@ use R3m\Io\Module\Response;
 
 use Exception;
 use R3m\Io\Exception\ObjectException;
+use R3m\Io\Exception\FileNotExistException;
 use DateTime;
-
 
 class Settings extends Main {
 
@@ -29,6 +27,12 @@ class Settings extends Main {
     public static function controllers_create(App $object): Response
     {
         $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
         return Settings::controllers_put($object, $domain);
     }
 
@@ -39,6 +43,12 @@ class Settings extends Main {
     public static function controllers_read(App $object, $name): Response
     {
         $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
         $url = $domain->dir . $object->config('dictionary.controller') . $object->config('ds') . $name;
         if(File::exist($url)){
             $read = File::read($url);
@@ -61,6 +71,12 @@ class Settings extends Main {
     {
         dd('update');
         $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
         $url = $domain->dir .
             'Command' .
             $object->config('extension.json');
@@ -119,6 +135,12 @@ class Settings extends Main {
     public static function controllers_delete(App $object, $name): Response
     {
         $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
         $url = $domain->dir . $object->config('dictionary.controller') . $object->config('ds') . $name;
         File::delete($url);
         $response = [];
@@ -137,16 +159,13 @@ class Settings extends Main {
     public static function controllers_list(App $object): Response
     {
         $domain = Settings::domain_get($object);
-
         if(
             !property_exists($domain, 'dir') ||
             !property_exists($domain, 'uuid')
         ){
             throw new Exception('Domain dir not set...');
         }
-
         $url = $domain->dir . $object->config('dictionary.controller') . $object->config('ds');
-
         $dir = new Dir();
         $data = new Data();
         $read = $dir->read($url, true);
@@ -683,6 +702,12 @@ class Settings extends Main {
     public static function routes_create(App $object): Response
     {
         $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
         $url = $domain->dir .
             $object->config('dictionary.data') .
             'Command' .
@@ -745,6 +770,12 @@ class Settings extends Main {
     public static function routes_read(App $object, $uuid): Response
     {
         $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
         $url = $domain->dir .
             $object->config('dictionary.data') .
             'Command' .
@@ -781,6 +812,12 @@ class Settings extends Main {
     public static function routes_update(App $object, $uuid): Response
     {
         $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
         $url = $domain->dir .
             $object->config('dictionary.data') .
             'Command' .
@@ -841,6 +878,12 @@ class Settings extends Main {
     public static function routes_delete(App $object, $uuid): Response
     {
         $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
         $url = $domain->dir .
             $object->config('dictionary.data') .
             'Command' .
@@ -869,6 +912,12 @@ class Settings extends Main {
     public static function routes_list(App $object): Response
     {
         $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
         $url = $domain->dir .
             $object->config('dictionary.data') .
             'Command' .
@@ -925,6 +974,12 @@ class Settings extends Main {
     public static function routes_one_up(App $object)
     {
         $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
         $url = $domain->dir .
             $object->config('dictionary.data') .
             'Command' .
@@ -995,6 +1050,12 @@ class Settings extends Main {
     public static function routes_one_down(App $object)
     {
         $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
         $url = $domain->dir .
             $object->config('dictionary.data') .
             'Command' .
