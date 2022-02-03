@@ -15,6 +15,7 @@ class Source extends Main
         $read = implode("\n", $explode);
         $url = $object->config('host.dir.data') . 'Source.json';
         $data = $object->data_read($url);
+        dd($data);
         if($data){
             foreach($data->get('replace') as $record){
                 if(
