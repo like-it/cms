@@ -1,8 +1,8 @@
 {{R3M}}
 {{response.view([
 'module' => $controller.name,
-'submodule' => 'routes',
-'command' => 'edit-redirect',
+'submodule' => 'controllers',
+'command' => 'edit-controller',
 "subcommand" => 'body',
 'init' => true,
 'prefix' => $controller.dir.view + $controller.title + '/',
