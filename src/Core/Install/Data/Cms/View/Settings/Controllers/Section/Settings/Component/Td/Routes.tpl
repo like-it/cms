@@ -1,5 +1,4 @@
 {{R3M}}
 <td>
-    {{controllers.routes.amount($node)}}
-    1
+    {{controllers.routes.amount($node)}
 </td>
