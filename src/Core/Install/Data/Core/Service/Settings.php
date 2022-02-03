@@ -37,12 +37,12 @@ class Settings extends Main {
     public static function controllers_read(App $object, $name): Response
     {
         $domain = Settings::domain_get($object);
-
-        d($name);
-        d($object->request());
-        dd($domain);
-
-
+        $url = Dir::name($domain->dir) . $object->config('dictionary.controller') . $object->config('ds') . $name;
+        $read = File::read($url);
+        $record = [];
+        $record['name'] = $name;
+        $record['content'] = $read;
+        $record['domain'] = $domain;
         $response = [];
         $response['node'] = $record;
         return new Response($response, Response::TYPE_JSON);
