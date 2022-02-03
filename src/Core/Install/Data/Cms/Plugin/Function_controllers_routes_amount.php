@@ -7,26 +7,19 @@ function function_controllers_routes_amount(Parse $parse, Data $data, $node = nu
     $object = $parse->object();
     $route = $object->route();
 
-    d($route);
-
 //    /Application/Host/Www/Funda/World/Controller/Abba.php
     $controller = str_replace('/', '.', $node->url);
     $controller = substr(str_replace('.Application.Host', 'Host', $controller), 0, -4);
 
-//    Host.Www.Funda.World.Controller.End.command
-
-    dd($controller);
-    if(File::exist($url) && File::extension($url) === 'md'){
-        $read = File::read($url);
-        $parsedown = new \Parsedown();
-        $string = $parsedown->text($read);
-        try {
-            return $parse->compile($string, $data);
-        } catch (Exception $e) {
-            return $e->getMessage();
+    $count = 0;
+    if($route){
+        foreach($route->data() as $key => $record){
+            if(property_exists($record, 'controller')){
+                if(stristr($record->controller, $controller) !== false){
+                    $count++;
+                }
+            }
         }
-    } else {
-        return 'File (' . $url . ') not found...';
     }
-
+    return $count;
 }
