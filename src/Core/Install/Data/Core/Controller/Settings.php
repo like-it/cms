@@ -40,15 +40,15 @@ class Settings extends View {
     }
 
     public static function controllers_command(App $object){
-        $uuid = $object->request('node.uuid');
+        $name = $object->request('node.name');
         try {
             switch (Handler::method()) {
                 case 'DELETE' :
-                    return Service::controllers_delete($object, $uuid);
+                    return Service::controllers_delete($object, $name);
                 case 'GET' :
-                    return Service::controllers_read($object, $uuid);
+                    return Service::controllers_read($object, $name);
                 case 'PUT' :
-                    return Service::controllers_update($object, $uuid);
+                    return Service::controllers_update($object, $name);
             }
         } catch (Exception $exception) {
             return $exception;

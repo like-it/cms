@@ -34,32 +34,15 @@ class Settings extends Main {
     /**
      * @throws Exception
      */
-    public static function controllers_read(App $object, $uuid): Response
+    public static function controllers_read(App $object, $name): Response
     {
         $domain = Settings::domain_get($object);
-        $url = $domain->dir .
-            'Command' .
-            $object->config('extension.json');
-        $route_url = $domain->dir .
-            'Route' .
-            $object->config('extension.json');
-        $data = $object->data_read($url);
-        if (!$data) {
-            $data = new Data();
-        }
-        $route = $object->data_read($route_url);
-        $record = $data->get($uuid);
-        if($route){
-            foreach($route->data() as $node){
-                if(
-                    property_exists($node, 'command') &&
-                    $node->command === $uuid
-                ){
-                    $record->route = $node;
-                    break;
-                }
-            }
-        }
+
+        d($name);
+        d($object->request());
+        dd($domain);
+
+
         $response = [];
         $response['node'] = $record;
         return new Response($response, Response::TYPE_JSON);
@@ -126,10 +109,10 @@ class Settings extends Main {
     /**
      * @throws Exception
      */
-    public static function controllers_delete(App $object, $uuid): Response
+    public static function controllers_delete(App $object, $name): Response
     {
         $domain = Settings::domain_get($object);
-        $url = Dir::name($domain->dir) . $object->config('dictionary.controller') . $object->config('ds') . $object->request('node.name');
+        $url = Dir::name($domain->dir) . $object->config('dictionary.controller') . $object->config('ds') . $name;
         File::delete($url);
         $response = [];
         $response['node'] = [
