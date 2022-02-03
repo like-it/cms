@@ -127,7 +127,6 @@ class Settings extends Main {
      */
     public static function controllers_delete(App $object, $uuid): Response
     {
-        dd($object->request());
         $domain = Settings::domain_get($object);
         $url = Dir::name($domain->dir) . $object->config('dictionary.controller') . $object->config('ds') . $object->request('node.name');
 
