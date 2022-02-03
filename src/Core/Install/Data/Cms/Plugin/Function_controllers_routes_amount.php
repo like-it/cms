@@ -8,7 +8,14 @@ function function_controllers_routes_amount(Parse $parse, Data $data, $node = nu
     $route = $object->route();
 
     d($route);
-    dd($node);
+
+//    /Application/Host/Www/Funda/World/Controller/Abba.php
+    $controller = str_replace('/', '.', $node->url);
+    $controller = str_replace('.Application.Host', 'Host', $controller);
+
+//    Host.Www.Funda.World.Controller.End.command
+
+    dd($controller);
     if(File::exist($url) && File::extension($url) === 'md'){
         $read = File::read($url);
         $parsedown = new \Parsedown();
