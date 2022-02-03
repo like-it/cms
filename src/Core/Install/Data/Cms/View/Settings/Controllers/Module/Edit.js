@@ -218,7 +218,9 @@ edit.content = () => {
     console.log(ol.data('content'));
     ol.request(null, null, (url, response) => {
         console.log(response);
-        ol.html(response.content);
+        if(response?.content){
+            ol.html(response.content);
+        }
     });
 }
 
