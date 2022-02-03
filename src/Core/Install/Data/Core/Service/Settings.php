@@ -15,6 +15,7 @@ use R3m\Io\Module\Response;
 
 use Exception;
 use R3m\Io\Exception\ObjectException;
+use DateTime;
 
 
 class Settings extends Main {
@@ -129,28 +130,14 @@ class Settings extends Main {
     {
         $domain = Settings::domain_get($object);
         $url = Dir::name($domain->dir) . $object->config('dictionary.controller') . $object->config('ds') . $object->request('node.name');
-
-        dd($url);
-
-
-
-        $url = $domain->dir .
-            'Command' .
-            $object->config('extension.json');
-        $route_url = $domain->dir .
-            'Route' .
-            $object->config('extension.json');
-        $data = $object->data_read($url);
-        if (!$data) {
-            $data = new Data();
-        }
-        $record = $data->get($uuid);
-        $data->delete($uuid);
-        $data->write($url);
-
+        File::delete($url);
         $response = [];
-        $response['node'] = $record;
-        Settings::routes_command_to_route($object, $url, $route_url, $domain);
+        $response['node'] = [
+            'url' => $url,
+            'is' => [
+                'deleted' => new DateTime('NOW')
+            ]
+        ];
         return new Response($response, Response::TYPE_JSON);
     }
 
