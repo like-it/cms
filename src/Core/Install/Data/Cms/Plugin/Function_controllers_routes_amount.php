@@ -5,6 +5,9 @@ use R3m\Io\Module\Parse;
 
 function function_controllers_routes_amount(Parse $parse, Data $data, $node = null){
     $object = $parse->object();
+    $route = $object->route();
+
+    d($route);
     dd($node);
     if(File::exist($url) && File::extension($url) === 'md'){
         $read = File::read($url);
