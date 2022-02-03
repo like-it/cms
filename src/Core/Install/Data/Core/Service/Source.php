@@ -18,8 +18,8 @@ class Source extends Main
         if($data){
             foreach($data->get('replace') as $record){
                 if(
-                    property_exists($record->search) &&
-                    property_exists($record->replace)
+                    property_exists($record, 'search') &&
+                    property_exists($record, 'replace')
                 )
                 $read = str_replace($record->search, $record->replace, $read);
             }
