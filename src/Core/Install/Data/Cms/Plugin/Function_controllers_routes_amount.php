@@ -16,6 +16,8 @@ function function_controllers_routes_amount(Parse $parse, Data $data, $node = nu
         foreach($route->data() as $key => $record){
             if(property_exists($record, 'controller')){
                 if(stristr($record->controller, $controller) !== false && strlen($record->controller) >= strlen($controller) ){
+                    d($record->controller);
+                    d($controller);
                     $count++;
                 }
             }
