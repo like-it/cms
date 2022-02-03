@@ -41,7 +41,7 @@
         {{for.each($request.nodeList as $node_nr => $node)}}
             <tr
                 data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.name}}/{{$node.domain}}"
-                data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-route-body')}}"
+                data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-command-body')}}"
             >
             {{for.each($components as $component)}}
             {{$require.basename = $component|uppercase.first.sentence:'.'}}
