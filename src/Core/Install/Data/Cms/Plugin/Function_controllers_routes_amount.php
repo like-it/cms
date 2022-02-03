@@ -21,7 +21,6 @@ function function_controllers_routes_amount(Parse $parse, Data $data, $node = nu
                     $test = false;
                     if(array_key_exists(1, $reverse)){
                         $test = strrev($reverse[1]);
-                        d($test);
                     }
                     if($test === $controller){
                         $count++;
