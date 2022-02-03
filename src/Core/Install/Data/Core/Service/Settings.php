@@ -53,6 +53,7 @@ class Settings extends Main {
         if(File::exist($url)){
             $read = File::read($url);
             $record = [];
+            $record['key'] = sha1($url);
             $record['name'] = $name;
             $record['content'] = $read;
             $record['domain'] = $domain;
