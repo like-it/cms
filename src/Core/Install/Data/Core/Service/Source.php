@@ -15,7 +15,6 @@ class Source extends Main
         $read = implode("\n", $explode);
         $url = $object->config('host.dir.data') . 'Source.json';
         $data = $object->data_read($url);
-        dd($data);
         if($data){
             foreach($data->get('replace') as $record){
                 if(
@@ -25,7 +24,7 @@ class Source extends Main
                 $read = str_replace($record->search, $record->replace, $read);
             }
         }
-        $read = implode("\n", $explode);
+        $explode = explode("\n", $read);
         foreach($explode as $nr => $record){
             $explode[$nr] = '<li><pre>' . $record .'</pre></li>';
         }

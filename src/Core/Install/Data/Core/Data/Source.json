@@ -2,7 +2,7 @@
     "replace" : [
         {
             "search" : "&lt;&quest;php",
-            "replace": "<span class=\"code-php-start\">>&lt;&quest;php</span>"
+            "replace": "<span class=\"code-php-start\">&lt;&quest;php</span>"
         }
     ]
 }
