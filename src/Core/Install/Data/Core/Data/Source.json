@@ -1,0 +1,8 @@
+{
+    "replace" : [
+        {
+            "search" : "<?php",
+            "replace": "<span class=\"code-php-start\"><?php</span>"
+        }
+    ]
+}
