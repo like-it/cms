@@ -11,7 +11,7 @@ function function_controllers_routes_amount(Parse $parse, Data $data, $node = nu
 
 //    /Application/Host/Www/Funda/World/Controller/Abba.php
     $controller = str_replace('/', '.', $node->url);
-    $controller = str_replace('.Application.Host', 'Host', $controller);
+    $controller = substr(str_replace('.Application.Host', 'Host', $controller), 0, -4);
 
 //    Host.Www.Funda.World.Controller.End.command
 
