@@ -246,5 +246,11 @@ edit.init = () => {
 };
 
 ready(() => {
-    edit.init();
+    require(
+    [
+        root() + 'Settings/Controllers/Css/Edit.css?' + version()
+    ],
+    () => {
+        edit.init();
+    });
 });
