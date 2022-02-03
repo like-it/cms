@@ -1,7 +1,7 @@
 {
     "controller" : {
         "default" : {
-            "limit" : 11
+            "limit" : 14
         }
     },
     "route" : {

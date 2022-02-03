@@ -4,7 +4,7 @@
 {{else}}
 {{$page.current = 1}}
 {{/if}}
-{{$page.size = 11}}
+{{$page.size = 14}}
 {{$page.start = ($page.current * $page.size) - $page.size}}
 {{$page.start += 1}}
 {{$page.to = ($page.current * $page.size)}}
