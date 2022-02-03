@@ -37,7 +37,7 @@ class Settings extends Main {
     public static function controllers_read(App $object, $name): Response
     {
         $domain = Settings::domain_get($object);
-        $url = Dir::name($domain->dir) . $object->config('dictionary.controller') . $object->config('ds') . $name;
+        $url = $domain->dir . $object->config('dictionary.controller') . $object->config('ds') . $name;
         $read = File::read($url);
         $record = [];
         $record['name'] = $name;
@@ -53,6 +53,7 @@ class Settings extends Main {
      */
     public static function controllers_update(App $object, $uuid): Response
     {
+        dd('update');
         $domain = Settings::domain_get($object);
         $url = $domain->dir .
             'Command' .
@@ -112,7 +113,7 @@ class Settings extends Main {
     public static function controllers_delete(App $object, $name): Response
     {
         $domain = Settings::domain_get($object);
-        $url = Dir::name($domain->dir) . $object->config('dictionary.controller') . $object->config('ds') . $name;
+        $url = $domain->dir . $object->config('dictionary.controller') . $object->config('ds') . $name;
         File::delete($url);
         $response = [];
         $response['node'] = [
@@ -138,7 +139,7 @@ class Settings extends Main {
             throw new Exception('Domain dir not set...');
         }
 
-        $url = Dir::name($domain->dir) . $object->config('dictionary.controller') . $object->config('ds');
+        $url = $domain->dir . $object->config('dictionary.controller') . $object->config('ds');
 
         $dir = new Dir();
         $data = new Data();
@@ -190,7 +191,7 @@ class Settings extends Main {
             if ($validate->success === true) {
                 $object->request(
                     'url',
-                    Dir::name($domain->dir) .
+                    $domain->dir .
                     $object->config('dictionary.controller') .
                     $object->config('ds') .
                     ucfirst($object->request('node.name')) .
@@ -505,7 +506,7 @@ class Settings extends Main {
             throw new Exception('No host & extension found in domain.');
         }
         $object->config('command.dir.data', $dir);
-        $domain->dir = $dir;
+        $domain->dir = Dir::name($dir);
         return $domain;
     }
 
@@ -677,10 +678,12 @@ class Settings extends Main {
     {
         $domain = Settings::domain_get($object);
         $url = $domain->dir .
+            $object->config('dictionary.data') .
             'Command' .
             $object->config('extension.json');
 
         $route_url = $domain->dir .
+            $object->config('dictionary.data') .
             'Route' .
             $object->config('extension.json');
 
@@ -737,9 +740,11 @@ class Settings extends Main {
     {
         $domain = Settings::domain_get($object);
         $url = $domain->dir .
+            $object->config('dictionary.data') .
             'Command' .
             $object->config('extension.json');
         $route_url = $domain->dir .
+            $object->config('dictionary.data') .
             'Route' .
             $object->config('extension.json');
         $data = $object->data_read($url);
@@ -771,9 +776,11 @@ class Settings extends Main {
     {
         $domain = Settings::domain_get($object);
         $url = $domain->dir .
+            $object->config('dictionary.data') .
             'Command' .
             $object->config('extension.json');
         $route_url = $domain->dir .
+            $object->config('dictionary.data') .
             'Route' .
             $object->config('extension.json');
         $data = $object->data_read($url);
@@ -829,9 +836,11 @@ class Settings extends Main {
     {
         $domain = Settings::domain_get($object);
         $url = $domain->dir .
+            $object->config('dictionary.data') .
             'Command' .
             $object->config('extension.json');
         $route_url = $domain->dir .
+            $object->config('dictionary.data') .
             'Route' .
             $object->config('extension.json');
         $data = $object->data_read($url);
@@ -855,9 +864,11 @@ class Settings extends Main {
     {
         $domain = Settings::domain_get($object);
         $url = $domain->dir .
+            $object->config('dictionary.data') .
             'Command' .
             $object->config('extension.json');
         $route_url = $domain->dir .
+            $object->config('dictionary.data') .
             'Route' .
             $object->config('extension.json');
         $data = $object->data_read($url);
@@ -909,9 +920,11 @@ class Settings extends Main {
     {
         $domain = Settings::domain_get($object);
         $url = $domain->dir .
+            $object->config('dictionary.data') .
             'Command' .
             $object->config('extension.json');
         $route_url = $domain->dir .
+            $object->config('dictionary.data') .
             'Route' .
             $object->config('extension.json');
         $data = $object->data_read($url);
@@ -977,9 +990,11 @@ class Settings extends Main {
     {
         $domain = Settings::domain_get($object);
         $url = $domain->dir .
+            $object->config('dictionary.data') .
             'Command' .
             $object->config('extension.json');
         $route_url = $domain->dir .
+            $object->config('dictionary.data') .
             'Route' .
             $object->config('extension.json');
         $data = $object->data_read($url);
