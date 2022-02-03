@@ -20,7 +20,7 @@ function function_controllers_routes_amount(Parse $parse, Data $data, $node = nu
                     $reverse = explode('.', $reverse, 2);
                     if(array_key_exists(1, $reverse)){
                         $test = strrev($reverse);
-                        d($test);
+                        d($test);   
                     }
                     d($controller);
                     $count++;
