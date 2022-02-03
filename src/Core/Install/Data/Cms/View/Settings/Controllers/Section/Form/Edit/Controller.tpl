@@ -1,6 +1,5 @@
 {{R3M}}
 {{$fields = [
-'Uuid',
 'Update',
 'Name_old',
 'Domain',
