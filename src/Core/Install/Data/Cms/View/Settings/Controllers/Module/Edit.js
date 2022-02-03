@@ -12,7 +12,7 @@ edit.title = () => {
     if(!section){
         return;
     }
-    const is_link = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.node.uuid}}");
+    const is_link = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.node.key}}");
     if(is_link){
         const nav = section.select('.nav');
         const active = nav.select('.active');
@@ -25,7 +25,7 @@ edit.title = () => {
     }
     const nav = section.select('.nav');
     const li = create('li', 'nav-item');
-    const a = create('a', 'nav-link ' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.node.uuid}}");
+    const a = create('a', 'nav-link ' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.node.key}}");
     a.data('frontend-url', "");
     a.data('url', "");
     a.html("<span class='title'>{{$request.node.name}}</span><i class=\"fas fa-window-close\"></i>");
@@ -78,13 +78,13 @@ edit.body = (action) => {
         case 'show' :
             body = section.select('.card-body');
             body.addClass('d-none');
-            selected = section.select('.card-body-' + "{{$request.node.uuid}}");
+            selected = section.select('.card-body-' + "{{$request.node.key}}");
             selected.removeClass('d-none');
             break;
         case 'remove' :
             body = section.select('.card-body');
             body.addClass('d-none');
-            selected = section.select('.card-body-' + "{{$request.node.uuid}}");
+            selected = section.select('.card-body-' + "{{$request.node.key}}");
             selected.remove();
             break;
     }
@@ -95,7 +95,7 @@ edit.form = (target) => {
     if(!section){
         return;
     }
-    const selected = section.select('.card-body-' + "{{$request.node.uuid}}");
+    const selected = section.select('.card-body-' + "{{$request.node.key}}");
     if(!selected){
         return;
     }
@@ -139,7 +139,7 @@ edit.onUpdate = () => {
     if(!section){
         return;
     }
-    const selected = section.select('.card-body-' + "{{$request.node.uuid}}");
+    const selected = section.select('.card-body-' + "{{$request.node.key}}");
     if(!selected){
         return;
     }
@@ -152,7 +152,7 @@ edit.onUpdate = () => {
         return;
     }
     input.on('change', (event) => {
-        const link = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.node.uuid}}");
+        const link = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.node.key}}");
         if(link){
             const title = link.select('.title');
             if(title){
@@ -161,7 +161,7 @@ edit.onUpdate = () => {
         }
     });
     input.on('keyup', (event) => {
-        const link = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.node.uuid}}");
+        const link = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.node.key}}");
         if(link){
             const title = link.select('.title');
             if(title){
@@ -176,7 +176,7 @@ edit.focus = () => {
     if(!section){
         return;
     }
-    const selected = section.select('.card-body-' + "{{$request.node.uuid}}");
+    const selected = section.select('.card-body-' + "{{$request.node.key}}");
     if(!selected){
         return;
     }
@@ -203,7 +203,7 @@ edit.init = () => {
     edit.form({
         select : [
             {
-                name : ".{{$module}}-{{$submodule}}-{{$command}}-{{$request.node.uuid}} .fa-window-close",
+                name : ".{{$module}}-{{$submodule}}-{{$command}}-{{$request.node.key}} .fa-window-close",
                 event : new MouseEvent("click"),
                 hidden : true
             },
