@@ -227,7 +227,7 @@
         "module" : "settings",
         "submodule" : "controllers",
         "command" : "command",
-        "path": "Settings/Controllers/{{$node.uuid}}/{{$node.domain}}",
+        "path": "Settings/Controllers/{{$node.name}}/{{$node.domain}}",
         "method": [
             "GET",
             "PUT",
