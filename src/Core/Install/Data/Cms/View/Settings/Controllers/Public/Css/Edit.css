@@ -13,13 +13,13 @@ section[name="main-content"] .node-content .code-php-curley-close
     font-weight: bold;
 }
 
-section[name="main-content"] li {
+section[name="main-content"] .node-content li {
     font-family: var(--bs-font-monospace);
     color: var(--bs-body-color);
     font-size: 0.875em;
 }
 
-section[name="main-content"] li pre {
+section[name="main-content"] .node-content li pre {
     font-family: var(--bs-font-monospace);
     color: var(--bs-body-color);
     margin: 0;
