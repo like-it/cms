@@ -37,8 +37,8 @@
             "replace": "<span class=\"code-php-const\">const</span>"
         },
         {
-            "search" : "&lcub;",
-            "replace": "<span class=\"code-php-curley-open\">&lcub;</span>"
+            "search" : "&lbrace;",
+            "replace": "<span class=\"code-php-curley-open\">&lbrace;</span>"
         },
         {
             "search" : "&rcub;",
