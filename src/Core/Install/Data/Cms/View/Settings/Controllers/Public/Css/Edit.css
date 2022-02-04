@@ -10,7 +10,10 @@ section[name="main-content"] .node-content .code-php-const,
 section[name="main-content"] .node-content .code-php-curley-open,
 section[name="main-content"] .node-content .code-php-curley-close
 {
-    font-weight: bold;
+    font-family: var(--bs-font-monospace);
+    color: var(--bs-body-color);
+    font-weight: var(--bs-body-font-weight);
+    font-size: 0.875em;
 }
 
 section[name="main-content"] li pre {
