@@ -1,6 +1,10 @@
 {
     "replace" : [
         {
+            "search" : "class",
+            "replace": "<span class=\"code-php-class\">class</span>"
+        },
+        {
             "search" : "&lt;&quest;php",
             "replace": "<span class=\"code-php-start\">&lt;&quest;php</span>"
         },
@@ -11,10 +15,6 @@
         {
             "search" : "use",
             "replace": "<span class=\"code-php-use\">use</span>"
-        },
-        {
-            "search" : "class",
-            "replace": "<span class=\"code-php-class\">class</span>"
         },
         {
             "search" : "extends",
