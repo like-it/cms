@@ -23,5 +23,5 @@ section[name="main-content"] li pre {
     font-family: var(--bs-font-monospace);
     color: var(--bs-body-color);
     margin: 0;
-    font-size: 0.875em;
+    font-size: 1em;
 }
