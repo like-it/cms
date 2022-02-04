@@ -10,12 +10,12 @@ section[name="main-content"] .node-content .code-php-const,
 section[name="main-content"] .node-content .code-php-curley-open,
 section[name="main-content"] .node-content .code-php-curley-close
 {
-    font-family: var(--bs-font-monospace);
-    color: var(--bs-body-color);
     font-weight: bold;
-    font-size: 0.875em;
 }
 
 section[name="main-content"] li pre {
+    font-family: var(--bs-font-monospace);
+    color: var(--bs-body-color);
     margin: 0;
+    font-size: 0.875em;
 }
