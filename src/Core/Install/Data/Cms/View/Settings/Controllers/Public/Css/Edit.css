@@ -12,3 +12,7 @@ section[name="main-content"] .node-content .code-php-curley-close
 {
     font-weight: bold;
 }
+
+section[name="main-content"] li pre {
+    margin: 0;
+}
