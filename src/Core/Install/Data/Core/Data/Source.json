@@ -37,12 +37,12 @@
             "replace": "<span class=\"code-php-const\">const</span>"
         },
         {
-            "search" : "{",
-            "replace": "<span class=\"code-php-curley-open\">{</span>"
+            "search" : "&lcub;",
+            "replace": "<span class=\"code-php-curley-open\">&lcub;</span>"
         },
         {
-            "search" : "}",
-            "replace": "<span class=\"code-php-curley-close\">}</span>"
+            "search" : "&rcub;",
+            "replace": "<span class=\"code-php-curley-close\">&rcub;</span>"
         }
     ]
 }
