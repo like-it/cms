@@ -12,7 +12,7 @@ section[name="main-content"] .node-content .code-php-curley-close
 {
     font-family: var(--bs-font-monospace);
     color: var(--bs-body-color);
-    font-weight: var(--bs-body-font-weight);
+    font-weight: bold;
     font-size: 0.875em;
 }
 
