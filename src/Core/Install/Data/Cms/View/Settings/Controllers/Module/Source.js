@@ -49,11 +49,7 @@ source.compile = (rows) => {
             row = replace(record.search, record.replace, row);
         }
         console.log(row);
-
-
-
-
-
+        rows[index] = row;
         content += row;
     }
 
