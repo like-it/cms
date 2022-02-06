@@ -116,7 +116,7 @@ source.createLi = () => {
             } else {
                 ol.on('keypress', (event) => {
                     let compiled_row = compile[index];
-                    let node = li[index];
+                    let node = li[selected];
                     let pre = node.select('pre');
                     pre.html(compiled_row);
                 });
