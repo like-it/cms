@@ -92,10 +92,14 @@ source.createLi = () => {
         console.log(event);
         let li = ol.select('li');
         let index;
+        let selected;
         rows = [];
         for(index = 0; index < li.length; index++){
             let node = li[index];
             let pre = node.select('pre');
+            if(pre.data('text') !== pre.innerText){
+                selected = index;
+            }
             pre.data('text', pre.innerText);
             rows[index] = pre.data('text');
         }
@@ -105,7 +109,9 @@ source.createLi = () => {
             let node = li[index];
             node.data('nr', index + 1);
             let pre = node.select('pre');
-            pre.html(compiled_row);
+            if(selected !== index){
+                pre.html(compiled_row);
+            }
         }
     });
 };
