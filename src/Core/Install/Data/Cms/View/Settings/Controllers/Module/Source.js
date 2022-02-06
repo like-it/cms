@@ -46,7 +46,11 @@ source.compile = (rows) => {
         let i;
         for(i =0; i < php.replace; i++){
             let record = php.replace[i];
+            console.log(record);
             row = replace(htmlentities.encode(record.search), record.replace, row);
+        }
+        if(is.empty(row)){
+            row = '&ZeroWidthSpace;';
         }
         console.log(row);
         rows[index] = row;
