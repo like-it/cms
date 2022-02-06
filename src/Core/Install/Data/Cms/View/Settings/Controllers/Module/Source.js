@@ -111,6 +111,13 @@ source.createLi = () => {
             let pre = node.select('pre');
             if(selected !== index){
                 pre.html(compiled_row);
+            } else {
+                pre.on('blur', (event) => {
+                    let compiled_row = compile[index];
+                    let node = li[index];
+                    let pre = node.select('pre');
+                    pre.html(compiled_row);
+                });
             }
         }
     });
