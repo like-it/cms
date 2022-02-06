@@ -85,15 +85,16 @@ source.createLi = () => {
         let pre = create('pre');
         pre.html(compiled_row);
         pre.data('text', row);
-        ol.on('keypress', (event) => {
-            let text = pre.text();
-            console.log(text);
-            //compile = source.compile(rows);
-
-        });
         li.append(pre);
         ol.append(li);
     }
+    ol.on('keypress', (event) => {
+        console.log(event);
+        let text = pre.text();
+        console.log(text);
+        //compile = source.compile(rows);
+
+    });
 };
 
 source.init = () => {
