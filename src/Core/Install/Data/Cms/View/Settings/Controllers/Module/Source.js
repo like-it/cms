@@ -85,10 +85,15 @@ source.createLi = () => {
         let pre = create('pre');
         pre.html(compiled_row);
         pre.data('text', row);
+        pre.on('click', (event) => {
+            pre.focus();
+        });
         li.append(pre);
         ol.append(li);
     }
     ol.on('keypress', (event) => {
+        //if arrow down
+        //selected = index;
         console.log(event);
         let li = ol.select('li');
         let index;
