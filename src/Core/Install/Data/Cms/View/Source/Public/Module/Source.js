@@ -7,8 +7,8 @@ php.replace = [
         "replace": "<span class=\"code-php-class\">class</span>"
     },
     {
-        "search" : "&#60;&#63;&#112;&#104;&#112;",
-        "replace": "<span class=\"code-php-start\">&#60;&#63;&#112;&#104;&#112;</span>"
+        "search" : "<?php",
+        "replace": "<span class=\"code-php-start\">&lt;&quest;php</span>"
     },
     {
         "search" : "namespace",
@@ -40,11 +40,11 @@ php.replace = [
     },
     {
         "search" : "&lbrace;",
-        "replace": "<span class=\"code-php-curley-open\">&lbrace;</span>"
+        "replace": "<span class=\"code-php-curly-open\">&lbrace;</span>"
     },
     {
         "search" : "&rcub;",
-        "replace": "<span class=\"code-php-curley-close\">&rcub;</span>"
+        "replace": "<span class=\"code-php-curly-close\">&rcub;</span>"
     }
 
 ];

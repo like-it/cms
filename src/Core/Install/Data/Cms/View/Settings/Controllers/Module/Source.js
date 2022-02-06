@@ -46,7 +46,7 @@ source.compile = (rows) => {
         let i;
         for(i =0; i < php.replace; i++){
             let record = php.replace[i];
-            row = replace(record.search, record.replace, row);
+            row = replace(htmlentities.encode(record.search), record.replace, row);
         }
         console.log(row);
         rows[index] = row;

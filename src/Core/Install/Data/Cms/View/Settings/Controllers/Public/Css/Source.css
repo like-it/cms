@@ -7,8 +7,8 @@ section[name="main-content"] .node-content .code-php-private,
 section[name="main-content"] .node-content .code-php-protected,
 section[name="main-content"] .node-content .code-php-public,
 section[name="main-content"] .node-content .code-php-const,
-section[name="main-content"] .node-content .code-php-curley-open,
-section[name="main-content"] .node-content .code-php-curley-close
+section[name="main-content"] .node-content .code-php-curly-open,
+section[name="main-content"] .node-content .code-php-curly-close
 {
     font-weight: bold;
 }
