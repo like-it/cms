@@ -95,7 +95,7 @@ source.createLi = () => {
         for(index = 0; index < li.length; index++){
             let node = li[index];
             let pre = node.select('pre');
-            console.log(pre.text());
+            console.log(pre.innerText);
         }
         //compile = source.compile(rows);
 
