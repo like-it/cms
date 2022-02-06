@@ -73,10 +73,10 @@ source.createLi = () => {
         //init empty content line
         return;
     }
-    ol.html('');
     let rows = content.split("\n");
     let compile = source.compile(rows);
     let index;
+    ol.html('');
     for(index=0; index < rows.length; index++){
         let row = rows[index];
         let compiled_row = compile[index];
@@ -92,13 +92,21 @@ source.createLi = () => {
         console.log(event);
         let li = ol.select('li');
         let index;
+        rows = [];
         for(index = 0; index < li.length; index++){
             let node = li[index];
             let pre = node.select('pre');
-            console.log(pre.innerText);
+            pre.data('text', pre.innerText);
+            rows[index] = pre.data('text');
         }
-        //compile = source.compile(rows);
-
+        compile = source.compile(rows);
+        for(index=0; index < rows.length; index++){
+            let compiled_row = compile[index];
+            let node = li[index];
+            node.data('nr', index + 1);
+            let pre = node.select('pre');
+            pre.html(compiled_row);
+        }
     });
 };
 
