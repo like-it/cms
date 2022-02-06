@@ -85,9 +85,6 @@ source.createLi = () => {
         let pre = create('pre');
         pre.html(compiled_row);
         pre.data('text', row);
-        pre.on('click', (event) => {
-            pre.focus();
-        });
         li.append(pre);
         ol.append(li);
     }
@@ -117,7 +114,7 @@ source.createLi = () => {
             if(selected !== index){
                 pre.html(compiled_row);
             } else {
-                pre.on('blur', (event) => {
+                ol.on('keypress', (event) => {
                     let compiled_row = compile[index];
                     let node = li[index];
                     let pre = node.select('pre');
