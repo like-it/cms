@@ -26,6 +26,9 @@ class Source extends Main
         }
         $explode = explode("\n", $read);
         foreach($explode as $nr => $record){
+            if(empty($record)){
+                $record = '&zerowidthspace;';
+            }
             $explode[$nr] = '<li><pre>' . $record .'</pre></li>';
         }
         $data = [];
