@@ -7,8 +7,8 @@ php.replace = [
         "replace": "<span class=\"code-php-class\">class</span>"
     },
     {
-        "search" : "&lt;&quest;php",
-        "replace": "<span class=\"code-php-start\">&lt;&quest;php</span>"
+        "search" : "&#60;&#63;&#112;&#104;&#112;",
+        "replace": "<span class=\"code-php-start\">&#60;&#63;&#112;&#104;&#112;</span>"
     },
     {
         "search" : "namespace",

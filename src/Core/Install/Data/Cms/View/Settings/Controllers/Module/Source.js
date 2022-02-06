@@ -43,6 +43,11 @@ source.compile = (rows) => {
     for(index = 0; index < rows.length; index++){
         let row = rows[index];
         row = htmlentities.encode(row);
+        let i;
+        for(i =0; i < php.replace; i++){
+            let record = php.replace[i];
+            row = replace(record.search, record.replace, row);
+        }
         console.log(row);
 
 
@@ -69,8 +74,8 @@ source.createLi = () => {
         //init empty content line
         return;
     }
+    ol.html('');
     let rows = content.split("\n");
-
     rows = source.compile(rows);
     let index;
     for(index=0; index < rows.length; index++){
@@ -91,7 +96,6 @@ source.init = () => {
 ready(() => {
     require(
         [
-            root() + 'He/1.2.0/he.js?' + version(),
             root() + 'Settings/Controllers/Css/Source.css?' + version()
         ],
         () => {
