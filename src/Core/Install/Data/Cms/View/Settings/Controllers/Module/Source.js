@@ -44,13 +44,12 @@ source.compile = (rows) => {
         let row = rows[index];
         row = htmlentities.encode(row);
         let i;
-        for(i =0; i < php.replace; i++){
+        for(i =0; i < php.replace.length; i++){
             let record = php.replace[i];
-            console.log(record);
             row = replace(htmlentities.encode(record.search), record.replace, row);
         }
         if(is.empty(row)){
-            row = '&ZeroWidthSpace;';
+            row = '&ZeroWidthSpace;'
         }
         console.log(row);
         rows[index] = row;

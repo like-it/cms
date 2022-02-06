@@ -1,7 +1,6 @@
 let php = {};
 
 php.replace = [
-
     {
         "search" : "class",
         "replace": "<span class=\"code-php-class\">class</span>"
@@ -46,7 +45,6 @@ php.replace = [
         "search" : "&rcub;",
         "replace": "<span class=\"code-php-curly-close\">&rcub;</span>"
     }
-
 ];
 
 export { php };
