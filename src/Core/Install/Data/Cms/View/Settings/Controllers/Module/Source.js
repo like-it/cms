@@ -75,14 +75,22 @@ source.createLi = () => {
     }
     ol.html('');
     let rows = content.split("\n");
-    rows = source.compile(rows);
+    let compile = source.compile(rows);
     let index;
     for(index=0; index < rows.length; index++){
         let row = rows[index];
+        let compiled_row = compile[index];
         let li = create('li');
         li.data('nr', index + 1);
         let pre = create('pre');
-        pre.html(row);
+        pre.html(compiled_row);
+        pre.data('text', row);
+        pre.on('change', (event) => {
+            let text = pre.text();
+            console.log(text);
+            //compile = source.compile(rows);
+
+        });
         li.append(pre);
         ol.append(li);
     }
