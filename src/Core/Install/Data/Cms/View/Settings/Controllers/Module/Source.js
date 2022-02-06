@@ -90,8 +90,13 @@ source.createLi = () => {
     }
     ol.on('keypress', (event) => {
         console.log(event);
-        let text = pre.text();
-        console.log(text);
+        let li = ol.select('li');
+        let index;
+        for(index = 0; index < li.length; index++){
+            let node = li[index];
+            let pre = node.select('pre');
+            console.log(pre.text());
+        }
         //compile = source.compile(rows);
 
     });
