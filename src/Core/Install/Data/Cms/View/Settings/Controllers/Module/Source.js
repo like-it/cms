@@ -85,7 +85,7 @@ source.createLi = () => {
         let pre = create('pre');
         pre.html(compiled_row);
         pre.data('text', row);
-        pre.on('keypress', (event) => {
+        ol.on('keypress', (event) => {
             let text = pre.text();
             console.log(text);
             //compile = source.compile(rows);
