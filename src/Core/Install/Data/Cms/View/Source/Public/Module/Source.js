@@ -38,11 +38,11 @@ php.replace = [
         "replace": "<span class=\"code-php-const\">const</span>"
     },
     {
-        "search" : "&#123;",
+        "search" : "{",
         "replace": "<span class=\"code-php-curly-open\">&#123;</span>"
     },
     {
-        "search" : "&#125;",
+        "search" : "}",
         "replace": "<span class=\"code-php-curly-close\">&#125;</span>"
     }
 ];
