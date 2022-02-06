@@ -1,0 +1,27 @@
+section[name="main-content"] .node-content .code-php-start,
+section[name="main-content"] .node-content .code-php-namespace,
+section[name="main-content"] .node-content .code-php-use,
+section[name="main-content"] .node-content .code-php-class,
+section[name="main-content"] .node-content .code-php-extends,
+section[name="main-content"] .node-content .code-php-private,
+section[name="main-content"] .node-content .code-php-protected,
+section[name="main-content"] .node-content .code-php-public,
+section[name="main-content"] .node-content .code-php-const,
+section[name="main-content"] .node-content .code-php-curley-open,
+section[name="main-content"] .node-content .code-php-curley-close
+{
+    font-weight: bold;
+}
+
+section[name="main-content"] .node-content li {
+    font-family: var(--bs-font-monospace);
+    color: var(--bs-body-color);
+    font-size: 0.875em;
+}
+
+section[name="main-content"] .node-content li pre {
+    font-family: var(--bs-font-monospace);
+    color: var(--bs-body-color);
+    margin: 0;
+    font-size: 1em;
+}

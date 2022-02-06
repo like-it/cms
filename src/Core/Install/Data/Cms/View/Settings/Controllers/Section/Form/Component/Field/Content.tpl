@@ -9,3 +9,6 @@
 >
     <li>Loading...</li>
 </ol>
+{{script('module')}}
+    {{require($prefix + $require.submodule + '/Module/Source.js')}}
+{{/script}}

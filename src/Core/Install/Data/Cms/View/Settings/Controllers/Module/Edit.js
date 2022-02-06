@@ -229,7 +229,7 @@ edit.content = () => {
 edit.init = () => {
     edit.body();
     edit.title();
-    edit.content();
+    //edit.content();
     edit.form({
         select : [
             {
