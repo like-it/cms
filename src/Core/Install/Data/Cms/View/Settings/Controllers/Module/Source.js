@@ -66,7 +66,7 @@ source.getAnchorPosition = () => {
     selection = window.getSelection();
     if (selection.rangeCount) {
         range = selection.getRangeAt(0);
-        position = range.endOffset;
+        position = range.startOffset;
     }
     return position;
 }
@@ -127,6 +127,8 @@ source.createLi = () => {
             pre = node.select('pre');
             if(selected === index){
                 let position = source.getAnchorPosition(ol);
+                console.log(pre);
+                pre.html(compiled_row);
                 let range = document.createRange();
                 let selection = window.getSelection();
                 range.setStart(pre.childNodes[0], position);
