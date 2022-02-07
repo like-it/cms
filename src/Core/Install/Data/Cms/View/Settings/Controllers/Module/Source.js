@@ -116,8 +116,9 @@ source.createLi = () => {
             if(selected === index){
                 const selection = window.getSelection();
                 const range = document.createRange();
-                range.setStart(selection.anchorNode, selection.anchorOffset);
-                range.setEnd(selection.focusNode, selection.focusOffset);
+                console.log(selection.anchorOffset);
+                range.setStart(selection.anchorNode, selection.anchorOffset + 1);
+                range.setEnd(selection.focusNode, selection.focusOffset + 1);
                 selection.removeAllRanges();
                 //range.selectNodeContents(ol);
                 range.collapse(false);
