@@ -114,11 +114,15 @@ source.createLi = () => {
             node.data('nr', index + 1);
             pre = node.select('pre');
             if(selected === index){
-                var selection = window.getSelection();
+                let selection = window.getSelection();
                 console.log(selection);
+                console.log(selection.anchorOffset);
                 // console.log(pre.selectionStart);
                 // console.log(pre.selectionEnd);
                 pre.html(compiled_row);
+                selection = window.getSelection();
+                console.log(selection.anchorOffset);
+                //selection.modify('extend', 'forward', 'character');
                 selection.collapseToEnd();
                 /*
                 let set = window.getSelection();
