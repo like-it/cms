@@ -119,7 +119,7 @@ source.createLi = () => {
                 range.setStart(selection.anchorNode, selection.anchorOffset);
                 range.setEnd(selection.focusNode, selection.focusOffset);
                 selection.removeAllRanges();
-                range.selectNodeContents(ol);
+                //range.selectNodeContents(ol);
                 range.collapse(false);
                 pre.html(compiled_row);
                 selection.addRange(range);
