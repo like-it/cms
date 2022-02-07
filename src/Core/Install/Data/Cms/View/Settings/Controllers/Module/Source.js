@@ -162,6 +162,9 @@ source.createLi = () => {
                             console.log('position3:', position);
                         } else {
                             if(sel.innerText?.length >= 0){
+                                if(!is.empty(selected_pre.childNodes[ii + 1])){
+                                    node = sel;
+                                }
                                 console.log('true');
                                 break;
                             }
@@ -191,7 +194,7 @@ source.createLi = () => {
                             console.log('position5:', position);
                         } else {
                             if(sel.innerText?.length >= 0){
-                                if(selected_pre.childNodes[ii + 1]){
+                                if(!is.empty(selected_pre.childNodes[ii + 1])){
                                     node = sel;
                                 }
                                 console.log('ii', ii);
