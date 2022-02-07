@@ -155,7 +155,10 @@ source.createLi = () => {
                             position -= sel.innerText.length;
                             node = sel;
                         } else {
-                            node = sel;
+                            if(sel.innerText?.length > 0){
+                                node = sel;
+                                break;
+                            }
                         }
                     }
                     console.log(node);
@@ -169,7 +172,10 @@ source.createLi = () => {
                             position -= sel.innerText.length;
                             node = sel;
                         } else {
-                            node = sel;
+                            if(sel.innerText?.length > 0){
+                                node = sel;
+                                break;
+                            }
                         }
                     }
                     console.log(node);
