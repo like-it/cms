@@ -133,17 +133,19 @@ source.createLi = () => {
             let compiled_row = compile[i];
             if (selected === i) {
                 let position = 0;
+                let container;
                 let selection;
                 let range;
                 selection = window.getSelection();
                 if (selection.rangeCount) {
                     range = selection.getRangeAt(0);
                     position = range.startOffset;
+                    container = range.startContainer;
                 }
                 selected_pre.html(compiled_row);
                 range = document.createRange();
                 selection = window.getSelection();
-                range.setStart(selected_pre.childNodes[selected_pre.childNodes.length - 1], position);
+                range.setStart(container, position);
                 range.collapse(true);
                 selection.removeAllRanges();
                 selection.addRange(range);
