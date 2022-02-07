@@ -238,6 +238,7 @@ source.createLi = () => {
                             console.log(node);
                             console.log(position);
                             console.log('this is happening...');
+                            range.setStart(node, position);
                         }
 
                     }
