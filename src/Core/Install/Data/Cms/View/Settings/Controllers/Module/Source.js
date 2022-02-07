@@ -59,6 +59,20 @@ source.compile = (rows) => {
     return rows;
 };
 
+source.getAnchorPosition = (editableDiv) => {
+    let caretPos = 0;
+    let selection;
+    let range;
+    selection = window.getSelection();
+    if (selection.rangeCount) {
+        range = sel.getRangeAt(0);
+        if (range.commonAncestorContainer.parentNode == editableDiv) {
+            caretPos = range.endOffset;
+        }
+    }
+    return caretPos;
+}
+
 source.createLi = () => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -114,20 +128,23 @@ source.createLi = () => {
             node.data('nr', index + 1);
             pre = node.select('pre');
             if(selected === index){
+                let position = source.getAnchorPosition(ol);
+                console.log(position);
+
+
+                /*
                 let save_selection = rangy.saveSelection();
                 //let save_selection_active_element = document.activeElement;
                 pre.html(compiled_row);
                 console.log(save_selection);
                 rangy.restoreSelection(save_selection, true);
                 window.setTimeout(function() {
-                    /*
                     if (save_selection_active_element && typeof save_selection_active_element.focus != "undefined") {
                         save_selection_active_element.focus();
                     }
-                    */
                     //ol.focus();
                 }, 1);
-
+                */
 
                 /*
                 let selection = window.getSelection();
