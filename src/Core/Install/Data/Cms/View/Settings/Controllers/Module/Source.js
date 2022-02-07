@@ -236,7 +236,6 @@ source.createLi = () => {
                             console.log('this too');
                         } else {
                             console.log(node);
-                            console.log(node?.innerText?.length);
                             console.log(position);
                             console.log('this is happening...');
                         }
