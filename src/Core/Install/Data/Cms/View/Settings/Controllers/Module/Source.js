@@ -121,7 +121,7 @@ source.createLi = () => {
                 let set = window.getSelection();
 
                 // Set start position of range
-                setpos.setStart(ol.childNodes[0], 12);
+                setpos.setStart(li[selected], 2);
                 let range_at = window.getSelection().getRangeAt(0);
                 console.log(range_at);
 
