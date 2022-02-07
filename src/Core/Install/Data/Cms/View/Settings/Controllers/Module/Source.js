@@ -146,6 +146,8 @@ source.createLi = () => {
                 range = document.createRange();
                 selection = window.getSelection();
                 console.log(selected_pre);
+                console.log(selected_pre.childNodes.length);
+                console.log(position);
                 if(position > selected_pre.childNodes.length - 1){
                     position = selected_pre.childNodes.length - 1;
                 }
