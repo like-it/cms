@@ -232,6 +232,9 @@ source.createLi = () => {
                         console.log('length', node.innerText.length, position);
                         range.setStart(node, position);
                     } else {
+                        if(node?.innerText === 'undefined'){
+                            console.log('this too');
+                        }
                         console.log(node);
                         console.log(node?.innerText?.length);
                         console.log(position);
