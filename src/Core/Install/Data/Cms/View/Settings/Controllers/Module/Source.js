@@ -134,7 +134,7 @@ source.createLi = () => {
                 pre.html(compiled_row);
                 let range = document.createRange();
                 let selection = window.getSelection();
-                range.setStart(pre.childNodes[0], position);
+                range.setStart(selected_pre.childNodes[0], position);
                 range.collapse(true);
                 selection.removeAllRanges();
                 selection.addRange(range);
