@@ -142,13 +142,20 @@ source.createLi = () => {
                     position = range.startOffset;
                     //container = range.cloneContents();
                 }
+                let oldLength = selected_pre.childNodes.length;
                 selected_pre.html(compiled_row);
                 range = document.createRange();
                 selection = window.getSelection();
+                let node = selected_pre.childNodes[selected_pre.childNodes.length - 1];
+                if(selected_pre.childNodes.length > oldLength){
+                    range.setStart(node, 0);
+                } else {
+                    range.setStart(node, position);
+                }
                 console.log(selected_pre);
                 console.log(selected_pre.childNodes.length);
                 console.log(position);
-                range.setStart(selected_pre.childNodes[0], position);
+
                 range.collapse(true);
                 selection.removeAllRanges();
                 selection.addRange(range);
