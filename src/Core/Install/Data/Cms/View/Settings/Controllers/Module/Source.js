@@ -176,6 +176,7 @@ source.createLi = () => {
                         position = 1;
                     }
                     if(node.innerText?.length <= position){
+                        console.log('tryue');
                         position = node.innerText.length;
                     }
                     console.log(node);
