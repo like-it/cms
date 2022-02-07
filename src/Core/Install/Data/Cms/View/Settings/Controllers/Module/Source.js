@@ -116,6 +116,8 @@ source.createLi = () => {
             } else {
                 let set = window.getSelection();
                 let range_at = window.getSelection().getRangeAt(0);
+                range_at.startOffset++;
+                range_at.endOffset++;
                 console.log(compiled_row);
                 console.log(range_at);
                 pre.html(compiled_row);
