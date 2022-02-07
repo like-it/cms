@@ -114,12 +114,31 @@ source.createLi = () => {
             if(selected !== index){
                 pre.html(compiled_row);
             } else {
-                ol.on('keypress', (event) => {
-                    let compiled_row = compile[index];
-                    let node = li[selected];
-                    let pre = node.select('pre');
-                    pre.html(compiled_row);
-                });
+                // Creates range object
+                let setpos = document.createRange();
+
+                // Creates object for selection
+                let set = window.getSelection();
+
+                // Set start position of range
+                setpos.setStart(ol.childNodes[0], 12);
+                let range_at = window.getSelection().getRangeAt(0);
+                console.log(range_at);
+
+                pre.html(compiled_row);
+
+                // Collapse range within its boundary points
+                // Returns boolean
+                setpos.collapse(true);
+
+                // Remove all ranges set
+                set.removeAllRanges();
+
+                // Add range with respect to range object.
+                set.addRange(setpos);
+
+                // Set cursor on focus
+                ol.focus();
             }
         }
     });
