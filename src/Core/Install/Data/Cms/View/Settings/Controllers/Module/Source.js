@@ -154,9 +154,11 @@ source.createLi = () => {
                         node = sel;
                         if(position >= sel.innerText?.length){
                             if(position === sel.innerText.length){
-                                sel = selected_pre.childNodes[ii + 1];
-                                node = sel;
-                                console.log('position9:', position);
+                                if(in_array(ii + 1, selected_pre.childNodes)){
+                                    sel = selected_pre.childNodes[ii + 1];
+                                    node = sel;
+                                    console.log('position9:', position);
+                                }
                                 break;
                             }
                             console.log('position2:', position);
@@ -220,7 +222,7 @@ source.createLi = () => {
                         position = 1;
                     }
                     console.log(node);
-                    if(node.innerText?.length <= position){
+                    if(node?.innerText?.length <= position){
                         position = node.innerText.length;
                         position = 2;
                     }
