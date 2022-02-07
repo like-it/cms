@@ -146,9 +146,10 @@ source.createLi = () => {
                 range = document.createRange();
                 selection = window.getSelection();
                 console.log(selected_pre);
-                if(position > selected_pre.childNodes.length){
-                    position = selected_pre.childNodes.length;
+                if(position > selected_pre.childNodes.length - 1){
+                    position = selected_pre.childNodes.length - 1;
                 }
+                console.log(position);
                 range.setStart(selected_pre.childNodes[0], position);
                 range.collapse(true);
                 selection.removeAllRanges();
