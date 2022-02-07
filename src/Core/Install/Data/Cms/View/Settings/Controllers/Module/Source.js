@@ -94,11 +94,13 @@ source.createLi = () => {
         console.log(event);
         let li = ol.select('li');
         let index;
+        let node;
+        let pre;
         let selected;
         rows = [];
         for(index = 0; index < li.length; index++){
-            let node = li[index];
-            let pre = node.select('pre');
+            node = li[index];
+            pre = node.select('pre');
             if(pre.data('text') !== pre.innerText){
                 selected = index;
             }
@@ -108,28 +110,31 @@ source.createLi = () => {
         compile = source.compile(rows);
         for(index=0; index < rows.length; index++){
             let compiled_row = compile[index];
-            let node = li[index];
+            node = li[index];
             node.data('nr', index + 1);
-            let pre = node.select('pre');
+            pre = node.select('pre');
             if(selected === index){
                 pre.html(compiled_row);
                 let set = window.getSelection();
-                let range_at = window.getSelection().getRangeAt(0);
-                let startOffset = range_at.startOffset + 1;
-                let endOffset = range_at.endOffset + 1;
-                let startContainer = range_at.startContainer;
-                let endContainer = range_at.endContainer;
+                let range = window.getSelection().getRangeAt(0);
+                let startOffset = range.startOffset + 1;
+                let endOffset = range.endOffset + 1;
+                let startContainer = range.startContainer;
+                let endContainer = range.endContainer;
                 console.log(startContainer);
-                console.log(range_at);
+                console.log(range);
 
-                range_at.setStart(startContainer, startOffset);
-                range_at.setEnd(endContainer, endOffset);
+                let to = document.createRange();
+
+
+                to.setStart(startContainer, startOffset);
+                to.setEnd(endContainer, endOffset);
                 console.log(pre);
                 console.log(compiled_row);
-                console.log(range_at);
-                range_at.collapse(true);
+                console.log(to);
+                to.collapse(true);
                 set.removeAllRanges();
-                set.addRange(range_at);
+                set.addRange(to);
                 ol.focus();
             } else {
                 pre.html(compiled_row);
