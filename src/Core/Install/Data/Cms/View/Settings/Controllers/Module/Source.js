@@ -125,7 +125,7 @@ source.createLi = () => {
                         save_selection_active_element.focus();
                     }
                     */
-                    ol.focus();
+                    //ol.focus();
                 }, 1);
 
 
