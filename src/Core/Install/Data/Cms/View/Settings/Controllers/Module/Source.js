@@ -225,11 +225,14 @@ source.createLi = () => {
                     console.log(node);
                     if(node?.innerText?.length <= position){
                         position = node.innerText.length;
-                        node = node.parentNode;
                     }
                     console.log(node);
                     console.log(position);
-                    range.setStart(node, position);
+                    if(node?.innerText?.length >= position){
+                        range.setStart(node, position);
+                    } else {
+                        console.log('this is happening...');
+                    }
                 }
                 console.log(selected_pre);
                 console.log(selected_pre.childNodes.length);
