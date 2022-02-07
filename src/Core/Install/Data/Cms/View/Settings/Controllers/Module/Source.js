@@ -229,10 +229,13 @@ source.createLi = () => {
                     if(
                         node &&
                         typeof node.data === 'function' &&
-                        node.data('has', 'text')){
+                        node.data('has', 'text')
+                    ){
                         node = node.parentNode;
+                    } else {
+                        range.setStart(node, position);
                     }
-                    range.setStart(node, position);
+
                     /*
                     console.log(node);
                     console.log(position);
