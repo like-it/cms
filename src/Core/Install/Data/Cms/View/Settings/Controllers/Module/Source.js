@@ -118,8 +118,11 @@ source.createLi = () => {
                 let range_at = window.getSelection().getRangeAt(0);
                 let startOffset = range_at.startOffset + 1;
                 let endOffset = range_at.endOffset + 1;
-                range_at.setStart(range_at.range.startContainer, startOffset);
-                range_at.setEnd(range_at.range.endContainer, endOffset);
+                let startContainer = range_at.range.startContainer;
+                console.log(startContainer);
+                return;
+                // range_at.setStart(, startOffset);
+                // range_at.setEnd(range_at.range.endContainer, endOffset);
                 console.log(compiled_row);
                 console.log(range_at);
                 pre.html(compiled_row);
