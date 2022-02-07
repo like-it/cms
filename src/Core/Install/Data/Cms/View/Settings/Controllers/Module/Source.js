@@ -114,23 +114,15 @@ source.createLi = () => {
             node.data('nr', index + 1);
             pre = node.select('pre');
             if(selected === index){
-                let selection = window.getSelection();
-                let anchorOffset = selection.anchorOffset;
-                let focusOffset = selection.focusOffset;
-                selection.removeAllRanges();
+                let save_selection = rangy.saveSelection();
+                let save_selection_active_element = document.activeElement;
                 pre.html(compiled_row);
-                selection = window.getSelection();
-                let focusNode = selection.focusNode;
-                let anchorNode = selection.anchorNode;
-                //range.selectNodeContents(ol);
-                const range = document.createRange();
-                console.log(selection.anchorOffset);
-                range.setStart(anchorNode, anchorOffset);
-                range.setEnd(focusNode, focusOffset);
-                range.collapse(false);
-
-                selection.addRange(range);
-                ol.focus();
+                rangy.restoreSelection(save_selection, true);
+                window.setTimeout(function() {
+                    if (save_selection_active_element && typeof save_selection_active_element.focus != "undefined") {
+                        save_selection_active_element.focus();
+                    }
+                }, 1);
 
 
                 /*
@@ -159,6 +151,8 @@ source.init = () => {
 ready(() => {
     require(
         [
+            root() + 'Rangy/1.3.0/rangy-core.js?' + version(),
+            root() + 'Rangy/1.3.0/rangy-selectionsaverestore.js?' + version(),
             root() + 'Settings/Controllers/Css/Source.css?' + version()
         ],
         () => {
