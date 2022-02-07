@@ -133,7 +133,7 @@ source.createLi = () => {
                 range.collapse(true);
                 selection.removeAllRanges();
                 selection.addRange(range);
-                pre.focus();
+                ol.focus();
 
 
 
