@@ -59,21 +59,16 @@ source.compile = (rows) => {
     return rows;
 };
 
-source.getAnchorPosition = (editableDiv) => {
-    let caretPos = 0;
+source.getAnchorPosition = () => {
+    let position = 0;
     let selection;
     let range;
     selection = window.getSelection();
     if (selection.rangeCount) {
         range = selection.getRangeAt(0);
-        caretPos = range.endOffset;
-        /*
-        if (range.commonAncestorContainer.parentNode == editableDiv) {
-
-        }
-         */
+        position = range.endOffset;
     }
-    return caretPos;
+    return position;
 }
 
 source.createLi = () => {
@@ -132,7 +127,14 @@ source.createLi = () => {
             pre = node.select('pre');
             if(selected === index){
                 let position = source.getAnchorPosition(ol);
-                console.log(position);
+                let range = document.createRange();
+                let selection = window.getSelection();
+                range.setStart(pre.childNodes[0], position);
+                range.collapse(true);
+                selection.removeAllRanges();
+                selection.addRange(range);
+                pre.focus();
+
 
 
                 /*
