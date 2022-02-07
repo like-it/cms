@@ -126,9 +126,10 @@ source.createLi = () => {
         }
         console.log(selected);
         compile = source.compile(rows);
-        for (index = 0; index < rows.length; index++) {
-            let compiled_row = compile[index];
-            if (selected === index) {
+        let i;
+        for (i = 0; i < rows.length; i++) {
+            let compiled_row = compile[i];
+            if (selected === i) {
                 let position = 0;
                 let selection;
                 let range;
