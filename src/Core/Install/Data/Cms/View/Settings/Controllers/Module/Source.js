@@ -116,10 +116,11 @@ source.createLi = () => {
             if(selected === index){
                 let selection = window.getSelection();
                 let offset = selection.anchorOffset;
+                console.log(offset);
                 pre.html(compiled_row);
                 selection = window.getSelection();
                 let index;
-                for(index=selection.anchorOffset;index <= offset; index++){
+                for(index=selection.anchorOffset;index < offset; index++){
                     selection.modify('extend', 'forward', 'character');
                 }
                 console.log(selection.anchorOffset);
