@@ -115,13 +115,17 @@ source.createLi = () => {
             pre = node.select('pre');
             if(selected === index){
                 let save_selection = rangy.saveSelection();
-                let save_selection_active_element = document.activeElement;
+                //let save_selection_active_element = document.activeElement;
                 pre.html(compiled_row);
+                console.log(save_selection);
                 rangy.restoreSelection(save_selection, true);
                 window.setTimeout(function() {
+                    /*
                     if (save_selection_active_element && typeof save_selection_active_element.focus != "undefined") {
                         save_selection_active_element.focus();
                     }
+                    */
+                    ol.focus();
                 }, 1);
 
 
