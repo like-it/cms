@@ -115,14 +115,19 @@ source.createLi = () => {
             pre = node.select('pre');
             if(selected === index){
                 const selection = window.getSelection();
+                let anchorNode = selection.anchorNode;
+                let anchorOffset = selection.anchorOffset;
+                let focusNode = selection.focusNode;
+                let focusOffset = selection.focusOffset;
+                selection.removeAllRanges();
+                pre.html(compiled_row);
+                //range.selectNodeContents(ol);
                 const range = document.createRange();
                 console.log(selection.anchorOffset);
-                range.setStart(selection.anchorNode, selection.anchorOffset + 1);
-                range.setEnd(selection.focusNode, selection.focusOffset + 1);
-                selection.removeAllRanges();
-                //range.selectNodeContents(ol);
+                range.setStart(anchorNode, anchorOffset);
+                range.setEnd(focusNode, focusOffset);
                 range.collapse(false);
-                pre.html(compiled_row);
+
                 selection.addRange(range);
                 ol.focus();
 
