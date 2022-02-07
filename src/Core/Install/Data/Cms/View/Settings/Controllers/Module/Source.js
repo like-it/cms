@@ -149,7 +149,17 @@ source.createLi = () => {
                 let node = selected_pre.childNodes[selected_pre.childNodes.length - 1];
                 if(selected_pre.childNodes.length > oldLength){
                     console.log(node);
-                    range.setStart(node, 1);
+                    let ii;
+                    for(ii=0; ii < selected_pre.childNodes.length; ii++){
+                        let sel = selected_pre.childNodes[ii];
+                        if(sel.innerText.length > position){
+                            node = sel;
+                            break;
+                        } else {
+                            position -= sel.innerText.length;
+                        }
+                    }
+                    range.setStart(node, position);
                 } else {
                     range.setStart(node, position);
                 }
