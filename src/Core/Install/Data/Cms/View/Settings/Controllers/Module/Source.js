@@ -143,7 +143,7 @@ source.createLi = () => {
                 selected_pre.html(compiled_row);
                 range = document.createRange();
                 selection = window.getSelection();
-                range.setStart(selected_pre.childNodes[0], position);
+                range.setStart(selected_pre.childNodes[selected_pre.childNodes.length - 1], position);
                 range.collapse(true);
                 selection.removeAllRanges();
                 selection.addRange(range);
