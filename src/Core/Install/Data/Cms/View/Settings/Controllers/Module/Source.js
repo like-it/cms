@@ -183,7 +183,7 @@ source.createLi = () => {
                     let ii;
                     for(ii=0; ii < selected_pre.childNodes.length; ii++){
                         let sel = selected_pre.childNodes[ii];
-                        if(position > sel.innerText.length){
+                        if(position > sel.innerText?.length){
                             position -= sel.innerText.length;
                             node = sel;
                         } else {
