@@ -101,7 +101,7 @@ source.createLi = () => {
         li.append(pre);
         ol.append(li);
     }
-    ol.on('keypress', (event) => {
+    ol.on('keyup', (event) => {
         //if arrow down
         //selected = index;
         console.log(event);
