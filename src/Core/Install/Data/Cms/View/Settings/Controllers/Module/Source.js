@@ -114,6 +114,17 @@ source.createLi = () => {
             node.data('nr', index + 1);
             pre = node.select('pre');
             if(selected === index){
+                const selection = window.getSelection();
+                const range = document.createRange();
+                selection.removeAllRanges();
+                range.selectNodeContents(ol);
+                range.collapse(false);
+                pre.html(compiled_row);
+                selection.addRange(range);
+                ol.focus();
+
+
+                /*
                 let selection = window.getSelection();
                 let offset = selection.anchorOffset;
                 console.log(offset);
@@ -124,6 +135,7 @@ source.createLi = () => {
                     selection.modify('extend', 'forward', 'character');
                 }
                 console.log(selection.anchorOffset);
+                 */
             } else {
                 pre.html(compiled_row);
             }
