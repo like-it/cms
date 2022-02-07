@@ -161,6 +161,9 @@ source.createLi = () => {
                             }
                         }
                     }
+                    if(position === 0){
+                        position = 1;
+                    }
                     console.log(node);
                     console.log(position);
                     range.setStart(node, position);
@@ -177,6 +180,9 @@ source.createLi = () => {
                                 break;
                             }
                         }
+                    }
+                    if(position === 0){
+                        position = 1;
                     }
                     console.log(node);
                     console.log(position);
