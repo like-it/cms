@@ -112,6 +112,7 @@ source.createLi = () => {
             node.data('nr', index + 1);
             let pre = node.select('pre');
             if(selected === index){
+                pre.html(compiled_row);
                 let set = window.getSelection();
                 let range_at = window.getSelection().getRangeAt(0);
                 let startOffset = range_at.startOffset + 1;
@@ -126,7 +127,6 @@ source.createLi = () => {
                 console.log(pre);
                 console.log(compiled_row);
                 console.log(range_at);
-                pre.html(compiled_row);
                 range_at.collapse(true);
                 set.removeAllRanges();
                 set.addRange(range_at);
