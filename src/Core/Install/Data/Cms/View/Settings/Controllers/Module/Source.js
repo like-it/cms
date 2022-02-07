@@ -231,6 +231,7 @@ source.createLi = () => {
                     if(node?.innerText?.length >= position){
                         console.log(node);
                         node = node.parentNode;
+                        console.log(node);
                         console.log('length', node.innerText.length, position);
                         range.setStart(node, position);
                     } else {
