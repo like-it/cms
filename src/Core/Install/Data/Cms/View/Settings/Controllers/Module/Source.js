@@ -140,7 +140,7 @@ source.createLi = () => {
                 if (selection.rangeCount) {
                     range = selection.getRangeAt(0);
                     position = range.startOffset;
-                    container = range.startContainer;
+                    container = range.cloneContents();
                 }
                 selected_pre.html(compiled_row);
                 range = document.createRange();
