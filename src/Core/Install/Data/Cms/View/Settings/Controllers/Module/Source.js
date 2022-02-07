@@ -191,6 +191,9 @@ source.createLi = () => {
                             console.log('position5:', position);
                         } else {
                             if(sel.innerText?.length >= 0){
+                                if(selected_pre.childNodes[ii + 1]){
+                                    node = sel;
+                                }
                                 console.log('ii', ii);
                                 console.log('position6:', position);
                                 console.log('try');
