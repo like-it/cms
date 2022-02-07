@@ -157,7 +157,7 @@ source.createLi = () => {
                             position -= sel.innerText.length;
                             console.log('position3:', position);
                         } else {
-                            if(sel.innerText?.length > 0){
+                            if(sel.innerText?.length >= 0){
                                 console.log('true');
                                 break;
                             }
@@ -182,7 +182,7 @@ source.createLi = () => {
                             position -= sel.innerText.length;
                             console.log('position5:', position);
                         } else {
-                            if(sel.innerText?.length > 0){
+                            if(sel.innerText?.length >= 0){
                                 console.log('ii', ii);
                                 console.log('position6:', position);
                                 console.log('try');
