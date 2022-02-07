@@ -97,6 +97,7 @@ source.createLi = () => {
         let pre = create('pre');
         pre.html(compiled_row);
         pre.data('text', row);
+        pre.data('compile', compiled_row);
         li.append(pre);
         ol.append(li);
     }
@@ -114,11 +115,11 @@ source.createLi = () => {
         for(index = 0; index < li.length; index++){
             node = li[index];
             pre = node.select('pre');
-            if(pre.data('text') !== pre.innerText){
+            if(pre.data('compile') !== pre.innerText){
                 selected = index;
                 selected_pre = pre;
             }
-            pre.data('text', pre.innerText);
+            pre.data('text', htmlentities.decode(pre.innerText));
             rows[index] = pre.data('text');
         }
         compile = source.compile(rows);
@@ -128,12 +129,19 @@ source.createLi = () => {
             node.data('nr', index + 1);
             pre = node.select('pre');
             if(selected === index){
-                let position = source.getAnchorPosition();
+                let position = 0;
+                let selection;
+                let range;
+                selection = window.getSelection();
+                if (selection.rangeCount) {
+                    range = selection.getRangeAt(0);
+                    position = range.startOffset;
+                }
                 console.log(pre);
                 console.log(selected_pre);
                 pre.html(compiled_row);
-                let range = document.createRange();
-                let selection = window.getSelection();
+                range = document.createRange();
+                selection = window.getSelection();
                 range.setStart(selected_pre.childNodes[0], position);
                 range.collapse(true);
                 selection.removeAllRanges();
