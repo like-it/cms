@@ -114,30 +114,14 @@ source.createLi = () => {
             if(selected !== index){
                 pre.html(compiled_row);
             } else {
-                // Creates range object
-                let setpos = document.createRange();
-
-                // Creates object for selection
                 let set = window.getSelection();
-
-                // Set start position of range
-                //setpos.setStart(li[selected], 2);
                 let range_at = window.getSelection().getRangeAt(0);
+                console.log(compiled_row);
                 console.log(range_at);
-
                 pre.html(compiled_row);
-
-                // Collapse range within its boundary points
-                // Returns boolean
-                setpos.collapse(true);
-
-                // Remove all ranges set
+                range_at.collapse(true);
                 set.removeAllRanges();
-
-                // Add range with respect to range object.
-                set.addRange(setpos);
-
-                // Set cursor on focus
+                set.addRange(range_at);
                 ol.focus();
             }
         }
