@@ -66,9 +66,12 @@ source.getAnchorPosition = (editableDiv) => {
     selection = window.getSelection();
     if (selection.rangeCount) {
         range = selection.getRangeAt(0);
+        caretPos = range.endOffset;
+        /*
         if (range.commonAncestorContainer.parentNode == editableDiv) {
-            caretPos = range.endOffset;
+
         }
+         */
     }
     return caretPos;
 }
