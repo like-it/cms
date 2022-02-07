@@ -184,6 +184,7 @@ source.createLi = () => {
                         node = sel;
                         if(position >= sel.innerText?.length){
                             if(position === sel.innerText.length){
+                                console.log(sel);
                                 console.log('position7:', position);
                                 break;
                             }
