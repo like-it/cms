@@ -226,26 +226,11 @@ source.createLi = () => {
                     if(node?.innerText?.length <= position){
                         position = node.innerText.length;
                     }
-                    if(
-                        node &&
-                        typeof node.data === 'function' &&
-                        node.data('has', 'text')
-                    ){
-                        node = node.parentNode;
-                        range.setStart(node, position);
+                    if(typeof node.data === 'undefined'){
+
                     } else {
-                        if(
-                            node &&
-                            typeof node.data !== 'function'
-                        ){
-                            node = node.parentNode;
-                            range.setStart(node, position);
-                        } else {
-                            range.setStart(node, position);
-                        }
-
+                        range.setStart(node, position);
                     }
-
                     /*
                     console.log(node);
                     console.log(position);
