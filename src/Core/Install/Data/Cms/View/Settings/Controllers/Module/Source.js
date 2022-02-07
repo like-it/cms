@@ -151,8 +151,8 @@ source.init = () => {
 ready(() => {
     require(
         [
-            root() + 'Rangy/1.3.0/rangy-core.js?' + version(),
-            root() + 'Rangy/1.3.0/rangy-selectionsaverestore.js?' + version(),
+            // root() + 'Rangy/1.3.0/rangy-core.js?' + version(),
+            // root() + 'Rangy/1.3.0/rangy-selectionsaverestore.js?' + version(),
             root() + 'Settings/Controllers/Css/Source.css?' + version()
         ],
         () => {
