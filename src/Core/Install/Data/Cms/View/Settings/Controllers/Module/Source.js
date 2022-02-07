@@ -96,8 +96,8 @@ source.createLi = () => {
         li.data('nr', index + 1);
         let pre = create('pre');
         pre.html(compiled_row);
-        pre.data('text', row);
-        pre.data('compile', compiled_row);
+        pre.data('text', pre.innerText);
+        //pre.data('compile', compiled_row);
         li.append(pre);
         ol.append(li);
     }
