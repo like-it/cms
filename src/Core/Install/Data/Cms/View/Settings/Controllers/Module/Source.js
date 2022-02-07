@@ -115,8 +115,10 @@ source.createLi = () => {
         for (index = 0; index < li.length; index++) {
             node = li[index];
             pre = node.select('pre');
-            console.log(pre.innerText);
+            //console.log(pre.innerText);
             if (pre.data('text') !== pre.innerText) {
+                console.log(pre.data('text'));
+                console.log(pre.innerText);
                 selected = index;
                 selected_pre = pre;
             }
