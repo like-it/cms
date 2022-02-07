@@ -114,7 +114,10 @@ source.createLi = () => {
             node.data('nr', index + 1);
             pre = node.select('pre');
             if(selected === index){
+                console.log(ol.selectionStart);
+                console.log(ol.selectionEnd);
                 pre.html(compiled_row);
+                /*
                 let set = window.getSelection();
                 let range = window.getSelection().getRangeAt(0);
                 let startOffset = range.startOffset + 1;
@@ -136,6 +139,7 @@ source.createLi = () => {
                 set.removeAllRanges();
                 set.addRange(to);
                 ol.focus();
+                 */
             } else {
                 pre.html(compiled_row);
             }
