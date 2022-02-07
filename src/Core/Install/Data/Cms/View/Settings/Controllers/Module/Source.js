@@ -153,6 +153,10 @@ source.createLi = () => {
                         let sel = selected_pre.childNodes[ii];
                         node = sel;
                         if(position >= sel.innerText?.length){
+                            if(position === sel.innerText.length){
+                                console.log('position9:', position);
+                                break;
+                            }
                             console.log('position2:', position);
                             position -= sel.innerText.length;
                             console.log('position3:', position);
@@ -178,6 +182,10 @@ source.createLi = () => {
                         let sel = selected_pre.childNodes[ii];
                         node = sel;
                         if(position >= sel.innerText?.length){
+                            if(position === sel.innerText.length){
+                                console.log('position7:', position);
+                                break;
+                            }
                             console.log('position4:', position);
                             position -= sel.innerText.length;
                             console.log('position5:', position);
