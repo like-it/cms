@@ -168,6 +168,22 @@ source.createLi = () => {
                     console.log(position);
                     range.setStart(node, position);
                 } else {
+                    let ii;
+                    for(ii=0; ii < selected_pre.childNodes.length; ii++){
+                        let sel = selected_pre.childNodes[ii];
+                        if(position >= sel.innerText?.length){
+                            position -= sel.innerText.length;
+                            node = sel;
+                        } else {
+                            if(sel.innerText?.length > 0){
+                                node = sel;
+                                break;
+                            }
+                        }
+                    }
+                    if(position === 0){
+                        position = 1;
+                    }
                     console.log(node);
                     console.log(position);
                     range.setStart(node, position);
