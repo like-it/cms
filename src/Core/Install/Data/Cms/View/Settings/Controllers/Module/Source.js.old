@@ -124,8 +124,65 @@ source.createLi = () => {
             //pre.data('compile', pre.innerText);
             rows[index] = pre.data('text');
         }
-        console.log(selected);
-        console.log(selected_pre);
+        /*
+        compile = source.compile(rows);
+        for(index=0; index < rows.length; index++){
+            let compiled_row = compile[index];
+            node = li[index];
+            node.data('nr', index + 1);
+            pre = node.select('pre');
+            if(selected === index){
+                let position = 0;
+                let selection;
+                let range;
+                selection = window.getSelection();
+                if (selection.rangeCount) {
+                    range = selection.getRangeAt(0);
+                    position = range.startOffset;
+                }
+                console.log(pre);
+                console.log(selected_pre);
+                pre.html(compiled_row);
+                range = document.createRange();
+                selection = window.getSelection();
+                range.setStart(selected_pre.childNodes[0], position);
+                range.collapse(true);
+                selection.removeAllRanges();
+                selection.addRange(range);
+                ol.focus();
+
+
+
+                /*
+                let save_selection = rangy.saveSelection();
+                //let save_selection_active_element = document.activeElement;
+                pre.html(compiled_row);
+                console.log(save_selection);
+                rangy.restoreSelection(save_selection, true);
+                window.setTimeout(function() {
+                    if (save_selection_active_element && typeof save_selection_active_element.focus != "undefined") {
+                        save_selection_active_element.focus();
+                    }
+                    //ol.focus();
+                }, 1);
+                */
+
+                /*
+                let selection = window.getSelection();
+                let offset = selection.anchorOffset;
+                console.log(offset);
+                pre.html(compiled_row);
+                selection = window.getSelection();
+                let index;
+                for(index=selection.anchorOffset;index < offset; index++){
+                    selection.modify('extend', 'forward', 'character');
+                }
+                console.log(selection.anchorOffset);
+                 */
+            } else {
+                pre.html(compiled_row);
+            }
+        }
     });
 };
 
