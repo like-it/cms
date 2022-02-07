@@ -166,7 +166,7 @@ source.createLi = () => {
                     if(position === 0){
                         position = 1;
                     }
-                    if(node.innerText.length <= position){
+                    if(node.innerText?.length <= position){
                         position = node.innerText.length;
                     }
                     console.log(node);
@@ -192,7 +192,7 @@ source.createLi = () => {
                         position = 1;
                     }
                     console.log(node);
-                    if(node.innerText.length <= position){
+                    if(node.innerText?.length <= position){
                         position = node.innerText.length;
                     }
                     console.log(position);
