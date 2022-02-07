@@ -232,8 +232,18 @@ source.createLi = () => {
                         node.data('has', 'text')
                     ){
                         node = node.parentNode;
-                    } else {
                         range.setStart(node, position);
+                    } else {
+                        if(
+                            node &&
+                            typeof node.data !== 'function'
+                        ){
+                            node = node.parentNode;
+                            range.setStart(node, position);
+                        } else {
+                            range.setStart(node, position);
+                        }
+
                     }
 
                     /*
