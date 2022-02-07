@@ -111,20 +111,18 @@ source.createLi = () => {
             let node = li[index];
             node.data('nr', index + 1);
             let pre = node.select('pre');
-            if(selected !== index){
-                pre.html(compiled_row);
-            } else {
+            if(selected === index){
                 let set = window.getSelection();
                 let range_at = window.getSelection().getRangeAt(0);
                 let startOffset = range_at.startOffset + 1;
                 let endOffset = range_at.endOffset + 1;
-                //let startContainer = range_at.range.startContainer;
+                let startContainer = range_at.range.startContainer;
+                console.log(startContainer);
                 console.log(range_at);
 
                 // range_at.setStart(pre.childNodes[0], startOffset);
                 // range_at.setEnd(pre.childNodes[0], endOffset);
                 console.log(pre);
-                return;
                 console.log(compiled_row);
                 console.log(range_at);
                 pre.html(compiled_row);
@@ -132,6 +130,8 @@ source.createLi = () => {
                 set.removeAllRanges();
                 set.addRange(range_at);
                 ol.focus();
+            } else {
+                pre.html(compiled_row);
             }
         }
     });
