@@ -109,12 +109,14 @@ source.createLi = () => {
         let node;
         let pre;
         let selected;
+        let selected_pre;
         rows = [];
         for(index = 0; index < li.length; index++){
             node = li[index];
             pre = node.select('pre');
             if(pre.data('text') !== pre.innerText){
                 selected = index;
+                selected_pre = pre;
             }
             pre.data('text', pre.innerText);
             rows[index] = pre.data('text');
@@ -126,8 +128,9 @@ source.createLi = () => {
             node.data('nr', index + 1);
             pre = node.select('pre');
             if(selected === index){
-                let position = source.getAnchorPosition(ol);
+                let position = source.getAnchorPosition();
                 console.log(pre);
+                console.log(selected_pre);
                 pre.html(compiled_row);
                 let range = document.createRange();
                 let selection = window.getSelection();
