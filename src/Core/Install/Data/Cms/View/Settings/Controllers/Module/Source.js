@@ -226,7 +226,10 @@ source.createLi = () => {
                     if(node?.innerText?.length <= position){
                         position = node.innerText.length;
                     }
-                    if(!node?.data('has', 'text')){
+                    if(
+                        node &&
+                        typeof node.data === 'function' &&
+                        node.data('has', 'text')){
                         node = node.parentNode;
                     }
                     range.setStart(node, position);
