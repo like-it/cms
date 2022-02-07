@@ -232,13 +232,15 @@ source.createLi = () => {
                         console.log('length', node.innerText.length, position);
                         range.setStart(node, position);
                     } else {
-                        if(node?.innerText === 'undefined'){
+                        if(node?.innerText?.length){
                             console.log('this too');
+                        } else {
+                            console.log(node);
+                            console.log(node?.innerText?.length);
+                            console.log(position);
+                            console.log('this is happening...');
                         }
-                        console.log(node);
-                        console.log(node?.innerText?.length);
-                        console.log(position);
-                        console.log('this is happening...');
+
                     }
                 }
                 console.log(selected_pre);
