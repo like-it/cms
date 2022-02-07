@@ -51,7 +51,7 @@ source.compile = (rows) => {
         if(is.empty(row)){
             row = '&ZeroWidthSpace;'
         }
-        console.log(row);
+        //console.log(row);
         rows[index] = row;
         content += row;
     }
@@ -166,6 +166,9 @@ source.createLi = () => {
                     if(position === 0){
                         position = 1;
                     }
+                    if(node.innerText.length <= position){
+                        position = node.innerText.length;
+                    }
                     console.log(node);
                     console.log(position);
                     range.setStart(node, position);
@@ -189,6 +192,9 @@ source.createLi = () => {
                         position = 1;
                     }
                     console.log(node);
+                    if(node.innerText.length <= position){
+                        position = node.innerText.length;
+                    }
                     console.log(position);
                     range.setStart(node, position);
                 }
