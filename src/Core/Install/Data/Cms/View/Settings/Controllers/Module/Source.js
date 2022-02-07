@@ -145,7 +145,7 @@ source.createLi = () => {
                 selected_pre.html(compiled_row);
                 range = document.createRange();
                 selection = window.getSelection();
-                console.log(container);
+                console.log(container.parentNode);
                 range.setStart(container, position);
                 range.collapse(true);
                 selection.removeAllRanges();
