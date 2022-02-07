@@ -159,6 +159,8 @@ source.createLi = () => {
                             position -= sel.innerText.length;
                         }
                     }
+                    console.log(node);
+                    console.log(position);
                     range.setStart(node, position);
                 } else {
                     range.setStart(node, position);
