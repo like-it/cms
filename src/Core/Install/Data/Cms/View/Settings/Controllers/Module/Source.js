@@ -119,6 +119,7 @@ source.createLi = () => {
                 // console.log(pre.selectionStart);
                 // console.log(pre.selectionEnd);
                 pre.html(compiled_row);
+                selection.collapseToEnd();
                 /*
                 let set = window.getSelection();
                 let range = window.getSelection().getRangeAt(0);
