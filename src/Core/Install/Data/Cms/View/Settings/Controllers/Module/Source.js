@@ -112,11 +112,11 @@ source.createLi = () => {
         let selected;
         let selected_pre;
         rows = [];
-        for(index = 0; index < li.length; index++){
+        for (index = 0; index < li.length; index++) {
             node = li[index];
             pre = node.select('pre');
             console.log(pre.innerText);
-            if(pre.data('text') !== pre.innerText){
+            if (pre.data('text') !== pre.innerText) {
                 selected = index;
                 selected_pre = pre;
             }
@@ -125,7 +125,28 @@ source.createLi = () => {
             rows[index] = pre.data('text');
         }
         console.log(selected);
-        console.log(selected_pre);
+        compile = source.compile(rows);
+        for (index = 0; index < rows.length; index++) {
+            let compiled_row = compile[index];
+            if (selected === index) {
+                let position = 0;
+                let selection;
+                let range;
+                selection = window.getSelection();
+                if (selection.rangeCount) {
+                    range = selection.getRangeAt(0);
+                    position = range.startOffset;
+                }
+                pre.html(compiled_row);
+                range = document.createRange();
+                selection = window.getSelection();
+                range.setStart(selected_pre.childNodes[0], position);
+                range.collapse(true);
+                selection.removeAllRanges();
+                selection.addRange(range);
+                ol.focus();
+            }
+        }
     });
 };
 
@@ -134,13 +155,13 @@ source.init = () => {
 };
 
 ready(() => {
-    require(
-        [
-            // root() + 'Rangy/1.3.0/rangy-core.js?' + version(),
-            // root() + 'Rangy/1.3.0/rangy-selectionsaverestore.js?' + version(),
-            root() + 'Settings/Controllers/Css/Source.css?' + version()
-        ],
-        () => {
-            source.init();
-        });
+require(
+[
+    // root() + 'Rangy/1.3.0/rangy-core.js?' + version(),
+    // root() + 'Rangy/1.3.0/rangy-selectionsaverestore.js?' + version(),
+    root() + 'Settings/Controllers/Css/Source.css?' + version()
+],
+() => {
+    source.init();
+});
 });
