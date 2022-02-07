@@ -227,7 +227,7 @@ source.createLi = () => {
                         position = node.innerText.length;
                     }
                     if(typeof node.data === 'undefined'){
-
+                        console.log(node);
                     } else {
                         range.setStart(node, position);
                     }
