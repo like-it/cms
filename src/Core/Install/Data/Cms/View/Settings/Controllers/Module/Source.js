@@ -148,23 +148,32 @@ source.createLi = () => {
                 selection = window.getSelection();
                 let node = selected_pre.childNodes[selected_pre.childNodes.length - 1];
                 if(selected_pre.childNodes.length > oldLength){
-                    console.log(node);
                     let ii;
                     for(ii=0; ii < selected_pre.childNodes.length; ii++){
                         let sel = selected_pre.childNodes[ii];
-                        if(sel.innerText?.length > position){
+                        if(position > sel.innerText?.length){
+                            position -= sel.innerText.length;
                             node = sel;
-                            break;
                         } else {
-                            if(sel.innerText?.length){
-                                position -= sel.innerText.length;
-                            }
+                            node = sel;
                         }
                     }
                     console.log(node);
                     console.log(position);
                     range.setStart(node, position);
                 } else {
+                    let ii;
+                    for(ii=0; ii < selected_pre.childNodes.length; ii++){
+                        let sel = selected_pre.childNodes[ii];
+                        if(position > sel.innerText?.length){
+                            position -= sel.innerText.length;
+                            node = sel;
+                        } else {
+                            node = sel;
+                        }
+                    }
+                    console.log(node);
+                    console.log(position);
                     range.setStart(node, position);
                 }
                 console.log(selected_pre);
