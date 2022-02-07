@@ -120,9 +120,11 @@ source.createLi = () => {
                 let endOffset = range_at.endOffset + 1;
                 //let startContainer = range_at.range.startContainer;
                 console.log(range_at);
+
+                range_at.setStart(pre.childNodes[0], startOffset);
+                range_at.setEnd(pre.childNodes[0], endOffset);
+                console.log(range_at);
                 return;
-                // range_at.setStart(, startOffset);
-                // range_at.setEnd(range_at.range.endContainer, endOffset);
                 console.log(compiled_row);
                 console.log(range_at);
                 pre.html(compiled_row);
