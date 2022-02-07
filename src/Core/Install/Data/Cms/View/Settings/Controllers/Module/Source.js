@@ -151,13 +151,14 @@ source.createLi = () => {
                     let ii;
                     for(ii=0; ii < selected_pre.childNodes.length; ii++){
                         let sel = selected_pre.childNodes[ii];
+                        node = sel;
                         if(position >= sel.innerText?.length){
-                            position -= sel.innerText.length;
                             console.log('position2:', position);
-                            node = sel;
+                            position -= sel.innerText.length;
+                            console.log('position3:', position);
                         } else {
                             if(sel.innerText?.length > 0){
-                                node = sel;
+                                console.log('true');
                                 break;
                             }
                         }
@@ -172,13 +173,14 @@ source.createLi = () => {
                     let ii;
                     for(ii=0; ii < selected_pre.childNodes.length; ii++){
                         let sel = selected_pre.childNodes[ii];
+                        node = sel;
                         if(position >= sel.innerText?.length){
+                            console.log('position4:', position);
                             position -= sel.innerText.length;
-                            console.log('position:', position);
-                            node = sel;
+                            console.log('position5:', position);
                         } else {
                             if(sel.innerText?.length > 0){
-                                node = sel;
+                                console.log('try');
                                 break;
                             }
                         }
