@@ -115,38 +115,14 @@ source.createLi = () => {
             pre = node.select('pre');
             if(selected === index){
                 let selection = window.getSelection();
-                console.log(selection);
-                console.log(selection.anchorOffset);
-                // console.log(pre.selectionStart);
-                // console.log(pre.selectionEnd);
+                let offset = selection.anchorOffset;
                 pre.html(compiled_row);
                 selection = window.getSelection();
+                let index;
+                for(index=selection.anchorOffset;index < offset; index++){
+                    selection.modify('extend', 'forward', 'character');
+                }
                 console.log(selection.anchorOffset);
-                //selection.modify('extend', 'forward', 'character');
-                selection.collapseToEnd();
-                /*
-                let set = window.getSelection();
-                let range = window.getSelection().getRangeAt(0);
-                let startOffset = range.startOffset + 1;
-                let endOffset = range.endOffset + 1;
-                let startContainer = range.startContainer;
-                let endContainer = range.endContainer;
-                console.log(startContainer);
-                console.log(range);
-
-                let to = document.createRange();
-
-
-                to.setStart(startContainer, startOffset);
-                to.setEnd(endContainer, endOffset);
-                console.log(pre);
-                console.log(compiled_row);
-                console.log(to);
-                to.collapse(true);
-                set.removeAllRanges();
-                set.addRange(to);
-                ol.focus();
-                 */
             } else {
                 pre.html(compiled_row);
             }
