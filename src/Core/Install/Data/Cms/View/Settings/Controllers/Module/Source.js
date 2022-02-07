@@ -114,8 +114,8 @@ source.createLi = () => {
             node.data('nr', index + 1);
             pre = node.select('pre');
             if(selected === index){
-                console.log(ol.selectionStart);
-                console.log(ol.selectionEnd);
+                console.log(pre.selectionStart);
+                console.log(pre.selectionEnd);
                 pre.html(compiled_row);
                 /*
                 let set = window.getSelection();
