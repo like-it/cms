@@ -149,7 +149,10 @@ source.createLi = () => {
                 range.collapse(true);
                 selection.removeAllRanges();
                 selection.addRange(range);
-                ol.focus();
+                window.setTimeout(() => {
+                    ol.focus();
+                }, 1);
+
             }
         }
     });
