@@ -222,6 +222,7 @@ source.createLi = () => {
                     console.log(node);
                     if(node.innerText?.length <= position){
                         position = node.innerText.length;
+                        position = 2;
                     }
                     console.log(node);
                     console.log(position);
