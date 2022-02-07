@@ -116,12 +116,13 @@ source.createLi = () => {
                 let range_at = window.getSelection().getRangeAt(0);
                 let startOffset = range_at.startOffset + 1;
                 let endOffset = range_at.endOffset + 1;
-                let startContainer = range_at.range.startContainer;
+                let startContainer = range_at.startContainer;
+                let endContainer = range_at.endContainer;
                 console.log(startContainer);
                 console.log(range_at);
 
-                // range_at.setStart(pre.childNodes[0], startOffset);
-                // range_at.setEnd(pre.childNodes[0], endOffset);
+                range_at.setStart(startContainer, startOffset);
+                range_at.setEnd(endContainer, endOffset);
                 console.log(pre);
                 console.log(compiled_row);
                 console.log(range_at);
