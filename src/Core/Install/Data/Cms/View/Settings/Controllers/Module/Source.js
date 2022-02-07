@@ -151,11 +151,23 @@ source.createLi = () => {
                     let ii;
                     for(ii=0; ii < selected_pre.childNodes.length; ii++){
                         let sel = selected_pre.childNodes[ii];
-                        if(position > sel.innerText?.length){
+                        node = sel;
+                        if(position >= sel.innerText?.length){
+                            if(position === sel.innerText.length){
+                                sel = selected_pre.childNodes[ii + 1];
+                                node = sel;
+                                console.log('position9:', position);
+                                break;
+                            }
+                            console.log('position2:', position);
                             position -= sel.innerText.length;
-                            node = sel;
+                            console.log('position3:', position);
                         } else {
-                            break;
+                            if(sel.innerText?.length >= 0){
+                                node = selected_pre.childNodes[selected_pre.childNodes.length - 1];
+                                console.log('true');
+                                break;
+                            }
                         }
                     }
                     if(position === 0){
