@@ -239,37 +239,39 @@ source.createLi = () => {
                     if(node?.innerText?.length <= position){
                         position = node.innerText.length;
                     }
-                    if(typeof node.data === 'undefined'){
-                        if(event.code === 'Backspace'){
-                            let parent = node.parentNode;
-                            if(parent){
-                                parent.html(parent.data('text'));
-                                range.setStart(parent?.childNodes[0], position);
-                            }
+                    if(event.code === 'ArrowUp'){
+                        selected = parseInt(ol.data('last-selected'));
+                        if(selected > 0){
+                            selected--;
+                            ol.data('last-selected', selected);
+                            range.setStart(li[selected]?.childNodes[0], position);
                         }
-                        else if(event.code === 'ArrowUp'){
-                            selected = parseInt(ol.data('last-selected'));
-                            if(selected > 0){
-                                selected--;
-                                ol.data('last-selected', selected);
-                                range.setStart(li[selected]?.childNodes[0], position);
-                            }
-                        }
-                        else if(event.code === 'ArrowDown'){
-                            selected = parseInt(ol.data('last-selected'));
-                            let li = ol.select('li');
-                            if(selected < li.length - 1){
-                                selected++;
-                                ol.data('last-selected', selected);
-                                range.setStart(li[selected]?.childNodes[0], position);
-                            }
-                        }
-                        //console.log(node);
-                        //console.log(node.parentNode);
-                        //range.setStart(node, position);
-                    } else {
-                        range.setStart(node, position);
                     }
+                    else if(event.code === 'ArrowDown'){
+                        selected = parseInt(ol.data('last-selected'));
+                        let li = ol.select('li');
+                        if(selected < li.length - 1){
+                            selected++;
+                            ol.data('last-selected', selected);
+                            range.setStart(li[selected]?.childNodes[0], position);
+                        }
+                    } else {
+                        if(typeof node.data === 'undefined'){
+                            if(event.code === 'Backspace'){
+                                let parent = node.parentNode;
+                                if(parent){
+                                    parent.html(parent.data('text'));
+                                    range.setStart(parent?.childNodes[0], position);
+                                }
+                            }
+                                //console.log(node);
+                                //console.log(node.parentNode);
+                                //range.setStart(node, position);
+                        } else {
+                            range.setStart(node, position);
+                        }
+                    }
+
                     /*
                     console.log(node);
                     console.log(position);
