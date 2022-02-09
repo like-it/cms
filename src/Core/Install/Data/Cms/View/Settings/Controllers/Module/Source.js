@@ -280,7 +280,7 @@ source.createLi = () => {
                                 //console.log(node.parentNode);
                                 //range.setStart(node, position);
                         } else {
-                            if(node.innerText.length <= position){
+                            if(node?.innerText?.length <= position){
                                 range.setStart(node, node.innerText.length);
                             } else {
                                 range.setStart(node, position);
