@@ -244,6 +244,7 @@ source.createLi = () => {
                         selected = parseInt(ol.data('last-selected'));
                         if(selected > 0){
                             selected--;
+                            let li = ol.select('li');
                             //ol.data('last-selected', selected);
                             if(li[selected]?.childNodes[0].innerText.length <= position){
                                 range.setStart(li[selected]?.childNodes[0], li[selected]?.childNodes[0].innerText.length);
