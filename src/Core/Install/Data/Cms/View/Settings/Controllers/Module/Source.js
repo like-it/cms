@@ -244,7 +244,11 @@ source.createLi = () => {
                         if(selected > 0){
                             selected--;
                             ol.data('last-selected', selected);
-                            range.setStart(li[selected]?.childNodes[0], position);
+                            if(li[selected]?.childNodes[0].innerText.length <= position){
+                                range.setStart(li[selected]?.childNodes[0], li[selected]?.childNodes[0].innerText.length);
+                            } else {
+                                range.setStart(li[selected]?.childNodes[0], position);
+                            }
                         }
                     }
                     else if(event.code === 'ArrowDown'){
@@ -253,7 +257,11 @@ source.createLi = () => {
                         if(selected < li.length - 1){
                             selected++;
                             ol.data('last-selected', selected);
-                            range.setStart(li[selected]?.childNodes[0], position);
+                            if(li[selected]?.childNodes[0].innerText.length <= position){
+                                range.setStart(li[selected]?.childNodes[0], li[selected]?.childNodes[0].innerText.length);
+                            } else {
+                                range.setStart(li[selected]?.childNodes[0], position);
+                            }
                         }
                     } else {
                         if(typeof node.data === 'undefined'){
@@ -261,7 +269,11 @@ source.createLi = () => {
                                 let parent = node.parentNode;
                                 if(parent){
                                     parent.html(parent.data('text'));
-                                    range.setStart(parent?.childNodes[0], position);
+                                    if(li[selected]?.childNodes[0].innerText.length <= position){
+                                        range.setStart(li[selected]?.childNodes[0], li[selected]?.childNodes[0].innerText.length);
+                                    } else {
+                                        range.setStart(li[selected]?.childNodes[0], position);
+                                    }
                                 }
                             }
                                 //console.log(node);
