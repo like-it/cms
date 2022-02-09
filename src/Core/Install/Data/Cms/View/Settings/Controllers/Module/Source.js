@@ -243,7 +243,7 @@ source.createLi = () => {
                         selected = parseInt(ol.data('last-selected'));
                         if(selected > 0){
                             selected--;
-                            ol.data('last-selected', selected);
+                            //ol.data('last-selected', selected);
                             if(li[selected]?.childNodes[0].innerText.length <= position){
                                 range.setStart(li[selected]?.childNodes[0], li[selected]?.childNodes[0].innerText.length);
                             } else {
@@ -256,7 +256,7 @@ source.createLi = () => {
                         let li = ol.select('li');
                         if(selected < li.length - 1){
                             selected++;
-                            ol.data('last-selected', selected);
+                            //ol.data('last-selected', selected);
                             if(li[selected]?.childNodes[0].innerText.length <= position){
                                 range.setStart(li[selected]?.childNodes[0], li[selected]?.childNodes[0].innerText.length);
                             } else {
