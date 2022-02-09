@@ -129,7 +129,7 @@ source.createLi = () => {
         }
         if(is.empty(selected)){
             selected = parseInt(ol.data('last-selected'));
-            node = li[index];
+            node = li[selected];
             selected_pre = node.select('pre');
         }
         console.log(selected);
