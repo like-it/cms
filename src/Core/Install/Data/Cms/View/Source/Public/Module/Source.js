@@ -3,7 +3,7 @@ let php = {};
 php.replace = [
     {
         "search" : "class ",
-        "replace": "<span class=\"code-php-class\">class</span>"
+        "replace": "<span class=\"code-php-class\">class</span> "
     },
     {
         "search" : "<?php",
@@ -11,31 +11,31 @@ php.replace = [
     },
     {
         "search" : "namespace ",
-        "replace": "<span class=\"code-php-namespace\">namespace</span>"
+        "replace": "<span class=\"code-php-namespace\">namespace</span> "
     },
     {
         "search" : "use ",
-        "replace": "<span class=\"code-php-use\">use</span>"
+        "replace": "<span class=\"code-php-use\">use</span> "
     },
     {
         "search" : "extends ",
-        "replace": "<span class=\"code-php-extends\">extends</span>"
+        "replace": "<span class=\"code-php-extends\">extends</span> "
     },
     {
         "search" : "private ",
-        "replace": "<span class=\"code-php-private\">private</span>"
+        "replace": "<span class=\"code-php-private\">private</span> "
     },
     {
         "search" : "protected ",
-        "replace": "<span class=\"code-php-protected\">protected</span>"
+        "replace": "<span class=\"code-php-protected\">protected</span> "
     },
     {
         "search" : "public ",
-        "replace": "<span class=\"code-php-public\">public</span>"
+        "replace": "<span class=\"code-php-public\">public</span> "
     },
     {
         "search" : "const ",
-        "replace": "<span class=\"code-php-const\">const</span>"
+        "replace": "<span class=\"code-php-const\">const</span> "
     },
     {
         "search" : "{",
