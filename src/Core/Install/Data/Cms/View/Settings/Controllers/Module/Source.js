@@ -120,11 +120,17 @@ source.createLi = () => {
                 console.log(pre.data('text'));
                 console.log(pre.innerText);
                 selected = index;
+                ol.data('last-selected', selected);
                 selected_pre = pre;
             }
             pre.data('text', pre.innerText);
             //pre.data('compile', pre.innerText);
             rows[index] = pre.data('text');
+        }
+        if(empty(selected)){
+            selected = parseInt(ol.data('last-selected'));
+            node = li[index];
+            selected_pre = node.select('pre');
         }
         console.log(selected);
         compile = source.compile(rows);
