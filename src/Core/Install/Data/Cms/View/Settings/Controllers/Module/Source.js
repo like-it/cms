@@ -101,6 +101,23 @@ source.createLi = () => {
         li.append(pre);
         ol.append(li);
     }
+    ol.on('keypress', (event) => {
+        if(event.code === 'ArrowUp'){
+            selected = parseInt(ol.data('last-selected'));
+            if(selected > 0){
+                selected--;
+                ol.data('last-selected', selected);
+            }
+        }
+        else if(event.code === 'ArrowDown'){
+            selected = parseInt(ol.data('last-selected'));
+            let li = ol.select('li');
+            if(selected < li.length - 1){
+                selected++;
+                ol.data('last-selected', selected);
+            }
+        }
+    });
     ol.on('keyup', (event) => {
         //if arrow down
         //selected = index;
@@ -131,7 +148,7 @@ source.createLi = () => {
             selected = parseInt(ol.data('last-selected'));
             node = li[selected];
             selected_pre = node.select('pre');
-            ol.data('delete', 'last-selected');
+            //ol.data('delete', 'last-selected');
         }
         console.log(selected);
         compile = source.compile(rows);
