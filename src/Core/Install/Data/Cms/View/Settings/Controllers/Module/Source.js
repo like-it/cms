@@ -159,6 +159,7 @@ source.createLi = () => {
                                     sel = selected_pre.childNodes[ii + 1];
                                     node = sel;
                                     console.log('position9:', position);
+                                    console.log(node);
                                 }
                                 break;
                             }
