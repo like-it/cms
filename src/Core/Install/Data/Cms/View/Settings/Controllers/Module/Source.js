@@ -227,9 +227,16 @@ source.createLi = () => {
                         position = node.innerText.length;
                     }
                     if(typeof node.data === 'undefined'){
-                        console.log(node);
-                        console.log(node.parentNode);
-                        range.setStart(node, position);
+                        if(event.code === 'Backspace'){
+                            let parent = node.parentNode;
+                            if(parent){
+                                parent.html(parent.data('text').substring(0, -1));
+                                range.setStart(parent?.childNodes[0], position);
+                            }
+                        }
+                        //console.log(node);
+                        //console.log(node.parentNode);
+                        //range.setStart(node, position);
                     } else {
                         range.setStart(node, position);
                     }

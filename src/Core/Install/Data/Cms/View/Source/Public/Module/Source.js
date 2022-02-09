@@ -2,7 +2,7 @@ let php = {};
 
 php.replace = [
     {
-        "search" : "class",
+        "search" : "class ",
         "replace": "<span class=\"code-php-class\">class</span>"
     },
     {
@@ -10,31 +10,31 @@ php.replace = [
         "replace": "<span class=\"code-php-start\">&lt;&quest;php</span>"
     },
     {
-        "search" : "namespace",
+        "search" : "namespace ",
         "replace": "<span class=\"code-php-namespace\">namespace</span>"
     },
     {
-        "search" : "use",
+        "search" : "use ",
         "replace": "<span class=\"code-php-use\">use</span>"
     },
     {
-        "search" : "extends",
+        "search" : "extends ",
         "replace": "<span class=\"code-php-extends\">extends</span>"
     },
     {
-        "search" : "private",
+        "search" : "private ",
         "replace": "<span class=\"code-php-private\">private</span>"
     },
     {
-        "search" : "protected",
+        "search" : "protected ",
         "replace": "<span class=\"code-php-protected\">protected</span>"
     },
     {
-        "search" : "public",
+        "search" : "public ",
         "replace": "<span class=\"code-php-public\">public</span>"
     },
     {
-        "search" : "const",
+        "search" : "const ",
         "replace": "<span class=\"code-php-const\">const</span>"
     },
     {
