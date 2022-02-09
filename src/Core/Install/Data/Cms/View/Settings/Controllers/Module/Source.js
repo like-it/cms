@@ -109,6 +109,9 @@ source.createLi = () => {
         //selected = index;
         console.log(event);
         let li = ol.select('li');
+            if(!li){
+                return;
+            }
         let index;
         let node;
         let pre;
