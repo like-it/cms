@@ -127,7 +127,7 @@ source.createLi = () => {
             //pre.data('compile', pre.innerText);
             rows[index] = pre.data('text');
         }
-        if(empty(selected)){
+        if(is.empty(selected)){
             selected = parseInt(ol.data('last-selected'));
             node = li[index];
             selected_pre = node.select('pre');
