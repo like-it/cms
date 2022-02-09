@@ -131,6 +131,7 @@ source.createLi = () => {
             selected = parseInt(ol.data('last-selected'));
             node = li[selected];
             selected_pre = node.select('pre');
+            ol.data('delete', 'last-selected');
         }
         console.log(selected);
         compile = source.compile(rows);
