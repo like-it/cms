@@ -228,6 +228,8 @@ source.createLi = () => {
                     }
                     if(typeof node.data === 'undefined'){
                         console.log(node);
+                        console.log(node.parentNode);
+                        range.setStart(node, position);
                     } else {
                         range.setStart(node, position);
                     }
