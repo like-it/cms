@@ -142,6 +142,7 @@ source.createLi = () => {
                     position = range.startOffset;
                     //container = range.cloneContents();
                 }
+                selected_pre.normalize();
                 let oldLength = selected_pre.childNodes.length;
                 selected_pre.html(compiled_row);
                 range = document.createRange();
@@ -184,6 +185,7 @@ source.createLi = () => {
                     range.setStart(node, position);
                 } else {
                     let ii;
+                    selected_pre.normalize();
                     for(ii=0; ii < selected_pre.childNodes.length; ii++){
                         let sel = selected_pre.childNodes[ii];
                         if(position > sel.innerText?.length){
