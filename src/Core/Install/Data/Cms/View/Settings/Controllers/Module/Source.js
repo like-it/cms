@@ -99,6 +99,10 @@ source.createLi = () => {
         let pre = create('pre');
         pre.html(compiled_row);
         pre.data('text', pre.innerText);
+        pre.on('keypress', (event) => {
+            pre.data('text', pre.innerText);
+            console.log('keypress pre');
+        });
         //pre.data('compile', compiled_row);
         li.append(pre);
         ol.append(li);
