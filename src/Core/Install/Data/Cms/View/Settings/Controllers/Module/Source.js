@@ -105,24 +105,27 @@ source.createLi = () => {
         ol.append(li);
     }
     ol.on('keypress', (event) => {
-        let li = ol.select('li');
-        for(index=0; index < li.length; index++){
-            let record = li[index];
-            record.data('nr', index + 1);
-            let pre = record.select('pre');
-            console.log(pre.innerText);
-            pre.data('text', pre.innerText);
-        }
-        let list = ol.select('pre');
-        let content = [];
-        for(index=0; index < list.length; index++){
-            content[index] = list[index].data('text');
-        }
-        ol.data('content', implode("\n", content));
-        console.log(ol.data('content'));
-        switch(event.code){
+        setTimeout( () => {
+            let li = ol.select('li');
+            for(index=0; index < li.length; index++){
+                let record = li[index];
+                record.data('nr', index + 1);
+                let pre = record.select('pre');
+                console.log(pre.innerText);
+                pre.data('text', pre.innerText);
+            }
+            let list = ol.select('pre');
+            let content = [];
+            for(index=0; index < list.length; index++){
+                content[index] = list[index].data('text');
+            }
+            ol.data('content', implode("\n", content));
+            console.log(ol.data('content'));
+            switch(event.code){
 
-        }
+            }
+        }, 1);
+
     });
     ol.on('keyup', (event) => {
 
