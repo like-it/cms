@@ -99,16 +99,25 @@ source.createLi = () => {
         let pre = create('pre');
         pre.html(compiled_row);
         pre.data('text', pre.innerText);
-        pre.on('keypress', (event) => {
-            pre.data('text', pre.innerText);
-            console.log('keypress pre');
-        });
         //pre.data('compile', compiled_row);
         li.append(pre);
         ol.append(li);
     }
     ol.on('keypress', (event) => {
-        console.log(event);
+        let li = ol.select('li');
+        for(index=0; index < li.length; index++){
+            let record = li[index];
+            li.data('nr', index + 1);
+            let pre =li.select('pre');
+            pre.data('text', pre.innerText);
+        }
+        let list = ol.select('pre');
+        let content = [];
+        for(index=0; index < list.length; index++){
+            content[index] = list.data('text');
+        }
+        ol.data('content', content.implode("\n"));
+        console.log(ol.data('content'));
         switch(event.code){
 
         }
