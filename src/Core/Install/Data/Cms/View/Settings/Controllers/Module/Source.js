@@ -108,8 +108,8 @@ source.createLi = () => {
         let li = ol.select('li');
         for(index=0; index < li.length; index++){
             let record = li[index];
-            li.data('nr', index + 1);
-            let pre = li.select('pre');
+            record.data('nr', index + 1);
+            let pre = record.select('pre');
             console.log(pre.innerText);
             pre.data('text', pre.innerText);
         }
