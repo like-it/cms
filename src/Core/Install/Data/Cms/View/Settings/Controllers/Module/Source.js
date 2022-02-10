@@ -102,9 +102,12 @@ source.createLi = () => {
         //pre.data('compile', compiled_row);
         li.append(pre);
         ol.append(li);
-    }     
+    }
     ol.on('keypress', (event) => {
+        console.log(event);
+        switch(event.code){
 
+        }
     });
     ol.on('keyup', (event) => {
 
