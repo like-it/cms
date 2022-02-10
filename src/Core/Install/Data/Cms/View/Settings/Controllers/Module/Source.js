@@ -111,7 +111,7 @@ source.createLi = () => {
                 let record = li[index];
                 record.data('nr', index + 1);
                 let pre = record.select('pre');
-                console.log(pre.innerText);
+                //console.log(pre.innerText);
                 pre.data('text', pre.innerText);
             }
             let list = ol.select('pre');
@@ -120,9 +120,10 @@ source.createLi = () => {
                 content[index] = list[index].data('text');
             }
             ol.data('content', implode("\n", content));
-            console.log(ol.data('content'));
+            //console.log(ol.data('content'));
+            console.log(event);
             switch(event.code){
-
+                // case ''
             }
         }, 1);
 
