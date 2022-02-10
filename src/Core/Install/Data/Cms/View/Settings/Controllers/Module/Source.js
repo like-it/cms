@@ -85,6 +85,11 @@ source.createLi = () => {
         //init empty content line
         return;
     }
+    const html = hljs.highlight(content, {language: 'php'}).value
+    console.log(html);
+
+
+    /*
     let rows = content.split("\n");
     let compile = source.compile(rows);
     let index;
@@ -101,234 +106,12 @@ source.createLi = () => {
         li.append(pre);
         ol.append(li);
     }
+     */
     ol.on('keypress', (event) => {
 
     });
     ol.on('keyup', (event) => {
-        //if arrow down
-        //selected = index;
-        console.log(event);
-        let li = ol.select('li');
-        if(is.empty(li)){
-            return;
-        }
-        let index;
-        let node;
-        let pre;
-        let selected;
-        let selected_pre;
-        rows = [];
-        for (index = 0; index < li.length; index++) {
-            node = li[index];
-            pre = node.select('pre');
-            //console.log(pre.innerText);
-            if (pre.data('text') !== pre.innerText) {
-                console.log(pre.data('text'));
-                console.log(pre.innerText);
-                selected = index;
-                ol.data('last-selected', selected);
-                selected_pre = pre;
-            }
-            pre.data('text', pre.innerText);
-            //pre.data('compile', pre.innerText);
-            rows[index] = pre.data('text');
-        }
-        if(is.empty(selected)){
-            selected = parseInt(ol.data('last-selected'));
-            node = li[selected];
-            console.log(node);
-            selected_pre = node.select('pre');
-            //ol.data('delete', 'last-selected');
-        }
-        console.log(selected);
-        compile = source.compile(rows);
-        let i;
-        for (i = 0; i < rows.length; i++) {
-            let compiled_row = compile[i];
-            if (selected === i) {
-                let position = 0;
-                //let container;
-                let selection;
-                let range;
-                selection = window.getSelection();
-                if (selection.rangeCount) {
-                    range = selection.getRangeAt(0);
-                    position = range.startOffset;
-                    //container = range.cloneContents();
-                }
-                selected_pre.normalize();
-                let oldLength = selected_pre.childNodes.length;
-                selected_pre.html(compiled_row);
-                range = document.createRange();
-                selection = window.getSelection();
-                let node = selected_pre.childNodes[selected_pre.childNodes.length - 1];
-                if(selected_pre.childNodes.length > oldLength){
-                    let ii;
-                    for(ii=0; ii < selected_pre.childNodes.length; ii++){
-                        let sel = selected_pre.childNodes[ii];
-                        node = sel;
-                        if(position >= sel.innerText?.length){
-                            if(position === sel.innerText.length){
-                                if(in_array(ii + 1, selected_pre.childNodes)){
-                                    sel = selected_pre.childNodes[ii + 1];
-                                    node = sel;
-                                    console.log('position9:', position);
-                                    console.log(node);
-                                }
-                                break;
-                            }
-                            console.log('position2:', position);
-                            position -= sel.innerText.length;
-                            console.log('position3:', position);
-                        } else {
-                            if(sel.innerText?.length >= 0){
-                                node = selected_pre.childNodes[selected_pre.childNodes.length - 1];
-                                console.log('true');
-                                break;
-                            }
-                        }
-                    }
-                    if(position === 0){
-                        position = 1;
-                    }
-                    if(node.innerText?.length <= position){
-                        console.log('tryue');
-                        position = node.innerText.length;
-                    }
-                    console.log(node);
-                    console.log(position);
-                    range.setStart(node, position);
-                } else {
-                    let ii;
-                    selected_pre.normalize();
-                    for(ii=0; ii < selected_pre.childNodes.length; ii++){
-                        let sel = selected_pre.childNodes[ii];
-                        if(position > sel.innerText?.length){
-                            position -= sel.innerText.length;
-                            node = sel;
-                        } else {
-                            break;
-                        }
 
-
-                        /*
-                        let sel = selected_pre.childNodes[ii];
-                        node = sel;
-                        if(position >= sel.innerText?.length){
-                            if(position === sel.innerText.length){
-                                console.log(sel);
-                                sel = selected_pre.childNodes[ii + 1];
-                                node = sel;
-                                console.log('position7:', position);
-                                break;
-                            }
-                            console.log('position4:', position);
-                            position -= sel.innerText.length;
-                            console.log('position5:', position);
-                        } else {
-                            if(sel.innerText?.length >= 0){
-                                node = selected_pre.childNodes[selected_pre.childNodes.length - 1];
-                                console.log('ii', ii);
-                                console.log('position6:', position);
-                                console.log('try');
-                                break;
-                            }
-                        }
-                         */
-                    }
-                    if(position === 0){
-                        position = 1;
-                    }
-                    console.log(node);
-                    if(node?.innerText?.length <= position){
-                        position = node.innerText.length;
-                    }
-                    if(event.code === 'ArrowUp'){
-                        selected = parseInt(ol.data('last-selected'));
-                        if(selected > 0){
-                            selected--;
-                            let li = ol.select('li');
-                            //ol.data('last-selected', selected);
-                            if(li[selected]?.childNodes[0].innerText.length <= position){
-                                range.setStart(li[selected]?.childNodes[0], li[selected]?.childNodes[0].innerText.length);
-                            } else {
-                                range.setStart(li[selected]?.childNodes[0], position);
-                            }
-                        }
-                    }
-                    else if(event.code === 'ArrowDown'){
-                        selected = parseInt(ol.data('last-selected'));
-                        let li = ol.select('li');
-                        if(selected < li.length - 1){
-                            selected++;
-                            //ol.data('last-selected', selected);
-                            if(li[selected]?.childNodes[0].innerText.length <= position){
-                                range.setStart(li[selected]?.childNodes[0], li[selected]?.childNodes[0].innerText.length);
-                            } else {
-                                range.setStart(li[selected]?.childNodes[0], position);
-                            }
-                        }
-                    } else {
-                        if(typeof node.data === 'undefined'){
-                            if(event.code === 'Backspace'){
-                                let parent = node.parentNode;
-                                if(parent){
-                                    parent.html(parent.data('text'));
-                                    if(li[selected]?.childNodes[0].innerText.length <= position){
-                                        range.setStart(li[selected]?.childNodes[0], li[selected]?.childNodes[0].innerText.length);
-                                    } else {
-                                        range.setStart(li[selected]?.childNodes[0], position);
-                                    }
-                                }
-                            }
-                                //console.log(node);
-                                //console.log(node.parentNode);
-                                //range.setStart(node, position);
-                        } else {
-                            if(node?.innerText?.length <= position){
-                                range.setStart(node, node.innerText.length);
-                            } else {
-                                range.setStart(node, position);
-                            }
-
-                        }
-                    }
-
-                    /*
-                    console.log(node);
-                    console.log(position);
-                    if(node?.innerText?.length >= position){
-                        console.log(node);
-                        node = node.parentNode;
-                        console.log(node);
-                        console.log('length', node.innerText.length, position);
-                        range.setStart(node, position);
-                    } else {
-                        if(node?.innerText?.length){
-                            console.log('this too');
-                        } else {
-                            console.log(node);
-                            console.log(position);
-                            console.log('this is happening...');
-                            range.setStart(node, position);
-                        }
-
-                    }
-                     */
-                }
-                console.log(selected_pre);
-                console.log(selected_pre.childNodes.length);
-                console.log(position);
-
-                range.collapse(true);
-                selection.removeAllRanges();
-                selection.addRange(range);
-                window.setTimeout(() => {
-                    ol.focus();
-                }, 1);
-
-            }
-        }
     });
 };
 
@@ -339,8 +122,8 @@ source.init = () => {
 ready(() => {
 require(
 [
-    // root() + 'Rangy/1.3.0/rangy-core.js?' + version(),
-    // root() + 'Rangy/1.3.0/rangy-selectionsaverestore.js?' + version(),
+    root() + 'Highlight/11.4.0/highlight.min.js?' + version(),
+    root() + 'Highlight/11.4.0/styles/github-dark.min.css?' + version(),
     root() + 'Settings/Controllers/Css/Source.css?' + version()
 ],
 () => {
