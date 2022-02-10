@@ -4,6 +4,7 @@ import { version } from "/Module/Priya.js";
 import { root } from "/Module/Web.js";
 import { getSectionByName } from "/Module/Section.js";
 import { contains, replace } from "/Module/String.js";
+import { implode } from "/Module/Array.js";
 import { php } from "/Source/Module/Source.js";
 
 (function(window){
@@ -116,7 +117,7 @@ source.createLi = () => {
         for(index=0; index < list.length; index++){
             content[index] = list.data('text');
         }
-        ol.data('content', content.implode("\n"));
+        ol.data('content', implode("\n", content));
         console.log(ol.data('content'));
         switch(event.code){
 
