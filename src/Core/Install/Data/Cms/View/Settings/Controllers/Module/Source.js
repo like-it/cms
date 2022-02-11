@@ -137,18 +137,20 @@ source.createLi = () => {
                 let rows = content.split("\n");
                 let compile = html.split("\n");
                 let index;
-                ol.html('');
+                //ol.html('');
+                let range = window.getSelection().getRangeAt(0);
                 for(index=0; index < rows.length; index++){
                     let row = rows[index];
                     let compiled_row = compile[index];
-                    let li = create('li');
+                    let li = ol.childNodes[index];
+                    //let li = create('li');
                     li.data('nr', index + 1);
-                    let pre = create('pre');
+                    let pre = li.select('pre');
                     pre.html(compiled_row);
                     pre.data('text', pre.innerText);
                     //pre.data('compile', compiled_row);
-                    li.append(pre);
-                    ol.append(li);
+                    //li.append(pre);
+                    //ol.append(li);
                 }
         }
         console.log(event);
