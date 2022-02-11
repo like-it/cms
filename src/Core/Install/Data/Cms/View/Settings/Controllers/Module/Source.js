@@ -129,6 +129,28 @@ source.createLi = () => {
 
     });
     ol.on('keyup', (event) => {
+        switch(event.code){
+            case 'ArrowDown':
+                const content = ol.data('content');
+                const html = hljs.highlight(content, {language: 'php'}).value
+                //console.log(html);
+                let rows = content.split("\n");
+                let compile = html.split("\n");
+                let index;
+                ol.html('');
+                for(index=0; index < rows.length; index++){
+                    let row = rows[index];
+                    let compiled_row = compile[index];
+                    let li = create('li');
+                    li.data('nr', index + 1);
+                    let pre = create('pre');
+                    pre.html(compiled_row);
+                    pre.data('text', pre.innerText);
+                    //pre.data('compile', compiled_row);
+                    li.append(pre);
+                    ol.append(li);
+                }
+        }
         console.log(event);
     });
 };
