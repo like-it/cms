@@ -1,14 +1,11 @@
 {{R3M}}
-{{$ol.class = 'node-content'}}
-<ol
-    class="{{$ol.class}}"
-    spellcheck="false"
-    contenteditable="true"
-    data-url="{{server.url('core')}}Source/To/Li"
-    data-content="{{request('node.content')}}"
+{{$pre.id = 'node-' + uuid()}}
+{{$pre.name = 'node.content'}}
+<pre
+    id="{{$pre.id}}"
+    name="{{$pre.name}}"
 >
-    <li>Loading...</li>
-</ol>
+</pre>
 {{script('module')}}
     {{require($prefix + $require.submodule + '/Module/Source.js')}}
 {{/script}}
