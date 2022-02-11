@@ -87,7 +87,7 @@ source.createLi = () => {
         return;
     }
     const html = hljs.highlight(content, {language: 'php'}).value
-    console.log(html);
+    //console.log(html);
     let rows = content.split("\n");
     let compile = html.split("\n");
     let index;
@@ -105,6 +105,7 @@ source.createLi = () => {
         ol.append(li);
     }
     ol.on('keypress', (event) => {
+        console.log(event);
         setTimeout( () => {
             let li = ol.select('li');
             for(index=0; index < li.length; index++){
