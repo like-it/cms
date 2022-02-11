@@ -15,6 +15,7 @@ source.init = () => {
         enableSnippets: true,
         enableLiveAutocompletion: true
     });
+    console.log('source init');
 };
 
 ready(() => {
