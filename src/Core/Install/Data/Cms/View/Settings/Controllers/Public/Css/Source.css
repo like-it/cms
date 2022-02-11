@@ -1,3 +1,14 @@
+section[name="main-content"] form {
+    width: 100%:
+    height: 100%;
+}
+
+section[name="main-content"] form .mb-3{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
 section[name="main-content"] pre[name="node.content"] {
     top: 0;
     bottom: 0;
