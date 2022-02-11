@@ -5,6 +5,7 @@
     id="{{$pre.id}}"
     name="{{$pre.name}}"
 >
+{{$node.content}}
 </pre>
 {{script('module')}}
     {{require($prefix + $require.submodule + '/Module/Source.js')}}
