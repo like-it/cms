@@ -4,7 +4,10 @@ import { root } from "/Module/Web.js";
 import { getSectionByName } from "/Module/Section.js";
 import { contains, replace } from "/Module/String.js";
 
+let source = {};
+
 source.init = () => {
+    /*
     ace.require("ace/ext/language_tools");
     let editor = ace.edit("{{$pre.id}}");
     editor.session.setMode("ace/mode/php");
@@ -15,6 +18,7 @@ source.init = () => {
         enableSnippets: true,
         enableLiveAutocompletion: true
     });
+     */
     console.log('source init');
 };
 
