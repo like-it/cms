@@ -53,8 +53,6 @@ source.init = () => {
 ready(() => {
 require(
 [
-    root() + 'Ace/1.4.14/src/ace.js?' + version(),
-    root() + 'Ace/1.4.14/src-noconflict/ext-language_tools.js?' + version(),
     root() + 'Settings/Controllers/Css/Source.css?' + version()
 ],
 () => {
