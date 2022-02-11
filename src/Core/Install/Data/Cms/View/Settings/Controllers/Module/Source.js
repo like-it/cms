@@ -105,7 +105,6 @@ source.createLi = () => {
         ol.append(li);
     }
     ol.on('keypress', (event) => {
-        console.log(event);
         setTimeout( () => {
             let li = ol.select('li');
             for(index=0; index < li.length; index++){
@@ -130,7 +129,7 @@ source.createLi = () => {
 
     });
     ol.on('keyup', (event) => {
-
+        console.log(event);
     });
 };
 
