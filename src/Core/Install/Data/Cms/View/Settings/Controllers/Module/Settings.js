@@ -14,6 +14,7 @@ settings.onDoubleClick = () => {
         return;
     }
     let list = section.select('.card-' + "{{$subcommand}}" + '-' + "{{$command}}" + ' tr');
+    console.log(list);
     if(is.nodeList(list)){
         let index;
         for(index=0; index < list.length; index++){
