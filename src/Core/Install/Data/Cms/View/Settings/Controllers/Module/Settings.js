@@ -26,7 +26,7 @@ settings.onDoubleClick = () => {
                         console.log(response);
                         console.log(node.data('frontend-url'));
                         request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
+                            console.log(frontendResponse);
                         });
                     });
                 }
