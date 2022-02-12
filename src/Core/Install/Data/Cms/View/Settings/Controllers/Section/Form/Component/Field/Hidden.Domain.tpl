@@ -8,6 +8,6 @@
 {{html.input([
 'id' => $module + '-' + $submodule + '-' + $field,
 'name' => $field,
-'type' => 'hidden'
+'type' => 'hidden',
 'value' => $value
 ])}}
