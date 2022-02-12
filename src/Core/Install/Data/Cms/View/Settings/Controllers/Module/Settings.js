@@ -23,6 +23,8 @@ settings.onDoubleClick = () => {
                 if(node.data('has', 'url')){
                     header('Authorization', 'Bearer ' + user.token());
                     request(node.data('url'), null, (url, response) => {
+                        console.log(response);
+                        console.log(node.data('frontend-url'));
                         request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
 
                         });
