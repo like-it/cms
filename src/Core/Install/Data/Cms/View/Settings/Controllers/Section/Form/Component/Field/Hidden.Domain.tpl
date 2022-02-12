@@ -1,6 +1,6 @@
 {{R3M}}
 {{$field = 'domain'}}
-{{hmtl.input([
+{{html.input([
 'id' => $module + '-' + $submodule + '-' + $field,
 'name' => $field,
 'type' => 'hidden'
