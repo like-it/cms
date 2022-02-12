@@ -47,6 +47,8 @@ source.init = () => {
         enableSnippets: true,
         enableLiveAutocompletion: true
     });
+    let element = select('#' + "{{$pre.id}}");
+    element.env.editor.session.setValue(element.data('content'));
     console.log('source init');
 };
 
