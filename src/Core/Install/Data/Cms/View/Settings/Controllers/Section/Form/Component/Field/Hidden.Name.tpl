@@ -1,16 +1,20 @@
-{{R3M}}
-{{$field = 'name_old'}}
+{{R3M}}}
+{{$field = 'name'}}
+{{hmtl.input([
+    'id' => $module + '-' + $submodule + '-' + $field,
+    'name' => $field,
+    'type' => 'hidden'
+])}}
+/*
+{{$field = 'name'}}
 {{$input.id = $module + '-' + $submodule + '-' + $field}}
 {{$input.type = 'hidden'}}
 {{$input.name = 'node.' + $field }}
-{{if(!is.empty(request('node.' + $field)))}}
 {{$input.value = request('node.' + $field )}}
-{{else}}
-{{$input.value = request('node.name')}}
-{{/if}}
 <input
     id="{{$input.id}}"
     type="{{$input.type}}"
     name="{{$input.name}}"
     value="{{$input.value}}"
 />
+*/

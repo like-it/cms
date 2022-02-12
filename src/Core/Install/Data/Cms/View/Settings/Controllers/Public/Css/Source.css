@@ -15,4 +15,5 @@ section[name="main-content"] pre[name="node.content"] {
     left: 0;
     right: 0;
     position: absolute;
+    font-size: 14px;
 }

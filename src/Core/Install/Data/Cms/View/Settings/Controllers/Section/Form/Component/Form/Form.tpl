@@ -2,11 +2,12 @@
 {{if(in.array($command,['add-controller']))}}
 {{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/' + $require.command + '/'}}
 {{$data.error = route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-' + $subcommand + '-node-domain', ['node.domain' => '{node.domain}'])}}
-{{$require.button = 'Add'}}
+{{$require.action = 'Add'}}
 {{else.if(in.array($command,['edit-controller']))}}
 {{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/' + $request.node.uuid}}
 {{$data.error = route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-' + $subcommand)}}
-{{$require.button = 'Edit'}}
+{{$require.action = 'Edit'}}
+
 {{/if}}
 <form
     name="{{$module}}-{{$submodule}}-{{$command}}-form"
@@ -15,13 +16,5 @@
     data-url-error="{{$data.error}}"
 >
     {{require($prefix + $require.submodule + '/Section/Form/Component/Error/Error.tpl')}}
-    <div class="mb-3 section-form-component-field">
-        {{for.each($fields as $field)}}
-        {{$require.basename = $field|uppercase.first.sentence:'.'}}
-        {{require($prefix + $require.submodule + '/Section/Form/Component/Field/' + $require.basename + '.tpl')}}
-        {{/for.each}}
-    </div>
-    <div class="mb-3 section-form-component-button">
-        {{require($prefix + $require.submodule + '/Section/Form/Component/Button/' + $require.button + '.tpl')}}
-    </div>
+    {{require($prefix + $require.submodule + '/Section/Form/Component/Form/' + $require.action +'.tpl')}}
 </form>
