@@ -42,8 +42,10 @@ source.menu = () => {
     }
     const body = section.select('.card-body-' + "{{$request.node.key}}");
 
-
-    const ul = select('.settings-controllers-section-form-component-menu');
+    if(!body){
+        return;
+    }
+    const ul = body.select('.menu');
     if(!ul){
         return;
     }
