@@ -84,6 +84,12 @@ section[name="main-content"] form .panel-edit li.divider {
     width: 340px;
     padding-left: 10px;
     padding-right: 10px;
+    height: 11px;
+}
+
+section[name="main-content"] form .panel-edit li.divider hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 section[name="main-content"] pre[name="node.content"] {
