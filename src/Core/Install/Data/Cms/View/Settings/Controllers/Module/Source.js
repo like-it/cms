@@ -46,6 +46,9 @@ source.menu = () => {
         let li = list[index];
         li.on('click', (event) => {
             console.log(li);
+            let data_class = li.data('class');
+            let menu = select('.' + data_class);
+            menu.toggleClass('d-none');
         });
     }
 }

@@ -1,6 +1,8 @@
 {{R3M}}
 <ul class="settings-controllers-section-form-component-menu">
-    <li>
+    <li
+    data-class="menu-file"
+    >
         <a
             class="settings-controllers-section-form-component-menu-file"
         >
@@ -15,7 +17,7 @@
         </a>
     </li>
 </ul>
-<div class="settings-controllers-section-form-component-menu-file menu d-none">
+<div class="settings-controllers-section-form-component-menu-file menu-file d-none">
     <a
         class="settings-controllers-menu-file-save"
     >
