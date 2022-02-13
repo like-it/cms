@@ -9,8 +9,16 @@ section[name="main-content"] form .section-form-component-menu {
     background: #f6f6f6;
 }
 
+section[name="main-content"] form .section-form-component-menu ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
 section[name="main-content"] form .section-form-component-menu li {
     float: left;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 section[name="main-content"] form .section-form-component-field {
