@@ -29,6 +29,14 @@ section[name="main-content"] form .edit {
 
 section[name="main-content"] .card-body-edit {
     padding: 0;
+    position: relative;
+}
+
+section[name="main-content"] .panel-file {
+    position: absolute;
+    top: 40px;
+    background: #f6f6f6;
+    z-index: 10;
 }
 
 section[name="main-content"] pre[name="node.content"] {
