@@ -1,5 +1,5 @@
 {{R3M}}
-<div class="panel-edit d-none">
+<div class="panel panel-edit d-none">
     <a
             class="edit-undo"
     >

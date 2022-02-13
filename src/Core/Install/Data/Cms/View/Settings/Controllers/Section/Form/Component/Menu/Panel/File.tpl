@@ -1,5 +1,5 @@
 {{R3M}}
-<div class="panel-file d-none">
+<div class="panel panel-file d-none">
     <a
             class="file-save"
     >

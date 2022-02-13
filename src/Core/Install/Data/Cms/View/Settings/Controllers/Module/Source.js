@@ -53,9 +53,18 @@ source.menu = () => {
     for(index=0; index < list.length; index++){
         let li = list[index];
         li.on('click', (event) => {
-            console.log(li.calculate('offset'));
+            let offset = li.calculate('offset');
             let data_class = li.data('class');
-            let menu = select('.' + data_class);
+            let menu = body.select('.' + data_class);
+            let panel = body.select('.panel');
+            let i;
+            for(i=0; i < panel.length; i++){
+                if(panel[i].hasClass(data_class)){
+                    continue;
+                }
+                panel[i].addClass('d-none');
+            }
+            menu.css('left', offset.left + 'px');
             menu.toggleClass('d-none');
         });
     }
