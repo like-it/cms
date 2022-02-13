@@ -35,8 +35,22 @@ import { contains, replace } from "/Module/String.js";
 
 let source = {};
 
-source.init = () => {
+source.menu = () => {
+    const ul = select('.settings-controllers-section-form-component-menu');
+    if(!ul){
+        return;
+    }
+    const list = ul.select('li');
+    let index;
+    for(index=0; index < list.length; index++){
+        let li = list[index];
+        li.on('click', (event) => {
+            console.log(li);
+        });
+    }
+}
 
+source.editor = () => {
     ace.require("ace/ext/language_tools");
     let editor = ace.edit("{{$pre.id}}");
     editor.session.setMode("ace/mode/php");
@@ -49,6 +63,12 @@ source.init = () => {
     });
     let element = select('#' + "{{$pre.id}}");
     element.env.editor.session.setValue(element.data('content'));
+
+};
+
+source.init = () => {
+    source.editor();
+    source.menu();
     console.log('source init');
 };
 

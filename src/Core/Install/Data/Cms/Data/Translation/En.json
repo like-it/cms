@@ -62,6 +62,8 @@
     "settings.controllers.section.settings.component.thead.functions" : "Amount of<br>Functions",
     "settings.controllers.section.settings.component.thead.default" : "",
     "settings.controllers.section.settings.component.thead.options" : "",
+    "settings.controllers.section.form.component.menu.file" : "File",
+    "settings.controllers.section.form.component.menu.edit" : "Edit",
     "settings.domains.component.header.a.main.link" : "Main",
     "settings.domains.component.header.a.settings.link" : "Settings",
     "settings.domains.component.header.a.add.link" : "Add domain",

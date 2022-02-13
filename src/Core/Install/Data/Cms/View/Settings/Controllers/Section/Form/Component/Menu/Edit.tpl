@@ -1,5 +1,5 @@
 {{R3M}}
-<ul>
+<ul class="settings-controllers-section-form-component-menu">
     <li>
         <a
             class="settings-controllers-section-form-component-menu-file"
@@ -15,9 +15,27 @@
         </a>
     </li>
 </ul>
-<button
-    type="submit"
-    class="btn btn-primary"
->
-    {{__('settings.controllers.section.form.component.button.edit')}}
-</button>
+<div class="settings-controllers-section-form-component-menu-file menu d-none">
+    <a
+        class="settings-controllers-menu-file-save"
+    >
+        {{__('settings.controllers.menu.file.save')}}
+    </a>
+    <a
+        class="settings-controllers-menu-file-save-as"
+    >
+        {{__('settings.controllers.menu.file.save_as')}}
+    </a>
+    <a
+        class="settings-controllers-menu-file-close"
+    >
+        {{__('settings.controllers.menu.file.close')}}
+    </a>
+
+    <button
+            type="submit"
+            class="btn btn-primary"
+    >
+        {{__('settings.controllers.section.form.component.button.edit')}}
+    </button>
+</div>
