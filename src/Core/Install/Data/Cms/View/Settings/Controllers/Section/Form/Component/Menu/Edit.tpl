@@ -1,20 +1,18 @@
 {{R3M}}
 <ul>
     <li>
-        <button
-                type="button"
-                class="btn btn-primary"
+        <a
+            class="settings-controllers-section-form-component-menu-file"
         >
-            {{__('settings.controllers.section.form.component.button.file')}}
-        </button>
+            {{__('settings.controllers.section.form.component.menu.file')}}
+        </a>
     </li>
     <li>
-        <button
-                type="button"
-                class="btn btn-primary"
+        <a
+            class="settings-controllers-section-form-component-menu-edit"
         >
-            {{__('settings.controllers.section.form.component.button.edit')}}
-        </button>
+            {{__('settings.controllers.section.form.component.menu.edit')}}
+        </a>
     </li>
 </ul>
 <button

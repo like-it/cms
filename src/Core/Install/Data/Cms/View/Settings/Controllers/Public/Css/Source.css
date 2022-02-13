@@ -9,6 +9,10 @@ section[name="main-content"] form .section-form-component-menu {
     background: #f6f6f6;
 }
 
+section[name="main-content"] form .section-form-component-menu li {
+    float: left;
+}
+
 section[name="main-content"] form .section-form-component-field {
     position: relative;
     width: 100%;
