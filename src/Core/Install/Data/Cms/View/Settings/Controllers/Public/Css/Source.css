@@ -9,6 +9,11 @@ section[name="main-content"] form .section-form-component-field {
     height: calc(100% - 40px);
 }
 
+section[name="main-content"] .card-body-edit {
+    padding: 0;
+}
+
+
 section[name="main-content"] pre[name="node.content"] {
     top: 0;
     bottom: 0;
@@ -16,4 +21,5 @@ section[name="main-content"] pre[name="node.content"] {
     right: 0;
     position: absolute;
     font-size: 14px;
+    margin: 0;
 }
