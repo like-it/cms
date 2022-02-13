@@ -75,6 +75,7 @@ section[name="main-content"] form .panel-edit li.shortcut {
     text-align: right;
     width: 100px;
     padding-right: 10px;
+    font-size: 10px;
 }
 
 section[name="main-content"] pre[name="node.content"] {
