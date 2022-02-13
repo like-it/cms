@@ -3,6 +3,12 @@ section[name="main-content"] form {
     height: 100%;
 }
 
+section[name="main-content"] form .section-form-component-menu {
+    width: 100%;
+    height: 40px;
+    background: #f6f6f6;
+}
+
 section[name="main-content"] form .section-form-component-field {
     position: relative;
     width: 100%;

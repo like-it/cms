@@ -1,6 +1,6 @@
 {{R3M}}
-<div class="section-form-component-button">
-    {{require($prefix + $require.submodule + '/Section/Form/Component/Button/' + $require.action + '.tpl')}}
+<div class="section-form-component-menu">
+    {{require($prefix + $require.submodule + '/Section/Form/Component/Menu/' + $require.action + '.tpl')}}
 </div>
 <div class="section-form-component-field">
     {{for.each($fields as $field)}}
