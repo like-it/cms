@@ -79,6 +79,13 @@ section[name="main-content"] form .panel-edit li.shortcut {
     font-size: 10px;
 }
 
+section[name="main-content"] form .panel-edit li.divider {
+    clear: both;
+    width: 340px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 section[name="main-content"] pre[name="node.content"] {
     top: 0;
     bottom: 0;

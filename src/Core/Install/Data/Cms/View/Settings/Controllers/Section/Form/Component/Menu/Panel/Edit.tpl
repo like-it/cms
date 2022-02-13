@@ -19,6 +19,7 @@
         <li class="shortcut">
             {{__('settings.controllers.section.form.component.menu.panel.edit.redo.shortcut')}}
         </li>
+        <li class="divider"><hr></li>
         <li class="icon">
             <i class="{{__('settings.controllers.section.form.component.menu.panel.edit.cut.icon')}}"></i>
         </li>
