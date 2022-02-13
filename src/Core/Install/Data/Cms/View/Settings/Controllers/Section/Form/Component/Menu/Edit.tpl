@@ -4,32 +4,32 @@
     data-class="menu-file"
     >
         <a
-            class="menu-file"
+            class="panel-file"
         >
             {{__('settings.controllers.section.form.component.menu.file')}}
         </a>
     </li>
     <li>
         <a
-            class="menu-edit"
+            class="panel-edit"
         >
             {{__('settings.controllers.section.form.component.menu.edit')}}
         </a>
     </li>
 </ul>
-<div class="menu-file d-none">
+<div class="panel-file d-none">
     <a
-        class="settings-controllers-menu-file-save"
+        class="file-save"
     >
         {{__('settings.controllers.menu.file.save')}}
     </a>
     <a
-        class="settings-controllers-menu-file-save-as"
+        class="file-save-as"
     >
         {{__('settings.controllers.menu.file.save_as')}}
     </a>
     <a
-        class="settings-controllers-menu-file-close"
+        class="file-close"
     >
         {{__('settings.controllers.menu.file.close')}}
     </a>
