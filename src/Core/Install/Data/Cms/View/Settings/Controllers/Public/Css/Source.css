@@ -57,12 +57,13 @@ section[name="main-content"] form .panel-edit li {
     margin: 0;
     padding: 0;
     display: inline-block;
+    height: 24px;
 }
 
 section[name="main-content"] form .panel-edit li.icon {
     clear: left;
     width: 40px;
-
+    padding-left: 10px;
 }
 
 section[name="main-content"] form .panel-edit li.text {
@@ -72,6 +73,8 @@ section[name="main-content"] form .panel-edit li.text {
 section[name="main-content"] form .panel-edit li.shortcut {
     clear: right;
     text-align: right;
+    width: 100px;
+    padding-right: 10px;
 }
 
 section[name="main-content"] pre[name="node.content"] {
