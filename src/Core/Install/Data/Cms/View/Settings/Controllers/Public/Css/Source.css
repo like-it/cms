@@ -46,6 +46,22 @@ section[name="main-content"] .panel-edit {
     z-index: 10;
 }
 
+section[name="main-content"] .panel-edit ul {
+    list-style-type: none;
+}
+
+section[name="main-content"] .panel-edit li {
+    float: left;
+}
+
+section[name="main-content"] .panel-edit li.icon {
+    clear: left;
+    width: 40px;
+}
+
+section[name="main-content"] .panel-edit li.shortcut {
+    clear: right;
+}
 
 section[name="main-content"] pre[name="node.content"] {
     top: 0;
