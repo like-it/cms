@@ -3,25 +3,25 @@ section[name="main-content"] form {
     height: 100%;
 }
 
-section[name="main-content"] form .section-form-component-menu {
+section[name="main-content"] form .menu {
     width: 100%;
     height: 40px;
     background: #f6f6f6;
 }
 
-section[name="main-content"] form .section-form-component-menu ul {
+section[name="main-content"] form .menu ul {
     margin: 0;
     padding: 0;
     list-style-type: none;
 }
 
-section[name="main-content"] form .section-form-component-menu li {
+section[name="main-content"] form .menu li {
     float: left;
     padding-left: 10px;
     padding-right: 10px;
 }
 
-section[name="main-content"] form .section-form-component-field {
+section[name="main-content"] form .edit {
     position: relative;
     width: 100%;
     height: calc(100% - 40px);

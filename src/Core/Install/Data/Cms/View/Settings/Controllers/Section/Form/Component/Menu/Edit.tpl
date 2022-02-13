@@ -1,23 +1,23 @@
 {{R3M}}
-<ul class="settings-controllers-section-form-component-menu">
+<ul class="settings-controllers-menu">
     <li
     data-class="menu-file"
     >
         <a
-            class="settings-controllers-section-form-component-menu-file"
+            class="menu-file"
         >
             {{__('settings.controllers.section.form.component.menu.file')}}
         </a>
     </li>
     <li>
         <a
-            class="settings-controllers-section-form-component-menu-edit"
+            class="menu-edit"
         >
             {{__('settings.controllers.section.form.component.menu.edit')}}
         </a>
     </li>
 </ul>
-<div class="settings-controllers-section-form-component-menu-file menu-file d-none">
+<div class="menu-file d-none">
     <a
         class="settings-controllers-menu-file-save"
     >

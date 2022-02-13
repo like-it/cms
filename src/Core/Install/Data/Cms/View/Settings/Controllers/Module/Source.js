@@ -36,6 +36,13 @@ import { contains, replace } from "/Module/String.js";
 let source = {};
 
 source.menu = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const body = section.select('.card-body-' + "{{$request.node.key}}");
+
+
     const ul = select('.settings-controllers-section-form-component-menu');
     if(!ul){
         return;
