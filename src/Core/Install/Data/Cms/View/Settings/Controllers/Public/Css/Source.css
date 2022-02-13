@@ -39,6 +39,14 @@ section[name="main-content"] .panel-file {
     z-index: 10;
 }
 
+section[name="main-content"] .panel-edit {
+    position: absolute;
+    top: 40px;
+    background: #f6f6f6;
+    z-index: 10;
+}
+
+
 section[name="main-content"] pre[name="node.content"] {
     top: 0;
     bottom: 0;

@@ -53,7 +53,7 @@ source.menu = () => {
     for(index=0; index < list.length; index++){
         let li = list[index];
         li.on('click', (event) => {
-            console.log(li);
+            console.log(li.calculate('offset'));
             let data_class = li.data('class');
             let menu = select('.' + data_class);
             menu.toggleClass('d-none');
