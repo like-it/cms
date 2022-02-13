@@ -32,14 +32,14 @@ section[name="main-content"] .card-body-edit {
     position: relative;
 }
 
-section[name="main-content"] .panel-file {
+section[name="main-content"] form .panel-file {
     position: absolute;
     top: 40px;
     background: #f6f6f6;
     z-index: 10;
 }
 
-section[name="main-content"] .panel-edit {
+section[name="main-content"] form .panel-edit {
     position: absolute;
     top: 40px;
     background: #f6f6f6;
@@ -48,28 +48,28 @@ section[name="main-content"] .panel-edit {
     border-radius: .25rem;
 }
 
-section[name="main-content"] .panel-edit ul {
+section[name="main-content"] form .panel-edit ul {
     list-style-type: none;
 }
 
-section[name="main-content"] .panel-edit li {
+section[name="main-content"] form .panel-edit li {
     float: left;
     margin: 0;
     padding: 0;
     display: inline-block;
 }
 
-section[name="main-content"] .panel-edit li.icon {
+section[name="main-content"] form .panel-edit li.icon {
     clear: left;
     width: 40px;
 
 }
 
-section[name="main-content"] .panel-edit li.text {
-
+section[name="main-content"] form .panel-edit li.text {
+    width: 200px;
 }
 
-section[name="main-content"] .panel-edit li.shortcut {
+section[name="main-content"] form .panel-edit li.shortcut {
     clear: right;
     text-align: right;
 }
