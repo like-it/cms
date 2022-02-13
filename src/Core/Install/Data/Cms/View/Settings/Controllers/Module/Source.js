@@ -68,6 +68,29 @@ source.menu = () => {
             menu.toggleClass('d-none');
         });
     }
+    const pre = body.select("{{$pre.id}}");
+    if(!pre){
+        return;
+    }
+    pre.on('click', (event) => {
+        let panel = body.select('.panel');
+        panel.addClass('d-none');
+    });
+    const item = section.select('.card-header-tabs li');
+    if(is.nodeList(item)){
+        for(index=0; index < item.length; index++){
+            item[index].on('click', (event) => {
+                let panel = body.select('.panel');
+                panel.addClass('d-none');
+            });
+        }
+    }
+    else if(item){
+        item.on('click', (event) => {
+            let panel = body.select('.panel');
+            panel.addClass('d-none');
+        });
+    }
 }
 
 source.editor = () => {
