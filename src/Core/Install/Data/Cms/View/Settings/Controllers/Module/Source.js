@@ -41,7 +41,6 @@ source.menu = () => {
         return;
     }
     const body = section.select('.card-body-' + "{{$request.node.key}}");
-
     if(!body){
         return;
     }
