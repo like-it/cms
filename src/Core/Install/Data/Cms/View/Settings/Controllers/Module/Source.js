@@ -68,7 +68,7 @@ source.menu = () => {
             menu.toggleClass('d-none');
         });
     }
-    const pre = body.select("{{$pre.id}}");
+    const pre = body.select("#{{$pre.id}}");
     if(!pre){
         return;
     }
