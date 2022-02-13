@@ -44,6 +44,8 @@ section[name="main-content"] .panel-edit {
     top: 40px;
     background: #f6f6f6;
     z-index: 10;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
 }
 
 section[name="main-content"] .panel-edit ul {
@@ -52,15 +54,24 @@ section[name="main-content"] .panel-edit ul {
 
 section[name="main-content"] .panel-edit li {
     float: left;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
 }
 
 section[name="main-content"] .panel-edit li.icon {
     clear: left;
     width: 40px;
+
+}
+
+section[name="main-content"] .panel-edit li.text {
+
 }
 
 section[name="main-content"] .panel-edit li.shortcut {
     clear: right;
+    text-align: right;
 }
 
 section[name="main-content"] pre[name="node.content"] {
