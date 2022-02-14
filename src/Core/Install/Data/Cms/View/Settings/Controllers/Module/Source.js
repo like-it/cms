@@ -46,6 +46,7 @@ source.panel = () => {
                         tr.addClass('disabled');
                     } else {
                         editor.undo();
+                        panel.addClass('d-none');
                     }
                 }
                 if(tr.hasClass('redo')) {
@@ -53,14 +54,16 @@ source.panel = () => {
                         tr.addClass('disabled');
                     } else {
                         editor.redo();
+                        panel.addClass('d-none');
                     }
                 }
                 if(tr.hasClass('find')){
                     console.log(editor.searchBox);
                     if(!editor.searchBox){
-                        ace.config.loadModule("ace/ext/searchbox", function(m) {m.Search(editor)});
-                        console.log(editor.searchBox);
-                        // editor.Search(editor, true);
+                        ace.config.loadModule("ace/ext/searchbox", (m) => {
+                            m.Search(editor)
+                        });
+                        panel.addClass('d-none');
                     }
                     /*
                     if (!editor.searchBox) {
