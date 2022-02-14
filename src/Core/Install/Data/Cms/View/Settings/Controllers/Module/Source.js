@@ -84,12 +84,14 @@ source.panel = () => {
                     panel.addClass('d-none');
                 }
                 if(tr.hasClass('paste')){
-                    navigator.clipboard.readText()
-                    .then((text) => {
-                        editor.$handlePaste(text);
-                        log('Async readText successful, "' + text + '" written');
-                    })
-                    .catch((err) => log('Async readText failed with error: "' + err + '"'));
+                    if(navigator.clipboard){
+                        navigator.clipboard.readText()
+                            .then((text) => {
+                                editor.$handlePaste(text);
+                                log('Async readText successful, "' + text + '" written');
+                            })
+                            .catch((err) => log('Async readText failed with error: "' + err + '"'));
+                    }
                     panel.addClass('d-none');
                 }
                 if(tr.hasClass('remove-line')){
@@ -106,17 +108,13 @@ source.panel = () => {
                 }
                 if(tr.hasClass('copy')){
                     let copyText = editor.getCopyText();
-                    console.log(copyText);
-                    navigator.clipboard.writeText("<empty clipboard>").then(function() {
-                        /* clipboard successfully set */
-                    }, function() {
-                        /* clipboard write failed */
-                    });
-                    /*
-                    navigator.clipboard.writeText(copyText).then(function(){
-                        console.log("The text has been succesfully copied to the clipboard!");
-                    });
-                     */
+                    if(navigator.clipboard){
+                        navigator.clipboard.writeText(copyText).then(() => {
+                            /* clipboard successfully set */
+                        }, () => {
+                            /* clipboard write failed */
+                        });
+                    }
                     panel.addClass('d-none');
                 }
                 if(tr.hasClass('go-to-next-error')){
