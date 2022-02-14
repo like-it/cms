@@ -84,7 +84,12 @@ source.panel = () => {
                     panel.addClass('d-none');
                 }
                 if(tr.hasClass('paste')){
-                    editor.$handlePaste();
+                    navigator.clipboard.readText()
+                    .then((text) => {
+                        editor.$handlePaste(text);
+                        log('Async readText successful, "' + text + '" written');
+                    })
+                    .catch((err) => log('Async readText failed with error: "' + err + '"'));
                     panel.addClass('d-none');
                 }
                 if(tr.hasClass('remove-line')){
