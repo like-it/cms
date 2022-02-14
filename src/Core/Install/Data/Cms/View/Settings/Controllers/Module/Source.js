@@ -59,6 +59,7 @@ source.panel = () => {
                     console.log(editor.searchBox);
                     if(!editor.searchBox){
                         ace.require("ace/ext/searchbox");
+                        console.log(editor.searchBox);
                         // editor.Search(editor, true);
                     }
                     /*
