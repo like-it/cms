@@ -65,7 +65,7 @@
     "settings.controllers.section.form.component.menu.panel.edit.find.shortcut" : "CTRL-F",
     "settings.controllers.section.form.component.menu.panel.edit.replace.icon" : "",
     "settings.controllers.section.form.component.menu.panel.edit.replace.text" : "Replace in file",
-    "settings.controllers.section.form.component.menu.panel.edit.replace.shortcut" : "CTRL-R",
+    "settings.controllers.section.form.component.menu.panel.edit.replace.shortcut" : "CTRL-H",
     "settings.controllers.section.form.component.menu.panel.edit.duplicate.icon" : "",
     "settings.controllers.section.form.component.menu.panel.edit.duplicate.text" : "Duplicate line",
     "settings.controllers.section.form.component.menu.panel.edit.duplicate.shortcut" : "CTRL-SHIFT-D",

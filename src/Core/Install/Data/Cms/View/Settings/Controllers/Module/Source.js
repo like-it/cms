@@ -69,6 +69,43 @@ source.panel = () => {
                     });
                     panel.addClass('d-none');
                 }
+                if(tr.hasClass('select-all')){
+                    editor.selectAll()
+                    panel.addClass('d-none');
+                }
+                if(tr.hasClass('cut')){
+                    let cutline = editor.$copyWithEmptySelection && editor.selection.isEmpty();
+                    let range = cutline ? editor.selection.getLineRange() : editor.selection.getRange();
+                    editor._emit('cut', range);
+                    if(!range.isEmpty()){
+                        editor.session.remove(range);
+                    }
+                    editor.clearSelection();
+                    panel.addClass('d-none');
+                }
+                if(tr.hasClass('paste')){
+                    editor.$handlePaste();
+                    panel.addClass('d-none');
+                }
+                if(tr.hasClass('remove-line')){
+                    editor.removeLines();
+                    panel.addClass('d-none');
+                }
+                if(tr.hasClass('duplicate')){
+                    editor.duplicatteSelection();
+                    panel.addClass('d-none');
+                }
+                if(tr.hasClass('delete')){
+                    editor.remove('right');
+                    panel.addClass('d-none');
+                }
+                if(tr.hasClass('copy')){
+                    let copyText = editor.getCopyText();
+                    navigator.clipboard.writeText(copyText).then(function(){
+                        console.log("The text has been succesfully copied to the clipboard!");
+                    });
+                    panel.addClass('d-none');
+                }
                 if(tr.hasClass('go-to-next-error')){
                     ace.config.loadModule("ace/ext/error_marker", (module) => {
                         module.showErrorMarker(editor, 1);
