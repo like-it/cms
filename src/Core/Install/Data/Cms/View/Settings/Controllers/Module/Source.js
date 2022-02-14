@@ -3,37 +3,25 @@ import { version } from "/Module/Priya.js";
 import { root } from "/Module/Web.js";
 import { getSectionByName } from "/Module/Section.js";
 import { contains, replace } from "/Module/String.js";
-
-(function(window){
-    window.htmlentities = {
-        /**
-         * Converts a string to its html characters completely.
-         *
-         * @param {String} str String with unescaped HTML characters
-         **/
-        encode : function(str) {
-            var buf = [];
-
-            for (var i=str.length-1;i>=0;i--) {
-                buf.unshift(['&#', str[i].charCodeAt(), ';'].join(''));
-            }
-
-            return buf.join('');
-        },
-        /**
-         * Converts an html characterSet into its original character.
-         *
-         * @param {String} str htmlSet entities
-         **/
-        decode : function(str) {
-            return str.replace(/&#(\d+);/g, function(match, dec) {
-                return String.fromCharCode(dec);
-            });
-        }
-    };
-})(window);
+import {user} from "../../../../../../../../../../../frontend/Host/Admin/Universeorange/Com/Module/Public/User/Js/User";
 
 let source = {};
+
+source.get = (attribute) => {
+    if(is.empty(attribute)){
+        return _('_').collection('source');
+    } else {
+        return _('_').collection('source.' + attribute);
+    }
+}
+
+source.set = (attribute, value) => {
+    _('_').collection('source.' + attribute, value);
+}
+
+source.data = (attribute, value) => {
+    return _('_').collection('source.' + attribute, value);
+}
 
 source.panel = () => {
     const section = getSectionByName('main-content');
@@ -48,7 +36,33 @@ source.panel = () => {
     let index;
     for(index=0; index < list.length; index++){
         let panel = list[index];
-        let li = panel.select('li')
+        let tr_list = panel.select('tr');
+        let i;
+        for(i=0; i < tr_list.length; i++){
+            let tr = tr_list[i];
+            tr.on('click', (event) => {
+                let editor = source.get('editor.' + "{{$pre.id}}");
+                switch(tr.data('command')){
+                    case 'undo':
+                        if(!editor.session.getUndoManager().hasUndo()){
+                            tr.addClass('disabled');
+                        } else {
+                            editor.undo();
+                        }
+
+                    break;
+                    case 'redo':
+                        if(!editor.session.getUndoManager().hasRedo()){
+                            tr.addClass('disabled');
+                        } else {
+                            editor.redo();
+                        }
+                        break;
+                }
+
+            });
+
+        }
     }
 }
 
@@ -111,19 +125,24 @@ source.menu = () => {
 }
 
 source.editor = () => {
-    ace.require("ace/ext/language_tools");
-    let editor = ace.edit("{{$pre.id}}");
-    editor.session.setMode("ace/mode/php");
-    editor.setTheme("ace/theme/tomorrow");
-    // enable autocompletion and snippets
-    editor.setOptions({
-        enableBasicAutocompletion: true,
-        enableSnippets: true,
-        enableLiveAutocompletion: true
-    });
-    let element = select('#' + "{{$pre.id}}");
-    element.env.editor.session.setValue(element.data('content'));
-
+    let editor = source.get('editor.' + "{{$pre.id}}");
+    if(is.empty(editor)){
+        ace.require("ace/ext/language_tools");
+        editor = ace.edit("{{$pre.id}}");
+        editor.session.setMode("ace/mode/php");
+        editor.setTheme("ace/theme/tomorrow");
+        // enable autocompletion and snippets
+        editor.setOptions({
+            enableBasicAutocompletion: true,
+            enableSnippets: true,
+            enableLiveAutocompletion: true
+        });
+        let element = select('#' + "{{$pre.id}}");
+        editor.session.setValue(element.data('content'));
+        //element.env.editor.session.setValue(element.data('content'));
+        source.set('editor.' + "{{$pre.id}}", editor);
+    }
+    return editor;
 };
 
 source.init = () => {
