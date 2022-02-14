@@ -45,7 +45,9 @@ section[name="main-content"] form .panel tr {
     height: 24px;
 }
 
-section[name="main-content"] form .panel tr:hover {
+section[name="main-content"] form .panel tr td.icon:hover,
+section[name="main-content"] form .panel tr td.text:hover,
+section[name="main-content"] form .panel tr td.shortcut:hover {
     background-color: rgba(255, 124, 13, 1);
 }
 
