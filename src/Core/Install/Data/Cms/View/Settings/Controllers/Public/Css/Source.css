@@ -43,7 +43,7 @@ section[name="main-content"] form .panel {
 
 section[name="main-content"] form .panel tr {
     height: 24px;
-    cursor: pointer;
+    cursor: default;
 }
 
 section[name="main-content"] form .panel tr:hover td.icon,
