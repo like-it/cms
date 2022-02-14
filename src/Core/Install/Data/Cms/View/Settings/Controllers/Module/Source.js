@@ -41,24 +41,20 @@ source.panel = () => {
             let tr = tr_list[i];
             tr.on('click', (event) => {
                 let editor = source.get('editor.' + "{{$pre.id}}");
-                switch(tr.data('command')){
-                    case 'undo':
-                        if(!editor.session.getUndoManager().hasUndo()){
-                            tr.addClass('disabled');
-                        } else {
-                            editor.undo();
-                        }
-
-                    break;
-                    case 'redo':
-                        if(!editor.session.getUndoManager().hasRedo()){
-                            tr.addClass('disabled');
-                        } else {
-                            editor.redo();
-                        }
-                        break;
+                if(tr.hasClass('undo')) {
+                    if(!editor.session.getUndoManager().hasUndo()){
+                        tr.addClass('disabled');
+                    } else {
+                        editor.undo();
+                    }
                 }
-
+                if(tr.hasClass('redo')) {
+                    if(!editor.session.getUndoManager().hasRedo()){
+                        tr.addClass('disabled');
+                    } else {
+                        editor.redo();
+                    }
+                }
             });
 
         }
