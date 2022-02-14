@@ -89,15 +89,6 @@
             {{__('settings.controllers.section.form.component.menu.panel.edit.replace.shortcut')}}
         </li>
         <li class="icon">
-            <i class="{{__('settings.controllers.section.form.component.menu.panel.edit.duplicate.icon')}}"></i>
-        </li>
-        <li class="text">
-            {{__('settings.controllers.section.form.component.menu.panel.edit.duplicate.text')}}
-        </li>
-        <li class="shortcut">
-            {{__('settings.controllers.section.form.component.menu.panel.edit.duplicate.shortcut')}}
-        </li>
-        <li class="icon">
             <i class="{{__('settings.controllers.section.form.component.menu.panel.edit.delete_line.icon')}}"></i>
         </li>
         <li class="text">
@@ -105,6 +96,15 @@
         </li>
         <li class="shortcut">
             {{__('settings.controllers.section.form.component.menu.panel.edit.delete_line.shortcut')}}
+        </li>
+        <li class="icon">
+            <i class="{{__('settings.controllers.section.form.component.menu.panel.edit.duplicate.icon')}}"></i>
+        </li>
+        <li class="text">
+            {{__('settings.controllers.section.form.component.menu.panel.edit.duplicate.text')}}
+        </li>
+        <li class="shortcut">
+            {{__('settings.controllers.section.form.component.menu.panel.edit.duplicate.shortcut')}}
         </li>
     </ul>
 </div>
