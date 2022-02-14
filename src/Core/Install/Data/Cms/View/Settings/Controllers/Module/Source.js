@@ -58,7 +58,7 @@ source.panel = () => {
                 if(tr.hasClass('find')){
                     console.log(editor.searchBox);
                     if(!editor.searchBox){
-                        ace.require("ace/ext/searchbox");
+                        ace.config.loadModule("ace/ext/searchbox", function(m) {m.Search(editor)});
                         console.log(editor.searchBox);
                         // editor.Search(editor, true);
                     }
