@@ -59,23 +59,17 @@ source.panel = () => {
                 }
                 if(tr.hasClass('find')){
                     console.log(editor.searchBox);
-                    if(!editor.searchBox){
-                        ace.config.loadModule("ace/ext/searchbox", (m) => {
-                            m.Search(editor)
-                        });
+                    ace.config.loadModule("ace/ext/searchbox", (m) => {
+                        m.Search(editor)
+                    });
                         panel.addClass('d-none');
-                    }
-                    /*
-                    if (!editor.searchBox) {
-                        config.loadModule("ace/ext/searchbox", function(e) {
-                            e.Search(editor, true);
-                        });
-                    } else {
-                        if (editor.searchBox.active === true && editor.searchBox.replaceOption.checked === true) {
-                            editor.searchBox.replaceAll();
-                        }
-                    }
-                     */
+                }
+                if(tr.hasClass('replace')){
+                    console.log(editor.searchBox);
+                    ace.config.loadModule("ace/ext/searchbox", (m) => {
+                        m.Search(editor, true)
+                    });
+                    panel.addClass('d-none');
                 }
             });
 
