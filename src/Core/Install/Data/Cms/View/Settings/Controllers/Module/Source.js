@@ -55,6 +55,20 @@ source.panel = () => {
                         editor.redo();
                     }
                 }
+                if(tr.hasClass('find')){
+                    console.log(editor.searchBox);
+                    /*
+                    if (!editor.searchBox) {
+                        config.loadModule("ace/ext/searchbox", function(e) {
+                            e.Search(editor, true);
+                        });
+                    } else {
+                        if (editor.searchBox.active === true && editor.searchBox.replaceOption.checked === true) {
+                            editor.searchBox.replaceAll();
+                        }
+                    }
+                     */
+                }
             });
 
         }
