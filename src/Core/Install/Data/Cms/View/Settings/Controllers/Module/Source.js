@@ -3,7 +3,6 @@ import { version } from "/Module/Priya.js";
 import { root } from "/Module/Web.js";
 import { getSectionByName } from "/Module/Section.js";
 import { contains, replace } from "/Module/String.js";
-import {user} from "../../../../../../../../../../../frontend/Host/Admin/Universeorange/Com/Module/Public/User/Js/User";
 
 let source = {};
 
