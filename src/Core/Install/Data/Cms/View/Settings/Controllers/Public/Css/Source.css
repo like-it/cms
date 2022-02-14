@@ -44,6 +44,7 @@ section[name="main-content"] form .panel {
 section[name="main-content"] form .panel tr {
     height: 24px;
     cursor: default;
+    user-select: none;
 }
 
 section[name="main-content"] form .panel tr:hover td.icon,
