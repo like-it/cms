@@ -106,9 +106,17 @@ source.panel = () => {
                 }
                 if(tr.hasClass('copy')){
                     let copyText = editor.getCopyText();
+                    console.log(copyText);
+                    navigator.clipboard.writeText("<empty clipboard>").then(function() {
+                        /* clipboard successfully set */
+                    }, function() {
+                        /* clipboard write failed */
+                    });
+                    /*
                     navigator.clipboard.writeText(copyText).then(function(){
                         console.log("The text has been succesfully copied to the clipboard!");
                     });
+                     */
                     panel.addClass('d-none');
                 }
                 if(tr.hasClass('go-to-next-error')){
