@@ -58,16 +58,26 @@ source.panel = () => {
                     }
                 }
                 if(tr.hasClass('find')){
-                    console.log(editor.searchBox);
-                    ace.config.loadModule("ace/ext/searchbox", (m) => {
-                        m.Search(editor)
+                    ace.config.loadModule("ace/ext/searchbox", (module) => {
+                        module.Search(editor)
                     });
                         panel.addClass('d-none');
                 }
                 if(tr.hasClass('replace')){
-                    console.log(editor.searchBox);
-                    ace.config.loadModule("ace/ext/searchbox", (m) => {
-                        m.Search(editor, true)
+                    ace.config.loadModule("ace/ext/searchbox", (module) => {
+                        module.Search(editor, true)
+                    });
+                    panel.addClass('d-none');
+                }
+                if(tr.hasClass('go-to-next-error')){
+                    ace.config.loadModule("ace/ext/error_marker", (module) => {
+                        module.showErrorMarker(editor, 1);
+                    });
+                    panel.addClass('d-none');
+                }
+                if(tr.hasClass('go-to-previous-error')){
+                    ace.config.loadModule("ace/ext/error_marker", (module) => {
+                        module.showErrorMarker(editor, -1);
                     });
                     panel.addClass('d-none');
                 }

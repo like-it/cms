@@ -133,6 +133,33 @@
                     {{__('settings.controllers.section.form.component.menu.panel.edit.duplicate.shortcut')}}
                 </td>
             </tr>
+            <tr class="divider">
+                <td colspan="3">
+                    <hr>
+                </td>
+            </tr>
+            <tr class="go-to-next-error">
+                <td class="icon">
+                    <i class="{{__('settings.controllers.section.form.component.menu.panel.edit.go_to_next_error.icon')}}"></i>
+                </td>
+                <td class="text">
+                    {{__('settings.controllers.section.form.component.menu.panel.edit.go_to_next_error.text')}}
+                </td>
+                <td class="shortcut">
+                    {{__('settings.controllers.section.form.component.menu.panel.edit.go_to_next_error.shortcut')}}
+                </td>
+            </tr>
+            <tr class="go-to-previous-error">
+                <td class="icon">
+                    <i class="{{__('settings.controllers.section.form.component.menu.panel.edit.go_to_previous_error.icon')}}"></i>
+                </td>
+                <td class="text">
+                    {{__('settings.controllers.section.form.component.menu.panel.edit.go_to_previous_error.text')}}
+                </td>
+                <td class="shortcut">
+                    {{__('settings.controllers.section.form.component.menu.panel.edit.go_to_previous_error.shortcut')}}
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>
