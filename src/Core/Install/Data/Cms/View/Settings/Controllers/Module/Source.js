@@ -35,6 +35,23 @@ import { contains, replace } from "/Module/String.js";
 
 let source = {};
 
+source.panel = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const body = section.select('.card-body-' + "{{$request.node.key}}");
+    if(!body){
+        return;
+    }
+    let list = body.select('.panel');
+    let index;
+    for(index=0; index < list.length; index++){
+        let panel = list[index];
+        let li = panel.select('li')
+    }
+}
+
 source.menu = () => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -112,6 +129,7 @@ source.editor = () => {
 source.init = () => {
     source.editor();
     source.menu();
+    source.panel();
     console.log('source init');
 };
 
