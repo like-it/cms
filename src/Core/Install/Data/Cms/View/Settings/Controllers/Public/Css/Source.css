@@ -46,7 +46,7 @@ section[name="main-content"] form .panel tr {
 }
 
 section[name="main-content"] form .panel tr:hover {
-    background-color: rgba(10, 20, 200, 0.5);
+    background-color: rgba(255, 124, 13, 1);
 }
 
 section[name="main-content"] form .panel td.icon {
