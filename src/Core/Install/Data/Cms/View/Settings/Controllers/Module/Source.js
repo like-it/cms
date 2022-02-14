@@ -99,7 +99,7 @@ source.panel = () => {
                     panel.addClass('d-none');
                 }
                 if(tr.hasClass('duplicate')){
-                    editor.duplicatteSelection();
+                    editor.duplicateSelection();
                     panel.addClass('d-none');
                 }
                 if(tr.hasClass('delete')){
