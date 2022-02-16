@@ -31,6 +31,17 @@ source.panel = () => {
     if(!body){
         return;
     }
+    let editor = source.get('editor.' + "{{$pre.id}}");
+    editor.on('change', (e) => {
+        if(editor.session.getUndoManager().hasUndo()){
+            let tr = body.select('.panel .undo');
+            tr.removeClass('disabled');
+        }
+        if(editor.session.getUndoManager().hasRedo()){
+            let tr = body.select('.panel .redo');
+            tr.removeClass('disabled');
+        }
+    });
     let list = body.select('.panel');
     let index;
     for(index=0; index < list.length; index++){
@@ -39,6 +50,24 @@ source.panel = () => {
         let i;
         for(i=0; i < tr_list.length; i++){
             let tr = tr_list[i];
+            if(!navigator.clipboard){
+                if(tr.hasClass('paste')){
+                    tr.addClass('disabled');
+                }
+                if(tr.hasClass('copy')){
+                    tr.addClass('disabled');
+                }
+            }
+            if(tr.hasClass('undo')) {
+                if(!editor.session.getUndoManager().hasUndo()){
+                    tr.addClass('disabled');
+                }
+            }
+            if(tr.hasClass('redo')) {
+                if(!editor.session.getUndoManager().hasRedo()){
+                    tr.addClass('disabled');
+                }
+            }
             tr.on('click', (event) => {
                 let editor = source.get('editor.' + "{{$pre.id}}");
                 if(tr.hasClass('undo')) {
@@ -90,6 +119,8 @@ source.panel = () => {
                                 editor.$handlePaste(text);
                             })
                             .catch((err) => console.log('Async readText failed with error: "' + err + '"'));
+                    } else {
+                        tr.addClass('disabled');
                     }
                     panel.addClass('d-none');
                 }
@@ -113,6 +144,8 @@ source.panel = () => {
                         }, () => {
                             /* clipboard write failed */
                         });
+                    } else {
+                        tr.addClass('disabled');
                     }
                     panel.addClass('d-none');
                 }
