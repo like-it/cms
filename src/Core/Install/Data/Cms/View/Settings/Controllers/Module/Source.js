@@ -183,6 +183,7 @@ source.panel = () => {
                     });
                     panel.addClass('d-none');
                 }
+                event.stopPropagation();
             });
 
         }
