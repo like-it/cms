@@ -32,12 +32,20 @@ source.panel = () => {
         return;
     }
     let editor = source.get('editor.' + "{{$pre.id}}");
+    if(!editor){
+        return;
+    }
     editor.on('change', (e) => {
+        console.log('change');
         if(editor.session.getUndoManager().hasUndo()){
+            console.log('has undo');
             let tr = body.select('.panel .undo');
+            console.log(tr);
             tr.removeClass('disabled');
         } else {
+            console.log('no undo');
             let tr = body.select('.panel .undo');
+            console.log(tr);
             tr.addClass('disabled');
         }
         if(editor.session.getUndoManager().hasRedo()){
