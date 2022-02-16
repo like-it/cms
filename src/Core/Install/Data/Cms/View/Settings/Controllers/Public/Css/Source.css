@@ -48,17 +48,6 @@ section[name="main-content"] form .panel tr {
     user-select: none;
 }
 
-section[name="main-content"] form .panel tr.disabled {
-    color: rgba(200, 200, 200, 1);
-}
-
-
-section[name="main-content"] form .panel tr:hover td.icon,
-section[name="main-content"] form .panel tr:hover td.text,
-section[name="main-content"] form .panel tr:hover td.shortcut{
-    background-color: rgba(255, 124, 13, 1);
-}
-
 section[name="main-content"] form .panel td.icon {
     width: 40px;
     padding-left: 10px;
@@ -76,6 +65,20 @@ section[name="main-content"] form .panel td.shortcut {
     padding-top: 6px;
     font-size: 10px;
 }
+
+section[name="main-content"] form .panel tr.disabled,
+section[name="main-content"] form .panel tr.disabled td.icon {
+    color: rgba(200, 200, 200, 1);
+}
+
+
+section[name="main-content"] form .panel tr:hover td.icon,
+section[name="main-content"] form .panel tr:hover td.text,
+section[name="main-content"] form .panel tr:hover td.shortcut{
+    background-color: rgba(255, 124, 13, 1);
+}
+
+
 
 section[name="main-content"] form .panel tr.divider {
     padding-left: 10px;
