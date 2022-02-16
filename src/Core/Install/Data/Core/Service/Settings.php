@@ -943,6 +943,7 @@ class Settings extends Main {
                 }
             }
         }
+        dd($data->data());
         if($object->request('page')){
             $page = (int) $object->request('page');
         } else {
