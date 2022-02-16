@@ -2,7 +2,7 @@
 <div class="panel panel-edit d-none">
     <table>
         <tbody>
-            <tr class="undo" data-command="undo">
+            <tr class="undo">
                 <td class="icon">
                     <i class="{{__('settings.controllers.section.form.component.menu.panel.edit.undo.icon')}}"></i>
                 </td>
@@ -13,7 +13,7 @@
                     {{__('settings.controllers.section.form.component.menu.panel.edit.undo.shortcut')}}
                 </td>
             </tr>
-            <tr class="redo" data-command="redo">
+            <tr class="redo">
                 <td class="icon">
                     <i class="{{__('settings.controllers.section.form.component.menu.panel.edit.redo.icon')}}"></i>
                 </td>
