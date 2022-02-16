@@ -221,6 +221,7 @@ source.menu = () => {
             }
             menu.css('left', offset.left + 'px');
             menu.toggleClass('d-none');
+            event.stopPropagation();
         });
     }
     const pre = body.select("#{{$pre.id}}");
