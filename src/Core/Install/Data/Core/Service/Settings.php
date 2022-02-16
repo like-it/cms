@@ -921,10 +921,12 @@ class Settings extends Main {
         }
         $url = $domain->dir .
             $object->config('dictionary.data') .
+            $object->config('ds') .
             'Command' .
             $object->config('extension.json');
         $route_url = $domain->dir .
             $object->config('dictionary.data') .
+            $object->config('ds') .
             'Route' .
             $object->config('extension.json');
         $data = $object->data_read($url);
