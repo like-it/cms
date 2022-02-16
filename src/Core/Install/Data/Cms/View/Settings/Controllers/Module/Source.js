@@ -53,7 +53,7 @@ source.panel = () => {
             let tr = body.select('.panel .redo');
             tr.removeClass('disabled');
         } else {
-            let tr = body.select('.panel .undo');
+            let tr = body.select('.panel .redo');
             tr.addClass('disabled');
         }
     });
