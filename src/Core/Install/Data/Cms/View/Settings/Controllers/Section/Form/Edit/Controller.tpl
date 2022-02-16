@@ -2,7 +2,6 @@
 {{$fields = [
 'Update',
 'Name_old',
-'Hidden.Domain',
 'Hidden.Name',
 'Content'
 ]}}
