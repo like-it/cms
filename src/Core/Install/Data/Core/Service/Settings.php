@@ -945,9 +945,6 @@ class Settings extends Main {
                 }
             }
         }
-        d($route_url);
-        d($route);
-        dd($data->data());
         if($object->request('page')){
             $page = (int) $object->request('page');
         } else {
