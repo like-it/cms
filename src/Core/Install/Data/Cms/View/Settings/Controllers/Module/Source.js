@@ -36,10 +36,16 @@ source.panel = () => {
         if(editor.session.getUndoManager().hasUndo()){
             let tr = body.select('.panel .undo');
             tr.removeClass('disabled');
+        } else {
+            let tr = body.select('.panel .undo');
+            tr.addClass('disabled');
         }
         if(editor.session.getUndoManager().hasRedo()){
             let tr = body.select('.panel .redo');
             tr.removeClass('disabled');
+        } else {
+            let tr = body.select('.panel .undo');
+            tr.addClass('disabled');
         }
     });
     let list = body.select('.panel');
