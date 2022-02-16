@@ -80,7 +80,9 @@ source.panel = () => {
             tr.on('click', (event) => {
                 let editor = source.get('editor.' + "{{$pre.id}}");
                 if(tr.hasClass('open')){
+                    console.log('open');
                     let settings = section.select('.nav-item .settings-controller-settings');
+                    console.log(settings);
                     if(settings){
                         settings.click();
                     }
