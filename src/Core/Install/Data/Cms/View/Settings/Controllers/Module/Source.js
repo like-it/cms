@@ -42,7 +42,6 @@ source.panel = () => {
         } else {
             console.log('no undo');
             let tr = body.select('.panel .undo');
-            console.log(tr);
             tr.addClass('disabled');
         }
         if(editor.session.getUndoManager().hasRedo()){
@@ -51,6 +50,18 @@ source.panel = () => {
         } else {
             let tr = body.select('.panel .redo');
             tr.addClass('disabled');
+        }
+    });
+    let ul = body.select('.menu ul');
+    if(!ul){
+        return;
+    }
+    ul.on('click', (event) => {
+        let list = body.select('.panel');
+        let index;
+        for(index=0; index < list.length; index++) {
+            let panel = list[index];
+            panel.addClass('d-none');
         }
     });
     let list = body.select('.panel');

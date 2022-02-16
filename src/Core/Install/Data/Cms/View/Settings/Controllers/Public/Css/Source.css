@@ -19,6 +19,7 @@ section[name="main-content"] form .menu li {
     float: left;
     padding-left: 10px;
     padding-right: 10px;
+    user-select: none;
 }
 
 section[name="main-content"] form .edit {
