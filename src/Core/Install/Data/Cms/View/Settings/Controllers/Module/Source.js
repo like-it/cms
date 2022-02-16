@@ -81,7 +81,7 @@ source.panel = () => {
                 let editor = source.get('editor.' + "{{$pre.id}}");
                 if(tr.hasClass('open')){
                     console.log('open');
-                    let settings = section.select('.nav-item .settings-controller-settings');
+                    let settings = section.select('.nav-item .settings-controllers-settings');
                     console.log(settings);
                     if(settings){
                         settings.trigger('click');
