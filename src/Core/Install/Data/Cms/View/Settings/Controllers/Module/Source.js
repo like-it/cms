@@ -84,7 +84,7 @@ source.panel = () => {
                     let settings = section.select('.nav-item .settings-controller-settings');
                     console.log(settings);
                     if(settings){
-                        settings.click();
+                        settings.trigger('click');
                     }
                 }
                 if(tr.hasClass('save')){
