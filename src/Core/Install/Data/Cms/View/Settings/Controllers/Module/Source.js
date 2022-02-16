@@ -40,7 +40,6 @@ source.panel = () => {
             let tr = body.select('.panel .undo');
             tr.removeClass('disabled');
         } else {
-            console.log('no undo');
             let tr = body.select('.panel .undo');
             tr.addClass('disabled');
         }
@@ -80,6 +79,16 @@ source.panel = () => {
             }
             tr.on('click', (event) => {
                 let editor = source.get('editor.' + "{{$pre.id}}");
+                if(tr.hasClass('open')){
+                    let settings = section.select('.nav-item .settings-controller-settings');
+                    if(settings){
+                        settings.click();
+                    }
+                }
+                if(tr.hasClass('save')){
+                    let text = editor.getValue();
+                    console.log(text);
+                }
                 if(tr.hasClass('undo')) {
                     if(!editor.session.getUndoManager().hasUndo()){
                         tr.addClass('disabled');
