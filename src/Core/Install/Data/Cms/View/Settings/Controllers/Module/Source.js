@@ -42,6 +42,7 @@ source.panel = () => {
             let tr = body.select('.panel .undo');
             console.log(tr);
             tr.removeClass('disabled');
+            console.log(tr);
         } else {
             console.log('no undo');
             let tr = body.select('.panel .undo');
