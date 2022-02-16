@@ -88,9 +88,10 @@ source.panel = () => {
                         navigator.clipboard.readText()
                             .then((text) => {
                                 editor.$handlePaste(text);
-                                log('Async readText successful, "' + text + '" written');
                             })
-                            .catch((err) => log('Async readText failed with error: "' + err + '"'));
+                            .catch((err) => console.log('Async readText failed with error: "' + err + '"'));
+                    } else {
+                        editor.execCommand("paste");
                     }
                     panel.addClass('d-none');
                 }
@@ -114,6 +115,8 @@ source.panel = () => {
                         }, () => {
                             /* clipboard write failed */
                         });
+                    } else {
+                        editor.execCommand("copy");
                     }
                     panel.addClass('d-none');
                 }
