@@ -932,13 +932,15 @@ class Settings extends Main {
             $data = new Data();
         }
         $route = $object->data_read($route_url);
-        foreach($route->data() as $nr => $node){
-            if(
-                property_exists($node, 'command') &&
-                $data->has($node->command)
-            ){
-                $data->set($node->command . '.route', $node);
-                $data->set($node->command . '.domain', $domain->uuid);
+        if($route){
+            foreach($route->data() as $nr => $node){
+                if(
+                    property_exists($node, 'command') &&
+                    $data->has($node->command)
+                ){
+                    $data->set($node->command . '.route', $node);
+                    $data->set($node->command . '.domain', $domain->uuid);
+                }
             }
         }
         if($object->request('page')){
