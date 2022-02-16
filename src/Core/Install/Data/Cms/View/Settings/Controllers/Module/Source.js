@@ -36,13 +36,9 @@ source.panel = () => {
         return;
     }
     editor.on('change', (e) => {
-        console.log('change');
         if(editor.session.getUndoManager().hasUndo()){
-            console.log('has undo');
             let tr = body.select('.panel .undo');
-            console.log(tr);
             tr.removeClass('disabled');
-            console.log(tr);
         } else {
             console.log('no undo');
             let tr = body.select('.panel .undo');
