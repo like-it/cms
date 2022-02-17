@@ -274,6 +274,7 @@ source.editor = () => {
             enableLiveAutocompletion: true
         });
         let element = select("#{{$pre.id}}");
+        window = priya.attach(window);
         window.on('keydown', function(event) {
             if (event.ctrlKey || event.metaKey) {
                 switch (String.fromCharCode(event.which).toLowerCase()) {
