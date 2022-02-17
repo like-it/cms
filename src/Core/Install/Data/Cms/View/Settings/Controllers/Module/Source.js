@@ -70,11 +70,15 @@ source.panel = () => {
             if(tr.hasClass('undo')) {
                 if(!editor.session.getUndoManager().hasUndo()){
                     tr.addClass('disabled');
+                } else {
+                    tr.removeClass('disabled');
                 }
             }
             if(tr.hasClass('redo')) {
                 if(!editor.session.getUndoManager().hasRedo()){
                     tr.addClass('disabled');
+                } else {
+                    tr.removeClass('disabled');
                 }
             }
             tr.on('click', (event) => {
@@ -269,9 +273,16 @@ source.editor = () => {
             enableSnippets: true,
             enableLiveAutocompletion: true
         });
-        let element = select('#' + "{{$pre.id}}");
+        let element = select("#{{$pre.id}}");
+        element.on('keypress', (event) => {
+            console.log(event);
+
+        });
         editor.session.setValue(element.data('content'));
-        //element.env.editor.session.setValue(element.data('content'));
+        editor.on('change', (e) => {
+            let element = select("#{{$pre.id}}");
+            element.data('content', editor.getValue());
+        });
         source.set('editor.' + "{{$pre.id}}", editor);
     }
     return editor;
