@@ -92,8 +92,8 @@ source.panel = () => {
                     }
                 }
                 if(tr.hasClass('save')){
-                    let text = editor.getValue();
-                    console.log(text);
+                    source.save("card-body-{{$request.node.key}}");
+                    panel.addClass('d-none');
                 }
                 if(tr.hasClass('undo')) {
                     if(!editor.session.getUndoManager().hasUndo()){
