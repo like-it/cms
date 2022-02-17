@@ -269,7 +269,6 @@ source.save = (className) => {
     if(!form){
         return;
     }
-    console.log(form);
     let data = form.data('serialize');
     let pre = form.select('pre[name="node.content"]');
     if(!pre){
@@ -278,6 +277,19 @@ source.save = (className) => {
     data.push({
         name : "node.content",
         value: pre.data('content')
+    });
+    request(form.data('url'), data, (url, response) => {
+        if(response?.error){
+            data.push({
+                name: "error",
+                value: response.error
+            });
+            request(form.data('url-error'), data, (url, response) => {
+
+            });
+        } else {
+            console.log('saved...');
+        }
     });
     console.log(data);
 }
