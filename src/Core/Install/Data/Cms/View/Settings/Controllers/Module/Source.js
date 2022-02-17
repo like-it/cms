@@ -270,8 +270,10 @@ source.save = (className) => {
         return;
     }
     console.log(form);
+    let data = form.data('serialize');
+    data.content = form.select('pre[name="node.content]')?.data('content');
 
-
+    console.log(data);
 }
 
 source.editor = () => {
