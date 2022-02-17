@@ -275,8 +275,10 @@ source.save = (className) => {
     if(!pre){
         return;
     }
-    data.content = pre.data('content');
-
+    data.push({
+        name : "node.content",
+        value: pre.data('content')
+    });
     console.log(data);
 }
 
