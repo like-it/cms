@@ -68,9 +68,8 @@ class Settings extends Main {
     /**
      * @throws Exception
      */
-    public static function controllers_update(App $object, $uuid): Response
+    public static function controllers_update(App $object, $name): Response
     {
-        dd('update');
         $domain = Settings::domain_get($object);
         if(
             !property_exists($domain, 'dir') ||
@@ -79,55 +78,19 @@ class Settings extends Main {
             throw new Exception('Domain dir not set...');
         }
         $url = $domain->dir .
-            'Command' .
-            $object->config('extension.json');
-        $route_url = $domain->dir .
-            'Route' .
-            $object->config('extension.json');
-        $data = $object->data_read($url);
-        if(!$data){
-            $data = new Data();
-        }
-        $record = $object->request('node');
-        if($object->request('node.path.radio') === 'automatic'){
-            unset($record->path);
-        } else {
-            $record->path = $object->request('node.path.text');
-        }
-        if($object->request('node.controller.radio') === 'automatic'){
-            unset($record->controller);
-        } else {
-            $record->controller = $object->request('node.controller.text');
-        }
-        unset($record->domain);
-        if(empty($record->submodule)){
-            unset($record->submodule);
-        }
-        if(empty($record->command)){
-            unset($record->command);
-        }
-        if(empty($record->subcommand)){
-            unset($record->subcommand);
-        }
-        $record->name = $record->module;
-        if(property_exists($record, 'submodule')){
-            $record->name .= '-' . $record->submodule;
-        }
-        if(property_exists($record, 'command')){
-            $record->name .= '-' . $record->command;
-        }
-        if(property_exists($record, 'subcommand')){
-            $record->name .= '-' . $record->subcommand;
-        }
-        if(
-            !property_exists($record, 'submodule') &&
-            !property_exists($record, 'command') &&
-            !property_exists($record, 'subcommand')
-        ){
-            $record->name .= '-command';
-        }
+            'Controller' .
+            $object->config('ds') .
+            $name;
+        $content = $object->request('node.content');
 
-        return Settings::controllers_put($object, $data, $record, $url, $route_url, $domain);
+        File::write($url, $content);
+        $response = [];
+        $response['node'] = [
+            'url' => $url,
+            'name' => $name,
+            'content' => $content
+        ];
+        return new Response($response, Response::TYPE_JSON);
     }
 
     /**
