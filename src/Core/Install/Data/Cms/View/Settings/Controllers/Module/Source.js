@@ -260,6 +260,21 @@ source.menu = () => {
     }
 }
 
+source.save = (className) => {
+
+    let div = select('.' + className);
+    if(!div){
+        return;
+    }
+    let form = div.select('form');
+    if(!form){
+        return;
+    }
+    console.log(form);
+
+
+}
+
 source.editor = () => {
     let editor = source.get('editor.' + "{{$pre.id}}");
     if(is.empty(editor)){
@@ -279,7 +294,7 @@ source.editor = () => {
                 switch (String.fromCharCode(event.which).toLowerCase()) {
                     case 's':
                         event.preventDefault();
-                        alert('ctrl-s');
+                        source.save("card-body-{{$request.node.key}}");
                         break;
                 }
             }
