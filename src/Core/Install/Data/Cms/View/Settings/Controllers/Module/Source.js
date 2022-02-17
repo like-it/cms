@@ -274,7 +274,7 @@ source.editor = () => {
             enableLiveAutocompletion: true
         });
         let element = select("#{{$pre.id}}");
-        window.bind('keydown', function(event) {
+        window.on('keydown', function(event) {
             if (event.ctrlKey || event.metaKey) {
                 switch (String.fromCharCode(event.which).toLowerCase()) {
                     case 's':
