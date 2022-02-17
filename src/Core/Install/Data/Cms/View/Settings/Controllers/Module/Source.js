@@ -261,22 +261,34 @@ source.menu = () => {
 }
 
 source.save = (className) => {
-    let div = select('.' + className);
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const div = select('.' + className);
     if(!div){
         return;
     }
-    let form = div.select('form');
+    const form = div.select('form');
     if(!form){
         return;
     }
     let data = form.data('serialize');
-    let pre = form.select('pre[name="node.content"]');
+    const pre = form.select('pre[name="node.content"]');
     if(!pre){
         return;
     }
     data.push({
         name : "node.content",
         value: pre.data('content')
+    });
+    const input = section.select('input[name="node.domain"]');
+    if(!input){
+        return;
+    }
+    data.push({
+        name : "node.domain",
+        value : input.value
     });
     request(form.data('url'), data, (url, response) => {
         if(response?.error){
