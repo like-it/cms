@@ -271,7 +271,11 @@ source.save = (className) => {
     }
     console.log(form);
     let data = form.data('serialize');
-    data.content = form.select('pre[name="node.content]')?.data('content');
+    let pre = form.select('pre[name="node.content"]');
+    if(!pre){
+        return;
+    }
+    data.content = pre.data('content');
 
     console.log(data);
 }
