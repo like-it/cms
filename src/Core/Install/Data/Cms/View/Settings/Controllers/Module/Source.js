@@ -274,9 +274,15 @@ source.editor = () => {
             enableLiveAutocompletion: true
         });
         let element = select("#{{$pre.id}}");
-        element.on('keypress', (event) => {
-            console.log(event);
-
+        window.bind('keydown', function(event) {
+            if (event.ctrlKey || event.metaKey) {
+                switch (String.fromCharCode(event.which).toLowerCase()) {
+                    case 's':
+                        event.preventDefault();
+                        alert('ctrl-s');
+                        break;
+                }
+            }
         });
         editor.session.setValue(element.data('content'));
         editor.on('change', (e) => {
