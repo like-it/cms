@@ -1,4 +1,4 @@
-.dialog-delete {
+.dialog-save-as {
     left: 33%;
     width: 34%;
     right: 33%;
@@ -6,7 +6,7 @@
     top: calc(50% - 75px);
 }
 
-.dialog-delete .body {
+.dialog-save-as .body {
     height: 70px;
     background: rgba(255, 255, 255, 1);
 }

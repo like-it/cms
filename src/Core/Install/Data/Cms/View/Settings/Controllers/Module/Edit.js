@@ -250,7 +250,8 @@ edit.init = () => {
 ready(() => {
     require(
     [
-        root() + 'Settings/Controllers/Css/Edit.css?' + version()
+        root() + 'Settings/Controllers/Css/Edit.css?' + version(),
+        root() + 'Dialog/Css/Dialog.Save.As.css?' + version(),
     ],
     () => {
         edit.init();
