@@ -123,7 +123,7 @@ edit.form = (target) => {
         } else {
             data.push({
                 name: "node.domain",
-                value: domain
+                value: domain.value
             });
         }
         const pre = form.select('pre[name="node.content"]');
