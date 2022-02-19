@@ -16,7 +16,7 @@
         'type' => 'text',
         'autocorrect' => 'off',
         'autocapitalize' => 'off',
-        'spellcheck' => 'off'
+        'spellcheck' => 'false'
         ])}}
     </div>
     <div class="footer">
