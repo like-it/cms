@@ -13,7 +13,10 @@
         'name' => $field,
         'label' => 'New name',
         'value' => request('node.' + $field),
-        'type' => 'text'
+        'type' => 'text',
+        'autocorrect' => 'off',
+        'autocapitalize' => 'off',
+        'spellcheck' => 'off'
         ])}}
     </div>
     <div class="footer">
