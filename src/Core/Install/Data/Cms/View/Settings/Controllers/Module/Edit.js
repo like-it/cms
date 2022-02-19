@@ -110,17 +110,30 @@ edit.form = (target) => {
         header('Authorization', 'Bearer ' + user.token());
         let data = form.data('serialize');
         let url = form.data('url');
-        if(contains(url, "{node.domain}") !== false){
-            const section = getSectionByName('main-content');
-            if(!section){
-                return;
-            }
-            const domain = section.select('input[name="node.domain"]');
-            if(!domain){
-                return;
-            }
-            url = replace("{node.domain}", domain.value, url);
+        const section = getSectionByName('main-content');
+        if(!section){
+            return;
         }
+        const domain = section.select('input[name="node.domain"]');
+        if(!domain){
+            return;
+        }
+        if(contains(url, "{node.domain}") !== false){
+            url = replace("{node.domain}", domain.value, url);
+        } else {
+            data.push({
+                name: "node.domain",
+                value: domain
+            });
+        }
+        const pre = form.select('pre[name="node.content"]');
+        if(!pre){
+            return;
+        }
+        data.push({
+            name : "node.content",
+            value: pre.data('content')
+        });
         form.request(url, data, (url, response) => {
             if(response?.error){
                 data.push({
@@ -263,7 +276,7 @@ edit.dialog = () => {
         return;
     }
     submit.on('click', (event) => {
-        source.save("card-body-{{$request.node.key}}");
+        form.trigger('submit');
     });
 }
 
