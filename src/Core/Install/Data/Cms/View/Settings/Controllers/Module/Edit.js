@@ -134,6 +134,7 @@ edit.form = (target) => {
             name : "node.content",
             value: pre.data('content')
         });
+        console.log(data);
         form.request(url, data, (url, response) => {
             if(response?.error){
                 data.push({
