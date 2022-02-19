@@ -1,6 +1,6 @@
 {{R3M}}
 {{$field = 'name'}}
-<div class="dialog dialog-save-as">
+<div class="dialog dialog-save-as d-none">
     <div class="head">
         <h1>Save as</h1>
         <span class="close">

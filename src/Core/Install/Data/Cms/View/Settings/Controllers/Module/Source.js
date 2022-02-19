@@ -95,6 +95,10 @@ source.panel = () => {
                     source.save("card-body-{{$request.node.key}}");
                     panel.addClass('d-none');
                 }
+                if(tr.hasClass('save-as')){
+                    source.saveAs("card-body-{{$request.node.key}}");
+                    panel.addClass('d-none');
+                }
                 if(tr.hasClass('undo')) {
                     if(!editor.session.getUndoManager().hasUndo()){
                         tr.addClass('disabled');
@@ -260,6 +264,26 @@ source.menu = () => {
     }
 }
 
+source.saveAs = (className) => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const div = select('.' + className);
+    if(!div){
+        return;
+    }
+    const form = div.select('form');
+    if(!form){
+        return;
+    }
+    const dialog = form.select('.dialog-save-as');
+    if(!dialog){
+        return;
+    }
+    dialog.removeClass('d-none');
+}
+
 source.save = (className) => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -321,11 +345,19 @@ source.editor = () => {
         });
         let element = select("#{{$pre.id}}");
         element.on('keydown', function(event) {
-            if (event.ctrlKey || event.metaKey) {
+            if (event.ctrlKey || event.metaKey && !event.shiftKey) {
                 switch (String.fromCharCode(event.which).toLowerCase()) {
                     case 's':
                         event.preventDefault();
                         source.save("card-body-{{$request.node.key}}");
+                        break;
+                }
+            }
+            else if (event.ctrlKey || event.metaKey && event.shiftKey) {
+                switch (String.fromCharCode(event.which).toLowerCase()) {
+                    case 's':
+                        event.preventDefault();
+                        source.saveAs("card-body-{{$request.node.key}}");
                         break;
                 }
             }
