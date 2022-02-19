@@ -7,7 +7,6 @@
 {{$data.url = server.url('core') + $require.module + '/' + $require.submodule + '/' + $request.node.uuid}}
 {{$data.error = route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-' + $subcommand)}}
 {{$require.action = 'Edit'}}
-
 {{/if}}
 <form
     name="{{$module}}-{{$submodule}}-{{$command}}-form"

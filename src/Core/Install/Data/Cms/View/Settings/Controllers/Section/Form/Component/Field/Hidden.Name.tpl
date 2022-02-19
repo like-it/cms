@@ -1,4 +1,4 @@
-{{R3M}}}
+{{R3M}}
 {{$field = 'name'}}
 {{html.input([
     'id' => $module + '-' + $submodule + '-' + $field,
