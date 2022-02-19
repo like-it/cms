@@ -4,9 +4,19 @@
     right: 33%;
     height: 150px;
     top: calc(50% - 75px);
+    z-index: 11;
 }
 
 .dialog-save-as .body {
     height: 70px;
+    padding: 10px;
     background: rgba(255, 255, 255, 1);
+}
+
+.dialog-save-as .body input[type="text"] {
+    width: 100%;
+}
+
+.dialog-save-as .footer d-inline-block {
+    float: left;
 }
