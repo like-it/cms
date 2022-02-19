@@ -102,38 +102,39 @@ edit.form = (target) => {
         return;
     }
     const form = selected.select('form');
-    if(form){
-        form.on('submit', ( event ) => {
-            event.preventDefault();
-            header('Authorization', 'Bearer ' + user.token());
-            let data = form.data('serialize');
-            let url = form.data('url');
-            if(contains(url, "{node.domain}") !== false){
-                const section = getSectionByName('main-content');
-                if(!section){
-                    return;
-                }
-                const domain = section.select('input[name="node.domain"]');
-                if(!domain){
-                    return;
-                }
-                url = replace("{node.domain}", domain.value, url);
-            }
-            form.request(url, data, (url, response) => {
-                if(response?.error){
-                    data.push({
-                        name: "error",
-                        value: response.error
-                    });
-                    request(form.data('url-error'), data, ( urlError, responseError ) => {
-
-                    });
-                } else {
-                    menu.dispatch(section, target);
-                }
-            });
-        });
+    if(!form){
+        return;
     }
+    form.on('submit', ( event ) => {
+        event.preventDefault();
+        header('Authorization', 'Bearer ' + user.token());
+        let data = form.data('serialize');
+        let url = form.data('url');
+        if(contains(url, "{node.domain}") !== false){
+            const section = getSectionByName('main-content');
+            if(!section){
+                return;
+            }
+            const domain = section.select('input[name="node.domain"]');
+            if(!domain){
+                return;
+            }
+            url = replace("{node.domain}", domain.value, url);
+        }
+        form.request(url, data, (url, response) => {
+            if(response?.error){
+                data.push({
+                    name: "error",
+                    value: response.error
+                });
+                request(form.data('url-error'), data, ( urlError, responseError ) => {
+
+                });
+            } else {
+                menu.dispatch(section, target);
+            }
+        });
+    });
 }
 
 edit.onUpdate = () => {
@@ -226,10 +227,50 @@ edit.content = () => {
     });
 }
 
+edit.dialog = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const selected = section.select('.card-body-' + "{{$request.node.key}}");
+    if(!selected){
+        return;
+    }
+    const form = selected.select('form');
+    if(!form){
+        return;
+    }
+    const dialog = form.select('.dialog-save-as');
+    if(!dialog){
+        return;
+    }
+    const close = dialog.select('.close');
+    if(!close){
+        return;
+    }
+    close.on('click', (event) => {
+        dialog.addClass('d-none');
+    });
+    const cancel = dialog.select('.button-cancel');
+    cancel.on('click', (event) => {
+        dialog.addClass('d-none');
+    });
+    cancel.on('click', (event) => {
+        dialog.addClass('d-none');
+    });
+    const submit = dialog.select('.button-submit');
+    if(!submit){
+        return;
+    }
+    submit.on('click', (event) => {
+        source.save("card-body-{{$request.node.key}}");
+    });
+}
+
 edit.init = () => {
     edit.body();
     edit.title();
-    //edit.content();
+    edit.dialog();
     edit.form({
         select : [
             {
