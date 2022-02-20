@@ -9,7 +9,7 @@
     </div>
     <div class="body">
         {{html.input([
-        'id' => $module + '-' + $submodule + '-' + $field + '-' + $node.key,
+        'id' => $module + '-' + $submodule + '-' + $field + '-' + $request.node.key,
         'name' => $field,
         'label' => 'New name',
         'value' => request('node.' + $field),
@@ -18,8 +18,8 @@
         'autocapitalize' => 'off',
         'spellcheck' => 'false'
         ])}}
-        <input id="node-class-rename-{{$node.key}}" type="checkbox" name="node.class_rename" value="true" checked="checked" />
-        <label for="node-class-rename-{{$node.key}}">Rename class</label>
+        <input id="node-class-rename-{{$request.node.key}}" type="checkbox" name="node.class_rename" value="true" checked="checked" />
+        <label for="node-class-rename-{{$request.node.key}}">Rename class</label>
     </div>
     <div class="footer">
         <div class="w-50 d-inline-block text-center">
