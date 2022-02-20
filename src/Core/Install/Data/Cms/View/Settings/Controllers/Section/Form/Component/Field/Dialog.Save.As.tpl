@@ -15,7 +15,7 @@
         'value' => request('node.' + $field),
         'type' => 'text',
         'autocorrect' => 'off',
-        'autocapitalize' => 'off',
+        'autocapitalize' => 'on',
         'spellcheck' => 'false'
         ])}}
         <input
@@ -28,7 +28,7 @@
         <label
             for="node-class-rename-{{$request.node.key}}"
         >
-            Rename class
+            Rename class in file
         </label>
     </div>
     <div class="footer">
