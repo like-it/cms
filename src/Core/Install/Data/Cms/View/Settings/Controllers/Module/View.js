@@ -24,11 +24,22 @@ view.progress = () => {
     if(!bg_process_bar){
         return;
     }
-    setTimeout((event) => {
-            let now = parseFloat(bg_process_bar.attribute('aria-valuenow'));
+    setInterval((event) => {
+        let now = parseFloat(bg_process_bar.attribute('aria-valuenow'));
+        let reverse = bg_process_bar.attribute('aria-reverse');
+        if(reverse){
+            now--;
+            if(now == 0){
+                bg_process_bar.attribute('delete', 'aria-reverse');
+            }
+        } else {
             now++;
-            bg_process_bar.css('width', now + '%');
-            bg_process_bar.attribute('aria-valuenow', now);
+        }
+        bg_process_bar.css('width', now + '%');
+        bg_process_bar.attribute('aria-valuenow', now);
+        if(now == 90){
+            bg_process_bar.attribute('aria-reverse', true);
+        }
     }, 50);
 }
 
