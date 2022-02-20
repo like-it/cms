@@ -289,6 +289,10 @@ source.saveAs = (className) => {
         return;
     }
     dialog.removeClass('d-none');
+    const name = form.select('input[name="node.name"]');
+    if(name){
+        name.focus();
+    }
 }
 
 source.save = (className) => {
@@ -353,7 +357,7 @@ source.editor = () => {
         });
         let element = select("#{{$pre.id}}");
         element.on('keydown', function(event) {
-            if (event.ctrlKey || event.metaKey && !event.shiftKey) {
+            if ((event.ctrlKey || event.metaKey) && !event.shiftKey) {
                 switch (String.fromCharCode(event.which).toLowerCase()) {
                     case 's':
                         event.preventDefault();
@@ -362,7 +366,7 @@ source.editor = () => {
                         break;
                 }
             }
-            else if (event.ctrlKey || event.metaKey && event.shiftKey) {
+            else if ((event.ctrlKey || event.metaKey) && event.shiftKey) {
                 switch (String.fromCharCode(event.which).toLowerCase()) {
                     case 's':
                         event.preventDefault();

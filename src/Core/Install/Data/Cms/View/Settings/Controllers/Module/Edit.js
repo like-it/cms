@@ -299,11 +299,9 @@ edit.dialogSaveAs = () => {
     submit.on('click', (event) => {
         form.trigger('submit');
     });
-    const name = form.select('input[name="node.name"]');
-    if(name){
-        name.focus();
-        console.log('focus');
-    }
+    /*
+
+     */
 }
 
 edit.init = () => {
