@@ -26,12 +26,12 @@ view.progress = () => {
     if(!bg_process_bar){
         return;
     }
-    setInterval((event) => {
-        let now = parseFloat(bg_process_bar.attribute('aria-valuenow'));
+    setTimeout((event) => {
+        let now = parseInt(bg_process_bar.attribute('aria-valuenow'));
         let reverse = bg_process_bar.attribute('aria-reverse');
         if(reverse){
             now--;
-            if(now == 0){
+            if(now === 0){
                 bg_process_bar.attribute('delete', 'aria-reverse');
             }
         } else {
@@ -39,11 +39,12 @@ view.progress = () => {
         }
         bg_process_bar.css('width', now + '%');
         bg_process_bar.attribute('aria-valuenow', now);
-        if(now == 90){
+        if(now === 90){
             bg_process_bar.attribute('aria-reverse', true);
         }
         console.log(now);
         console.log(event);
+        view.progress();
     }, 50);
 }
 
