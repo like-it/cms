@@ -152,11 +152,15 @@ edit.form = (target) => {
                 if(!dialog){
                     return;
                 }
-                const error = dialog.select('.body .error');
+                const error = dialog.select('.body .alert');
                 if(!error){
-                    return;
+                    const body = dialog.select('.body');
+                    let div = create('div', 'alert alert-danger');
+                    div.html(response?.message)
+                    body.prepend(div);
+                } else {
+                    error.html(response?.message);
                 }
-                error.html(response?.message);
             } else {
                 menu.dispatch(section, target);
             }
