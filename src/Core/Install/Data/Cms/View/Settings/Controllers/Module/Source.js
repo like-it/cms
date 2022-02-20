@@ -84,9 +84,8 @@ source.panel = () => {
             tr.on('click', (event) => {
                 let editor = source.get('editor.' + "{{$pre.id}}");
                 if(tr.hasClass('open')){
-                    console.log('open');
                     let settings = section.select('.nav-item .settings-controllers-settings');
-                    console.log(settings);
+                    panel.addClass('d-none');
                     if(settings){
                         settings.trigger('click');
                     }
@@ -364,6 +363,17 @@ source.editor = () => {
                         event.preventDefault();
                         source.save("card-body-{{$request.node.key}}");
                         //source.get('delete', 'editor.' + "{{$pre.id}}");
+                        break;
+                    case 'o':
+                        event.preventDefault();
+                        const section = getSectionByName('main-content');
+                        if(!section){
+                            return;
+                        }
+                        let settings = section.select('.nav-item .settings-controllers-settings');
+                        if(settings){
+                            settings.trigger('click');
+                        }
                         break;
                 }
             }
