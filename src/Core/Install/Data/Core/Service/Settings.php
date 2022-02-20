@@ -14,6 +14,7 @@ use R3m\Io\Module\Response;
 
 use Exception;
 use R3m\Io\Exception\ObjectException;
+use R3m\Io\Exception\FileExistException;
 use R3m\Io\Exception\FileNotExistException;
 use DateTime;
 
@@ -67,9 +68,11 @@ class Settings extends Main {
 
     /**
      * @throws Exception
+     * @throws FileExistException
      */
     public static function controllers_update(App $object, $name): Response
     {
+        $name_old = $object->request('node.name_old');
         $domain = Settings::domain_get($object);
         if(
             !property_exists($domain, 'dir') ||
@@ -77,13 +80,30 @@ class Settings extends Main {
         ){
             throw new Exception('Domain dir not set...');
         }
-        $url = $domain->dir .
-            'Controller' .
-            $object->config('ds') .
-            $name;
-        $content = $object->request('node.content');
-
-        File::write($url, $content);
+        if($name !== $name_old){
+            $url = $domain->dir .
+                'Controller' .
+                $object->config('ds') .
+                $name;
+            $content = $object->request('node.content');
+            if(File::exist($url)){
+                throw new FileExistException('Target file (' . $url .') exist.');
+            } else {
+                File::write($url, $content);
+                $url_old = $domain->dir .
+                    'Controller' .
+                    $object->config('ds') .
+                    $name_old;
+                File::delete($url_old);
+            }
+        } else {
+            $url = $domain->dir .
+                'Controller' .
+                $object->config('ds') .
+                $name;
+            $content = $object->request('node.content');
+            File::write($url, $content);
+        }
         $response = [];
         $response['node'] = [
             'url' => $url,
