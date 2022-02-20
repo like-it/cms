@@ -267,7 +267,7 @@ edit.dialogSaveAs = () => {
             name.value = name_old.value;
         }
         const alert = dialog.select('.alert');
-        alert.remove();
+        alert?.remove();
         dialog.addClass('d-none');
     });
     const cancel = dialog.select('.button-cancel');
@@ -285,7 +285,7 @@ edit.dialogSaveAs = () => {
             name.value = name_old.value;
         }
         const alert = dialog.select('.alert');
-        alert.remove();
+        alert?.remove();
         dialog.addClass('d-none');
     });
     const submit = dialog.select('.button-submit');
