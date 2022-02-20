@@ -375,6 +375,7 @@ source.editor = () => {
                         source.get('delete', 'editor.' + "{{$pre.id}}");
                         break;
                     default:
+                        console.log(event);
                         console.log(String.fromCharCode(event.which).toLowerCase());
                 }
             }
