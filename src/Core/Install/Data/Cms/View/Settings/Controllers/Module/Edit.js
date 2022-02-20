@@ -154,10 +154,10 @@ edit.form = (target) => {
                 }
                 const error = dialog.select('.body .alert');
                 if(!error){
-                    const body = dialog.select('.body');
+                    const label = dialog.select('label');
                     let div = create('div', 'alert alert-danger');
                     div.html(response?.message)
-                    body.prepend(div);
+                    dialog.insertBefore(div, label);
                 } else {
                     error.html(response?.message);
                 }
