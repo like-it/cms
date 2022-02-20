@@ -299,9 +299,6 @@ edit.dialogSaveAs = () => {
     submit.on('click', (event) => {
         form.trigger('submit');
     });
-    /*
-
-     */
 }
 
 edit.init = () => {
