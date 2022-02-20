@@ -9,7 +9,7 @@ $subcommand === 'body'
     {{$request.target = 'section[name="' + $section.name + '"] .card-body-view-' + $request.node.uuid}}
     {{$request.append.to = 'section[name="' + $section.name + '"] .card'}}
 {{/if}}
-<div class="card-body h-100 card-body-view-{{$request.node.uuid}}">
+<div class="card-body h-100 card-body-view-{{$request.node.key}}">
 {{require($prefix + $require.submodule + '/Section/' + $require.command + '/' + $require.command + '.tpl')}}
 </div>
 {{script('module')}}

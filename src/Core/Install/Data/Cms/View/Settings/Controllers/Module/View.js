@@ -12,7 +12,7 @@ view.title = () => {
     if(!section){
         return;
     }
-    const is_link = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.node.uuid}}");
+    const is_link = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.node.key}}");
     if(is_link){
         const nav = section.select('.nav');
         const active = nav.select('.active');
@@ -25,7 +25,7 @@ view.title = () => {
     }
     const nav = section.select('.nav');
     const li = create('li', 'nav-item');
-    const a = create('a', 'nav-link ' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.node.uuid}}");
+    const a = create('a', 'nav-link ' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.node.key}}");
     a.data('frontend-url', "");
     a.data('url', "");
     a.html("<span class='title'>{{$request.node.name}}</span><i class=\"fas fa-window-close\"></i>");
@@ -78,7 +78,7 @@ view.body = (action) => {
         case 'show' :
             body = section.select('.card-body');
             body.addClass('d-none');
-            selected = section.select('.card-body-view-' + "{{$request.node.uuid}}");
+            selected = section.select('.card-body-view-' + "{{$request.node.key}}");
             if(selected){
                 selected.removeClass('d-none');
             }
@@ -86,7 +86,7 @@ view.body = (action) => {
         case 'remove' :
             body = section.select('.card-body');
             body.addClass('d-none');
-            selected = section.select('.card-body-view-' + "{{$request.node.uuid}}");
+            selected = section.select('.card-body-view-' + "{{$request.node.key}}");
             if(selected){
                 selected.remove();
             }
