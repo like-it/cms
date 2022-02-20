@@ -6,7 +6,7 @@
 'validate_string_length',
 'validate_string_contains'
 ]}}
-{{$input.id = $module + '-' + $submodule + '-' + $field}}
+{{$input.id = $module + '-' + $submodule + '-' + $field + '-' + $request.node.key}}
 {{$input.class = 'form-control'}}
 {{for.each($validates as $validate)}}
     {{if(request.error($field + '.' + $validate) === true)}}

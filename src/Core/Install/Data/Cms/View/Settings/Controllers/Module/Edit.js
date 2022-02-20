@@ -231,7 +231,7 @@ edit.focus = () => {
     input.focus();
 }
 
-edit.dialog = () => {
+edit.dialogSaveAs = () => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
@@ -253,13 +253,26 @@ edit.dialog = () => {
         return;
     }
     close.on('click', (event) => {
+        const link = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.node.key}}");
+        const name_old = form.select('input[name="node.name_old"]');
+        if(link){
+            const title = link.select('.title');
+            if(title){
+                title.html(name_old.value);
+            }
+        }
         dialog.addClass('d-none');
     });
     const cancel = dialog.select('.button-cancel');
     cancel.on('click', (event) => {
-        dialog.addClass('d-none');
-    });
-    cancel.on('click', (event) => {
+        const link = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.node.key}}");
+        const name_old = form.select('input[name="node.name_old"]');
+        if(link){
+            const title = link.select('.title');
+            if(title){
+                title.html(name_old.value);
+            }
+        }
         dialog.addClass('d-none');
     });
     const submit = dialog.select('.button-submit');
@@ -274,7 +287,7 @@ edit.dialog = () => {
 edit.init = () => {
     edit.body();
     edit.title();
-    edit.dialog();
+    edit.dialogSaveAs();
     edit.form({
         select : [
             {

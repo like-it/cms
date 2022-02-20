@@ -1,5 +1,5 @@
 {{R3M}}
-{{$pre.id = 'node-' + uuid()}}
+{{$pre.id = 'node-' + $request.node.key}}
 {{$pre.name = 'node.content'}}
 <pre
     id="{{$pre.id}}"

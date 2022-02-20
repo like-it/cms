@@ -2,7 +2,7 @@
 {{$field = 'extension'}}
 {{$label = $field|uppercase.first}}
 {{$label += '*'}}
-{{$input.id = $module + '-' + $submodule + '-' + $field}}
+{{$input.id = $module + '-' + $submodule + '-' + $field + '-' + $request.node.key}}
 {{$input.class = 'form-control'}}
 {{$input.type = 'radio'}}
 {{$input.name = 'node.' + $field}}

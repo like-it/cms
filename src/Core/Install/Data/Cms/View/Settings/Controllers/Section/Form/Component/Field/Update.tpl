@@ -1,6 +1,6 @@
 {{R3M}}
 {{$field = 'update'}}
-{{$input.id = $module + '-' + $submodule + '-' + $field}}
+{{$input.id = $module + '-' + $submodule + '-' + $field + '-' + $request.node.key}}
 {{$input.type = 'hidden'}}
 {{$input.name = 'request-method' }}
 {{$input.value = 'PUT'}}

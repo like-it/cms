@@ -5,7 +5,7 @@
 {{$validates = [
 'validate_in_list_json',
 ]}}
-{{$select.id = $module + '-' + $submodule + '-' + $field}}
+{{$select.id = $module + '-' + $submodule + '-' + $field + '-' + $request.node.key}}
 {{$select.class = 'form-control'}}
 {{for.each($validates as $validate)}}
     {{if(request.error($field + '.' + $validate) === true)}}
