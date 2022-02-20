@@ -340,6 +340,31 @@ source.save = (className) => {
     console.log(data);
 }
 
+source.open = () => {
+    let section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    let settings = section.select('.nav-item .settings-controllers-settings');
+    if(settings){
+        settings.trigger('click');
+    }
+}
+
+source.close = (className) => {
+    let section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    let settings = section.select('.nav-item .' + className);
+    if(settings){
+        let close = settings.select('.close');
+        if(close){
+            close.trigger('click');
+        }
+    }
+}
+
 source.editor = () => {
     //let editor = source.get('editor.' + "{{$pre.id}}");
     let editor = false;
@@ -366,14 +391,11 @@ source.editor = () => {
                         break;
                     case 'o':
                         event.preventDefault();
-                        const section = getSectionByName('main-content');
-                        if(!section){
-                            return;
-                        }
-                        let settings = section.select('.nav-item .settings-controllers-settings');
-                        if(settings){
-                            settings.trigger('click');
-                        }
+                        source.open();
+                        break;
+                    case 'w':
+                        event.preventDefault();
+                        source.close("settings-controllers-edit-controller-{{$request.node.key}}");
                         break;
                 }
             }
