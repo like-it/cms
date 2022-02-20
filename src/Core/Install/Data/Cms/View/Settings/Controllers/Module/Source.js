@@ -357,6 +357,7 @@ source.editor = () => {
                     case 's':
                         event.preventDefault();
                         source.save("card-body-{{$request.node.key}}");
+                        //source.get('delete', 'editor.' + "{{$pre.id}}");
                         break;
                 }
             }
@@ -365,6 +366,7 @@ source.editor = () => {
                     case 's':
                         event.preventDefault();
                         source.saveAs("card-body-{{$request.node.key}}");
+                        source.get('delete', 'editor.' + "{{$pre.id}}");
                         break;
                 }
             }

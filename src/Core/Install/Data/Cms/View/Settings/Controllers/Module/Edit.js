@@ -162,6 +162,7 @@ edit.form = (target) => {
                     error.html(response?.message);
                 }
             } else {
+                _('_').collection('delete', 'source.editor.' + pre.id);
                 menu.dispatch(section, target);
             }
         });
