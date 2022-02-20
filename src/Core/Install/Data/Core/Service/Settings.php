@@ -115,6 +115,8 @@ class Settings extends Main {
                 $object->config('ds') .
                 $name;
             $content = $object->request('node.content');
+            $classname_old = File::basename($name_old, '.php');
+            $classname = File::basename($name, '.php');
             if($class_rename){
                 $content = str_replace([
                     $classname_old . '::',
