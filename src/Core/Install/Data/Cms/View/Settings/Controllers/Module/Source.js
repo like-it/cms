@@ -245,21 +245,28 @@ source.menu = () => {
     }
     pre.on('click', (event) => {
         let panel = body.select('.panel');
-        panel.addClass('d-none');
+        if(panel){
+            panel.addClass('d-none');
+        }
     });
     const item = section.select('.card-header-tabs li');
     if(is.nodeList(item)){
         for(index=0; index < item.length; index++){
             item[index].on('click', (event) => {
                 let panel = body.select('.panel');
-                panel.addClass('d-none');
+                if(panel){
+                    panel.addClass('d-none');
+                }
             });
         }
     }
     else if(item){
         item.on('click', (event) => {
             let panel = body.select('.panel');
-            panel.addClass('d-none');
+            if(panel){
+                panel.addClass('d-none');
+            }
+
         });
     }
 }
