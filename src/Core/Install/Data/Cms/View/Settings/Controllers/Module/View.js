@@ -17,12 +17,10 @@ view.progress = () => {
         return;
     }
     const progress = selected.select('.progress');
-    console.log(progress);
     if(!progress){
         return;
     }
     const bg_progress_bar = progress.select('.bg-progress-bar');
-    console.log(bg_progress_bar);
     if(!bg_progress_bar){
         return;
     }
@@ -31,7 +29,7 @@ view.progress = () => {
         let reverse = bg_progress_bar.attribute('aria-reverse');
         if(reverse){
             now--;
-            if(now === 0){
+            if(now <= -10){
                 bg_progress_bar.attribute('delete', 'aria-reverse');
             }
         } else {
@@ -39,11 +37,9 @@ view.progress = () => {
         }
         bg_progress_bar.css('width', now + '%');
         bg_progress_bar.attribute('aria-valuenow', now);
-        if(now === 90){
+        if(now === 100){
             bg_progress_bar.attribute('aria-reverse', true);
         }
-        console.log(now);
-        console.log(event);
         view.progress();
     }, 50);
 }
