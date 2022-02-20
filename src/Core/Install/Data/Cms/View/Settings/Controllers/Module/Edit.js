@@ -302,6 +302,7 @@ edit.dialogSaveAs = () => {
     const name = form.select('input[name="node.name"]');
     if(name){
         name.focus();
+        console.log('focus');
     }
 }
 
