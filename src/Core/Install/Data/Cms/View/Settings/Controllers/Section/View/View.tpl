@@ -1,6 +1,6 @@
 {{R3M}}
 <div class="progress" style="height: 1px">
-    {{$progress=0}}
+    {{$progress=10}}
     <div
         class="progress-bar bg-progress-bar"
         role="progressbar"
