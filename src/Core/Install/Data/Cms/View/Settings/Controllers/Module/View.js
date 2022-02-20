@@ -17,10 +17,12 @@ view.progress = () => {
         return;
     }
     const progress = selected.select('.progress');
+    console.log(progress);
     if(!progress){
         return;
     }
     const bg_process_bar = progress.select('.bg-process-bar');
+    console.log(bg_process_bar);
     if(!bg_process_bar){
         return;
     }
