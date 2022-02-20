@@ -267,7 +267,9 @@ edit.dialogSaveAs = () => {
             name.value = name_old.value;
         }
         const alert = dialog.select('.alert');
-        alert ?? alert.remove();
+        if(alert){
+            alert.remove();
+        }
         dialog.addClass('d-none');
     });
     const cancel = dialog.select('.button-cancel');
@@ -285,7 +287,9 @@ edit.dialogSaveAs = () => {
             name.value = name_old.value;
         }
         const alert = dialog.select('.alert');
-        alert ?? alert.remove();
+        if(alert){
+            alert.remove();
+        }
         dialog.addClass('d-none');
     });
     const submit = dialog.select('.button-submit');
@@ -295,6 +299,10 @@ edit.dialogSaveAs = () => {
     submit.on('click', (event) => {
         form.trigger('submit');
     });
+    const name = form.select('input[name="node.name"]');
+    if(name){
+        name.focus();
+    }
 }
 
 edit.init = () => {
