@@ -357,6 +357,7 @@ source.editor = () => {
         });
         let element = select("#{{$pre.id}}");
         element.on('keydown', function(event) {
+            console.log(event);
             if ((event.ctrlKey || event.metaKey) && !event.shiftKey) {
                 switch (String.fromCharCode(event.which).toLowerCase()) {
                     case 's':
@@ -367,16 +368,12 @@ source.editor = () => {
                 }
             }
             else if ((event.ctrlKey || event.metaKey) && event.shiftKey) {
-                console.log('trugger');
                 switch (String.fromCharCode(event.which).toLowerCase()) {
                     case 's':
                         event.preventDefault();
                         source.saveAs("card-body-{{$request.node.key}}");
-                        source.get('delete', 'editor.' + "{{$pre.id}}");
+                        //source.get('delete', 'editor.' + "{{$pre.id}}");
                         break;
-                    default:
-                        console.log(event);
-                        console.log(String.fromCharCode(event.which));
                 }
             }
         });
