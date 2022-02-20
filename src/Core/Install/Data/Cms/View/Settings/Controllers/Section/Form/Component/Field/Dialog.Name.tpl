@@ -18,6 +18,7 @@
         'autocapitalize' => 'off',
         'spellcheck' => 'false'
         ])}}
+        <input type="checkbox" name="node.class_rename" value="true" checked="checked" />
     </div>
     <div class="footer">
         <div class="w-50 d-inline-block text-center">
