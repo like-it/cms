@@ -31,7 +31,7 @@
             aria-valuemax="100"
         ></div>
     </div>
-    <div class="progress">
+    <div class="progress" style="height: 1px">
         {{$progress=15}}
         <div
             class="progress-bar"
