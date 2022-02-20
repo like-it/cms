@@ -376,7 +376,7 @@ source.editor = () => {
                         break;
                     default:
                         console.log(event);
-                        console.log(String.fromCharCode(event.which).toLowerCase());
+                        console.log(String.fromCharCode(event.which));
                 }
             }
         });
