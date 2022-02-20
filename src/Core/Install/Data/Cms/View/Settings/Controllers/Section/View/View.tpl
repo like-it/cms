@@ -11,7 +11,7 @@
     ></div>
     {{$progress=10}}
     <div
-        class="progress-bar progress-bar-striped progress-bar-animated"
+        class="progress-bar"
         role="progressbar"
         style="width: {{$progress}}%"
         aria-valuenow="{{$progress}}"

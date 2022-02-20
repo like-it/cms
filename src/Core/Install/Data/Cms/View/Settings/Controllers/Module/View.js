@@ -20,6 +20,7 @@ view.progress = () => {
     if(!progress){
         return;
     }
+    const progress_bar = progress.select('.progress-bar');
     const bg_progress_bar = progress.select('.bg-progress-bar');
     if(!bg_progress_bar){
         return;
@@ -47,7 +48,7 @@ view.progress = () => {
             //bg_progress_bar.attribute('aria-reverse', true);
         }
         view.progress();
-    }, 50);
+    }, 100);
 }
 
 view.title = () => {
