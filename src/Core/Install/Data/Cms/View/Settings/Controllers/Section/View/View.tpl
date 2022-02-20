@@ -21,7 +21,7 @@
     </div>
     {{/if}}
     <div class="progress" style="height: 1px">
-        {{$progress=45}}
+        {{$progress=0}}
         <div
             class="progress-bar bg-progress-bar progress-bar-striped progress-bar-animated"
             role="progressbar"
@@ -33,15 +33,6 @@
         {{$progress=10}}
         <div
             class="progress-bar progress-bar-striped progress-bar-animated"
-            role="progressbar"
-            style="width: {{$progress}}%"
-            aria-valuenow="{{$progress}}"
-            aria-valuemin="0"
-            aria-valuemax="100"
-        ></div>
-        {{$progress=45}}
-        <div
-            class="progress-bar bg-progress-bar progress-bar-striped progress-bar-animated"
             role="progressbar"
             style="width: {{$progress}}%"
             aria-valuenow="{{$progress}}"
