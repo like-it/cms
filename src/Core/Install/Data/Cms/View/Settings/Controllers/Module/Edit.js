@@ -261,6 +261,12 @@ edit.dialogSaveAs = () => {
                 title.html(name_old.value);
             }
         }
+        const name = form.select('input[name="node.name"]');
+        if(name){
+            name.value = name_old.value;
+        }
+        const alert = dialog.select('.alert');
+        alert.remove();
         dialog.addClass('d-none');
     });
     const cancel = dialog.select('.button-cancel');
@@ -273,6 +279,12 @@ edit.dialogSaveAs = () => {
                 title.html(name_old.value);
             }
         }
+        const name = form.select('input[name="node.name"]');
+        if(name){
+            name.value = name_old.value;
+        }
+        const alert = dialog.select('.alert');
+        alert.remove();
         dialog.addClass('d-none');
     });
     const submit = dialog.select('.button-submit');
