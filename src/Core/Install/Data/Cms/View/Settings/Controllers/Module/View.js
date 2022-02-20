@@ -30,7 +30,7 @@ view.progress = () => {
         let reverse = bg_progress_bar.attribute('aria-reverse');
         if(reverse){
             now--;
-            if(now <= -50){
+            if(now <= -15){
                 bg_progress_bar.attribute('delete', 'aria-reverse');
             }
         } else {
@@ -39,7 +39,7 @@ view.progress = () => {
 
         bg_progress_bar.css('width', now + '%');
         bg_progress_bar.attribute('aria-valuenow', now);
-        if(now >= 90){
+        if(now >= 100){
             bg_progress_bar.attribute('aria-reverse', true);
         }
         view.progress();
