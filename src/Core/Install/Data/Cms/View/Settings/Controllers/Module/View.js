@@ -40,13 +40,10 @@ view.progress = () => {
         bg_progress_bar.css('width', now + '%');
         bg_progress_bar.attribute('aria-valuenow', now);
         if(now >= 90){
-            //now = 0;
-            bg_progress_bar.css('width', now + '%');
-            bg_progress_bar.attribute('aria-valuenow', now);
             bg_progress_bar.attribute('aria-reverse', true);
         }
         view.progress();
-    }, 1000 / 60);
+    }, 25);
 }
 
 view.title = () => {
