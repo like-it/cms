@@ -157,7 +157,10 @@ edit.form = (target) => {
                 if(!error){
                     return;
                 }
-                error.html("{{parse.string(__(" + response?.message + "))}}");
+                const key = response?.message;
+                const text = "{{__('" + key +"')}}";
+                console.log(text);
+                error.html(text);
             } else {
                 menu.dispatch(section, target);
             }
