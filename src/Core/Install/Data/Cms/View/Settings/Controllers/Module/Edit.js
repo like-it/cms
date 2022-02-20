@@ -154,7 +154,7 @@ edit.form = (target) => {
                 }
                 const error = dialog.select('.body .alert');
                 if(!error){
-                    const label = dialog.select('.body').childnodes[0];
+                    const label = dialog.select('label[for="settings-controllers-name-{{$request.node.key}}"]');
                     let div = create('div', 'alert alert-danger');
                     div.html(response?.message)
                     label.parentNode.insertBefore(div, label);
