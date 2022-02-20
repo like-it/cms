@@ -26,6 +26,7 @@ view.progress = () => {
     }
     setTimeout((event) => {
         let now = parseInt(bg_progress_bar.attribute('aria-valuenow'));
+        /*
         let reverse = bg_progress_bar.attribute('aria-reverse');
         if(reverse){
             now--;
@@ -35,10 +36,15 @@ view.progress = () => {
         } else {
             now++;
         }
+         */
+        now++;
         bg_progress_bar.css('width', now + '%');
         bg_progress_bar.attribute('aria-valuenow', now);
         if(now === 100){
-            bg_progress_bar.attribute('aria-reverse', true);
+            now = 0;
+            bg_progress_bar.css('width', now + '%');
+            bg_progress_bar.attribute('aria-valuenow', now);
+            //bg_progress_bar.attribute('aria-reverse', true);
         }
         view.progress();
     }, 50);
