@@ -20,8 +20,17 @@
         </div>
     </div>
     {{/if}}
-    {{$progress=75}}
-    <div class="progress">
+    <div class="progress" style="height: 1px">
+        {{$progress=45}}
+        <div
+            class="progress-bar bg-progress-bar progress-bar-striped progress-bar-animated"
+            role="progressbar"
+            style="width: {{$progress}}%"
+            aria-valuenow="{{$progress}}"
+            aria-valuemin="0"
+            aria-valuemax="100"
+        ></div>
+        {{$progress=10}}
         <div
             class="progress-bar progress-bar-striped progress-bar-animated"
             role="progressbar"
@@ -30,29 +39,9 @@
             aria-valuemin="0"
             aria-valuemax="100"
         ></div>
-    </div>
-    <div class="progress" style="height: 1px">
-        {{$progress=15}}
+        {{$progress=45}}
         <div
-            class="progress-bar"
-            role="progressbar"
-            style="width: {{$progress}}%"
-            aria-valuenow="{{$progress}}"
-            aria-valuemin="0"
-            aria-valuemax="100"
-        ></div>
-        {{$progress=30}}
-        <div
-            class="progress-bar bg-success"
-            role="progressbar"
-            style="width: {{$progress}}%"
-            aria-valuenow="{{$progress}}"
-            aria-valuemin="0"
-            aria-valuemax="100"
-        ></div>
-        {{$progress=15}}
-        <div
-            class="progress-bar bg-info"
+            class="progress-bar bg-progress-bar progress-bar-striped progress-bar-animated"
             role="progressbar"
             style="width: {{$progress}}%"
             aria-valuenow="{{$progress}}"
