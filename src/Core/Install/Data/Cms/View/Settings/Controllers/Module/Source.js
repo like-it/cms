@@ -356,11 +356,9 @@ source.close = (className) => {
     if(!section){
         return;
     }
-    console.log('close');
-    console.log(className);
     let settings = section.select('.nav-item .' + className);
     if(settings){
-        let close = settings.select('.close');
+        let close = settings.select('.fa-window-close');
         if(close){
             close.trigger('click');
         }
