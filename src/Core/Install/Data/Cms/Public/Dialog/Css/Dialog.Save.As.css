@@ -17,6 +17,13 @@
     width: 100%;
 }
 
+.dialog-save-as .body .alert {
+    padding: 10px;
+    margin: 0;
+}
+
+/*
 .dialog-save-as .footer d-inline-block {
     float: left;
 }
+ */
