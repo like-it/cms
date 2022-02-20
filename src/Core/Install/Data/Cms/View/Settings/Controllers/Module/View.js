@@ -40,6 +40,8 @@ view.progress = () => {
         if(now == 90){
             bg_process_bar.attribute('aria-reverse', true);
         }
+        console.log(now);
+        console.log(event);
     }, 50);
 }
 
