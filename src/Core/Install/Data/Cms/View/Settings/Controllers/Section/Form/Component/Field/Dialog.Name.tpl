@@ -8,6 +8,7 @@
         </span>
     </div>
     <div class="body">
+        <span class="error"></span>
         {{html.input([
         'id' => $module + '-' + $submodule + '-' + $field,
         'name' => $field,

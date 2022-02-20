@@ -144,6 +144,20 @@ edit.form = (target) => {
                 request(form.data('url-error'), data, ( urlError, responseError ) => {
 
                 });
+            }
+            else if(
+                response?.class &&
+                response.class === 'R3m\\Io\\Exception\\FileExistException'
+            ){
+                const dialog = form.select('.dialog-save-as');
+                if(!dialog){
+                    return;
+                }
+                const error = dialog.select('.body .error');
+                if(!error){
+                    return;
+                }
+                error.html(response?.message);
             } else {
                 menu.dispatch(section, target);
             }
@@ -212,33 +226,6 @@ edit.focus = () => {
         return;
     }
     input.focus();
-}
-
-edit.content = () => {
-    const section = getSectionByName('main-content');
-    if(!section){
-        return;
-    }
-    const selected = section.select('.card-body-' + "{{$request.node.key}}");
-    if(!selected){
-        return;
-    }
-    const form = selected.select('form');
-    if(!form){
-        return;
-    }
-    const ol = form.select('.node-content');
-    if(!ol){
-        return;
-    }
-    console.log(ol);
-    console.log(ol.data('content'));
-    ol.request(null, null, (url, response) => {
-        console.log(response);
-        if(response?.content){
-            ol.html(response.content);
-        }
-    });
 }
 
 edit.dialog = () => {
