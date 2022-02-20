@@ -339,6 +339,7 @@ source.save = (className) => {
 
 source.editor = () => {
     //let editor = source.get('editor.' + "{{$pre.id}}");
+    let editor = false;
     if(is.empty(editor)){
         ace.require("ace/ext/language_tools");
         editor = ace.edit("{{$pre.id}}");
