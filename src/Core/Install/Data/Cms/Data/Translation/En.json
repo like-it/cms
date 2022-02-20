@@ -90,7 +90,7 @@
     "settings.controllers.section.form.component.dialog.save_as.file.exist" : "The target file {{request('node.name'}} already exists.",
     "settings.controllers.section.form.component.menu.panel.file.close.icon" : "",
     "settings.controllers.section.form.component.menu.panel.file.close.text" : "Close",
-    "settings.controllers.section.form.component.menu.panel.file.close.shortcut" : "CTRL-W",
+    "settings.controllers.section.form.component.menu.panel.file.close.shortcut" : "CTRL-Q",
     "settings.controllers.section.form.error.module.validate_string_length" : "The module is required.",
     "settings.controllers.section.form.error.module.validate_string_contains" : "The module must just be [a-z]_- (alphabetical, _ or -)",
     "settings.controllers.section.form.error.submodule.validate_string_contains" : "The submodule must just be [a-z]_- (alphabetical, _ or -)",

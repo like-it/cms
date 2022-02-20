@@ -393,7 +393,7 @@ source.editor = () => {
                         event.preventDefault();
                         source.open();
                         break;
-                    case 'w':
+                    case 'q': //w will close the browser tab
                         event.preventDefault();
                         source.close("settings-controllers-edit-controller-{{$request.node.key}}");
                         break;
