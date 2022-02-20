@@ -46,7 +46,7 @@ view.progress = () => {
             bg_progress_bar.attribute('aria-reverse', true);
         }
         view.progress();
-    }, 100);
+    }, 1000 / 60);
 }
 
 view.title = () => {
