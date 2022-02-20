@@ -73,6 +73,7 @@ class Settings extends Main {
     public static function controllers_update(App $object, $name): Response
     {
         $name_old = $object->request('node.name_old');
+        $class_rename = $object->request('node.class_rename');
         $domain = Settings::domain_get($object);
         if(
             !property_exists($domain, 'dir') ||
@@ -86,6 +87,18 @@ class Settings extends Main {
                 $object->config('ds') .
                 $name;
             $content = $object->request('node.content');
+            $classname_old = File::basename($name_old, '.php');
+            $classname = File::basename($name, '.php');
+            if($class_rename){
+                $content = str_replace([
+                    $classname_old . '::',
+                    'class ' . $classname_old,
+                ], [
+                    $classname . '::',
+                    'class ' . $classname,
+
+                ], $content);
+            }
             if(File::exist($url)){
                 throw new FileExistException('Target file (' . $name .') exist.');
             } else {
@@ -102,6 +115,16 @@ class Settings extends Main {
                 $object->config('ds') .
                 $name;
             $content = $object->request('node.content');
+            if($class_rename){
+                $content = str_replace([
+                    $classname_old . '::',
+                    'class ' . $classname_old,
+                ], [
+                    $classname . '::',
+                    'class ' . $classname,
+
+                ], $content);
+            }
             File::write($url, $content);
         }
         $response = [];
