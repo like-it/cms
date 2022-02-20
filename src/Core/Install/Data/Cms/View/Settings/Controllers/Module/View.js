@@ -21,26 +21,26 @@ view.progress = () => {
     if(!progress){
         return;
     }
-    const bg_process_bar = progress.select('.bg-process-bar');
-    console.log(bg_process_bar);
-    if(!bg_process_bar){
+    const bg_progress_bar = progress.select('.bg-progress-bar');
+    console.log(bg_progress_bar);
+    if(!bg_progress_bar){
         return;
     }
     setTimeout((event) => {
-        let now = parseInt(bg_process_bar.attribute('aria-valuenow'));
-        let reverse = bg_process_bar.attribute('aria-reverse');
+        let now = parseInt(bg_progress_bar.attribute('aria-valuenow'));
+        let reverse = bg_progress_bar.attribute('aria-reverse');
         if(reverse){
             now--;
             if(now === 0){
-                bg_process_bar.attribute('delete', 'aria-reverse');
+                bg_progress_bar.attribute('delete', 'aria-reverse');
             }
         } else {
             now++;
         }
-        bg_process_bar.css('width', now + '%');
-        bg_process_bar.attribute('aria-valuenow', now);
+        bg_progress_bar.css('width', now + '%');
+        bg_progress_bar.attribute('aria-valuenow', now);
         if(now === 90){
-            bg_process_bar.attribute('aria-reverse', true);
+            bg_progress_bar.attribute('aria-reverse', true);
         }
         console.log(now);
         console.log(event);

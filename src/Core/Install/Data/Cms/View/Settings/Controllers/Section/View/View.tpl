@@ -2,21 +2,21 @@
 <div class="progress" style="height: 1px">
     {{$progress=0}}
     <div
-            class="progress-bar bg-progress-bar"
-            role="progressbar"
-            style="width: {{$progress}}%"
-            aria-valuenow="{{$progress}}"
-            aria-valuemin="0"
-            aria-valuemax="100"
+        class="progress-bar bg-progress-bar"
+        role="progressbar"
+        style="width: {{$progress}}%"
+        aria-valuenow="{{$progress}}"
+        aria-valuemin="0"
+        aria-valuemax="100"
     ></div>
     {{$progress=10}}
     <div
-            class="progress-bar progress-bar-striped progress-bar-animated"
-            role="progressbar"
-            style="width: {{$progress}}%"
-            aria-valuenow="{{$progress}}"
-            aria-valuemin="0"
-            aria-valuemax="100"
+        class="progress-bar progress-bar-striped progress-bar-animated"
+        role="progressbar"
+        style="width: {{$progress}}%"
+        aria-valuenow="{{$progress}}"
+        aria-valuemin="0"
+        aria-valuemax="100"
     ></div>
 </div>
 <div class="container">
