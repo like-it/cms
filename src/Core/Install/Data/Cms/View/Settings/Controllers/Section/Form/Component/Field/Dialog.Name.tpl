@@ -9,7 +9,7 @@
     </div>
     <div class="body">
         {{html.input([
-        'id' => $module + '-' + $submodule + '-' + $field + '-' + {{$node.key}},
+        'id' => $module + '-' + $submodule + '-' + $field + '-' + $node.key,
         'name' => $field,
         'label' => 'New name',
         'value' => request('node.' + $field),
