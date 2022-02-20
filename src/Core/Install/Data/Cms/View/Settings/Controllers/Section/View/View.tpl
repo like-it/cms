@@ -1,5 +1,4 @@
 {{R3M}}
-
 <div class="container">
     {{if(!is.empty($request.node.key))}}
     <div class="row align-items-start">
