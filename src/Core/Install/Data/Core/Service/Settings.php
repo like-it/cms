@@ -87,7 +87,7 @@ class Settings extends Main {
                 $name;
             $content = $object->request('node.content');
             if(File::exist($url)){
-                throw new FileExistException('settings.controllers.section.form.component.dialog.save_as.file.exist');
+                throw new FileExistException('Target file (' . $name .') exist.');
             } else {
                 File::write($url, $content);
                 $url_old = $domain->dir .

@@ -134,7 +134,6 @@ edit.form = (target) => {
             name : "node.content",
             value: pre.data('content')
         });
-        console.log(data);
         form.request(url, data, (url, response) => {
             if(response?.error){
                 data.push({
@@ -157,10 +156,7 @@ edit.form = (target) => {
                 if(!error){
                     return;
                 }
-                const key = response?.message;
-                const text = "{{__('" + key +"')}}";
-                console.log(text);
-                error.html(text);
+                error.html(response?.message);
             } else {
                 menu.dispatch(section, target);
             }
