@@ -7,6 +7,31 @@ import { getSectionByName } from "/Module/Section.js";
 
 let view = {};
 
+view.progress = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const selected = section.select('.card-body-view-' + "{{$request.node.key}}");
+    if(!selected){
+        return;
+    }
+    const progress = selected.select('.progress');
+    if(!progress){
+        return;
+    }
+    const bg_process_bar = progress.select('.bg-process-bar');
+    if(!bg_process_bar){
+        return;
+    }
+    setTimeout((event) => {
+            let now = parseFloat(bg_process_bar.attribute('aria-valuenow'));
+            now++;
+            bg_process_bar.css('width', now + '%');
+            bg_process_bar.attribute('aria-valuenow', now);
+    }, 50);
+}
+
 view.title = () => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -98,6 +123,7 @@ view.body = (action) => {
 view.init = () => {
     view.body();
     view.title();
+    view.progress();
 };
 
 ready(() => {
