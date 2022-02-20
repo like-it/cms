@@ -2,7 +2,7 @@
 <div class="progress" style="height: 1px">
     {{$progress=0}}
     <div
-            class="progress-bar bg-progress-bar progress-bar-striped progress-bar-animated"
+            class="progress-bar bg-progress-bar"
             role="progressbar"
             style="width: {{$progress}}%"
             aria-valuenow="{{$progress}}"

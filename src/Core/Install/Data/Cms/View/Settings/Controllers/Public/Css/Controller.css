@@ -13,6 +13,6 @@ section[name="main-content"].settings-controllers tfoot i.disabled {
     color: rgba(200, 200, 200, 1);
 }
 
-section[name="main-content"].settings-controllers {
-
+section[name="main-content"].settings-controllers .bg-progress-bar {
+    background-color: #e9ecef;
 }
