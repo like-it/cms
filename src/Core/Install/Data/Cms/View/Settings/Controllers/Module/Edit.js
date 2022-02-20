@@ -157,7 +157,7 @@ edit.form = (target) => {
                 if(!error){
                     return;
                 }
-                error.html(response?.message);
+                error.html("{{parse.string(" + response?.message+ ")}}");
             } else {
                 menu.dispatch(section, target);
             }
