@@ -31,6 +31,7 @@ section[name="main-content"] form .edit {
 section[name="main-content"] .card-body-edit {
     padding: 0;
     position: relative;
+    min-height: 400px;
 }
 
 section[name="main-content"] form .panel {
