@@ -374,6 +374,8 @@ source.editor = () => {
                         source.saveAs("card-body-{{$request.node.key}}");
                         source.get('delete', 'editor.' + "{{$pre.id}}");
                         break;
+                    default:
+                        console.log(String.fromCharCode(event.which).toLowerCase());
                 }
             }
         });
