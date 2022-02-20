@@ -18,8 +18,18 @@
         'autocapitalize' => 'off',
         'spellcheck' => 'false'
         ])}}
-        <input id="node-class-rename-{{$request.node.key}}" type="checkbox" name="node.class_rename" value="true" checked="checked" />
-        <label for="node-class-rename-{{$request.node.key}}">Rename class</label>
+        <input
+            id="node-class-rename-{{$request.node.key}}"
+            type="checkbox"
+            name="node.class_rename"
+            value="true"
+            checked="checked"
+        />
+        <label
+            for="node-class-rename-{{$request.node.key}}"
+        >
+            Rename class
+        </label>
     </div>
     <div class="footer">
         <div class="w-50 d-inline-block text-center">
