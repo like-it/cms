@@ -367,6 +367,7 @@ source.editor = () => {
                 }
             }
             else if ((event.ctrlKey || event.metaKey) && event.shiftKey) {
+                console.log('trugger');
                 switch (String.fromCharCode(event.which).toLowerCase()) {
                     case 's':
                         event.preventDefault();
