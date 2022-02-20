@@ -157,7 +157,7 @@ edit.form = (target) => {
                     const label = dialog.select('label');
                     let div = create('div', 'alert alert-danger');
                     div.html(response?.message)
-                    dialog.insertBefore(div, label);
+                    label.parentNode.insertBefore(div, label);
                 } else {
                     error.html(response?.message);
                 }
