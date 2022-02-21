@@ -918,6 +918,7 @@ class Settings extends Main {
 
     /**
      * @throws Exception
+     * @throws ObjectException
      */
     public static function routes_list(App $object): Response
     {
@@ -960,7 +961,7 @@ class Settings extends Main {
         $controller_name = File::basename($controller_name, $object->config('extension.php'));
         if($controller_name){
             if(!$has_set){
-                throw new Exception('Command not set in Route');
+                throw new ObjectException('Command not set in Route');
             }
             $controller =
                 'Host.' .
