@@ -982,6 +982,7 @@ class Settings extends Main {
                     $data->data('delete', $uuid);
                 }
             }
+            dd($data->data());
         }
         if($object->request('page')){
             $page = (int) $object->request('page');
