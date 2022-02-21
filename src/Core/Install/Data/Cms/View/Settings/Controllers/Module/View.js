@@ -154,8 +154,20 @@ view.onStart = () => {
         value : routes.data('controller-name')
     });
     request(routes.data('url'), data, (url, response) => {
-        console.log(response);
-        //remove progress bar?
+        if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
+            if(response?.message){
+                routes.html(response.message);
+            }
+        } else {
+            response.target = '.settings-routes-settings';
+            response.method = 'replace-with';
+            request(routes.data('frontend-url'), response, (urlResponse, responseResponse) => {
+                let progress = selected.select('.progress');
+                if(progress){
+                    progress.remove();
+                }
+            });
+        }
     });
 }
 

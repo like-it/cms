@@ -962,7 +962,7 @@ class Settings extends Main {
         $controller_name = File::basename($controller_name, $object->config('extension.php'));
         if($controller_name){
             if(!$has_set){
-                throw new ErrorException('Command not set in Route');
+                throw new ErrorException('Loading routes failed. Command not set in Route');
             }
             $controller =
                 'Host.' .
