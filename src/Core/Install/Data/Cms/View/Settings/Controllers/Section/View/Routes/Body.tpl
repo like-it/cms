@@ -14,7 +14,7 @@
     <div class="col">
         <span class="title">Route path</span><br>
         <span class="title">Controller</span><br>
-        <span class="title">Function</span><br>
+        <span class="title">Function (Action)</span><br>
         <span class="title">Methods</span><br>
         {{$count = array.count($node.route.method)}}
         {{for($i=1; $i < $count ; $i++)}}
