@@ -8,7 +8,8 @@
         <span class="title">Route path</span><br>
         <span class="title">Controller</span><br>
         <span class="title">Methods</span><br>
-        {{for($i=1; $i < array.count($node.route.method); $i++)}}
+        {{$count = array.count($node.route.method)}}
+        {{for($i=1; $i < $count ; $i++)}}
         <br>
         {{/for}}
     </div>
