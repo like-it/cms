@@ -159,10 +159,12 @@ view.onStart = () => {
                 routes.html(response.message);
             }
         } else {
+            console.log('here');
             response.target = '.card-body-view-' + "{{$request.node.key}}" + ' .settings-routes-settings';
             response.method = 'replace-with';
             request(routes.data('frontend-url'), response, (urlResponse, responseResponse) => {
                 let progress = selected.select('.progress');
+                console.log('progress', progress);
                 if(progress){
                     progress.remove();
                 }
