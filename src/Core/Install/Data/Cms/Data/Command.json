@@ -189,6 +189,16 @@
             "POST"
         ]
     },
+    "56c2865e-e591-45f7-bc49-c3deaee9a98c" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "view-routes",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "e9ccd042-3c5e-4dac-a5c7-aef9df8f9046" : {
         "module" : "settings",
         "submodule" : "domains",
