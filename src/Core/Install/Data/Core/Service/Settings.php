@@ -956,12 +956,12 @@ class Settings extends Main {
                 }
             }
         }
-        if(!$has_set){
-            throw new Exception('Command not set in Route');
-        }
         $controller_name = $object->request('controller.name');
         $controller_name = File::basename($controller_name, $object->config('extension.php'));
         if($controller_name){
+            if(!$has_set){
+                throw new Exception('Command not set in Route');
+            }
             $controller =
                 'Host.' .
                 ucfirst($domain->subdomain) .
