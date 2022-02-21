@@ -1,6 +1,7 @@
 {{R3M}}
 {{if(!is.empty($request.nodeList) && is.array($request.nodeList))}}
     {{for.each($request.nodeList as $nr => $node)}}
+    {{dd(array.count($node.route.methods))}}
 <div
     class="row align-items-start"
 >
