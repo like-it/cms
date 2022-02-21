@@ -1003,9 +1003,7 @@ class Settings extends Main {
         $response = [];
         $list = Sort::list($data->data())->with(['sort' => 'ASC', 'name' => 'ASC']);
         if($list){
-            if(!is_array($list) && !is_object($list)){
-                dd($list);
-            }
+            dd($list);
             $response['count'] = count($list);
             $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
         }
