@@ -24,7 +24,7 @@
     <div class="col">
         <span class="content">{{$node.route.path}}</span><br>
         {{$explode = explode('.', $node.route.controller)}}
-        {{$function = array.pop($explode)}}
+        {{$function = array.pop('$explode')}}
         {{$_controller = implode('.', $explode)}}
         <span class="content">{{$_controller}}</span><br>
         <span class="content">{{$function}}</span><br>
