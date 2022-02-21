@@ -943,21 +943,22 @@ class Settings extends Main {
             $data = new Data();
         }
         $route = $object->data_read($route_url);
+        $has_set = false;
         if($route){
             foreach($route->data() as $nr => $node){
                 if(
                     property_exists($node, 'command') &&
                     $data->has($node->command)
                 ){
+                    $has_set = true;
                     $data->set($node->command . '.route', $node);
                     $data->set($node->command . '.domain', $domain->uuid);
                 }
             }
         }
-        d($route_url);
-        d($route);
-        d($url);
-        dd($data);
+        if(!$has_set){
+            throw new Exception('Command not set in Route');
+        }
         $controller_name = $object->request('controller.name');
         $controller_name = File::basename($controller_name, $object->config('extension.php'));
         if($controller_name){
@@ -986,7 +987,6 @@ class Settings extends Main {
                     $data->data('delete', $uuid);
                 }
             }
-            dd($data->data());
         }
         if($object->request('page')){
             $page = (int) $object->request('page');
