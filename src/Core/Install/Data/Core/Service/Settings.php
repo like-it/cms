@@ -939,8 +939,6 @@ class Settings extends Main {
             'Route' .
             $object->config('extension.json');
         $data = $object->data_read($url);
-        d($url);
-        dd($data);
         if(!$data){
             $data = new Data();
         }
@@ -956,6 +954,8 @@ class Settings extends Main {
                 }
             }
         }
+        d($url);
+        dd($data);
         $controller_name = $object->request('controller.name');
         $controller_name = File::basename($controller_name, $object->config('extension.php'));
         if($controller_name){
