@@ -5,6 +5,13 @@
     class="row align-items-start"
 >
     <div class="col">
+        <hr>
+    </div>
+</div>
+<div
+    class="row align-items-start"
+>
+    <div class="col">
         <span class="title">Route path</span><br>
         <span class="title">Controller</span><br>
         <span class="title">Methods</span><br>
