@@ -954,6 +954,8 @@ class Settings extends Main {
                 }
             }
         }
+        d($route_url);
+        d($route);
         d($url);
         dd($data);
         $controller_name = $object->request('controller.name');
