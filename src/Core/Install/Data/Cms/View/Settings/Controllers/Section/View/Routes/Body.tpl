@@ -14,6 +14,7 @@
     <div class="col">
         <span class="title">Route path</span><br>
         <span class="title">Controller</span><br>
+        <span class="title">Function</span><br>
         <span class="title">Methods</span><br>
         {{$count = array.count($node.route.method)}}
         {{for($i=1; $i < $count ; $i++)}}
@@ -22,7 +23,11 @@
     </div>
     <div class="col">
         <span class="content">{{$node.route.path}}</span><br>
-        <span class="content">{{$node.route.controller}}</span><br>
+        {{$explode = explode('.', $node.route.controller)}}
+        {{$function = array.pop($explode)}}
+        {{$_controller = implode('.', $explode)}}
+        <span class="content">{{$_controller}}</span><br>
+        <span class="content">{{$function}}</span><br>
         {{for.each($node.route.method as $route_method)}}
         <span class="content">{{$route_method}}</span><br>
         {{/for.each}}
