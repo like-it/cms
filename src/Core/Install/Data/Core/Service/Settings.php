@@ -939,6 +939,8 @@ class Settings extends Main {
             'Route' .
             $object->config('extension.json');
         $data = $object->data_read($url);
+        d($url);
+        dd($data);
         if(!$data){
             $data = new Data();
         }
