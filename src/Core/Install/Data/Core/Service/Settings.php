@@ -955,12 +955,32 @@ class Settings extends Main {
             }
         }
         $controller_name = $object->request('controller.name');
+        $controller_name = File::basename($controller_name, $object->config('extension.php'));
         if($controller_name){
+            $controller =
+                'Host.' .
+                ucfirst($domain->subdomain) .
+                '.' .
+                ucfirst($domain->host) .
+                '.' .
+                ucfirst($domain->extension) .
+                '.' .
+                ucfirst($object->config('dictionary.controller')) .
+                '.' .
+                $controller_name;
+
             foreach($data->data() as $uuid => $command){
-                d($uuid);
-                d($command);
-                d($domain);
-                dd($controller_name);
+                $node = $data->data($uuid . '.route');
+                if($node){
+                    if(
+                        property_exists($node, 'controller') &&
+                        stristr($node->controller, $controller) === false
+                    ) {
+                        $data->data('delete', $uuid);
+                    }
+                } else {
+                    $data->data('delete', $uuid);
+                }
             }
         }
         if($object->request('page')){
