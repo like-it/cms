@@ -956,7 +956,11 @@ class Settings extends Main {
         }
         $controller_name = $object->request('controller.name');
         if($controller_name){
-            dd($controller_name);
+            foreach($data->data() as $key => $value){
+                d($key);
+                d($value);
+                dd($controller_name);
+            }
         }
         if($object->request('page')){
             $page = (int) $object->request('page');
