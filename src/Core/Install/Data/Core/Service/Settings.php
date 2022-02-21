@@ -14,6 +14,7 @@ use R3m\Io\Module\Response;
 
 use Exception;
 use R3m\Io\Exception\ObjectException;
+use R3m\Io\Exception\ErrorException;
 use R3m\Io\Exception\FileExistException;
 use R3m\Io\Exception\FileNotExistException;
 use DateTime;
@@ -961,7 +962,7 @@ class Settings extends Main {
         $controller_name = File::basename($controller_name, $object->config('extension.php'));
         if($controller_name){
             if(!$has_set){
-                throw new ObjectException('Command not set in Route');
+                throw new ErrorException('Command not set in Route');
             }
             $controller =
                 'Host.' .
