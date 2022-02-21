@@ -1002,8 +1002,10 @@ class Settings extends Main {
         }
         $response = [];
         $list = Sort::list($data->data())->with(['sort' => 'ASC', 'name' => 'ASC']);
-        $response['count'] = count($list);
-        $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
+        if($list){
+            $response['count'] = count($list);
+            $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
+        }
         $response['nodeList'] = $list;
         $response['limit'] = $limit;
         $response['page'] = $page;
