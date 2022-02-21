@@ -56,6 +56,7 @@ class Settings extends Main {
             $record = [];
             $record['key'] = sha1($url);
             $record['name'] = $name;
+            $record['url'] = $url;
             $record['content'] = $read;
             $record['domain'] = $domain;
             $response = [];

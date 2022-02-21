@@ -40,4 +40,14 @@
         </div>
     </div>
     {{/if}}
+    <div
+        class="row align-items-start settings-routes-settings"
+        data-url="{{server.url('core')}}Settings/Routes/Settings/{{$request.node.domain.uuid}}"
+        data-frontend-url="{{route.get(route.prefix() + '-settings-controllers-view-routes-body')}}"
+        data-controller-name="{{$request.node.name}}"
+    >
+        <div class="col">
+            <span class="title">Loading routes...</span><br>
+        </div>
+    </div>
 </div>

@@ -28,6 +28,11 @@ view.progress = () => {
     setTimeout((event) => {
         let now = parseInt(bg_progress_bar.attribute('aria-valuenow'));
         let reverse = bg_progress_bar.attribute('aria-reverse');
+        let end = bg_progress_bar.attribute('aria-end');
+        if(end){
+            progress.remove();
+            return;
+        }
         if(reverse){
             now--;
             if(now <= -15){
@@ -133,12 +138,34 @@ view.body = (action) => {
     }
 }
 
+view.onStart = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    let selected = section.select('.card-body-view-' + "{{$request.node.key}}");
+    if(!selected){
+        return;
+    }
+    let routes = selected.select('.settings-routes-settings');
+    let data = [];
+    data.push({
+        name : "controller.name",
+        value : routes.data('controller-name')
+    });
+    request(routes.data('url'), data, (url, response) => {
+        console.log(response);
+        //remove progress bar?
+    });
+}
+
 
 view.init = () => {
     view.body();
     view.title();
     view.progress();
-};
+    view.onStart();
+}
 
 ready(() => {
     view.init();
