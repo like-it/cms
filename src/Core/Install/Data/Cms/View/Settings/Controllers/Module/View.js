@@ -157,6 +157,11 @@ view.onStart = () => {
         if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
             if(response?.message){
                 routes.html(response.message);
+                let progress = selected.select('.progress');
+                console.log('progress', progress);
+                if(progress){
+                    progress.remove();
+                }
             }
         } else {
             console.log('here');
