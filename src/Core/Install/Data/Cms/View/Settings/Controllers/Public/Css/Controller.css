@@ -19,4 +19,5 @@ section[name="main-content"].settings-controllers .bg-progress-bar {
 
 section[name="main-content"].settings-controllers .card-body-view hr {
     margin: 0;
+    margin-top: 1rem;
 }
