@@ -136,6 +136,18 @@ class Settings extends View {
         }
     }
 
+    public static function controllers_view_routes_body(App $object){
+        $name = Settings::name(__FUNCTION__, __CLASS__, '/');
+        try {
+            $url = Settings::locate($object, $name);
+            return Settings::response($object, $url);
+        } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception){
+            return $exception;
+        }
+    }
+
+
+
     public static function export_main(App $object){
         $name = Settings::name(__FUNCTION__, __CLASS__, '/');
         $name = explode('.', $name);
