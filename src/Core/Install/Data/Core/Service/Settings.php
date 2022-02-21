@@ -772,6 +772,7 @@ class Settings extends Main {
         ){
             $record->name .= '-command';
         }
+        dd($url);
         return Settings::routes_put($object, $data, $record, $url, $route_url,$domain);
     }
 
