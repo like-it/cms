@@ -15,8 +15,8 @@
     <div class="col">
         <span class="content">{{$node.route.path}}</span><br>
         <span class="content">{{$node.route.controller}}</span><br>
-        {{for.each($node.route.methods as $method)}}
-        <span class="content">{{$method}}</span><br>
+        {{for.each($node.route.methods as $route_method)}}
+        <span class="content">{{$route_method}}</span><br>
         {{/for.each}}
     </div>
 </div>
