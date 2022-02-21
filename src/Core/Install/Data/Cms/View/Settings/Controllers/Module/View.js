@@ -162,13 +162,18 @@ view.onStart = () => {
             console.log('here');
             response.target = '.card-body-view-' + "{{$request.node.key}}" + ' .settings-routes-settings';
             response.method = 'replace-with';
-            request(routes.data('frontend-url'), response, (urlResponse, responseResponse) => {
-                let progress = selected.select('.progress');
-                console.log('progress', progress);
-                if(progress){
-                    progress.remove();
-                }
-            });
+            if(routes.data('frontend-url')){
+                request(routes.data('frontend-url'), response, (urlResponse, responseResponse) => {
+                    let progress = selected.select('.progress');
+                    console.log('progress', progress);
+                    if(progress){
+                        progress.remove();
+                    }
+                });
+            } else {
+                routes.html('Routes loading failed. No frontend url...');
+            }
+
         }
     });
 }
