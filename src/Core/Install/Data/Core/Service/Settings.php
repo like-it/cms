@@ -956,9 +956,10 @@ class Settings extends Main {
         }
         $controller_name = $object->request('controller.name');
         if($controller_name){
-            foreach($data->data() as $key => $value){
-                d($key);
-                d($value);
+            foreach($data->data() as $uuid => $command){
+                d($uuid);
+                d($command);
+                d($domain);
                 dd($controller_name);
             }
         }
