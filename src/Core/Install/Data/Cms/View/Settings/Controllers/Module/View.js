@@ -159,7 +159,7 @@ view.onStart = () => {
                 routes.html(response.message);
             }
         } else {
-            response.target = '.settings-routes-settings';
+            response.target = '.card-body-view-' + "{{$request.node.key}}" + ' .settings-routes-settings';
             response.method = 'replace-with';
             request(routes.data('frontend-url'), response, (urlResponse, responseResponse) => {
                 let progress = selected.select('.progress');
