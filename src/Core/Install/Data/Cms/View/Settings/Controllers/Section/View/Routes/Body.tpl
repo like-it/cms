@@ -6,12 +6,18 @@
     is.object($request.nodeList)
     )
 )}}
-    {{for.each($request.nodeList as $nr => $node)}}
 <div
     class="row align-items-start"
 >
     <div class="col">
         <h3>Routes</h3>
+    </div>
+</div>
+    {{for.each($request.nodeList as $nr => $node)}}
+<div
+    class="row align-items-start"
+>
+    <div class="col">
         <hr>
     </div>
 </div>
@@ -30,7 +36,7 @@
         {{/for}}
     </div>
     <div class="col">
-        <span class="content">{{literal}}{{route.get('{{/literal}}{{$node.route.key}}{{literal}}{{')}}{{/literal}}</span><br>
+        <span class="content">{{literal}}{{route.get('{{/literal}}{{$node.route.key}}{{literal}}')}}{{/literal}}</span><br>
         <span class="content">{{array.reset('$node.route.host')}}{{$node.route.path}}</span><br>
         {{$explode = explode('.', $node.route.controller)}}
         {{$function = array.pop('$explode')}}
