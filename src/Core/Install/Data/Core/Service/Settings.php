@@ -1013,14 +1013,14 @@ class Settings extends Main {
             }
         }
         $response = [];
-        $list = Sort::list($data->data())->with(['sort' => 'ASC', 'name' => 'ASC']);
+        $list = Sort::list($data->data())->with(['sort' => 'ASC', 'name' => 'ASC'], true);
         if($object->request('pagination') === false){
             if($list){
                 $response['count'] = count($list);
             } else {
                 $response['count'] = 0;
             }
-            $response['nodeList'] = Core::object($list, Core::OBJECT_ARRAY);
+            $response['nodeList'] = $list;
         } else {
             if($list){
                 $response['count'] = count($list);

@@ -4,7 +4,7 @@
     (
     is.array($request.nodeList) ||
     is.object($request.nodeList)
-    )   
+    )
 )}}
     {{for.each($request.nodeList as $nr => $node)}}
 <div
