@@ -10,7 +10,7 @@
     class="row align-items-start"
 >
     <div class="col">
-        <h5>Routes</h5>
+        <h5>{{__('settings.controllers.section.view.routes.body.title')}}</h5>
     </div>
 </div>
     {{for.each($request.nodeList as $nr => $node)}}
@@ -25,12 +25,12 @@
     class="row align-items-start"
 >
     <div class="col">
-        <span class="title">Url</span><br>
-        <span class="title">Key</span><br>
-        <span class="title">Get</span><br>
-        <span class="title">Controller</span><br>
-        <span class="title">Function (Action)</span><br>
-        <span class="title">Request methods</span><br>
+        <span class="title">{{__('settings.controllers.section.view.routes.body.node.url')}}</span><br>
+        <span class="title">{{__('settings.controllers.section.view.routes.body.node.key')}}</span><br>
+        <span class="title">{{__('settings.controllers.section.view.routes.body.node.get')}}</span><br>
+        <span class="title">{{__('settings.controllers.section.view.routes.body.node.controller')}}</span><br>
+        <span class="title">{{__('settings.controllers.section.view.routes.body.node.function')}}</span><br>
+        <span class="title">{{__('settings.controllers.section.view.routes.body.node.request.methods')}}</span><br>
         {{$count = array.count($node.route.method)}}
         {{for($i=1; $i < $count ; $i++)}}
         <br>
