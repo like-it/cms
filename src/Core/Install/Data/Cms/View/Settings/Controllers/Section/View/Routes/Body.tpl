@@ -36,7 +36,7 @@
         {{/for}}
     </div>
     <div class="col">
-        <span class="content">{{literal}}{{route.get('{{/literal}}{{$node.route.key}}{{literal}}')}}{{/literal}}</span><br>
+        <span class="content">{{$node.route.key}}</span><br>
         <span class="content">{{array.reset('$node.route.host')}}{{$node.route.path}}</span><br>
         {{$explode = explode('.', $node.route.controller)}}
         {{$function = array.pop('$explode')}}
