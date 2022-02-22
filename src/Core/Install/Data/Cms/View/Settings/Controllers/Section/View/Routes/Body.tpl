@@ -11,6 +11,7 @@
     class="row align-items-start"
 >
     <div class="col">
+        <h3>Routes</h3>
         <hr>
     </div>
 </div>
@@ -18,7 +19,7 @@
     class="row align-items-start"
 >
     <div class="col">
-        <span class="title">Route key</span><br>
+        <span class="title">Key</span><br>
         <span class="title">Url</span><br>
         <span class="title">Controller</span><br>
         <span class="title">Function (Action)</span><br>
@@ -29,7 +30,7 @@
         {{/for}}
     </div>
     <div class="col">
-        <span class="content">{{$node.route.key}}</span><br>
+        <span class="content">{{literal}}{{route.get('{{/literal}}{{$node.route.key}}{{literal}}{{')}}{{/literal}}</span><br>
         <span class="content">{{array.reset('$node.route.host')}}{{$node.route.path}}</span><br>
         {{$explode = explode('.', $node.route.controller)}}
         {{$function = array.pop('$explode')}}
