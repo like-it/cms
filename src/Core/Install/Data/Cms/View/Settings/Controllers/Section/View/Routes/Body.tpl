@@ -18,16 +18,7 @@
     class="row align-items-start"
 >
     <div class="col">
-        <span class="title">Module</span><br>
-        {{if(!is.empty($node.submodule))}}
-        <span class="title">Submodule</span><br>
-        {{/if}}
-        {{if(!is.empty($node.command))}}
-        <span class="title">Command</span><br>
-        {{/if}}
-        {{if(!is.empty($node.subcommand))}}
-        <span class="title">Subcommand</span><br>
-        {{/if}}
+        <span class="title">Name</span><br>
         <span class="title">Url</span><br>
         <span class="title">Controller</span><br>
         <span class="title">Function (Action)</span><br>
@@ -38,16 +29,7 @@
         {{/for}}
     </div>
     <div class="col">
-        <span class="content">{{$node.module}}</span><br>
-        {{if(!is.empty($node.submodule))}}
-            <span class="content">{{$node.submodule}}</span><br>
-        {{/if}}
-        {{if(!is.empty($node.command))}}
-            <span class="content">{{$node.command}}</span><br>
-        {{/if}}
-        {{if(!is.empty($node.subcommand))}}
-            <span class="content">{{$node.subcommand}}</span><br>
-        {{/if}}
+        <span class="content">{{$node.name}}</span><br>
         <span class="content">{{array.reset('$node.route.host')}}{{$node.route.path}}</span><br>
         {{$explode = explode('.', $node.route.controller)}}
         {{$function = array.pop('$explode')}}
