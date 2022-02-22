@@ -33,10 +33,10 @@
     {{if(!is.empty($request.node.name))}}
     <div class="row align-items-start">
         <div class="col">
-            <span class="title">Internal name</span><br>
+            <span class="title"><h5>Internal name</h5></span><br>
         </div>
         <div class="col">
-            <span class="content">{{$request.node.name}}</span><br>
+            <span class="content"><h5>{{$request.node.name}}</h5></span><br>
         </div>
     </div>
     {{/if}}
