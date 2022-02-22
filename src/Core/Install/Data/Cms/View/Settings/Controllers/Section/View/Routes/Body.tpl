@@ -22,7 +22,7 @@
         <span class="title">Url</span><br>
         <span class="title">Controller</span><br>
         <span class="title">Function (Action)</span><br>
-        <span class="title">Methods</span><br>
+        <span class="title">Request methods</span><br>
         {{$count = array.count($node.route.method)}}
         {{for($i=1; $i < $count ; $i++)}}
         <br>
