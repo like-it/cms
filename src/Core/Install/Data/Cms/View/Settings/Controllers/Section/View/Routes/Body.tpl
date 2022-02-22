@@ -18,7 +18,7 @@
     class="row align-items-start"
 >
     <div class="col">
-        <span class="title">Route path</span><br>
+        <span class="title">Url</span><br>
         <span class="title">Controller</span><br>
         <span class="title">Function (Action)</span><br>
         <span class="title">Methods</span><br>
@@ -28,7 +28,7 @@
         {{/for}}
     </div>
     <div class="col">
-        <span class="content">{{$node.route.path}}</span><br>
+        <span class="content">{{$node.route.host[0]}}{{$node.route.path}}</span><br>
         {{$explode = explode('.', $node.route.controller)}}
         {{$function = array.pop('$explode')}}
         {{$_controller = implode('.', $explode)}}

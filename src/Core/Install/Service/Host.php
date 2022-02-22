@@ -80,7 +80,10 @@ class Host {
                         !property_exists($add,'subcommand')
                     ){
                         if(!property_exists($add, 'path')){
-                            $add->path = ucfirst($add->module) . '/';
+                            $add->path =
+                                '/' .
+                                ucfirst($add->module) .
+                                '/';
                         }
                         $key = strtolower($options['subdomain']) .
                             '-' .
@@ -110,9 +113,12 @@ class Host {
                         !property_exists($add,'subcommand')
                     ) {
                         if(!property_exists($add, 'path')){
-                            $add->path = ucfirst($add->module) .
+                            $add->path =
                                 '/' .
-                                ucfirst($add->command) . '/';
+                                ucfirst($add->module) .
+                                '/' .
+                                ucfirst($add->command) .
+                                '/';
                         }
                         $key =
                             strtolower($options['subdomain']) .
@@ -143,9 +149,12 @@ class Host {
                         !property_exists($add,'subcommand')
                     ) {
                         if(!property_exists($add, 'path')){
-                            $add->path = ucfirst($add->module) .
+                            $add->path =
                                 '/' .
-                                ucfirst($add->command) . '/';
+                                ucfirst($add->module) .
+                                '/' .
+                                ucfirst($add->command) .
+                                '/';
                         }
                         $key =
                             strtolower($options['subdomain']) .
@@ -176,7 +185,9 @@ class Host {
                         !property_exists($add,'subcommand')
                     ){
                         if(!property_exists($add, 'path')){
-                            $add->path = ucfirst($add->module) .
+                            $add->path =
+                                '/' .
+                                ucfirst($add->module) .
                                 '/' .
                                 ucfirst($add->submodule) .
                                 '/' .
@@ -216,7 +227,9 @@ class Host {
                         property_exists($add,'subcommand')
                     ){
                         if(!property_exists($add, 'path')) {
-                            $add->path = ucfirst($add->module) .
+                            $add->path =
+                                '/' .
+                                ucfirst($add->module) .
                                 '/' .
                                 ucfirst($add->submodule) .
                                 '/' .
