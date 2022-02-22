@@ -42,7 +42,7 @@
     {{/if}}
     <div
         class="row align-items-start settings-routes-settings"
-        data-url="{{server.url('core')}}Settings/Routes/Settings/{{$request.node.domain.uuid}}"
+        data-url="{{server.url('core')}}Settings/Routes/Settings/{{$request.node.domain.uuid}}?pagination=false"
         data-frontend-url="{{route.get(route.prefix() + '-settings-controllers-view-routes-body')}}"
         data-controller-name="{{$request.node.name}}"
     >
