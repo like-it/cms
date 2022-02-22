@@ -1020,7 +1020,7 @@ class Settings extends Main {
             } else {
                 $response['count'] = 0;
             }
-            $response['nodeList'] = $list;
+            $response['nodeList'] = Core::object($list, Core::OBJECT_ARRAY);
         } else {
             if($list){
                 $response['count'] = count($list);
