@@ -153,24 +153,22 @@ view.onStart = () => {
         name : "controller.name",
         value : routes.data('controller-name')
     });
+    header('Authorization', 'Bearer ' + user.token());
     request(routes.data('url'), data, (url, response) => {
         if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
             if(response?.message){
                 routes.html(response.message);
                 let progress = selected.select('.progress');
-                console.log('progress', progress);
                 if(progress){
                     progress.remove();
                 }
             }
         } else {
-            console.log('here');
             response.target = '.card-body-view-' + "{{$request.node.key}}" + ' .settings-routes-settings';
             response.method = 'replace-with';
             if(routes.data('frontend-url')){
                 request(routes.data('frontend-url'), response, (urlResponse, responseResponse) => {
                     let progress = selected.select('.progress');
-                    console.log('progress', progress);
                     if(progress){
                         progress.remove();
                     }
@@ -182,7 +180,6 @@ view.onStart = () => {
         }
     });
 }
-
 
 view.init = () => {
     view.body();
