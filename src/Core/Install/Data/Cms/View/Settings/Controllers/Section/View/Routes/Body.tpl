@@ -28,7 +28,7 @@
         {{/for}}
     </div>
     <div class="col">
-        <span class="content">{{array.reset($node.route.host)}}{{$node.route.path}}</span><br>
+        <span class="content">{{array.reset('$node.route.host')}}{{$node.route.path}}</span><br>
         {{$explode = explode('.', $node.route.controller)}}
         {{$function = array.pop('$explode')}}
         {{$_controller = implode('.', $explode)}}
