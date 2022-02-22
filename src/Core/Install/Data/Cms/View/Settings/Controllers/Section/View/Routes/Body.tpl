@@ -1,5 +1,11 @@
 {{R3M}}
-{{if(!is.empty($request.nodeList) && is.array($request.nodeList))}}
+{{if(
+    !is.empty($request.nodeList) &&
+    (
+    is.array($request.nodeList) ||
+    is.object($request.nodeList)
+    )   
+)}}
     {{for.each($request.nodeList as $nr => $node)}}
 <div
     class="row align-items-start"
