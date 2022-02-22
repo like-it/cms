@@ -18,7 +18,7 @@
     class="row align-items-start"
 >
     <div class="col">
-        <span class="title">Name</span><br>
+        <span class="title">Command name</span><br>
         <span class="title">Url</span><br>
         <span class="title">Controller</span><br>
         <span class="title">Function (Action)</span><br>
