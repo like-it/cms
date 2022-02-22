@@ -806,12 +806,13 @@ class Settings extends Main {
         $route = $object->data_read($route_url);
         $record = $data->get($uuid);
         if($route){
-            foreach($route->data() as $node){
+            foreach($route->data() as $key => $node){
                 if(
                     property_exists($node, 'command') &&
                     $node->command === $uuid
                 ){
                     $record->route = $node;
+                    $record->route->key = $key;
                     break;
                 }
             }
@@ -958,13 +959,14 @@ class Settings extends Main {
         $route = $object->data_read($route_url);
         $has_set = false;
         if($route){
-            foreach($route->data() as $nr => $node){
+            foreach($route->data() as $key => $node){
                 if(
                     property_exists($node, 'command') &&
                     $data->has($node->command)
                 ){
                     $has_set = true;
                     $data->set($node->command . '.route', $node);
+                    $data->set($node->command . '.route.key', $key);
                     $data->set($node->command . '.domain', $domain->uuid);
                 }
             }
