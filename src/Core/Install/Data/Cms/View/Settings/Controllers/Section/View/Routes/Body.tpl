@@ -26,6 +26,7 @@
 >
     <div class="col">
         <span class="title">Key</span><br>
+        <span class="title">Get</span><br>
         <span class="title">Url</span><br>
         <span class="title">Controller</span><br>
         <span class="title">Function (Action)</span><br>
@@ -37,6 +38,7 @@
     </div>
     <div class="col">
         <span class="content">{{$node.route.key}}</span><br>
+        <span class="content">{{literal}}{{route.get(route.prefix() + '-{{/literal}}{{$node.name}}{{literal}}')}}{{/literal}}</span><br>
         <span class="content">{{array.reset('$node.route.host')}}{{$node.route.path}}</span><br>
         {{$explode = explode('.', $node.route.controller)}}
         {{$function = array.pop('$explode')}}
