@@ -925,7 +925,9 @@ class Settings extends Main {
      */
     public static function routes_list(App $object): Response
     {
-        dd($object->request());
+        if($object->request('pagination') === 'false'){
+            $object->request('pagination', false);
+        }
         $domain = Settings::domain_get($object);
         if(
             !property_exists($domain, 'dir') ||
@@ -1012,14 +1014,26 @@ class Settings extends Main {
         }
         $response = [];
         $list = Sort::list($data->data())->with(['sort' => 'ASC', 'name' => 'ASC']);
-        if($list){
-            $response['count'] = count($list);
-            $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
+        if($object->request('pagination') === false){
+            if($list){
+                $response['count'] = count($list);
+            } else {
+                $response['count'] = 0;
+            }
+            $response['nodeList'] = $list;
+        } else {
+            if($list){
+                $response['count'] = count($list);
+                $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
+            } else {
+                $response['count'] = 0;
+            }
+            $response['nodeList'] = $list;
+            $response['limit'] = $limit;
+            $response['page'] = $page;
+            $response['max'] = ceil($response['count'] / $response['limit']);
         }
-        $response['nodeList'] = $list;
-        $response['limit'] = $limit;
-        $response['page'] = $page;
-        $response['max'] = ceil($response['count'] / $response['limit']);
+
         return new Response($response, Response::TYPE_JSON);
     }
 
