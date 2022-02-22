@@ -10,7 +10,7 @@
     class="row align-items-start"
 >
     <div class="col">
-        <h3>Routes</h3>
+        <h5>Routes</h5>
     </div>
 </div>
     {{for.each($request.nodeList as $nr => $node)}}
