@@ -15,6 +15,7 @@ $__.submodule +
 $__.command +
 '.component.options.edit.text'
 )}}
+{{dd($node)}}
 <a
     class="dropdown-item item-edit"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.url}}/{{$node.domain}}"
