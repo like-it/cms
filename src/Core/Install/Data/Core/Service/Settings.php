@@ -1456,6 +1456,7 @@ class Settings extends Main {
             throw new Exception('Domain dir not set...');
         }
         if(File::exist($url)){
+            $name = File::basename($url);
             $read = File::read($url);
             $record = [];
             $record['key'] = sha1($url);
