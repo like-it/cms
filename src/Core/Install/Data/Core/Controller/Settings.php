@@ -238,8 +238,16 @@ class Settings extends View {
 
     public static function views_command(App $object){
         $url = $object->request('node.url');
-        d($object->request());
-        dd($url);
+        if(empty($url)){
+            $domain = $object->request('node.domain');
+            $explode = explode('/', $domain);
+            if(array_key_exists(1, $explode)){
+                $domain = array_pop($explode);
+                $url = implode('/', $explode);
+                $object->request('node.domain', $domain);
+                $object->request('node.url', $url);
+            }
+        }
         try {
             switch (Handler::method()) {
                 case 'DELETE' :
