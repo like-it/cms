@@ -1,7 +1,7 @@
 {{R3M}}
 {{response.view([
 'module' => $controller.name,
-'submodule' => 'controllers',
+'submodule' => 'views',
 'command' => 'settings',
 'subcommand' => 'body',
 'init' => true,
