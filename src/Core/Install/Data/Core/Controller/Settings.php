@@ -237,15 +237,16 @@ class Settings extends View {
     }
 
     public static function views_command(App $object){
-        $name = $object->request('node.name');
+        $url = $object->request('node.url');
+        dd($url);
         try {
             switch (Handler::method()) {
                 case 'DELETE' :
-                    return Service::views_delete($object, $name);
+                    return Service::views_delete($object, $url);
                 case 'GET' :
-                    return Service::views_read($object, $name);
+                    return Service::views_read($object, $url);
                 case 'PUT' :
-                    return Service::views_update($object, $name);
+                    return Service::views_update($object, $url);
             }
         } catch (Exception $exception) {
             return $exception;

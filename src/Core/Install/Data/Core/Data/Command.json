@@ -453,7 +453,7 @@
         "module" : "settings",
         "submodule" : "views",
         "command" : "command",
-        "path": "Settings/Views/{{$node.name}}/{{$node.domain}}",
+        "path": "Settings/Views/{{$node.url}}/{{$node.domain}}",
         "method": [
             "GET",
             "PUT",

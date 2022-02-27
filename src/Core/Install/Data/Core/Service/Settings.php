@@ -1446,7 +1446,7 @@ class Settings extends Main {
      * @throws Exception
      * @throws FileNotExistException
      */
-    public static function views_read(App $object, $name): Response
+    public static function views_read(App $object, $url): Response
     {
         $domain = Settings::domain_get($object);
         if(
@@ -1455,6 +1455,7 @@ class Settings extends Main {
         ){
             throw new Exception('Domain dir not set...');
         }
+        dd($url);
         $url = $domain->dir . $object->config('dictionary.controller') . $object->config('ds') . $name;
         if(File::exist($url)){
             $read = File::read($url);
