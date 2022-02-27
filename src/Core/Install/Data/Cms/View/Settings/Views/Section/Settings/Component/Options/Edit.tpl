@@ -17,7 +17,7 @@ $__.command +
 )}}
 <a
     class="dropdown-item item-edit"
-    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.url|url.encode}}/{{$node.domain}}"
+    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.url|raw.url.encode}}/{{$node.domain}}"
     data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-template-body')}}"
 >
     <i

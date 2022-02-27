@@ -38,7 +38,7 @@
         {{/for.each}}
         {{for.each($request.nodeList as $node_nr => $node)}}
             <tr
-                data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.url|url.encode}}/{{$node.domain}}"
+                data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.url|raw.url.encode}}/{{$node.domain}}"
                 data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-edit-template-body')}}"
             >
             {{for.each($components as $component)}}
