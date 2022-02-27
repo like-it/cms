@@ -429,6 +429,38 @@
             "OPTIONS"
         ]
     },
+    "70b0f59e-61c3-42fa-93ed-65448d15bca7" : {
+        "module" : "settings",
+        "submodule" : "views",
+        "command" : "settings",
+        "path": "Settings/Views/Settings/{{$node.domain}}",
+        "method" : [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "430ad061-9bb3-4fad-8ba3-feffff078271" : {
+        "module" : "settings",
+        "submodule" : "views",
+        "command" : "add",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "cca7e1c9-2083-49e0-9560-c916f3a1a29b" : {
+        "module" : "settings",
+        "submodule" : "views",
+        "command" : "command",
+        "path": "Settings/Views/{{$node.name}}/{{$node.domain}}",
+        "method": [
+            "GET",
+            "PUT",
+            "DELETE",
+            "OPTIONS"
+        ]
+    },
     "68afe695-6df8-49ef-a17f-0e3e989f6e11" : {
         "module" : "admin",
         "path": "admin",
