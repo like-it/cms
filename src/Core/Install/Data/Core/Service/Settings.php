@@ -1586,40 +1586,45 @@ class Settings extends Main {
         $dir = new Dir();
         $data = new Data();
         $read = $dir->read($url, true);
-        foreach($read as $nr => $record){
-            if($record->type !== File::TYPE){
-                continue;
+        if($read){
+            foreach($read as $nr => $record){
+                if($record->type !== File::TYPE){
+                    continue;
+                }
+                $record->domain = $domain->uuid;
+                $key = sha1($record->url);
+                $data->set($key, $record);
             }
-            $record->domain = $domain->uuid;
-            $key = sha1($record->url);
-            $data->set($key, $record);
-        }
-        if($object->request('page')){
-            $page = (int) $object->request('page');
+            if($object->request('page')){
+                $page = (int) $object->request('page');
+            } else {
+                $page = 1;
+            }
+            $limit = Limit::LIMIT;
+            $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
+            $settings =  $object->data_read($settings_url);
+            if($settings->data('view.default.limit')){
+                $limit = $settings->data('view.default.limit');
+            }
+            if($object->request('limit')){
+                $limit = (int) $object->request('limit');
+                if($limit > Limit::MAX){
+                    $limit = Limit::MAX;
+                }
+            }
+            $response = [];
+            $list = Sort::list($data->data())->with(['url' => 'ASC']);
+            $response['count'] = count($list);
+            $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
+            $response['nodeList'] = $list;
+            $response['limit'] = $limit;
+            $response['page'] = $page;
+            $response['max'] = ceil($response['count'] / $response['limit']);
+            return new Response($response, Response::TYPE_JSON);
         } else {
-            $page = 1;
+            throw new Exception('Could not find a matching file...');
         }
-        $limit = Limit::LIMIT;
-        $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
-        $settings =  $object->data_read($settings_url);
-        if($settings->data('view.default.limit')){
-            $limit = $settings->data('view.default.limit');
-        }
-        if($object->request('limit')){
-            $limit = (int) $object->request('limit');
-            if($limit > Limit::MAX){
-                $limit = Limit::MAX;
-            }
-        }
-        $response = [];
-        $list = Sort::list($data->data())->with(['url' => 'ASC']);
-        $response['count'] = count($list);
-        $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
-        $response['nodeList'] = $list;
-        $response['limit'] = $limit;
-        $response['page'] = $page;
-        $response['max'] = ceil($response['count'] / $response['limit']);
-        return new Response($response, Response::TYPE_JSON);
+
     }
 
     /**
