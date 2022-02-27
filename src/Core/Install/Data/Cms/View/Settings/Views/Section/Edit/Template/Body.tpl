@@ -1,6 +1,6 @@
 {{R3M}}
 {{if(
-$command === 'edit-controller' &&
+$command === 'edit-template' &&
 $subcommand === 'body'
 )}}
     {{$section.name = 'main-content'}}
