@@ -1,0 +1,103 @@
+section[name="main-content"] form {
+    width: 100%;
+    height: 100%;
+}
+
+section[name="main-content"] form .menu {
+    width: 100%;
+    height: 40px;
+    background: #f6f6f6;
+}
+
+section[name="main-content"] form .menu ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+section[name="main-content"] form .menu li {
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    user-select: none;
+}
+
+section[name="main-content"] form .edit {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 40px);
+}
+
+section[name="main-content"] .card-body-edit {
+    padding: 0;
+    position: relative;
+    min-height: 600px;
+}
+
+section[name="main-content"] form .panel {
+    position: absolute;
+    top: 40px;
+    background: #f6f6f6;
+    z-index: 10;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+section[name="main-content"] form .panel tr {
+    height: 24px;
+    cursor: default;
+    user-select: none;
+}
+
+section[name="main-content"] form .panel td.icon {
+    width: 40px;
+    padding-left: 10px;
+    color: #0d6efd;
+}
+
+section[name="main-content"] form .panel td.text {
+    width: 200px;
+}
+
+section[name="main-content"] form .panel td.shortcut {
+    text-align: right;
+    width: 100px;
+    padding-right: 10px;
+    padding-top: 6px;
+    font-size: 10px;
+}
+
+section[name="main-content"] form .panel tr.disabled,
+section[name="main-content"] form .panel tr.disabled td.icon {
+    color: rgba(200, 200, 200, 1);
+}
+
+
+section[name="main-content"] form .panel tr:hover td.icon,
+section[name="main-content"] form .panel tr:hover td.text,
+section[name="main-content"] form .panel tr:hover td.shortcut{
+    background-color: rgba(255, 124, 13, 1);
+}
+
+
+
+section[name="main-content"] form .panel tr.divider {
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 11px;
+}
+
+section[name="main-content"] form .panel tr.divider hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+section[name="main-content"] pre[name="node.content"] {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    font-size: 14px;
+    margin: 0;
+}
