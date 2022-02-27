@@ -502,9 +502,9 @@
     "92e70282-f60e-4330-83aa-e1e8df4dd610" : {
         "module" : "settings",
         "submodule" : "views",
-        "command" : "add-view",
+        "command" : "add-template",
         "subcommand" : "body",
-        "path" : "Settings/Views/Add/View/Body/{$node.domain}",
+        "path" : "Settings/Views/Add/Template/Body/{$node.domain}",
         "method": [
             "GET",
             "POST"
@@ -513,9 +513,9 @@
     "d4a1600e-b1d1-4aea-a9c3-b61f25a9f5dd" : {
         "module" : "settings",
         "submodule" : "views",
-        "command" : "edit-view",
+        "command" : "edit-template",
         "subcommand" : "body",
-        "path" : "Settings/Views/Edit/View/Body/",
+        "path" : "Settings/Views/Edit/Template/Body/",
         "method": [
             "GET",
             "POST"
