@@ -1,5 +1,5 @@
 {{R3M}}
-{{$section = 'add-controller'}}
+{{$section = 'add-template'}}
 {{$__.section = $section|lowercase|replace:'-':'.'}}
 {{$require.section = $section|uppercase.first.sentence:'-'|replace:'-':'/'}}
 {{$node = 'body-node-domain'}}
