@@ -4,6 +4,11 @@
             "limit" : 12
         }
     },
+    "view" : {
+        "default" : {
+            "limit" : 12
+        }
+    },
     "route" : {
         "default" : {
             "limit" : 9

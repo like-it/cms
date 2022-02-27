@@ -217,4 +217,38 @@ class Settings extends View {
             return $exception;
         }
     }
+
+    public static function views_settings(App $object)
+    {
+        try {
+            return Service::views_list($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function views_add(App $object)
+    {
+        try {
+            return Service::views_create($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function views_command(App $object){
+        $name = $object->request('node.name');
+        try {
+            switch (Handler::method()) {
+                case 'DELETE' :
+                    return Service::views_delete($object, $name);
+                case 'GET' :
+                    return Service::views_read($object, $name);
+                case 'PUT' :
+                    return Service::views_update($object, $name);
+            }
+        } catch (Exception $exception) {
+            return $exception;
+        }
+    }
 }

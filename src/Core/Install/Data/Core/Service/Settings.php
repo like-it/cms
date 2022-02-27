@@ -1425,4 +1425,273 @@ class Settings extends Main {
             'Theme' .
             $object->config('extension.json');
     }
+
+    /**
+     * @throws Exception
+     * @throws ObjectException
+     */
+    public static function views_create(App $object): Response
+    {
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        return Settings::views_put($object, $domain);
+    }
+
+    /**
+     * @throws Exception
+     * @throws FileNotExistException
+     */
+    public static function views_read(App $object, $name): Response
+    {
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $url = $domain->dir . $object->config('dictionary.controller') . $object->config('ds') . $name;
+        if(File::exist($url)){
+            $read = File::read($url);
+            $record = [];
+            $record['key'] = sha1($url);
+            $record['name'] = $name;
+            $record['url'] = $url;
+            $record['content'] = $read;
+            $record['domain'] = $domain;
+            $response = [];
+            $response['node'] = $record;
+            return new Response($response, Response::TYPE_JSON);
+        } else {
+            throw new FileNotExistException('File (' . $url .') not found...');
+        }
+    }
+
+    /**
+     * @throws Exception
+     * @throws FileExistException
+     */
+    public static function views_update(App $object, $name): Response
+    {
+        dd('update');
+        $name_old = $object->request('node.name_old');
+        $class_rename = $object->request('node.class_rename');
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        if($name !== $name_old){
+            $url = $domain->dir .
+                'Controller' .
+                $object->config('ds') .
+                $name;
+            $content = $object->request('node.content');
+            $classname_old = File::basename($name_old, '.php');
+            $classname = File::basename($name, '.php');
+            if($class_rename){
+                $content = str_replace([
+                    $classname_old . '::',
+                    'class ' . $classname_old,
+                ], [
+                    $classname . '::',
+                    'class ' . $classname,
+
+                ], $content);
+            }
+            if(File::exist($url)){
+                throw new FileExistException('Target file (' . $name .') exist.');
+            } else {
+                File::write($url, $content);
+                $url_old = $domain->dir .
+                    'Controller' .
+                    $object->config('ds') .
+                    $name_old;
+                File::delete($url_old);
+            }
+        } else {
+            $url = $domain->dir .
+                'Controller' .
+                $object->config('ds') .
+                $name;
+            $content = $object->request('node.content');
+            $classname_old = File::basename($name_old, '.php');
+            $classname = File::basename($name, '.php');
+            if($class_rename){
+                $content = str_replace([
+                    $classname_old . '::',
+                    'class ' . $classname_old,
+                ], [
+                    $classname . '::',
+                    'class ' . $classname,
+
+                ], $content);
+            }
+            File::write($url, $content);
+        }
+        $response = [];
+        $response['node'] = [
+            'url' => $url,
+            'name' => $name,
+            'content' => $content
+        ];
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function views_delete(App $object, $name): Response
+    {
+        dd('delete');
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $url = $domain->dir . $object->config('dictionary.views') . $object->config('ds') . $name;
+        File::delete($url);
+        $response = [];
+        $response['node'] = [
+            'url' => $url,
+            'is' => [
+                'deleted' => new DateTime('NOW')
+            ]
+        ];
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function views_list(App $object): Response
+    {
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $url = $domain->dir . $object->config('dictionary.view') . $object->config('ds');
+        $dir = new Dir();
+        $data = new Data();
+        $read = $dir->read($url, true);
+        foreach($read as $nr => $record){
+            if($record->type !== File::TYPE){
+                continue;
+            }
+            $record->domain = $domain->uuid;
+            $key = sha1($record->url);
+            $data->set($key, $record);
+        }
+        if($object->request('page')){
+            $page = (int) $object->request('page');
+        } else {
+            $page = 1;
+        }
+        $limit = Limit::LIMIT;
+        $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
+        $settings =  $object->data_read($settings_url);
+        if($settings->data('view.default.limit')){
+            $limit = $settings->data('view.default.limit');
+        }
+        if($object->request('limit')){
+            $limit = (int) $object->request('limit');
+            if($limit > Limit::MAX){
+                $limit = Limit::MAX;
+            }
+        }
+        $response = [];
+        $list = Sort::list($data->data())->with(['url' => 'ASC']);
+        $response['count'] = count($list);
+        $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
+        $response['nodeList'] = $list;
+        $response['limit'] = $limit;
+        $response['page'] = $page;
+        $response['max'] = ceil($response['count'] / $response['limit']);
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws Exception
+     * @throws ObjectException;
+     */
+    private static function views_put(App $object, $domain)
+    {
+        dd('put');
+        $validate = Main::validate($object, Settings::controllers_getValidatorUrl($object), 'controller');
+        if($validate) {
+            if ($validate->success === true) {
+                $object->request(
+                    'url',
+                    $domain->dir .
+                    $object->config('dictionary.controller') .
+                    $object->config('ds') .
+                    ucfirst($object->request('node.name')) .
+                    $object->request('node.extension')
+                );
+                if(File::exist($object->request('url'))){
+                    $data = [];
+                    $data['error'] = [
+                        'url' => [
+                            'validate_url' => [
+                                false
+                            ]
+                        ]
+                    ];
+                    return new Response(
+                        $data,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                } else {
+                    $source = $object->config('host.dir.data') .
+                        'Source' .
+                        $object->config('ds') .
+                        'Controller' .
+                        $object->config('extension.tpl');
+                    $parse = new Parse($object);
+                    $data = new Data($object->data());
+                    $data->set('domain', $domain);
+                    $content = $parse->compile(File::read($source), $data->get());
+                    $dir = Dir::name($object->request('url'));
+                    Dir::create($dir);
+                    File::write($object->request('url'), $content);
+                    $object->request('node.content', $content);
+                    $data = [];
+                    $data['node'] = $object->request('node');
+                    return new Response($data, Response::TYPE_JSON);
+                }
+            } else {
+                $data = [];
+                $data['error'] = $validate->test;
+                return new Response(
+                    $data,
+                    Response::TYPE_JSON,
+                    Response::STATUS_ERROR
+                );
+            }
+        } else {
+            throw new Exception('Cannot validate controller at: ' . Settings::controllers_getValidatorUrl($object));
+        }
+    }
+
+    private static function views_getValidatorUrl(App $object): string
+    {
+        return $object->config('host.dir.data') .
+            'Validator' .
+            $object->config('ds') .
+            'View' .
+            $object->config('extension.json');
+    }
 }
