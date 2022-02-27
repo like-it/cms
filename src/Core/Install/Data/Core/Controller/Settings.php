@@ -238,6 +238,7 @@ class Settings extends View {
 
     public static function views_command(App $object){
         $url = $object->request('node.url');
+        d($object->request());
         dd($url);
         try {
             switch (Handler::method()) {
