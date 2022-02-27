@@ -1,5 +1,5 @@
 {R3M}
-{{$a.name = 'templates'}}
+{{$a.name = 'views'}}
 {{$a.translation = $a.name|replace:'-':'.'}}
 {{$a.route = 'settings-' + $a.name + '-main'}}
 {{$a.data.url = ''}}

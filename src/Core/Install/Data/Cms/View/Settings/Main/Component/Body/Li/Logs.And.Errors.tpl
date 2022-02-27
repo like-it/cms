@@ -1,4 +1,4 @@
-{R3M}
+{{R3M}}
 {{$li.name = 'logs-and-errors'}}
 {{$li.translation = $li.name|replace:'-':'.'}}
 {{$li.id = 'accordion-flush-' + $li.name}}

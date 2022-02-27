@@ -470,6 +470,77 @@
             "PUT"
         ]
     },
+    "0996978b-7dd7-4f79-9b73-21ded3c6f9ec" : {
+        "module" : "settings",
+        "submodule" : "views",
+        "command" : "main",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "bf37085c-b60a-4668-9856-dcfefcba5af0" : {
+        "module" : "settings",
+        "submodule" : "views",
+        "command" : "main",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "bd3f74f9-6347-4644-bcdb-48741d35fd40" : {
+        "module" : "settings",
+        "submodule" : "views",
+        "command" : "settings",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "92e70282-f60e-4330-83aa-e1e8df4dd610" : {
+        "module" : "settings",
+        "submodule" : "views",
+        "command" : "add-view",
+        "subcommand" : "body",
+        "path" : "Settings/Views/Add/View/Body/{$node.domain}",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "d4a1600e-b1d1-4aea-a9c3-b61f25a9f5dd" : {
+        "module" : "settings",
+        "submodule" : "views",
+        "command" : "edit-view",
+        "subcommand" : "body",
+        "path" : "Settings/Views/Edit/View/Body/",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "866ad443-1ebf-490e-adb0-b3fa55b83c4e" : {
+        "module" : "settings",
+        "submodule" : "views",
+        "command" : "view",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "837afeaa-9ab2-41ea-9934-1c1503111861" : {
+        "module" : "settings",
+        "submodule" : "views",
+        "command" : "view-routes",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "2e61686d-449a-444b-95e6-9e5b1687e528" : {
         "module" : "system",
         "command" : "information",

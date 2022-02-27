@@ -1,5 +1,5 @@
-{R3M}
-{{$li.name = 'templates'}}
+{{R3M}}
+{{$li.name = 'views'}}
 {{$li.translation = $li.name|replace:'-':'.'}}
 {{$li.id = 'accordion-flush-' + $li.name}}
 {{$li.flush.heading.1 = 'flush-heading-one-' + $li.name}}
