@@ -243,6 +243,7 @@ class Settings extends View {
             $explode = explode('/', $domain);
             if(array_key_exists(1, $explode)){
                 $domain = array_pop($explode);
+                array_unshift($explode, '');
                 $url = implode('/', $explode);
                 $object->request('node.domain', $domain);
                 $object->request('node.url', $url);
