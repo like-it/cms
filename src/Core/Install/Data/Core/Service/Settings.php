@@ -1455,8 +1455,6 @@ class Settings extends Main {
         ){
             throw new Exception('Domain dir not set...');
         }
-        dd($url);
-        $url = $domain->dir . $object->config('dictionary.controller') . $object->config('ds') . $name;
         if(File::exist($url)){
             $read = File::read($url);
             $record = [];
