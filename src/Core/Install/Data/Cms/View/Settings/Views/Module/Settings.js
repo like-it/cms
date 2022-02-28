@@ -443,7 +443,9 @@ settings.search = () => {
     });
 
     input.on('change', (event) => {
+        console.log('change');
         if(input?.value?.length >= 3){
+            console.log('submit');
             form.trigger('submit');
         }
     });
@@ -471,7 +473,7 @@ ready(() => {
     [
         root() + 'Dialog/Css/Dialog.css?' + version(),
         root() + 'Dialog/Css/Dialog.Delete.css?' + version(),
-        root() + '{{$require.module}}/{{$require.submodule}}/Css/{{$require.submodule}}.css?' + version()
+        root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + "{{$require.submodule}}" + '.css?' + version()
     ],
     () => {
         settings.init();
