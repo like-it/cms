@@ -1634,6 +1634,8 @@ class Settings extends Main {
                         'Source' .
                         $object->config('ds') .
                         'Template' .
+                        '.' .
+                        ucfirst(File::extension($object->request('node.url'))) .
                         $object->config('extension.tpl');
                     $parse = new Parse($object);
                     $data = new Data($object->data());
