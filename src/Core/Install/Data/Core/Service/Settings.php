@@ -1610,7 +1610,8 @@ class Settings extends Main {
      */
     private static function views_put(App $object, $domain)
     {
-        $object->request('node.extension', File::extension($object->request('url')));
+        $object->request('node.extension', File::extension($object->request('node.url')));
+//        dd($object->request());
         $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view');
         if($validate) {
             if ($validate->success === true) {
