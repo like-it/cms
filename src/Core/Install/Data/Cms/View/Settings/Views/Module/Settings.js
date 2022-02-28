@@ -440,9 +440,9 @@ settings.search = () => {
             return;
         }
         let split = url.split('?');
-        if(split[1]){
+        if(split[1] && input.value.length > 0){
             url += '&q=' + input.value
-        } else {
+        } else if(input.value.length > 0) {
             url += '?q=' + input.value
         }
         let frontend_url = form.data('frontend-url');
@@ -470,6 +470,9 @@ settings.search = () => {
         console.log('change');
         if(input?.value?.length >= 3){
             console.log('submit');
+            form.trigger('submit');
+        }
+        if(input?.value?.length === 0){
             form.trigger('submit');
         }
     });
