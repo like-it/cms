@@ -450,7 +450,9 @@ settings.search = () => {
         if(!frontend_url){
             return;
         }
-        console.log(frontend_url);
+        request(url,null, (response_url, response) => {
+            request(frontend_url, response);
+        });
     });
 
     input.on('change', (event) => {
