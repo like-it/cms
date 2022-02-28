@@ -4,11 +4,6 @@
             "url": [
                 {
                     "string.length": ">=1"
-                },
-                {
-                    "string.contains": {
-                        "regex": "^\\w.\\/^"
-                    }
                 }
             ],
             "extension": [
