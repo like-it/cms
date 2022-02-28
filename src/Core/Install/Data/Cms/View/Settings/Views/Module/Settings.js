@@ -445,7 +445,6 @@ settings.search = () => {
         } else {
             url += '?q=' + input.value
         }
-        console.log(url);
         let frontend_url = form.data('frontend-url');
         if(!frontend_url){
             return;
