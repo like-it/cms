@@ -1510,9 +1510,8 @@ class Settings extends Main {
     /**
      * @throws Exception
      */
-    public static function views_delete(App $object, $name): Response
+    public static function views_delete(App $object, $url): Response
     {
-        dd('delete');
         $domain = Settings::domain_get($object);
         if(
             !property_exists($domain, 'dir') ||
@@ -1520,7 +1519,6 @@ class Settings extends Main {
         ){
             throw new Exception('Domain dir not set...');
         }
-        $url = $domain->dir . $object->config('dictionary.views') . $object->config('ds') . $name;
         File::delete($url);
         $response = [];
         $response['node'] = [
