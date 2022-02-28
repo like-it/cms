@@ -1586,6 +1586,7 @@ class Settings extends Main {
                     }
                 }
                 $list = $q;
+                $response['q'] = $object->request('q');
             }
             $response['count'] = count($list);
             $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
