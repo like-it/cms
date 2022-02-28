@@ -39,6 +39,7 @@
                     placeholder="Search..."
                     aria-label="Search"
                     name="q"
+                    value="{{$request.q}}"
                 >
                 <button class="btn btn-outline-primary" type="submit">Search</button>
             </form>
@@ -62,7 +63,9 @@
             $require.command +
             '/' +
             '{node.domain}' +
-            '/?page=1'
+            '/?page=1' +
+            '&q=' +
+            $request.q
             }}
             {{$button.data.frontend.url =
             route.get(route.prefix() +
@@ -104,7 +107,9 @@
             '/' +
             '{node.domain}' +
             '/?page=' +
-            $page.previous
+            $page.previous +
+            '&q=' +
+            $request.q
             }}
             {{$button.data.frontend.url =
             route.get(route.prefix() +
@@ -146,7 +151,9 @@
             '/' +
             '{node.domain}' +
             '/?page=' +
-            $page.next
+            $page.next +
+            '&q=' +
+            $request.q
             }}
             {{$button.data.frontend.url =
             route.get(route.prefix() +
@@ -188,7 +195,9 @@
                 '/' +
                 '{node.domain}' +
                 '/?page=' +
-                $page.max
+                $page.max +
+                '&q=' +
+                $request.q
             }}
             {{$button.data.frontend.url =
                 route.get(route.prefix() +
