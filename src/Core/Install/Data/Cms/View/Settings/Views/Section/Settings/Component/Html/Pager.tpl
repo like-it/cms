@@ -23,7 +23,20 @@
 {{/if}}
 <tfoot>
     <tr>
-        <td colspan="{{array.count($components)}}" class="text-end">
+        {{$td.colspan = array.count($components) - 1}}
+        <td colspan="{{$td.colspan}}" class="text-end">
+            <form class="d-flex">
+                <input
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="Search..."
+                    aria-label="Search"
+                    name="q"
+                >
+                <button class="btn btn-outline-primary" type="submit">Search</button>
+            </form>
+        </td>
+        <td class="text-end">
             <span class="page">{{$page.start}}-{{$page.to}} of {{$page.count}}</span>
             {{if($page.current === 1)}}
             {{$i.class = 'fas fa-angle-double-left'}}
