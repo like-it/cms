@@ -1610,18 +1610,10 @@ class Settings extends Main {
      */
     private static function views_put(App $object, $domain)
     {
-        dd('put');
-        $validate = Main::validate($object, Settings::controllers_getValidatorUrl($object), 'controller');
+        $object->request('node.extension', File::extension($object->request('url')));
+        $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view');
         if($validate) {
             if ($validate->success === true) {
-                $object->request(
-                    'url',
-                    $domain->dir .
-                    $object->config('dictionary.controller') .
-                    $object->config('ds') .
-                    ucfirst($object->request('node.name')) .
-                    $object->request('node.extension')
-                );
                 if(File::exist($object->request('url'))){
                     $data = [];
                     $data['error'] = [
@@ -1640,7 +1632,7 @@ class Settings extends Main {
                     $source = $object->config('host.dir.data') .
                         'Source' .
                         $object->config('ds') .
-                        'Controller' .
+                        'Template' .
                         $object->config('extension.tpl');
                     $parse = new Parse($object);
                     $data = new Data($object->data());
