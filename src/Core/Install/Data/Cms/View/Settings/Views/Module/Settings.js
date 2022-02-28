@@ -436,10 +436,21 @@ settings.search = () => {
     form.on('submit', (event) => {
         event.preventDefault();
         let url = form.data('url');
-        if(url){
+        if(!url){
+            return;
+        }
+        let split = url.split('?');
+        if(split[1]){
+            url += '&q=' + input.value
+        } else {
             url += '?q=' + input.value
         }
         console.log(url);
+        let frontend_url = form.data('frontend-url');
+        if(!frontend_url){
+            return;
+        }
+        console.log(frontend_url);
     });
 
     input.on('change', (event) => {

@@ -30,6 +30,7 @@
             <form
                 class="d-flex"
                 data-url="{{server.url('core')}}Settings/Views/Settings/{{$request.node.domain}}"
+                data-frontend-url="{{route.get(route.prefix() + '-settings-views-settings-body')}}"
                 name="search"
                 >
                 <input
