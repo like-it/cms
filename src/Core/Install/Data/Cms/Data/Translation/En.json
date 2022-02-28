@@ -315,14 +315,7 @@
     "settings.views.section.form.component.menu.panel.file.close.icon" : "",
     "settings.views.section.form.component.menu.panel.file.close.text" : "Close",
     "settings.views.section.form.component.menu.panel.file.close.shortcut" : "CTRL-Q",
-    "settings.views.section.form.error.module.validate_string_length" : "The module is required.",
-    "settings.views.section.form.error.module.validate_string_contains" : "The module must just be [a-z]_- (alphabetical, _ or -)",
-    "settings.views.section.form.error.submodule.validate_string_contains" : "The submodule must just be [a-z]_- (alphabetical, _ or -)",
-    "settings.views.section.form.error.command.validate_string_contains" : "The command must just be [a-z]_- (alphabetical, _ or -)",
-    "settings.views.section.form.error.subcommand.validate_string_contains" : "The subcommand must just be [a-z]_- (alphabetical, _ or -)",
-    "settings.views.section.form.error.method[].validate_in_list_json" : "Please select at least one method.",
-    "settings.views.section.form.error.name.validate_is_unique_json" : "Please provide an unique name which consist of module, submodule, command & subcommand.",
-    "settings.views.section.form.error.redirect.validate_string_length" : "The redirect is required.",
+    "settings.views.section.form.error.extension.validate_in_array" : "Please use one of the following extensions: .tpl, .js or .css",
     "settings.views.section.settings.component.options.controller.icon" : "fas fa-cog",
     "settings.views.section.settings.component.options.controller.text" : "View controller",
     "settings.views.section.settings.component.options.delete.icon" : "far fa-trash-alt",
@@ -340,6 +333,7 @@
     "settings.views.section.settings.component.thead.functions" : "Amount of<br>Functions",
     "settings.views.section.settings.component.thead.default" : "",
     "settings.views.section.settings.component.thead.options" : "",
+
     "settings.main.component.header.a.main.link" : "Main",
     "settings.main.component.body.li.account.settings.title" : "Account settings",
     "settings.main.component.body.li.account.settings.body" : [
