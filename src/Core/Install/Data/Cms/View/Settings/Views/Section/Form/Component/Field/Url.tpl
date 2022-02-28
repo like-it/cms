@@ -6,7 +6,11 @@
 'validate_string_length',
 'validate_string_contains'
 ]}}
+{{if(!is.empty($request.node.key))}}
 {{$input.id = $module + '-' + $submodule + '-' + $field + '-' + $request.node.key}}
+{{else}}
+{{$input.id = $module + '-' + $submodule + '-' + $field}}
+{{/if}}
 {{$input.class = 'form-control'}}
 {{for.each($validates as $validate)}}
     {{if(request.error($field + '.' + $validate) === true)}}

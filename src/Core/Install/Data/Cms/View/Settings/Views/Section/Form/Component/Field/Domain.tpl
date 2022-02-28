@@ -5,7 +5,11 @@
 {{$validates = [
 'validate_in_list_json',
 ]}}
+{{if(!is.empty($request.node.key))}}
 {{$select.id = $module + '-' + $submodule + '-' + $field + '-' + $request.node.key}}
+{{else}}
+{{$select.id = $module + '-' + $submodule + '-' + $field}}
+{{/if}}
 {{$select.class = 'form-control'}}
 {{for.each($validates as $validate)}}
     {{if(request.error($field + '.' + $validate) === true)}}
