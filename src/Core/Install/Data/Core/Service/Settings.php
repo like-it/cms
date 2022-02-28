@@ -1615,7 +1615,7 @@ class Settings extends Main {
         $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view');
         if($validate) {
             if ($validate->success === true) {
-                if(File::exist($object->request('url'))){
+                if(File::exist($object->request('node.url'))){
                     $data = [];
                     $data['error'] = [
                         'url' => [
@@ -1639,9 +1639,9 @@ class Settings extends Main {
                     $data = new Data($object->data());
                     $data->set('domain', $domain);
                     $content = $parse->compile(File::read($source), $data->get());
-                    $dir = Dir::name($object->request('url'));
+                    $dir = Dir::name($object->request('node.url'));
                     Dir::create($dir);
-                    File::write($object->request('url'), $content);
+                    File::write($object->request('node.url'), $content);
                     $object->request('node.content', $content);
                     $data = [];
                     $data['node'] = $object->request('node');
