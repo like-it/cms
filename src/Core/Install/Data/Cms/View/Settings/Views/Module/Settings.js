@@ -102,7 +102,8 @@ settings.deleteDialog = (data) => {
     const submit = footer.select('.button-submit');
     if(submit){
         submit.on('click', (event) => {
-            if(node.data('has', 'url')){
+            console.log(node.data());
+            if(node.data('has', 'request-url')){
                 let data = {
                     request : {
                         method : node.data('request-method') ? node.data('request-method') : "DELETE"
