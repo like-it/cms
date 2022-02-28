@@ -1,7 +1,6 @@
 {{R3M}}
 {{$fields = [
 'Update',
-'Url',
 'Url_old',
 'Dialog.Save.As',
 'Content'
