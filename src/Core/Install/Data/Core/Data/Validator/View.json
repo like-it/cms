@@ -7,7 +7,7 @@
                 },
                 {
                     "string.contains": {
-                        "regex": "^[a-zA-Z.\/]+$^"
+                        "regex": "^\\w.\\/^"
                     }
                 }
             ],
