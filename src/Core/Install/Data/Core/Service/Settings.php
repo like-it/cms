@@ -1622,7 +1622,10 @@ class Settings extends Main {
             $response['max'] = ceil($response['count'] / $response['limit']);
             return new Response($response, Response::TYPE_JSON);
         } else {
-            throw new Exception('Could not find a matching file...');
+            $response = [];
+            $response['count'] = 0;
+            $response['nodeList'] = [];
+            return new Response($response, Response::TYPE_JSON);
         }
 
     }
