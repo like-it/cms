@@ -449,6 +449,18 @@ settings.search = () => {
         if(!frontend_url){
             return;
         }
+        if(contains(url, "{node.domain}") !== false){
+            const section = getSectionByName('main-content');
+            if(!section){
+                return;
+            }
+            const domain = section.select('input[name="node.domain"]');
+            console.log('domain', domain);
+            if(!domain){
+                return;
+            }
+            url = replace("{node.domain}", domain.value, url);
+        }
         request(url,null, (response_url, response) => {
             request(frontend_url, response);
         });
