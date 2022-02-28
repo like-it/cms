@@ -5,6 +5,7 @@
     id="{{$pre.id}}"
     name="{{$pre.name}}"
     data-content="{{$request.node.content|html.entity.encode}}"
+    data-extension="{{file.extension($request.node.url)}}"
 >
 </pre>
 {{script('module')}}

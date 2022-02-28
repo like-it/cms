@@ -371,7 +371,27 @@ source.editor = () => {
     if(is.empty(editor)){
         ace.require("ace/ext/language_tools");
         editor = ace.edit("{{$pre.id}}");
-        editor.session.setMode("ace/mode/php");
+        let pre = select("#{{$pre.id}}");
+        let extension;
+        if(pre){
+            extension = pre.data('extension');
+        }
+        switch(extension){
+            case 'php' :
+                editor.session.setMode("ace/mode/php");
+                break;
+            case 'tpl' :
+                editor.session.setMode("ace/mode/smarty");
+                break;
+            case 'css' :
+                editor.session.setMode("ace/mode/css");
+                break;
+            case 'js' :
+                editor.session.setMode("ace/mode/js");
+                break;
+            default :
+                editor.session.setMode("ace/mode/php");
+        }
         editor.setTheme("ace/theme/tomorrow");
         // enable autocompletion and snippets
         editor.setOptions({
