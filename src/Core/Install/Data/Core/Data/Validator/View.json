@@ -7,7 +7,7 @@
                 },
                 {
                     "string.contains": {
-                        "regex": "^[a-zA-Z]+/$^"
+                        "regex": "^[a-zA-Z/]+$^"
                     }
                 }
             ],
@@ -22,9 +22,9 @@
                 },
                 {
                     "in.array": [
-                        "tpl",
-                        "js",
-                        "css"
+                        ".tpl",
+                        ".js",
+                        ".css"
                     ]
                 }
             ],
