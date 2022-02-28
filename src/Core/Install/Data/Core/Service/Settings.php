@@ -1656,7 +1656,7 @@ class Settings extends Main {
                 );
             }
         } else {
-            throw new Exception('Cannot validate controller at: ' . Settings::controllers_getValidatorUrl($object));
+            throw new Exception('Cannot validate view at: ' . Settings::views_getValidatorUrl($object));
         }
     }
 
