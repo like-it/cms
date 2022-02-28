@@ -10,7 +10,7 @@
                 <i class="{{__('home.icon.home.class')}}"></i> {{__('home.link.home')}}
             </a>
             <a
-                class="nav-link" h
+                class="nav-link"
                 data-url="{{server.url('core')}}User/Profile/"
                 data-method="replace-with"
                 data-target="section[name='main-content']"

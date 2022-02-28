@@ -1476,11 +1476,9 @@ class Settings extends Main {
      * @throws Exception
      * @throws FileExistException
      */
-    public static function views_update(App $object, $name): Response
+    public static function views_update(App $object, $url): Response
     {
-        dd('update');
-        $name_old = $object->request('node.name_old');
-        $class_rename = $object->request('node.class_rename');
+        $url_old = $object->request('node.url_old');
         $domain = Settings::domain_get($object);
         if(
             !property_exists($domain, 'dir') ||
@@ -1488,58 +1486,22 @@ class Settings extends Main {
         ){
             throw new Exception('Domain dir not set...');
         }
-        if($name !== $name_old){
-            $url = $domain->dir .
-                'Controller' .
-                $object->config('ds') .
-                $name;
+        if($url !== $url_old){
             $content = $object->request('node.content');
-            $classname_old = File::basename($name_old, '.php');
-            $classname = File::basename($name, '.php');
-            if($class_rename){
-                $content = str_replace([
-                    $classname_old . '::',
-                    'class ' . $classname_old,
-                ], [
-                    $classname . '::',
-                    'class ' . $classname,
-
-                ], $content);
-            }
             if(File::exist($url)){
-                throw new FileExistException('Target file (' . $name .') exist.');
+                throw new FileExistException('Target url (' . $url .') exist.');
             } else {
                 File::write($url, $content);
-                $url_old = $domain->dir .
-                    'Controller' .
-                    $object->config('ds') .
-                    $name_old;
                 File::delete($url_old);
             }
         } else {
-            $url = $domain->dir .
-                'Controller' .
-                $object->config('ds') .
-                $name;
             $content = $object->request('node.content');
-            $classname_old = File::basename($name_old, '.php');
-            $classname = File::basename($name, '.php');
-            if($class_rename){
-                $content = str_replace([
-                    $classname_old . '::',
-                    'class ' . $classname_old,
-                ], [
-                    $classname . '::',
-                    'class ' . $classname,
-
-                ], $content);
-            }
             File::write($url, $content);
         }
         $response = [];
         $response['node'] = [
             'url' => $url,
-            'name' => $name,
+            'name' => File::basename($url),
             'content' => $content
         ];
         return new Response($response, Response::TYPE_JSON);
