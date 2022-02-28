@@ -103,14 +103,14 @@ settings.deleteDialog = (data) => {
     if(submit){
         submit.on('click', (event) => {
             console.log(node.data());
-            if(node.data('has', 'request-url')){
+            if(node.data('has', 'url')){
                 let data = {
                     request : {
                         method : node.data('request-method') ? node.data('request-method') : "DELETE"
                     }
                 };
                 header('authorization', 'Bearer ' + user.token());
-                request(node.data('request-url'), data, (url, response) => {
+                request(node.data('url'), data, (url, response) => {
                     menu.dispatch(section, target);
                 });
             }
