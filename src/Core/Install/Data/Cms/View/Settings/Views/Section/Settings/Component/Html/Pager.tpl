@@ -23,9 +23,15 @@
 {{/if}}
 <tfoot>
     <tr>
-        {{$td.colspan = array.count($components) - 1}}
-        <td colspan="{{$td.colspan}}" class="text-end">
-            <form class="d-flex">
+        {{$td.colspan = array.count($components) - 2}}
+        <td colspan="{{$td.colspan}}">
+        </td>
+        <td class="text-end">
+            <form
+                class="d-flex"
+                data-url="{{server.url('core')}}Settings/Views/Settings/{{$request.node.domain}}?page={{$page.current}}"
+                name="search"
+                >
                 <input
                     class="form-control me-2"
                     type="search"
