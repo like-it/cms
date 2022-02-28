@@ -237,6 +237,8 @@ class Settings extends View {
     }
 
     public static function views_command(App $object){
+        d($object->request());
+        dd($_REQUEST);
         $url = $object->request('node.url');
         if(empty($url)){
             $domain = $object->request('node.domain');
