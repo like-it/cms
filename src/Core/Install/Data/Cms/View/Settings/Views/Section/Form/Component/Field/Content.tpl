@@ -4,7 +4,7 @@
 <pre
     id="{{$pre.id}}"
     name="{{$pre.name}}"
-    data-content="{{$request.node.content}}"
+    data-content="{{$request.node.content|html.entity.encode}}"
 >
 </pre>
 {{script('module')}}
