@@ -387,7 +387,10 @@ source.editor = () => {
                 editor.session.setMode("ace/mode/css");
                 break;
             case 'js' :
-                editor.session.setMode("ace/mode/js");
+                editor.session.setMode("ace/mode/javascript");
+                break;
+            case 'json' :
+                editor.session.setMode("ace/mode/json");
                 break;
             default :
                 editor.session.setMode("ace/mode/php");
