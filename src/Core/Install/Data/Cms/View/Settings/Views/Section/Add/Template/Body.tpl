@@ -1,6 +1,6 @@
 {{R3M}}
 {{if(
-$command === 'add-controller' &&
+$command === 'add-template' &&
 $subcommand === 'body'
 )}}
     {{$section.name = 'main-content'}}
