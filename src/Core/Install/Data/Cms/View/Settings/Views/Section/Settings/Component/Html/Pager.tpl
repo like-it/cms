@@ -29,7 +29,7 @@
         <td class="text-end">
             <form
                 class="d-flex"
-                data-url="{{server.url('core')}}Settings/Views/Settings/{{$request.node.domain}}?page={{$page.current}}"
+                data-url="{{server.url('core')}}Settings/Views/Settings/{{$request.node.domain}}"
                 name="search"
                 >
                 <input

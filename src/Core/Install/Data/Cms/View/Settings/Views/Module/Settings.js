@@ -437,7 +437,7 @@ ready(() => {
     [
         root() + 'Dialog/Css/Dialog.css?' + version(),
         root() + 'Dialog/Css/Dialog.Delete.css?' + version(),
-        root() + 'Settings/Controllers/Css/Controller.css?' + version()
+        root() + '{{$require.module}}/{{$require.submodule}}/Css/{{$require.submodule}}.css?' + version()
     ],
     () => {
         settings.init();
