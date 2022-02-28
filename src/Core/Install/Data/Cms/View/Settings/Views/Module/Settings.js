@@ -416,6 +416,39 @@ settings.body = () => {
     }
 }
 
+settings.search = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const selected = section.select('.card-body-' + "{{$command}}");
+    if(!selected){
+        return;
+    }
+    const form = selected.select('form[name="search"]');
+    if(!form){
+        return;
+    }
+    const input = form.select('input[type="search"]');
+    if(!input){
+        return;
+    }
+    form.on('submit', (event) => {
+        event.preventDefault();
+        let url = form.data('url');
+        if(url){
+            url += '?q=' + input.value
+        }
+        console.log(url);
+    });
+
+    input.on('change', (event) => {
+        if(input?.value?.length >= 3){
+            form.trigger('submit');
+        }
+    });
+}
+
 settings.init = () => {
     settings.body();
     settings.onDoubleClick();
@@ -427,6 +460,7 @@ settings.init = () => {
         select: ".{{$module}}-{{$submodule}}-{{$command}}",
         event: new MouseEvent("dblclick")
     });
+    settings.search();
     settings.pagination({
         select: ".{{$module}}-{{$submodule}}-{{$command}}"
     });
