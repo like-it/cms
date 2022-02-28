@@ -109,7 +109,7 @@ settings.deleteDialog = (data) => {
                     }
                 };
                 header('authorization', 'Bearer ' + user.token());
-                request(node.data('url'), data, (url, response) => {
+                request(node.data('request-url'), data, (url, response) => {
                     menu.dispatch(section, target);
                 });
             }
