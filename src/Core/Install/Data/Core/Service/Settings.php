@@ -1576,6 +1576,17 @@ class Settings extends Main {
             }
             $response = [];
             $list = Sort::list($data->data())->with(['url' => 'ASC']);
+            if($object->request('q')){
+                $q = [];
+                foreach($list as $key => $record){
+                    if(property_exists($record, 'url')){
+                        if(stristr($record->url, $object->request('q')) !== false){
+                            $q[] = $record;
+                        }
+                    }
+                }
+                $list = $q;
+            }
             $response['count'] = count($list);
             $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
             $response['nodeList'] = $list;
