@@ -288,9 +288,9 @@ source.saveAs = (className) => {
         return;
     }
     dialog.removeClass('d-none');
-    const name = form.select('input[name="node.name"]');
-    if(name){
-        name.focus();
+    const url = form.select('input[name="node.url"]');
+    if(url){
+        url.focus();
     }
 }
 
