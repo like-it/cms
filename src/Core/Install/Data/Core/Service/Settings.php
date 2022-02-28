@@ -1491,6 +1491,8 @@ class Settings extends Main {
             if(File::exist($url)){
                 throw new FileExistException('Target url (' . $url .') exist.');
             } else {
+                $dir = dir::name($url);
+                Dir::create($dir);
                 File::write($url, $content);
                 File::delete($url_old);
             }
