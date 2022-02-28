@@ -6,6 +6,7 @@
 {{$errors = [
 'url.validate_string_length',
 'url.validate_string_contains',
+'url.validate_url',
 'extension.validate_string_length',
 'extension.validate_in_array',
 ]}}
