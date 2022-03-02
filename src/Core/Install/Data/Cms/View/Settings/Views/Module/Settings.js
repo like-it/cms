@@ -475,6 +475,9 @@ settings.search = () => {
     });
     input.on('keydown', (event) => {
         console.log(event);
+        if(event.code === 'Backspace'){
+            return;
+        }
         if(input?.value?.length >= 3){
             form.trigger('submit');
         }
