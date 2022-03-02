@@ -473,7 +473,7 @@ settings.search = () => {
             form.trigger('submit');
         }
     });
-    input.on('keypress', (event) => {
+    input.on('keydown', (event) => {
         if(input?.value?.length >= 3){
             form.trigger('submit');
         }
