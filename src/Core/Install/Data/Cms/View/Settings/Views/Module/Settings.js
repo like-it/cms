@@ -474,9 +474,7 @@ settings.search = () => {
         });
     });
     input.on('keyup', (event) => {
-        if(input?.value?.length >= 3){
-            form.trigger('submit');
-        }
+        form.trigger('submit');
     });
 }
 
