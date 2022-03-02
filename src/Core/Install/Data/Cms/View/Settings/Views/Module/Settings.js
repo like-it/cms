@@ -421,7 +421,7 @@ settings.search = () => {
     if(!section){
         return;
     }
-    const form = selected.select('form[name="search"]');
+    const form = section.select('form[name="search"]');
     if(!form){
         return;
     }
