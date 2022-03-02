@@ -456,6 +456,7 @@ settings.search = () => {
             return;
         }
         if(!active.hasClass("{{$module}}-{{$submodule}}-{{$command}}")){
+            input.value = '';
             return;
         }
         let url = form.data('url');
