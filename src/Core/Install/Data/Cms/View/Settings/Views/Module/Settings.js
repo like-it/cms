@@ -443,6 +443,21 @@ settings.search = () => {
     }
     form.on('submit', (event) => {
         event.preventDefault();
+        let content = getSectionByName('main-content');
+        if(!content){
+            return;
+        }
+        let nav = content.select('.nav');
+        if(!nav){
+            return;
+        }
+        let active = nav.select('.active');
+        if(!active){
+            return;
+        }
+        if(!active.hasClass("{{$module}}-{{$submodule}}-{{$command}}")){
+            return;
+        }
         let url = form.data('url');
         if(!url){
             return;
