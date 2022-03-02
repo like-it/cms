@@ -465,6 +465,7 @@ settings.search = () => {
         });
     });
 
+    /*
     input.on('change', (event) => {
         if(input?.value?.length >= 3){
             form.trigger('submit');
@@ -473,6 +474,7 @@ settings.search = () => {
             form.trigger('submit');
         }
     });
+     */
     input.on('keydown', (event) => {
         console.log(event);
         if(event.code === 'Backspace'){
