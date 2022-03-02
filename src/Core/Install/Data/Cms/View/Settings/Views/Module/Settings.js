@@ -462,6 +462,18 @@ settings.search = () => {
         }
         request(url,null, (response_url, response) => {
             request(frontend_url, response, (frontend_response_url, frontend_response) => {
+                const section = getSectionByName('main-content');
+                if(!section){
+                    return;
+                }
+                const selected = section.select('.card-body-' + "{{$command}}");
+                if(!selected){
+                    return;
+                }
+                const form = selected.select('form[name="search"]');
+                if(!form){
+                    return;
+                }
                 const input = form.select('input[type="search"]');
                 if(!input){
                     return;
