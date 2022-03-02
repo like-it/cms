@@ -451,7 +451,7 @@ settings.search = () => {
         if(!nav){
             return;
         }
-        let active = nav.select('nav-link.active');
+        let active = nav.select('.nav-link.active');
         if(!active){
             return;
         }
