@@ -23,28 +23,8 @@
 {{/if}}
 <tfoot>
     <tr>
-        {{$td.colspan = array.count($components) - 2}}
+        {{$td.colspan = array.count($components) - 1}}
         <td colspan="{{$td.colspan}}">
-        </td>
-        <td class="text-end">
-            /*
-            <form
-                class="d-flex"
-                data-url="{{server.url('core')}}Settings/Views/Settings/{node.domain}"
-                data-frontend-url="{{route.get(route.prefix() + '-settings-views-settings-body')}}"
-                name="search"
-                >
-                <input
-                    class="form-control me-2"
-                    type="search"
-                    placeholder="Search..."
-                    aria-label="Search"
-                    name="q"
-                    value="{{$request.q}}"
-                >
-                <button class="btn btn-outline-primary" type="submit">Search</button>
-            </form>
-            */
         </td>
         <td class="text-end">
             <span class="page">{{$page.start}}-{{$page.to}} of {{$page.count}}</span>

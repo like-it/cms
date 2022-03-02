@@ -61,6 +61,7 @@ class Export extends Main {
         }
         $target = Export::FILENAME . $object->config('ds') .  Export::VERSION . $object->config('ds');
         $dir = $object->config('host.dir.data'). 'Export' . $object->config('ds');
+        dd($dir);
         Dir::create($dir);
         $url = $dir . Export::FILENAME . '-' . Export::VERSION . $object->config('extension.zip');
         $zip = new ZipArchive();
