@@ -474,6 +474,7 @@ settings.search = () => {
         }
     });
     input.on('keydown', (event) => {
+        console.log(event);
         if(input?.value?.length >= 3){
             form.trigger('submit');
         }
