@@ -455,6 +455,7 @@ settings.search = () => {
         if(!active){
             return;
         }
+        console.log("{{$module}}-{{$submodule}}-{{$command}}");
         if(!active.hasClass("{{$module}}-{{$submodule}}-{{$command}}")){
             input.value = '';
             return;
