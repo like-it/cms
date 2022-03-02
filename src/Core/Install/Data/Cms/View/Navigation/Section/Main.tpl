@@ -42,7 +42,10 @@
                         <a class="nav-link" href="#">{{__('navbar.translations')}}</a>
                     </li>
                 </ul>
-                <form class="d-flex">
+                <form
+                    class="d-flex"
+                    name="search"
+                >
                     <input
                         class="form-control me-2"
                         type="{{__('navbar.search.type')}}"
