@@ -417,18 +417,16 @@ settings.body = () => {
 }
 
 settings.search = () => {
-    const section = getSectionByName('main-content');
+    const section = getSectionByName('navigation');
     if(!section){
-        return;
-    }
-    const selected = section.select('.card-body-' + "{{$command}}");
-    if(!selected){
         return;
     }
     const form = selected.select('form[name="search"]');
     if(!form){
         return;
     }
+    form.data('url', "{{server.url('core')}}Settings/Views/Settings/{node.domain}");
+    form.data('frontend-url', "{{route.get(route.prefix() + '-settings-views-settings-body')}}");
     const input = form.select('input[type="search"]');
     if(!input){
         return;
@@ -462,23 +460,6 @@ settings.search = () => {
         }
         request(url,null, (response_url, response) => {
             request(frontend_url, response, (frontend_response_url, frontend_response) => {
-                const section = getSectionByName('main-content');
-                if(!section){
-                    return;
-                }
-                const selected = section.select('.card-body-' + "{{$command}}");
-                if(!selected){
-                    return;
-                }
-                const form = selected.select('form[name="search"]');
-                if(!form){
-                    return;
-                }
-                const input = form.select('input[type="search"]');
-                if(!input){
-                    return;
-                }
-                input.focus();
             });
         });
     });

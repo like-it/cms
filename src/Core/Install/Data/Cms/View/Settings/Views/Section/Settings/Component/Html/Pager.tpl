@@ -27,6 +27,7 @@
         <td colspan="{{$td.colspan}}">
         </td>
         <td class="text-end">
+            /*
             <form
                 class="d-flex"
                 data-url="{{server.url('core')}}Settings/Views/Settings/{node.domain}"
@@ -43,6 +44,7 @@
                 >
                 <button class="btn btn-outline-primary" type="submit">Search</button>
             </form>
+            */
         </td>
         <td class="text-end">
             <span class="page">{{$page.start}}-{{$page.to}} of {{$page.count}}</span>
