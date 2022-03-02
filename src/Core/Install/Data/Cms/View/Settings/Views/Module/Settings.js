@@ -477,9 +477,6 @@ settings.search = () => {
         if(input?.value?.length >= 3){
             form.trigger('submit');
         }
-        if(input?.value?.length === 0){
-            form.trigger('submit');
-        }
     });
 }
 
