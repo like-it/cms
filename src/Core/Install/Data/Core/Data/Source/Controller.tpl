@@ -23,7 +23,7 @@ namespace {{$namespace.php}};
 use {{$usage}};
 {{/for.each}}
 
-class {{$node.name}} extends View {
+class {{$node.name|uppercase.first}} extends View {
 
     const DIR = __DIR__ . DIRECTORY_SEPARATOR;
 
