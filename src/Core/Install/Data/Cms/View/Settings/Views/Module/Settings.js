@@ -425,8 +425,18 @@ settings.search = () => {
     if(!form){
         return;
     }
-    form.data('url', "{{server.url('core')}}Settings/Views/Settings/{node.domain}");
-    form.data('frontend-url', "{{route.get(route.prefix() + '-settings-views-settings-body')}}");
+    if(
+        form.data('module') === "{{$module}}" &&
+        form.data('submodule') === "{{$submodule}}" &&
+        form.data('command') === "{{$command}}"
+    ){
+        return;
+    }
+    form.data('url', "{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.command}}/{node.domain}");
+    form.data('frontend-url', "{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-' + $command + '-body')}}");
+    form.data('module', "{{$module}}");
+    form.data('submodule', "{{$submodule}}");
+    form.data('command', "{{$command}}");
     const input = form.select('input[type="search"]');
     if(!input){
         return;
