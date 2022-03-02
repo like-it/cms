@@ -462,6 +462,10 @@ settings.search = () => {
         }
         request(url,null, (response_url, response) => {
             request(frontend_url, response, (frontend_response_url, frontend_response) => {
+                const input = form.select('input[type="search"]');
+                if(!input){
+                    return;
+                }
                 input.focus();
             });
         });
