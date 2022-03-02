@@ -461,7 +461,9 @@ settings.search = () => {
             url = replace("{node.domain}", domain.value, url);
         }
         request(url,null, (response_url, response) => {
-            request(frontend_url, response);
+            request(frontend_url, response, (frontend_response_url, frontend_response) => {
+                input.focus();
+            });
         });
     });
 
