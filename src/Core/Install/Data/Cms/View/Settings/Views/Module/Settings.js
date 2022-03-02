@@ -473,22 +473,7 @@ settings.search = () => {
             });
         });
     });
-
-    /*
-    input.on('change', (event) => {
-        if(input?.value?.length >= 3){
-            form.trigger('submit');
-        }
-        if(input?.value?.length === 0){
-            form.trigger('submit');
-        }
-    });
-     */
     input.on('keyup', (event) => {
-        console.log(event);
-        if(event.code === 'Backspace'){
-            return;
-        }
         if(input?.value?.length >= 3){
             form.trigger('submit');
         }
