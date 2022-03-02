@@ -477,7 +477,7 @@ settings.search = () => {
         }
     });
      */
-    input.on('keydown', (event) => {
+    input.on('keyup', (event) => {
         console.log(event);
         if(event.code === 'Backspace'){
             return;
