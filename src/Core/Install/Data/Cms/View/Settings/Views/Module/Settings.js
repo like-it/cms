@@ -455,7 +455,6 @@ settings.search = () => {
                 return;
             }
             const domain = section.select('input[name="node.domain"]');
-            console.log('domain', domain);
             if(!domain){
                 return;
             }
@@ -467,9 +466,15 @@ settings.search = () => {
     });
 
     input.on('change', (event) => {
-        console.log('change');
         if(input?.value?.length >= 3){
-            console.log('submit');
+            form.trigger('submit');
+        }
+        if(input?.value?.length === 0){
+            form.trigger('submit');
+        }
+    });
+    input.on('keypress', (event) => {
+        if(input?.value?.length >= 3){
             form.trigger('submit');
         }
         if(input?.value?.length === 0){
