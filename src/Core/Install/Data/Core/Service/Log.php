@@ -50,7 +50,7 @@ class Log extends Main {
         $response['nodeList'] = [];
         Core::execute($command, $output);
         foreach($output as $nr => $line){
-            $node = Log::access_line_to_object($object, $line);
+            $node = Log::app_line_to_object($object, $line);
             $response['nodeList'][$nr] = $node;
         }
         return new Response($response, Response::TYPE_JSON);
