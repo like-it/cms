@@ -490,6 +490,19 @@ class Settings extends View {
         }
     }
 
+    public static function logs_and_errors_log_app(App $object){
+        $name = Settings::name(__FUNCTION__, __CLASS__, '/');
+        $name = explode('.', $name);
+        $name = implode('/', $name);
+        $name = str_replace('Log/', 'Log.', $name);
+        try {
+            $url = Settings::locate($object, $name);
+            return Settings::response($object, $url);
+        } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception){
+            return $exception;
+        }
+    }
+
     public static function logs_and_errors_log_error(App $object){
         $name = Settings::name(__FUNCTION__, __CLASS__, '/');
         $name = explode('.', $name);

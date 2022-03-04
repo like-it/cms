@@ -295,6 +295,15 @@
             "OPTIONS"
         ]
     },
+    "45169727-270e-4d4d-9af0-e9886348e656" : {
+        "module" : "settings",
+        "submodule" : "log",
+        "command" : "app",
+        "method" : [
+            "GET",
+            "OPTIONS"
+        ]
+    },
     "f5ddb40b-0559-4106-9d0e-1cf5cad52604" : {
         "module" : "settings",
         "submodule" : "log",

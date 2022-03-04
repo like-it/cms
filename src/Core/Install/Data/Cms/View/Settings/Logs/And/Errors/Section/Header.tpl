@@ -21,6 +21,15 @@
         <li class="nav-item">
             <a
                 class="nav-link"
+                data-url="{{server.url('core')}}Settings/Log/App"
+                data-frontend-url="{{route.get(route.prefix() + '-settings-logs-and-errors-log-app')}}"
+            >
+                {{__('settings.logs_and_errors.section.header.app_log')}}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link"
                 data-url="{{server.url('core')}}Settings/Log/Error"
                 data-frontend-url="{{route.get(route.prefix() + '-settings-logs-and-errors-log-error')}}"
             >

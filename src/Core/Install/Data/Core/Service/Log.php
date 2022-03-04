@@ -22,7 +22,29 @@ class Log extends Main {
             $object->config('ds') .
             'access' .
             $object->config('extension.log');
-        $command = 'tail -100 ' . $url;
+        $command = 'tail -200 ' . $url;
+        $output = [];
+        $response = [];
+        $response['nodeList'] = [];
+        Core::execute($command, $output);
+        foreach($output as $nr => $line){
+            $node = Log::app_line_to_object($object, $line);
+            $response['nodeList'][$nr] = $node;
+        }
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws ObjectException
+     */
+    public static function app_read(App $object): Response
+    {
+        $url = $object->config('project.dir.root') .
+            'Log' .
+            $object->config('ds') .
+            'app' .
+            $object->config('extension.log');
+        $command = 'tail -200 ' . $url;
         $output = [];
         $response = [];
         $response['nodeList'] = [];
@@ -44,7 +66,7 @@ class Log extends Main {
             $object->config('ds') .
             'error' .
             $object->config('extension.log');
-        $command = 'tail -100 ' . $url;
+        $command = 'tail -200 ' . $url;
         $output = [];
         $response = [];
         $response['nodeList'] = [];
@@ -74,6 +96,37 @@ class Log extends Main {
             $temp = explode(' ', $explode[1], 7);
             $array['method'] = $temp[0];
             $array['path'] = $temp[1];
+            $array['protocol'] = $temp[2];
+            $array['status'] = $temp[3] + 0;
+            $array['size'] = $temp[4] + 0;
+            $array['referer'] = trim($temp[5], '"');
+            $array['user']['agent'] = trim($temp[6], '"');
+        }
+        return Core::object($array, Core::OBJECT_OBJECT);
+    }
+
+
+    /**
+     * @throws ObjectException
+     */
+    private static function app_line_to_object(App $object, $line=''): stdClass
+    {
+        $explode = explode('] ', $line, 2);
+        $array = [];
+        if(array_key_exists(1, $explode)){
+            $record = substr($explode[0], 1);
+            $temp = explode('T', $record, 2);
+            $date = '';
+            $time = '';
+            if(array_key_exists(1, $temp)){
+                $date = $temp[0];
+                $time = $temp[1];
+            }
+            $array['date'] = ltrim($date . ' ' . $time, ' ');
+            $temp = explode(': ', $explode[1]);
+            $temp2 = explode('.', $temp[0]);
+            $array['type'] = array_pop($temp2);
+            $array['path'] = implode('.', $temp2);
             $array['protocol'] = $temp[2];
             $array['status'] = $temp[3] + 0;
             $array['size'] = $temp[4] + 0;
