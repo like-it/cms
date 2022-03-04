@@ -126,12 +126,8 @@ class Log extends Main {
             $temp = explode(': ', $explode[1]);
             $temp2 = explode('.', $temp[0]);
             $array['type'] = array_pop($temp2);
-            $array['path'] = implode('.', $temp2);
-            $array['protocol'] = $temp[2];
-            $array['status'] = $temp[3] + 0;
-            $array['size'] = $temp[4] + 0;
-            $array['referer'] = trim($temp[5], '"');
-            $array['user']['agent'] = trim($temp[6], '"');
+            $array['namespace'] = implode('.', $temp2);
+            $array['message'] = $temp[1];
         }
         return Core::object($array, Core::OBJECT_OBJECT);
     }
