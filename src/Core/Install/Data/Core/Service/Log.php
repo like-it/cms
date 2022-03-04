@@ -123,7 +123,7 @@ class Log extends Main {
                 $time = $temp[1];
             }
             $array['date'] = ltrim($date . ' ' . $time, ' ');
-            $temp = explode(': ', $explode[1]);
+            $temp = explode(': ', $explode[1], 2);
             $temp2 = explode('.', $temp[0]);
             $array['type'] = array_pop($temp2);
             $array['namespace'] = implode('.', $temp2);
