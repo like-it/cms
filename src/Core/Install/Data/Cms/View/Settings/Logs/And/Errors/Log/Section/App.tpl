@@ -23,7 +23,7 @@
                     {{$node.namespace}}
                 </td>
                 <td title="{{$node.message}}">
-                    {{$node.message|truncate:65}}
+                    {{$node.message|truncate:125}}
                 </td>
             </tr>
         {{/for.each}}
