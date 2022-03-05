@@ -35,7 +35,7 @@
                     {{$node.message}}
                 </td>
             </tr>
-        {{/for}}
+        {{/for.each}}
         </tbody>
     </table>
 </div>

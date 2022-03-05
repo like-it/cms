@@ -46,7 +46,7 @@
                     {{$node.size|file.size}}
                 </td>
             </tr>
-        {{/for}}
+        {{/for.each}}
         </tbody>
     </table>
 </div>
