@@ -29,6 +29,18 @@ dialog.create = ({
     div.appendChild(body);
     div.appendChild(footer);
     section.appendChild(div);
+    const close = head.select('.fa-window-close');
+    if(close){
+        close.on('click', (event) => {
+            div.remove();
+        });
+    }
+    const submit = footer.select('.button-submit');
+    if(submit){
+        submit.on('click', (event) => {
+            div.remove();
+        });
+    }
 }
 
 export default dialog;

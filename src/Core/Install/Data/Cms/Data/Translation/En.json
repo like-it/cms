@@ -240,6 +240,12 @@
     "settings.views.component.header.a.settings.link" : "Settings",
     "settings.views.component.header.a.add.template.link" : "Add template",
     "settings.views.component.header.button.domains.settings.link" : "Loading...",
+    "settings.views.dialog.error.domain.title" : "Error:",
+    "settings.views.dialog.error.domain.message" : [
+        "Unable to find a domain.",
+        "Did you forget to add a domain?"
+    ],
+    "settings.views.dialog.error.domain.button.ok" : "Ok",
     "settings.views.module.settings.delete" : "Are you sure you want to delete this item",
     "settings.views.section.view.routes.body.title" : "Routes",
     "settings.views.section.view.routes.body.node.url" : "Url",
