@@ -114,7 +114,7 @@ menu.is_selected = (node, selected) => {
                             return;
                         }
                         let message = "{{object(__($module + '.' + $submodule + '.' + 'dialog.error.domain.message'), 'json-data')}}";
-                        message = message.replace('&quot;', '"');
+                        message = message.replaceAll('&quot;', '"');
                         message = JSON.parse(message);
                         dialog.create({
                             title : "{{__($module + '.' + $submodule + '.' + 'dialog.error.domain.title')}}",
