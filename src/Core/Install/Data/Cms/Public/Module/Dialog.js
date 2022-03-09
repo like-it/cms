@@ -40,6 +40,7 @@ dialog.create = ({
         submit.on('click', (event) => {
             div.remove();
         });
+        submit.focus();
     }
 }
 
