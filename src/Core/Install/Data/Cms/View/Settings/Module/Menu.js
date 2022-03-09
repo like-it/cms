@@ -1,8 +1,10 @@
 //{{R3M}}
 import user from "/Module/User.js";
 import create from "/Module/Create.js";
+import dialog from "/Module/Dialog.js";
 import { stristr, str_replace } from "/Module/String.js";
 import { getSectionByName } from "/Module/Section.js";
+
 
 let menu = {};
 
@@ -105,7 +107,19 @@ menu.is_selected = (node, selected) => {
                 node.data('delete', 'page');
             }
             request(url, null, (url, response) => {
-                console.log(response);
+                if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
+                    if(response.message === 'No domain found.'){
+                        dialog.create({
+                            title : "{{__($module + '.' + $submodule + '.' + 'dialog.error.domain.title')}}",
+                            message : "{{__($module + '.' + $submodule + '.' + 'dialog.error.domain.message')}}",
+                            buttons : [
+                                {
+                                    text : "{{__($module + '.' + $submodule + '.' + 'dialog.error.domain.button.ok')}}"
+                                }
+                            ]
+                        });
+                    }
+                }
                 if(node.data('has', 'frontend-url')){
                     let url = node.data('frontend-url');
                     if(stristr(url, "{node.domain}") !== false){
