@@ -497,6 +497,7 @@ class Settings extends Main {
 
     /**
      * @throws Exception
+     * @throws ErrorException
      */
     private static function domain_get(App $object)
     {
@@ -510,7 +511,7 @@ class Settings extends Main {
             }
         }
         if(!$domain){
-            throw new Exception('No domain found.');
+            throw new ErrorException('No domain found.');
         }
         if(
             property_exists($domain, 'subdomain') &&
