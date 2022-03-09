@@ -1643,7 +1643,9 @@ class Settings extends Main {
                     $data->set('domain', $domain);
                     $content = $parse->compile(File::read($source), $data->get());
                     $dir = Dir::name($object->request('node.url'));
-                    Dir::create($dir);
+                    if($dir){
+                        Dir::create($dir);
+                    }
                     File::write($object->request('node.url'), $content);
                     $object->request('node.content', $content);
                     $data = [];
