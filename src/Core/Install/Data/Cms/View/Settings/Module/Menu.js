@@ -113,7 +113,9 @@ menu.is_selected = (node, selected) => {
                         if(!section){
                             return;
                         }
-                        let message = JSON.parse("{{object(__($module + '.' + $submodule + '.' + 'dialog.error.domain.message'), 'json-data')}}").replace('&quot;', '"');
+                        let message = "{{object(__($module + '.' + $submodule + '.' + 'dialog.error.domain.message'), 'json-data')}}";
+                        message.replace('&quot;', '"');
+                        message = JSON.parse(message);
                         dialog.create({
                             title : "{{__($module + '.' + $submodule + '.' + 'dialog.error.domain.title')}}",
                             message : message,
