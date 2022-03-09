@@ -1,3 +1,5 @@
+import create from "/Module/Create.js";
+
 let dialog = {};
 
 dialog.create = ({
