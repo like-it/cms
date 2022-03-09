@@ -1,0 +1,12 @@
+.dialog-error {
+    left: 33%;
+    width: 34%;
+    right: 33%;
+    height: 150px;
+    top: calc(50% - 75px);
+}
+
+.dialog-error .body {
+    height: 70px;
+    background: rgba(255, 255, 255, 1);
+}

@@ -19,5 +19,12 @@ main.init = () => {
 };
 
 ready(() => {
-    main.init();
+    require(
+        [
+            root() + 'Dialog/Css/Dialog.css?' + version(),
+            root() + 'Dialog/Css/Dialog.Error.css?' + version(),
+        ],
+        () => {
+            main.init();
+        });
 });
