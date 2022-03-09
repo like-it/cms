@@ -109,6 +109,10 @@ menu.is_selected = (node, selected) => {
             request(url, null, (url, response) => {
                 if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
                     if(response.message === 'No domain found.'){
+                        const section = getSectionByName('main-content');
+                        if(!section){
+                            return;
+                        }
                         dialog.create({
                             title : "{{__($module + '.' + $submodule + '.' + 'dialog.error.domain.title')}}",
                             message : "{{__($module + '.' + $submodule + '.' + 'dialog.error.domain.message')}}",
@@ -116,7 +120,9 @@ menu.is_selected = (node, selected) => {
                                 {
                                     text : "{{__($module + '.' + $submodule + '.' + 'dialog.error.domain.button.ok')}}"
                                 }
-                            ]
+                            ],
+                            section : section,
+                            className : "dialog dialog-error dialog-error-domain"
                         });
                     }
                 }
