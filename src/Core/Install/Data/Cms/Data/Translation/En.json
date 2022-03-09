@@ -132,12 +132,6 @@
     "settings.domains.component.header.a.main.link" : "Main",
     "settings.domains.component.header.a.settings.link" : "Settings",
     "settings.domains.component.header.a.add.link" : "Add domain",
-    "settings.domains.dialog.error.domain.title" : "Error:",
-    "settings.domains.dialog.error.domain.message" : [
-        "Unable to find a domain.",
-        "Did you forget to add a domain?"
-    ],
-    "settings.domains.dialog.error.domain.button.ok" : "Ok",
     "settings.domains.module.settings.delete" : "Are you sure you want to delete this item",
     "settings.domains.section.main.component.html.title" : "Domains",
     "settings.domains.section.main.component.html.text" : [

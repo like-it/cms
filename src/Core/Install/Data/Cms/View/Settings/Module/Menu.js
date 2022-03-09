@@ -115,7 +115,7 @@ menu.is_selected = (node, selected) => {
                         }
                         dialog.create({
                             title : "{{__($module + '.' + $submodule + '.' + 'dialog.error.domain.title')}}",
-                            message : "{{implode('<br>', __($module + '.' + $submodule + '.' + 'dialog.error.domain.message'))}}",
+                            message : "{{object(__($module + '.' + $submodule + '.' + 'dialog.error.domain.message'), 'json')}}",
                             buttons : [
                                 {
                                     text : "{{__($module + '.' + $submodule + '.' + 'dialog.error.domain.button.ok')}}"
