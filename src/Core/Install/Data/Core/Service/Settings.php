@@ -180,13 +180,15 @@ class Settings extends Main {
         $dir = new Dir();
         $data = new Data();
         $read = $dir->read($url, true);
-        foreach($read as $nr => $record){
-            if($record->type !== File::TYPE){
-                continue;
+        if($read){
+            foreach($read as $nr => $record){
+                if($record->type !== File::TYPE){
+                    continue;
+                }
+                $record->domain = $domain->uuid;
+                $key = sha1($record->url);
+                $data->set($key, $record);
             }
-            $record->domain = $domain->uuid;
-            $key = sha1($record->url);
-            $data->set($key, $record);
         }
         if($object->request('page')){
             $page = (int) $object->request('page');
