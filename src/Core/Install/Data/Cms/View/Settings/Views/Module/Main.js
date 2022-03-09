@@ -1,4 +1,6 @@
 //{{R3M}}
+import { version } from "/Module/Priya.js";
+import { root } from "/Module/Web.js";
 import { getSectionByName } from "/Module/Section.js";
 
 let main = {};
