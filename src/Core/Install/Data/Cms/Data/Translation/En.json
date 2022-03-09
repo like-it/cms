@@ -29,6 +29,12 @@
     "settings.controllers.component.header.a.settings.link" : "Settings",
     "settings.controllers.component.header.a.add.controller.link" : "Add controller",
     "settings.controllers.component.header.button.domains.settings.link" : "Loading...",
+    "settings.controllers.dialog.error.domain.title" : "Error:",
+    "settings.controllers.dialog.error.domain.message" : [
+        "Unable to find a domain.",
+        "Did you forget to add a domain?"
+    ],
+    "settings.controllers.dialog.error.domain.button.ok" : "Ok",
     "settings.controllers.module.settings.delete" : "Are you sure you want to delete this item",
     "settings.controllers.section.view.routes.body.title" : "Routes",
     "settings.controllers.section.view.routes.body.node.url" : "Url",
@@ -126,6 +132,12 @@
     "settings.domains.component.header.a.main.link" : "Main",
     "settings.domains.component.header.a.settings.link" : "Settings",
     "settings.domains.component.header.a.add.link" : "Add domain",
+    "settings.domains.dialog.error.domain.title" : "Error:",
+    "settings.domains.dialog.error.domain.message" : [
+        "Unable to find a domain.",
+        "Did you forget to add a domain?"
+    ],
+    "settings.domains.dialog.error.domain.button.ok" : "Ok",
     "settings.domains.module.settings.delete" : "Are you sure you want to delete this item",
     "settings.domains.section.main.component.html.title" : "Domains",
     "settings.domains.section.main.component.html.text" : [
