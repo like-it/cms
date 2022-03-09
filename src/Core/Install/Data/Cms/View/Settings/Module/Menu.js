@@ -105,6 +105,7 @@ menu.is_selected = (node, selected) => {
                 node.data('delete', 'page');
             }
             request(url, null, (url, response) => {
+                console.log(response);
                 if(node.data('has', 'frontend-url')){
                     let url = node.data('frontend-url');
                     if(stristr(url, "{node.domain}") !== false){
