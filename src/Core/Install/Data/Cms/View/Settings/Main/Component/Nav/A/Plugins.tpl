@@ -1,5 +1,5 @@
 {{R3M}}
-{{$a.name = 'account-settings'}}
+{{$a.name = 'plugins'}}
 {{$a.translation = $a.name|replace:'-':'.'}}
 {{$a.route = 'settings-' + $a.name + '-main'}}
 {{$a.data.url = ''}}
