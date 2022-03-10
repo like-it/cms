@@ -1,5 +1,5 @@
 {{R3M}}
 <td>
-    {{dd($node.domain.dir)}}
+    {{dd('{{$this}}')}}
     {{$node.url|replace:$node.domain.dir:'/'}}
 </td>
