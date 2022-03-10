@@ -12,6 +12,7 @@ use R3m\Io\Module\Response;
 use R3m\Io\Module\Sort;
 
 use Exception;
+use ErrorException;
 use R3m\Io\Exception\AuthorizationException;
 use R3m\Io\Exception\ObjectException;
 
@@ -343,7 +344,7 @@ class User extends Main {
     }
 
     /**
-     * @throws Exception
+     * @throws ErrorException
      */
     public static function login(App $object): Response
     {
@@ -358,7 +359,7 @@ class User extends Main {
             $verify = password_verify($password, $node->password);
             if(empty($verify)){
                 UserLogger::log($object, $node, UserLogger::STATUS_INVALID_PASSWORD);
-                throw new Exception('Invalid password.');
+                throw new ErrorException('Invalid password.');
             }
             UserLogger::log($object, $node, UserLogger::STATUS_SUCCESS);
             $node = User::getTokens($object, $node);
@@ -370,7 +371,7 @@ class User extends Main {
             );
         } else {
             UserLogger::log($object, null, UserLogger::STATUS_INVALID_EMAIL);
-            throw new Exception('Invalid e-mail.');
+            throw new ErrorException('Invalid e-mail.');
         }
     }
 
