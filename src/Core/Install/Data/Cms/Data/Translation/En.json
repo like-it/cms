@@ -530,11 +530,11 @@
     "settings.section.export.export.body.text" : "Export the entire project as zip file <a id=\"export\" href=\"#export\">here</a>.",
     "settings.logs_and_errors.section.header.main" :  "Main",
     "settings.logs_and_errors.section.header.access_log" :  "Access log",
+    "settings.logs_and_errors.section.header.app_log" : "Application log",
     "settings.logs_and_errors.section.header.error_log" :  "Error log",
     "settings.logs_and_errors_section.main.body.title" : "Logs & errors",
     "settings.logs_and_errors_section.main.body.text" : [
-        "test",
-        "testing..."
+        "View the access log, application log or error log here.",
     ],
     "settings.theme.component.header.a.main.link" : "Main",
     "settings.theme.component.header.a.settings.link" : "Settings",
