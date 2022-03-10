@@ -15,7 +15,33 @@ function function_node_host_dir(Parse $parse, Data $data, $uuid){
     $host = $object->data_read($object->config('project.dir.data') . 'Host' . $object->config('extension.json'));
     if($host){
         $node = $host->get($uuid);
-        d($node);
+        if(
+            property_exists($node, 'subdomain') &&
+            property_exists($node, 'host') &&
+            property_exists($node, 'extension')
+        ){
+            return
+                '/Application/Host/' .
+                ucfirst($node->subdomain) .
+                '/' .
+                ucfirst($node->host) .
+                '/' .
+                ucfirst($node->extension) .
+                '/'
+                ;
+        }
+        else if(
+            property_exists($node, 'host') &&
+            property_exists($node, 'extension')
+        ){
+            return
+                '/Application/Host/' .
+                ucfirst($node->host) .
+                '/' .
+                ucfirst($node->extension) .
+                '/'
+                ;
+        }
+
     }
-    dd($uuid);
 }
