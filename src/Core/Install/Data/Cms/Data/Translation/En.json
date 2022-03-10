@@ -417,6 +417,10 @@
     "settings.main.component.body.li.nodes.body" : [
         "Data nodes can be configured and managed here."
     ],
+    "settings.main.component.body.li.plugins.title" : "Plugins",
+    "settings.main.component.body.li.plugins.body" : [
+        "plugins: custom functions & modifiers can be configured here."
+    ],
     "settings.main.component.body.li.routes.title" : "Routes",
     "settings.main.component.body.li.routes.body" : [
         "Manage routes, module & submodule, commands & subcommands, paths, methods & redirects."
@@ -424,6 +428,14 @@
     "settings.main.component.body.li.scripts.title" : "Scripts",
     "settings.main.component.body.li.scripts.body" : [
         "Handle document Javascript sources here."
+    ],
+    "settings.main.component.body.li.services.title" : "Services",
+    "settings.main.component.body.li.services.body" : [
+        "Handle custom services, core & cms are read-only."
+    ],
+    "settings.main.component.body.li.server.settings.title" : "Server settings",
+    "settings.main.component.body.li.server.settings.body" : [
+        "Handle .htaccess, index sources here."
     ],
     "settings.main.component.body.li.stylesheets.title" : "Stylesheets",
     "settings.main.component.body.li.stylesheets.body" : [
