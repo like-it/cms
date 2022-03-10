@@ -1,5 +1,5 @@
 {{R3M}}
-{{$li.name = 'views'}}
+{{$li.name = 'services'}}
 {{$li.translation = $li.name|replace:'-':'.'}}
 {{$li.id = 'accordion-flush-' + $li.name}}
 {{$li.flush.heading.1 = 'flush-heading-one-' + $li.name}}

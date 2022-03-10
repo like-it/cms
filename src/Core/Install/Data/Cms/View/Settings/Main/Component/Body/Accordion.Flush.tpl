@@ -27,7 +27,7 @@
                 data-bs-parent="#{{$li.id}}"
             >
                 <div class="accordion-body">
-                    {{implode("<br>\n", $li.description)}}
+                    {{sentences($li.description)}}
                 </div>
             </div>
         </div>
