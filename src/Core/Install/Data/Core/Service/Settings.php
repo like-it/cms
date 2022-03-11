@@ -480,15 +480,6 @@ class Settings extends Main {
                             ucfirst($record->extension) .
                             $object->config('ds')
                         ;
-                        $destination =
-                            $object->config('host.dir.root') .
-                            ucfirst($record->subdomain) .
-                            $object->config('ds') .
-                            ucfirst($record->host) .
-                            $object->config('ds') .
-                            'Local' .
-                            $object->config('ds')
-                        ;
                     } else {
                         $dir =
                             $object->config('host.dir.root') .
@@ -497,19 +488,13 @@ class Settings extends Main {
                             ucfirst($record->extension) .
                             $object->config('ds')
                         ;
-                        $destination =
-                            $object->config('host.dir.root') .
-                            ucfirst($record->host) .
-                            $object->config('ds') .
-                            'Local' .
-                            $object->config('ds')
-                        ;
                     }
                     Dir::create($dir);
                     if(!File::exist($destination)){
-                        d($dir);
-                        d($destination);
-                        dd(File::link($dir, $destination));
+                        Dir::change(Dir::name($dir));
+                        $source = ucfirst($record->extension);
+                        $destination = 'Local';
+                        dd(File::link($source, $destination));
                     }
                     $data = [];
                     $data['node'] = $record;
