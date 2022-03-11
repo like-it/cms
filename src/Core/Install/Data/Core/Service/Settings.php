@@ -510,7 +510,9 @@ class Settings extends Main {
                         Dir::change(Dir::name($dir));
                         $source = ucfirst($record->extension);
                         $destination = 'Local';
-                        dd(File::link($source, $destination));
+                        $output = [];
+                        $command = 'funda ln ' . $source . ' ' . $destination;
+                        Core::execute($command, $output);
                     }
                     $data = [];
                     $data['node'] = $record;
