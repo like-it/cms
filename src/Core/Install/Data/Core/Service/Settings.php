@@ -472,7 +472,7 @@ class Settings extends Main {
 
                     if(property_exists($record, 'subdomain')){
                         $dir =
-                            $object->config('host.dir.root') .
+                            $object->config('project.dir.host') .
                             ucfirst($record->subdomain) .
                             $object->config('ds') .
                             ucfirst($record->host) .
@@ -481,7 +481,7 @@ class Settings extends Main {
                             $object->config('ds')
                         ;
                         $destination =
-                            $object->config('host.dir.root') .
+                            $object->config('project.dir.host') .
                             ucfirst($record->subdomain) .
                             $object->config('ds') .
                             ucfirst($record->host) .
@@ -491,14 +491,14 @@ class Settings extends Main {
                         ;
                     } else {
                         $dir =
-                            $object->config('host.dir.root') .
+                            $object->config('project.dir.host') .
                             ucfirst($record->host) .
                             $object->config('ds') .
                             ucfirst($record->extension) .
                             $object->config('ds')
                         ;
                         $destination =
-                            $object->config('host.dir.root') .
+                            $object->config('project.dir.host') .
                             ucfirst($record->host) .
                             $object->config('ds') .
                             'Local' .
