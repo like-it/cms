@@ -480,12 +480,28 @@ class Settings extends Main {
                             ucfirst($record->extension) .
                             $object->config('ds')
                         ;
+                        $destination =
+                            $object->config('host.dir.root') .
+                            ucfirst($record->subdomain) .
+                            $object->config('ds') .
+                            ucfirst($record->host) .
+                            $object->config('ds') .
+                            'Local' .
+                            $object->config('ds')
+                        ;
                     } else {
                         $dir =
                             $object->config('host.dir.root') .
                             ucfirst($record->host) .
                             $object->config('ds') .
                             ucfirst($record->extension) .
+                            $object->config('ds')
+                        ;
+                        $destination =
+                            $object->config('host.dir.root') .
+                            ucfirst($record->host) .
+                            $object->config('ds') .
+                            'Local' .
                             $object->config('ds')
                         ;
                     }
