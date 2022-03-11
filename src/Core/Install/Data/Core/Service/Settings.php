@@ -469,6 +469,46 @@ class Settings extends Main {
                     $original = $data->get($record->uuid);
                     $data->set($record->uuid, Core::object_merge($original, $record));
                     $data->write($url);
+
+                    if(property_exists($record, 'subdomain')){
+                        $dir =
+                            $object->config('host.dir.root') .
+                            ucfirst($record->subdomain) .
+                            $object->config('ds') .
+                            ucfirst($record->host) .
+                            $object->config('ds') .
+                            ucfirst($record->extension) .
+                            $object->config('ds')
+                        ;
+                        $destination =
+                            $object->config('host.dir.root') .
+                            ucfirst($record->subdomain) .
+                            $object->config('ds') .
+                            ucfirst($record->host) .
+                            $object->config('ds') .
+                            'Local' .
+                            $object->config('ds')
+                        ;
+                    } else {
+                        $dir =
+                            $object->config('host.dir.root') .
+                            ucfirst($record->host) .
+                            $object->config('ds') .
+                            ucfirst($record->extension) .
+                            $object->config('ds')
+                        ;
+                        $destination =
+                            $object->config('host.dir.root') .
+                            ucfirst($record->host) .
+                            $object->config('ds') .
+                            'Local' .
+                            $object->config('ds')
+                        ;
+                    }
+                    Dir::create($dir);
+                    if(!File::exist($destination)){
+                        File::link($dir, $destination);
+                    }
                     $data = [];
                     $data['node'] = $record;
                     return new Response($data, Response::TYPE_JSON);
