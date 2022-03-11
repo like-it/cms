@@ -506,8 +506,6 @@ class Settings extends Main {
                         ;
                     }
                     Dir::create($dir);
-                    d($destination);
-                    dd(File::exist($destination));
                     if(!File::exist($destination)){
                         Dir::change(Dir::name($dir));
                         $source = ucfirst($record->extension);
