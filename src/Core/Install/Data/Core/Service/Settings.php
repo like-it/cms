@@ -512,9 +512,7 @@ class Settings extends Main {
                         $destination = 'Local';
                         $output = [];
                         $command = 'funda ln ' . $source . ' ' . $destination;
-                        d($command);
                         Core::execute($command, $output);
-                        dd($output);
                     }
                     $data = [];
                     $data['node'] = $record;
