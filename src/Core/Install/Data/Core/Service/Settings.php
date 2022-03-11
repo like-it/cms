@@ -507,6 +507,8 @@ class Settings extends Main {
                     }
                     Dir::create($dir);
                     if(!File::exist($destination)){
+                        d($dir);
+                        d($destination);
                         dd(File::link($dir, $destination));
                     }
                     $data = [];
