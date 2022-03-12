@@ -1662,10 +1662,10 @@ class Settings extends Main {
 //        dd($object->request());
         $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view');
         $url = $object->request('node.prefix') . $object->request('node.url');
+        d($url);
         if($validate) {
             if ($validate->success === true) {
                 if(File::exist($url)){
-                    d($url);
                     $data = [];
                     $data['error'] = [
                         'url' => [
