@@ -1,6 +1,6 @@
 {{R3M}}
 {{$fields = [
 'Domain',
-'Url',
+'Name',
 ]}}
 {{require($prefix + $require.submodule + '/Section/Form/Component/Form/Form.tpl')}}

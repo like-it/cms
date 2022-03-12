@@ -22,7 +22,7 @@
 {{$select.name = 'node.' + $field}}
 {{$select.selected = request('node.' + $field)}}
 {{$select.url = config('project.dir.data') + 'Host.json'}}
-{{$select.options = json.select($select.url, null)}}
+{{$select.options = json.select($select.url)}}
 <label for="{{$select.id}}">{{$label}}</label>
 <select
     id="{{$select.id}}"

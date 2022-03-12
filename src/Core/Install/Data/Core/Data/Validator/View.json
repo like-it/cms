@@ -1,6 +1,16 @@
 {
     "view": {
         "validate": {
+            "name": [
+                {
+                    "string.length": ">=1"
+                },
+                {
+                    "string.contains": {
+                        "regex": "^[a-zA-Z.\/]+$^"
+                    }
+                }
+            ],
             "url": [
                 {
                     "string.length": ">=1"

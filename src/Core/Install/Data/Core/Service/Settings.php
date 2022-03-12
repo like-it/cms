@@ -1658,16 +1658,17 @@ class Settings extends Main {
      */
     private static function views_put(App $object, $domain)
     {
-        $object->request('node.extension', File::extension($object->request('node.url')));
+        $object->request('node.extension', File::extension($object->request('node.name')));
         $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view');
-        $url =
+        $object->request('node.url',
             $domain->dir .
             $object->config('dictionary.view') .
             $object->config('ds') .
-            $object->request('node.url');
+            $object->request('node.name')
+        );
         if($validate) {
             if ($validate->success === true) {
-                if(File::exist($url)){
+                if(File::exist($object->request('node.url'))){
                     $data = [];
                     $data['error'] = [
                         'url' => [
@@ -1687,7 +1688,7 @@ class Settings extends Main {
                         $object->config('ds') .
                         'Template' .
                         '.' .
-                        ucfirst(File::extension($object->request('node.url'))) .
+                        ucfirst(File::extension($object->request('node.name'))) .
                         $object->config('extension.tpl');
                     $parse = new Parse($object);
                     $data = new Data($object->data());
