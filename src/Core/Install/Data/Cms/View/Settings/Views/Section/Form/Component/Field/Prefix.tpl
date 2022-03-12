@@ -24,7 +24,7 @@
 {{$input.name = 'node.' + $field}}
 {{$input.value = request('node.' + $field)}}
 {{if(is.empty($input.value))}}
-    {{$input.value = config('project.dir.host') + '/{{$subdomain}}/{{$host}}/{{$extension}}/View/'}}
+    {{$input.value = config('project.dir.host') + '{{literal}}/{{$subdomain}}/{{$host}}/{{$extension}}{{/literal}}/View/'}}
 {{/if}}
 {{$input.placeholder = $label}}
 <label for="{{$input.id}}">{{$label}}</label>
