@@ -1659,18 +1659,15 @@ class Settings extends Main {
     private static function views_put(App $object, $domain)
     {
         $object->request('node.extension', File::extension($object->request('node.url')));
-//        dd($object->request());
         $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view');
         $url =
             $domain->dir .
             $object->config('dictionary.view') .
             $object->config('ds') .
             $object->request('node.url');
-        d($url);
         if($validate) {
             if ($validate->success === true) {
                 if(File::exist($url)){
-                    dd($url);
                     $data = [];
                     $data['error'] = [
                         'url' => [
