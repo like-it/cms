@@ -1666,6 +1666,7 @@ class Settings extends Main {
         if($validate) {
             if ($validate->success === true) {
                 if(File::exist($url)){
+                    dd($url);
                     $data = [];
                     $data['error'] = [
                         'url' => [
