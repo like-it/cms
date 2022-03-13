@@ -5,6 +5,11 @@
 {{$meta.keywords = __('meta.keywords')}}
 {{$meta.description = __('meta.description')}}
 {{$request = request()}}
-{{$test = 2 * ((2 * (3 * 2 + 2)) - 2) - 1}}
-
-{{logger.warning('test', [$test])}}
+{{logger.alert('A')}}
+{{logger.critical('B')}}
+{{logger.debug('C')}}
+{{logger.emergency('D')}}
+{{logger.error('E')}}
+{{logger.info('F')}}
+{{logger.notice('G')}}
+{{logger.warning('H')}}
