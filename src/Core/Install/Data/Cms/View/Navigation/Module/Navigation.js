@@ -8,7 +8,6 @@ let navigation = {};
 
 navigation.init = () => {
     const name = "{{$controller.name}}";
-    console.log(name);
     const section = getSectionByName(name);
     if (!section) {
         console.warn('Cannot find section...');
@@ -19,11 +18,9 @@ navigation.init = () => {
         active.request();
     }
     const list = section.select('.nav-link');
-    console.log(list);
     let index;
     for (index = 0; index < list.length; index++) {
         let node = list[index];
-        console.log(node);
         node.on('click', (event) => {
             list.removeClass('active');
             node.addClass('active');
