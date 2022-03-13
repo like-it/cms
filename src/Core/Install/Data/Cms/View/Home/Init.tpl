@@ -5,4 +5,3 @@
 {{$meta.keywords = __('meta.keywords')}}
 {{$meta.description = __('meta.description')}}
 {{$request = request()}}
-{{logger.warning('test', ['serial'])}}
