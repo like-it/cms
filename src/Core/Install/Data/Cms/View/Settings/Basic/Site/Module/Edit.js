@@ -94,11 +94,9 @@ edit.form = (target) => {
                         name: "error",
                         value: response.error
                     });
-                    console.log(form.data('url-error'));
                     request(form.data('url-error'), data, ( urlError, responseError ) => {
 
                     });
-                    console.log(response.error);
                 } else {
                     menu.dispatch(section, target);
                 }

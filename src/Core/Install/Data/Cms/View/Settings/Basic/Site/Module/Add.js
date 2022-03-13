@@ -90,7 +90,6 @@ add.form = (target) => {
                     request(form.data('url-error'), data, ( urlError, responseError ) => {
 
                     });
-                    console.log(response.error);
                 } else {
                     menu.dispatch(section, target);
                 }

@@ -4,6 +4,4 @@ import user from "/Module/User.js";
 
 ready(() => {
     console.log('access.js')
-    //const request = {{object(request(), 'json')}};
-    //console.log(request);
 });

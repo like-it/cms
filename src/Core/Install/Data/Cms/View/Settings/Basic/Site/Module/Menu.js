@@ -26,12 +26,10 @@ menu.is_selected = (node, selected) => {
 
 menu.click = () => {
     const section = getSectionByName('main-content');
-    console.log(section);
     if(!section){
         return;
     }
     const list = section.select('.nav-link');
-    console.log(list);
     let index;
     for(index=0; index < list.length; index++){
         let node = list[index];

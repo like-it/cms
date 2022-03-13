@@ -17,7 +17,6 @@ dialog.create = ({
     const body = create('div', 'body');
     const footer = create('div', 'footer');
     head.html('<h1>' + title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
-    console.log(typeof message);
     body.html('<p>' + message  + '</p>');
     if(buttons.length === 1){
         footer.html('<div class="w-100 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">' + buttons[0].text +'</button></div>');
