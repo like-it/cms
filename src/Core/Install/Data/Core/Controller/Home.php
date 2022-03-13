@@ -11,6 +11,7 @@ class Home extends View {
     public static function body(App $object): Response
     {
         $data = [];
+        $object->logger()->info('test');
         return new Response($data, Response::TYPE_JSON);
     }
 }
