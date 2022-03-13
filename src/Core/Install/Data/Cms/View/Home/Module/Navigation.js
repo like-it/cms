@@ -37,9 +37,6 @@ ready(() => {
                 const list = section.select('.nav-link');
                 list.removeClass('active');
                 node.addClass('active');
-                console.log(node.data('url'));
-                console.log(node.data('frontend-url'));
-
                 if(node.data('url')){
                     header('Authorization', 'bearer ' + user.token());
                     request(node.data('url'), null, (url, response) => {
@@ -49,7 +46,6 @@ ready(() => {
                     });
                 }
                 else if(node.data('frontend-url')){
-                    console.log('as');
                     request(node.data('frontend-url'));
                 }
             });

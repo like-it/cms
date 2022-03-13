@@ -430,6 +430,16 @@
             "POST"
         ]
     },
+    "03721592-0803-4ae6-80d9-a5bdcee84732" : {
+        "module" : "settings",
+        "submodule" : "server",
+        "command" : "settings",
+        "subcommand" : "main",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "71b60d6f-2f1a-417e-85e1-e7dc385c72c7" : {
         "module" : "settings",
         "submodule" : "theme",

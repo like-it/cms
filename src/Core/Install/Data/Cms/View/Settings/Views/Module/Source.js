@@ -404,7 +404,6 @@ source.editor = () => {
         });
         let element = select("#{{$pre.id}}");
         element.on('keydown', function(event) {
-            console.log(event);
             if ((event.ctrlKey || event.metaKey) && !event.shiftKey) {
                 switch (String.fromCharCode(event.which).toLowerCase()) {
                     case 's':
@@ -446,7 +445,6 @@ source.init = () => {
     source.editor();
     source.menu();
     source.panel();
-    console.log('source init');
 };
 
 ready(() => {
