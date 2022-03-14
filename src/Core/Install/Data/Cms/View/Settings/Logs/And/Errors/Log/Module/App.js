@@ -1,7 +1,20 @@
 {R3M}
-import { getSectionByName } from "/Module/Section.js";
-import user from "/Module/User.js";
+import { version } from "/Module/Priya.js";
+import { root } from "/Module/Web.js";
+
+let app = {};
+
+app.init = () => {
+    console.log('app.init');
+};
 
 ready(() => {
-    console.log('app.js');
+    require(
+        [
+            root() + "{{$require.module}}/{{$require.submodule}}/" + 'Css/App.css?' + version(),
+        ],
+        () => {
+            app.init();
+        });
+
 });

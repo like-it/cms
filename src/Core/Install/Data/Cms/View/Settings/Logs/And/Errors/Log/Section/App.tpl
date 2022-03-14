@@ -12,17 +12,17 @@
         </thead>
         <tbody>
         {{for.each($request.nodeList as $nr => $node)}}
-            <tr>
-                <td>
+            <tr class="{{$node.type}}">
+                <td class="date">
                     {{$node.date}}
                 </td>
-                <td>
+                <td class="type">
                     {{$node.type}}
                 </td>
-                <td>
+                <td class="namespace">
                     {{$node.namespace}}
                 </td>
-                <td title="{{$node.message}}">
+                <td class="message" title="{{$node.message}}">
                     {{$node.message|truncate:125}}
                 </td>
             </tr>
