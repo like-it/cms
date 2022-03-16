@@ -354,7 +354,7 @@
     "settings.server.settings.section.settings.component.thead.functions" : "Amount of<br>Functions",
     "settings.server.settings.section.settings.component.thead.default" : "",
     "settings.server.settings.section.settings.component.thead.options" : "",
-    "settings.server.settings.section.settings.component.td.action" : "Actions",
+    "settings.server.settings.section.settings.component.td.options.text" : "Actions",
     "settings.views.component.header.a.main.link" : "Main",
     "settings.views.component.header.a.settings.link" : "Settings",
     "settings.views.component.header.a.add.template.link" : "Add template",
