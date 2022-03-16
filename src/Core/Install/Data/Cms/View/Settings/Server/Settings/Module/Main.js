@@ -25,7 +25,7 @@ ready(() => {
         [
             root() + 'Dialog/Css/Dialog.css?' + version(),
             root() + 'Dialog/Css/Dialog.Error.css?' + version(),
-            root() + 'Server/Settings/Css/Main.css?' + version(),
+            root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/Main.css?' + version(),
         ],
         () => {
             main.init();
