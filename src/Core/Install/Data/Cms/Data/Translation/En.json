@@ -344,7 +344,7 @@
     "settings.server.settings.section.settings.component.options.edit.icon" : "far fa-edit",
     "settings.server.settings.section.settings.component.options.edit.text" : "Edit",
     "settings.server.settings.section.settings.component.options.view.icon" : "fas fa-cog",
-    "settings.server.settings.section.settings.component.options.view.text" : "View details",
+    "settings.server.settings.section.settings.component.options.view.text" : "View",
     "settings.server.settings.section.settings.component.options.rename.icon" : "fas fa-cog",
     "settings.server.settings.section.settings.component.options.rename.text" : "Rename",
     "settings.server.settings.section.settings.component.thead.actions" : "",

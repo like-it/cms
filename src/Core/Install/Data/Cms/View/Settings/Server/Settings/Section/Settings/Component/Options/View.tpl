@@ -33,6 +33,6 @@ $__.command +
         data-name="{{$node.name}}"
     >
     </i>
-    <span>{{$node.extension}}{{$span.text}}</span>
+    <span>{{$span.text}}</span>
 </a>
 {{/if}}
