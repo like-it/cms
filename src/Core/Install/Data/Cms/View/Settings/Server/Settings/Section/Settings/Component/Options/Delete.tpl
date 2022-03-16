@@ -15,6 +15,10 @@ $__.submodule +
 $__.command +
 '.component.options.delete.text'
 )}}
+{{if(!in.array($node.url, [
+'/Application/Public/.htaccess',
+'/Application/Public/index.php'
+]))}}
 <a
     class="dropdown-item item-delete"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.url|url.encode}}/{{$node.domain}}"
@@ -27,3 +31,4 @@ $__.command +
     </i>
     <span>{{$span.text}}</span>
 </a>
+{{/if}}
