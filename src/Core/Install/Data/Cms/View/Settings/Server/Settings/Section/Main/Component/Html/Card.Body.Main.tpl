@@ -6,7 +6,8 @@
     '/Section/' +
     $require.command +
     '/Component/Markdown/' +
-    language() +
+    $require.language +
+    '/' +
     $require.submodule +
     '.md'
     )}}

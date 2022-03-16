@@ -5,6 +5,7 @@
 {{if(is.empty($subcommand))}}
 {{$subcommand = 'content'}}
 {{/if}}
+{{$language = language()}}
 {{$__.module = $module|lowercase|replace:'-':'.'}}
 {{$__.submodule = $submodule|lowercase|replace:'-':'.'}}
 {{$__.command = $command|lowercase|replace:'-':'.'}}
@@ -13,6 +14,7 @@
 {{$require.submodule = $submodule|uppercase.first.sentence:'-'|replace:'-':'/'}}
 {{$require.command = $command|uppercase.first.sentence:'-'|replace:'-':'/'}}
 {{$require.subcommand = $subcommand|uppercase.first.sentence:'-'|replace:'-':'.'}}
+{{$require.language = $language|uppercase.first}}
 {{if(!is.empty($debug))}}
     {{dd('{{$this}}')}}
 {{else}}
