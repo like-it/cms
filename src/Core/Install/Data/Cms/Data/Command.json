@@ -432,9 +432,39 @@
     },
     "03721592-0803-4ae6-80d9-a5bdcee84732" : {
         "module" : "settings",
-        "submodule" : "server",
+        "submodule" : "server-settings",
+        "command" : "main",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "7f2a5adc-129d-4765-8125-f74d20c551b5" : {
+        "module" : "settings",
+        "submodule" : "server-settings",
+        "command" : "main",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "fce330c0-b57e-4e94-9b8e-5890f9d55cc3" : {
+        "module" : "settings",
+        "submodule" : "server-settings",
         "command" : "settings",
-        "subcommand" : "main",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "41592d4e-a4df-47cd-bce3-0e7c54edde13" : {
+        "module" : "settings",
+        "submodule" : "server-settings",
+        "command" : "edit-template",
+        "subcommand" : "body",
+        "path" : "Settings/Views/Edit/Template/Body/",
         "method": [
             "GET",
             "POST"
