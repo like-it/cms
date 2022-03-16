@@ -4,6 +4,13 @@
             "limit" : 12
         }
     },
+    "server" : {
+        "settings" : {
+            "default" : {
+                "limit" : 12
+            }
+        }
+    },
     "view" : {
         "default" : {
             "limit" : 12

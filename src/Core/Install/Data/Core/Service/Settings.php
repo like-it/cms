@@ -1431,8 +1431,7 @@ class Settings extends Main {
      */
     public static function server_settings_list(App $object): Response
     {
-        dd($object->config());
-        $url = $domain->dir . $object->config('dictionary.view') . $object->config('ds');
+        $url = $object->config('project.dir.public');
         $dir = new Dir();
         $data = new Data();
         $read = $dir->read($url, true);
@@ -1441,7 +1440,6 @@ class Settings extends Main {
                 if($record->type !== File::TYPE){
                     continue;
                 }
-                $record->domain = $domain->uuid;
                 $key = sha1($record->url);
                 $data->set($key, $record);
             }
@@ -1453,8 +1451,8 @@ class Settings extends Main {
             $limit = Limit::LIMIT;
             $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
             $settings =  $object->data_read($settings_url);
-            if($settings->data('view.default.limit')){
-                $limit = $settings->data('view.default.limit');
+            if($settings->data('server.settings.default.limit')){
+                $limit = $settings->data('server.settings.default.limit');
             }
             if($object->request('limit')){
                 $limit = (int) $object->request('limit');
@@ -1489,7 +1487,6 @@ class Settings extends Main {
             $response['nodeList'] = [];
             return new Response($response, Response::TYPE_JSON);
         }
-
     }
 
     /**
@@ -1857,7 +1854,6 @@ class Settings extends Main {
             $response['nodeList'] = [];
             return new Response($response, Response::TYPE_JSON);
         }
-
     }
 
     /**
