@@ -400,7 +400,7 @@
         "module" : "settings",
         "submodule" : "server-settings",
         "command" : "settings",
-        "path": "Settings/Server/Settings/Settings/{{$node.domain}}",
+        "path": "Settings/Server/Settings/Settings/",
         "method" : [
             "GET",
             "POST",
@@ -411,7 +411,7 @@
         "module" : "settings",
         "submodule" : "server-settings",
         "command" : "command",
-        "path": "Settings/Server/Settings/{{$node.url}}/{{$node.domain}}",
+        "path": "Settings/Server/Settings/{{$node.url}}",
         "method": [
             "GET",
             "PUT",

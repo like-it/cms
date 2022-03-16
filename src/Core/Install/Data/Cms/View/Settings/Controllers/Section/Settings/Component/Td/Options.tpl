@@ -10,7 +10,7 @@
                 aria-haspopup="true"
                 aria-expanded="false"
             >
-                Actions
+                {{__('settings.controllers.section.settings.component.td.options.text')}}
             </button>
             <div
                 class="dropdown-menu"

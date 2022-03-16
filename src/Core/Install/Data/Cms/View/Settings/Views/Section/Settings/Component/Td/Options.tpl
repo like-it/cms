@@ -10,6 +10,7 @@
                 aria-haspopup="true"
                 aria-expanded="false"
             >
+                {{__('settings.views.section.settings.component.td.text')}}
                 Actions
             </button>
             <div
