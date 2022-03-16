@@ -458,7 +458,7 @@
     "settings.views.section.settings.component.thead.functions" : "Amount of<br>Functions",
     "settings.views.section.settings.component.thead.default" : "",
     "settings.views.section.settings.component.thead.options" : "",
-    "settings.views.section.settings.component.td.action" : "Actions",
+    "settings.views.section.settings.component.td.options.text" : "Actions",
     "settings.main.component.header.a.main.link" : "Main",
     "settings.main.component.body.li.account.settings.title" : "Account settings",
     "settings.main.component.body.li.account.settings.body" : [

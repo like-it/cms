@@ -10,7 +10,7 @@
                 aria-haspopup="true"
                 aria-expanded="false"
             >
-                {{__('settings.views.section.settings.component.td.text')}}
+                {{__('settings.views.section.settings.component.td.options.text')}}
                 Actions
             </button>
             <div
