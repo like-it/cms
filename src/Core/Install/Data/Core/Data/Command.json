@@ -396,6 +396,29 @@
             "OPTIONS"
         ]
     },
+    "ed768345-1504-4f0f-a363-f8e23a3c7211" : {
+        "module" : "settings",
+        "submodule" : "server-settings",
+        "command" : "settings",
+        "path": "Settings/Server/Settings/Settings/{{$node.domain}}",
+        "method" : [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "5f95d385-635f-4e17-811f-a7a7765b7532" : {
+        "module" : "settings",
+        "submodule" : "server-settings",
+        "command" : "command",
+        "path": "Settings/Server/Settings/{{$node.url}}/{{$node.domain}}",
+        "method": [
+            "GET",
+            "PUT",
+            "DELETE",
+            "OPTIONS"
+        ]
+    },
     "5642e4a6-313e-40eb-9837-6af246c79a62" : {
         "module" : "settings",
         "submodule" : "email",

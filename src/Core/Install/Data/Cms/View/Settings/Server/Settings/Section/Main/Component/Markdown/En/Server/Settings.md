@@ -1,7 +1,11 @@
-##### Views
+##### Server settings
 
-Controllers can use views to respond.  
-Views on the other hand can require other templates, scripts/modules or styles.  
-The views are capable of scripting in {{literal}}{{R3M}}{{/literal}}, include public files (style (CSS) / images) and more.  
+The server settings can be configured here.  
+Warning, changes to these files can cause a corrupt system.   
+This means that the whole system cannot be reached if you make one of these files corrupt.  
+Gladfully you can restore these files if necessary in the cli (command line interface). 
 
+funda restore .htaccess  
+funda restore index.php  
 
+These files aren't imported or exported from the system.
