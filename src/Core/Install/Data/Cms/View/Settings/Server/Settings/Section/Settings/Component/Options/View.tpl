@@ -16,13 +16,7 @@ $__.command +
 '.component.options.view.text'
 )}}
 {{$node.extension = file.extension($node.url)}}
-{{if(in.array($node.extension, [
-'jpg',
-'gif',
-'png',
-'bmp',
-'webm'
-]))}}
+{{if(in.array($node.extension, image.extensions()))}}
 <a
     class="dropdown-item item-view"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.name}}/{{$node.domain}}"
