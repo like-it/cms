@@ -15,6 +15,7 @@ $__.submodule +
 $__.command +
 '.component.options.view.text'
 )}}
+{{$node.extension = file.extension($node.url)}}
 <a
     class="dropdown-item item-view"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.name}}/{{$node.domain}}"
@@ -25,5 +26,5 @@ $__.command +
         data-name="{{$node.name}}"
     >
     </i>
-    <span>{{$span.text}}</span>
+    <span>{{$node.extension}}{{$span.text}}</span>
 </a>
