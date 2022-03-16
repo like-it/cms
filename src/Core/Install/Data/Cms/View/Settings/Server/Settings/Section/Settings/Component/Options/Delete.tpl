@@ -15,10 +15,9 @@ $__.submodule +
 $__.command +
 '.component.options.delete.text'
 )}}
-{{if(!in.array($node.url, [
-'/Application/Public/.htaccess',
-'/Application/Public/index.php'
-]))}}
+{{if(
+is.array($request.protected) &&
+!in.array($node.url, $request.protected))}}
 <a
     class="dropdown-item item-delete"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.url|url.encode}}/{{$node.domain}}"
