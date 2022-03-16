@@ -1451,6 +1451,10 @@ class Settings extends Main {
             $limit = Limit::LIMIT;
             $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
             $settings =  $object->data_read($settings_url);
+            $protected = [];
+            if($settings->data('server.settings.protected')){
+                $protected = $settings->data('server.settings.protected');
+            }
             if($settings->data('server.settings.default.limit')){
                 $limit = $settings->data('server.settings.default.limit');
             }
@@ -1480,6 +1484,9 @@ class Settings extends Main {
             $response['limit'] = $limit;
             $response['page'] = $page;
             $response['max'] = ceil($response['count'] / $response['limit']);
+            if(!empty($protected)){
+                $response['protected'] = $protected;
+            }
             return new Response($response, Response::TYPE_JSON);
         } else {
             $response = [];

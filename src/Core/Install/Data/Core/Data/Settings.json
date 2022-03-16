@@ -8,7 +8,11 @@
         "settings" : {
             "default" : {
                 "limit" : 12
-            }
+            },
+            "protected" : [
+                ",/Application/Public/.htaccess",
+                "/Application/Public/index.php"
+            ]
         }
     },
     "view" : {
