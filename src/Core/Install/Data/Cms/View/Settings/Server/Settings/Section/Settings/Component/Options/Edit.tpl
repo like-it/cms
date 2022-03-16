@@ -15,6 +15,8 @@ $__.submodule +
 $__.command +
 '.component.options.edit.text'
 )}}
+{{$node.extension = file.extension($node.url)}}
+{{if(!in.array($node.extension, image.extensions()))}}
 <a
     class="dropdown-item item-edit"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.url|url.raw.encode}}/"
@@ -27,3 +29,4 @@ $__.command +
     </i>
     <span>{{$span.text}}</span>
 </a>
+{{/if}}
