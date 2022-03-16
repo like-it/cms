@@ -11,7 +11,8 @@
             },
             "protected" : [
                 "/Application/Public/.htaccess",
-                "/Application/Public/index.php"
+                "/Application/Public/index.php",
+                "/Application/Public/Image/Background/1.jpg"
             ]
         }
     },

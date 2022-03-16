@@ -15,9 +15,12 @@ $__.submodule +
 $__.command +
 '.component.options.rename.text'
 )}}
+{{if(
+is.array($request.protected) &&
+!in.array($node.url, $request.protected))}}
 <a
     class="dropdown-item item-controller"
-    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.name}}/{{$node.domain}}"
+    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.name}}/"
     data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-rename-body')}}"
 >
     <i
@@ -27,3 +30,4 @@ $__.command +
     </i>
     <span>{{$span.text}}</span>
 </a>
+{{/if}}

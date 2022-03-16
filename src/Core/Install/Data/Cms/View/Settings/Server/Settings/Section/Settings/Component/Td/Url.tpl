@@ -1,5 +1,5 @@
 {{R3M}}
 <td title="{{$node.url}}">
-    {{$node.dir.view = node.host.dir($node.domain) + 'View/'}}
-    {{$node.url|replace:$node.dir.view:''}}
+    {{$node.dir.root = config('project.dir.public')}}
+    {{$node.url|replace:$node.dir.root:''}}
 </td>

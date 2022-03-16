@@ -20,7 +20,7 @@ is.array($request.protected) &&
 !in.array($node.url, $request.protected))}}
 <a
     class="dropdown-item item-delete"
-    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.url|url.encode}}/{{$node.domain}}"
+    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.url|url.raw.encode}}/{{$node.domain}}"
     data-request-method="DELETE"
     data-name="{{$node.name}}"
 >
