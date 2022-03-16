@@ -197,6 +197,29 @@ class Settings extends View {
         }
     }
 
+    public static function server_settings_settings(App $object)
+    {
+        try {
+            return Service::server_settings_list($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function server_settings_command(App $object){
+        $url = $object->request('node.url');
+        try {
+            switch (Handler::method()) {
+                case 'GET' :
+                    return Service::server_settings_read($object, $url);
+                case 'PUT' :
+                    return Service::server_settings_update($object, $url);
+            }
+        } catch (Exception $exception) {
+            return $exception;
+        }
+    }
+
     public static function theme_settings(App $object): Response
     {
         return Service::theme_list($object);
