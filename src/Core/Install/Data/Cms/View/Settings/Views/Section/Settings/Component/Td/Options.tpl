@@ -11,7 +11,6 @@
                 aria-expanded="false"
             >
                 {{__('settings.views.section.settings.component.td.options.text')}}
-                Actions
             </button>
             <div
                 class="dropdown-menu"
