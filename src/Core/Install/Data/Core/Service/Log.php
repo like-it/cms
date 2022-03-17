@@ -127,7 +127,9 @@ class Log extends Main {
             $temp2 = explode('.', $temp[0]);
             $array['type'] = array_pop($temp2);
             $array['namespace'] = implode('.', $temp2);
-            $array['message'] = $temp[1];
+            if(array_key_exists(1, $temp)){
+                $array['message'] = $temp[1];
+            }
         }
         return Core::object($array, Core::OBJECT_OBJECT);
     }

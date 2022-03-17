@@ -36,6 +36,7 @@ class Export extends Main {
             $object->config('project.dir.data') . 'Export/',
             $object->config('project.dir.vendor'),
             $object->config('project.dir.host'),
+            $object->config('project.dir.public'),
         ]);
         $read = $dir->read($object->config('project.dir.root'), true);
         foreach ($read as $nr => $file){
@@ -51,6 +52,12 @@ class Export extends Main {
             '/Local/'
         ]);
         $host = $dir->read($object->config('project.dir.host'), true);
+        foreach($read as $file){
+            $host[] = $file;
+        }
+        $dir->ignore([
+        ]);
+        $read = $dir->read($object->config('project.dir.public'), true);
         foreach($read as $file){
             $host[] = $file;
         }
