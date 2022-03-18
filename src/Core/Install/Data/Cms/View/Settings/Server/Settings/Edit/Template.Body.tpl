@@ -1,7 +1,7 @@
 {{R3M}}
 {{response.view([
 'module' => $controller.name,
-'submodule' => 'views',
+'submodule' => 'server-settings',
 'command' => 'edit-template',
 "subcommand" => 'body',
 'init' => true,
