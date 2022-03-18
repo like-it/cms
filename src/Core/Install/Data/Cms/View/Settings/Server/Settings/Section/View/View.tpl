@@ -20,6 +20,7 @@
                 $__.submodule +
                 '.section.view.' +
                 $__.command +
+                '.' +
                 'node.url'
                 )}}
             </h5>

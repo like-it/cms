@@ -269,9 +269,8 @@
     "settings.server.settings.section.view.routes.body.node.controller" : "Controller",
     "settings.server.settings.section.view.routes.body.node.function" : "Function (action)",
     "settings.server.settings.section.view.routes.body.node.request.methods" : "Request methods",
-    "settings.server.settings.section.view.view.node.routes": "Loading routes...",
     "settings.server.settings.section.view.view.node.key" : "Key",
-    "settings.server.settings.section.view.view.node.name" : "Internal name",
+    "settings.server.settings.section.view.view.node.url" : "Url",
     "settings.server.settings.section.main.component.html.title" : "Controllers",
     "settings.server.settings.section.main.component.html.text" : [
         "Routes can go to controllers which are capable of initiating a service and / or respond with a template, script, style(CSS) even protected by an access token.",
