@@ -84,7 +84,7 @@ source.panel = () => {
             tr.on('click', (event) => {
                 let editor = source.get('editor.' + "{{$pre.id}}");
                 if(tr.hasClass('open')){
-                    let settings = section.select('.nav-item .settings-controllers-settings');
+                    let settings = section.select('.nav-item .settings-server-settings-settings');
                     panel.addClass('d-none');
                     if(settings){
                         settings.trigger('click');
@@ -345,7 +345,7 @@ source.open = () => {
     if(!section){
         return;
     }
-    let settings = section.select('.nav-item .settings-controllers-settings');
+    let settings = section.select('.nav-item .settings-server-settings-settings');
     if(settings){
         settings.trigger('click');
     }
@@ -417,7 +417,7 @@ source.editor = () => {
                         break;
                     case 'q': //w will close the browser tab
                         event.preventDefault();
-                        source.close("settings-controllers-edit-controller-{{$request.node.key}}");
+                        source.close("settings-server-settings-edit-controller-{{$request.node.key}}");
                         break;
                 }
             }
