@@ -1,4 +1,5 @@
 {{R3M}}
+{{dd($submodule)}}
 {{$components = [
 'actions',
 'name',
