@@ -19,7 +19,7 @@ $__.command +
 {{if(in.array($node.extension, image.extensions()))}}
 <a
     class="dropdown-item item-view"
-    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.url|url.raw.encode}}"
+    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.url|url.raw.encode}}/"
     data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-view-body')}}"
 >
     <i
