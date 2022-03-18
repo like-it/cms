@@ -4,7 +4,7 @@
 <pre
     id="{{$pre.id}}"
     name="{{$pre.name}}"
-    data-content="{{$request.node.content|html.entity.encode}}"
+    data-content="{{$request.node.content|base64.decode|html.entity.encode}}"
     data-extension="{{file.extension($request.node.url)}}"
 >
 </pre>
