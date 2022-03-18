@@ -1,4 +1,5 @@
 {{R3M}}
+{{dd('test')}}
 {{if(
     $command === 'settings' &&
     $subcommand === 'body'
