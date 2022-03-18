@@ -295,11 +295,14 @@ settings.options = (target) => {
             }
             else {
                 node.on('click', (event) => {
+                    console.log('click2');
                     if(node.data('has', 'url') && node.data('has', 'frontend-url')){
+                        console.log('has2');
                         header('Authorization', 'Bearer ' + user.token());
                         request(node.data('url'), null, (url, response) => {
+                            console.log('url2');
                             request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
+                                console.log('frontend-url2');
                             });
                         });
                     }
@@ -326,11 +329,14 @@ settings.options = (target) => {
         }
         else {
             node.on('click', (event) => {
+                console.log('click');
                 if(node.data('has', 'url') && node.data('has', 'frontend-url')){
+                    console.log('has');
                     header('Authorization', 'Bearer ' + user.token());
                     request(node.data('url'), null, (url, response) => {
+                        console.log('url');
                         request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
+                            console.log('frontend-url');
                         });
                     });
                 }
