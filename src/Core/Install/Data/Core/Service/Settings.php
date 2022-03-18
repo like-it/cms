@@ -1365,13 +1365,7 @@ class Settings extends Main {
      */
     public static function server_settings_read(App $object, $url): Response
     {
-        $domain = Settings::domain_get($object);
-        if(
-            !property_exists($domain, 'dir') ||
-            !property_exists($domain, 'uuid')
-        ){
-            throw new Exception('Domain dir not set...');
-        }
+        dd($url);
         if(File::exist($url)){
             $name = File::basename($url);
             $read = File::read($url);
