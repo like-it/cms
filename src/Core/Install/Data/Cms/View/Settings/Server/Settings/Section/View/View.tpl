@@ -30,24 +30,22 @@
         </div>
     </div>
     {{/if}}
-    {{if(!is.empty($request.node.name))}}
+    {{if(!is.empty($request.node.url))}}
     <div class="row align-items-start">
         <div class="col">
-            <h5>{{__('settings.controllers.section.view.view.node.name')}}</h5>
+            <h5>{{__('settings.controllers.section.view.view.node.url')}}</h5>
         </div>
         <div class="col">
-            <h5>{{$request.node.name}}</h5>
+            <h5>{{$request.node.url}}</h5>
         </div>
     </div>
     {{/if}}
-    <div
-        class="row align-items-start settings-routes-settings"
-        data-url="{{server.url('core')}}Settings/Routes/Settings/{{$request.node.domain.uuid}}?pagination=false"
-        data-frontend-url="{{route.get(route.prefix() + '-settings-controllers-view-routes-body')}}"
-        data-controller-name="{{$request.node.name}}"
-    >
-        <div class="col">
-            <span class="title">{{__('settings.controllers.section.view.view.node.routes')}}</span><br>
-        </div>
+    {{if(in.array(
+    $request.node.extension,
+    image.extensions()
+    ))}}
+    <div class="row align-items-start">
+        image
     </div>
+    {{/if}}
 </div>

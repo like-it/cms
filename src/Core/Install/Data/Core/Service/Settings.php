@@ -1372,6 +1372,7 @@ class Settings extends Main {
             $record['key'] = sha1($url);
             $record['name'] = $name;
             $record['url'] = $url;
+            $record['extension'] = File::extension($url);
             $record['content'] = base64_encode($read);
             $explode = explode($object->config('project.dir.public'), $url, 2);
             if(array_key_exists(1, $explode)){
