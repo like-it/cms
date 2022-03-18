@@ -13,7 +13,7 @@
     {{if(!is.empty($request.node.url))}}
     <div class="row align-items-start">
         <div class="col">
-            <h5>{{__('settings.controllers.section.view.view.node.url')}}</h5>
+            <h5>{{__($__.module + '.' + $__.submodule '.section.view.' + $__.command +'node.url')}}</h5>
         </div>
         <div class="col">
             <h5>{{$request.node.url}}</h5>
