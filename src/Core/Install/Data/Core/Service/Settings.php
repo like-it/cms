@@ -1366,7 +1366,6 @@ class Settings extends Main {
     public static function server_settings_read(App $object, $url): Response
     {
         if(File::exist($url)){
-            dd($url);
             $name = File::basename($url);
             $read = File::read($url);
             $record = [];
@@ -1380,6 +1379,7 @@ class Settings extends Main {
             }
             $response = [];
             $response['node'] = $record;
+            dd($response);
             return new Response($response, Response::TYPE_JSON);
         } else {
             throw new FileNotExistException('File (' . $url .') not found...');
