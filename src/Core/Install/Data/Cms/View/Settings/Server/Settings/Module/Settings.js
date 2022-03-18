@@ -310,11 +310,37 @@ settings.options = (target) => {
                     }
                 });
             }
-
         }
     }
     else if(list){
         let node = list;
+        if(node.hasClass('item-delete')){
+            node.on('click', (event) => {
+                //make dialog delete with are you sure.
+                settings.deleteDialog({
+                    node: node,
+                    section: section,
+                    target: target,
+                });
+            });
+        }
+        else {
+            node.on('click', (event) => {
+                if(node.data('has', 'url') && node.data('has', 'frontend-url')){
+                    header('Authorization', 'Bearer ' + user.token());
+                    request(node.data('url'), null, (url, response) => {
+                        request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+
+                        });
+                    });
+                }
+                else if(node.data('has', 'frontend-url')){
+                    request(node.data('frontend-url'), null, (url, response) => {
+
+                    });
+                }
+            });
+        }
     }
 }
 
