@@ -1,5 +1,4 @@
 {{R3M}}
-{{dd('test')}}
 {{if(
     $command === 'settings' &&
     $subcommand === 'body'
@@ -10,6 +9,7 @@
     {{$request.target = 'section[name="' + $section.name + '"] .card-' + $subcommand + '-' + $command}}
     {{$request.append.to = 'section[name="' + $section.name + '"] .card'}}
 {{/if}}
+{{dd($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Html/Card.Body.Settings.tpl')}}
 {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Html/Card.Body.Settings.tpl')}}
 {{script('module')}}
     {{require($prefix + $require.submodule + '/Module/' + $require.command + '.js')}}
