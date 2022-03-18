@@ -1,24 +1,4 @@
 {{R3M}}
-<div class="progress" style="height: 1px">
-    {{$progress=10}}
-    <div
-        class="progress-bar bg-progress-bar"
-        role="progressbar"
-        style="width: {{$progress}}%"
-        aria-valuenow="{{$progress}}"
-        aria-valuemin="0"
-        aria-valuemax="100"
-    ></div>
-    {{$progress=10}}
-    <div
-        class="progress-bar"
-        role="progressbar"
-        style="width: {{$progress}}%"
-        aria-valuenow="{{$progress}}"
-        aria-valuemin="0"
-        aria-valuemax="100"
-    ></div>
-</div>
 <div class="container">
     {{if(!is.empty($request.node.key))}}
     <div class="row align-items-start">
@@ -45,7 +25,7 @@
     image.extensions()
     ))}}
     <div class="row align-items-start">
-        <img src="data:{{image.content.type($request.node.extension)}};base64,{{$request.node.content}}">
+        <img src="data:{{image.content.type($request.node.extension)}};base64,{{$request.node.content}}" alt="{{$request.node.name}}">
     </div>
     {{/if}}
 </div>
