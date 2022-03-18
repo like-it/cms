@@ -1365,7 +1365,6 @@ class Settings extends Main {
      */
     public static function server_settings_read(App $object, $url): Response
     {
-        dd($url);
         if(File::exist($url)){
             $name = File::basename($url);
             $read = File::read($url);
@@ -1374,7 +1373,10 @@ class Settings extends Main {
             $record['name'] = $name;
             $record['url'] = $url;
             $record['content'] = $read;
-            $record['domain'] = $domain;
+            $explode = explode($object->config('project.dir.public'), $url, 2);
+            if(array_key_exists(1, $explode)){
+                $record['public'] = $object->config('ds') . $explode[1];
+            }
             $response = [];
             $response['node'] = $record;
             return new Response($response, Response::TYPE_JSON);
