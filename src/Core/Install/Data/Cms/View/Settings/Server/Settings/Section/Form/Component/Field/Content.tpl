@@ -1,7 +1,6 @@
 {{R3M}}
 {{$pre.id = 'node-' + $request.node.key}}
 {{$pre.name = 'node.content'}}
-{{dd($request.node.content|base64.decode|html.entity.encode)}}
 <pre
     id="{{$pre.id}}"
     name="{{$pre.name}}"
