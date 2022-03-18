@@ -1372,14 +1372,13 @@ class Settings extends Main {
             $record['key'] = sha1($url);
             $record['name'] = $name;
             $record['url'] = $url;
-            $record['content'] = $read;
+            $record['content'] = base64_encode($read);
             $explode = explode($object->config('project.dir.public'), $url, 2);
             if(array_key_exists(1, $explode)){
                 $record['public'] = $object->config('ds') . $explode[1];
             }
             $response = [];
             $response['node'] = $record;
-            dd($response);
             return new Response($response, Response::TYPE_JSON);
         } else {
             throw new FileNotExistException('File (' . $url .') not found...');
