@@ -550,7 +550,7 @@ ready(() => {
     [
         root() + 'Dialog/Css/Dialog.css?' + version(),
         root() + 'Dialog/Css/Dialog.Delete.css?' + version(),
-        root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + "{{$require.submodule}}" + '.css?' + version()
+        root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Settings' + '.css?' + version()
     ],
     () => {
         settings.init();
