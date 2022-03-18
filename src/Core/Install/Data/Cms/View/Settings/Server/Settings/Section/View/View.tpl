@@ -45,7 +45,7 @@
     image.extensions()
     ))}}
     <div class="row align-items-start">
-        image
+        {{image.contentType($request.node.extension)}}
     </div>
     {{/if}}
 </div>
