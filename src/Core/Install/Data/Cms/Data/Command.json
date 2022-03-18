@@ -464,7 +464,7 @@
         "submodule" : "server-settings",
         "command" : "edit-template",
         "subcommand" : "body",
-        "path" : "Settings/Views/Edit/Template/Body/",
+        "path" : "Settings/Server/Settings/Edit/Template/Body/",
         "method": [
             "GET",
             "POST"
