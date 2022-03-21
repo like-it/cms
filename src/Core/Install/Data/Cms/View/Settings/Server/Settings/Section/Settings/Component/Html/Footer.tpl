@@ -41,7 +41,7 @@
             >
                 {{for.each($actions as $action)}}
                     {{$require.basename = $action|uppercase.first.sentence:'.'}}
-                    {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Options/' + $require.basename + '.tpl')}}
+                    {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Actions/' + $require.basename + '.tpl')}}
                 {{/for.each}}
             </div>
         </td>
