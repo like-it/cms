@@ -14,6 +14,7 @@ $__.submodule +
 '.section.' +
 $__.command +
 '.component.actions.delete.text'
+)}}
 <a
     class="dropdown-item item-delete"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/"

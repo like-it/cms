@@ -5,7 +5,7 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.actions.delete.icon'
+'.component.actions.move.icon'
 )}}
 {{$span.text = __(
 $__.module +
@@ -13,7 +13,8 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.actions.delete.text'
+'.component.actions.move.text'
+)}}
 <a
 class="dropdown-item item-delete"
 data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Move/"
