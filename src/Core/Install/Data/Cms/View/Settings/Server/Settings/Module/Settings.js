@@ -180,8 +180,10 @@ settings.moveDialog = (data) => {
     head.html('<h1>' + data?.title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
     if(!is.empty(node.data('name'))){
         body.html('<p>' + "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.move')}}" + ': ' + node.data('name') + '?<br></p>');
+        body.html('<p><label>Target directory:</label><input type="text" name="node.directory" value=""/></p>')
     } else {
         body.html('<p>' + "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.move')}}" + '?<br></p>');
+        body.html('<p><label>Target directory:</label><input type="text" name="node.directory" value=""/></p>')
     }
     footer.html('<div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">Yes</button></div><div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-cancel">No</button></div>');
     dialog.appendChild(head);
