@@ -14,7 +14,11 @@ settings.onSelectInverse = () => {
         return;
     }
     let list = section.select('.card-' + "{{$subcommand}}" + '-' + "{{$command}}" + ' tr input[type="checkbox"]');
-    console.log(list);
+    let index;
+    for(index = 1; index <list.length; index++){
+        let node = list[index];
+        node.checked = !node.checked;
+    }
 }
 
 settings.onDoubleClick = () => {
