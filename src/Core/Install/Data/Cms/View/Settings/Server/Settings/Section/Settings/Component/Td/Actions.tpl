@@ -1,5 +1,8 @@
 {{R3M}}
 <td scope="row" class="actions">
+    {{if(is.empty($node.protected))}}
+    <input type="checkbox" name="node.nodeList[]" value="{{$node.url}}" />
+    {{/if}}
     {{if(!is.empty($node.sort))}}
         {{if($nr > 0 || $request.page > 1)}}
             {{$action = '1-up'}}
