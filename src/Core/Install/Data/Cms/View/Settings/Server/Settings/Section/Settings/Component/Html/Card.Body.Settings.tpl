@@ -24,8 +24,7 @@
                     type="checkbox"
                     name="node.checkAll"
                     value="true"
-                    title="
-                    {{__(
+                    title="{{__(
                     $__.module +
                     '.' +
                     $__.submodule +
@@ -33,8 +32,7 @@
                     $__.command +
                     '.component.thead.' +
                     $component
-                    )}}
-                    "
+                    )}}"
                 />
                 {{else}}
                 {{__(

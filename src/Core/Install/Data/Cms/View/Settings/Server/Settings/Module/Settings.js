@@ -8,6 +8,15 @@ import { root } from "/Module/Web.js";
 import { contains, replace } from "/Module/String.js";
 let settings = {};
 
+settings.onSelectInverse = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    let list = section.select('.card-' + "{{$subcommand}}" + '-' + "{{$command}}" + ' tr input[type="checkbox"]');
+    console.log(list);
+}
+
 settings.onDoubleClick = () => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -530,6 +539,7 @@ settings.search = () => {
 
 settings.init = () => {
     settings.body();
+    settings.onSelectInverse();
     settings.onDoubleClick();
     settings.actions({
         select: ".{{$module}}-{{$submodule}}-{{$command}}",
