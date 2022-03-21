@@ -142,6 +142,79 @@ settings.deleteDialog = (data) => {
     }
 }
 
+settings.moveDialog = (data) => {
+    if(!data?.node){
+        return;
+    }
+    if(!data?.section){
+        const selection = data.node.data('select');
+        if(selection){
+            data.section = select(selection);
+            if(!data.section){
+                return;
+            }
+        } else {
+            return;
+        }
+    }
+    if(!data?.target){
+        return;
+    }
+    if(!data?.className){
+        data.className = 'dialog dialog-move';
+    }
+    if(!data?.title){
+        data.title = 'Move';
+    }
+    if(!is.empty(data.node.data('title'))){
+        data.title = data.node.data('title');
+    }
+    const section = data.section;
+    const target = data.target;
+    const node = data.node;
+    const dialog = create('div', data.className);
+    const head = create('div', 'head');
+    const body = create('div', 'body');
+    const footer = create('div', 'footer');
+    head.html('<h1>' + data?.title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
+    if(!is.empty(node.data('name'))){
+        body.html('<p>' + "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.move')}}" + ': ' + node.data('name') + '?<br></p>');
+    } else {
+        body.html('<p>' + "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.move')}}" + '?<br></p>');
+    }
+    footer.html('<div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">Yes</button></div><div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-cancel">No</button></div>');
+    dialog.appendChild(head);
+    dialog.appendChild(body);
+    dialog.appendChild(footer);
+    section.appendChild(dialog);
+    const close = head.select('.fa-window-close');
+    if(close){
+        close.on('click', (event) => {
+            dialog.remove();
+        });
+    }
+    const submit = footer.select('.button-submit');
+    if(submit){
+        submit.on('click', (event) => {
+            if(node.data('has', 'url')){
+                header('authorization', 'Bearer ' + user.token());
+                request(node.data('url'), data, (url, response) => {
+                    menu.dispatch(section, target);
+                });
+            }
+            dialog.remove();
+        });
+        submit.focus();
+    }
+    const cancel = footer.select('.button-cancel');
+    if(cancel){
+        cancel.on('click', (event) => {
+            dialog.remove();
+        });
+    }
+}
+
+
 settings.page = (type, section, data) => {
     console.log(data);
     if(
@@ -304,6 +377,16 @@ settings.options = (target) => {
                 node.on('click', (event) => {
                     //make dialog delete with are you sure.
                     settings.deleteDialog({
+                        node: node,
+                        section: section,
+                        target: target,
+                    });
+                });
+            }
+            else if(node.hasClass('item-move')){
+                node.on('click', (event) => {
+                    //make dialog delete with are you sure.
+                    settings.moveDialog({
                         node: node,
                         section: section,
                         target: target,
