@@ -1437,6 +1437,7 @@ class Settings extends Main {
                 if($record->type !== File::TYPE){
                     continue;
                 }
+                $record->extension = File::extension($record->url);
                 $key = sha1($record->url);
                 $data->set($key, $record);
             }
