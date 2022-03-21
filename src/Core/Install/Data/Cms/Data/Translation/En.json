@@ -357,6 +357,7 @@
     "settings.server.settings.section.settings.component.html.footer.actions.text" : "Actions",
     "settings.server.settings.section.settings.component.actions.delete.text" : "Delete",
     "settings.server.settings.section.settings.component.actions.move.text" : "Move",
+    "settings.server.settings.module.settings.move" : "Are you sure you want to move these items",
     "settings.views.component.header.a.main.link" : "Main",
     "settings.views.component.header.a.settings.link" : "Settings",
     "settings.views.component.header.a.add.template.link" : "Add template",
