@@ -25,7 +25,7 @@
     <tr>
         {{$td.colspan = array.count($components) - 1}}
         <td colspan="{{$td.colspan}}">
-            <span class="text">With selected:</span><div class="dropdown dropstart">
+            <span class="text">With selected:</span><div class="dropdown dropend">
             <button
                 class="btn btn-secondary dropdown-toggle"
                 type="button"
