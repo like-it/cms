@@ -199,6 +199,9 @@ settings.moveDialog = (data) => {
         submit.on('click', (event) => {
             if(node.data('has', 'url')){
                 header('authorization', 'Bearer ' + user.token());
+                delete data?.target;
+                const nodeList = section.select('input[name="node.nodeList[]"]');
+                console.log(nodeList);
                 request(node.data('url'), data, (url, response) => {
                     menu.dispatch(section, target);
                 });
