@@ -143,6 +143,7 @@ settings.deleteDialog = (data) => {
 }
 
 settings.moveDialog = (data) => {
+    console.log(data.node);
     if(!data?.node){
         return;
     }
