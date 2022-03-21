@@ -201,7 +201,25 @@ settings.moveDialog = (data) => {
                 header('authorization', 'Bearer ' + user.token());
                 delete data?.target;
                 const nodeList = section.select('input[name="node.nodeList[]"]');
-                console.log(nodeList);
+                let result = [];
+                if(is.nodeList(nodeList)){
+                    let index;
+                    for(index=0; index < nodeList.length; index++){
+                        let node = nodeList[index];
+                        if(node.checked){
+                            result.push(node.data('url'));
+                        }
+                    }
+                    console.log(result);
+                } else if(nodeList) {
+                    let node = nodeList;
+                    if(node.checked){
+                        result.push(node.data('url'));
+                    }
+                }
+                let data = {
+                    nodeList : result
+                };
                 request(node.data('url'), data, (url, response) => {
                     menu.dispatch(section, target);
                 });
