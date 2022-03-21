@@ -21,11 +21,33 @@
 {{if($page.next > $page.max)}}
     {{$page.next = $page.max}}
 {{/if}}
+{{$actions = [
+'move',
+'delete'
+]}}
 <tfoot>
     <tr>
         {{$td.colspan = array.count($components) - 1}}
         <td colspan="{{$td.colspan}}">
-        With selected:
+            <span class="text">With selected:</span><div class="dropdown dropstart">
+            <button
+                class="btn btn-secondary dropdown-toggle"
+                type="button"
+                data-toggle="dropdown"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+            >
+                {{__('settings.server.settings.section.settings.component.html.footer.actions.text')}}
+            </button>
+            <div
+                class="dropdown-menu"
+            >
+                {{for.each($actions as $action)}}
+                    {{$require.basename = $action|uppercase.first.sentence:'.'}}
+                    {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Options/' + $require.basename + '.tpl')}}
+                {{/for.each}}
+            </div>
         </td>
         <td class="text-end">
             <span class="page">{{$page.start}}-{{$page.to}} of {{$page.count}}</span>
