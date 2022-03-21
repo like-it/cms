@@ -18,7 +18,6 @@ $__.command +
 <a
 class="dropdown-item item-move"
 data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Move/"
-data-request-method="POST"
 >
 <i
 class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-delete"
