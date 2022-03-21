@@ -22,7 +22,7 @@
                 {{if($component === 'actions')}}
                 <input
                     type="checkbox"
-                    name="node.checkAll"
+                    name="node.checkInverse"
                     value="true"
                     title="{{__(
                     $__.module +
