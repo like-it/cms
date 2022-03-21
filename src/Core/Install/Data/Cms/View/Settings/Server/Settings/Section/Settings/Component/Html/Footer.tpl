@@ -23,7 +23,10 @@
 {{/if}}
 <tfoot>
     <tr>
-        {{$td.colspan = array.count($components) - 1}}
+        {{$td.colspan = array.count($components) - 2}}
+        <td class="">
+            With selected: 
+        </td>
         <td colspan="{{$td.colspan}}">
         </td>
         <td class="text-end">

@@ -79,7 +79,7 @@
         {{$nr++}}
         {{/for.each}}
         </tbody>
-        {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Html/Pager.tpl')}}
+        {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Html/Footer.tpl')}}
     </table>
     {{/if}}
 </div>
