@@ -1432,6 +1432,10 @@ class Settings extends Main {
         $dir = new Dir();
         $data = new Data();
         $read = $dir->read($url, true);
+        $settings_url = $object->config('host.dir.data') . 'Settings' . $object->config('extension.json');
+        $settings = $object->data_read($settings_url);
+        d($settings_url);
+        dd($settings);
         if($read){
             foreach($read as $nr => $record){
                 if($record->type !== File::TYPE){
