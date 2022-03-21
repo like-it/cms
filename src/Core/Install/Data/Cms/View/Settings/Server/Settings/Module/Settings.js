@@ -206,14 +206,14 @@ settings.moveDialog = (data) => {
                     for(index=0; index < nodeList.length; index++){
                         let node = nodeList[index];
                         if(node.checked){
-                            result.push(node.data('url'));
+                            result.push(node.value);
                         }
                     }
                     console.log(result);
                 } else if(nodeList) {
                     let node = nodeList;
                     if(node.checked){
-                        result.push(node.data('url'));
+                        result.push(node.value);
                     }
                 }
                 let data = {
