@@ -218,7 +218,7 @@ settings.moveDialog = (data) => {
                     }
                 }
                 let data = {
-                    directory: section.select('input[name="node.directory"]')
+                    directory: section.select('input[name="node.directory"]'),
                     nodeList : result
                 };
                 request(node.data('url'), data, (url, response) => {
