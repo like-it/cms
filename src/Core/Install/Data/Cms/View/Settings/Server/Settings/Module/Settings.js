@@ -199,7 +199,6 @@ settings.moveDialog = (data) => {
         submit.on('click', (event) => {
             if(node.data('has', 'url')){
                 header('authorization', 'Bearer ' + user.token());
-                delete data?.target;
                 const nodeList = section.select('input[name="node.nodeList[]"]');
                 let result = [];
                 if(is.nodeList(nodeList)){
