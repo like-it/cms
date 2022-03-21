@@ -23,11 +23,9 @@
 {{/if}}
 <tfoot>
     <tr>
-        {{$td.colspan = array.count($components) - 2}}
-        <td class="">
-            With selected: 
-        </td>
+        {{$td.colspan = array.count($components) - 1}}
         <td colspan="{{$td.colspan}}">
+        With selected:
         </td>
         <td class="text-end">
             <span class="page">{{$page.start}}-{{$page.to}} of {{$page.count}}</span>
