@@ -21,10 +21,6 @@
 {{if($page.next > $page.max)}}
     {{$page.next = $page.max}}
 {{/if}}
-{{$actions = [
-'move',
-'delete'
-]}}
 <tfoot>
     <tr>
         {{$td.colspan = array.count($components) - 1}}
