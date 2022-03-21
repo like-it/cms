@@ -18,7 +18,26 @@
         <thead>
         <tr>
             {{for.each($components as $component)}}
-            <th scope="col">{{__(
+            <th scope="col">
+                {{if($component === 'actions')}}
+                <input
+                    type="checkbox"
+                    name="node.checkAll"
+                    value="true"
+                    title="
+                    {{__(
+                    $__.module +
+                    '.' +
+                    $__.submodule +
+                    '.section.' +
+                    $__.command +
+                    '.component.thead.' +
+                    $component
+                    )}}
+                    "
+                />
+                {{else}}
+                {{__(
                 $__.module +
                 '.' +
                 $__.submodule +
@@ -26,7 +45,8 @@
                 $__.command +
                 '.component.thead.' +
                 $component
-            )}}
+                )}}
+                {{/if}}
             </th>
             {{/for.each}}
         </tr>
