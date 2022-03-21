@@ -1432,16 +1432,24 @@ class Settings extends Main {
         $dir = new Dir();
         $data = new Data();
         $read = $dir->read($url, true);
-        $settings_url = $object->config('host.dir.data') . 'Settings' . $object->config('extension.json');
-        $settings = $object->data_read($settings_url);
-        d($settings_url);
-        dd($settings);
+        $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
+        $settings =  $object->data_read($settings_url);
+        $protected = [];
+        if($settings->data('server.settings.protected')){
+            $protected = $settings->data('server.settings.protected');
+        }
         if($read){
             foreach($read as $nr => $record){
                 if($record->type !== File::TYPE){
                     continue;
                 }
                 $record->extension = File::extension($record->url);
+                if(in_array(
+                    $record->url,
+                    $protected
+                )){
+                    $record->protected = true;
+                }
                 $key = sha1($record->url);
                 $data->set($key, $record);
             }
@@ -1451,12 +1459,6 @@ class Settings extends Main {
                 $page = 1;
             }
             $limit = Limit::LIMIT;
-            $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
-            $settings =  $object->data_read($settings_url);
-            $protected = [];
-            if($settings->data('server.settings.protected')){
-                $protected = $settings->data('server.settings.protected');
-            }
             if($settings->data('server.settings.default.limit')){
                 $limit = $settings->data('server.settings.default.limit');
             }
