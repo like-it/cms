@@ -174,27 +174,27 @@ settings.list_moveDialog = (data) => {
     const section = data.section;
     const target = data.target;
     const node = data.node;
-    const dialog = create('div', data.className);
-    const head = create('div', 'head');
-    const body = create('div', 'body');
-    const footer = create('div', 'footer');
-    head.html('<h1>' + data?.title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
+    const div_dialog = create('div', data.className);
+    const div_head = create('div', 'head');
+    const div_body = create('div', 'body');
+    const div_footer = create('div', 'footer');
+    div_head.html('<h1>' + data?.title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
     if(!is.empty(node.data('name'))){
-        body.html('<p>' + "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.move')}}" + ': ' + node.data('name') + '?<br></p>');
-        body.html('<p><label>Target directory:</label><input type="text" name="node.directory" value=""/></p>')
+        div_body.html('<p>' + "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.move')}}" + ': ' + node.data('name') + '?<br></p>');
+        div_body.html('<p><label>Target directory:</label><input type="text" name="node.directory" value=""/></p>')
     } else {
-        body.html('<p>' + "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.move')}}" + '?<br></p>');
-        body.html('<p><label>Target directory: ' + "{{config('project.dir.public')}}" + '</label><input type="text" name="node.directory" value=""/></p>')
+        div_body.html('<p>' + "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.move')}}" + '?<br></p>');
+        div_body.html('<p><label>Target directory: ' + "{{config('project.dir.public')}}" + '</label><input type="text" name="node.directory" value=""/></p>')
     }
-    footer.html('<div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">Yes</button></div><div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-cancel">No</button></div>');
-    dialog.appendChild(head);
-    dialog.appendChild(body);
-    dialog.appendChild(footer);
-    section.appendChild(dialog);
+    div_footer.html('<div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">Yes</button></div><div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-cancel">No</button></div>');
+    div_dialog.appendChild(div_head);
+    div_dialog.appendChild(div_body);
+    div_dialog.appendChild(div_footer);
+    section.appendChild(div_dialog);
     const close = head.select('.fa-window-close');
     if(close){
         close.on('click', (event) => {
-            dialog.remove();
+            div_dialog.remove();
         });
     }
     const submit = footer.select('.button-submit');
@@ -240,14 +240,14 @@ settings.list_moveDialog = (data) => {
                     menu.dispatch(section, target);
                 });
             }
-            dialog.remove();
+            div_dialog.remove();
         });
         submit.focus();
     }
     const cancel = footer.select('.button-cancel');
     if(cancel){
         cancel.on('click', (event) => {
-            dialog.remove();
+            div_dialog.remove();
         });
     }
 }
