@@ -95,7 +95,7 @@ settings.deleteDialog = (data) => {
     }
     if(!data?.message){
         if(!is.empty(node.data('name'))){
-            data.message =  "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.delete')}}" + ': ' + node.data('name') + '?');
+            data.message =  "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.delete')}}" + ': ' + node.data('name') + '?';
         } else {
             data.message = "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.delete')}}" + '?';
         }
@@ -176,7 +176,7 @@ settings.moveDialog = (data) => {
     }
     if(!data?.message){
         if(!is.empty(node.data('name'))){
-            data.message =  "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.move')}}" + ': ' + node.data('name') + '?');
+            data.message =  "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.move')}}" + ': ' + node.data('name') + '?';
         } else {
             data.message = "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.move')}}" + '?';
         }
