@@ -190,7 +190,7 @@ settings.moveDialog = (data) => {
     const div_footer = create('div', 'footer');
     div_head.html('<h1>' + data?.title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
     div_body.html('<p>' +  data.message + '</p>');
-    div_body.html(div_body.html() + '<p><label>Target directory:</label><input type="text" name="node.directory" value=""/></p>')
+    div_body.html(div_body.html() + '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.target.directory')}}" + '</label><input type="text" name="node.directory" value=""/></p>')
     div_footer.html('<div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">Yes</button></div><div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-cancel">No</button></div>');
     div_dialog.appendChild(div_head);
     div_dialog.appendChild(div_body);

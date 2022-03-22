@@ -270,6 +270,7 @@
     "settings.server.settings.module.settings.move" : "Are you sure you want to move this item",
     "settings.server.settings.module.settings.list.delete" : "Are you sure you want to delete these items",
     "settings.server.settings.module.settings.list.move" : "Are you sure you want to move these items",
+    "settings.server.settings.module.settings.target.directory" : "Target directory: ",
     "settings.server.settings.section.view.routes.body.title" : "Routes",
     "settings.server.settings.section.view.routes.body.node.url" : "Url",
     "settings.server.settings.section.view.routes.body.node.get" : "Get",
