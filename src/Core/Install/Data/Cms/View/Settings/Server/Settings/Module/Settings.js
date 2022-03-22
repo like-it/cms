@@ -2,6 +2,7 @@
 import user from "/Module/User.js";
 import menu from "/Module/Menu.js";
 import create from "/Module/Create.js";
+import dialog from "/Module/Dialog.js";
 import { getSectionByName } from "/Module/Section.js";
 import { version } from "/Module/Priya.js";
 import { root } from "/Module/Web.js";
@@ -222,6 +223,20 @@ settings.list_moveDialog = (data) => {
                     nodeList : result
                 };
                 request(node.data('url'), data, (url, response) => {
+                    if(response?.error){
+                        dialog.create({
+                            title : "{{__($module + '.' + $submodule + '.' + 'dialog.error.move.title')}}",
+                            message : "{{sentences(__($module + '.' + $submodule + '.' + 'dialog.error.move.message'))}}",
+                            error : response.error,
+                            buttons : [
+                                {
+                                    text : "{{__($module + '.' + $submodule + '.' + 'dialog.error.move.button.ok')}}"
+                                }
+                            ],
+                            section : section,
+                            className : "dialog dialog-error dialog-error-move"
+                        });
+                    }
                     menu.dispatch(section, target);
                 });
             }
