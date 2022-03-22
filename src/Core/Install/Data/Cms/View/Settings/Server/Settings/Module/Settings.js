@@ -197,7 +197,7 @@ settings.list_moveDialog = (data) => {
             div_dialog.remove();
         });
     }
-    const submit = footer.select('.button-submit');
+    const submit = div_footer.select('.button-submit');
     if(submit){
         submit.on('click', (event) => {
             if(node.data('has', 'url')){
@@ -244,7 +244,7 @@ settings.list_moveDialog = (data) => {
         });
         submit.focus();
     }
-    const cancel = footer.select('.button-cancel');
+    const cancel = div_footer.select('.button-cancel');
     if(cancel){
         cancel.on('click', (event) => {
             div_dialog.remove();
