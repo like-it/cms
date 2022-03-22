@@ -22,7 +22,7 @@ dialog.create = ({
     if(error.length > 0){
         body.html('<p class="alert alert-danger">' + error.join('<br>')  + '</p>');
     }
-    body.html('<p>' + message  + '</p>');
+    body.html(body.html() + '<p>' + message  + '</p>');
     if(buttons.length === 1){
         footer.html('<div class="w-100 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">' + buttons[0].text +'</button></div>');
     }
