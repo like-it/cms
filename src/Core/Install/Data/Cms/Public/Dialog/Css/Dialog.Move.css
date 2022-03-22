@@ -10,3 +10,17 @@
     height: 70px;
     background: rgba(255, 255, 255, 1);
 }
+
+.dialog-error-move {
+    left: 33%;
+    width: 34%;
+    right: 33%;
+    height: 250px;
+    top: calc(50% - 75px);
+}
+
+.dialog-error-move .body {
+    height: 170px;
+    background: rgba(255, 255, 255, 1);
+    overflow: auto;
+}
