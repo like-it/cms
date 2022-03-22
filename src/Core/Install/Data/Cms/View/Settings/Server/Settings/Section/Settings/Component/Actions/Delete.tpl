@@ -16,7 +16,7 @@ $__.command +
 '.component.actions.delete.text'
 )}}
 <a
-    class="dropdown-item item-delete"
+    class="dropdown-item list-delete"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/"
     data-request-method="DELETE"
 >

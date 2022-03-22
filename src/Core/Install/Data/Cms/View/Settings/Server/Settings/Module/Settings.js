@@ -93,31 +93,34 @@ settings.deleteDialog = (data) => {
     if(!is.empty(data.node.data('title'))){
         data.title = data.node.data('title');
     }
+    if(!data?.message){
+        if(!is.empty(node.data('name'))){
+            data.message =  "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.delete')}}" + ': ' + node.data('name') + '?');
+        } else {
+            data.message = "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.delete')}}" + '?';
+        }
+    }
     const section = data.section;
     const target = data.target;
     const node = data.node;
-    const dialog = create('div', data.className);
-    const head = create('div', 'head');
-    const body = create('div', 'body');
-    const footer = create('div', 'footer');
-    head.html('<h1>' + data?.title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
-    if(!is.empty(node.data('name'))){
-        body.html('<p>' + "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.delete')}}" + ': ' + node.data('name') + '?<br></p>');
-    } else {
-        body.html('<p>' + "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.delete')}}" + '?<br></p>');
-    }
-    footer.html('<div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">Yes</button></div><div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-cancel">No</button></div>');
-    dialog.appendChild(head);
-    dialog.appendChild(body);
-    dialog.appendChild(footer);
-    section.appendChild(dialog);
-    const close = head.select('.fa-window-close');
+    const div_dialog = create('div', data.className);
+    const div_head = create('div', 'head');
+    const div_body = create('div', 'body');
+    const div_footer = create('div', 'footer');
+    div_head.html('<h1>' + data?.title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
+    div_body.html('<p>' + data.message + '<br></p>');
+    div_footer.html('<div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">Yes</button></div><div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-cancel">No</button></div>');
+    div_dialog.appendChild(div_head);
+    div_dialog.appendChild(div_body);
+    div_dialog.appendChild(div_footer);
+    section.appendChild(div_dialog);
+    const close = div_head.select('.fa-window-close');
     if(close){
         close.on('click', (event) => {
-            dialog.remove();
+            div_dialog.remove();
         });
     }
-    const submit = footer.select('.button-submit');
+    const submit = div_footer.select('.button-submit');
     if(submit){
         submit.on('click', (event) => {
             if(node.data('has', 'url')){
@@ -131,19 +134,19 @@ settings.deleteDialog = (data) => {
                     menu.dispatch(section, target);
                 });
             }
-            dialog.remove();
+            div_dialog.remove();
         });
         submit.focus();
     }
-    const cancel = footer.select('.button-cancel');
+    const cancel = div_footer.select('.button-cancel');
     if(cancel){
         cancel.on('click', (event) => {
-            dialog.remove();
+            div_dialog.remove();
         });
     }
 }
 
-settings.list_moveDialog = (data) => {
+settings.moveDialog = (data) => {
     console.log(data.node);
     if(!data?.node){
         return;
@@ -171,6 +174,13 @@ settings.list_moveDialog = (data) => {
     if(!is.empty(data.node.data('title'))){
         data.title = data.node.data('title');
     }
+    if(!data?.message){
+        if(!is.empty(node.data('name'))){
+            data.message =  "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.move')}}" + ': ' + node.data('name') + '?');
+        } else {
+            data.message = "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.move')}}" + '?';
+        }
+    }
     const section = data.section;
     const target = data.target;
     const node = data.node;
@@ -179,13 +189,8 @@ settings.list_moveDialog = (data) => {
     const div_body = create('div', 'body');
     const div_footer = create('div', 'footer');
     div_head.html('<h1>' + data?.title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
-    if(!is.empty(node.data('name'))){
-        div_body.html('<p>' + "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.move')}}" + ': ' + node.data('name') + '?<br></p>');
-        div_body.html('<p><label>Target directory:</label><input type="text" name="node.directory" value=""/></p>')
-    } else {
-        div_body.html('<p>' + "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.move')}}" + '?<br></p>');
-        div_body.html('<p><label>Target directory: ' + "{{config('project.dir.public')}}" + '</label><input type="text" name="node.directory" value=""/></p>')
-    }
+    div_body.html('<p>' +  data.message + '</p>');
+    div_body.html(div_body.html() + '<p><label>Target directory:</label><input type="text" name="node.directory" value=""/></p>')
     div_footer.html('<div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">Yes</button></div><div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-cancel">No</button></div>');
     div_dialog.appendChild(div_head);
     div_dialog.appendChild(div_body);
@@ -431,13 +436,25 @@ settings.options = (target) => {
                     });
                 });
             }
-            else if(node.hasClass('list-move')){
+            else if(node.hasClass('list-delete')){
                 node.on('click', (event) => {
                     //make dialog delete with are you sure.
-                    settings.list_moveDialog({
+                    settings.deleteDialog({
                         node: node,
                         section: section,
                         target: target,
+                        message: "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.list.delete')}}"
+                    });
+                });
+            }
+            else if(node.hasClass('list-move')){
+                node.on('click', (event) => {
+                    //make dialog delete with are you sure.
+                    settings.moveDialog({
+                        node: node,
+                        section: section,
+                        target: target,
+                        message: "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.list.delete')}}"
                     });
                 });
             }
