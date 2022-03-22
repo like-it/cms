@@ -1575,7 +1575,9 @@ class Settings extends Main {
         }
         $response = [];
         $response['nodeList'] = $list;
-        $response['error'] = $error;
+        if(!empty($error)){
+            $response['error'] = $error;
+        }
         return new Response($response, Response::TYPE_JSON);
     }
 
