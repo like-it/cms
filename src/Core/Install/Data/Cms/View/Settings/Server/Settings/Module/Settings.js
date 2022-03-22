@@ -191,7 +191,7 @@ settings.list_moveDialog = (data) => {
     div_dialog.appendChild(div_body);
     div_dialog.appendChild(div_footer);
     section.appendChild(div_dialog);
-    const close = head.select('.fa-window-close');
+    const close = div_head.select('.fa-window-close');
     if(close){
         close.on('click', (event) => {
             div_dialog.remove();
