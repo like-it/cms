@@ -1,6 +1,7 @@
 <?php
 namespace Host\Subdomain\Host\Extension\Service;
 
+
 use stdClass;
 use R3m\Io\App;
 use R3m\Io\Module\Core;
@@ -16,6 +17,7 @@ use Exception;
 use R3m\Io\Exception\ObjectException;
 use R3m\Io\Exception\ErrorException;
 use R3m\Io\Exception\FileExistException;
+use R3m\Io\Exception\FileMoveException;
 use R3m\Io\Exception\FileNotExistException;
 use DateTime;
 
@@ -1527,6 +1529,7 @@ class Settings extends Main {
     /**
      * @throws Exception
      * @throws ErrorException
+     * @throws FileMoveException
      */
     public static function server_settings_move_list(App $object): Response
     {
