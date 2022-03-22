@@ -9,6 +9,7 @@
 .dialog-move .body {
     height: 100px;
     background: rgba(255, 255, 255, 1);
+    overflow: auto;
 }
 
 .dialog-error-move {
