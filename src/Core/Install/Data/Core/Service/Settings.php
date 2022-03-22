@@ -1561,6 +1561,10 @@ class Settings extends Main {
             }
             foreach($nodeList as $nr => $source){
                 $destination = $url . File::basename($source);
+                if($source == $destination){
+                    $list[] = $destination;
+                    continue;
+                }
                 $move = File::move($source, $destination, $overwrite);
                 if($move){
                     $list[] = $destination;
