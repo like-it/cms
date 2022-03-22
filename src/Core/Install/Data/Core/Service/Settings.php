@@ -1526,11 +1526,49 @@ class Settings extends Main {
 
     /**
      * @throws Exception
+     * @throws ErrorException
      */
     public static function server_settings_move_list(App $object): Response
     {
-        dd($object->request());
+        $nodeList = $object->request('nodeList');
+        $list = [];
+        if(is_array($nodeList)){
+            foreach($nodeList as $nr => $url){
+                $basename = File::basename($url);
+                if(in_array($basename, $list)){
+                    throw new ErrorException('Duplicate basename...');
+                }
+                $list[] = File::basename($url);
+            }
+        }
+        $overwrite = $object->request('overwrite');
+        if(empty($overwrite)){
+            $overwrite = false;
+        } else {
+            $overwrite = true;
+        }
+        $directory = $object->request('directory');
+        $directory = trim($directory, $object->config('ds')) . $object->config('ds');
+        $url = $object->config('project.dir.public') . $directory;
+        $list = [];
+        $error = [];
+        if(is_array($nodeList)){
+            if(!File::exist($url)){
+                Dir::create($url);
+            }
+            foreach($nodeList as $nr => $source){
+                $destination = $url . File::basename($source);
+                $move = File::move($source, $destination, $overwrite);
+                if($move){
+                    $list[] = $destination;
+                } else {
+                    $error[] = $source;
+                }
+            }
+        }
         $response = [];
+        $response['nodeList'] = $list;
+        $response['error'] = $error;
         return new Response($response, Response::TYPE_JSON);
     }
 
