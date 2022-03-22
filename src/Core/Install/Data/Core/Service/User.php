@@ -653,7 +653,6 @@ class User extends Main {
 
     public static function getUserByEmail(App $object)
     {
-        dd($object->request());
         $email = $object->request('email');
         $url = User::getDataUrl($object);
         $data = $object->data_read($url);
