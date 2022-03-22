@@ -142,7 +142,7 @@ settings.deleteDialog = (data) => {
     }
 }
 
-settings.moveDialog = (data) => {
+settings.list_moveDialog = (data) => {
     console.log(data.node);
     if(!data?.node){
         return;
@@ -410,6 +410,16 @@ settings.options = (target) => {
                 node.on('click', (event) => {
                     //make dialog delete with are you sure.
                     settings.moveDialog({
+                        node: node,
+                        section: section,
+                        target: target,
+                    });
+                });
+            }
+            else if(node.hasClass('list-move')){
+                node.on('click', (event) => {
+                    //make dialog delete with are you sure.
+                    settings.list_moveDialog({
                         node: node,
                         section: section,
                         target: target,

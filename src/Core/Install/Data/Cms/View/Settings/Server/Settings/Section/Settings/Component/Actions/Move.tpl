@@ -16,7 +16,7 @@ $__.command +
 '.component.actions.move.text'
 )}}
 <a
-class="dropdown-item item-move"
+class="dropdown-item list-move"
 data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Move/"
 >
 <i
