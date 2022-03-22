@@ -16,7 +16,7 @@
     width: 34%;
     right: 33%;
     height: 250px;
-    top: calc(50% - 75px);
+    top: calc(50% - 125px);
 }
 
 .dialog-error-move .body {
