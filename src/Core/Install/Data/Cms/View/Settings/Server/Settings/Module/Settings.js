@@ -247,7 +247,10 @@ settings.moveDialog = (data) => {
             }
             div_dialog.remove();
         });
-        submit.focus();
+        const input = div_dialog.select('input[name="node.directory"]');
+        if(input){
+            input.focus();
+        }
     }
     const cancel = div_footer.select('.button-cancel');
     if(cancel){
