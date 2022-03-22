@@ -419,6 +419,17 @@
             "OPTIONS"
         ]
     },
+    "5143cf7a-5ae9-4caa-8f01-516f377c4060" : {
+        "module" : "settings",
+        "submodule" : "server-settings",
+        "command" : "move",
+        "path": "Settings/Server/Settings/Move/",
+        "method" : [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
+    },
     "5642e4a6-313e-40eb-9837-6af246c79a62" : {
         "module" : "settings",
         "submodule" : "email",
