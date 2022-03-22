@@ -1426,6 +1426,30 @@ class Settings extends Main {
     /**
      * @throws Exception
      */
+    public static function server_settings_delete(App $object, $url): Response
+    {
+        dd($url);
+
+        /*
+        $data = $object->data_read($url);
+        if (!$data) {
+            $data = new Data();
+        }
+        $record = $data->get($uuid);
+        $data->delete($uuid);
+        $data->write($url);
+
+        $response = [];
+        $response['node'] = $record;
+        Settings::routes_command_to_route($object, $url, $route_url, $domain);
+        */
+        $response = [];
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws Exception
+     */
     public static function server_settings_list(App $object): Response
     {
         $url = $object->config('project.dir.public');
@@ -1498,6 +1522,16 @@ class Settings extends Main {
             $response['nodeList'] = [];
             return new Response($response, Response::TYPE_JSON);
         }
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function server_settings_move_list(App $object): Response
+    {
+        dd($object->request());
+        $response = [];
+        return new Response($response, Response::TYPE_JSON);
     }
 
     /**

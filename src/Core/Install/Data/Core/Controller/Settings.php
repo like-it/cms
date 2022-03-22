@@ -210,12 +210,23 @@ class Settings extends View {
         $url = $object->request('node.url');
         try {
             switch (Handler::method()) {
+                case 'DELETE' :
+                    return Service::server_settings_delete($object, $url);
                 case 'GET' :
                     return Service::server_settings_read($object, $url);
                 case 'PUT' :
                     return Service::server_settings_update($object, $url);
             }
         } catch (Exception $exception) {
+            return $exception;
+        }
+    }
+
+    public static function server_settings_move(App $object)
+    {
+        try {
+            return Service::server_settings_move_list($object);
+        } catch (Exception $exception){
             return $exception;
         }
     }
