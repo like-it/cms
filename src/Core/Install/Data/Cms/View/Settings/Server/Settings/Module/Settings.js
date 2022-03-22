@@ -225,12 +225,12 @@ settings.list_moveDialog = (data) => {
                 request(node.data('url'), data, (url, response) => {
                     if(response?.error){
                         dialog.create({
-                            title : "{{__($module + '.' + $submodule + '.' + 'dialog.error.move.title')}}",
-                            message : "{{sentences(__($module + '.' + $submodule + '.' + 'dialog.error.move.message'))}}",
+                            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.move.title')}}",
+                            message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.move.message'))}}",
                             error : response.error,
                             buttons : [
                                 {
-                                    text : "{{__($module + '.' + $submodule + '.' + 'dialog.error.move.button.ok')}}"
+                                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.move.button.ok')}}"
                                 }
                             ],
                             section : section,

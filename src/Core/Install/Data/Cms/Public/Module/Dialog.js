@@ -18,7 +18,8 @@ dialog.create = ({
     const body = create('div', 'body');
     const footer = create('div', 'footer');
     head.html('<h1>' + title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
-    if(error){
+    console.log(error);
+    if(error.length > 0){
         body.html('<p class="alert alert-danger">' + error.join('<br>')  + '</p>');
     }
     body.html('<p>' + message  + '</p>');
