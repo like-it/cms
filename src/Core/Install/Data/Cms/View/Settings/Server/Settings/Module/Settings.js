@@ -454,7 +454,7 @@ settings.options = (target) => {
                         node: node,
                         section: section,
                         target: target,
-                        message: "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.list.delete')}}"
+                        message: "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.list.move')}}"
                     });
                 });
             }
