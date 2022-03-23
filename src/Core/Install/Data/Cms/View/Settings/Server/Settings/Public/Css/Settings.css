@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+.settings-server-settings .card-body-settings table {
+    margin: 1rem;
+}
+
 .settings-server-settings .card-body-settings thead th{
     position: sticky;
     top: 0;
