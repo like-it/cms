@@ -256,6 +256,29 @@ settings.page = (type, section, data) => {
     }
 }
 
+settings.selected = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const selected = settings.get('selected');
+    const input = section.select('input[name="node.nodeList[]"]');
+    if(is.nodeList(input)){
+        let index;
+        for(index=0; index < input.length; index++){
+            let node = input[index];
+            if(in_array(node.value, selected)){
+                node.checked = true;
+            }
+        }
+    } else if(input){
+        let node = input;
+        if(in_array(node.value, selected)){
+            node.checked = true;
+        }
+    }
+}
+
 settings.actions = (target) => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -276,7 +299,6 @@ settings.actions = (target) => {
                     }
                     selected.push(node.value);
                     settings.set('selected', selected);
-                    console.log(settings.get('selected'));
                     //add item to nodeList
                 } else {
                     let selected = settings.get('selected');
@@ -287,13 +309,32 @@ settings.actions = (target) => {
                         return item !== node.value;
                     });
                     settings.set('selected', selected);
-                    console.log(settings.get('selected'));
                 }
-                console.log(node.checked);
             });
         }
     } else if(input){
         let node = input;
+        node.on('input', (event) => {
+            //event.preventDefault();
+            event.stopPropagation();
+            if(node.checked){
+                let selected = settings.get('selected');
+                if(is.empty(selected)){
+                    selected = [];
+                }
+                selected.push(node.value);
+                settings.set('selected', selected);
+            } else {
+                let selected = settings.get('selected');
+                if(is.empty(selected)){
+                    selected = [];
+                }
+                selected = selected.filter((item) => {
+                    return item !== node.value;
+                });
+                settings.set('selected', selected);
+            }
+        });
     }
 }
 
@@ -475,7 +516,7 @@ settings.pagination = (target) => {
                 header('Authorization', 'Bearer ' + user.token());
                 request(url, null, (url, response) => {
                     request(button.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
+                        settings.selected();
                     });
                 });
             });
