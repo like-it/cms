@@ -1448,8 +1448,15 @@ class Settings extends Main {
             '',
         ], $url);
         $pos = strpos($url, $object->config('project.dir.public'));
-        dd($pos);
+        if($pos !== 0){
+            throw new Exception('Cannot delete outside project.dir.public');
+        }
+        File::delete($url);
+        $node = [];
+        $node['url'] = $url;
+        $node['isDeleted'] = new DateTime();
         $response = [];
+        $response['node'] = $node;
         return new Response($response, Response::TYPE_JSON);
     }
 
