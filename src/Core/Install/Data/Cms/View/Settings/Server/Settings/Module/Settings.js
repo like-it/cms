@@ -253,8 +253,11 @@ settings.actions = (target) => {
             node.on('click', (event) => {
                 event.preventDefault();
                 event.stopPropagation();
-                node.checked = !node.checked;
-                console.log('store node');
+                if(is.empty(node.checked)){
+                    node.checked = true;
+                } else {
+                    node.checked = false;
+                }
             });
         }
     } else if(input){
