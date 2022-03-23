@@ -1,3 +1,14 @@
 .settings-server-settings .card-body-settings {
     overflow: auto;
 }
+
+.settings-server-settings .card-body-settings thead th{
+    position: sticky;
+    top: 0;
+}
+
+.settings-server-settings .card-body-settings tfoot td {
+    position: sticky;
+    bottom: 0;
+}
+
