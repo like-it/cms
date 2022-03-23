@@ -1430,7 +1430,6 @@ class Settings extends Main {
      */
     public static function server_settings_delete(App $object, $url): Response
     {
-        d($url);
         $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
         $settings =  $object->data_read($settings_url);
         $protected = [];
