@@ -34,11 +34,17 @@ settings.onSelectInverse = () => {
 
     selectInverse.on('click', () => {
         let list = section.select('.card-' + "{{$subcommand}}" + '-' + "{{$command}}" + ' tr input[type="checkbox"]');
-        let index;
-        for(index = 1; index < list.length; index++){
-            let node = list[index];
-            node.checked = !node.checked;
+        if(is.nodeList(list)){
+            let index;
+            for(index = 1; index < list.length; index++){
+                let node = list[index];
+                node.trigger('click');
+            }
+        } else if(list){
+            let node = list;
+            node.trigger('click');
         }
+
     });
 }
 
