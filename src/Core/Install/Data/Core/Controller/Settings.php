@@ -208,10 +208,16 @@ class Settings extends View {
 
     public static function server_settings_command(App $object){
         $url = $object->request('node.url');
+        $nodeList = $object->request('nodeList');
         try {
             switch (Handler::method()) {
                 case 'DELETE' :
-                    return Service::server_settings_delete($object, $url);
+                    if($url){
+                        return Service::server_settings_delete($object, $url);
+                    }
+                    elseif($nodeList){
+                        return Service::server_settings_delete($object, $nodeList);
+                    }
                 case 'GET' :
                     return Service::server_settings_read($object, $url);
                 case 'PUT' :

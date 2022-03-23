@@ -1436,26 +1436,56 @@ class Settings extends Main {
         if($settings->data('server.settings.protected')){
             $protected = $settings->data('server.settings.protected');
         }
-        if(in_array($url, $protected)){
-            throw new Exception('Cannot delete protected file...');
+        if(is_array($url)){
+            $nodeList = $url;
+            foreach($nodeList as $url) {
+                if (in_array($url, $protected)) {
+                    throw new Exception('Cannot delete protected file...');
+                }
+            }
+            foreach($nodeList as $nr => $url) {
+                $nodeList[$nr] = str_replace([
+                    '../',
+                    './'
+                ], [
+                    '',
+                    '',
+                ], $url);
+                $pos = strpos($url, $object->config('project.dir.public'));
+                if ($pos !== 0) {
+                    throw new Exception('Cannot delete outside project.dir.public');
+                }
+            }
+            foreach($nodeList as $url) {
+                File::delete($url);
+                $node = [];
+                $node['url'] = $url;
+                $node['isDeleted'] = new DateTime();
+                $response = [];
+                $response['nodeList'][] = $node;
+            }
+        } else {
+            if(in_array($url, $protected)){
+                throw new Exception('Cannot delete protected file...');
+            }
+            $url = str_replace([
+                '../',
+                './'
+            ],[
+                '',
+                '',
+            ], $url);
+            $pos = strpos($url, $object->config('project.dir.public'));
+            if($pos !== 0){
+                throw new Exception('Cannot delete outside project.dir.public');
+            }
+            File::delete($url);
+            $node = [];
+            $node['url'] = $url;
+            $node['isDeleted'] = new DateTime();
+            $response = [];
+            $response['node'] = $node;
         }
-        $url = str_replace([
-            '../',
-            './'
-        ],[
-            '',
-            '',
-        ], $url);
-        $pos = strpos($url, $object->config('project.dir.public'));
-        if($pos !== 0){
-            throw new Exception('Cannot delete outside project.dir.public');
-        }
-        File::delete($url);
-        $node = [];
-        $node['url'] = $url;
-        $node['isDeleted'] = new DateTime();
-        $response = [];
-        $response['node'] = $node;
         return new Response($response, Response::TYPE_JSON);
     }
 
