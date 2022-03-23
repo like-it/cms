@@ -257,7 +257,7 @@
     "settings.server.settings.component.header.button.domains.settings.link" : "Loading...",
     "settings.server.settings.dialog.delete.title" : "Error:",
     "settings.server.settings.dialog.delete.message" : [
-        "Are you sure you want to delete {{$name}}?"
+        "Are you sure you want to delete {$name}?"
     ],
     "settings.server.settings.dialog.delete.button.ok" : "Ok",
     "settings.server.settings.dialog.delete.button.cancel" : "Cancel",
