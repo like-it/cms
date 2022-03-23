@@ -404,6 +404,15 @@
         "method" : [
             "GET",
             "POST",
+            "OPTIONS"
+        ]
+    },
+    "f18083e8-f1ef-4c19-8e8a-603404b57a6d" : {
+        "module" : "settings",
+        "submodule" : "server-settings",
+        "command" : "command",
+        "path": "Settings/Server/Settings/",
+        "method" : [
             "DELETE",
             "OPTIONS"
         ]
