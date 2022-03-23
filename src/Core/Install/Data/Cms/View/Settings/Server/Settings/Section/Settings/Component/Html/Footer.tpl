@@ -4,7 +4,7 @@
 {{else}}
 {{$page.current = 1}}
 {{/if}}
-{{$page.size = 12}}
+{{$page.size = $request.limit}}
 {{$page.start = ($page.current * $page.size) - $page.size}}
 {{$page.start += 1}}
 {{$page.to = ($page.current * $page.size)}}
@@ -62,8 +62,6 @@
             $require.submodule +
             '/' +
             $require.command +
-            '/' +
-            '{node.domain}' +
             '/?page=1' +
             '&q=' +
             $request.q
@@ -105,8 +103,6 @@
             $require.submodule +
             '/' +
             $require.command +
-            '/' +
-            '{node.domain}' +
             '/?page=' +
             $page.previous +
             '&q=' +
@@ -149,8 +145,6 @@
             $require.submodule +
             '/' +
             $require.command +
-            '/' +
-            '{node.domain}' +
             '/?page=' +
             $page.next +
             '&q=' +
@@ -193,8 +187,6 @@
                 $require.submodule +
                 '/' +
                 $require.command +
-                '/' +
-                '{node.domain}' +
                 '/?page=' +
                 $page.max +
                 '&q=' +
