@@ -1456,12 +1456,12 @@ class Settings extends Main {
                     throw new Exception('Cannot delete outside project.dir.public');
                 }
             }
+            $response = [];
             foreach($nodeList as $url) {
                 File::delete($url);
                 $node = [];
                 $node['url'] = $url;
                 $node['isDeleted'] = new DateTime();
-                $response = [];
                 $response['nodeList'][] = $node;
             }
         } else {
