@@ -5,6 +5,7 @@
 
 .settings-server-settings .card-body-settings table {
     margin: 1rem;
+    width: calc(100% - 2rem);
 }
 
 .settings-server-settings .card-body-settings thead th{
