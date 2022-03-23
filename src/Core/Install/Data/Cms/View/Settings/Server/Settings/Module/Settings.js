@@ -251,13 +251,8 @@ settings.actions = (target) => {
         for(index=0; index < input.length; index++){
             let node = input[index];
             node.on('click', (event) => {
-                event.preventDefault();
+                //event.preventDefault();
                 event.stopPropagation();
-                if(is.empty(node.checked)){
-                    node.checked = true;
-                } else {
-                    node.checked = false;
-                }
             });
         }
     } else if(input){
