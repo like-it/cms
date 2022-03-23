@@ -250,9 +250,10 @@ settings.actions = (target) => {
         let index;
         for(index=0; index < input.length; index++){
             let node = input[index];
-            node.on('click', (event) => {
+            node.on('input', (event) => {
                 //event.preventDefault();
                 event.stopPropagation();
+                console.log(node.checked);
             });
         }
     } else if(input){
