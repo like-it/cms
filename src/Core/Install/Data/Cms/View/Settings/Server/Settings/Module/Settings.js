@@ -67,6 +67,7 @@ settings.onDoubleClick = () => {
 }
 
 settings.deleteDialog = (data) => {
+    console.log(data.node);
     if(!data?.node){
         return;
     }
@@ -124,11 +125,37 @@ settings.deleteDialog = (data) => {
     if(submit){
         submit.on('click', (event) => {
             if(node.data('has', 'url')){
-                let data = {
-                    request : {
-                        method : node.data('request-method') ? node.data('request-method') : "DELETE"
+                let post;
+                if(data?.multiple){
+                    const nodeList = section.select('input[name="node.nodeList[]"]');
+                    let result = [];
+                    if(is.nodeList(nodeList)){
+                        let index;
+                        for(index=0; index < nodeList.length; index++){
+                            let node = nodeList[index];
+                            if(node.checked){
+                                result.push(node.value);
+                            }
+                        }
+                    } else if(nodeList) {
+                        let node = nodeList;
+                        if(node.checked){
+                            result.push(node.value);
+                        }
                     }
-                };
+                    data = {
+                        nodeList : result,
+                        request : {
+                            method : node.data('request-method') ? node.data('request-method') : "DELETE"
+                        }
+                    };
+                } else {
+                    data = {
+                        request : {
+                            method : node.data('request-method') ? node.data('request-method') : "DELETE"
+                        }
+                    };
+                }
                 header('authorization', 'Bearer ' + user.token());
                 request(node.data('url'), data, (url, response) => {
                     menu.dispatch(section, target);
@@ -446,7 +473,8 @@ settings.options = (target) => {
                         node: node,
                         section: section,
                         target: target,
-                        message: "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.list.delete')}}"
+                        message: "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.list.delete')}}",
+                        multiple: true
                     });
                 });
             }
@@ -457,7 +485,8 @@ settings.options = (target) => {
                         node: node,
                         section: section,
                         target: target,
-                        message: "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.list.move')}}"
+                        message: "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.list.move')}}",
+                        multiple: true
                     });
                 });
             }
