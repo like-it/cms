@@ -34,17 +34,37 @@ settings.onSelectInverse = () => {
 
     selectInverse.on('click', () => {
         let list = section.select('.card-' + "{{$subcommand}}" + '-' + "{{$command}}" + ' tr input[type="checkbox"]');
+        let selected = settings.get('selected');
+        if(is.empty(selected)){
+            selected = [];
+        }
         if(is.nodeList(list)){
             let index;
             for(index = 1; index < list.length; index++){
                 let node = list[index];
-                node.trigger('click');
+                if(node.checked){
+                    selected = selected.filter((item) => {
+                        return item !== node.value;
+                    });
+                    node.checked = false;
+                } else {
+                    node.checked = true;
+                    selected.push(node.value);
+                }
             }
         } else if(list){
             let node = list;
-            node.trigger('click');
+            if(node.checked){
+                selected = selected.filter((item) => {
+                    return item !== node.value;
+                });
+                node.checked = false;
+            } else {
+                node.checked = true;
+                selected.push(node.value);
+            }
         }
-
+        settings.set('selected', selected);
     });
 }
 
