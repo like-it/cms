@@ -27,7 +27,7 @@ dialog.create = ({
         footer.html('<div class="w-100 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">' + buttons[0].text +'</button></div>');
     }
     else if (buttons.length === 2){
-        footer.html('<div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">' + buttons[0].text +'</button></div><div class="w-100 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">' + buttons[1].text +'</button></div>');
+        footer.html('<div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">' + buttons[0].text +'</button></div><div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">' + buttons[1].text +'</button></div>');
     }
     div.appendChild(head);
     div.appendChild(body);
