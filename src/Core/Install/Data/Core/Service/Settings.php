@@ -1431,20 +1431,24 @@ class Settings extends Main {
     public static function server_settings_delete(App $object, $url): Response
     {
         dd($url);
-
-        /*
-        $data = $object->data_read($url);
-        if (!$data) {
-            $data = new Data();
+        $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
+        $settings =  $object->data_read($settings_url);
+        $protected = [];
+        if($settings->data('server.settings.protected')){
+            $protected = $settings->data('server.settings.protected');
         }
-        $record = $data->get($uuid);
-        $data->delete($uuid);
-        $data->write($url);
-
-        $response = [];
-        $response['node'] = $record;
-        Settings::routes_command_to_route($object, $url, $route_url, $domain);
-        */
+        if(in_array($url, $protected)){
+            throw new Exception('Cannot delete protected file...');
+        }
+        $url = str_replace([
+            '../',
+            './'
+        ],[
+            '',
+            '',
+        ], $url);
+        $pos = strpos($url, $object->config('project.dir.public'));
+        dd($pos);
         $response = [];
         return new Response($response, Response::TYPE_JSON);
     }
