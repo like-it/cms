@@ -21,6 +21,10 @@ settings.set = (attribute, value) => {
     _('_').collection('settings.' + attribute, value);
 }
 
+settings.delete = (attribute) => {
+    _('_').collection('delete', 'settings.' + attribute);
+}
+
 settings.data = (attribute, value) => {
     return _('_').collection('settings.' + attribute, value);
 }
@@ -425,14 +429,41 @@ settings.options = (target) => {
             }
             else if(node.hasClass('list-delete')){
                 node.on('click', (event) => {
-                    //make dialog delete with are you sure.
-                    settings.deleteDialog({
-                        node: node,
-                        section: section,
-                        target: target,
-                        message: "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.list.delete')}}",
-                        multiple: true
+                    let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.message'))}}";
+                    let dialog_create = dialog.create({
+                        title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.title')}}",
+                        message : message,
+                        buttons : [
+                            {
+                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.button.ok')}}"
+                            },
+                            {
+                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.button.cancel')}}"
+                            }
+                        ],
+                        section : section,
+                        className : "dialog dialog-delete"
                     });
+                    const submit = dialog_create.select('.button-submit');
+                    if(submit){
+                        submit.on('click', (event) => {
+                            if(node.data('has', 'url')){
+                                let data = {
+                                    nodeList : settings.get('selected'),
+                                    request : {
+                                        method : node.data('request-method') ? node.data('request-method') : "DELETE"
+                                    }
+                                };
+                                header('authorization', 'Bearer ' + user.token());
+                                request(node.data('url'), data, (url, response) => {
+                                    settings.delete('selected');
+                                    menu.dispatch(section, target);
+                                });
+                            }
+                        });
+                        console.log(submit);
+                        submit.focus();
+                    }
                 });
             }
             else if(node.hasClass('list-move')){
