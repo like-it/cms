@@ -372,6 +372,7 @@ settings.options = (target) => {
                                 });
                             }
                         });
+                        console.log(submit);
                         submit.focus();
                     }
                 });
