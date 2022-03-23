@@ -66,6 +66,94 @@ settings.onDoubleClick = () => {
     }
 }
 
+settings.itemDeleteDialog = (data) => {
+    if (!data?.node) {
+        return;
+    }
+    if (!data?.section) {
+        const selection = data.node.data('select');
+        if (selection) {
+            data.section = select(selection);
+            if (!data.section) {
+                return;
+            }
+        } else {
+            return;
+        }
+    }
+    if (!data?.target) {
+        return;
+    }
+}
+
+
+
+    const section = data.section;
+    const target = data.target;
+    const node = data.node;
+    if(!data?.className){
+        data.className = 'dialog dialog-delete';
+    }
+    if(!data?.title){
+        data.title = 'Delete';
+    }
+    if(!is.empty(data.node.data('title'))){
+        data.title = data.node.data('title');
+    }
+    if(!data?.message){
+        if(!is.empty(data.node.data('name'))){
+            data.message =  "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.delete')}}" + ': ' + data.node.data('name') + '?';
+        } else {
+            data.message = "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.delete')}}" + '?';
+        }
+    }
+    const div_dialog = create('div', data.className);
+    const div_head = create('div', 'head');
+    const div_body = create('div', 'body');
+    const div_footer = create('div', 'footer');
+    div_head.html('<h1>' + data?.title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
+    div_body.html('<p>' + data.message + '<br></p>');
+    div_footer.html('<div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">Yes</button></div><div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-cancel">No</button></div>');
+    div_dialog.appendChild(div_head);
+    div_dialog.appendChild(div_body);
+    div_dialog.appendChild(div_footer);
+    section.appendChild(div_dialog);
+    const close = div_head.select('.fa-window-close');
+    if(close){
+        close.on('click', (event) => {
+            div_dialog.remove();
+        });
+    }
+    const submit = div_footer.select('.button-submit');
+    if(submit){
+        submit.on('click', (event) => {
+            if(node.data('has', 'url')){
+                data = {
+                    request : {
+                        method : node.data('request-method') ? node.data('request-method') : "DELETE"
+                    }
+                };
+                header('authorization', 'Bearer ' + user.token());
+                request(node.data('url'), data, (url, response) => {
+                    menu.dispatch(section, target);
+                });
+            }
+            div_dialog.remove();
+        });
+        submit.focus();
+    }
+    const cancel = div_footer.select('.button-cancel');
+    if(cancel){
+        cancel.on('click', (event) => {
+            div_dialog.remove();
+        });
+    }
+}
+
+settings.listDeleteDialog = (data) => {
+
+}
+
 settings.deleteDialog = (data) => {
     console.log(data.node);
     if(!data?.node){
@@ -95,8 +183,8 @@ settings.deleteDialog = (data) => {
         data.title = data.node.data('title');
     }
     if(!data?.message){
-        if(!is.empty(node.data('name'))){
-            data.message =  "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.delete')}}" + ': ' + node.data('name') + '?';
+        if(!is.empty(data.node.data('name'))){
+            data.message =  "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.delete')}}" + ': ' + data.node.data('name') + '?';
         } else {
             data.message = "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.delete')}}" + '?';
         }
@@ -448,12 +536,38 @@ settings.options = (target) => {
             let node = list[index];
             if(node.hasClass('item-delete')){
                 node.on('click', (event) => {
-                    //make dialog delete with are you sure.
-                    settings.deleteDialog({
-                        node: node,
-                        section: section,
-                        target: target,
+                    let dialog_create = dialog.create({
+                        title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.title')}}",
+                        message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.message'))}}",
+                        buttons : [
+                            {
+                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.button.ok')}}"
+                            },
+                            {
+                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.button.cancel')}}"
+                            }
+                        ],
+                        section : section,
+                        className : "dialog dialog-delete"
                     });
+                    const submit = dialog_create.select('.button-submit');
+                    if(submit){
+                        submit.on('click', (event) => {
+                            if(node.data('has', 'url')){
+                                let data = {
+                                    request : {
+                                        method : node.data('request-method') ? node.data('request-method') : "DELETE"
+                                    }
+                                };
+                                header('authorization', 'Bearer ' + user.token());
+                                request(node.data('url'), data, (url, response) => {
+                                    menu.dispatch(section, target);
+                                });
+                            }
+                            div_dialog.remove();
+                        });
+                        submit.focus();
+                    }
                 });
             }
             else if(node.hasClass('item-move')){

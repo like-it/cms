@@ -46,6 +46,7 @@ dialog.create = ({
         });
         submit.focus();
     }
+    return div;
 }
 
 export default dialog;
