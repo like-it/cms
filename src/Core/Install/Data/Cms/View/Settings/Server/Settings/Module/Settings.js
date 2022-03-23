@@ -371,7 +371,6 @@ settings.options = (target) => {
                                     menu.dispatch(section, target);
                                 });
                             }
-                            div_dialog.remove();
                         });
                         submit.focus();
                     }
