@@ -342,7 +342,7 @@ settings.options = (target) => {
             if(node.hasClass('item-delete')){
                 node.on('click', (event) => {
                     let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.message'))}}";
-                    message = _('_').string.replace('{{name}}', node.data('name'), message);
+                    message = _('prototype').string.replace('{{name}}', node.data('name'), message);
                     let dialog_create = dialog.create({
                         title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.title')}}",
                         message : message,
