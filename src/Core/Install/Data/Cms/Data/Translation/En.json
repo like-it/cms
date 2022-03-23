@@ -255,12 +255,12 @@
     "settings.server.settings.component.header.a.settings.link" : "Settings",
     "settings.server.settings.component.header.a.add.template.link" : "Add template",
     "settings.server.settings.component.header.button.domains.settings.link" : "Loading...",
-    "settings.server.settings.dialog.error.domain.title" : "Error:",
-    "settings.server.settings.dialog.error.domain.message" : [
-        "Unable to find a domain.",
-        "Did you forget to add a domain?"
+    "settings.server.settings.dialog.delete.title" : "Error:",
+    "settings.server.settings.dialog.delete.message" : [
+        "Are you sure you want to delete {{$name}}?"
     ],
-    "settings.server.settings.dialog.error.domain.button.ok" : "Ok",
+    "settings.server.settings.dialog.delete.button.ok" : "Ok",
+    "settings.server.settings.dialog.delete.button.cancel" : "Cancel",
     "settings.server.settings.dialog.error.move.title" : "Error moving files...",
     "settings.server.settings.dialog.error.move.message" : [
         "The above files where unable to move..."
