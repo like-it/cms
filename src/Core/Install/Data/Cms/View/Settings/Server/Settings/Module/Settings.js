@@ -246,6 +246,7 @@ settings.actions = (target) => {
         return;
     }
     const actions = section.select('.actions');
+    console.log('actions', actions);
     if(!actions){
         return;
     }
@@ -489,7 +490,6 @@ settings.pagination = (target) => {
                         return;
                     }
                     const domain = section.select('input[name="node.domain"]');
-                    console.log('domain', domain);
                     if(!domain){
                         return;
                     }
@@ -500,7 +500,6 @@ settings.pagination = (target) => {
                     if(!section){
                         return;
                     }
-                    console.log('settings.page');
                     target.page = button.data('page');
                     target.page = parseInt(target.page);
                     settings.page('current', section, target);
@@ -524,14 +523,12 @@ settings.pagination = (target) => {
                     return;
                 }
                 const domain = section.select('input[name="node.domain"]');
-                console.log('domain', domain);
                 if(!domain){
                     return;
                 }
                 url = replace("{node.domain}", domain.value, url);
             }
             if(button.data('has', 'page')){
-                console.log('settings.page');
                 const section = getSectionByName('main-content');
                 if(!section){
                     return;
