@@ -9,6 +9,22 @@ import { root } from "/Module/Web.js";
 import { contains, replace } from "/Module/String.js";
 let settings = {};
 
+settings.get = (attribute) => {
+    if(is.empty(attribute)){
+        return _('_').collection('settings');
+    } else {
+        return _('_').collection('settings.' + attribute);
+    }
+}
+
+settings.set = (attribute, value) => {
+    _('_').collection('settings.' + attribute, value);
+}
+
+settings.data = (attribute, value) => {
+    return _('_').collection('settings.' + attribute, value);
+}
+
 settings.onSelectInverse = () => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -253,6 +269,26 @@ settings.actions = (target) => {
             node.on('input', (event) => {
                 //event.preventDefault();
                 event.stopPropagation();
+                if(node.checked){
+                    let selected = settings.get('selected');
+                    if(is.empty(selected)){
+                        selected = [];
+                    }
+                    selected.push(node.value);
+                    settings.set('selected', selected);
+                    console.log(settings.get('selected'));
+                    //add item to nodeList
+                } else {
+                    let selected = settings.get('selected');
+                    if(is.empty(selected)){
+                        selected = [];
+                    }
+                    selected = selected.filter((item) => {
+                        return item !== node.value;
+                    });
+                    settings.set('selected', selected);
+                    console.log(settings.get('selected'));
+                }
                 console.log(node.checked);
             });
         }
