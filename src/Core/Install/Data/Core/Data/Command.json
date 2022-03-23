@@ -404,6 +404,7 @@
         "method" : [
             "GET",
             "POST",
+            "DELETE",
             "OPTIONS"
         ]
     },
