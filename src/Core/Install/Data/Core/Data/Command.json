@@ -410,7 +410,7 @@
     "f18083e8-f1ef-4c19-8e8a-603404b57a6d" : {
         "module" : "settings",
         "submodule" : "server-settings",
-        "command" : "command",
+        "command" : "command2",
         "path": "Settings/Server/Settings/",
         "method" : [
             "DELETE",
