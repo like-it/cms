@@ -11,12 +11,12 @@
 .settings-server-settings .card-body-settings thead th{
     position: sticky;
     top: 0;
-    background-color: var(--bs-table-bg);
+    background: rgba(255, 255, 255, 1);
 }
 
 .settings-server-settings .card-body-settings tfoot td {
     position: sticky;
     bottom: 0;
-    background-color: var(--bs-table-bg);
+    background: rgba(255, 255, 255, 1);
 }
 

@@ -245,87 +245,20 @@ settings.actions = (target) => {
     if(!section){
         return;
     }
-    const actions = section.select('.actions');
-    console.log('actions', actions);
-    if(!actions){
-        return;
-    }
-    const i = actions.select('i');
-    if(is.nodeList(i)){
+    const input = section.select('input[name="node.nodeList[]"]');
+    if(is.nodeList(input)){
         let index;
-        for(index=0; index < i.length; index++){
-            let node = i[index];
+        for(index=0; index < input.length; index++){
+            let node = input[index];
             node.on('click', (event) => {
-                let url = node.data('url');
-                if(contains(url, "{node.domain}") !== false){
-                    const section = getSectionByName('main-content');
-                    if(!section){
-                        return;
-                    }
-                    const domain = section.select('input[name="node.domain"]');
-                    console.log('domain', domain);
-                    if(!domain){
-                        return;
-                    }
-                    url = replace("{node.domain}", domain.value, url);
-                }
-                let data;
-                if(node.data('request-method')){
-                    data = {
-                        "request-method" : node.data('request-method')
-                    }
-                }
-                header('Authorization', 'Bearer ' + user.token());
-                request(url, data, (url, response) => {
-                    console.log(response);
-                    if(node.data('move-to-next-page')){
-                        settings.page('next', section, target);
-                    }
-                    else if(node.data('move-to-previous-page')){
-                        settings.page('previous', section, target);
-                    }
-                    menu.dispatch(section, target);
-                    /*
-                    request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
-                    });
-                     */
-                });
+                event.preventDefault();
+                event.stopPropagation();
+                node.checked = !node.checked;
+                console.log('store node');
             });
         }
-    } else if(i){
-        let node = i;
-        node.on('click', (event) => {
-            let url = node.data('url');
-            if(contains(url, "{node.domain}") !== false){
-                const section = getSectionByName('main-content');
-                if(!section){
-                    return;
-                }
-                const domain = section.select('input[name="node.domain"]');
-                console.log('domain', domain);
-                if(!domain){
-                    return;
-                }
-                url = replace("{node.domain}", domain.value, url);
-            }
-            let data;
-            if(node.data('request-method')){
-                data = {
-                    "request-method" : node.data('request-method')
-                }
-            }
-            header('Authorization', 'Bearer ' + user.token());
-            request(url, data, (url, response) => {
-                console.log(response);
-                menu.dispatch(section, target);
-                /*
-                request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
-                });
-                 */
-            });
-        });
+    } else if(input){
+        let node = input;
     }
 }
 
