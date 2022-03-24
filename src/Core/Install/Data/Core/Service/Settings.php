@@ -1595,6 +1595,7 @@ class Settings extends Main {
         $url = $object->config('project.dir.public') . $directory;
         $list = [];
         $error = [];
+        $destination = false;
         if(is_array($nodeList)){
             if(!File::exist($url)){
                 Dir::create($url);
@@ -1615,10 +1616,68 @@ class Settings extends Main {
         }
         $response = [];
         $response['nodeList'] = $list;
+        $response['page'] = Settings::server_settings_page($object, [
+            'url' => $destination
+        ]);
         if(!empty($error)){
             $response['error'] = $error;
         }
         return new Response($response, Response::TYPE_JSON);
+    }
+
+    private static function server_settings_page(App $object, $search=[])
+    {
+        $url = $object->config('project.dir.public');
+        $dir = new Dir();
+        $data = new Data();
+        $read = $dir->read($url, true);
+        $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
+        $settings = $object->data_read($settings_url);
+        $protected = [];
+        $page = false;
+        if ($settings->data('server.settings.protected')) {
+            $protected = $settings->data('server.settings.protected');
+        }
+        if ($read) {
+            foreach ($read as $nr => $record) {
+                if ($record->type !== File::TYPE) {
+                    continue;
+                }
+                $record->extension = File::extension($record->url);
+                if (in_array(
+                    $record->url,
+                    $protected
+                )) {
+                    $record->protected = true;
+                }
+                $key = sha1($record->url);
+                $data->set($key, $record);
+            }
+            $list = Sort::list($data->data())->with(['url' => 'ASC']);
+            $count = count($list);
+            $nr = 1;
+            foreach($list as $key => $record){
+                if(
+                    array_key_exists('url', $search) &&
+                    $search['url'] === $record['url']
+                ){
+                   break;
+                }
+                $nr++;
+            }
+            $limit = Limit::LIMIT;
+            if($settings->data('server.settings.default.limit')){
+                $limit = $settings->data('server.settings.default.limit');
+            }
+            if($object->request('limit')){
+                $limit = (int) $object->request('limit');
+                if($limit > Limit::MAX){
+                    $limit = Limit::MAX;
+                }
+            }
+            $page = floor($nr / $limit);
+        }
+        return $page;
     }
 
     /**
