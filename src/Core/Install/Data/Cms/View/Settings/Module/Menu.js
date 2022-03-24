@@ -104,7 +104,7 @@ menu.is_selected = (node, selected) => {
                 let page = node.data('page');
                 page = parseInt(page);
                 url += '?page=' + page;
-                node.data('delete', 'page');
+                //node.data('delete', 'page');
             }
             request(url, null, (url, response) => {
                 if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
@@ -183,9 +183,6 @@ menu.onClick = () => {
                 }
                 const selected = section.select(node.data('selected'));
                 menu.is_selected(node, selected);
-                if(event.detail === 1){
-
-                }
             });
         }
     }
@@ -201,9 +198,6 @@ menu.onClick = () => {
             }
             const selected = section.select(node.data('selected'));
             menu.is_selected(node, selected);
-            if(event.detail === 1){
-
-            }
         });
     }
 }
