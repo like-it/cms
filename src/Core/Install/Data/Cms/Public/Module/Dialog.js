@@ -56,8 +56,8 @@ dialog.create = ({
     }
     const cancel = footer.select('.button-cancel');
     if(cancel){
-        submit.on('click', (event) => {
-            cancel.remove();
+        cancel.on('click', (event) => {
+            div.remove();
         });
     }
     if(submit !== false){
