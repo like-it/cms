@@ -166,89 +166,66 @@ settings.moveDialog = (data) => {
             }
         ],
         section : section,
-        className : "dialog dialog-move"
+        className : "dialog dialog-move",
+        form : {
+            name: "dialog-move",
+            url : node.data('url'),
+        }
     });
 
-
-    const div_dialog = create('div', data.className);
-    const div_head = create('div', 'head');
-    const div_body = create('div', 'body');
-    const div_footer = create('div', 'footer');
-    div_head.html('<h1>' + data?.title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
-    div_body.html('<p>' +  data.message + '</p>');
-    div_body.html(div_body.html() + '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.target.directory')}}" + '</label><input type="text" name="node.directory" value=""/></p>')
-    div_footer.html('<div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">Yes</button></div><div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-cancel">No</button></div>');
-    div_dialog.appendChild(div_head);
-    div_dialog.appendChild(div_body);
-    div_dialog.appendChild(div_footer);
-    section.appendChild(div_dialog);
-    const close = div_head.select('.fa-window-close');
-    if(close){
-        close.on('click', (event) => {
-            div_dialog.remove();
-        });
-    }
-    const submit = div_footer.select('.button-submit');
-    if(submit){
-        submit.on('click', (event) => {
-            if(node.data('has', 'url')){
-                header('authorization', 'Bearer ' + user.token());
-                const nodeList = section.select('input[name="node.nodeList[]"]');
-                let result = [];
-                if(is.nodeList(nodeList)){
-                    let index;
-                    for(index=0; index < nodeList.length; index++){
-                        let item = nodeList[index];
-                        if(item.checked){
-                            result.push(item.value);
-                        }
-                    }
-                } else if(nodeList) {
-                    let item = nodeList;
+    const form = dialog_create.select('.form[name="dialog-move"]');
+    form.on('submit', (event) => {
+        event.preventDefault();
+        if(form.data('has', 'url')){
+            header('authorization', 'Bearer ' + user.token());
+            const nodeList = section.select('input[name="node.nodeList[]"]');
+            let result = [];
+            if(is.nodeList(nodeList)){
+                let index;
+                for(index=0; index < nodeList.length; index++){
+                    let item = nodeList[index];
                     if(item.checked){
                         result.push(item.value);
                     }
                 }
-                let data = {
-                    directory: section.select('input[name="node.directory"]')?.value,
-                    nodeList : result
-                };
-                request(node.data('url'), data, (url, response) => {
-                    if(response?.page){
-                        const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                        if(menuItem){
-                            menuItem.data('page', response.page);
-                        }
-                    }
-                    if(response?.error){
-                        dialog.create({
-                            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.move.title')}}",
-                            message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.move.message'))}}",
-                            error : response.error,
-                            buttons : [
-                                {
-                                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.move.button.ok')}}"
-                                }
-                            ],
-                            section : section,
-                            className : "dialog dialog-error dialog-error-move"
-                        });
-                    }
-                    menu.dispatch(section, target);
-                });
+            } else if(nodeList) {
+                let item = nodeList;
+                if(item.checked){
+                    result.push(item.value);
+                }
             }
-            div_dialog.remove();
-        });
-        const input = div_dialog.select('input[name="node.directory"]');
-        if(input){
-            input.focus();
+            let data = {
+                directory: section.select('input[name="node.directory"]')?.value,
+                nodeList : result
+            };
+            request(form.data('url'), data, (url, response) => {
+                if(response?.page){
+                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                    if(menuItem){
+                        menuItem.data('page', response.page);
+                    }
+                }
+                if(response?.error){
+                    dialog.create({
+                        title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.move.title')}}",
+                        message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.move.message'))}}",
+                        error : response.error,
+                        buttons : [
+                            {
+                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.move.button.ok')}}"
+                            }
+                        ],
+                        section : section,
+                        className : "dialog dialog-error dialog-error-move"
+                    });
+                }
+                menu.dispatch(section, target);
+            });
         }
-    }
-    const cancel = div_footer.select('.button-cancel');
-    if(cancel){
-        cancel.on('click', (event) => {
-            div_dialog.remove();
-        });
+    });
+    const input = form.select('input[name="node.directory"]');
+    if(input){
+        input.focus();
     }
 }
 

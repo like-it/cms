@@ -9,18 +9,20 @@ dialog.create = ({
     buttons,
     section,
     className,
-    form
+    form,
 }) => {
     if(is.empty(className)){
         className = 'dialog';
     }
     const div = create('div', className);
-    if(form){
-        form = create('form');
-        form.attribute('name', 'form-' + className);
-        form.attribute('method', 'POST');
-        form.data('url')
+    const element = create('form');
+    element.attribute('name', form?.name);
+    if(form?.method){
+        element.attribute('method', form.method);
+    } else {
+        element.attribute('method', 'POST');
     }
+    element.data('url', form?.url);
     const head = create('div', 'head');
     const body = create('div', 'body');
     const footer = create('div', 'footer');
