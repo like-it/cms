@@ -1592,6 +1592,9 @@ class Settings extends Main {
         }
         $directory = $object->request('directory');
         $directory = trim($directory, $object->config('ds')) . $object->config('ds');
+        if($directory === $directory->config('ds')){
+            $directory = '';
+        }
         $url = $object->config('project.dir.public') . $directory;
         $list = [];
         $error = [];
