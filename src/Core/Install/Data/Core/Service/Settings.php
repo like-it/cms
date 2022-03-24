@@ -1659,7 +1659,7 @@ class Settings extends Main {
             foreach($list as $key => $record){
                 if(
                     array_key_exists('url', $search) &&
-                    $search['url'] === $record['url']
+                    $search['url'] === $record->url
                 ){
                    break;
                 }
