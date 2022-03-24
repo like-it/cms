@@ -422,6 +422,8 @@ settings.options = (target) => {
 
                     const form = dialog_create.select('form[name="dialog-move"]');
                     form.on('submit', (event) => {
+                        console.log('submit');
+                        return;
                         event.preventDefault();
                         if(form.data('has', 'url')){
                             header('authorization', 'Bearer ' + user.token());
