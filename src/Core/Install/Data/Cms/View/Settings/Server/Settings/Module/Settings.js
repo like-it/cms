@@ -150,6 +150,26 @@ settings.moveDialog = (data) => {
     const section = data.section;
     const target = data.target;
     const node = data.node;
+
+    let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.move.message'))}}";
+    message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
+    message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.move.target.directory')}}" + '</label><input type="text" name="node.directory" value=""/></p>'
+    let dialog_create = dialog.create({
+        title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.move.title')}}",
+        message : message,
+        buttons : [
+            {
+                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.move.button.ok')}}"
+            },
+            {
+                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.move.button.cancel')}}"
+            }
+        ],
+        section : section,
+        className : "dialog dialog-move"
+    });
+
+
     const div_dialog = create('div', data.className);
     const div_head = create('div', 'head');
     const div_body = create('div', 'body');
@@ -178,15 +198,15 @@ settings.moveDialog = (data) => {
                 if(is.nodeList(nodeList)){
                     let index;
                     for(index=0; index < nodeList.length; index++){
-                        let node = nodeList[index];
-                        if(node.checked){
-                            result.push(node.value);
+                        let item = nodeList[index];
+                        if(item.checked){
+                            result.push(item.value);
                         }
                     }
                 } else if(nodeList) {
-                    let node = nodeList;
-                    if(node.checked){
-                        result.push(node.value);
+                    let item = nodeList;
+                    if(item.checked){
+                        result.push(item.value);
                     }
                 }
                 let data = {

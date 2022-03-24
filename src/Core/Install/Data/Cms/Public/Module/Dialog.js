@@ -8,12 +8,19 @@ dialog.create = ({
     error,
     buttons,
     section,
-    className
+    className,
+    form
 }) => {
     if(is.empty(className)){
         className = 'dialog';
     }
     const div = create('div', className);
+    if(form){
+        form = create('form');
+        form.attribute('name', 'form-' + className);
+        form.attribute('method', 'POST');
+        form.data('url')
+    }
     const head = create('div', 'head');
     const body = create('div', 'body');
     const footer = create('div', 'footer');
@@ -22,16 +29,21 @@ dialog.create = ({
     if(error?.length > 0){
         body.html('<p class="alert alert-danger">' + error.join('<br>')  + '</p>');
     }
-    body.html(body.html() + '<p>' + message  + '</p>');
+    if(message.substring(0,1) === '<' && message.substring(-1,1) === '>'){
+        body.html(body.html() + message);
+    } else {
+        body.html(body.html() + '<p>' + message  + '</p>');
+    }
     if(buttons.length === 1){
-        footer.html('<div class="w-100 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">' + buttons[0].text +'</button></div>');
+        footer.html('<div class="w-100 d-inline-block text-center"><button type="submit" class="btn btn-primary button-submit">' + buttons[0].text +'</button></div>');
     }
     else if (buttons.length === 2){
-        footer.html('<div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-submit">' + buttons[0].text +'</button></div><div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-cancel">' + buttons[1].text +'</button></div>');
+        footer.html('<div class="w-50 d-inline-block text-center"><button type="submit" class="btn btn-primary button-submit">' + buttons[0].text +'</button></div><div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-cancel">' + buttons[1].text +'</button></div>');
     }
-    div.appendChild(head);
-    div.appendChild(body);
-    div.appendChild(footer);
+    form.append(head);
+    form.append(body);
+    form.append(footer);
+    div.appendChild(form);
     section.appendChild(div);
     const close = head.select('.fa-window-close');
     if(close){
