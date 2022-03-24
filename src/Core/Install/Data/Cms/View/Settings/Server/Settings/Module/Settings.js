@@ -151,82 +151,7 @@ settings.moveDialog = (data) => {
     const target = data.target;
     const node = data.node;
 
-    let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.move.message'))}}";
-    message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
-    message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.move.target.directory')}}" + '</label><input type="text" name="node.directory" value=""/></p>'
-    let dialog_create = dialog.create({
-        title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.move.title')}}",
-        message : message,
-        buttons : [
-            {
-                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.move.button.ok')}}"
-            },
-            {
-                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.move.button.cancel')}}"
-            }
-        ],
-        section : section,
-        className : "dialog dialog-move",
-        form : {
-            name: "dialog-move",
-            url : node.data('url'),
-        }
-    });
 
-    const form = dialog_create.select('.form[name="dialog-move"]');
-    form.on('submit', (event) => {
-        event.preventDefault();
-        if(form.data('has', 'url')){
-            header('authorization', 'Bearer ' + user.token());
-            const nodeList = section.select('input[name="node.nodeList[]"]');
-            let result = [];
-            if(is.nodeList(nodeList)){
-                let index;
-                for(index=0; index < nodeList.length; index++){
-                    let item = nodeList[index];
-                    if(item.checked){
-                        result.push(item.value);
-                    }
-                }
-            } else if(nodeList) {
-                let item = nodeList;
-                if(item.checked){
-                    result.push(item.value);
-                }
-            }
-            let data = {
-                directory: section.select('input[name="node.directory"]')?.value,
-                nodeList : result
-            };
-            request(form.data('url'), data, (url, response) => {
-                if(response?.page){
-                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                    if(menuItem){
-                        menuItem.data('page', response.page);
-                    }
-                }
-                if(response?.error){
-                    dialog.create({
-                        title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.move.title')}}",
-                        message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.move.message'))}}",
-                        error : response.error,
-                        buttons : [
-                            {
-                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.move.button.ok')}}"
-                            }
-                        ],
-                        section : section,
-                        className : "dialog dialog-error dialog-error-move"
-                    });
-                }
-                menu.dispatch(section, target);
-            });
-        }
-    });
-    const input = form.select('input[name="node.directory"]');
-    if(input){
-        input.focus();
-    }
 }
 
 
@@ -471,14 +396,83 @@ settings.options = (target) => {
             }
             else if(node.hasClass('list-move')){
                 node.on('click', (event) => {
-                    //make dialog delete with are you sure.
-                    settings.moveDialog({
-                        node: node,
-                        section: section,
-                        target: target,
-                        message: "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.list.move')}}",
-                        multiple: true
+                    //make dialog move with where to move to.
+                    let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.message'))}}";
+                    message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
+                    message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.move.target.directory')}}" + '</label><input type="text" name="node.directory" value=""/></p>'
+                    let dialog_create = dialog.create({
+                        title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.title')}}",
+                        message : message,
+                        buttons : [
+                            {
+                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.button.ok')}}"
+                            },
+                            {
+                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.button.cancel')}}"
+                            }
+                        ],
+                        section : section,
+                        className : "dialog dialog-move",
+                        form : {
+                            name: "dialog-move",
+                            url : node.data('url'),
+                        }
                     });
+
+                    const form = dialog_create.select('form[name="dialog-move"]');
+                    form.on('submit', (event) => {
+                        event.preventDefault();
+                        if(form.data('has', 'url')){
+                            header('authorization', 'Bearer ' + user.token());
+                            const nodeList = section.select('input[name="node.nodeList[]"]');
+                            let result = [];
+                            if(is.nodeList(nodeList)){
+                                let index;
+                                for(index=0; index < nodeList.length; index++){
+                                    let item = nodeList[index];
+                                    if(item.checked){
+                                        result.push(item.value);
+                                    }
+                                }
+                            } else if(nodeList) {
+                                let item = nodeList;
+                                if(item.checked){
+                                    result.push(item.value);
+                                }
+                            }
+                            let data = {
+                                directory: section.select('input[name="node.directory"]')?.value,
+                                nodeList : result
+                            };
+                            request(form.data('url'), data, (url, response) => {
+                                if(response?.page){
+                                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                                    if(menuItem){
+                                        menuItem.data('page', response.page);
+                                    }
+                                }
+                                if(response?.error){
+                                    dialog.create({
+                                        title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.title')}}",
+                                        message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.message'))}}",
+                                        error : response.error,
+                                        buttons : [
+                                            {
+                                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.button.ok')}}"
+                                            }
+                                        ],
+                                        section : section,
+                                        className : "dialog dialog-error dialog-error-move"
+                                    });
+                                }
+                                menu.dispatch(section, target);
+                            });
+                        }
+                    });
+                    const input = form.select('input[name="node.directory"]');
+                    if(input){
+                        input.focus();
+                    }
                 });
             }
             else {
