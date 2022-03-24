@@ -181,9 +181,10 @@ menu.onClick = () => {
                 if(body){
                     body.addClass('d-none');
                 }
+                const selected = section.select(node.data('selected'));
+                menu.is_selected(node, selected);
                 if(event.detail === 1){
-                    const selected = section.select(node.data('selected'));
-                    menu.is_selected(node, selected);
+
                 }
             });
         }
@@ -198,9 +199,10 @@ menu.onClick = () => {
             if(body){
                 body.addClass('d-none');
             }
+            const selected = section.select(node.data('selected'));
+            menu.is_selected(node, selected);
             if(event.detail === 1){
-                const selected = section.select(node.data('selected'));
-                menu.is_selected(node, selected);
+
             }
         });
     }
