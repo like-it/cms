@@ -10,6 +10,7 @@ dialog.create = ({
     section,
     className,
     form,
+    submit
 }) => {
     if(is.empty(className)){
         className = 'dialog';
@@ -53,12 +54,14 @@ dialog.create = ({
             div.remove();
         });
     }
-    const submit = footer.select('.button-submit');
-    if(submit){
-        submit.on('click', (event) => {
-            div.remove();
-        });
-        submit.focus();
+    if(submit !== false){
+        submit = footer.select('.button-submit');
+        if(submit){
+            submit.on('click', (event) => {
+                div.remove();
+            });
+            submit.focus();
+        }
     }
     return div;
 }

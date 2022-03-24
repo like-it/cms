@@ -416,7 +416,8 @@ settings.options = (target) => {
                         form : {
                             name: "dialog-move",
                             url : node.data('url'),
-                        }
+                        },
+                        submit: false
                     });
 
                     const form = dialog_create.select('form[name="dialog-move"]');
