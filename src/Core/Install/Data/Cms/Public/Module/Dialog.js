@@ -42,10 +42,10 @@ dialog.create = ({
     else if (buttons.length === 2){
         footer.html('<div class="w-50 d-inline-block text-center"><button type="submit" class="btn btn-primary button-submit">' + buttons[0].text +'</button></div><div class="w-50 d-inline-block text-center"><button type="button" class="btn btn-primary button-cancel">' + buttons[1].text +'</button></div>');
     }
-    form.append(head);
-    form.append(body);
-    form.append(footer);
-    div.appendChild(form);
+    element.append(head);
+    element.append(body);
+    element.append(footer);
+    div.appendChild(element);
     section.appendChild(div);
     const close = head.select('.fa-window-close');
     if(close){
