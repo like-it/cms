@@ -466,6 +466,7 @@ settings.options = (target) => {
                                         className : "dialog dialog-error dialog-error-move"
                                     });
                                 }
+                                dialog_create.remove();
                                 menu.dispatch(section, target);
                             });
                         }

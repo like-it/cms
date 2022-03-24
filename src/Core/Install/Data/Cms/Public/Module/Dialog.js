@@ -54,6 +54,12 @@ dialog.create = ({
             div.remove();
         });
     }
+    const cancel = footer.select('.button-cancel');
+    if(cancel){
+        submit.on('click', (event) => {
+            cancel.remove();
+        });
+    }
     if(submit !== false){
         submit = footer.select('.button-submit');
         if(submit){
