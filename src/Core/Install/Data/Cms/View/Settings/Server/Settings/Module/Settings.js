@@ -194,6 +194,12 @@ settings.moveDialog = (data) => {
                     nodeList : result
                 };
                 request(node.data('url'), data, (url, response) => {
+                    if(response?.page){
+                        const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                        if(menuItem){
+                            menuItem.data('page', response.page);
+                        }
+                    }
                     if(response?.error){
                         dialog.create({
                             title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.move.title')}}",
