@@ -267,11 +267,17 @@
     ],
     "settings.server.settings.dialog.list.delete.button.ok" : "Ok",
     "settings.server.settings.dialog.list.delete.button.cancel" : "Cancel",
-    "settings.server.settings.dialog.error.move.title" : "Error moving files...",
-    "settings.server.settings.dialog.error.move.message" : [
+    "settings.server.settings.dialog.list.move.title" : "Delete multiple:",
+    "settings.server.settings.dialog.list.move.message" : [
+        "Where do you want to move the selected items to?"
+    ],
+    "settings.server.settings.dialog.list.move.button.ok" : "Ok",
+    "settings.server.settings.dialog.list.move.button.cancel" : "Cancel",
+    "settings.server.settings.dialog.error.list.move.title" : "Error moving files...",
+    "settings.server.settings.dialog.error.list.move.message" : [
         "The above files where unable to move..."
     ],
-    "settings.server.settings.dialog.error.move.button.ok" : "Ok",
+    "settings.server.settings.dialog.error.list.move.button.ok" : "Ok",
     "settings.server.settings.module.settings.delete" : "Are you sure you want to delete this item",
     "settings.server.settings.module.settings.move" : "Are you sure you want to move this item",
     "settings.server.settings.module.settings.list.delete" : "Are you sure you want to delete these items?",

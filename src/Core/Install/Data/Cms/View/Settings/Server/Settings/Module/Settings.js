@@ -399,7 +399,7 @@ settings.options = (target) => {
                     //make dialog move with where to move to.
                     let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.message'))}}";
                     message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
-                    message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.move.target.directory')}}" + '</label><input type="text" name="node.directory" value=""/></p>'
+                    message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.list.move.target.directory')}}" + '</label><input type="text" name="node.directory" value=""/></p>'
                     let dialog_create = dialog.create({
                         title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.title')}}",
                         message : message,
