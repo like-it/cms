@@ -455,7 +455,7 @@ settings.options = (target) => {
                                 if(node.data('filter-type')){
                                     const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
                                     if(menuItem){
-                                        menuItem.data('filter_type', node.data('filter-type'));
+                                        menuItem.data('filter-type', node.data('filter-type'));
                                     }
                                 }
                                 if(response?.error){
@@ -498,7 +498,7 @@ settings.options = (target) => {
                                 filter.text = node.text;
                             }
                             request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
+                                settings.selected();
                             });
                         });
                     }
@@ -524,31 +524,218 @@ settings.options = (target) => {
                     }
                 });
             }
-
         }
     }
     else if(list){
         let node = list;
         if(node.hasClass('item-delete')){
             node.on('click', (event) => {
+                let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.message'))}}";
+                message = _('prototype').string.replace('{{$name}}', node.data('name'), message);
+                let dialog_create = dialog.create({
+                    title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.title')}}",
+                    message : message,
+                    buttons : [
+                        {
+                            text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.button.ok')}}"
+                        },
+                        {
+                            text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.button.cancel')}}"
+                        }
+                    ],
+                    section : section,
+                    className : "dialog dialog-delete",
+                    form : {
+                        name : "dialog-delete",
+                        url : node.data('url'),
+                    }
+                });
+                const form = dialog_create.select('form');
+                if(form){
+                    form.on('submit', (event) => {
+                        if(node.data('has', 'url')){
+                            let data = {
+                                request : {
+                                    method : node.data('request-method') ? node.data('request-method') : "DELETE"
+                                }
+                            };
+                            header('authorization', 'Bearer ' + user.token());
+                            request(node.data('url'), data, (url, response) => {
+                                dialog_create.remove();
+                                menu.dispatch(section, target);
+                            });
+                        }
+                    });
+                    const submit = form.select('.button-submit');
+                    if(submit){
+                        submit.focus();
+                    }
+
+                }
+            });
+        }
+        else if(node.hasClass('item-move')){
+            node.on('click', (event) => {
                 //make dialog delete with are you sure.
-                settings.deleteDialog({
+                settings.moveDialog({
                     node: node,
                     section: section,
                     target: target,
                 });
             });
         }
+        else if(node.hasClass('list-delete')){
+            node.on('click', (event) => {
+                let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.message'))}}";
+                let dialog_create = dialog.create({
+                    title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.title')}}",
+                    message : message,
+                    buttons : [
+                        {
+                            text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.button.ok')}}"
+                        },
+                        {
+                            text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.button.cancel')}}"
+                        }
+                    ],
+                    section : section,
+                    className : "dialog dialog-delete",
+                    form : {
+                        name : "dialog-delete",
+                        url : node.data('url'),
+                    }
+                });
+                const form = dialog_create.select('form');
+                if(form){
+                    form.on('submit', (event) => {
+                        if(node.data('has', 'url')){
+                            let data = {
+                                nodeList : settings.get('selected'),
+                                request : {
+                                    method : node.data('request-method') ? node.data('request-method') : "DELETE"
+                                }
+                            };
+                            header('authorization', 'Bearer ' + user.token());
+                            request(node.data('url'), data, (url, response) => {
+                                dialog_create.remove();
+                                settings.delete('selected');
+                                menu.dispatch(section, target);
+                            });
+                        }
+                    });
+                }
+                const submit = dialog_create.select('.button-submit');
+                if(submit){
+                    submit.focus();
+                }
+            });
+        }
+        else if(node.hasClass('list-move')){
+            node.on('click', (event) => {
+                //make dialog move with where to move to.
+                let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.message'))}}";
+                message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
+                message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.list.move.target.directory')}}" + '</label><input type="text" name="node.directory" value=""/></p>'
+                let dialog_create = dialog.create({
+                    title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.title')}}",
+                    message : message,
+                    buttons : [
+                        {
+                            text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.button.ok')}}"
+                        },
+                        {
+                            text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.button.cancel')}}"
+                        }
+                    ],
+                    section : section,
+                    className : "dialog dialog-move",
+                    form : {
+                        name: "dialog-move",
+                        url : node.data('url'),
+                    }
+                });
+                const form = dialog_create.select('form[name="dialog-move"]');
+                if(!form){
+                    return;
+                }
+                form.on('submit', (event) => {
+                    if(form.data('has', 'url')){
+                        header('authorization', 'Bearer ' + user.token());
+                        let data = {
+                            directory: section.select('input[name="node.directory"]')?.value,
+                            nodeList: settings.get('selected'),
+                            limit: "{{$request.limit}}"
+                        };
+                        request(form.data('url'), data, (url, response) => {
+                            dialog_create.remove();
+                            if(response?.page){
+                                const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                                if(menuItem){
+                                    menuItem.data('page', response.page);
+                                }
+                            }
+                            if(node.data('filter-type')){
+                                const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                                if(menuItem){
+                                    menuItem.data('filter-type', node.data('filter-type'));
+                                }
+                            }
+                            if(response?.error){
+                                dialog.create({
+                                    title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.title')}}",
+                                    message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.message'))}}",
+                                    error : response.error,
+                                    buttons : [
+                                        {
+                                            text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.button.ok')}}"
+                                        }
+                                    ],
+                                    section : section,
+                                    className : "dialog dialog-error dialog-error-move"
+                                });
+                            }
+                            settings.delete('selected')
+                            menu.dispatch(section, target);
+                        });
+                    }
+                });
+                const input = form.select('input[name="node.directory"]');
+                if(input){
+                    input.focus();
+                }
+            });
+        }
+
+        else if(
+            node.hasClass('list-filter-file-dir') ||
+            node.hasClass('list-filter-file') ||
+            node.hasClass('list-filter-dir')
+        ){
+            node.on('click', (event) => {
+                if(node.data('has', 'url') && node.data('has', 'frontend-url')){
+                    let data = {};
+                    request(node.data('url'), data, (url, response) => {
+                        let filter = section.select('.dropdown .filter-type');
+                        if(filter){
+                            filter.text = node.text;
+                        }
+                        request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+                            settings.selected();
+                        });
+                    });
+                }
+            });
+        }
         else {
             node.on('click', (event) => {
-                console.log('click');
+                console.log('click2');
                 if(node.data('has', 'url') && node.data('has', 'frontend-url')){
-                    console.log('has');
+                    console.log('has2');
                     header('Authorization', 'Bearer ' + user.token());
                     request(node.data('url'), null, (url, response) => {
-                        console.log('url');
+                        console.log('url2');
                         request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-                            console.log('frontend-url');
+                            console.log('frontend-url2');
                         });
                     });
                 }
