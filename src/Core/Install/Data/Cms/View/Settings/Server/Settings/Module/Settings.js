@@ -296,7 +296,6 @@ settings.actions = (target) => {
     }
 }
 
-
 settings.options = (target) => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -475,6 +474,17 @@ settings.options = (target) => {
                     const input = form.select('input[name="node.directory"]');
                     if(input){
                         input.focus();
+                    }
+                });
+            }
+            else if(node.hasClass('list-filter-file-dir')){
+                node.on('click', (event) => {
+                    if(node.data('has', 'url') && node.data('has', 'frontend-url')){
+                        request(node.data('url'), data, (url, response) => {
+                            request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+
+                            });
+                        });
                     }
                 });
             }
