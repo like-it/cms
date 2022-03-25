@@ -1,7 +1,12 @@
 {{R3M}}
 <td scope="row" class="actions">
     {{if(is.empty($node.protected))}}
-    <input type="checkbox" name="node.nodeList[]" value="{{$node.url}}" />
+    <input id="checkbox_{{$node.key}}" type="checkbox" name="node.nodeList[]" value="{{$node.url}}" />
+        {{if($node.type==='Dir')}}
+        <label for="checkbox_{{$node.key}}"><i class="fas fa-folder"></i></label>
+        {{else}}
+        <label for="checkbox_{{$node.key}}"><i class="fas fa-file"></i></label>
+        {{/if}}
     {{/if}}
     {{if(!is.empty($node.sort))}}
         {{if($nr > 0 || $request.page > 1)}}
