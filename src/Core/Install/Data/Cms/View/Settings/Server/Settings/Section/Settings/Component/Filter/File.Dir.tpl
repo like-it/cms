@@ -17,7 +17,7 @@ $__.command +
 )}}
 <a
     class="dropdown-item list-filter-file-dir"
-    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/?filter=['type'=> 'All']"
+    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/?filter_type=All"
     data-frontend-url="{{route.get(route.prefix() + '-settings-server-settings-settings-body')}}"
 >
 <i
