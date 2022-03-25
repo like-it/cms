@@ -17,7 +17,7 @@ $__.command +
 )}}
 {{if($request.filter_type==='File')}}
 {{$a.data.default = 'data-default="true"'}}
-{{elseif(empty($request.filter_type))}}
+{{elseif(is.empty($request.filter_type))}}
 {{$a.data.default = 'data-default="true"'}}
 {{else}}
 {{$a.data.default = ''}}
