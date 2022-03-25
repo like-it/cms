@@ -477,14 +477,13 @@ settings.options = (target) => {
                     }
                 });
             }
-            /*
+
             else if(node.hasClass('list-filter-file-dir')){
                 node.on('click', (event) => {
                     if(node.data('has', 'url') && node.data('has', 'frontend-url')){
                         let data = {};
                         request(node.data('url'), data, (url, response) => {
-                            /*
-                            let filter = section.select('.dropdown.list-filter');
+                            let filter = section.select('.dropdown .filter-type');
                             if(filter){
                                 filter.text = node.text;
                             }
@@ -495,7 +494,7 @@ settings.options = (target) => {
                     }
                 });
             }
-            */
+
             else {
                 node.on('click', (event) => {
                     console.log('click2');
@@ -516,6 +515,7 @@ settings.options = (target) => {
                     }
                 });
             }
+            
         }
     }
     else if(list){
