@@ -1567,6 +1567,7 @@ class Settings extends Main {
             $response['limit'] = $limit;
             $response['page'] = $page;
             $response['max'] = ceil($response['count'] / $response['limit']);
+            $response['filter_type'] = $filter_type;
             if(!empty($protected)){
                 $response['protected'] = $protected;
             }
