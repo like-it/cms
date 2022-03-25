@@ -482,10 +482,12 @@ settings.options = (target) => {
                     if(node.data('has', 'url') && node.data('has', 'frontend-url')){
                         let data = {};
                         request(node.data('url'), data, (url, response) => {
+                            /*
                             let filter = section.select('.dropdown.list-filter');
                             if(filter){
                                 filter.text = node.text;
                             }
+                             */
                             request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
 
                             });
