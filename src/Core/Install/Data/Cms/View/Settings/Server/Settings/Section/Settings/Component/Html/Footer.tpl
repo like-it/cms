@@ -38,7 +38,6 @@
             >
                 {{__('settings.server.settings.section.settings.component.html.footer.actions.text')}}
             </button>
-            </div>
             <div
                 class="dropdown-menu"
             >
@@ -46,6 +45,7 @@
                     {{$require.basename = $action|uppercase.first.sentence:'.'}}
                     {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Actions/' + $require.basename + '.tpl')}}
                 {{/for.each}}
+            </div>
             </div>
             <div class="dropdown dropup">
             <div class="btn-group">
