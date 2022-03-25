@@ -58,8 +58,8 @@
             <div
                 class="dropdown-menu"
             >
-                {{for.each($actions as $action)}}
-                    {{$require.basename = $action|uppercase.first.sentence:'.'}}
+                {{for.each($filters as $filter)}}
+                    {{$require.basename = $filter|uppercase.first.sentence:'.'}}
                     {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Filter/' + $require.basename + '.tpl')}}
                 {{/for.each}}
             </div>
