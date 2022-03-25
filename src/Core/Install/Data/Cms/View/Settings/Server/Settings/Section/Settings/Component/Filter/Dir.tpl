@@ -16,12 +16,12 @@ $__.command +
 '.component.filter.dir.text'
 )}}
 <a
-class="dropdown-item list-filter-dir"
-data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/?filter=['type'=> 'Dir']"
-data-frontend-url="{{route.get(route.prefix() + '-settings-server-settings-settings')}}"
+    class="dropdown-item list-filter-dir"
+    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/?filter=['type'=> 'Dir']"
+    data-frontend-url="{{route.get(route.prefix() + '-settings-server-settings-settings-body')}}"
 >
 <i
-class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-filter"
+    class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-filter"
 >
 </i>
 <span>{{$span.text}}</span>
