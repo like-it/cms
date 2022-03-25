@@ -323,11 +323,15 @@ settings.options = (target) => {
                             }
                         ],
                         section : section,
-                        className : "dialog dialog-delete"
+                        className : "dialog dialog-delete",
+                        form : {
+                            name : "dialog-delete",
+                            url : node.data('url'),
+                        }
                     });
-                    const submit = dialog_create.select('.button-submit');
-                    if(submit){
-                        submit.on('click', (event) => {
+                    const form = dialog_create.select('form');
+                    if(form){
+                        form.on('submit', (event) => {
                             if(node.data('has', 'url')){
                                 let data = {
                                     request : {
@@ -340,8 +344,11 @@ settings.options = (target) => {
                                 });
                             }
                         });
-                        console.log(submit);
-                        submit.focus();
+                        const submit = form.select('.button-submit');
+                        if(submit){
+                            submit.focus();
+                        }
+
                     }
                 });
             }
