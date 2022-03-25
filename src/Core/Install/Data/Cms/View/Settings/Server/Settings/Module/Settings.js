@@ -484,7 +484,7 @@ settings.options = (target) => {
                         request(node.data('url'), data, (url, response) => {
                             let filter = section.select('.dropdown.list-filter');
                             if(filter){
-                                filter.html(node.html());
+                                filter.text = node.text;
                             }
                             request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
 
