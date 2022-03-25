@@ -420,11 +420,10 @@ settings.options = (target) => {
                         submit: false
                     });
                     const form = dialog_create.select('form[name="dialog-move"]');
-                    console.log(form);
-                    form.on('submit', (event) => {
-                        console.log('submit');
+                    if(!form){
                         return;
-                        event.preventDefault();
+                    }
+                    form.on('submit', (event) => {
                         if(form.data('has', 'url')){
                             header('authorization', 'Bearer ' + user.token());
                             const nodeList = section.select('input[name="node.nodeList[]"]');
