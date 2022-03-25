@@ -478,7 +478,11 @@ settings.options = (target) => {
                 });
             }
 
-            else if(node.hasClass('list-filter-file-dir') || node.hasClass('list-filter-file') || node.hasClass('list-filter-dir')){
+            else if(
+                node.hasClass('list-filter-file-dir') ||
+                node.hasClass('list-filter-file') ||
+                node.hasClass('list-filter-dir')
+            ){
                 node.on('click', (event) => {
                     if(node.data('has', 'url') && node.data('has', 'frontend-url')){
                         let data = {};
@@ -487,18 +491,45 @@ settings.options = (target) => {
                             if(filter){
                                 filter.text = node.text;
                             }
+                            let menuItem = secion.select(target.select);
+                            if(
+                                menuItem &&
+                                node.hasClass('list-filter-file-dir')
+                            ){
+                                let url = menuItem.data('url');
+                                let split = url.split('?');
+                                if(split.length > 1){
+                                    menuItem.data('url', menuItem.data('url') + "&filter_type=All")
+                                } else {
+                                    menuItem.data('url', menuItem.data('url') + "?filter_type=All")
+                                }
+                            }
+                            else if(
+                                menuItem &&
+                                node.hasClass('list-filter-dir')
+                            ){
+                                let url = menuItem.data('url');
+                                let split = url.split('?');
+                                if(split.length > 1){
+                                    menuItem.data('url', menuItem.data('url') + "&filter_type=Dir")
+                                } else {
+                                    menuItem.data('url', menuItem.data('url') + "?filter_type=Dir")
+                                }
+                            } else if(menuItem){
+                                let url = menuItem.data('url');
+                                let split = url.split('?');
+                                if(split.length > 1){
+                                    menuItem.data('url', menuItem.data('url') + "&filter_type=File")
+                                } else {
+                                    menuItem.data('url', menuItem.data('url') + "?filter_type=File")
+                                }
+                            }
                             request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
 
                             });
                         });
                     }
                 });
-                if(node.data('default') === 'true'){
-                    let filter = section.select('.dropdown .filter-type');
-                    if(filter){
-                        filter.text = node.text;
-                    }
-                }
                 /*
                 let filter_type = "{{$request.filter_type}}";
                 if(filter_type){
