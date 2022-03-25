@@ -491,7 +491,7 @@ settings.options = (target) => {
                             if(filter){
                                 filter.text = node.text;
                             }
-                            let menuItem = secion.select(target.select);
+                            let menuItem = section.select(target.select);
                             if(
                                 menuItem &&
                                 node.hasClass('list-filter-file-dir')
