@@ -15,11 +15,19 @@ $__.submodule +
 $__.command +
 '.component.filter.file.text'
 )}}
+{{if($request.filter_type==='File')}}
+{{$a.data.default = 'data-default="true"'}}
+{{elseif(empty($request.filter_type))}}
+{{$a.data.default = 'data-default="true"'}}
+{{else}}
+{{$a.data.default = ''}}
+{{/if}}
+
 <a
     class="dropdown-item list-filter-file"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/?filter_type=File"
     data-frontend-url="{{route.get(route.prefix() + '-settings-server-settings-settings-body')}}"
-    data-default="true"
+    {{$a.data.default}}
 >
     <i
         class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-filter"
