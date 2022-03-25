@@ -340,6 +340,7 @@ settings.options = (target) => {
                                 };
                                 header('authorization', 'Bearer ' + user.token());
                                 request(node.data('url'), data, (url, response) => {
+                                    dialog_create.remove();
                                     menu.dispatch(section, target);
                                 });
                             }
