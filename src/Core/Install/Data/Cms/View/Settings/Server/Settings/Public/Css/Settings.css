@@ -24,7 +24,7 @@
     float: left;
 }
 
-.settings-server-settings .card-body-settings td.actions i {
- width: 16px;
+.settings-server-settings .card-body-settings td.actions i.fa-file {
+ margin-right: 4px;
 }
 
