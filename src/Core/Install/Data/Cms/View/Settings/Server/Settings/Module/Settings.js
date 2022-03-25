@@ -503,12 +503,12 @@ settings.options = (target) => {
                                 } else {
                                     menuItem.data('url', menuItem.data('url') + "?filter_type=All")
                                 }
-                                let url_frontend = menuItem.data('url-frontend');
-                                split = url_frontend.split('?');
+                                let frontend_url = menuItem.data('frontend-url');
+                                split = frontend_url.split('?');
                                 if(split.length > 1){
-                                    menuItem.data('url-frontend', menuItem.data('url-frontend') + "&filter_type=All")
+                                    menuItem.data('frontend-url', menuItem.data('frontend-url') + "&filter_type=All")
                                 } else {
-                                    menuItem.data('url-frontend', menuItem.data('url-frontend') + "?filter_type=All")
+                                    menuItem.data('frontend-url', menuItem.data('frontend-url') + "?filter_type=All")
                                 }
                             }
                             else if(
@@ -522,12 +522,12 @@ settings.options = (target) => {
                                 } else {
                                     menuItem.data('url', menuItem.data('url') + "?filter_type=Dir")
                                 }
-                                let url_frontend = menuItem.data('url-frontend');
-                                split = url_frontend.split('?');
+                                let frontend_url = menuItem.data('frontend-url');
+                                split = frontend_url.split('?');
                                 if(split.length > 1){
-                                    menuItem.data('url-frontend', menuItem.data('url-frontend') + "&filter_type=Dir")
+                                    menuItem.data('frontend-url', menuItem.data('frontend-url') + "&filter_type=Dir")
                                 } else {
-                                    menuItem.data('url-frontend', menuItem.data('url-frontend') + "?filter_type=Dir")
+                                    menuItem.data('frontend-url', menuItem.data('frontend-url') + "?filter_type=Dir")
                                 }
                             } else if(menuItem){
                                 let url = menuItem.data('url');
@@ -537,12 +537,12 @@ settings.options = (target) => {
                                 } else {
                                     menuItem.data('url', menuItem.data('url') + "?filter_type=File")
                                 }
-                                let url_frontend = menuItem.data('url-frontend');
-                                split = url_frontend.split('?');
+                                let frontend_url = menuItem.data('frontend-url');
+                                split = frontend_url.split('?');
                                 if(split.length > 1){
-                                    menuItem.data('url-frontend', menuItem.data('url-frontend') + "&filter_type=File")
+                                    menuItem.data('frontend-url', menuItem.data('frontend-url') + "&filter_type=File")
                                 } else {
-                                    menuItem.data('url-frontend', menuItem.data('url-frontend') + "?filter_type=File")
+                                    menuItem.data('frontend-url', menuItem.data('frontend-url') + "?filter_type=File")
                                 }
                             }
                             request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
