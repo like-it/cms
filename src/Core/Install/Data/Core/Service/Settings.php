@@ -1500,16 +1500,29 @@ class Settings extends Main {
         $read = $dir->read($url, true);
         $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
         $settings =  $object->data_read($settings_url);
+        $filter_type = $object->request('filter_type');
+        if(empty($filter_type)){
+            $filter_type = 'File';
+        }
         $protected = [];
         if($settings->data('server.settings.protected')){
             $protected = $settings->data('server.settings.protected');
         }
         if($read){
             foreach($read as $nr => $record){
-                if($record->type !== File::TYPE){
-                    continue;
+                if($filter_type === 'file'){
+                    if($record->type !== File::TYPE){
+                        continue;
+                    }
                 }
-                $record->extension = File::extension($record->url);
+                elseif($filter_type === 'dir'){
+                    if($record->type !== Dir::TYPE){
+                        continue;
+                    }
+                }
+                if($record->type !== Dir::TYPE){
+                    $record->extension = File::extension($record->url);
+                }
                 if(in_array(
                     $record->url,
                     $protected
