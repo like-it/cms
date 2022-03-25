@@ -12,6 +12,8 @@
             "protected" : [
                 "/Application/Public/.htaccess",
                 "/Application/Public/index.php",
+                "/Application/Public/Image/",
+                "/Application/Public/Image/Background/",
                 "/Application/Public/Image/Background/1.jpg"
             ]
         }
