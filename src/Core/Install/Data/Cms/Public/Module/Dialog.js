@@ -69,6 +69,9 @@ dialog.create = ({
             submit.focus();
         }
     }
+    element.on('submit', (event) => {
+        event.preventDefault();
+    });
     return div;
 }
 
