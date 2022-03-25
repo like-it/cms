@@ -573,10 +573,12 @@ settings.pagination = (target) => {
     if(!buttons){
         return;
     }
+    /*
     let filter_type = "{{$request.filter_type}}";
     if(!filter_type){
         filter_type = 'File';
     }
+     */
     if(is.nodeList(buttons)){
         let index;
         for(index=0; index < buttons.length; index++){
@@ -603,9 +605,11 @@ settings.pagination = (target) => {
                     target.page = parseInt(target.page);
                     settings.page('current', section, target);
                 }
+                /*
                 if(url){
                     url += '&filter_type=' + filter_type;
                 }
+                 */
                 header('Authorization', 'Bearer ' + user.token());
                 request(url, null, (url, response) => {
                     request(button.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
@@ -639,9 +643,11 @@ settings.pagination = (target) => {
                 target.page = parseInt(target.page);
                 settings.page('current', section, target);
             }
+            /*
             if(url){
                 url += '&filter_type=' + filter_type;
             }
+             */
             header('Authorization', 'Bearer ' + user.token());
             request(url, null, (url, response) => {
                 request(button.data('frontend-url'), response, (frontendUrl, frontendResponse) => {

@@ -83,7 +83,9 @@
             $require.command +
             '/?page=1' +
             '&q=' +
-            $request.q
+            $request.q +
+            '&filter_type=' +
+            $request.filter_type
             }}
             {{$button.data.frontend.url =
             route.get(route.prefix() +
@@ -125,7 +127,9 @@
             '/?page=' +
             $page.previous +
             '&q=' +
-            $request.q
+            $request.q +
+            '&filter_type=' +
+            $request.filter_type
             }}
             {{$button.data.frontend.url =
             route.get(route.prefix() +
@@ -167,7 +171,9 @@
             '/?page=' +
             $page.next +
             '&q=' +
-            $request.q
+            $request.q +
+            '&filter_type=' +
+            $request.filter_type
             }}
             {{$button.data.frontend.url =
             route.get(route.prefix() +
@@ -209,7 +215,9 @@
                 '/?page=' +
                 $page.max +
                 '&q=' +
-                $request.q
+                $request.q +
+                '&filter_type=' +
+                $request.filter_type
             }}
             {{$button.data.frontend.url =
                 route.get(route.prefix() +
