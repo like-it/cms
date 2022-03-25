@@ -452,6 +452,12 @@ settings.options = (target) => {
                                         menuItem.data('page', response.page);
                                     }
                                 }
+                                if(response?.filter_type){
+                                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                                    if(menuItem){
+                                        menuItem.data('filter_type', response.filter_type);
+                                    }
+                                }
                                 if(response?.error){
                                     dialog.create({
                                         title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.title')}}",
@@ -497,12 +503,6 @@ settings.options = (target) => {
                         });
                     }
                 });
-                /*
-                let filter_type = "{{$request.filter_type}}";
-                if(filter_type){
-                    console.log(filter_type);
-                }
-                 */
             }
             else {
                 node.on('click', (event) => {

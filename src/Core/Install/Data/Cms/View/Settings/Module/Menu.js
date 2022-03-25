@@ -106,6 +106,9 @@ menu.is_selected = (node, selected) => {
                 url += '?page=' + page;
                 //node.data('delete', 'page');
             }
+            if(node.data('filter_type')){
+                url += '&filter_type=' + node.data('filter_type');
+            }
             request(url, null, (url, response) => {
                 if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
                     if(response.message === 'No domain found.'){
@@ -140,6 +143,9 @@ menu.is_selected = (node, selected) => {
                         }
                         url = str_replace("{node.domain}", domain.value, url);
                     }
+                    if(node.data('filter_type')){
+                        url += '?filter_type=' + node.data('filter_type');
+                    }
                     request(url, response);
                 }
             });
@@ -157,6 +163,9 @@ menu.is_selected = (node, selected) => {
                     return;
                 }
                 url = str_replace("{node.domain}", domain.value, url);
+            }
+            if(node.data('filter_type')){
+                url += '?filter_type=' + node.data('filter_type');
             }
             request(url);
         }
