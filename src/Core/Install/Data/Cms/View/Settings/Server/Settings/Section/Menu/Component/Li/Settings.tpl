@@ -6,7 +6,7 @@
 <li class="nav-item">
     <a
         class="nav-link {{$module}}-{{$submodule}}-{{$section}}"
-        data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.section}}/"
+        data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.section}}/?filter_type={{$request.filter_type}}"
         data-frontend-url="{{
         route.get(
         route.prefix() +
