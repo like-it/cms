@@ -499,6 +499,10 @@ settings.options = (target) => {
                         filter.text = node.text;
                     }
                 }
+                let filter_type = "{{$request.filter_type}}";
+                if(filter_type){
+                    console.log(filter_type);
+                }
             }
             else {
                 node.on('click', (event) => {
