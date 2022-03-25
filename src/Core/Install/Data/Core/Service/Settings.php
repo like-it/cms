@@ -1510,12 +1510,12 @@ class Settings extends Main {
         }
         if($read){
             foreach($read as $nr => $record){
-                if($filter_type === 'file'){
+                if($filter_type === File::TYPE){
                     if($record->type !== File::TYPE){
                         continue;
                     }
                 }
-                elseif($filter_type === 'dir'){
+                elseif($filter_type === Dir::TYPE){
                     if($record->type !== Dir::TYPE){
                         continue;
                     }
