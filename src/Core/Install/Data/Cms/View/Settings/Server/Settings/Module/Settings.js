@@ -378,11 +378,15 @@ settings.options = (target) => {
                             }
                         ],
                         section : section,
-                        className : "dialog dialog-delete"
+                        className : "dialog dialog-delete",
+                        form : {
+                            name : "dialog-delete",
+                            url : node.data('url'),
+                        }
                     });
-                    const submit = dialog_create.select('.button-submit');
-                    if(submit){
-                        submit.on('click', (event) => {
+                    const form = dialog_create.select('form');
+                    if(form){
+                        form.on('submit', (event) => {
                             if(node.data('has', 'url')){
                                 let data = {
                                     nodeList : settings.get('selected'),
@@ -392,12 +396,15 @@ settings.options = (target) => {
                                 };
                                 header('authorization', 'Bearer ' + user.token());
                                 request(node.data('url'), data, (url, response) => {
+                                    dialog_create.remove();
                                     settings.delete('selected');
                                     menu.dispatch(section, target);
                                 });
                             }
                         });
-                        console.log(submit);
+                    }
+                    const submit = dialog_create.select('.button-submit');
+                    if(submit){
                         submit.focus();
                     }
                 });
