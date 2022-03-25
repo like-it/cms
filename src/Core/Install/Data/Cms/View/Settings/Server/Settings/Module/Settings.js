@@ -419,8 +419,8 @@ settings.options = (target) => {
                         },
                         submit: false
                     });
-
                     const form = dialog_create.select('form[name="dialog-move"]');
+                    console.log(form);
                     form.on('submit', (event) => {
                         console.log('submit');
                         return;
