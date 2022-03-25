@@ -25,73 +25,75 @@
     <tr>
         {{$td.colspan = array.count($components) - 1}}
         <td colspan="{{$td.colspan}}">
-            <div class="dropdown dropup">
-            <button
-                class="btn btn-outline-primary dropdown-toggle"
-                type="button"
-                data-toggle="dropdown"
-                data-bs-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-            >
-                {{__('settings.server.settings.section.settings.component.html.footer.actions.text')}}
-            </button>
-            <div
-                class="dropdown-menu"
-            >
-                {{for.each($actions as $action)}}
-                    {{$require.basename = $action|uppercase.first.sentence:'.'}}
-                    {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Actions/' + $require.basename + '.tpl')}}
-                {{/for.each}}
-            </div>
-            <div class="dropdown dropup">
-            <button
-                class="btn btn-outline-primary dropdown-toggle filter-type"
-                type="button"
-                data-toggle="dropdown"
-                data-bs-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-            >
-            {{if($request.filter_type==='All')}}
-            {{__(
-            $__.module +
-            '.' +
-            $__.submodule +
-            '.section.' +
-            $__.command +
-            '.component.filter.file.dir.text'
-            )}}
-            {{elseif($request.filter_type==='File')}}
-            {{__(
-            $__.module +
-            '.' +
-            $__.submodule +
-            '.section.' +
-            $__.command +
-            '.component.filter.file.text'
-            )}}
-            {{elseif($request.filter_type==='Dir')}}
-            {{__(
-            $__.module +
-            '.' +
-            $__.submodule +
-            '.section.' +
-            $__.command +
-            '.component.filter.dir.text'
-            )}}
-            {{else}}
-            {{__(
-            $__.module +
-            '.' +
-            $__.submodule +
-            '.section.' +
-            $__.command +
-            '.component.filter.file.text'
-            )}}
+            <div class="btn-group">
+                <div class="dropdown dropup">
+                <button
+                    class="btn btn-outline-primary dropdown-toggle"
+                    type="button"
+                    data-toggle="dropdown"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                >
+                    {{__('settings.server.settings.section.settings.component.html.footer.actions.text')}}
+                </button>
+                <div
+                    class="dropdown-menu"
+                >
+                    {{for.each($actions as $action)}}
+                        {{$require.basename = $action|uppercase.first.sentence:'.'}}
+                        {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Actions/' + $require.basename + '.tpl')}}
+                    {{/for.each}}
+                </div>
+                <div class="dropdown dropup">
+                <button
+                    class="btn btn-outline-primary dropdown-toggle filter-type"
+                    type="button"
+                    data-toggle="dropdown"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                >
+                {{if($request.filter_type==='All')}}
+                {{__(
+                $__.module +
+                '.' +
+                $__.submodule +
+                '.section.' +
+                $__.command +
+                '.component.filter.file.dir.text'
+                )}}
+                {{elseif($request.filter_type==='File')}}
+                {{__(
+                $__.module +
+                '.' +
+                $__.submodule +
+                '.section.' +
+                $__.command +
+                '.component.filter.file.text'
+                )}}
+                {{elseif($request.filter_type==='Dir')}}
+                {{__(
+                $__.module +
+                '.' +
+                $__.submodule +
+                '.section.' +
+                $__.command +
+                '.component.filter.dir.text'
+                )}}
+                {{else}}
+                {{__(
+                $__.module +
+                '.' +
+                $__.submodule +
+                '.section.' +
+                $__.command +
+                '.component.filter.file.text'
+                )}}
 
-            {{/if}}
-            </button>
+                {{/if}}
+                </button>
+            </div>
             <div
                 class="dropdown-menu"
             >
