@@ -424,8 +424,7 @@ settings.options = (target) => {
                         form : {
                             name: "dialog-move",
                             url : node.data('url'),
-                        },
-                        submit: false
+                        }
                     });
                     const form = dialog_create.select('form[name="dialog-move"]');
                     if(!form){
@@ -434,25 +433,10 @@ settings.options = (target) => {
                     form.on('submit', (event) => {
                         if(form.data('has', 'url')){
                             header('authorization', 'Bearer ' + user.token());
-                            const nodeList = section.select('input[name="node.nodeList[]"]');
-                            let result = [];
-                            if(is.nodeList(nodeList)){
-                                let index;
-                                for(index=0; index < nodeList.length; index++){
-                                    let item = nodeList[index];
-                                    if(item.checked){
-                                        result.push(item.value);
-                                    }
-                                }
-                            } else if(nodeList) {
-                                let item = nodeList;
-                                if(item.checked){
-                                    result.push(item.value);
-                                }
-                            }
                             let data = {
                                 directory: section.select('input[name="node.directory"]')?.value,
-                                nodeList : result
+                                nodeList: settings.get('selected'),
+                                limit: "{{$request.limit}}"
                             };
                             request(form.data('url'), data, (url, response) => {
                                 dialog_create.remove();
