@@ -24,3 +24,7 @@
     float: left;
 }
 
+.settings-server-settings .card-body-settings td.actions i {
+ width: 16px;
+}
+
