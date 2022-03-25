@@ -5,7 +5,7 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.actions.file.dir.icon'
+'.component.filter.file.dir.icon'
 )}}
 {{$span.text = __(
 $__.module +
