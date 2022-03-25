@@ -25,7 +25,7 @@
     <tr>
         {{$td.colspan = array.count($components) - 1}}
         <td colspan="{{$td.colspan}}">
-            <div class="dropdown dropup">
+            <div class="dropdown dropup list-actions">
             <button
                 class="btn btn-outline-primary dropdown-toggle"
                 type="button"
@@ -44,7 +44,7 @@
                     {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Actions/' + $require.basename + '.tpl')}}
                 {{/for.each}}
             </div>
-            <div class="dropdown dropup">
+            <div class="dropdown dropup list-filters">
             <button
                 class="btn btn-outline-primary dropdown-toggle"
                 type="button"

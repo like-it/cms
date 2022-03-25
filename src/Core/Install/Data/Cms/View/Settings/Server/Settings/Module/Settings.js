@@ -482,6 +482,10 @@ settings.options = (target) => {
                     if(node.data('has', 'url') && node.data('has', 'frontend-url')){
                         let data = {};
                         request(node.data('url'), data, (url, response) => {
+                            let filter = section.select('.dropdown.list-filter');
+                            if(filter){
+                                filter.html(node.html());
+                            }
                             request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
 
                             });
@@ -555,6 +559,10 @@ settings.pagination = (target) => {
     if(!buttons){
         return;
     }
+    let filter_type = "{{$request.filter_type}}";
+    if(!filter_type){
+        filter_type = 'File';
+    }
     if(is.nodeList(buttons)){
         let index;
         for(index=0; index < buttons.length; index++){
@@ -581,6 +589,7 @@ settings.pagination = (target) => {
                     target.page = parseInt(target.page);
                     settings.page('current', section, target);
                 }
+                url += '?filter_type=' + filter_type;
                 header('Authorization', 'Bearer ' + user.token());
                 request(url, null, (url, response) => {
                     request(button.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
@@ -614,6 +623,7 @@ settings.pagination = (target) => {
                 target.page = parseInt(target.page);
                 settings.page('current', section, target);
             }
+            url += '?filter_type=' + filter_type;
             header('Authorization', 'Bearer ' + user.token());
             request(url, null, (url, response) => {
                 request(button.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
