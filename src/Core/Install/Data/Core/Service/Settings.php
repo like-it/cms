@@ -1576,6 +1576,7 @@ class Settings extends Main {
             $response = [];
             $response['count'] = 0;
             $response['nodeList'] = [];
+            $response['filter_type'] = $filter_type;
             return new Response($response, Response::TYPE_JSON);
         }
     }

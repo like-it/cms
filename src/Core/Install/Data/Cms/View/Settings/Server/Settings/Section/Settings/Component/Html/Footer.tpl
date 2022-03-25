@@ -53,7 +53,44 @@
                 aria-haspopup="true"
                 aria-expanded="false"
             >
-                {{__('settings.server.settings.section.settings.component.html.footer.filter.text')}}
+            {{if($request.filter_type==='All')}}
+            {{__(
+            $__.module +
+            '.' +
+            $__.submodule +
+            '.section.' +
+            $__.command +
+            '.component.filter.file.dir.text'
+            )}}
+            {{elseif($request.filter_type==='File')}}
+            {{__(
+            $__.module +
+            '.' +
+            $__.submodule +
+            '.section.' +
+            $__.command +
+            '.component.filter.file.text'
+            )}}
+            {{elseif($request.filter_type==='Dir')}}
+            {{__(
+            $__.module +
+            '.' +
+            $__.submodule +
+            '.section.' +
+            $__.command +
+            '.component.filter.dir.text'
+            )}}
+            {{else}}
+            {{__(
+            $__.module +
+            '.' +
+            $__.submodule +
+            '.section.' +
+            $__.command +
+            '.component.filter.file.text'
+            )}}
+
+            {{/if}}
             </button>
             <div
                 class="dropdown-menu"
