@@ -491,60 +491,6 @@ settings.options = (target) => {
                             if(filter){
                                 filter.text = node.text;
                             }
-                            let menuItem = section.select(target.select);
-                            if(
-                                menuItem &&
-                                node.hasClass('list-filter-file-dir')
-                            ){
-                                let url = menuItem.data('url');
-                                let split = url.split('?');
-                                if(split.length > 1){
-                                    menuItem.data('url', menuItem.data('url') + "&filter_type=All")
-                                } else {
-                                    menuItem.data('url', menuItem.data('url') + "?filter_type=All")
-                                }
-                                let frontend_url = menuItem.data('frontend-url');
-                                split = frontend_url.split('?');
-                                if(split.length > 1){
-                                    menuItem.data('frontend-url', menuItem.data('frontend-url') + "&filter_type=All")
-                                } else {
-                                    menuItem.data('frontend-url', menuItem.data('frontend-url') + "?filter_type=All")
-                                }
-                            }
-                            else if(
-                                menuItem &&
-                                node.hasClass('list-filter-dir')
-                            ){
-                                let url = menuItem.data('url');
-                                let split = url.split('?');
-                                if(split.length > 1){
-                                    menuItem.data('url', menuItem.data('url') + "&filter_type=Dir")
-                                } else {
-                                    menuItem.data('url', menuItem.data('url') + "?filter_type=Dir")
-                                }
-                                let frontend_url = menuItem.data('frontend-url');
-                                split = frontend_url.split('?');
-                                if(split.length > 1){
-                                    menuItem.data('frontend-url', menuItem.data('frontend-url') + "&filter_type=Dir")
-                                } else {
-                                    menuItem.data('frontend-url', menuItem.data('frontend-url') + "?filter_type=Dir")
-                                }
-                            } else if(menuItem){
-                                let url = menuItem.data('url');
-                                let split = url.split('?');
-                                if(split.length > 1){
-                                    menuItem.data('url', menuItem.data('url') + "&filter_type=File")
-                                } else {
-                                    menuItem.data('url', menuItem.data('url') + "?filter_type=File")
-                                }
-                                let frontend_url = menuItem.data('frontend-url');
-                                split = frontend_url.split('?');
-                                if(split.length > 1){
-                                    menuItem.data('frontend-url', menuItem.data('frontend-url') + "&filter_type=File")
-                                } else {
-                                    menuItem.data('frontend-url', menuItem.data('frontend-url') + "?filter_type=File")
-                                }
-                            }
                             request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
 
                             });
