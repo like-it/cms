@@ -477,6 +477,7 @@ settings.options = (target) => {
                     }
                 });
             }
+            /*
             else if(node.hasClass('list-filter-file-dir')){
                 node.on('click', (event) => {
                     if(node.data('has', 'url') && node.data('has', 'frontend-url')){
@@ -487,7 +488,6 @@ settings.options = (target) => {
                             if(filter){
                                 filter.text = node.text;
                             }
-                             */
                             request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
 
                             });
@@ -495,6 +495,7 @@ settings.options = (target) => {
                     }
                 });
             }
+            */
             else {
                 node.on('click', (event) => {
                     console.log('click2');
