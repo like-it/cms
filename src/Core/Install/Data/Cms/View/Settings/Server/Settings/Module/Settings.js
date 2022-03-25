@@ -503,6 +503,13 @@ settings.options = (target) => {
                                 } else {
                                     menuItem.data('url', menuItem.data('url') + "?filter_type=All")
                                 }
+                                let url_frontend = menuItem.data('url-frontend');
+                                split = url_frontend.split('?');
+                                if(split.length > 1){
+                                    menuItem.data('url-frontend', menuItem.data('url-frontend') + "&filter_type=All")
+                                } else {
+                                    menuItem.data('url-frontend', menuItem.data('url-frontend') + "?filter_type=All")
+                                }
                             }
                             else if(
                                 menuItem &&
@@ -515,6 +522,13 @@ settings.options = (target) => {
                                 } else {
                                     menuItem.data('url', menuItem.data('url') + "?filter_type=Dir")
                                 }
+                                let url_frontend = menuItem.data('url-frontend');
+                                split = url_frontend.split('?');
+                                if(split.length > 1){
+                                    menuItem.data('url-frontend', menuItem.data('url-frontend') + "&filter_type=Dir")
+                                } else {
+                                    menuItem.data('url-frontend', menuItem.data('url-frontend') + "?filter_type=Dir")
+                                }
                             } else if(menuItem){
                                 let url = menuItem.data('url');
                                 let split = url.split('?');
@@ -522,6 +536,13 @@ settings.options = (target) => {
                                     menuItem.data('url', menuItem.data('url') + "&filter_type=File")
                                 } else {
                                     menuItem.data('url', menuItem.data('url') + "?filter_type=File")
+                                }
+                                let url_frontend = menuItem.data('url-frontend');
+                                split = url_frontend.split('?');
+                                if(split.length > 1){
+                                    menuItem.data('url-frontend', menuItem.data('url-frontend') + "&filter_type=File")
+                                } else {
+                                    menuItem.data('url-frontend', menuItem.data('url-frontend') + "?filter_type=File")
                                 }
                             }
                             request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
