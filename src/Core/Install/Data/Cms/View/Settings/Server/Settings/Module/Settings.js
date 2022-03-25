@@ -452,10 +452,10 @@ settings.options = (target) => {
                                         menuItem.data('page', response.page);
                                     }
                                 }
-                                if(response?.filter_type){
+                                if(node.data('filter-type')){
                                     const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
                                     if(menuItem){
-                                        menuItem.data('filter_type', response.filter_type);
+                                        menuItem.data('filter_type', node.data('filter-type'));
                                     }
                                 }
                                 if(response?.error){
