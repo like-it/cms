@@ -11,22 +11,22 @@ let settings = {};
 
 settings.get = (attribute) => {
     if(is.empty(attribute)){
-        return _('_').collection('settings');
+        return _('_').collection("{{$__.module}}.{{$__.submodule}}." + 'settings');
     } else {
-        return _('_').collection('settings.' + attribute);
+        return _('_').collection("{{$__.module}}.{{$__.submodule}}." + 'settings.' + attribute);
     }
 }
 
 settings.set = (attribute, value) => {
-    _('_').collection('settings.' + attribute, value);
+    _('_').collection("{{$__.module}}.{{$__.submodule}}." + 'settings.' + attribute, value);
 }
 
 settings.delete = (attribute) => {
-    _('_').collection('delete', 'settings.' + attribute);
+    _('_').collection('delete', "{{$__.module}}.{{$__.submodule}}." + 'settings.' + attribute);
 }
 
 settings.data = (attribute, value) => {
-    return _('_').collection('settings.' + attribute, value);
+    return _('_').collection("{{$__.module}}.{{$__.submodule}}." + 'settings.' + attribute, value);
 }
 
 settings.onSelectInverse = () => {
@@ -460,6 +460,7 @@ settings.options = (target) => {
                                         className : "dialog dialog-error dialog-error-move"
                                     });
                                 }
+                                settings.delete('selected')
                                 menu.dispatch(section, target);
                             });
                         }
