@@ -1634,9 +1634,12 @@ class Settings extends Main {
         }
         $response = [];
         $response['nodeList'] = $list;
-        $response['page'] = Settings::server_settings_page($object, [
-            'url' => $destination
-        ]);
+        if($destination){
+            $response['page'] = Settings::server_settings_page($object, [
+                'url' => $destination
+            ]);
+        }
+
         if(!empty($error)){
             $response['error'] = $error;
         }
