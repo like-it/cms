@@ -447,7 +447,7 @@ settings.options = (target) => {
                                 nodeList : result
                             };
                             request(form.data('url'), data, (url, response) => {
-                                //dialog_create.remove();
+                                dialog_create.remove();
                                 if(response?.page){
                                     const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
                                     if(menuItem){
