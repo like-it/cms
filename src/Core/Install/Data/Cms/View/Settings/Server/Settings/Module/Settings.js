@@ -604,7 +604,7 @@ settings.pagination = (target) => {
                     settings.page('current', section, target);
                 }
                 if(url){
-                    url += '?filter_type=' + filter_type;
+                    url += '&filter_type=' + filter_type;
                 }
                 header('Authorization', 'Bearer ' + user.token());
                 request(url, null, (url, response) => {
@@ -640,7 +640,7 @@ settings.pagination = (target) => {
                 settings.page('current', section, target);
             }
             if(url){
-                url += '?filter_type=' + filter_type;
+                url += '&filter_type=' + filter_type;
             }
             header('Authorization', 'Bearer ' + user.token());
             request(url, null, (url, response) => {
