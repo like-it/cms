@@ -480,6 +480,7 @@ settings.options = (target) => {
             else if(node.hasClass('list-filter-file-dir')){
                 node.on('click', (event) => {
                     if(node.data('has', 'url') && node.data('has', 'frontend-url')){
+                        let data = {};
                         request(node.data('url'), data, (url, response) => {
                             request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
 
