@@ -44,6 +44,25 @@
                     {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Actions/' + $require.basename + '.tpl')}}
                 {{/for.each}}
             </div>
+            <div class="dropdown dropup">
+            <button
+                class="btn btn-outline-primary dropdown-toggle"
+                type="button"
+                data-toggle="dropdown"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+            >
+                {{__('settings.server.settings.section.settings.component.html.footer.filter.text')}}
+            </button>
+            <div
+                class="dropdown-menu"
+            >
+                {{for.each($actions as $action)}}
+                    {{$require.basename = $action|uppercase.first.sentence:'.'}}
+                    {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Filter/' + $require.basename + '.tpl')}}
+                {{/for.each}}
+            </div>
         </td>
         <td class="text-end">
             <span class="page">{{$page.start}}-{{$page.to}} of {{$page.count}}</span>
