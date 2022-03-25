@@ -207,7 +207,7 @@ class Settings extends View {
     }
 
     public static function server_settings_command(App $object){
-        $object->logger()->debug('request' [ $object->request() ]);
+        dd($object->request());
         $url = $object->request('node.url');
         $nodeList = $object->request('nodeList');
         try {
