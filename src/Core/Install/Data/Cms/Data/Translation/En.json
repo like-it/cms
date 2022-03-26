@@ -375,6 +375,7 @@
     "settings.server.settings.section.settings.component.options.rename.icon" : "fas fa-cog",
     "settings.server.settings.section.settings.component.options.rename.text" : "Rename",
     "settings.server.settings.section.settings.component.thead.actions" : "Toggle select inverse on this page",
+    "settings.server.settings.section.settings.component.thead.icon" : "",
     "settings.server.settings.section.settings.component.thead.name" : "Name",
     "settings.server.settings.section.settings.component.thead.url" : "Url",
     "settings.server.settings.section.settings.component.thead.routes" : "Amount of<br>Routes",
