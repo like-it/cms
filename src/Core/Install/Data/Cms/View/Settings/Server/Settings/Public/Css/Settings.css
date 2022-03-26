@@ -25,6 +25,10 @@
 }
 
 .settings-server-settings .card-body-settings td.actions i.fa-file {
- margin-right: 4px;
+    margin-right: calc(1rem + 4px);
+}
+
+.settings-server-settings .card-body-settings td.actions i.fa-folder {
+    margin-right: 1rem;
 }
 
