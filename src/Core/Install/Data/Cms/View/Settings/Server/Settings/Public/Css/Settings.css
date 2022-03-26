@@ -14,11 +14,11 @@
     background: rgba(255, 255, 255, 1);
 }
 
-.settings-server-settings .card-body-settings thead th .th-icon {
+.settings-server-settings .card-body-settings thead .th-icon {
     width: 20px;
 }
 
-.settings-server-settings .card-body-settings thead th .th-actions {
+.settings-server-settings .card-body-settings thead .th-actions {
     width: 20px;
 }
 
