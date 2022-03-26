@@ -27,7 +27,7 @@
         <thead>
         <tr>
             {{for.each($components as $component)}}
-            <th scope="col">
+            <th scope="col" class="th-{{$component}}">
                 {{if($component === 'actions')}}
                 <input
                     type="checkbox"
