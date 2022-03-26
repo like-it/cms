@@ -24,11 +24,11 @@
     float: left;
 }
 
-.settings-server-settings .card-body-settings td.actions i.fa-file {
+.settings-server-settings .card-body-settings td i.fa-file {
     margin-right: calc(1rem + 4px);
 }
 
-.settings-server-settings .card-body-settings td.actions i.fa-folder {
+.settings-server-settings .card-body-settings td i.fa-folder {
     margin-right: 1rem;
 }
 
