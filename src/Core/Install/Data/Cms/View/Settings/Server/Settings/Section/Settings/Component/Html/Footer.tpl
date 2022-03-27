@@ -57,8 +57,7 @@
                 aria-haspopup="true"
                 aria-expanded="false"
             >
-            {{dd($request.filter.type)}}
-            {{if($request.filter_type==='All')}}
+            {{if($request.filter.type==='All')}}
             {{__(
             $__.module +
             '.' +
@@ -67,7 +66,7 @@
             $__.command +
             '.component.filter.file.dir.text'
             )}}
-            {{elseif($request.filter_type==='File')}}
+            {{elseif($request.filter.type==='File')}}
             {{__(
             $__.module +
             '.' +
@@ -76,7 +75,7 @@
             $__.command +
             '.component.filter.file.text'
             )}}
-            {{elseif($request.filter_type==='Dir')}}
+            {{elseif($request.filter.type==='Dir')}}
             {{__(
             $__.module +
             '.' +
