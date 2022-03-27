@@ -1629,7 +1629,28 @@ class Settings extends Main {
                     $list[] = $destination;
                     continue;
                 }
-                $move = File::move($source, $destination, $overwrite);
+                if(Dir::is($source)){
+                    continue;
+                } else {
+                    $move = File::move($source, $destination, $overwrite);
+                }
+                if($move){
+                    $list[] = $destination;
+                } else {
+                    $error[] = $source;
+                }
+            }
+            foreach($nodeList as $nr => $source){
+                $destination = $url;
+                if($source == $destination){
+                    $list[] = $destination;
+                    continue;
+                }
+                if(File::is($source)){
+                    continue;
+                } else {
+                    $move = Dir::move($source, $destination, $overwrite);
+                }
                 if($move){
                     $list[] = $destination;
                 } else {
@@ -1644,7 +1665,6 @@ class Settings extends Main {
                 'url' => $destination
             ]);
         }
-
         if(!empty($error)){
             $response['error'] = $error;
         }
