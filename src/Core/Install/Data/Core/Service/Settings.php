@@ -1501,24 +1501,26 @@ class Settings extends Main {
         $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
         $settings =  $object->data_read($settings_url);
         $filter = $object->request('filter');
-        if(!empty($filter)){
-            dd($filter);
+        if(empty($filter) || !is_array($filter)){
+            $filter = [];
+            $filter['type'] = 'File';
         }
-        if(empty($filter_type)){
-            $filter_type = 'File';
+        if(!array_key_exists('type', $filter)){
+            $filter['type'] = 'File';
         }
+
         $protected = [];
         if($settings->data('server.settings.protected')){
             $protected = $settings->data('server.settings.protected');
         }
         if($read){
             foreach($read as $nr => $record){
-                if($filter_type === File::TYPE){
+                if($filter['type'] === File::TYPE){
                     if($record->type !== File::TYPE){
                         continue;
                     }
                 }
-                elseif($filter_type === Dir::TYPE){
+                elseif($filter['type'] === Dir::TYPE){
                     if($record->type !== Dir::TYPE){
                         continue;
                     }
@@ -1570,7 +1572,7 @@ class Settings extends Main {
             $response['limit'] = $limit;
             $response['page'] = $page;
             $response['max'] = ceil($response['count'] / $response['limit']);
-            $response['filter_type'] = $filter_type;
+            $response['filter'] = $filter;
             if(!empty($protected)){
                 $response['protected'] = $protected;
             }
@@ -1579,7 +1581,7 @@ class Settings extends Main {
             $response = [];
             $response['count'] = 0;
             $response['nodeList'] = [];
-            $response['filter_type'] = $filter_type;
+            $response['filter'] = $filter;
             return new Response($response, Response::TYPE_JSON);
         }
     }
