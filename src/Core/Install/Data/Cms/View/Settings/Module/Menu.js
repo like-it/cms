@@ -164,8 +164,8 @@ menu.is_selected = (node, selected) => {
                 }
                 url = str_replace("{node.domain}", domain.value, url);
             }
-            if(node.data('filter_type')){
-                url += '?filter_type=' + node.data('filter_type');
+            if(node.data('filter[type]')){
+                url += '?filter[type]=' + node.data('filter[type]');
             }
             request(url);
         }

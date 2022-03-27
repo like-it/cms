@@ -457,7 +457,7 @@ settings.options = (target) => {
                                 }
                                 const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
                                 if(menuItem){
-                                    menuItem.data('filter-type', filter.type);
+                                    menuItem.data('filter[type]', filter.type);
                                 }
                                 if(response?.error){
                                     dialog.create({
