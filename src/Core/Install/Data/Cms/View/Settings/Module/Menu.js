@@ -2,6 +2,7 @@
 import user from "/Module/User.js";
 import create from "/Module/Create.js";
 import dialog from "/Module/Dialog.js";
+import loader from "/Module/Loader.js";
 import { stristr, str_replace } from "/Module/String.js";
 import { getSectionByName } from "/Module/Section.js";
 
@@ -109,6 +110,10 @@ menu.is_selected = (node, selected) => {
             if(node.data('filter-type')){
                 url += '&filter[type]=' + node.data('filter-type');
             }
+            loader.create({
+                className : "card-body h-100 card-body-loader",
+                target: ".card"
+            });
             console.log('loader');
             request(url, null, (url, response) => {
                 if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
