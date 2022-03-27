@@ -17,9 +17,9 @@
 'delete'
 ]}}
 {{$filters = [
-'dir'
+'dir',
 'file',
-'all',
+'all'
 ]}}
 <div class="card-body h-100 card-body-{{$command}}">
     {{if(!is.empty($request.nodeList))}}
