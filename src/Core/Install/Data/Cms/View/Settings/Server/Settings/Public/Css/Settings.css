@@ -15,11 +15,12 @@
 }
 
 .settings-server-settings .card-body-settings thead .th-icon {
-    width: 20px;
+    width: 32px;
+    color: #0b5ed7;
 }
 
 .settings-server-settings .card-body-settings thead .th-actions {
-    width: 20px;
+    width: 32px;
 }
 
 .settings-server-settings .card-body-settings tfoot td {
