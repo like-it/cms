@@ -1,5 +1,7 @@
 .spinner {
-    margin: calc(50% - 50px) auto;
+    margin-top: calc(50% - 50px);
+    margin-left: auto;
+    margin-right: auto;
     width: 150px;
     height: 100px;
     text-align: center;
