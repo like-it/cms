@@ -57,6 +57,10 @@
                 aria-haspopup="true"
                 aria-expanded="false"
             >
+            {{if($request.filter)}}
+            {{d($request.filter['type'])}}
+            {{dd($request.filter)}}
+            {{/if}}
             {{if($request.filter_type==='All')}}
             {{__(
             $__.module +
