@@ -64,7 +64,7 @@
             $__.submodule +
             '.section.' +
             $__.command +
-            '.component.filter.file.dir.text'
+            '.component.filter.all.text'
             )}}
             {{elseif($request.filter.type==='File')}}
             {{__(
