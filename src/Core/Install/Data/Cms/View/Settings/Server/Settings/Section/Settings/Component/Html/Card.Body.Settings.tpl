@@ -17,8 +17,8 @@
 'delete'
 ]}}
 {{$filters = [
+'all',
 'dir',
-'file.dir',
 'file'
 ]}}
 <div class="card-body h-100 card-body-{{$command}}">

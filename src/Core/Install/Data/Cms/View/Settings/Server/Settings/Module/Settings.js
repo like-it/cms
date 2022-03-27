@@ -337,8 +337,15 @@ settings.options = (target) => {
                                         method : node.data('request-method') ? node.data('request-method') : "DELETE"
                                     }
                                 };
+                                let filter = {
+                                    type : "{{$request.filter.type}}"
+                                };
                                 header('authorization', 'Bearer ' + user.token());
                                 request(node.data('url'), data, (url, response) => {
+                                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                                    if(menuItem){
+                                        menuItem.data('filter-type', filter.type);
+                                    }
                                     dialog_create.remove();
                                     menu.dispatch(section, target);
                                 });
@@ -350,16 +357,6 @@ settings.options = (target) => {
                         }
 
                     }
-                });
-            }
-            else if(node.hasClass('item-move')){
-                node.on('click', (event) => {
-                    //make dialog delete with are you sure.
-                    settings.moveDialog({
-                        node: node,
-                        section: section,
-                        target: target,
-                    });
                 });
             }
             else if(node.hasClass('list-delete')){
@@ -525,12 +522,9 @@ settings.options = (target) => {
             }
             else {
                 node.on('click', (event) => {
-                    console.log('click2');
                     if(node.data('has', 'url') && node.data('has', 'frontend-url')){
-                        console.log('has2');
                         header('Authorization', 'Bearer ' + user.token());
                         request(node.data('url'), null, (url, response) => {
-                            console.log('url2');
                             request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
                                 console.log('frontend-url2');
                             });
@@ -538,7 +532,6 @@ settings.options = (target) => {
                     }
                     else if(node.data('has', 'frontend-url')){
                         request(node.data('frontend-url'), null, (url, response) => {
-
                         });
                     }
                 });
@@ -578,8 +571,15 @@ settings.options = (target) => {
                                     method : node.data('request-method') ? node.data('request-method') : "DELETE"
                                 }
                             };
+                            let filter = {
+                                type : "{{$request.filter.type}}"
+                            };
                             header('authorization', 'Bearer ' + user.token());
                             request(node.data('url'), data, (url, response) => {
+                                const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                                if(menuItem){
+                                    menuItem.data('filter-type', filter.type);
+                                }
                                 dialog_create.remove();
                                 menu.dispatch(section, target);
                             });
@@ -591,16 +591,6 @@ settings.options = (target) => {
                     }
 
                 }
-            });
-        }
-        else if(node.hasClass('item-move')){
-            node.on('click', (event) => {
-                //make dialog delete with are you sure.
-                settings.moveDialog({
-                    node: node,
-                    section: section,
-                    target: target,
-                });
             });
         }
         else if(node.hasClass('list-delete')){
@@ -634,8 +624,15 @@ settings.options = (target) => {
                                     method : node.data('request-method') ? node.data('request-method') : "DELETE"
                                 }
                             };
+                            let filter = {
+                                type : "{{$request.filter.type}}"
+                            };
                             header('authorization', 'Bearer ' + user.token());
                             request(node.data('url'), data, (url, response) => {
+                                const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                                if(menuItem){
+                                    menuItem.data('filter-type', filter.type);
+                                }
                                 dialog_create.remove();
                                 settings.delete('selected');
                                 menu.dispatch(section, target);
@@ -685,6 +682,9 @@ settings.options = (target) => {
                             nodeList: settings.get('selected'),
                             limit: "{{$request.limit}}"
                         };
+                        let filter = {
+                            type : "{{$request.filter.type}}"
+                        };
                         request(form.data('url'), data, (url, response) => {
                             dialog_create.remove();
                             if(response?.page){
@@ -693,14 +693,12 @@ settings.options = (target) => {
                                     menuItem.data('page', response.page);
                                 }
                             }
-                            if(node.data('filter-type')){
-                                const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                                if(menuItem){
-                                    menuItem.data('filter-type', node.data('filter-type'));
-                                }
+                            const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                            if(menuItem){
+                                menuItem.data('filter-type', filter.type);
                             }
                             if(response?.error){
-                                dialog.create({
+                                let dialog_error = dialog.create({
                                     title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.title')}}",
                                     message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.message'))}}",
                                     error : response.error,
@@ -712,6 +710,17 @@ settings.options = (target) => {
                                     section : section,
                                     className : "dialog dialog-error dialog-error-move"
                                 });
+                                const form = dialog_error.select('form');
+                                if(!form){
+                                    return;
+                                }
+                                form.on('submit', (event) => {
+                                    dialog_error.remove();
+                                });
+                                const button = form.select('button[type="submit"]');
+                                if(button){
+                                    button.focus();
+                                }
                             }
                             settings.delete('selected')
                             menu.dispatch(section, target);
@@ -726,7 +735,7 @@ settings.options = (target) => {
         }
 
         else if(
-            node.hasClass('list-filter-file-dir') ||
+            node.hasClass('list-filter-all') ||
             node.hasClass('list-filter-file') ||
             node.hasClass('list-filter-dir')
         ){
