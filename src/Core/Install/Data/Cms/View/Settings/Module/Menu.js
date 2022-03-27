@@ -109,6 +109,7 @@ menu.is_selected = (node, selected) => {
             if(node.data('filter-type')){
                 url += '&filter[type]=' + node.data('filter-type');
             }
+            console.log('loader');
             request(url, null, (url, response) => {
                 if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
                     if(response.message === 'No domain found.'){
@@ -146,7 +147,11 @@ menu.is_selected = (node, selected) => {
                     if(node.data('filter-type')){
                         url += '?filter[type]=' + node.data('filter-type');
                     }
-                    request(url, response);
+                    request(url, response, () => {
+                        console.log('loader remove');
+                    });
+                } else {
+                    console.log('loader remove');
                 }
             });
         }
