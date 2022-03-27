@@ -4,12 +4,12 @@ import { getSectionByName } from "/Module/Section.js";
 
 let loader = {};
 
-loader.start = ({className, target}) => {
-    const section = select("section[name='main-content']");
+loader.start = ({className, target, section}) => {
+    section = select(section);
     if(!section){
         return;
     }
-    target = section.select(target);
+    target = section.select('.' + target);
     if(!target){
         return;
     }
@@ -30,8 +30,19 @@ loader.start = ({className, target}) => {
     target.appendChild(card);
 }
 
-loader.end = () => {
-    //not needed or delete card-body-loader
+loader.delete = ({className, target, section}) => {
+    section = select(section);
+    if(!section){
+        return;
+    }
+    target = section.select('.' + target);
+    if(!target){
+        return;
+    }
+    const card = target.select('.' + className);
+    if(card){
+        card.remove();
+    }
 }
 
 export default loader;

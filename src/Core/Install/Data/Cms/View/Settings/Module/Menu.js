@@ -113,9 +113,9 @@ menu.is_selected = (node, selected) => {
             }
             loader.start({
                 className : "card-body h-100 card-body-loader",
-                target: ".card"
+                target: "card",
+                section: "section[name='main-content']"
             });
-            console.log('loader');
             request(url, null, (url, response) => {
                 if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
                     if(response.message === 'No domain found.'){
@@ -154,10 +154,18 @@ menu.is_selected = (node, selected) => {
                         url += '?filter[type]=' + node.data('filter-type');
                     }
                     request(url, response, () => {
-                        console.log('loader remove');
+                        loader.delete({
+                            className : "card-body h-100 card-body-loader",
+                            target: "card",
+                            section: "section[name='main-content']"
+                        });
                     });
                 } else {
-                    console.log('loader remove');
+                    loader.delete({
+                        className : "card-body h-100 card-body-loader",
+                        target: "card",
+                        section: "section[name='main-content']"
+                    });
                 }
             });
         }
@@ -178,7 +186,18 @@ menu.is_selected = (node, selected) => {
             if(node.data('filter-type')){
                 url += '?filter[type]=' + node.data('filter-type');
             }
-            request(url);
+            loader.start({
+                className : "card-body h-100 card-body-loader",
+                target: "card",
+                section: "section[name='main-content']"
+            });
+            request(url, null, () => {
+                loader.delete({
+                    className : "card-body h-100 card-body-loader",
+                    target: "card",
+                    section: "section[name='main-content']"
+                });
+            });
         }
     }
 };
