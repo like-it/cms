@@ -467,7 +467,7 @@ settings.options = (target) => {
                                     menuItem.data('filter-type', filter.type);
                                 }
                                 if(response?.error){
-                                    dialog.create({
+                                    let dialog_error = dialog.create({
                                         title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.title')}}",
                                         message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.message'))}}",
                                         error : response.error,
@@ -479,6 +479,17 @@ settings.options = (target) => {
                                         section : section,
                                         className : "dialog dialog-error dialog-error-move"
                                     });
+                                    const form = dialog_error.select('form');
+                                    if(!form){
+                                        return;
+                                    }
+                                    form.on('submit', (event) => {
+                                        dialog_error.remove();
+                                    });
+                                    const button = form.select('button[type="submit"]');
+                                    if(button){
+                                        button.focus();
+                                    }
                                 }
                                 settings.delete('selected')
                                 menu.dispatch(section, target);
