@@ -1646,9 +1646,12 @@ class Settings extends Main {
                     $list[] = $destination;
                     continue;
                 }
-                if(File::is($source)){
+                if(!Dir::is($source)){
                     continue;
                 } else {
+                    d($overwrite);
+                    d($source);
+                    dd($destination);
                     $move = Dir::move($source, $destination, $overwrite);
                 }
                 if($move){
