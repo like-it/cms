@@ -111,7 +111,7 @@ menu.is_selected = (node, selected) => {
             if(node.data('filter-type')){
                 url += '&filter[type]=' + node.data('filter-type');
             }
-            loader.create({
+            loader.start({
                 className : "card-body h-100 card-body-loader",
                 target: ".card"
             });
