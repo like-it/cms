@@ -1516,7 +1516,6 @@ class Settings extends Main {
         if(!array_key_exists('type', $filter)){
             $filter['type'] = 'File';
         }
-
         $protected = [];
         if($settings->data('server.settings.protected')){
             $protected = $settings->data('server.settings.protected');
@@ -1687,6 +1686,14 @@ class Settings extends Main {
         $read = $dir->read($url, true);
         $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
         $settings = $object->data_read($settings_url);
+        $filter = $object->request('filter');
+        if(empty($filter) || !is_array($filter)){
+            $filter = [];
+            $filter['type'] = 'File';
+        }
+        if(!array_key_exists('type', $filter)){
+            $filter['type'] = 'File';
+        }
         $protected = [];
         $page = false;
         if ($settings->data('server.settings.protected')) {
@@ -1694,10 +1701,19 @@ class Settings extends Main {
         }
         if ($read) {
             foreach ($read as $nr => $record) {
-                if ($record->type !== File::TYPE) {
-                    continue;
+                if($filter['type'] === File::TYPE){
+                    if($record->type !== File::TYPE){
+                        continue;
+                    }
                 }
-                $record->extension = File::extension($record->url);
+                elseif($filter['type'] === Dir::TYPE){
+                    if($record->type !== Dir::TYPE){
+                        continue;
+                    }
+                }
+                if($record->type !== Dir::TYPE){
+                    $record->extension = File::extension($record->url);
+                }
                 if (in_array(
                     $record->url,
                     $protected

@@ -443,13 +443,14 @@ settings.options = (target) => {
                     form.on('submit', (event) => {
                         if(form.data('has', 'url')){
                             header('authorization', 'Bearer ' + user.token());
+                            let filter = {
+                                type : "{{$request.filter.type}}"
+                            };
                             let data = {
                                 directory: section.select('input[name="node.directory"]')?.value,
                                 nodeList: settings.get('selected'),
                                 limit: "{{$request.limit}}",
-                            };
-                            let filter = {
-                                type : "{{$request.filter.type}}"
+                                filter: filter
                             };
                             request(form.data('url'), data, (url, response) => {
                                 dialog_create.remove();
@@ -677,13 +678,14 @@ settings.options = (target) => {
                 form.on('submit', (event) => {
                     if(form.data('has', 'url')){
                         header('authorization', 'Bearer ' + user.token());
+                        let filter = {
+                            type : "{{$request.filter.type}}"
+                        };
                         let data = {
                             directory: section.select('input[name="node.directory"]')?.value,
                             nodeList: settings.get('selected'),
-                            limit: "{{$request.limit}}"
-                        };
-                        let filter = {
-                            type : "{{$request.filter.type}}"
+                            limit: "{{$request.limit}}",
+                            filter: filter
                         };
                         request(form.data('url'), data, (url, response) => {
                             dialog_create.remove();
