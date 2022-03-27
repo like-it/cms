@@ -155,14 +155,14 @@ menu.is_selected = (node, selected) => {
                     }
                     request(url, response, () => {
                         loader.delete({
-                            className : "card-body h-100 card-body-loader",
+                            className : "card-body-loader",
                             target: "card",
                             section: "section[name='main-content']"
                         });
                     });
                 } else {
                     loader.delete({
-                        className : "card-body h-100 card-body-loader",
+                        className : "card-body-loader",
                         target: "card",
                         section: "section[name='main-content']"
                     });
@@ -193,7 +193,7 @@ menu.is_selected = (node, selected) => {
             });
             request(url, null, () => {
                 loader.delete({
-                    className : "card-body h-100 card-body-loader",
+                    className : "card-body-loader",
                     target: "card",
                     section: "section[name='main-content']"
                 });
