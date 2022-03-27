@@ -73,6 +73,8 @@
                 data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.url|url.raw.encode}}/"
                 data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-view-body')}}"
             >
+            {{else.if($node.type === 'Dir')}}
+            <tr>
             {{else}}
             <tr
                 data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.url|url.raw.encode}}/"
