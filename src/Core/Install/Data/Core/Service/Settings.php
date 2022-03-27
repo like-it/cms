@@ -1649,9 +1649,6 @@ class Settings extends Main {
                 if(!Dir::is($source)){
                     continue;
                 } else {
-                    d($overwrite);
-                    d($source);
-                    dd($destination);
                     $move = Dir::move($source, $destination, $overwrite);
                 }
                 if($move){
