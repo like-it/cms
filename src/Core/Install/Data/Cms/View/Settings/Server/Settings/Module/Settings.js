@@ -444,7 +444,7 @@ settings.options = (target) => {
                                 nodeList: settings.get('selected'),
                                 limit: "{{$request.limit}}",
                             };
-                            let filter = "{$request.filter}}";
+                            let filter = "{{$request.filter}}";
                             console.log(filter);
                             request(form.data('url'), data, (url, response) => {
                                 dialog_create.remove();
