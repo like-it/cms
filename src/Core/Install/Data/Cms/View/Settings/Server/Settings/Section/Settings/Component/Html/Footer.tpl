@@ -127,7 +127,7 @@
             '&q=' +
             $request.q +
             '&filter[type]=' +
-            $request.filter_type
+            $request.filter.type
             }}
             {{$button.data.frontend.url =
             route.get(route.prefix() +
@@ -171,7 +171,7 @@
             '&q=' +
             $request.q +
             '&filter[type]=' +
-            $request.filter_type
+            $request.filter.type
             }}
             {{$button.data.frontend.url =
             route.get(route.prefix() +
@@ -215,7 +215,7 @@
             '&q=' +
             $request.q +
             '&filter[type]=' +
-            $request.filter_type
+            $request.filter.type
             }}
             {{$button.data.frontend.url =
             route.get(route.prefix() +
@@ -259,7 +259,7 @@
                 '&q=' +
                 $request.q +
                 '&filter[type]=' +
-                $request.filter_type
+                $request.filter.type
             }}
             {{$button.data.frontend.url =
                 route.get(route.prefix() +
