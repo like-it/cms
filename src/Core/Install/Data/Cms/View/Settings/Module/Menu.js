@@ -106,8 +106,8 @@ menu.is_selected = (node, selected) => {
                 url += '?page=' + page;
                 //node.data('delete', 'page');
             }
-            if(node.data('filter_type')){
-                url += '&filter_type=' + node.data('filter_type');
+            if(node.data('filter-type')){
+                url += '&filter[type]=' + node.data('filter-type');
             }
             request(url, null, (url, response) => {
                 if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
@@ -143,8 +143,8 @@ menu.is_selected = (node, selected) => {
                         }
                         url = str_replace("{node.domain}", domain.value, url);
                     }
-                    if(node.data('filter_type')){
-                        url += '?filter_type=' + node.data('filter_type');
+                    if(node.data('filter-type')){
+                        url += '?filter[type]=' + node.data('filter-type');
                     }
                     request(url, response);
                 }
@@ -164,8 +164,8 @@ menu.is_selected = (node, selected) => {
                 }
                 url = str_replace("{node.domain}", domain.value, url);
             }
-            if(node.data('filter[type]')){
-                url += '?filter[type]=' + node.data('filter[type]');
+            if(node.data('filter-type')){
+                url += '?filter[type]=' + node.data('filter-type');
             }
             request(url);
         }
