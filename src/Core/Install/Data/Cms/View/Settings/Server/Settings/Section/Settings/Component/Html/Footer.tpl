@@ -126,7 +126,7 @@
             '/?page=1' +
             '&q=' +
             $request.q +
-            "&filter['type']=" +
+            '&filter[type]=' +
             $request.filter_type
             }}
             {{$button.data.frontend.url =
@@ -170,7 +170,7 @@
             $page.previous +
             '&q=' +
             $request.q +
-            "&filter['type']=" +
+            '&filter[type]=' +
             $request.filter_type
             }}
             {{$button.data.frontend.url =
@@ -214,7 +214,7 @@
             $page.next +
             '&q=' +
             $request.q +
-            "&filter['type']=" +
+            '&filter[type]=' +
             $request.filter_type
             }}
             {{$button.data.frontend.url =
@@ -258,7 +258,7 @@
                 $page.max +
                 '&q=' +
                 $request.q +
-                "&filter['type']=" +
+                '&filter[type]=' +
                 $request.filter_type
             }}
             {{$button.data.frontend.url =
