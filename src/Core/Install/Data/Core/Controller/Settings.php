@@ -209,16 +209,6 @@ class Settings extends View {
     public static function server_settings_command(App $object){
         $url = $object->request('node.url');
         $nodeList = $object->request('nodeList');
-        /*
-        $filter_type = $object->request('filter_type');
-        if(
-            $filter_type &&
-            empty($url) &&
-            empty($nodeList)
-        ){
-            return self::server_settings_settings($object);
-        }
-        */
         try {
             switch (Handler::method()) {
                 case 'DELETE' :

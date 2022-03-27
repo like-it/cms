@@ -1500,7 +1500,10 @@ class Settings extends Main {
         $read = $dir->read($url, true);
         $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
         $settings =  $object->data_read($settings_url);
-        $filter_type = $object->request('filter_type');
+        $filter = $object->request('filter');
+        if(!empty($filter)){
+            dd($filter);
+        }
         if(empty($filter_type)){
             $filter_type = 'File';
         }
