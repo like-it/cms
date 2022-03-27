@@ -1458,7 +1458,11 @@ class Settings extends Main {
             }
             $response = [];
             foreach($nodeList as $url) {
-                File::delete($url);
+                if(Dir::is($url)){
+                    Dir::remove($url);
+                } else {
+                    File::delete($url);
+                }
                 $node = [];
                 $node['url'] = $url;
                 $node['isDeleted'] = new DateTime();
@@ -1479,7 +1483,11 @@ class Settings extends Main {
             if($pos !== 0){
                 throw new Exception('Cannot delete outside project.dir.public');
             }
-            File::delete($url);
+            if(Dir::is($url)){
+                Dir::remove($url);
+            } else {
+                File::delete($url);
+            }
             $node = [];
             $node['url'] = $url;
             $node['isDeleted'] = new DateTime();

@@ -16,7 +16,10 @@ $__.command +
 '.component.options.edit.text'
 )}}
 {{$node.extension = file.extension($node.url)}}
-{{if(!in.array($node.extension, image.extensions()))}}
+{{if(
+!in.array($node.extension, image.extensions()) &&
+$node.type !== 'Dir'
+)}}
 <a
     class="dropdown-item item-edit"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.url|url.raw.encode}}/"
