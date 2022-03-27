@@ -18,7 +18,7 @@ $__.command +
 <a
 class="dropdown-item list-move"
 data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Move/"
-data-filter-type="{{$request.filter_type}}"
+data-filter[type]="{{$request.filter.type}}"
 >
 <i
 class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-move"

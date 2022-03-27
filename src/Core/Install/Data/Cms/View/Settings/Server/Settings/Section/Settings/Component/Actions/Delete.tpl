@@ -19,7 +19,7 @@ $__.command +
     class="dropdown-item list-delete"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/"
     data-request-method="DELETE"
-    data-filter-type="{{$request.filter_type}}"
+    data-filter[type]="{{$request.filter.type}}"
 >
     <i
         class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-delete"
