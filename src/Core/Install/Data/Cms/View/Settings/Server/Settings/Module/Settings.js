@@ -393,8 +393,15 @@ settings.options = (target) => {
                                         method : node.data('request-method') ? node.data('request-method') : "DELETE"
                                     }
                                 };
+                                let filter = {
+                                    type : "{{$request.filter.type}}"
+                                };
                                 header('authorization', 'Bearer ' + user.token());
                                 request(node.data('url'), data, (url, response) => {
+                                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                                    if(menuItem){
+                                        menuItem.data('filter-type', filter.type);
+                                    }
                                     dialog_create.remove();
                                     settings.delete('selected');
                                     menu.dispatch(section, target);
