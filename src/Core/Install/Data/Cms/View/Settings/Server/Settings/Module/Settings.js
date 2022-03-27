@@ -442,8 +442,10 @@ settings.options = (target) => {
                             let data = {
                                 directory: section.select('input[name="node.directory"]')?.value,
                                 nodeList: settings.get('selected'),
-                                limit: "{{$request.limit}}"
+                                limit: "{{$request.limit}}",
                             };
+                            let filter = "{$request.filter}}";
+                            console.log(filter);
                             request(form.data('url'), data, (url, response) => {
                                 dialog_create.remove();
                                 if(response?.page){
