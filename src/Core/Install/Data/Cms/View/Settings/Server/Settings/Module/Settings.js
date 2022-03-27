@@ -447,7 +447,6 @@ settings.options = (target) => {
                             let filter = {
                                 type : "{{$request.filter.type}}"
                             };
-                            console.log(filter);
                             request(form.data('url'), data, (url, response) => {
                                 dialog_create.remove();
                                 if(response?.page){
@@ -456,11 +455,9 @@ settings.options = (target) => {
                                         menuItem.data('page', response.page);
                                     }
                                 }
-                                if(node.data('filter-type')){
-                                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                                    if(menuItem){
-                                        menuItem.data('filter-type', node.data('filter-type'));
-                                    }
+                                const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                                if(menuItem){
+                                    menuItem.data('filter-type', filter.type);
                                 }
                                 if(response?.error){
                                     dialog.create({
