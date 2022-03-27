@@ -3,9 +3,10 @@ import user from "/Module/User.js";
 import create from "/Module/Create.js";
 import dialog from "/Module/Dialog.js";
 import loader from "/Module/Loader.js";
+import { version } from "/Module/Priya.js";
+import { root } from "/Module/Web.js";
 import { stristr, str_replace } from "/Module/String.js";
 import { getSectionByName } from "/Module/Section.js";
-
 
 let menu = {};
 
@@ -269,5 +270,11 @@ menu.init = () => {
 }
 
 ready(() => {
-    menu.init();
+    require(
+        [
+            root() + 'Loader/Css/Loader.css?' + version(),
+        ],
+        () => {
+            menu.init();
+        });
 });
