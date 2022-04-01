@@ -339,6 +339,35 @@ settings.options = (target) => {
                             url: node.data('url'),
                         }
                     });
+                    const input = dialog_create.select('input[name="node.name"]');
+                    if(input){
+                        input.focus();
+                    }
+                    const form = dialog_create.select('form');
+                    if(form){
+                        form.on('submit', (event) => {
+                            if(form.data('has', 'url')){
+                                let filter = {
+                                    type : "{{$request.filter.type}}"
+                                };
+                                header('authorization', 'Bearer ' + user.token());
+                                request(form.data('url'), form.data('serialize'), (url, response) => {
+                                    console.log(response);
+                                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                                    if(menuItem){
+                                        menuItem.data('filter-type', filter.type);
+                                    }
+                                    dialog_create.remove();
+                                    menu.dispatch(section, target);
+                                });
+                            }
+                        });
+                        const submit = form.select('.button-submit');
+                        if(submit){
+                            submit.focus();
+                        }
+
+                    }
                 });
             }
             else if(node.hasClass('list-delete')){
