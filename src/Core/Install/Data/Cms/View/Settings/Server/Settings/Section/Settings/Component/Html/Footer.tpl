@@ -26,86 +26,8 @@
         {{$td.colspan = array.count($components) - 1}}
         <td colspan="{{$td.colspan}}">
             <div class="btn-group">
-                <div class="dropdown dropup">
-                    <div class="btn-group">
-                        <button
-                            class="btn btn-outline-primary dropdown-toggle"
-                            type="button"
-                            data-toggle="dropdown"
-                            data-bs-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                        >
-                            {{__('settings.server.settings.section.settings.component.html.footer.actions.text')}}
-                        </button>
-                        <div
-                            class="dropdown-menu"
-                        >
-                            {{for.each($actions as $action)}}
-                                {{$require.basename = $action|uppercase.first.sentence:'.'}}
-                                {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Actions/' + $require.basename + '.tpl')}}
-                            {{/for.each}}
-                        </div>
-                    </div>
-                </div>
-                <div class="dropdown dropup">
-                    <div class="btn-group">
-                        <button
-                            class="btn btn-outline-primary dropdown-toggle filter-type"
-                            type="button"
-                            data-toggle="dropdown"
-                            data-bs-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                        >
-                        {{if($request.filter.type==='All')}}
-                        {{__(
-                        $__.module +
-                        '.' +
-                        $__.submodule +
-                        '.section.' +
-                        $__.command +
-                        '.component.filter.all.text'
-                        )}}
-                        {{elseif($request.filter.type==='File')}}
-                        {{__(
-                        $__.module +
-                        '.' +
-                        $__.submodule +
-                        '.section.' +
-                        $__.command +
-                        '.component.filter.file.text'
-                        )}}
-                        {{elseif($request.filter.type==='Dir')}}
-                        {{__(
-                        $__.module +
-                        '.' +
-                        $__.submodule +
-                        '.section.' +
-                        $__.command +
-                        '.component.filter.dir.text'
-                        )}}
-                        {{else}}
-                        {{__(
-                        $__.module +
-                        '.' +
-                        $__.submodule +
-                        '.section.' +
-                        $__.command +
-                        '.component.filter.file.text'
-                        )}}
-                        {{/if}}
-                        </button>
-                        <div
-                            class="dropdown-menu"
-                        >
-                            {{for.each($filters as $filter)}}
-                                {{$require.basename = $filter|uppercase.first.sentence:'.'}}
-                                {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Filter/' + $require.basename + '.tpl')}}
-                            {{/for.each}}
-                        </div>
-                    </div>
-                </div>
+                {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Dropdown/' + 'Actions.tpl')}}
+                {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Dropdown/' + 'Filter.tpl')}}
             </div>
         </td>
         <td class="text-end">
