@@ -112,49 +112,6 @@ settings.onDoubleClick = () => {
     }
 }
 
-settings.moveDialog = (data) => {
-    console.log(data.node);
-    if(!data?.node){
-        return;
-    }
-    if(!data?.section){
-        const selection = data.node.data('select');
-        if(selection){
-            data.section = select(selection);
-            if(!data.section){
-                return;
-            }
-        } else {
-            return;
-        }
-    }
-    if(!data?.target){
-        return;
-    }
-    if(!data?.className){
-        data.className = 'dialog dialog-move';
-    }
-    if(!data?.title){
-        data.title = 'Move';
-    }
-    if(!is.empty(data.node.data('title'))){
-        data.title = data.node.data('title');
-    }
-    if(!data?.message){
-        if(!is.empty(node.data('name'))){
-            data.message =  "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.move')}}" + ': ' + node.data('name') + '?';
-        } else {
-            data.message = "{{__($__.module + '.' + $__.submodule + '.module.' + $__.command + '.move')}}" + '?';
-        }
-    }
-    const section = data.section;
-    const target = data.target;
-    const node = data.node;
-
-
-}
-
-
 settings.page = (type, section, data) => {
     console.log(data);
     if(
@@ -357,6 +314,31 @@ settings.options = (target) => {
                         }
 
                     }
+                });
+            }
+            else if(node.hasClass('item-new-dir')){
+                node.on('click', (event) => {
+                    let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.new.directory.message'))}}";
+                    message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
+                    message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.new.directory.name')}}" + '</label><input type="text" name="node.name" value=""/></p>'
+                    let dialog_create = dialog.create({
+                        title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.new.directory.title')}}",
+                        message: message,
+                        buttons: [
+                            {
+                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.new.directory.button.ok')}}"
+                            },
+                            {
+                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.new.directory.button.cancel')}}"
+                            }
+                        ],
+                        section: section,
+                        className: "dialog dialog-new-directory",
+                        form: {
+                            name: "dialog-new-directory",
+                            url: node.data('url'),
+                        }
+                    });
                 });
             }
             else if(node.hasClass('list-delete')){

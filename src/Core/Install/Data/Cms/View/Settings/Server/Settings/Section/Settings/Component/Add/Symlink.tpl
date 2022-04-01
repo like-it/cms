@@ -5,7 +5,7 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.addons.dir.icon'
+'.component.addons.symlink.icon'
 )}}
 {{$span.text = __(
 $__.module +
@@ -13,11 +13,11 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.addons.dir.text'
+'.component.addons.symlink.text'
 )}}
 <a
-class="dropdown-item item-new-dir"
-data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Directory/"
+class="dropdown-item item-new-symlink"
+data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Move/"
 data-filter[type]="{{$request.filter.type}}"
 >
 <i
