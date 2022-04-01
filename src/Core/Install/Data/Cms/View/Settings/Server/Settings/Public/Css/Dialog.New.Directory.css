@@ -2,12 +2,12 @@
     left: 33%;
     width: 34%;
     right: 33%;
-    height: 180px;
-    top: calc(50% - 90px);
+    height: 190px;
+    top: calc(50% - 95px);
 }
 
 .dialog-new-directory .body {
-    height: 100px;
+    height: 110px;
     background: rgba(255, 255, 255, 1);
     overflow: auto;
 }
