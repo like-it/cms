@@ -9,7 +9,7 @@
             aria-haspopup="true"
             aria-expanded="false"
         >
-            {{__('settings.server.settings.section.settings.component.html.footer.add.text')}}
+            <i class="{{__('settings.server.settings.section.settings.component.html.dropdown.addons.icon')}}"></i>
         </button>
         <div
             class="dropdown-menu"
