@@ -339,10 +339,6 @@ settings.options = (target) => {
                             url: node.data('url'),
                         }
                     });
-                    const input = dialog_create.select('input[name="node.name"]');
-                    if(input){
-                        input.focus();
-                    }
                     const form = dialog_create.select('form');
                     if(form){
                         form.on('submit', (event) => {
@@ -362,11 +358,10 @@ settings.options = (target) => {
                                 });
                             }
                         });
-                        const submit = form.select('.button-submit');
-                        if(submit){
-                            submit.focus();
-                        }
-
+                    }
+                    const input = dialog_create.select('input[name="node.name"]');
+                    if(input){
+                        input.focus();
                     }
                 });
             }
