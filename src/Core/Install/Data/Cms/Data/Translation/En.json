@@ -279,6 +279,13 @@
         "The above files where unable to move..."
     ],
     "settings.server.settings.dialog.error.list.move.button.ok" : "Ok",
+    "settings.server.settings.dialog.new.directory.title" : "Create new directory",
+    "settings.server.settings.dialog.new.directory.message" : [
+        "Please give the name of the directory which you want to create..."
+    ],
+    "settings.server.settings.dialog.new.directory.button.ok" : "Ok",
+    "settings.server.settings.dialog.new.directory.button.cancel" : "Cancel",
+    "settings.server.settings.dialog.new.directory.name" : "Name: ",
     "settings.server.settings.module.settings.delete" : "Are you sure you want to delete this item",
     "settings.server.settings.module.settings.move" : "Are you sure you want to move this item",
     "settings.server.settings.module.settings.list.delete" : "Are you sure you want to delete these items?",
@@ -388,7 +395,6 @@
     "settings.server.settings.section.settings.component.td.options.text" : "Actions",
     "settings.server.settings.section.settings.component.actions.delete.text" : "Delete",
     "settings.server.settings.section.settings.component.actions.move.text" : "Move",
-    "settings.server.settings.module.settings.move" : "Are you sure you want to move these items",
     "settings.views.component.header.a.main.link" : "Main",
     "settings.views.component.header.a.settings.link" : "Settings",
     "settings.views.component.header.a.add.template.link" : "Add template",
