@@ -21,6 +21,11 @@
 'file',
 'all'
 ]}}
+{{$addons = [
+'dir',
+'file',
+'upload'
+]}}
 <div class="card-body h-100 card-body-{{$command}}">
     {{if(!is.empty($request.nodeList))}}
     <table class="table table-hover">

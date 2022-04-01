@@ -9,14 +9,14 @@
             aria-haspopup="true"
             aria-expanded="false"
         >
-            {{__('settings.server.settings.section.settings.component.html.footer.actions.text')}}
+            {{__('settings.server.settings.section.settings.component.html.footer.add.text')}}
         </button>
         <div
             class="dropdown-menu"
         >
-            {{for.each($actions as $action)}}
-            {{$require.basename = $action|uppercase.first.sentence:'.'}}
-            {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Actions/' + $require.basename + '.tpl')}}
+            {{for.each($addons as $add)}}
+            {{$require.basename = $add|uppercase.first.sentence:'.'}}
+            {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Add/' + $require.basename + '.tpl')}}
             {{/for.each}}
         </div>
     </div>

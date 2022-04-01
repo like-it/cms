@@ -26,8 +26,9 @@
         {{$td.colspan = array.count($components) - 1}}
         <td colspan="{{$td.colspan}}">
             <div class="btn-group">
-                {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Dropdown/' + 'Actions.tpl')}}
                 {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Dropdown/' + 'Filter.tpl')}}
+                {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Dropdown/' + 'Action.tpl')}}
+                {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Dropdown/' + 'Add.tpl')}}
             </div>
         </td>
         <td class="text-end">
