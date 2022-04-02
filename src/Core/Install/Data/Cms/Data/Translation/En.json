@@ -290,8 +290,11 @@
     ],
     "settings.server.settings.dialog.error.item.create.file.button.ok" : "Ok",
     "settings.server.settings.dialog.error.item.create.symlink.title": "Error creating symlink",
-    "settings.server.settings.dialog.error.item.create.symlink.message" : [
-        "Unable to create the symlink, the symlink already exists..."
+    "settings.server.settings.dialog.error.item.create.symlink.destination.message" : [
+        "Unable to create the symlink, the destination already exists..."
+    ],
+    "settings.server.settings.dialog.error.item.create.symlink.source.message" : [
+        "Unable to create the symlink, cannot find the source..."
     ],
     "settings.server.settings.dialog.error.item.create.symlink.button.ok" : "Ok",
     "settings.server.settings.dialog.create.directory.title" : "Create new directory",

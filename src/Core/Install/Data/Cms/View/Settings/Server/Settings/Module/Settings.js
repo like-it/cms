@@ -511,18 +511,37 @@ settings.options = (target) => {
                                         error.push('source: ' + source.value);
                                         let destination = dialog_create.select('input[name="node.destination"]');
                                         error.push('destination: ' + destination.value);
-                                        let dialog_error = dialog.create({
-                                            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.title')}}",
-                                            message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.message'))}}",
-                                            error : error,
-                                            buttons : [
-                                                {
-                                                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.button.ok')}}"
-                                                }
-                                            ],
-                                            section : section,
-                                            className : "dialog dialog-error dialog-error-create-symlink"
-                                        });
+
+                                        if(response?.message === 'Destination exists...'){
+                                            let dialog_error = dialog.create({
+                                                title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.title')}}",
+                                                message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.destination.message'))}}",
+                                                error : error,
+                                                buttons : [
+                                                    {
+                                                        text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.button.ok')}}"
+                                                    }
+                                                ],
+                                                section : section,
+                                                className : "dialog dialog-error dialog-error-create-symlink dialog-error-destination"
+                                            });
+                                        } else {
+                                            let dialog_error = dialog.create({
+                                                title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.title')}}",
+                                                message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.source.message'))}}",
+                                                error : error,
+                                                buttons : [
+                                                    {
+                                                        text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.button.ok')}}"
+                                                    }
+                                                ],
+                                                section : section,
+                                                className : "dialog dialog-error dialog-error-create-symlink dialog-error-source"
+                                            });
+                                        }
+
+
+
                                         const form = dialog_error.select('form');
                                         if(!form){
                                             return;
