@@ -24,6 +24,7 @@
 {{$addons = [
 'dir',
 'file',
+'symlink',
 'upload'
 ]}}
 <div class="card-body h-100 card-body-{{$command}}">

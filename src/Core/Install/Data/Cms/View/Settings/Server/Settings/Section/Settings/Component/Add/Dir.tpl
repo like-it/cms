@@ -5,7 +5,7 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.addons.dir.icon'
+'.component.add.dir.icon'
 )}}
 {{$span.text = __(
 $__.module +
@@ -13,16 +13,16 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.addons.dir.text'
+'.component.add.dir.text'
 )}}
 <a
-class="dropdown-item item-new-dir"
-data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Directory/"
-data-filter[type]="{{$request.filter.type}}"
+    class="dropdown-item item-new-dir"
+    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/New/Directory/"
+    data-filter-type="{{$request.filter.type}}"
 >
-<i
-class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-move"
->
-</i>
-<span>{{$span.text}}</span>
+    <i
+        class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-move"
+    >
+    </i>
+    <span>{{$span.text}}</span>
 </a>

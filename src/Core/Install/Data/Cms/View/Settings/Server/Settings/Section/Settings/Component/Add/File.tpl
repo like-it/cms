@@ -5,7 +5,7 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.addons.file.icon'
+'.component.add.file.icon'
 )}}
 {{$span.text = __(
 $__.module +
@@ -13,13 +13,12 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.addons.file.text'
+'.component.add.file.text'
 )}}
 <a
     class="dropdown-item item-new-file"
-    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/"
-    data-request-method="DELETE"
-    data-filter[type]="{{$request.filter.type}}"
+    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/New/File/"
+    data-filter-type="{{$request.filter.type}}"
 >
     <i
         class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-delete"
