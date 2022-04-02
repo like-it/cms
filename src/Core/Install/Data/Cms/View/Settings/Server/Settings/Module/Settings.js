@@ -394,6 +394,84 @@ settings.options = (target) => {
                     }
                 });
             }
+            else if(node.hasClass('item-create-file')){
+                node.on('click', (event) => {
+                    let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.message'))}}";
+                    message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
+                    message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.create.file.name')}}" + '</label><input type="text" name="node.name" value=""/></p>'
+                    let dialog_create = dialog.create({
+                        title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.title')}}",
+                        message: message,
+                        buttons: [
+                            {
+                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.button.ok')}}"
+                            },
+                            {
+                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.button.cancel')}}"
+                            }
+                        ],
+                        section: section,
+                        className: "dialog dialog-create-file",
+                        form: {
+                            name: "dialog-create-file",
+                            url: node.data('url'),
+                        }
+                    });
+                    const form = dialog_create.select('form');
+                    if(form){
+                        form.on('submit', (event) => {
+                            if(form.data('has', 'url')){
+                                let data = form.data('serialize');
+                                let filter = {
+                                    type : "{{$request.filter.type}}"
+                                };
+                                header('authorization', 'Bearer ' + user.token());
+                                request(form.data('url'), data, (url, response) => {
+                                    if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
+                                        let error = [];
+                                        const input = dialog_create.select('input[name="node.name"]');
+                                        error.push(input.value);
+                                        let dialog_error = dialog.create({
+                                            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.title')}}",
+                                            message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.message'))}}",
+                                            error : error,
+                                            buttons : [
+                                                {
+                                                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.button.ok')}}"
+                                                }
+                                            ],
+                                            section : section,
+                                            className : "dialog dialog-error dialog-error-create-file"
+                                        });
+                                        const form = dialog_error.select('form');
+                                        if(!form){
+                                            return;
+                                        }
+                                        form.on('submit', (event) => {
+                                            dialog_error.remove();
+                                        });
+                                        const button = form.select('button[type="submit"]');
+                                        if(button){
+                                            button.focus();
+                                        }
+                                    } else {
+                                        const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                                        if(menuItem){
+                                            menuItem.data('filter-type', filter.type);
+                                        }
+                                        menu.dispatch(section, target);
+                                    }
+                                    dialog_create.remove();
+                                });
+                            }
+                        });
+                    }
+                    const input = dialog_create.select('input[name="node.name"]');
+                    if(input){
+                        input.focus();
+                    }
+                });
+            }
             else if(node.hasClass('list-delete')){
                 node.on('click', (event) => {
                     let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.message'))}}";
