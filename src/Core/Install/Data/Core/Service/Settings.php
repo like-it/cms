@@ -1691,7 +1691,9 @@ class Settings extends Main {
             $object->config('ds'),
             $object->config('ds'),
         ], $name);
-
+        if(empty($name)){
+            throw new ErrorException('Name cannot be empty...');
+        }
         $url = $object->config('project.dir.public') . $name;
         if(file::exist($url)){
             throw new ErrorException('Url exists...');
@@ -1721,6 +1723,9 @@ class Settings extends Main {
         ], $name);
 
         $url = $object->config('project.dir.public') . $name;
+        if(empty($name)){
+            throw new ErrorException('Name cannot be empty...');
+        }
         if(file::exist($url)){
             throw new ErrorException('Url exists...');
         } else {

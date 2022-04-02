@@ -280,12 +280,18 @@
     ],
     "settings.server.settings.dialog.error.list.move.button.ok" : "Ok",
     "settings.server.settings.dialog.error.item.create.directory.title": "Error creating directory",
-    "settings.server.settings.dialog.error.item.create.directory.message" : [
+    "settings.server.settings.dialog.error.item.create.directory.empty.message" : [
+        "Please give a valid name..."
+    ],
+    "settings.server.settings.dialog.error.item.create.directory.exist.message" : [
         "Unable to create the directory, the directory already exists..."
     ],
     "settings.server.settings.dialog.error.item.create.directory.button.ok" : "Ok",
     "settings.server.settings.dialog.error.item.create.file.title": "Error creating file",
-    "settings.server.settings.dialog.error.item.create.file.message" : [
+    "settings.server.settings.dialog.error.item.create.file.empty.message" : [
+        "Please give a valid name..."
+    ],
+    "settings.server.settings.dialog.error.item.create.file.exist.message" : [
         "Unable to create the file, the file already exists..."
     ],
     "settings.server.settings.dialog.error.item.create.file.button.ok" : "Ok",

@@ -353,9 +353,15 @@ settings.options = (target) => {
                                         let error = [];
                                         const input = dialog_create.select('input[name="node.name"]');
                                         error.push(input.value);
+                                        let message;
+                                        if(response?.message === 'Name cannot be empty...'){
+                                            message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.empty.message'))}}";
+                                        } else {
+                                            message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.exist.message'))}}";
+                                        }
                                         let dialog_error = dialog.create({
                                             title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.title')}}",
-                                            message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.message'))}}",
+                                            message : message,
                                             error : error,
                                             buttons : [
                                                 {
@@ -382,8 +388,8 @@ settings.options = (target) => {
                                             menuItem.data('filter-type', filter.type);
                                         }
                                         menu.dispatch(section, target);
+                                        dialog_create.remove();
                                     }
-                                    dialog_create.remove();
                                 });
                             }
                         });
@@ -429,11 +435,17 @@ settings.options = (target) => {
                                 request(form.data('url'), data, (url, response) => {
                                     if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
                                         let error = [];
-                                        const input = dialog_create.select('input[name="node.name"]');
+                                        let input = dialog_create.select('input[name="node.name"]');
                                         error.push(input.value);
+                                        let message;
+                                        if(response?.message === 'Name cannot be empty...'){
+                                           message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.empty.message'))}}";
+                                        } else {
+                                           message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.exist.message'))}}";
+                                        }
                                         let dialog_error = dialog.create({
                                             title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.title')}}",
-                                            message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.message'))}}",
+                                            message: message,
                                             error : error,
                                             buttons : [
                                                 {
@@ -460,8 +472,8 @@ settings.options = (target) => {
                                             menuItem.data('filter-type', filter.type);
                                         }
                                         menu.dispatch(section, target);
+                                        dialog_create.remove();
                                     }
-                                    dialog_create.remove();
                                 });
                             }
                         });
@@ -512,33 +524,24 @@ settings.options = (target) => {
                                         let destination = dialog_create.select('input[name="node.destination"]');
                                         error.push('Destination: ' + destination.value);
                                         let dialog_error;
-                                        if(response?.message === 'Destination exists...'){
-                                            dialog_error = dialog.create({
-                                                title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.title')}}",
-                                                message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.destination.message'))}}",
-                                                error : error,
-                                                buttons : [
-                                                    {
-                                                        text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.button.ok')}}"
-                                                    }
-                                                ],
-                                                section : section,
-                                                className : "dialog dialog-error dialog-error-create-symlink dialog-error-destination"
-                                            });
+                                        let message;
+                                        if(response?.message === 'Destination exists...') {
+                                            message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.destination.message'))}}";
                                         } else {
-                                            dialog_error = dialog.create({
-                                                title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.title')}}",
-                                                message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.source.message'))}}",
-                                                error : error,
-                                                buttons : [
-                                                    {
-                                                        text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.button.ok')}}"
-                                                    }
-                                                ],
-                                                section : section,
-                                                className : "dialog dialog-error dialog-error-create-symlink dialog-error-source"
-                                            });
+                                            message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.source.message'))}}";
                                         }
+                                        dialog_error = dialog.create({
+                                            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.title')}}",
+                                            message : message,
+                                            error : error,
+                                            buttons : [
+                                                {
+                                                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.button.ok')}}"
+                                                }
+                                            ],
+                                            section : section,
+                                            className : "dialog dialog-error dialog-error-create-symlink dialog-error-destination"
+                                        });
                                         const form = dialog_error.select('form');
                                         if(!form){
                                             return;
