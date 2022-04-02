@@ -507,8 +507,10 @@ settings.options = (target) => {
                                 request(form.data('url'), data, (url, response) => {
                                     if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
                                         let error = [];
-                                        const input = dialog_create.select('input[name="node.name"]');
-                                        error.push(input.value);
+                                        let source = dialog_create.select('input[name="node.source"]');
+                                        error.push(source.value);
+                                        let destination = dialog_create.select('input[name="node.destination"]');
+                                        error.push(destination.value);
                                         let dialog_error = dialog.create({
                                             title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.title')}}",
                                             message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.message'))}}",

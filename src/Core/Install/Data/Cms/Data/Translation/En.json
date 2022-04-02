@@ -289,9 +289,9 @@
         "Unable to create the file, the file already exists..."
     ],
     "settings.server.settings.dialog.error.item.create.file.button.ok" : "Ok",
-    "settings.server.settings.dialog.error.item.create.symlink.title": "Error creating file",
+    "settings.server.settings.dialog.error.item.create.symlink.title": "Error creating symlink",
     "settings.server.settings.dialog.error.item.create.symlink.message" : [
-        "Unable to create the file, the file already exists..."
+        "Unable to create the symlink, the symlink already exists..."
     ],
     "settings.server.settings.dialog.error.item.create.symlink.button.ok" : "Ok",
     "settings.server.settings.dialog.create.directory.title" : "Create new directory",
