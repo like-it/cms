@@ -276,6 +276,48 @@
             "OPTIONS"
         ]
     },
+    "5642e4a6-313e-40eb-9837-6af246c79a62" : {
+        "module" : "settings",
+        "submodule" : "email",
+        "command" : "settings",
+        "method" : [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "ee6003e2-f224-43dd-bf15-bf91308dd7cc" : {
+        "module" : "settings",
+        "submodule" : "email",
+        "command" : "add",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "1e2fc7a7-69d6-40a9-9369-6ce335a3582d" : {
+        "module" : "settings",
+        "submodule" : "email",
+        "command" : "account",
+        "subcommand" : "default",
+        "path": "Settings/Email/Account/Default/{{$uuid}}",
+        "method": [
+            "GET",
+            "OPTIONS"
+        ]
+    },
+    "e5737e14-09c7-4a6d-b9bc-41234207a480" : {
+        "module" : "settings",
+        "submodule" : "email",
+        "command" : "command",
+        "path": "Settings/Email/{{$node.uuid}}",
+        "method": [
+            "GET",
+            "PUT",
+            "DELETE",
+            "OPTIONS"
+        ]
+    },
     "32c6a6ea-7d05-4241-bdb7-59368025b7d7" : {
         "module" : "settings",
         "submodule" : "export",
@@ -429,6 +471,16 @@
             "OPTIONS"
         ]
     },
+    "b4cd86ed-d28b-4119-8ccc-a79b4490ddc4" : {
+        "module" : "settings",
+        "submodule" : "server-settings",
+        "command" : "new",
+        "path": "Settings/Server/Settings/New/{{$type}}",
+        "method": [
+            "POST",
+            "OPTIONS"
+        ]
+    },
     "5143cf7a-5ae9-4caa-8f01-516f377c4060" : {
         "module" : "settings",
         "submodule" : "server-settings",
@@ -437,48 +489,6 @@
         "method" : [
             "GET",
             "POST",
-            "OPTIONS"
-        ]
-    },
-    "5642e4a6-313e-40eb-9837-6af246c79a62" : {
-        "module" : "settings",
-        "submodule" : "email",
-        "command" : "settings",
-        "method" : [
-            "GET",
-            "POST",
-            "OPTIONS"
-        ]
-    },
-    "ee6003e2-f224-43dd-bf15-bf91308dd7cc" : {
-        "module" : "settings",
-        "submodule" : "email",
-        "command" : "add",
-        "method" : [
-            "POST",
-            "OPTIONS"
-        ]
-    },
-    "1e2fc7a7-69d6-40a9-9369-6ce335a3582d" : {
-        "module" : "settings",
-        "submodule" : "email",
-        "command" : "account",
-        "subcommand" : "default",
-        "path": "Settings/Email/Account/Default/{{$uuid}}",
-        "method": [
-            "GET",
-            "OPTIONS"
-        ]
-    },
-    "e5737e14-09c7-4a6d-b9bc-41234207a480" : {
-        "module" : "settings",
-        "submodule" : "email",
-        "command" : "command",
-        "path": "Settings/Email/{{$node.uuid}}",
-        "method": [
-            "GET",
-            "PUT",
-            "DELETE",
             "OPTIONS"
         ]
     },
