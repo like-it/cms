@@ -1091,6 +1091,7 @@ ready(() => {
         root() + 'Dialog/Css/Dialog.Delete.css?' + version(),
         root() + 'Dialog/Css/Dialog.Move.css?' + version(),
         root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Create.Directory.css?' + version(),
+        root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Create.File.css?' + version(),
         root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + "{{$require.submodule|file.basename}}" + '.css?' + version()
     ],
     () => {
