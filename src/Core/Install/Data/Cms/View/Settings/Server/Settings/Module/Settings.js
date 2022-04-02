@@ -348,13 +348,38 @@ settings.options = (target) => {
                                 };
                                 header('authorization', 'Bearer ' + user.token());
                                 request(form.data('url'), form.data('serialize'), (url, response) => {
-                                    console.log(response);
-                                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                                    if(menuItem){
-                                        menuItem.data('filter-type', filter.type);
-                                    }
                                     dialog_create.remove();
-                                    menu.dispatch(section, target);
+                                    if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
+                                        let dialog_error = dialog.create({
+                                            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.title')}}",
+                                            message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.message'))}}",
+                                            error : response.message,
+                                            buttons : [
+                                                {
+                                                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.button.ok')}}"
+                                                }
+                                            ],
+                                            section : section,
+                                            className : "dialog dialog-error dialog-error-create-directory"
+                                        });
+                                        const form = dialog_error.select('form');
+                                        if(!form){
+                                            return;
+                                        }
+                                        form.on('submit', (event) => {
+                                            dialog_error.remove();
+                                        });
+                                        const button = form.select('button[type="submit"]');
+                                        if(button){
+                                            button.focus();
+                                        }
+                                    } else {
+                                        const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                                        if(menuItem){
+                                            menuItem.data('filter-type', filter.type);
+                                        }
+                                        menu.dispatch(section, target);
+                                    }
                                 });
                             }
                         });
