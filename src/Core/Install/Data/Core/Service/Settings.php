@@ -1742,30 +1742,45 @@ class Settings extends Main {
      */
     public static function server_settings_create_symlink(App $object): Response
     {
-        $name = $object->request('node.name');
-        $name = str_replace([
+        $source = $object->request('node.source');
+        $source = str_replace([
             '../',
             './'
         ], [
             $object->config('ds'),
             $object->config('ds'),
-        ], $name);
-
-        $url = $object->config('project.dir.public') . $name;
-        if(file::exist($url)){
-            throw new ErrorException('Url exists...');
+        ],
+            $source
+        );
+        $destination = $object->request('node.destination');
+        $destination = str_replace([
+            '../',
+            './'
+        ], [
+            $object->config('ds'),
+            $object->config('ds'),
+        ],
+            $destination
+        );
+        $url_source = $object->config('project.dir.public') . $source;
+        $url_destination = $object->config('project.dir.public') . $destination;
+        if(!file::exist($url_source)){
+            throw new ErrorException('Source not exists...');
+        }
+        elseif(file::exist($url_destination)){
+            throw new ErrorException('Destination exists...');
         } else {
-            Dir::create($url);
+            File::link($url_source, $url_destination);
         }
         $node = [];
-        $node['url'] = $url;
+        $node['url'] = $url_destination;
         $node['created'] = new DateTime();
         $response = [];
         $response['node'] = $node;
         return new Response($response, Response::TYPE_JSON);
     }
 
-        private static function server_settings_page(App $object, $search=[])
+    private static function server_settings_page(App $object, $search=[])
     {
         $url = $object->config('project.dir.public');
         $dir = new Dir();
