@@ -508,12 +508,12 @@ settings.options = (target) => {
                                     if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
                                         let error = [];
                                         let source = dialog_create.select('input[name="node.source"]');
-                                        error.push('source: ' + source.value);
+                                        error.push('Source: ' + source.value);
                                         let destination = dialog_create.select('input[name="node.destination"]');
-                                        error.push('destination: ' + destination.value);
-
+                                        error.push('Destination: ' + destination.value);
+                                        let dialog_error;
                                         if(response?.message === 'Destination exists...'){
-                                            let dialog_error = dialog.create({
+                                            dialog_error = dialog.create({
                                                 title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.title')}}",
                                                 message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.destination.message'))}}",
                                                 error : error,
@@ -526,7 +526,7 @@ settings.options = (target) => {
                                                 className : "dialog dialog-error dialog-error-create-symlink dialog-error-destination"
                                             });
                                         } else {
-                                            let dialog_error = dialog.create({
+                                            dialog_error = dialog.create({
                                                 title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.title')}}",
                                                 message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.source.message'))}}",
                                                 error : error,
@@ -539,9 +539,6 @@ settings.options = (target) => {
                                                 className : "dialog dialog-error dialog-error-create-symlink dialog-error-source"
                                             });
                                         }
-
-
-
                                         const form = dialog_error.select('form');
                                         if(!form){
                                             return;
