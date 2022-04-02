@@ -489,9 +489,9 @@ settings.options = (target) => {
                             }
                         ],
                         section: section,
-                        className: "dialog dialog-create-file",
+                        className: "dialog dialog-create-symlink",
                         form: {
-                            name: "dialog-create-file",
+                            name: "dialog-create-symlink",
                             url: node.data('url'),
                         }
                     });
