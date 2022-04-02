@@ -16,12 +16,12 @@
     left: 33%;
     width: 34%;
     right: 33%;
-    height: 250px;
-    top: calc(50% - 125px);
+    height: 205px;
+    top: calc(50% - 102px);
 }
 
 .dialog-error-create-directory .body {
-    height: 170px;
+    height: 125px;
     background: rgba(255, 255, 255, 1);
     overflow: auto;
 }
