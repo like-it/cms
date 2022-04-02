@@ -16,7 +16,7 @@ $__.command +
 '.component.add.file.text'
 )}}
 <a
-    class="dropdown-item item-new-file"
+    class="dropdown-item item-create-file"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Create/File/"
     data-filter-type="{{$request.filter.type}}"
 >

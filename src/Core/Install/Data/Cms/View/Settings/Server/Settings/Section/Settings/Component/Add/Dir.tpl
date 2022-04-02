@@ -16,7 +16,7 @@ $__.command +
 '.component.add.dir.text'
 )}}
 <a
-    class="dropdown-item item-new-dir"
+    class="dropdown-item item-create-dir"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Create/Directory/"
     data-filter-type="{{$request.filter.type}}"
 >

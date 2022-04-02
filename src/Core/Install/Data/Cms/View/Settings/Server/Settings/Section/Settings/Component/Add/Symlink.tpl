@@ -16,7 +16,7 @@ $__.command +
 '.component.add.symlink.text'
 )}}
 <a
-    class="dropdown-item item-new-symlink"
+    class="dropdown-item item-create-symlink"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Create/Symlink/"
     data-filter-type="{{$request.filter.type}}"
 >

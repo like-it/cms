@@ -316,7 +316,7 @@ settings.options = (target) => {
                     }
                 });
             }
-            else if(node.hasClass('item-new-dir')){
+            else if(node.hasClass('item-create-dir')){
                 node.on('click', (event) => {
                     let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.message'))}}";
                     message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
@@ -352,7 +352,7 @@ settings.options = (target) => {
                                     if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
                                         let error = [];
                                         const input = dialog_create.select('input[name="node.name"]');
-                                        error.push(input);
+                                        error.push(input.value);
                                         let dialog_error = dialog.create({
                                             title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.title')}}",
                                             message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.message'))}}",
@@ -1012,7 +1012,7 @@ ready(() => {
         root() + 'Dialog/Css/Dialog.css?' + version(),
         root() + 'Dialog/Css/Dialog.Delete.css?' + version(),
         root() + 'Dialog/Css/Dialog.Move.css?' + version(),
-        root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.New.Directory.css?' + version(),
+        root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Create.Directory.css?' + version(),
         root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + "{{$require.submodule|file.basename}}" + '.css?' + version()
     ],
     () => {

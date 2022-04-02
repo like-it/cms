@@ -1,4 +1,4 @@
-.dialog-new-directory {
+.dialog-create-directory {
     left: 33%;
     width: 34%;
     right: 33%;
@@ -6,13 +6,13 @@
     top: calc(50% - 95px);
 }
 
-.dialog-new-directory .body {
+.dialog-create-directory .body {
     height: 110px;
     background: rgba(255, 255, 255, 1);
     overflow: auto;
 }
 
-.dialog-error-new-directory {
+.dialog-error-create-directory {
     left: 33%;
     width: 34%;
     right: 33%;
@@ -20,7 +20,7 @@
     top: calc(50% - 125px);
 }
 
-.dialog-error-new-directory .body {
+.dialog-error-create-directory .body {
     height: 170px;
     background: rgba(255, 255, 255, 1);
     overflow: auto;
