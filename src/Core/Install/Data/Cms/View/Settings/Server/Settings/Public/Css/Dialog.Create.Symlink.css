@@ -12,6 +12,12 @@
     overflow: auto;
 }
 
+.dialog-create-symlink .body label {
+    width: 100px;
+    display: inline-block;
+}
+
+
 .dialog-error-create-symlink {
     left: 33%;
     width: 34%;
