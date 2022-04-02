@@ -247,9 +247,9 @@ class Settings extends View {
                         case 'Directory':
                             return Service::server_settings_create_directory($object);
                         case 'File':
-                            break;
+                            return Service::server_settings_create_file($object);
                         case 'Symlink':
-                            break;
+                            return Service::server_settings_create_symlink($object);
                     }
                 break;
             }

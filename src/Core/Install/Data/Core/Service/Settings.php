@@ -1706,6 +1706,65 @@ class Settings extends Main {
         return new Response($response, Response::TYPE_JSON);
     }
 
+    /**
+     * @throws ErrorException
+     */
+    public static function server_settings_create_file(App $object): Response
+    {
+        $name = $object->request('node.name');
+        $name = str_replace([
+            '../',
+            './'
+        ], [
+            $object->config('ds'),
+            $object->config('ds'),
+        ], $name);
+
+        $url = $object->config('project.dir.public') . $name;
+        if(file::exist($url)){
+            throw new ErrorException('Url exists...');
+        } else {
+            $dir = Dir::name($url);
+            $file = File::basename($url);
+            Dir::create($dir);
+            File::touch($url);
+        }
+        $node = [];
+        $node['url'] = $url;
+        $node['created'] = new DateTime();
+        $response = [];
+        $response['node'] = $node;
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws ErrorException
+     */
+    public static function server_settings_create_symlink(App $object): Response
+    {
+        $name = $object->request('node.name');
+        $name = str_replace([
+            '../',
+            './'
+        ], [
+            $object->config('ds'),
+            $object->config('ds'),
+        ], $name);
+
+        $url = $object->config('project.dir.public') . $name;
+        if(file::exist($url)){
+            throw new ErrorException('Url exists...');
+        } else {
+            Dir::create($url);
+        }
+        $node = [];
+        $node['url'] = $url;
+        $node['created'] = new DateTime();
+        $response = [];
+        $response['node'] = $node;
+        return new Response($response, Response::TYPE_JSON);
+    }
+
         private static function server_settings_page(App $object, $search=[])
     {
         $url = $object->config('project.dir.public');
