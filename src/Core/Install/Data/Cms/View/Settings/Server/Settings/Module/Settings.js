@@ -378,6 +378,11 @@ settings.options = (target) => {
                                         }
                                         form.on('submit', (event) => {
                                             dialog_error.remove();
+                                            const form = dialog_create.select('form');
+                                            const button = form.select('button[type="submit"]');
+                                            if(button){
+                                                button.focus();
+                                            }
                                         });
                                         const button = form.select('button[type="submit"]');
                                         if(button){
@@ -464,6 +469,11 @@ settings.options = (target) => {
                                         }
                                         form.on('submit', (event) => {
                                             dialog_error.remove();
+                                            const form = dialog_create.select('form');
+                                            const button = form.select('button[type="submit"]');
+                                            if(button){
+                                                button.focus();
+                                            }
                                         });
                                         const button = form.select('button[type="submit"]');
                                         if(button){
