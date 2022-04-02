@@ -17,7 +17,7 @@ $__.command +
 )}}
 <a
     class="dropdown-item item-new-dir"
-    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/New/Directory/"
+    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Create/Directory/"
     data-filter-type="{{$request.filter.type}}"
 >
     <i

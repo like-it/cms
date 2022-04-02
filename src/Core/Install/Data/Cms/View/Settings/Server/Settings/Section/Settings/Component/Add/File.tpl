@@ -17,7 +17,7 @@ $__.command +
 )}}
 <a
     class="dropdown-item item-new-file"
-    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/New/File/"
+    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Create/File/"
     data-filter-type="{{$request.filter.type}}"
 >
     <i
