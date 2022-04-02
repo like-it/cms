@@ -350,10 +350,12 @@ settings.options = (target) => {
                                 request(form.data('url'), form.data('serialize'), (url, response) => {
                                     dialog_create.remove();
                                     if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
+                                        let error = [];
+                                        error.push(response.message);
                                         let dialog_error = dialog.create({
                                             title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.title')}}",
                                             message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.message'))}}",
-                                            error : response.message,
+                                            error : error,
                                             buttons : [
                                                 {
                                                     text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.button.ok')}}"
