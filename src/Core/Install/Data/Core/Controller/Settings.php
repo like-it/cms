@@ -237,6 +237,17 @@ class Settings extends View {
         }
     }
 
+    public static function server_settings_new(App $object)
+    {
+        $type = $object->request('type');
+        dd($type);
+        try {
+            return Service::server_settings_list($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
     public static function theme_settings(App $object): Response
     {
         return Service::theme_list($object);
