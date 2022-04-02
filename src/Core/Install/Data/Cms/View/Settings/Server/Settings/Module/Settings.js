@@ -349,11 +349,10 @@ settings.options = (target) => {
                                 };
                                 header('authorization', 'Bearer ' + user.token());
                                 request(form.data('url'), data, (url, response) => {
-                                    dialog_create.remove();
                                     if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
                                         let error = [];
-                                        console.log(data);
-                                        error.push(data?.node?.name);
+                                        const input = dialog_create.select('input[name="node.name"]');
+                                        error.push(input);
                                         let dialog_error = dialog.create({
                                             title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.title')}}",
                                             message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.message'))}}",
@@ -384,6 +383,7 @@ settings.options = (target) => {
                                         }
                                         menu.dispatch(section, target);
                                     }
+                                    dialog_create.remove();
                                 });
                             }
                         });
