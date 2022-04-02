@@ -556,8 +556,8 @@ settings.options = (target) => {
                                             menuItem.data('filter-type', filter.type);
                                         }
                                         menu.dispatch(section, target);
+                                        dialog_create.remove();
                                     }
-                                    dialog_create.remove();
                                 });
                             }
                         });
