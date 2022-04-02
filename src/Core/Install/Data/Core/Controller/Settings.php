@@ -237,13 +237,22 @@ class Settings extends View {
         }
     }
 
-    public static function server_settings_new(App $object)
+    public static function server_settings_create(App $object)
     {
         $type = $object->request('type');
-        d($object->request());
-        dd($type);
         try {
-            return Service::server_settings_list($object);
+            switch (Handler::method()) {
+                case 'POST':
+                    switch ($type){
+                        case 'Directory':
+                            return Service::server_settings_create_directory($object);
+                        case 'File':
+                            break;
+                        case 'Symlink':
+                            break;
+                    }
+                break;
+            }
         } catch (Exception $exception){
             return $exception;
         }

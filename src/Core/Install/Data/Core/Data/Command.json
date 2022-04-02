@@ -474,8 +474,8 @@
     "b4cd86ed-d28b-4119-8ccc-a79b4490ddc4" : {
         "module" : "settings",
         "submodule" : "server-settings",
-        "command" : "new",
-        "path": "Settings/Server/Settings/New/{{$type}}",
+        "command" : "create",
+        "path": "Settings/Server/Settings/Create/{{$type}}",
         "method": [
             "POST",
             "OPTIONS"
