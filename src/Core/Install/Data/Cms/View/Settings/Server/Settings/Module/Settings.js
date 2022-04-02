@@ -352,6 +352,7 @@ settings.options = (target) => {
                                     dialog_create.remove();
                                     if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
                                         let error = [];
+                                        console.log(data);
                                         error.push(data?.node?.name);
                                         let dialog_error = dialog.create({
                                             title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.title')}}",
