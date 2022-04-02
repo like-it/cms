@@ -318,18 +318,18 @@ settings.options = (target) => {
             }
             else if(node.hasClass('item-new-dir')){
                 node.on('click', (event) => {
-                    let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.new.directory.message'))}}";
+                    let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.message'))}}";
                     message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
-                    message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.new.directory.name')}}" + '</label><input type="text" name="node.name" value=""/></p>'
+                    message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.create.directory.name')}}" + '</label><input type="text" name="node.name" value=""/></p>'
                     let dialog_create = dialog.create({
-                        title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.new.directory.title')}}",
+                        title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.title')}}",
                         message: message,
                         buttons: [
                             {
-                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.new.directory.button.ok')}}"
+                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.button.ok')}}"
                             },
                             {
-                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.new.directory.button.cancel')}}"
+                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.button.cancel')}}"
                             }
                         ],
                         section: section,
@@ -343,15 +343,16 @@ settings.options = (target) => {
                     if(form){
                         form.on('submit', (event) => {
                             if(form.data('has', 'url')){
+                                let data = form.data('serialize');
                                 let filter = {
                                     type : "{{$request.filter.type}}"
                                 };
                                 header('authorization', 'Bearer ' + user.token());
-                                request(form.data('url'), form.data('serialize'), (url, response) => {
+                                request(form.data('url'), data, (url, response) => {
                                     dialog_create.remove();
                                     if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
                                         let error = [];
-                                        error.push(response.message);
+                                        error.push(data?.node?.name);
                                         let dialog_error = dialog.create({
                                             title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.title')}}",
                                             message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.message'))}}",
