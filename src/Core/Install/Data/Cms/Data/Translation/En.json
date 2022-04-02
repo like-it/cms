@@ -286,7 +286,7 @@
     "settings.server.settings.dialog.error.item.create.directory.button.ok" : "Ok",
     "settings.server.settings.dialog.error.item.create.file.title": "Error creating file",
     "settings.server.settings.dialog.error.item.create.file.message" : [
-        "Unable to create the directory, the directory already exists..."
+        "Unable to create the file, the file already exists..."
     ],
     "settings.server.settings.dialog.error.item.create.file.button.ok" : "Ok",
     "settings.server.settings.dialog.create.directory.title" : "Create new directory",
