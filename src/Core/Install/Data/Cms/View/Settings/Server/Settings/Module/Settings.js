@@ -379,9 +379,9 @@ settings.options = (target) => {
                                         form.on('submit', (event) => {
                                             dialog_error.remove();
                                             let form = dialog_create.select('form');
-                                            let button = form.select('button[type="submit"]');
-                                            if(button){
-                                                button.focus();
+                                            let input = form.select('input[name="node.name"]');
+                                            if(input){
+                                                input.focus();
                                             }
                                         });
                                         const button = form.select('button[type="submit"]');
@@ -470,9 +470,9 @@ settings.options = (target) => {
                                         form.on('submit', (event) => {
                                             dialog_error.remove();
                                             form = dialog_create.select('form');
-                                            let button = form.select('button[type="submit"]');
-                                            if(button){
-                                                button.focus();
+                                            let input = form.select('input[name="node.name"]');
+                                            if(input){
+                                                input.focus();
                                             }
                                         });
                                         let button = form.select('button[type="submit"]');
@@ -520,7 +520,7 @@ settings.options = (target) => {
                             url: node.data('url'),
                         }
                     });
-                    const form = dialog_create.select('form');
+                    let form = dialog_create.select('form');
                     if(form){
                         form.on('submit', (event) => {
                             if(form.data('has', 'url')){
@@ -555,12 +555,17 @@ settings.options = (target) => {
                                             section : section,
                                             className : "dialog dialog-error dialog-error-create-symlink dialog-error-destination"
                                         });
-                                        const form = dialog_error.select('form');
+                                        let form = dialog_error.select('form');
                                         if(!form){
                                             return;
                                         }
                                         form.on('submit', (event) => {
                                             dialog_error.remove();
+                                            let form = dialog_create.select('form');
+                                            let input = form.select('input[name="node.source"]');
+                                            if(input){
+                                                input.focus();
+                                            }
                                         });
                                         const button = form.select('button[type="submit"]');
                                         if(button){
