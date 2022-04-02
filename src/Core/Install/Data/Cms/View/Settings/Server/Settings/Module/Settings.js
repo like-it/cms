@@ -351,13 +351,14 @@ settings.options = (target) => {
                                 request(form.data('url'), data, (url, response) => {
                                     if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
                                         let error = [];
-                                        const input = dialog_create.select('input[name="node.name"]');
-                                        error.push(input.value);
                                         let message;
                                         if(response?.message === 'Name cannot be empty...'){
                                             message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.empty.message'))}}";
+                                            error.push("{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.empty.directory'))}}");
                                         } else {
                                             message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.exist.message'))}}";
+                                            const input = dialog_create.select('input[name="node.name"]');
+                                            error.push(input.value);
                                         }
                                         let dialog_error = dialog.create({
                                             title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.title')}}",
@@ -434,15 +435,17 @@ settings.options = (target) => {
                                 header('authorization', 'Bearer ' + user.token());
                                 request(form.data('url'), data, (url, response) => {
                                     if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
-                                        let error = [];
-                                        let input = dialog_create.select('input[name="node.name"]');
-                                        error.push(input.value);
                                         let message;
+                                        let error = [];
                                         if(response?.message === 'Name cannot be empty...'){
-                                           message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.empty.message'))}}";
+                                            message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.empty.message'))}}";
+                                            error.push("{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.empty.file'))}}")
                                         } else {
-                                           message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.exist.message'))}}";
+                                            message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.exist.message'))}}";
+                                            let input = dialog_create.select('input[name="node.name"]');
+                                            error.push(input.value);
                                         }
+
                                         let dialog_error = dialog.create({
                                             title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.title')}}",
                                             message: message,

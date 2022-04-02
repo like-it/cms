@@ -280,6 +280,7 @@
     ],
     "settings.server.settings.dialog.error.list.move.button.ok" : "Ok",
     "settings.server.settings.dialog.error.item.create.directory.title": "Error creating directory",
+    "settings.server.settings.dialog.error.item.create.directory.empty.directory" : "Empty directory",
     "settings.server.settings.dialog.error.item.create.directory.empty.message" : [
         "Please give a valid name..."
     ],
@@ -288,6 +289,7 @@
     ],
     "settings.server.settings.dialog.error.item.create.directory.button.ok" : "Ok",
     "settings.server.settings.dialog.error.item.create.file.title": "Error creating file",
+    "settings.server.settings.dialog.error.item.create.file.empty.file" : "Empty file",
     "settings.server.settings.dialog.error.item.create.file.empty.message" : [
         "Please give a valid name..."
     ],
