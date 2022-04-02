@@ -339,7 +339,7 @@ settings.options = (target) => {
                             url: node.data('url'),
                         }
                     });
-                    const form = dialog_create.select('form');
+                    let form = dialog_create.select('form');
                     if(form){
                         form.on('submit', (event) => {
                             if(form.data('has', 'url')){
@@ -372,14 +372,14 @@ settings.options = (target) => {
                                             section : section,
                                             className : "dialog dialog-error dialog-error-create-directory"
                                         });
-                                        const form = dialog_error.select('form');
+                                        let form = dialog_error.select('form');
                                         if(!form){
                                             return;
                                         }
                                         form.on('submit', (event) => {
                                             dialog_error.remove();
-                                            const form = dialog_create.select('form');
-                                            const button = form.select('button[type="submit"]');
+                                            let form = dialog_create.select('form');
+                                            let button = form.select('button[type="submit"]');
                                             if(button){
                                                 button.focus();
                                             }
@@ -429,7 +429,7 @@ settings.options = (target) => {
                             url: node.data('url'),
                         }
                     });
-                    const form = dialog_create.select('form');
+                    let form = dialog_create.select('form');
                     if(form){
                         form.on('submit', (event) => {
                             if(form.data('has', 'url')){
@@ -463,19 +463,19 @@ settings.options = (target) => {
                                             section : section,
                                             className : "dialog dialog-error dialog-error-create-file"
                                         });
-                                        const form = dialog_error.select('form');
+                                        let form = dialog_error.select('form');
                                         if(!form){
                                             return;
                                         }
                                         form.on('submit', (event) => {
                                             dialog_error.remove();
-                                            const form = dialog_create.select('form');
-                                            const button = form.select('button[type="submit"]');
+                                            form = dialog_create.select('form');
+                                            let button = form.select('button[type="submit"]');
                                             if(button){
                                                 button.focus();
                                             }
                                         });
-                                        const button = form.select('button[type="submit"]');
+                                        let button = form.select('button[type="submit"]');
                                         if(button){
                                             button.focus();
                                         }
