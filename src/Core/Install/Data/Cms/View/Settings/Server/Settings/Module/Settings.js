@@ -333,9 +333,9 @@ settings.options = (target) => {
                             }
                         ],
                         section: section,
-                        className: "dialog dialog-new-directory",
+                        className: "dialog dialog-create-directory",
                         form: {
-                            name: "dialog-new-directory",
+                            name: "dialog-create-directory",
                             url: node.data('url'),
                         }
                     });
