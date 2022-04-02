@@ -25,12 +25,12 @@
     left: 33%;
     width: 34%;
     right: 33%;
-    height: 205px;
-    top: calc(50% - 102px);
+    height: 220px;
+    top: calc(50% - 110px);
 }
 
 .dialog-error-create-symlink .body {
-    height: 125px;
+    height: 140px;
     background: rgba(255, 255, 255, 1);
     overflow: auto;
 }
