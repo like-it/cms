@@ -1767,7 +1767,14 @@ class Settings extends Main {
         ],
             $destination
         );
-        $url_source = $object->config('project.dir.public') . $source;
+        $match = $object->config('project.dir.host');
+        dd($match);
+        if(substr($source, 0, strlen($match)) === $match){
+            $url_source = $source;
+        } else {
+            $url_source = $object->config('project.dir.public') . $source;
+        }
+
         $url_destination = $object->config('project.dir.public') . $destination;
         if(!file::exist($url_source)){
             throw new ErrorException('Source not exists...');
