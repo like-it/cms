@@ -1482,9 +1482,6 @@ class Settings extends Main {
                 $response['nodeList'][] = $node;
             }
         } else {
-            if(in_array($url, $protected)){
-                throw new Exception('Cannot delete protected file...');
-            }
             $url = str_replace([
                 '../',
                 './'
@@ -1495,6 +1492,22 @@ class Settings extends Main {
             $pos = strpos($url, $object->config('project.dir.public'));
             if($pos !== 0){
                 throw new Exception('Cannot delete outside project.dir.public');
+            }
+            if(in_array($url, $protected)){
+                throw new Exception('Cannot delete protected file...');
+            }
+            if(Dir::is($url)){
+                $dir = $url;
+            } else {
+                $dir = Dir::name($url);
+            }
+            $explode = explode($object->config('ds'), $dir);
+            for($i=count($explode); $i >= 2; $i--){
+                $dir_example = implode($object->config('ds'), $explode);
+                array_pop($explode);
+                if(File::is_link($dir_example)){
+                    throw new Exception('Cannot delete protected symlink file...');
+                }
             }
             if(Dir::is($url)){
                 Dir::remove($url);
