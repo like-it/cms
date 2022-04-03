@@ -1438,11 +1438,6 @@ class Settings extends Main {
         }
         if(is_array($url)){
             $nodeList = $url;
-            foreach($nodeList as $url) {
-                if (in_array($url, $protected)) {
-                    throw new Exception('Cannot delete protected file...');
-                }
-            }
             foreach($nodeList as $nr => $url) {
                 $nodeList[$nr] = str_replace([
                     '../',
@@ -1454,6 +1449,25 @@ class Settings extends Main {
                 $pos = strpos($url, $object->config('project.dir.public'));
                 if ($pos !== 0) {
                     throw new Exception('Cannot delete outside project.dir.public');
+                }
+            }
+            foreach($nodeList as $url) {
+                if (in_array($url, $protected)) {
+                    throw new Exception('Cannot delete protected file...');
+                }
+                if(Dir::is($url)){
+                    $dir = $url;
+                } else {
+                    $dir = Dir::name($url);
+                }
+                $explode = explode($object->config('ds'), $dir);
+                dd($explode);
+                for($i=count($explode); $i >= 0; $i--){
+                    $dir_example = implode($object->config('ds'), $explode);
+                    array_pop($explode);
+                    if(File::is_link($dir_example)){
+                        throw new Exception('Cannot delete protected symlink file...');
+                    }
                 }
             }
             $response = [];

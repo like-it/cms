@@ -1,8 +1,11 @@
 {{R3M}}
 <td scope="row" class="actions">
+    <input id="checkbox-{{$node.uuid}}" type="checkbox" name="node.nodeList[]" value="{{$node.url}}" />
+    /*
     {{if(is.empty($node.protected))}}
     <input id="checkbox-{{$node.uuid}}" type="checkbox" name="node.nodeList[]" value="{{$node.url}}" />
     {{/if}}
+    */
     {{if(!is.empty($node.sort))}}
         {{if($nr > 0 || $request.page > 1)}}
             {{$action = '1-up'}}
