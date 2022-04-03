@@ -1401,10 +1401,20 @@ class Settings extends Main {
             if(File::exist($url)){
                 throw new FileExistException('Target url (' . $url .') exist.');
             } else {
-                $dir = dir::name($url);
-                Dir::create($dir);
-                File::write($url, $content);
-                File::delete($url_old);
+                if(File::is_link($url_old)){
+                    $source = File::readlink($url_old, true);
+                    $dir = dir::name($url);
+                    Dir::create($dir);
+                    File::write($url_old, $content);
+                    File::link($source, $url);
+                    File::delete($url_old);
+                } else {
+                    $dir = dir::name($url);
+                    Dir::create($dir);
+                    File::write($url, $content);
+                    File::delete($url_old);
+                }
+
             }
         } else {
             $content = $object->request('node.content');
