@@ -1520,6 +1520,7 @@ class Settings extends Main {
         if($settings->data('server.settings.protected')){
             $protected = $settings->data('server.settings.protected');
         }
+        $link = [];
         if($read){
             foreach($read as $nr => $record){
                 if($filter['type'] === File::TYPE){
@@ -1532,6 +1533,9 @@ class Settings extends Main {
                         continue;
                     }
                 }
+                if(property_exists($record, 'link') && $record->link === true){
+                    $link[] = $record->url;
+                }
                 if($record->type !== Dir::TYPE){
                     $record->extension = File::extension($record->url);
                 }
@@ -1540,6 +1544,14 @@ class Settings extends Main {
                     $protected
                 )){
                     $record->protected = true;
+                }
+                foreach($link as $symlink){
+                    if(
+                        $symlink !== $record->url &&
+                        substr($record->url, 0, strlen($symlink)) === $symlink
+                    ){
+                        $record->protected = true;
+                    }
                 }
                 $key = sha1($record->url);
                 $data->set($key, $record);
