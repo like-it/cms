@@ -583,7 +583,7 @@ settings.options = (target) => {
                             }
                         });
                     }
-                    const input = dialog_create.select('input[name="node.name"]');
+                    const input = dialog_create.select('input[name="node.source"]');
                     if(input){
                         input.focus();
                     }
