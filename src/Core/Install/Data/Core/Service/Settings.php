@@ -1549,6 +1549,9 @@ class Settings extends Main {
         $link = [];
         if($read){
             foreach($read as $nr => $record){
+                if(property_exists($record, 'link') && $record->link === true){
+                    $link[] = $record->url;
+                }
                 if($filter['type'] === File::TYPE){
                     if($record->type !== File::TYPE){
                         continue;
@@ -1558,9 +1561,6 @@ class Settings extends Main {
                     if($record->type !== Dir::TYPE){
                         continue;
                     }
-                }
-                if(property_exists($record, 'link') && $record->link === true){
-                    $link[] = $record->url;
                 }
                 if($record->type !== Dir::TYPE){
                     $record->extension = File::extension($record->url);
