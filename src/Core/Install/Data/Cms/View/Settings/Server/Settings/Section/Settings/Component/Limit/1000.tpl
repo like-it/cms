@@ -1,5 +1,5 @@
 {{R3M}}
-{{$span.text = 1000
+{{$span.text = 1000}}
 <a
 class="dropdown-item list-10"
 data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.command}}/?limit=10"
