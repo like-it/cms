@@ -15,7 +15,7 @@ $__.submodule +
 $__.command +
 '.component.options.delete.text'
 )}}
-{{if(is.empty($node.protected)}}
+{{if(is.empty($node.protected))}}
 <a
     class="dropdown-item item-delete"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.url|url.raw.encode}}/"
