@@ -1768,7 +1768,6 @@ class Settings extends Main {
             $destination
         );
         $match = $object->config('project.dir.host');
-        dd($match);
         if(substr($source, 0, strlen($match)) === $match){
             $url_source = $source;
         } else {
