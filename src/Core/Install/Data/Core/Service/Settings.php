@@ -19,6 +19,7 @@ use R3m\Io\Exception\ErrorException;
 use R3m\Io\Exception\FileExistException;
 use R3m\Io\Exception\FileMoveException;
 use R3m\Io\Exception\FileNotExistException;
+use R3m\Io\Exception\FileWriteException;
 use DateTime;
 
 class Settings extends Main {
@@ -1389,19 +1390,12 @@ class Settings extends Main {
     }
 
     /**
-     * @throws Exception
      * @throws FileExistException
+     * @throws FileWriteException
      */
     public static function server_settings_update(App $object, $url): Response
     {
         $url_old = $object->request('node.url_old');
-        $domain = Settings::domain_get($object);
-        if(
-            !property_exists($domain, 'dir') ||
-            !property_exists($domain, 'uuid')
-        ){
-            throw new Exception('Domain dir not set...');
-        }
         if($url !== $url_old){
             $content = $object->request('node.content');
             if(File::exist($url)){
