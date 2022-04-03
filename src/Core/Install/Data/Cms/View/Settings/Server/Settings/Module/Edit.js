@@ -114,10 +114,6 @@ edit.form = (target) => {
         if(!section){
             return;
         }
-        const domain = section.select('input[name="node.domain"]');
-        if(!domain){
-            return;
-        }
         if(contains(url, "{node.domain}") !== false){
             url = replace("{node.domain}", domain.value, url);
         } else {
