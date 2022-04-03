@@ -1,5 +1,5 @@
 {{R3M}}
-<div class="dropdown dropup">
+<div class="dropdown dropup col-lg-12">
     <div class="btn-group">
         <button
             class="btn btn-outline-primary dropdown-toggle filter-type"
