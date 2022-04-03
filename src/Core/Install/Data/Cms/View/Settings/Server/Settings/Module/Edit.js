@@ -114,14 +114,6 @@ edit.form = (target) => {
         if(!section){
             return;
         }
-        if(contains(url, "{node.domain}") !== false){
-            url = replace("{node.domain}", domain.value, url);
-        } else {
-            data.push({
-                name: "node.domain",
-                value: domain.value
-            });
-        }
         const pre = form.select('pre[name="node.content"]');
         if(!pre){
             return;
