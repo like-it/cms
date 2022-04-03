@@ -1,8 +1,17 @@
 {{R3M}}
 <td scope="row" class="icon">
     {{if($node.type==='Dir')}}
-    <label for="checkbox-{{$node.uuid}}"><i class="fas fa-folder"></i></label>
+        {{if($node.link)}}
+        <label for="checkbox-{{$node.uuid}}" title="Directory symbolic link"><i class="fas fa-folder is-link"></i></label>
+        {{else}}
+        <label for="checkbox-{{$node.uuid}}" title="Directory"><i class="fas fa-folder"></i></label>
+        {{/if}}
     {{else}}
-    <label for="checkbox-{{$node.uuid}}"><i class="fas fa-file"></i></label>
+        {{if($node.link)}}
+        <label for="checkbox-{{$node.uuid}}" title="File symbolic link"><i class="fas fa-file is-link"></i></label>
+        {{else}}
+        <label for="checkbox-{{$node.uuid}}" title="File"><i class="fas fa-file"></i></label>
+        {{/if}}
+
     {{/if}}
 </td>

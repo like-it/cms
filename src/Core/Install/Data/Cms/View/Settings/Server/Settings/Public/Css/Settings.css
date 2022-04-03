@@ -26,6 +26,10 @@
     color: #0b5ed7;
 }
 
+.settings-server-settings .card-body-settings tbody td.icon .is-link {
+    color: rgba(255, 124, 13, 1);
+}
+
 .settings-server-settings .card-body-settings tfoot td {
     position: sticky;
     bottom: 0;
