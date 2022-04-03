@@ -316,6 +316,7 @@ source.save = (className) => {
         name : "node.content",
         value: pre.data('content')
     });
+    /*
     const input = section.select('input[name="node.domain"]');
     if(!input){
         return;
@@ -324,6 +325,7 @@ source.save = (className) => {
         name : "node.domain",
         value : input.value
     });
+     */
     request(form.data('url'), data, (url, response) => {
         if(response?.error){
             data.push({
@@ -352,6 +354,7 @@ source.open = () => {
 }
 
 source.close = (className) => {
+    console.log(className);
     let section = getSectionByName('main-content');
     if(!section){
         return;
