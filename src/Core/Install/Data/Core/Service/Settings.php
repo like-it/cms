@@ -1646,6 +1646,19 @@ class Settings extends Main {
                 if(in_array($basename, $list)){
                     throw new ErrorException('Duplicate basename...');
                 }
+                if(Dir::is($url)){
+                    $dir = $url;
+                } else {
+                    $dir = Dir::name($url);
+                }
+                $explode = explode($object->config('ds'), $dir);
+                for($i=count($explode); $i >= 2; $i--){
+                    $dir_example = implode($object->config('ds'), $explode);
+                    array_pop($explode);
+                    if(File::is_link($dir_example)){
+                        throw new Exception('Cannot move protected symlink file...');
+                    }
+                }
                 $list[] = File::basename($url);
             }
         }
