@@ -53,7 +53,9 @@
             '&q=' +
             $request.q +
             '&filter[type]=' +
-            $request.filter.type
+            $request.filter.type +
+            '&limit=' +
+            $request.limit
             }}
             {{$button.data.frontend.url =
             route.get(route.prefix() +
@@ -97,7 +99,9 @@
             '&q=' +
             $request.q +
             '&filter[type]=' +
-            $request.filter.type
+            $request.filter.type +
+            '&limit=' +
+            $request.limit
             }}
             {{$button.data.frontend.url =
             route.get(route.prefix() +
@@ -141,7 +145,9 @@
             '&q=' +
             $request.q +
             '&filter[type]=' +
-            $request.filter.type
+            $request.filter.type +
+            '&limit=' +
+            $request.limit
             }}
             {{$button.data.frontend.url =
             route.get(route.prefix() +
@@ -185,7 +191,9 @@
                 '&q=' +
                 $request.q +
                 '&filter[type]=' +
-                $request.filter.type
+                $request.filter.type +
+                '&limit=' +
+                $request.limit
             }}
             {{$button.data.frontend.url =
                 route.get(route.prefix() +

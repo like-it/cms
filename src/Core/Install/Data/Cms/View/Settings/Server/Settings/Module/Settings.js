@@ -628,6 +628,7 @@ settings.options = (target) => {
                                     const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
                                     if(menuItem){
                                         menuItem.data('filter-type', filter.type);
+                                        menuItem.data('limit', "{{$request.limit}}");
                                     }
                                     dialog_create.remove();
                                     settings.delete('selected');
