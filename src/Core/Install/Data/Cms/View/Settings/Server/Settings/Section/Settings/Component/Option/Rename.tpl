@@ -15,9 +15,7 @@ $__.submodule +
 $__.command +
 '.component.options.rename.text'
 )}}
-{{if(
-is.array($request.protected) &&
-!in.array($node.url, $request.protected))}}
+{{if(is.empty($node.protected)}}
 <a
     class="dropdown-item item-controller"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.name}}/"
