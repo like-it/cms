@@ -1461,8 +1461,7 @@ class Settings extends Main {
                     $dir = Dir::name($url);
                 }
                 $explode = explode($object->config('ds'), $dir);
-                dd($explode);
-                for($i=count($explode); $i >= 0; $i--){
+                for($i=count($explode); $i >= 2; $i--){
                     $dir_example = implode($object->config('ds'), $explode);
                     array_pop($explode);
                     if(File::is_link($dir_example)){
