@@ -111,6 +111,9 @@ menu.is_selected = (node, selected) => {
             if(node.data('filter-type')){
                 url += '&filter[type]=' + node.data('filter-type');
             }
+            if(node.data('limit')){
+                url += '&limit=' + node.data('limit');
+            }
             loader.start({
                 className : "card-body h-100 card-body-loader",
                 target: "card",
@@ -153,6 +156,9 @@ menu.is_selected = (node, selected) => {
                     if(node.data('filter-type')){
                         url += '?filter[type]=' + node.data('filter-type');
                     }
+                    if(node.data('limit')){
+                        url += '&limit=' + node.data('limit');
+                    }
                     request(url, response, () => {
                         loader.delete({
                             className : "card-body-loader",
@@ -185,6 +191,9 @@ menu.is_selected = (node, selected) => {
             }
             if(node.data('filter-type')){
                 url += '?filter[type]=' + node.data('filter-type');
+            }
+            if(node.data('limit')){
+                url += '&limit=' + node.data('limit');
             }
             loader.start({
                 className : "card-body h-100 card-body-loader",

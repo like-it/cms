@@ -693,6 +693,7 @@ settings.options = (target) => {
                                 const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
                                 if(menuItem){
                                     menuItem.data('filter-type', filter.type);
+                                    menuItem.data('limit', "{{$request.limit}}");
                                 }
                                 if(response?.error){
                                     let dialog_error = dialog.create({
