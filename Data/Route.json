@@ -2,8 +2,5 @@
     "d702a6dd-0c0e-4b07-b79f-0730377114f2": {
         "comment" : "This route needs to be on top",
         "resource": "{$project.dir.vendor}like-it\/cms\/src\/Core\/Install\/Data\/Route.json"
-    },
-    "db1c244c-afb9-42f3-8f9a-26aa0eee1bfb": {
-        "resource": "{$project.dir.vendor}like-it\/cms\/src\/Core\/Zip\/Data\/Route.json"
     }
 }
