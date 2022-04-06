@@ -5,15 +5,5 @@
         "method": [
             "CLI"
         ]
-    },
-    "cms-install-process": {
-        "path": "\/Installation\/Process\/",
-        "host": [
-            "localhost"
-        ],
-        "controller": "LikeIt.Cms.Core.Install.Controller.Install.process",
-        "method": [
-            "POST"
-        ]
     }
 }
