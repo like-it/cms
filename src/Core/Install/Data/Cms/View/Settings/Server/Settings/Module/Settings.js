@@ -254,7 +254,6 @@ settings.actions = (target) => {
 }
 
 settings.node = {};
-
 settings.node.item = {};
 settings.node.list = {};
 
