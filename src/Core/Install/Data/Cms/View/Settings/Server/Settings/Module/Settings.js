@@ -253,6 +253,550 @@ settings.actions = (target) => {
     }
 }
 
+settings.node = {};
+
+settings.node.item = {};
+settings.node.list = {};
+
+settings.node.item.delete = ({node, section}) => {
+    if(!node){
+        return;
+    }
+    if(!section){
+        return;
+    }
+    node.on('click', (event) => {
+        let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.message'))}}";
+        message = _('prototype').string.replace('{{$name}}', node.data('name'), message);
+        let dialog_create = dialog.create({
+            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.title')}}",
+            message : message,
+            buttons : [
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.button.ok')}}"
+                },
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.button.cancel')}}"
+                }
+            ],
+            section : section,
+            className : "dialog dialog-delete",
+            form : {
+                name : "dialog-delete",
+                url : node.data('url'),
+            }
+        });
+        const form = dialog_create.select('form');
+        if(form){
+            form.on('submit', (event) => {
+                if(node.data('has', 'url')){
+                    let data = {
+                        request : {
+                            method : node.data('request-method') ? node.data('request-method') : "DELETE"
+                        }
+                    };
+                    let filter = {
+                        type : "{{$request.filter.type}}"
+                    };
+                    header('authorization', 'Bearer ' + user.token());
+                    request(node.data('url'), data, (url, response) => {
+                        const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                        if(menuItem){
+                            menuItem.data('filter-type', filter.type);
+                            menuItem.data('limit', "{{$request.limit}}");
+                        }
+                        dialog_create.remove();
+                        menu.dispatch(section, target);
+                    });
+                }
+            });
+            const submit = form.select('.button-submit');
+            if(submit){
+                submit.focus();
+            }
+        }
+    });
+}
+
+settings.node.item.create_dir = ({node, section}) => {
+    if (!node) {
+        return;
+    }
+    if (!section) {
+        return;
+    }
+    node.on('click', (event) => {
+        let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.message'))}}";
+        message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
+        message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.create.directory.name')}}" + '</label><input type="text" name="node.name" value=""/></p>'
+        let dialog_create = dialog.create({
+            title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.title')}}",
+            message: message,
+            buttons: [
+                {
+                    text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.button.ok')}}"
+                },
+                {
+                    text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.button.cancel')}}"
+                }
+            ],
+            section: section,
+            className: "dialog dialog-create-directory",
+            form: {
+                name: "dialog-create-directory",
+                url: node.data('url'),
+            }
+        });
+        let form = dialog_create.select('form');
+        if(form){
+            form.on('submit', (event) => {
+                if(form.data('has', 'url')){
+                    let data = form.data('serialize');
+                    let filter = {
+                        type : "{{$request.filter.type}}"
+                    };
+                    header('authorization', 'Bearer ' + user.token());
+                    request(form.data('url'), data, (url, response) => {
+                        if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
+                            let error = [];
+                            let message;
+                            if(response?.message === 'Name cannot be empty...'){
+                                message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.empty.message'))}}";
+                                error.push("{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.empty.directory'))}}");
+                            } else {
+                                message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.exist.message'))}}";
+                                const input = dialog_create.select('input[name="node.name"]');
+                                error.push(input.value);
+                            }
+                            let dialog_error = dialog.create({
+                                title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.title')}}",
+                                message : message,
+                                error : error,
+                                buttons : [
+                                    {
+                                        text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.button.ok')}}"
+                                    }
+                                ],
+                                section : section,
+                                className : "dialog dialog-error dialog-error-create-directory"
+                            });
+                            let form = dialog_error.select('form');
+                            if(!form){
+                                return;
+                            }
+                            form.on('submit', (event) => {
+                                dialog_error.remove();
+                                let form = dialog_create.select('form');
+                                let input = form.select('input[name="node.name"]');
+                                if(input){
+                                    input.focus();
+                                }
+                            });
+                            const button = form.select('button[type="submit"]');
+                            if(button){
+                                button.focus();
+                            }
+                        } else {
+                            const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                            if(menuItem){
+                                menuItem.data('filter-type', filter.type);
+                                menuItem.data('limit', "{{$request.limit}}");
+                            }
+                            menu.dispatch(section, target);
+                            dialog_create.remove();
+                        }
+                    });
+                }
+            });
+        }
+        const input = dialog_create.select('input[name="node.name"]');
+        if(input){
+            input.focus();
+        }
+    });
+}
+
+settings.node.item.create_file = ({node, section}) => {
+    if (!node) {
+        return;
+    }
+    if (!section) {
+        return;
+    }
+    node.on('click', (event) => {
+        let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.message'))}}";
+        message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
+        message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.create.file.name')}}" + '</label><input type="text" name="node.name" value=""/></p>'
+        let dialog_create = dialog.create({
+            title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.title')}}",
+            message: message,
+            buttons: [
+                {
+                    text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.button.ok')}}"
+                },
+                {
+                    text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.button.cancel')}}"
+                }
+            ],
+            section: section,
+            className: "dialog dialog-create-file",
+            form: {
+                name: "dialog-create-file",
+                url: node.data('url'),
+            }
+        });
+        let form = dialog_create.select('form');
+        if(form){
+            form.on('submit', (event) => {
+                if(form.data('has', 'url')){
+                    let data = form.data('serialize');
+                    let filter = {
+                        type : "{{$request.filter.type}}"
+                    };
+                    header('authorization', 'Bearer ' + user.token());
+                    request(form.data('url'), data, (url, response) => {
+                        if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
+                            let message;
+                            let error = [];
+                            if(response?.message === 'Name cannot be empty...'){
+                                message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.empty.message'))}}";
+                                error.push("{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.empty.file'))}}")
+                            } else {
+                                message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.exist.message'))}}";
+                                let input = dialog_create.select('input[name="node.name"]');
+                                error.push(input.value);
+                            }
+
+                            let dialog_error = dialog.create({
+                                title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.title')}}",
+                                message: message,
+                                error : error,
+                                buttons : [
+                                    {
+                                        text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.button.ok')}}"
+                                    }
+                                ],
+                                section : section,
+                                className : "dialog dialog-error dialog-error-create-file"
+                            });
+                            let form = dialog_error.select('form');
+                            if(!form){
+                                return;
+                            }
+                            form.on('submit', (event) => {
+                                dialog_error.remove();
+                                form = dialog_create.select('form');
+                                let input = form.select('input[name="node.name"]');
+                                if(input){
+                                    input.focus();
+                                }
+                            });
+                            let button = form.select('button[type="submit"]');
+                            if(button){
+                                button.focus();
+                            }
+                        } else {
+                            const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                            if(menuItem){
+                                menuItem.data('filter-type', filter.type);
+                                menuItem.data('limit', "{{$request.limit}}");
+                            }
+                            menu.dispatch(section, target);
+                            dialog_create.remove();
+                        }
+                    });
+                }
+            });
+        }
+        const input = dialog_create.select('input[name="node.name"]');
+        if(input){
+            input.focus();
+        }
+    });
+}
+
+settings.node.item.create_symlink = ({node, section}) => {
+    if (!node) {
+        return;
+    }
+    if (!section) {
+        return;
+    }
+    node.on('click', (event) => {
+        let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.symlink.message'))}}";
+        message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
+        message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.create.symlink.source')}}" + '</label><input type="text" name="node.source" value=""/><br><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.create.symlink.destination')}}" + '</label><input type="text" name="node.destination" value=""/></p>'
+        let dialog_create = dialog.create({
+            title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.symlink.title')}}",
+            message: message,
+            buttons: [
+                {
+                    text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.symlink.button.ok')}}"
+                },
+                {
+                    text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.symlink.button.cancel')}}"
+                }
+            ],
+            section: section,
+            className: "dialog dialog-create-symlink",
+            form: {
+                name: "dialog-create-symlink",
+                url: node.data('url'),
+            }
+        });
+        let form = dialog_create.select('form');
+        if(form){
+            form.on('submit', (event) => {
+                if(form.data('has', 'url')){
+                    let data = form.data('serialize');
+                    let filter = {
+                        type : "{{$request.filter.type}}"
+                    };
+                    header('authorization', 'Bearer ' + user.token());
+                    request(form.data('url'), data, (url, response) => {
+                        if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
+                            let error = [];
+                            let source = dialog_create.select('input[name="node.source"]');
+                            error.push('Source: ' + source.value);
+                            let destination = dialog_create.select('input[name="node.destination"]');
+                            error.push('Destination: ' + destination.value);
+                            let dialog_error;
+                            let message;
+                            if(response?.message === 'Destination exists...') {
+                                message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.destination.message'))}}";
+                            } else {
+                                message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.source.message'))}}";
+                            }
+                            dialog_error = dialog.create({
+                                title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.title')}}",
+                                message : message,
+                                error : error,
+                                buttons : [
+                                    {
+                                        text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.button.ok')}}"
+                                    }
+                                ],
+                                section : section,
+                                className : "dialog dialog-error dialog-error-create-symlink dialog-error-destination"
+                            });
+                            let form = dialog_error.select('form');
+                            if(!form){
+                                return;
+                            }
+                            form.on('submit', (event) => {
+                                dialog_error.remove();
+                                let form = dialog_create.select('form');
+                                let input = form.select('input[name="node.source"]');
+                                if(input){
+                                    input.focus();
+                                }
+                            });
+                            const button = form.select('button[type="submit"]');
+                            if(button){
+                                button.focus();
+                            }
+                        } else {
+                            const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                            if(menuItem){
+                                menuItem.data('filter-type', filter.type);
+                                menuItem.data('limit', "{{$request.limit}}");
+                            }
+                            menu.dispatch(section, target);
+                            dialog_create.remove();
+                        }
+                    });
+                }
+            });
+        }
+        const input = dialog_create.select('input[name="node.source"]');
+        if(input){
+            input.focus();
+        }
+    });
+}
+
+settings.node.list.delete = ({node, section}) => {
+    if (!node) {
+        return;
+    }
+    if (!section) {
+        return;
+    }
+    node.on('click', (event) => {
+        let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.message'))}}";
+        let dialog_create = dialog.create({
+            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.title')}}",
+            message : message,
+            buttons : [
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.button.ok')}}"
+                },
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.button.cancel')}}"
+                }
+            ],
+            section : section,
+            className : "dialog dialog-delete",
+            form : {
+                name : "dialog-delete",
+                url : node.data('url'),
+            }
+        });
+        const form = dialog_create.select('form');
+        if(form){
+            form.on('submit', (event) => {
+                if(node.data('has', 'url')){
+                    let data = {
+                        nodeList : settings.get('selected'),
+                        request : {
+                            method : node.data('request-method') ? node.data('request-method') : "DELETE"
+                        }
+                    };
+                    let filter = {
+                        type : "{{$request.filter.type}}"
+                    };
+                    header('authorization', 'Bearer ' + user.token());
+                    request(node.data('url'), data, (url, response) => {
+                        const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                        if(menuItem){
+                            menuItem.data('filter-type', filter.type);
+                            menuItem.data('limit', "{{$request.limit}}");
+                        }
+                        dialog_create.remove();
+                        settings.delete('selected');
+                        menu.dispatch(section, target);
+                    });
+                }
+            });
+        }
+        const submit = dialog_create.select('.button-submit');
+        if(submit){
+            submit.focus();
+        }
+    });
+}
+
+settings.node.list.move = ({node, section}) => {
+    if (!node) {
+        return;
+    }
+    if (!section) {
+        return;
+    }
+    node.on('click', (event) => {
+        //make dialog move with where to move to.
+        let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.message'))}}";
+        message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
+        message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.list.move.target.directory')}}" + '</label><input type="text" name="node.directory" value=""/></p>'
+        let dialog_create = dialog.create({
+            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.title')}}",
+            message : message,
+            buttons : [
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.button.ok')}}"
+                },
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.button.cancel')}}"
+                }
+            ],
+            section : section,
+            className : "dialog dialog-move",
+            form : {
+                name: "dialog-move",
+                url : node.data('url'),
+            }
+        });
+        const form = dialog_create.select('form[name="dialog-move"]');
+        if(!form){
+            return;
+        }
+        form.on('submit', (event) => {
+            if(form.data('has', 'url')){
+                header('authorization', 'Bearer ' + user.token());
+                let filter = {
+                    type : "{{$request.filter.type}}"
+                };
+                let data = {
+                    directory: section.select('input[name="node.directory"]')?.value,
+                    nodeList: settings.get('selected'),
+                    limit: "{{$request.limit}}",
+                    filter: filter
+                };
+                request(form.data('url'), data, (url, response) => {
+                    dialog_create.remove();
+                    if(response?.page){
+                        const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                        if(menuItem){
+                            menuItem.data('page', response.page);
+                        }
+                    }
+                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                    if(menuItem){
+                        menuItem.data('filter-type', filter.type);
+                        menuItem.data('limit', "{{$request.limit}}");
+                    }
+                    if(response?.error){
+                        let dialog_error = dialog.create({
+                            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.title')}}",
+                            message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.message'))}}",
+                            error : response.error,
+                            buttons : [
+                                {
+                                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.button.ok')}}"
+                                }
+                            ],
+                            section : section,
+                            className : "dialog dialog-error dialog-error-move"
+                        });
+                        const form = dialog_error.select('form');
+                        if(!form){
+                            return;
+                        }
+                        form.on('submit', (event) => {
+                            dialog_error.remove();
+                        });
+                        const button = form.select('button[type="submit"]');
+                        if(button){
+                            button.focus();
+                        }
+                    }
+                    settings.delete('selected')
+                    menu.dispatch(section, target);
+                });
+            }
+        });
+        const input = form.select('input[name="node.directory"]');
+        if(input){
+            input.focus();
+        }
+    });
+}
+
+settings.node.list.filter = ({node, section}) => {
+    if (!node) {
+        return;
+    }
+    if (!section) {
+        return;
+    }
+    node.on('click', (event) => {
+        if(node.data('has', 'url') && node.data('has', 'frontend-url')){
+            let data = {};
+            header('authorization', 'Bearer ' + user.token());
+            request(node.data('url'), data, (url, response) => {
+                let filter = section.select('.dropdown .filter-type');
+                if(filter){
+                    filter.text = node.text;
+                }
+                request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+                    settings.selected();
+                });
+            });
+        }
+    });
+}
+
+
 settings.options = (target) => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -264,476 +808,39 @@ settings.options = (target) => {
         for(index=0; index < list.length; index++){
             let node = list[index];
             if(node.hasClass('item-delete')){
-                node.on('click', (event) => {
-                    let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.message'))}}";
-                    message = _('prototype').string.replace('{{$name}}', node.data('name'), message);
-                    let dialog_create = dialog.create({
-                        title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.title')}}",
-                        message : message,
-                        buttons : [
-                            {
-                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.button.ok')}}"
-                            },
-                            {
-                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.button.cancel')}}"
-                            }
-                        ],
-                        section : section,
-                        className : "dialog dialog-delete",
-                        form : {
-                            name : "dialog-delete",
-                            url : node.data('url'),
-                        }
-                    });
-                    const form = dialog_create.select('form');
-                    if(form){
-                        form.on('submit', (event) => {
-                            if(node.data('has', 'url')){
-                                let data = {
-                                    request : {
-                                        method : node.data('request-method') ? node.data('request-method') : "DELETE"
-                                    }
-                                };
-                                let filter = {
-                                    type : "{{$request.filter.type}}"
-                                };
-                                header('authorization', 'Bearer ' + user.token());
-                                request(node.data('url'), data, (url, response) => {
-                                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                                    if(menuItem){
-                                        menuItem.data('filter-type', filter.type);
-                                        menuItem.data('limit', "{{$request.limit}}");
-                                    }
-                                    dialog_create.remove();
-                                    menu.dispatch(section, target);
-                                });
-                            }
-                        });
-                        const submit = form.select('.button-submit');
-                        if(submit){
-                            submit.focus();
-                        }
-
-                    }
+                settings.node.item.delete({
+                    node : node,
+                    section : section
                 });
             }
             else if(node.hasClass('item-create-dir')){
-                node.on('click', (event) => {
-                    let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.message'))}}";
-                    message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
-                    message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.create.directory.name')}}" + '</label><input type="text" name="node.name" value=""/></p>'
-                    let dialog_create = dialog.create({
-                        title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.title')}}",
-                        message: message,
-                        buttons: [
-                            {
-                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.button.ok')}}"
-                            },
-                            {
-                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.button.cancel')}}"
-                            }
-                        ],
-                        section: section,
-                        className: "dialog dialog-create-directory",
-                        form: {
-                            name: "dialog-create-directory",
-                            url: node.data('url'),
-                        }
-                    });
-                    let form = dialog_create.select('form');
-                    if(form){
-                        form.on('submit', (event) => {
-                            if(form.data('has', 'url')){
-                                let data = form.data('serialize');
-                                let filter = {
-                                    type : "{{$request.filter.type}}"
-                                };
-                                header('authorization', 'Bearer ' + user.token());
-                                request(form.data('url'), data, (url, response) => {
-                                    if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
-                                        let error = [];
-                                        let message;
-                                        if(response?.message === 'Name cannot be empty...'){
-                                            message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.empty.message'))}}";
-                                            error.push("{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.empty.directory'))}}");
-                                        } else {
-                                            message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.exist.message'))}}";
-                                            const input = dialog_create.select('input[name="node.name"]');
-                                            error.push(input.value);
-                                        }
-                                        let dialog_error = dialog.create({
-                                            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.title')}}",
-                                            message : message,
-                                            error : error,
-                                            buttons : [
-                                                {
-                                                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.button.ok')}}"
-                                                }
-                                            ],
-                                            section : section,
-                                            className : "dialog dialog-error dialog-error-create-directory"
-                                        });
-                                        let form = dialog_error.select('form');
-                                        if(!form){
-                                            return;
-                                        }
-                                        form.on('submit', (event) => {
-                                            dialog_error.remove();
-                                            let form = dialog_create.select('form');
-                                            let input = form.select('input[name="node.name"]');
-                                            if(input){
-                                                input.focus();
-                                            }
-                                        });
-                                        const button = form.select('button[type="submit"]');
-                                        if(button){
-                                            button.focus();
-                                        }
-                                    } else {
-                                        const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                                        if(menuItem){
-                                            menuItem.data('filter-type', filter.type);
-                                            menuItem.data('limit', "{{$request.limit}}");
-                                        }
-                                        menu.dispatch(section, target);
-                                        dialog_create.remove();
-                                    }
-                                });
-                            }
-                        });
-                    }
-                    const input = dialog_create.select('input[name="node.name"]');
-                    if(input){
-                        input.focus();
-                    }
+                settings.node.item.create_dir({
+                    node : node,
+                    section : section
                 });
             }
             else if(node.hasClass('item-create-file')){
-                node.on('click', (event) => {
-                    let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.message'))}}";
-                    message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
-                    message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.create.file.name')}}" + '</label><input type="text" name="node.name" value=""/></p>'
-                    let dialog_create = dialog.create({
-                        title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.title')}}",
-                        message: message,
-                        buttons: [
-                            {
-                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.button.ok')}}"
-                            },
-                            {
-                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.button.cancel')}}"
-                            }
-                        ],
-                        section: section,
-                        className: "dialog dialog-create-file",
-                        form: {
-                            name: "dialog-create-file",
-                            url: node.data('url'),
-                        }
-                    });
-                    let form = dialog_create.select('form');
-                    if(form){
-                        form.on('submit', (event) => {
-                            if(form.data('has', 'url')){
-                                let data = form.data('serialize');
-                                let filter = {
-                                    type : "{{$request.filter.type}}"
-                                };
-                                header('authorization', 'Bearer ' + user.token());
-                                request(form.data('url'), data, (url, response) => {
-                                    if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
-                                        let message;
-                                        let error = [];
-                                        if(response?.message === 'Name cannot be empty...'){
-                                            message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.empty.message'))}}";
-                                            error.push("{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.empty.file'))}}")
-                                        } else {
-                                            message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.exist.message'))}}";
-                                            let input = dialog_create.select('input[name="node.name"]');
-                                            error.push(input.value);
-                                        }
-
-                                        let dialog_error = dialog.create({
-                                            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.title')}}",
-                                            message: message,
-                                            error : error,
-                                            buttons : [
-                                                {
-                                                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.button.ok')}}"
-                                                }
-                                            ],
-                                            section : section,
-                                            className : "dialog dialog-error dialog-error-create-file"
-                                        });
-                                        let form = dialog_error.select('form');
-                                        if(!form){
-                                            return;
-                                        }
-                                        form.on('submit', (event) => {
-                                            dialog_error.remove();
-                                            form = dialog_create.select('form');
-                                            let input = form.select('input[name="node.name"]');
-                                            if(input){
-                                                input.focus();
-                                            }
-                                        });
-                                        let button = form.select('button[type="submit"]');
-                                        if(button){
-                                            button.focus();
-                                        }
-                                    } else {
-                                        const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                                        if(menuItem){
-                                            menuItem.data('filter-type', filter.type);
-                                            menuItem.data('limit', "{{$request.limit}}");
-                                        }
-                                        menu.dispatch(section, target);
-                                        dialog_create.remove();
-                                    }
-                                });
-                            }
-                        });
-                    }
-                    const input = dialog_create.select('input[name="node.name"]');
-                    if(input){
-                        input.focus();
-                    }
+                settings.node.item.create_file({
+                    node : node,
+                    section : section
                 });
             }
             else if(node.hasClass('item-create-symlink')){
-                node.on('click', (event) => {
-                    let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.symlink.message'))}}";
-                    message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
-                    message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.create.symlink.source')}}" + '</label><input type="text" name="node.source" value=""/><br><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.create.symlink.destination')}}" + '</label><input type="text" name="node.destination" value=""/></p>'
-                    let dialog_create = dialog.create({
-                        title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.symlink.title')}}",
-                        message: message,
-                        buttons: [
-                            {
-                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.symlink.button.ok')}}"
-                            },
-                            {
-                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.symlink.button.cancel')}}"
-                            }
-                        ],
-                        section: section,
-                        className: "dialog dialog-create-symlink",
-                        form: {
-                            name: "dialog-create-symlink",
-                            url: node.data('url'),
-                        }
-                    });
-                    let form = dialog_create.select('form');
-                    if(form){
-                        form.on('submit', (event) => {
-                            if(form.data('has', 'url')){
-                                let data = form.data('serialize');
-                                let filter = {
-                                    type : "{{$request.filter.type}}"
-                                };
-                                header('authorization', 'Bearer ' + user.token());
-                                request(form.data('url'), data, (url, response) => {
-                                    if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
-                                        let error = [];
-                                        let source = dialog_create.select('input[name="node.source"]');
-                                        error.push('Source: ' + source.value);
-                                        let destination = dialog_create.select('input[name="node.destination"]');
-                                        error.push('Destination: ' + destination.value);
-                                        let dialog_error;
-                                        let message;
-                                        if(response?.message === 'Destination exists...') {
-                                            message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.destination.message'))}}";
-                                        } else {
-                                            message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.source.message'))}}";
-                                        }
-                                        dialog_error = dialog.create({
-                                            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.title')}}",
-                                            message : message,
-                                            error : error,
-                                            buttons : [
-                                                {
-                                                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.button.ok')}}"
-                                                }
-                                            ],
-                                            section : section,
-                                            className : "dialog dialog-error dialog-error-create-symlink dialog-error-destination"
-                                        });
-                                        let form = dialog_error.select('form');
-                                        if(!form){
-                                            return;
-                                        }
-                                        form.on('submit', (event) => {
-                                            dialog_error.remove();
-                                            let form = dialog_create.select('form');
-                                            let input = form.select('input[name="node.source"]');
-                                            if(input){
-                                                input.focus();
-                                            }
-                                        });
-                                        const button = form.select('button[type="submit"]');
-                                        if(button){
-                                            button.focus();
-                                        }
-                                    } else {
-                                        const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                                        if(menuItem){
-                                            menuItem.data('filter-type', filter.type);
-                                            menuItem.data('limit', "{{$request.limit}}");
-                                        }
-                                        menu.dispatch(section, target);
-                                        dialog_create.remove();
-                                    }
-                                });
-                            }
-                        });
-                    }
-                    const input = dialog_create.select('input[name="node.source"]');
-                    if(input){
-                        input.focus();
-                    }
+                settings.node.item.create_symlink({
+                    node : node,
+                    section : section
                 });
             }
             else if(node.hasClass('list-delete')){
-                node.on('click', (event) => {
-                    let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.message'))}}";
-                    let dialog_create = dialog.create({
-                        title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.title')}}",
-                        message : message,
-                        buttons : [
-                            {
-                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.button.ok')}}"
-                            },
-                            {
-                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.button.cancel')}}"
-                            }
-                        ],
-                        section : section,
-                        className : "dialog dialog-delete",
-                        form : {
-                            name : "dialog-delete",
-                            url : node.data('url'),
-                        }
-                    });
-                    const form = dialog_create.select('form');
-                    if(form){
-                        form.on('submit', (event) => {
-                            if(node.data('has', 'url')){
-                                let data = {
-                                    nodeList : settings.get('selected'),
-                                    request : {
-                                        method : node.data('request-method') ? node.data('request-method') : "DELETE"
-                                    }
-                                };
-                                let filter = {
-                                    type : "{{$request.filter.type}}"
-                                };
-                                header('authorization', 'Bearer ' + user.token());
-                                request(node.data('url'), data, (url, response) => {
-                                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                                    if(menuItem){
-                                        menuItem.data('filter-type', filter.type);
-                                        menuItem.data('limit', "{{$request.limit}}");
-                                    }
-                                    dialog_create.remove();
-                                    settings.delete('selected');
-                                    menu.dispatch(section, target);
-                                });
-                            }
-                        });
-                    }
-                    const submit = dialog_create.select('.button-submit');
-                    if(submit){
-                        submit.focus();
-                    }
+                settings.node.list.delete({
+                    node : node,
+                    section : section
                 });
             }
             else if(node.hasClass('list-move')){
-                node.on('click', (event) => {
-                    //make dialog move with where to move to.
-                    let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.message'))}}";
-                    message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
-                    message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.list.move.target.directory')}}" + '</label><input type="text" name="node.directory" value=""/></p>'
-                    let dialog_create = dialog.create({
-                        title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.title')}}",
-                        message : message,
-                        buttons : [
-                            {
-                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.button.ok')}}"
-                            },
-                            {
-                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.button.cancel')}}"
-                            }
-                        ],
-                        section : section,
-                        className : "dialog dialog-move",
-                        form : {
-                            name: "dialog-move",
-                            url : node.data('url'),
-                        }
-                    });
-                    const form = dialog_create.select('form[name="dialog-move"]');
-                    if(!form){
-                        return;
-                    }
-                    form.on('submit', (event) => {
-                        if(form.data('has', 'url')){
-                            header('authorization', 'Bearer ' + user.token());
-                            let filter = {
-                                type : "{{$request.filter.type}}"
-                            };
-                            let data = {
-                                directory: section.select('input[name="node.directory"]')?.value,
-                                nodeList: settings.get('selected'),
-                                limit: "{{$request.limit}}",
-                                filter: filter
-                            };
-                            request(form.data('url'), data, (url, response) => {
-                                dialog_create.remove();
-                                if(response?.page){
-                                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                                    if(menuItem){
-                                        menuItem.data('page', response.page);
-                                    }
-                                }
-                                const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                                if(menuItem){
-                                    menuItem.data('filter-type', filter.type);
-                                    menuItem.data('limit', "{{$request.limit}}");
-                                }
-                                if(response?.error){
-                                    let dialog_error = dialog.create({
-                                        title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.title')}}",
-                                        message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.message'))}}",
-                                        error : response.error,
-                                        buttons : [
-                                            {
-                                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.button.ok')}}"
-                                            }
-                                        ],
-                                        section : section,
-                                        className : "dialog dialog-error dialog-error-move"
-                                    });
-                                    const form = dialog_error.select('form');
-                                    if(!form){
-                                        return;
-                                    }
-                                    form.on('submit', (event) => {
-                                        dialog_error.remove();
-                                    });
-                                    const button = form.select('button[type="submit"]');
-                                    if(button){
-                                        button.focus();
-                                    }
-                                }
-                                settings.delete('selected')
-                                menu.dispatch(section, target);
-                            });
-                        }
-                    });
-                    const input = form.select('input[name="node.directory"]');
-                    if(input){
-                        input.focus();
-                    }
+                settings.node.list.move({
+                    node : node,
+                    section : section
                 });
             }
 
@@ -742,19 +849,9 @@ settings.options = (target) => {
                 node.hasClass('list-filter-file') ||
                 node.hasClass('list-filter-dir')
             ){
-                node.on('click', (event) => {
-                    if(node.data('has', 'url') && node.data('has', 'frontend-url')){
-                        let data = {};
-                        request(node.data('url'), data, (url, response) => {
-                            let filter = section.select('.dropdown .filter-type');
-                            if(filter){
-                                filter.text = node.text;
-                            }
-                            request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-                                settings.selected();
-                            });
-                        });
-                    }
+                settings.node.list.filter({
+                    node : node,
+                    section : section
                 });
             }
             else {
@@ -763,7 +860,6 @@ settings.options = (target) => {
                         header('Authorization', 'Bearer ' + user.token());
                         request(node.data('url'), null, (url, response) => {
                             request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-                                console.log('frontend-url2');
                             });
                         });
                     }
@@ -778,476 +874,39 @@ settings.options = (target) => {
     else if(list){
         let node = list;
         if(node.hasClass('item-delete')){
-            node.on('click', (event) => {
-                let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.message'))}}";
-                message = _('prototype').string.replace('{{$name}}', node.data('name'), message);
-                let dialog_create = dialog.create({
-                    title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.title')}}",
-                    message : message,
-                    buttons : [
-                        {
-                            text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.button.ok')}}"
-                        },
-                        {
-                            text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.button.cancel')}}"
-                        }
-                    ],
-                    section : section,
-                    className : "dialog dialog-delete",
-                    form : {
-                        name : "dialog-delete",
-                        url : node.data('url'),
-                    }
-                });
-                const form = dialog_create.select('form');
-                if(form){
-                    form.on('submit', (event) => {
-                        if(node.data('has', 'url')){
-                            let data = {
-                                request : {
-                                    method : node.data('request-method') ? node.data('request-method') : "DELETE"
-                                }
-                            };
-                            let filter = {
-                                type : "{{$request.filter.type}}"
-                            };
-                            header('authorization', 'Bearer ' + user.token());
-                            request(node.data('url'), data, (url, response) => {
-                                const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                                if(menuItem){
-                                    menuItem.data('filter-type', filter.type);
-                                    menuItem.data('limit', "{{$request.limit}}");
-                                }
-                                dialog_create.remove();
-                                menu.dispatch(section, target);
-                            });
-                        }
-                    });
-                    const submit = form.select('.button-submit');
-                    if(submit){
-                        submit.focus();
-                    }
-
-                }
+            settings.node.item.delete({
+                node : node,
+                section : section
             });
         }
         else if(node.hasClass('item-create-dir')){
-            node.on('click', (event) => {
-                let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.message'))}}";
-                message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
-                message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.create.directory.name')}}" + '</label><input type="text" name="node.name" value=""/></p>'
-                let dialog_create = dialog.create({
-                    title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.title')}}",
-                    message: message,
-                    buttons: [
-                        {
-                            text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.button.ok')}}"
-                        },
-                        {
-                            text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.button.cancel')}}"
-                        }
-                    ],
-                    section: section,
-                    className: "dialog dialog-create-directory",
-                    form: {
-                        name: "dialog-create-directory",
-                        url: node.data('url'),
-                    }
-                });
-                let form = dialog_create.select('form');
-                if(form){
-                    form.on('submit', (event) => {
-                        if(form.data('has', 'url')){
-                            let data = form.data('serialize');
-                            let filter = {
-                                type : "{{$request.filter.type}}"
-                            };
-                            header('authorization', 'Bearer ' + user.token());
-                            request(form.data('url'), data, (url, response) => {
-                                if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
-                                    let error = [];
-                                    let message;
-                                    if(response?.message === 'Name cannot be empty...'){
-                                        message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.empty.message'))}}";
-                                        error.push("{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.empty.directory'))}}");
-                                    } else {
-                                        message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.exist.message'))}}";
-                                        const input = dialog_create.select('input[name="node.name"]');
-                                        error.push(input.value);
-                                    }
-                                    let dialog_error = dialog.create({
-                                        title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.title')}}",
-                                        message : message,
-                                        error : error,
-                                        buttons : [
-                                            {
-                                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.button.ok')}}"
-                                            }
-                                        ],
-                                        section : section,
-                                        className : "dialog dialog-error dialog-error-create-directory"
-                                    });
-                                    let form = dialog_error.select('form');
-                                    if(!form){
-                                        return;
-                                    }
-                                    form.on('submit', (event) => {
-                                        dialog_error.remove();
-                                        let form = dialog_create.select('form');
-                                        let input = form.select('input[name="node.name"]');
-                                        if(input){
-                                            input.focus();
-                                        }
-                                    });
-                                    const button = form.select('button[type="submit"]');
-                                    if(button){
-                                        button.focus();
-                                    }
-                                } else {
-                                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                                    if(menuItem){
-                                        menuItem.data('filter-type', filter.type);
-                                        menuItem.data('limit', "{{$request.limit}}");
-                                    }
-                                    menu.dispatch(section, target);
-                                    dialog_create.remove();
-                                }
-                            });
-                        }
-                    });
-                }
-                const input = dialog_create.select('input[name="node.name"]');
-                if(input){
-                    input.focus();
-                }
+            settings.node.item.create_dir({
+                node : node,
+                section : section
             });
         }
         else if(node.hasClass('item-create-file')){
-            node.on('click', (event) => {
-                let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.message'))}}";
-                message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
-                message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.create.file.name')}}" + '</label><input type="text" name="node.name" value=""/></p>'
-                let dialog_create = dialog.create({
-                    title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.title')}}",
-                    message: message,
-                    buttons: [
-                        {
-                            text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.button.ok')}}"
-                        },
-                        {
-                            text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.button.cancel')}}"
-                        }
-                    ],
-                    section: section,
-                    className: "dialog dialog-create-file",
-                    form: {
-                        name: "dialog-create-file",
-                        url: node.data('url'),
-                    }
-                });
-                let form = dialog_create.select('form');
-                if(form){
-                    form.on('submit', (event) => {
-                        if(form.data('has', 'url')){
-                            let data = form.data('serialize');
-                            let filter = {
-                                type : "{{$request.filter.type}}"
-                            };
-                            header('authorization', 'Bearer ' + user.token());
-                            request(form.data('url'), data, (url, response) => {
-                                if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
-                                    let message;
-                                    let error = [];
-                                    if(response?.message === 'Name cannot be empty...'){
-                                        message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.empty.message'))}}";
-                                        error.push("{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.empty.file'))}}")
-                                    } else {
-                                        message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.exist.message'))}}";
-                                        let input = dialog_create.select('input[name="node.name"]');
-                                        error.push(input.value);
-                                    }
-
-                                    let dialog_error = dialog.create({
-                                        title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.title')}}",
-                                        message: message,
-                                        error : error,
-                                        buttons : [
-                                            {
-                                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.button.ok')}}"
-                                            }
-                                        ],
-                                        section : section,
-                                        className : "dialog dialog-error dialog-error-create-file"
-                                    });
-                                    let form = dialog_error.select('form');
-                                    if(!form){
-                                        return;
-                                    }
-                                    form.on('submit', (event) => {
-                                        dialog_error.remove();
-                                        form = dialog_create.select('form');
-                                        let input = form.select('input[name="node.name"]');
-                                        if(input){
-                                            input.focus();
-                                        }
-                                    });
-                                    let button = form.select('button[type="submit"]');
-                                    if(button){
-                                        button.focus();
-                                    }
-                                } else {
-                                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                                    if(menuItem){
-                                        menuItem.data('filter-type', filter.type);
-                                        menuItem.data('limit', "{{$request.limit}}");
-                                    }
-                                    menu.dispatch(section, target);
-                                    dialog_create.remove();
-                                }
-                            });
-                        }
-                    });
-                }
-                const input = dialog_create.select('input[name="node.name"]');
-                if(input){
-                    input.focus();
-                }
+            settings.node.item.create_file({
+                node : node,
+                section : section
             });
         }
         else if(node.hasClass('item-create-symlink')){
-            node.on('click', (event) => {
-                let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.symlink.message'))}}";
-                message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
-                message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.create.symlink.source')}}" + '</label><input type="text" name="node.source" value=""/><br><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.create.symlink.destination')}}" + '</label><input type="text" name="node.destination" value=""/></p>'
-                let dialog_create = dialog.create({
-                    title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.symlink.title')}}",
-                    message: message,
-                    buttons: [
-                        {
-                            text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.symlink.button.ok')}}"
-                        },
-                        {
-                            text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.symlink.button.cancel')}}"
-                        }
-                    ],
-                    section: section,
-                    className: "dialog dialog-create-symlink",
-                    form: {
-                        name: "dialog-create-symlink",
-                        url: node.data('url'),
-                    }
-                });
-                let form = dialog_create.select('form');
-                if(form){
-                    form.on('submit', (event) => {
-                        if(form.data('has', 'url')){
-                            let data = form.data('serialize');
-                            let filter = {
-                                type : "{{$request.filter.type}}"
-                            };
-                            header('authorization', 'Bearer ' + user.token());
-                            request(form.data('url'), data, (url, response) => {
-                                if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
-                                    let error = [];
-                                    let source = dialog_create.select('input[name="node.source"]');
-                                    error.push('Source: ' + source.value);
-                                    let destination = dialog_create.select('input[name="node.destination"]');
-                                    error.push('Destination: ' + destination.value);
-                                    let dialog_error;
-                                    let message;
-                                    if(response?.message === 'Destination exists...') {
-                                        message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.destination.message'))}}";
-                                    } else {
-                                        message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.source.message'))}}";
-                                    }
-                                    dialog_error = dialog.create({
-                                        title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.title')}}",
-                                        message : message,
-                                        error : error,
-                                        buttons : [
-                                            {
-                                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.button.ok')}}"
-                                            }
-                                        ],
-                                        section : section,
-                                        className : "dialog dialog-error dialog-error-create-symlink dialog-error-destination"
-                                    });
-                                    let form = dialog_error.select('form');
-                                    if(!form){
-                                        return;
-                                    }
-                                    form.on('submit', (event) => {
-                                        dialog_error.remove();
-                                        let form = dialog_create.select('form');
-                                        let input = form.select('input[name="node.source"]');
-                                        if(input){
-                                            input.focus();
-                                        }
-                                    });
-                                    const button = form.select('button[type="submit"]');
-                                    if(button){
-                                        button.focus();
-                                    }
-                                } else {
-                                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                                    if(menuItem){
-                                        menuItem.data('filter-type', filter.type);
-                                        menuItem.data('limit', "{{$request.limit}}");
-                                    }
-                                    menu.dispatch(section, target);
-                                    dialog_create.remove();
-                                }
-                            });
-                        }
-                    });
-                }
-                const input = dialog_create.select('input[name="node.source"]');
-                if(input){
-                    input.focus();
-                }
+            settings.node.item.create_symlink({
+                node : node,
+                section : section
             });
         }
         else if(node.hasClass('list-delete')){
-            node.on('click', (event) => {
-                let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.message'))}}";
-                let dialog_create = dialog.create({
-                    title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.title')}}",
-                    message : message,
-                    buttons : [
-                        {
-                            text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.button.ok')}}"
-                        },
-                        {
-                            text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.button.cancel')}}"
-                        }
-                    ],
-                    section : section,
-                    className : "dialog dialog-delete",
-                    form : {
-                        name : "dialog-delete",
-                        url : node.data('url'),
-                    }
-                });
-                const form = dialog_create.select('form');
-                if(form){
-                    form.on('submit', (event) => {
-                        if(node.data('has', 'url')){
-                            let data = {
-                                nodeList : settings.get('selected'),
-                                request : {
-                                    method : node.data('request-method') ? node.data('request-method') : "DELETE"
-                                }
-                            };
-                            let filter = {
-                                type : "{{$request.filter.type}}"
-                            };
-                            header('authorization', 'Bearer ' + user.token());
-                            request(node.data('url'), data, (url, response) => {
-                                const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                                if(menuItem){
-                                    menuItem.data('filter-type', filter.type);
-                                    menuItem.data('limit', "{{$request.limit}}");
-                                }
-                                dialog_create.remove();
-                                settings.delete('selected');
-                                menu.dispatch(section, target);
-                            });
-                        }
-                    });
-                }
-                const submit = dialog_create.select('.button-submit');
-                if(submit){
-                    submit.focus();
-                }
+            settings.node.list.delete({
+                node : node,
+                section : section
             });
         }
         else if(node.hasClass('list-move')){
-            node.on('click', (event) => {
-                //make dialog move with where to move to.
-                let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.message'))}}";
-                message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
-                message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.list.move.target.directory')}}" + '</label><input type="text" name="node.directory" value=""/></p>'
-                let dialog_create = dialog.create({
-                    title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.title')}}",
-                    message : message,
-                    buttons : [
-                        {
-                            text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.button.ok')}}"
-                        },
-                        {
-                            text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.button.cancel')}}"
-                        }
-                    ],
-                    section : section,
-                    className : "dialog dialog-move",
-                    form : {
-                        name: "dialog-move",
-                        url : node.data('url'),
-                    }
-                });
-                const form = dialog_create.select('form[name="dialog-move"]');
-                if(!form){
-                    return;
-                }
-                form.on('submit', (event) => {
-                    if(form.data('has', 'url')){
-                        header('authorization', 'Bearer ' + user.token());
-                        let filter = {
-                            type : "{{$request.filter.type}}"
-                        };
-                        let data = {
-                            directory: section.select('input[name="node.directory"]')?.value,
-                            nodeList: settings.get('selected'),
-                            limit: "{{$request.limit}}",
-                            filter: filter
-                        };
-                        request(form.data('url'), data, (url, response) => {
-                            dialog_create.remove();
-                            if(response?.page){
-                                const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                                if(menuItem){
-                                    menuItem.data('page', response.page);
-                                }
-                            }
-                            const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                            if(menuItem){
-                                menuItem.data('filter-type', filter.type);
-                                menuItem.data('limit', "{{$request.limit}}");
-                            }
-                            if(response?.error){
-                                let dialog_error = dialog.create({
-                                    title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.title')}}",
-                                    message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.message'))}}",
-                                    error : response.error,
-                                    buttons : [
-                                        {
-                                            text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.button.ok')}}"
-                                        }
-                                    ],
-                                    section : section,
-                                    className : "dialog dialog-error dialog-error-move"
-                                });
-                                const form = dialog_error.select('form');
-                                if(!form){
-                                    return;
-                                }
-                                form.on('submit', (event) => {
-                                    dialog_error.remove();
-                                });
-                                const button = form.select('button[type="submit"]');
-                                if(button){
-                                    button.focus();
-                                }
-                            }
-                            settings.delete('selected')
-                            menu.dispatch(section, target);
-                        });
-                    }
-                });
-                const input = form.select('input[name="node.directory"]');
-                if(input){
-                    input.focus();
-                }
+            settings.node.list.move({
+                node : node,
+                section : section
             });
         }
 
@@ -1256,19 +915,9 @@ settings.options = (target) => {
             node.hasClass('list-filter-file') ||
             node.hasClass('list-filter-dir')
         ){
-            node.on('click', (event) => {
-                if(node.data('has', 'url') && node.data('has', 'frontend-url')){
-                    let data = {};
-                    request(node.data('url'), data, (url, response) => {
-                        let filter = section.select('.dropdown .filter-type');
-                        if(filter){
-                            filter.text = node.text;
-                        }
-                        request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-                            settings.selected();
-                        });
-                    });
-                }
+            settings.node.list.filter({
+                node : node,
+                section : section
             });
         }
         else {
@@ -1277,7 +926,6 @@ settings.options = (target) => {
                     header('Authorization', 'Bearer ' + user.token());
                     request(node.data('url'), null, (url, response) => {
                         request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-                            console.log('frontend-url2');
                         });
                     });
                 }
