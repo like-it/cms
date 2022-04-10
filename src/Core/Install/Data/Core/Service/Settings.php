@@ -1509,7 +1509,6 @@ class Settings extends Main {
             for($i=count($explode); $i >= 2; $i--){
                 $dir_example = implode($object->config('ds'), $explode);
                 array_pop($explode);
-                dd($dir_example);
                 if(
                     File::is_link($dir_example) &&
                     $url !== $dir_example
