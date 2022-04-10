@@ -258,7 +258,7 @@ settings.node = {};
 settings.node.item = {};
 settings.node.list = {};
 
-settings.node.item.delete = ({node, section}) => {
+settings.node.item.delete = ({node, section, target}) => {
     if(!node){
         return;
     }
@@ -318,7 +318,7 @@ settings.node.item.delete = ({node, section}) => {
     });
 }
 
-settings.node.item.create_dir = ({node, section}) => {
+settings.node.item.create_dir = ({node, section, target}) => {
     if (!node) {
         return;
     }
@@ -416,7 +416,7 @@ settings.node.item.create_dir = ({node, section}) => {
     });
 }
 
-settings.node.item.create_file = ({node, section}) => {
+settings.node.item.create_file = ({node, section, target}) => {
     if (!node) {
         return;
     }
@@ -515,7 +515,7 @@ settings.node.item.create_file = ({node, section}) => {
     });
 }
 
-settings.node.item.create_symlink = ({node, section}) => {
+settings.node.item.create_symlink = ({node, section, target}) => {
     if (!node) {
         return;
     }
@@ -615,7 +615,7 @@ settings.node.item.create_symlink = ({node, section}) => {
     });
 }
 
-settings.node.list.delete = ({node, section}) => {
+settings.node.list.delete = ({node, section, target}) => {
     if (!node) {
         return;
     }
@@ -676,7 +676,7 @@ settings.node.list.delete = ({node, section}) => {
     });
 }
 
-settings.node.list.move = ({node, section}) => {
+settings.node.list.move = ({node, section, target}) => {
     if (!node) {
         return;
     }
@@ -772,7 +772,7 @@ settings.node.list.move = ({node, section}) => {
     });
 }
 
-settings.node.list.filter = ({node, section}) => {
+settings.node.list.filter = ({node, section, target}) => {
     if (!node) {
         return;
     }
@@ -810,40 +810,45 @@ settings.options = (target) => {
             if(node.hasClass('item-delete')){
                 settings.node.item.delete({
                     node : node,
-                    section : section
+                    section : section,
+                    target: target
                 });
             }
             else if(node.hasClass('item-create-dir')){
                 settings.node.item.create_dir({
                     node : node,
-                    section : section
+                    section : section,
+                    target: target
                 });
             }
             else if(node.hasClass('item-create-file')){
                 settings.node.item.create_file({
                     node : node,
-                    section : section
+                    section : section,
+                    target: target
                 });
             }
             else if(node.hasClass('item-create-symlink')){
                 settings.node.item.create_symlink({
                     node : node,
-                    section : section
+                    section : section,
+                    target: target
                 });
             }
             else if(node.hasClass('list-delete')){
                 settings.node.list.delete({
                     node : node,
-                    section : section
+                    section : section,
+                    target: target
                 });
             }
             else if(node.hasClass('list-move')){
                 settings.node.list.move({
                     node : node,
-                    section : section
+                    section : section,
+                    target: target
                 });
             }
-
             else if(
                 node.hasClass('list-filter-file-dir') ||
                 node.hasClass('list-filter-file') ||
@@ -851,7 +856,8 @@ settings.options = (target) => {
             ){
                 settings.node.list.filter({
                     node : node,
-                    section : section
+                    section : section,
+                    target: target
                 });
             }
             else {
@@ -876,37 +882,43 @@ settings.options = (target) => {
         if(node.hasClass('item-delete')){
             settings.node.item.delete({
                 node : node,
-                section : section
+                section : section,
+                target: target
             });
         }
         else if(node.hasClass('item-create-dir')){
             settings.node.item.create_dir({
                 node : node,
-                section : section
+                section : section,
+                target: target
             });
         }
         else if(node.hasClass('item-create-file')){
             settings.node.item.create_file({
                 node : node,
-                section : section
+                section : section,
+                target: target
             });
         }
         else if(node.hasClass('item-create-symlink')){
             settings.node.item.create_symlink({
                 node : node,
-                section : section
+                section : section,
+                target: target
             });
         }
         else if(node.hasClass('list-delete')){
             settings.node.list.delete({
                 node : node,
-                section : section
+                section : section,
+                target: target
             });
         }
         else if(node.hasClass('list-move')){
             settings.node.list.move({
                 node : node,
-                section : section
+                section : section,
+                target: target
             });
         }
 
@@ -917,7 +929,8 @@ settings.options = (target) => {
         ){
             settings.node.list.filter({
                 node : node,
-                section : section
+                section : section,
+                target: target
             });
         }
         else {
