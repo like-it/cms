@@ -1633,11 +1633,14 @@ class Settings extends Main {
                 $response['q'] = $object->request('q');
             }
             $response['count'] = count($list);
-            $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
-            $response['nodeList'] = $list;
             $response['limit'] = $limit;
-            $response['page'] = $page;
             $response['max'] = ceil($response['count'] / $response['limit']);
+            $response['page'] = $page;
+            if($response['page'] > $response['max']){
+                $response['page'] = $response['max'];
+            }
+            $list = Limit::list($list)->with(['page' => $response['page'], 'limit' => $response['limit']]);
+            $response['nodeList'] = $list;
             $response['filter'] = $filter;
             if(!empty($protected)){
                 $response['protected'] = $protected;
