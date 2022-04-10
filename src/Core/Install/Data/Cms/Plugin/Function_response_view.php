@@ -32,6 +32,8 @@ function function_response_view(Parse $parse, Data $data, $options=[]){
         $object->config('ds') .
         'Response.View.tpl'
     ;
+    $list[] = $object->config('host.dir');
+    $list[] = $object->config('controller.dir');
     dd($list);
     $data_data = clone($data);
     $data_data->data(Core::object($options, Core::OBJECT_OBJECT));
