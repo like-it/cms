@@ -1534,6 +1534,7 @@ class Settings extends Main {
                 }
             }
             if(File::is_link($url)){
+                dd($url);
                 File::delete($url);
             }
             elseif(Dir::is($url)){
