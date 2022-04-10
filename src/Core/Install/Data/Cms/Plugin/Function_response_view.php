@@ -32,6 +32,7 @@ function function_response_view(Parse $parse, Data $data, $options=[]){
         $object->config('ds') .
         'Response.View.tpl'
     ;
+    dd($list);
     $data_data = clone($data);
     $data_data->data(Core::object($options, Core::OBJECT_OBJECT));
     foreach($list as $url){
