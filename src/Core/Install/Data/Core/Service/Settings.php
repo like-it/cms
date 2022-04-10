@@ -1464,6 +1464,9 @@ class Settings extends Main {
                 $explode = explode($object->config('ds'), $dir);
                 for($i=count($explode); $i >= 2; $i--){
                     $dir_example = implode($object->config('ds'), $explode);
+                    if(substr($dir_example, 0, -1) !== $object->config('ds')){
+                        $dir_example .= $object->config('ds');
+                    }
                     $pop = array_pop($explode);
                     if(empty($pop)){
                         continue;
@@ -1511,6 +1514,9 @@ class Settings extends Main {
             $explode = explode($object->config('ds'), $dir);
             for($i=count($explode); $i >= 2; $i--){
                 $dir_example = implode($object->config('ds'), $explode);
+                if(substr($dir_example, 0, -1) !== $object->config('ds')){
+                    $dir_example .= $object->config('ds');
+                }
                 $pop = array_pop($explode);
                 if(empty($pop)){
                     continue;
