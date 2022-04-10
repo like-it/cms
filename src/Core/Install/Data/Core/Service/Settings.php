@@ -1481,7 +1481,10 @@ class Settings extends Main {
             }
             $response = [];
             foreach($nodeList as $url) {
-                if(Dir::is($url)){
+                if(File::is_link($url)){
+                    File::delete($url);
+                }
+                elseif(Dir::is($url)){
                     Dir::remove($url);
                 } else {
                     File::delete($url);
@@ -1530,7 +1533,10 @@ class Settings extends Main {
                     throw new Exception('Cannot delete protected symlink file...');
                 }
             }
-            if(Dir::is($url)){
+            if(File::is_link($url)){
+                File::delete($url);
+            }
+            elseif(Dir::is($url)){
                 Dir::remove($url);
             } else {
                 File::delete($url);
