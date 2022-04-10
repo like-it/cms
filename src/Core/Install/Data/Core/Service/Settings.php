@@ -1519,6 +1519,8 @@ class Settings extends Main {
                     File::is_link($dir_example) &&
                     $url !== $dir_example
                 ){
+                    d($url);
+                    dd($dir_example);
                     throw new Exception('Cannot delete protected symlink file...');
                 }
             }
