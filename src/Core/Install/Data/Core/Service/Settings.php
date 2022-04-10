@@ -1533,6 +1533,7 @@ class Settings extends Main {
                     throw new Exception('Cannot delete protected symlink file...');
                 }
             }
+            dd(File::is_link($url));
             if(File::is_link($url)){
                 dd($url);
                 File::delete($url);
