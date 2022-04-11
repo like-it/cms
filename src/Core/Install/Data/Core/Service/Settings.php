@@ -1725,7 +1725,7 @@ class Settings extends Main {
                     continue;
                 } else {
                     $move = File::move($source, $destination, $overwrite);
-                    dd($move);
+                    d($move);
                 }
                 if($move){
                     $list[] = $destination;
