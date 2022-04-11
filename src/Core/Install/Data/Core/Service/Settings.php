@@ -1528,8 +1528,6 @@ class Settings extends Main {
                     File::is_link($dir_example) &&
                     $url !== $dir_example
                 ){
-                    d($url);
-                    dd($dir_example);
                     throw new Exception('Cannot delete protected symlink file...');
                 }
             }
@@ -1684,7 +1682,13 @@ class Settings extends Main {
                 $explode = explode($object->config('ds'), $dir);
                 for($i=count($explode); $i >= 2; $i--){
                     $dir_example = implode($object->config('ds'), $explode);
-                    array_pop($explode);
+                    if(substr($dir_example, 0, -1) !== $object->config('ds')){
+                        $dir_example .= $object->config('ds');
+                    }
+                    $pop = array_pop($explode);
+                    if(empty($pop)){
+                        continue;
+                    }
                     if(File::is_link($dir_example)){
                         throw new Exception('Cannot move protected symlink file...');
                     }
