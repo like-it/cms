@@ -29,7 +29,7 @@ class Log extends View {
     const EXCEPTION_COMMAND = 'invalid command (' . log::EXCEPTION_COMMAND_PARAMETER . ')' . PHP_EOL;
 
     const INFO = [
-        '{{binary()}} log archive /Application/log...| /app.log Zip app.log into app.{date(\'Y-m-d H:i:s\')}.zip',
+        '{{binary()}} log archive /Application/log...| /app.log Zip app.log into app.{literal}{date(\'Y-m-d H:i:s\')}{/literal}.log.zip',
     ];
 
     /**
