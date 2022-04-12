@@ -27,6 +27,8 @@ function function_log_archive(Parse $parse, Data $data){
             $output = [];
             Core::execute($execute, $output);
             echo implode(PHP_EOL, $output) . PHP_EOL;
+            $dir = Dir::name($destination);
+            File::chown($dir, 'www-data', 'www-data', true);
             File::remove($source);
             File::touch($source);
             echo 'Log file has been reset...' . PHP_EOL;
