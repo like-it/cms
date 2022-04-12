@@ -139,6 +139,10 @@ menu.is_selected = (node, selected) => {
                                 event.preventDefault();
                                 dialog_create.remove();
                             });
+                            let button = form.select('button[type="submit"]');
+                            if(button){
+                                button.focus();
+                            }
                         }
                     }
                 }
