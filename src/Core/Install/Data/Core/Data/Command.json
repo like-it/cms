@@ -561,15 +561,6 @@
             "OPTIONS"
         ]
     },
-    "e1ea2486-a2a3-4f27-83b0-de6705aba0aa" : {
-        "module" : "source",
-        "submodule" : "to",
-        "command" : "li",
-        "method": [
-            "POST",
-            "OPTIONS"
-        ]
-    },
     "fdbfeed4-8ad5-4fd0-94c7-224b00b9a1b8" : {
         "module" : "system",
         "command" : "information",
