@@ -78,7 +78,6 @@ settings.onDoubleClick = () => {
         return;
     }
     let list = section.select('.card-' + "{{$subcommand}}" + '-' + "{{$command}}" + ' tr');
-    console.log(list);
     if(is.nodeList(list)){
         let index;
         for(index=0; index < list.length; index++){
@@ -87,10 +86,7 @@ settings.onDoubleClick = () => {
                 if(node.data('has', 'url')){
                     header('Authorization', 'Bearer ' + user.token());
                     request(node.data('url'), null, (url, response) => {
-                        console.log(response);
-                        console.log(node.data('frontend-url'));
                         request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-                            console.log(frontendResponse);
                         });
                     });
                 }
@@ -113,7 +109,6 @@ settings.onDoubleClick = () => {
 }
 
 settings.page = (type, section, data) => {
-    console.log(data);
     if(
         is.array(data?.select)
     ){
@@ -130,7 +125,6 @@ settings.page = (type, section, data) => {
                     switch (type){
                         case 'current' :
                             page = data.page;
-                            console.log('current', page);
                             menuItem.data('page', page);
                             break;
                         case 'next' :
@@ -154,7 +148,6 @@ settings.page = (type, section, data) => {
                 switch (type){
                     case 'current' :
                         page = data.page;
-                        console.log('current', page);
                         menuItem.data('page', page);
                         break;
                     case 'next' :
@@ -1083,8 +1076,6 @@ settings.search = () => {
         if(!active){
             return;
         }
-        console.log("{{$module}}-{{$submodule}}-{{$command}}");
-        console.log(active);
         if(!active.hasClass("{{$module}}-{{$submodule}}-{{$command}}")){
             input.value = '';
             return;
