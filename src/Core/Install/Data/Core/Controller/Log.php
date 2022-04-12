@@ -58,6 +58,7 @@ class Log extends View {
             $url = Log::locate($object, $name);
             return Log::response($object, $url);
         } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception) {
+            d($exception);
             return 'Command undefined.' . PHP_EOL;
         }
     }
@@ -68,6 +69,7 @@ class Log extends View {
             $url = Log::locate($object, $name);
             return Log::response($object, $url);
         } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception) {
+            d($exception);  
             return 'Command undefined.' . PHP_EOL;
         }
     }
