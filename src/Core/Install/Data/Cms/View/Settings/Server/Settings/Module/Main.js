@@ -11,9 +11,14 @@ main.body = () => {
         return;
     }
     const body = section.select('.card-body');
-    body.addClass('d-none');
+    if(body){
+        body.addClass('d-none');
+    }
     const selected = section.select('.card-' + "{{$command}}" + '-body');
-    selected.removeClass('d-none');
+    if(selected){
+        selected.removeClass('d-none');
+    }
+
 }
 
 main.init = () => {

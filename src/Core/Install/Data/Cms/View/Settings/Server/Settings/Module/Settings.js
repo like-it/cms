@@ -99,12 +99,10 @@ settings.onDoubleClick = () => {
                 header('Authorization', 'Bearer ' + user.token());
                 request(node.data('url'), null, (url, response) => {
                     request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
                     });
                 });
             }
         });
-
     }
 }
 
