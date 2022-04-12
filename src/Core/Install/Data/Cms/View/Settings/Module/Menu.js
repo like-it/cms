@@ -133,12 +133,13 @@ menu.is_selected = (node, selected) => {
                             section : section,
                             className : "dialog dialog-error dialog-error-domain"
                         });
-
                         let form = dialog_create.select('form');
-                        form.on('submit', (event) => {
-                            event.preventDefault();
-                            dialog_create.remove();
-                        });
+                        if(form){
+                            form.on('submit', (event) => {
+                                event.preventDefault();
+                                dialog_create.remove();
+                            });
+                        }
                     }
                 }
                 if(node.data('has', 'frontend-url')){
@@ -299,6 +300,7 @@ ready(() => {
     require(
         [
             root() + 'Loader/Css/Loader.css?' + version(),
+            root() + 'Dialog/Css/Dialog.Error.css?' + version(),
         ],
         () => {
             menu.init();
