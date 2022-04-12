@@ -41,7 +41,6 @@ settings.onDoubleClick = () => {
                 });
             }
         });
-
     }
 }
 
@@ -123,7 +122,6 @@ settings.deleteDialog = (data) => {
 }
 
 settings.page = (type, section, data) => {
-    console.log(data);
     if(
         is.array(data?.select)
     ){
@@ -203,7 +201,6 @@ settings.actions = (target) => {
                         return;
                     }
                     const domain = section.select('input[name="node.domain"]');
-                    console.log('domain', domain);
                     if(!domain){
                         return;
                     }
@@ -217,7 +214,6 @@ settings.actions = (target) => {
                 }
                 header('Authorization', 'Bearer ' + user.token());
                 request(url, data, (url, response) => {
-                    console.log(response);
                     if(node.data('move-to-next-page')){
                         settings.page('next', section, target);
                     }
@@ -225,11 +221,6 @@ settings.actions = (target) => {
                         settings.page('previous', section, target);
                     }
                     menu.dispatch(section, target);
-                    /*
-                    request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
-                    });
-                     */
                 });
             });
         }
@@ -243,7 +234,6 @@ settings.actions = (target) => {
                     return;
                 }
                 const domain = section.select('input[name="node.domain"]');
-                console.log('domain', domain);
                 if(!domain){
                     return;
                 }
@@ -259,16 +249,10 @@ settings.actions = (target) => {
             request(url, data, (url, response) => {
                 console.log(response);
                 menu.dispatch(section, target);
-                /*
-                request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
-                });
-                 */
             });
         });
     }
 }
-
 
 settings.options = (target) => {
     const section = getSectionByName('main-content');
@@ -336,7 +320,6 @@ settings.pagination = (target) => {
                         return;
                     }
                     const domain = section.select('input[name="node.domain"]');
-                    console.log('domain', domain);
                     if(!domain){
                         return;
                     }
@@ -347,7 +330,6 @@ settings.pagination = (target) => {
                     if(!section){
                         return;
                     }
-                    console.log('settings.page');
                     target.page = button.data('page');
                     target.page = parseInt(target.page);
                     settings.page('current', section, target);
@@ -355,7 +337,6 @@ settings.pagination = (target) => {
                 header('Authorization', 'Bearer ' + user.token());
                 request(url, null, (url, response) => {
                     request(button.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
                     });
                 });
             });
@@ -371,14 +352,12 @@ settings.pagination = (target) => {
                     return;
                 }
                 const domain = section.select('input[name="node.domain"]');
-                console.log('domain', domain);
                 if(!domain){
                     return;
                 }
                 url = replace("{node.domain}", domain.value, url);
             }
             if(button.data('has', 'page')){
-                console.log('settings.page');
                 const section = getSectionByName('main-content');
                 if(!section){
                     return;
@@ -390,7 +369,6 @@ settings.pagination = (target) => {
             header('Authorization', 'Bearer ' + user.token());
             request(url, null, (url, response) => {
                 request(button.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
                 });
             });
         });

@@ -65,7 +65,6 @@ menu.domain = () => {
                         menu_active.trigger('dblclick');
                     }
                     const menu_settings = section.select('.nav-link[data-selected=".card-body-settings"]');
-                    console.log(menu_settings);
                     if(menu_settings && !menu_settings.hasClass('active')){
                         menu_settings.data('reload', true);
                     }
@@ -123,7 +122,7 @@ menu.is_selected = (node, selected) => {
                         if(!section){
                             return;
                         }
-                        dialog.create({
+                        let dialog_create = dialog.create({
                             title : "{{__($module + '.' + $submodule + '.' + 'dialog.error.domain.title')}}",
                             message : "{{sentences(__($module + '.' + $submodule + '.' + 'dialog.error.domain.message'))}}",
                             buttons : [
@@ -133,6 +132,12 @@ menu.is_selected = (node, selected) => {
                             ],
                             section : section,
                             className : "dialog dialog-error dialog-error-domain"
+                        });
+
+                        let form = dialog_create.select('form');
+                        form.on('submit', (event) => {
+                            event.preventDefault();
+                            dialog_create.remove();
                         });
                     }
                 }
