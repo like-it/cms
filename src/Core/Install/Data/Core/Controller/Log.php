@@ -15,7 +15,7 @@ use Host\Subdomain\Host\Extension\Service\System as Service;
 
 class Log extends View {
     const DIR = __DIR__ . DIRECTORY_SEPARATOR;
-    const NAME = 'log';
+    const NAME = 'Log';
 
     const COMMAND_INFO = 'info';
     const COMMAND_ARCHIVE = 'archive';
@@ -69,7 +69,7 @@ class Log extends View {
             $url = Log::locate($object, $name);
             return Log::response($object, $url);
         } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception) {
-            d($exception);  
+            d($exception);
             return 'Command undefined.' . PHP_EOL;
         }
     }
