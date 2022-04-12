@@ -89,14 +89,12 @@ menu.is_selected = (node, selected) => {
         if(node.data('has', 'url')){
             header('Authorization', 'Bearer ' + user.token());
             let url = node.data('url');
-            console.log(stristr(url, "{node.domain}"));
             if(stristr(url, "{node.domain}") !== false){
                 const section = getSectionByName('main-content');
                 if(!section){
                     return;
                 }
                 const domain = section.select('input[name="node.domain"]');
-                console.log('domain', domain);
                 if(!domain){
                     return;
                 }
@@ -106,7 +104,6 @@ menu.is_selected = (node, selected) => {
                 let page = node.data('page');
                 page = parseInt(page);
                 url += '?page=' + page;
-                //node.data('delete', 'page');
             }
             if(node.data('filter-type')){
                 url += '&filter[type]=' + node.data('filter-type');
@@ -147,7 +144,6 @@ menu.is_selected = (node, selected) => {
                             return;
                         }
                         const domain = section.select('input[name="node.domain"]');
-                        console.log('domain', domain);
                         if(!domain){
                             return;
                         }
@@ -183,7 +179,6 @@ menu.is_selected = (node, selected) => {
                     return;
                 }
                 const domain = section.select('input[name="node.domain"]');
-                console.log('domain', domain);
                 if(!domain){
                     return;
                 }
@@ -261,7 +256,6 @@ menu.onDoubleClick = () => {
         for(index=0; index < list.length; index++){
             let node = list[index];
             node.on('dblclick', (event) => {
-                console.log('dblclick');
                 const list = section.select('.nav-link');
                 list.removeClass('active');
                 node.addClass('active');
@@ -276,7 +270,6 @@ menu.onDoubleClick = () => {
     else if(list){
         let node = list;
         node.on('dblclick', (event) => {
-            console.log('dblclick');
             const list = section.select('.nav-link');
             list.removeClass('active');
             node.addClass('active');
