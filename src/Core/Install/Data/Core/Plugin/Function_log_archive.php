@@ -13,12 +13,21 @@ function function_log_archive(Parse $parse, Data $data){
     $explode = explode('.', File::basename($source));
     if(array_key_exists(1, $explode)){
         $destination = $explode[0] . '.{date(\'Ymd His\')}.' . $explode[1] . '.zip';
-        $execute = '{{binary()}} zip archive ' . $source . ' ' . $destination;
-        $output = [];
-        Core::execute($execute, $output);
-        echo implode(PHP_EOL, $output) . PHP_EOL;
-        File::remove($source);
-        File::touch($source);
-        echo 'Log file has been reset...' . PHP_EOL;
+
+        if(array_key_exists('_', $_SERVER)){
+            $dirname = \R3m\Io\Module\Dir::name($_SERVER['_']);
+            $binary = str_replace($dirname, '', $_SERVER['_']);
+            $execute = $binary . ' zip archive ' . $source . ' ' . $destination;
+            $output = [];
+            Core::execute($execute, $output);
+            echo implode(PHP_EOL, $output) . PHP_EOL;
+            File::remove($source);
+            File::touch($source);
+            echo 'Log file has been reset...' . PHP_EOL;
+        }
+
+
+
+
     }
 }
