@@ -531,6 +531,13 @@
             "CLI"
         ]
     },
+    "0d1b1331-a2a8-41bd-a6f8-c29bd69e39b4" : {
+        "module" : "log",
+        "path": "log",
+        "method": [
+            "CLI"
+        ]
+    },
     "55b1f34a-05c5-4140-951d-d293fa187b33" : {
         "module" : "system",
         "path": "system",
