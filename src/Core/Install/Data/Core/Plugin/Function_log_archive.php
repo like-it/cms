@@ -12,7 +12,8 @@ function function_log_archive(Parse $parse, Data $data){
     $source = $object->parameter($object, 'archive', 1);
     $explode = explode('.', File::basename($source));
     if(array_key_exists(1, $explode)){
-        $destination = $explode[0] . '."{date(\'Ymd His\')}".' . $explode[1] . '.zip';
+        dd($object->config('project.dir'));
+        $destination = $object->config('project.dir.log') . $explode[0] . '."{date(\'Ymd His\')}".' . $explode[1] . '.zip';
 
         if(array_key_exists('_', $_SERVER)){
             $dirname = \R3m\Io\Module\Dir::name($_SERVER['_']);
