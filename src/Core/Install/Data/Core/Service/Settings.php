@@ -1716,6 +1716,24 @@ class Settings extends Main {
                 Dir::create($url);
             }
             foreach($nodeList as $nr => $source){
+                $destination = $url;
+                if($source == $destination){
+                    $list[] = $destination;
+                    continue;
+                }
+                if(!Dir::is($source)){
+                    continue;
+                } else {
+                    $move = Dir::move($source, $destination, $overwrite);
+                    d($move);
+                }
+                if($move){
+                    $list[] = $destination;
+                } else {
+                    $error[] = $source;
+                }
+            }
+            foreach($nodeList as $nr => $source){
                 $destination = $url . File::basename($source);
                 if($source == $destination){
                     $list[] = $destination;
@@ -1726,23 +1744,6 @@ class Settings extends Main {
                 } else {
                     $move = File::move($source, $destination, $overwrite);
                     d($move);
-                }
-                if($move){
-                    $list[] = $destination;
-                } else {
-                    $error[] = $source;
-                }
-            }
-            foreach($nodeList as $nr => $source){
-                $destination = $url;
-                if($source == $destination){
-                    $list[] = $destination;
-                    continue;
-                }
-                if(!Dir::is($source)){
-                    continue;
-                } else {
-                    $move = Dir::move($source, $destination, $overwrite);
                 }
                 if($move){
                     $list[] = $destination;
