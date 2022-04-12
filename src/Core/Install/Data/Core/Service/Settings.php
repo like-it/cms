@@ -1696,12 +1696,15 @@ class Settings extends Main {
                 $list[] = File::basename($url);
             }
         }
+        /*
         $overwrite = $object->request('overwrite');
         if(empty($overwrite)){
             $overwrite = false;
         } else {
             $overwrite = true;
         }
+        */
+        $overwrite = true;
         $directory = $object->request('directory');
         $directory = trim($directory, $object->config('ds')) . $object->config('ds');
         if($directory === $object->config('ds')){
