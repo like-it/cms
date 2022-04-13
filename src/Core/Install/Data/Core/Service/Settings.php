@@ -1402,7 +1402,7 @@ class Settings extends Main {
             Dir::create($dir);
             File::move($source, $destination);
         } else {
-            $destination = Dir::name($source) . $destination;
+            $destination = $object->config('project.dir.public') . $destination;
             if(substr($source, 0, strlen($object->config('project.dir.public'))) === $object->config('project.dir.public')){
                 File::move($source, $destination);
             } else {
