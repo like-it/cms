@@ -1390,14 +1390,37 @@ class Settings extends Main {
     }
 
     /**
+     * @throws FileMoveException
+     */
+    public static function server_settings_rename(App $object): Response
+    {
+        $source = $object->request('node.source');
+        $destination = $object->request('node.destination');
+        if(strpos($destination, $object->config('ds')) !== false){
+            $destination = $object->config('project.dir.public') . ltrim($destination, $object->config('ds'));
+            File::move($source, $destination);
+        } else {
+            $destination = Dir::name($source) . $destination;
+            if(substr($source, 0, strlen($object->config('project.dir.public'))) === $object->config('project.dir.public')){
+                File::move($source, $destination);
+            } else {
+                throw new FileMoveException('Not in server settings directory...');
+            }
+        }
+        $response = [];
+        $response['node'] = [
+            'source' => $source,
+            'destination' => $destination,
+        ];
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
      * @throws FileExistException
      * @throws FileWriteException
      */
     public static function server_settings_update(App $object, $url): Response
     {
-        dd($object->request());
-
-
         $url_old = $object->request('node.url_old');
         if($url !== $url_old){
             $content = $object->request('node.content');
