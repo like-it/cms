@@ -318,7 +318,7 @@ settings.node.item.rename = ({node, section, target}) => {
     node.on('click', (event) => {
         let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.message'))}}";
         message = _('prototype').string.replace('{{$name}}', node.data('name'), message);
-        message += '<input type="hidden" name="node.source" value="' + node.data('source') + '"<label>' + "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.destination.label')}}" + '</label><input type="text" name="node.destination" />'
+        message += '<br><input type="hidden" name="node.source" value="' + node.data('source') + '"<label>' + "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.destination.label')}}" + '</label><input type="text" name="node.destination" />'
         let dialog_create = dialog.create({
             title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.title')}}",
             message : message,
@@ -355,9 +355,9 @@ settings.node.item.rename = ({node, section, target}) => {
                     });
                 }
             });
-            const submit = form.select('.button-submit');
-            if(submit){
-                submit.focus();
+            const input = form.select('.input[type="text"]');
+            if(input){
+                input.focus();
             }
         }
     });
