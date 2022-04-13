@@ -1029,9 +1029,13 @@ settings.body = () => {
         item.data('delete', 'is-hidden');
     } else {
         const body = section.select('.card-body');
-        body.addClass('d-none');
+        if(body){
+            body.addClass('d-none');
+        }
         const selected = section.select('.card-body-' + "{{$command}}");
-        selected.removeClass('d-none');
+        if(selected){
+            selected.removeClass('d-none');
+        }
     }
 }
 
@@ -1113,8 +1117,21 @@ settings.search = () => {
     });
 }
 
+settings.menuItem = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+    if(menuItem){
+        menuItem.data('filter-type', "{{$request.filter.type}}");
+        menuItem.data('limit', "{{$request.limit}}");
+    }
+}
+
 settings.init = () => {
     settings.body();
+    settings.menuItem();
     settings.onSelectInverse();
     settings.onDoubleClick();
     settings.actions({
