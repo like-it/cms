@@ -344,7 +344,7 @@ settings.node.item.rename = ({node, section, target}) => {
                     let data = {
                         ...form.data('serialize'),
                         request : {
-                            method : node.data('request-method') ? node.data('request-method') : "PUT"
+                            method : node.data('request-method') ? node.data('request-method') : "PATCH"
                         }
                     };
                     header('authorization', 'Bearer ' + user.token());

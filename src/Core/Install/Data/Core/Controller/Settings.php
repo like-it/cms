@@ -222,6 +222,8 @@ class Settings extends View {
                     return Service::server_settings_read($object, $url);
                 case 'PUT' :
                     return Service::server_settings_update($object, $url);
+                case 'PATCH' :
+                    return Service::server_settings_rename($object);
             }
         } catch (Exception $exception) {
             return $exception;
