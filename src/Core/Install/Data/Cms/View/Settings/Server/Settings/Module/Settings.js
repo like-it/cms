@@ -355,7 +355,7 @@ settings.node.item.rename = ({node, section, target}) => {
                     });
                 }
             });
-            const input = form.select('.input[type="text"]');
+            const input = form.select('input[type="text"]');
             if(input){
                 input.focus();
             }
