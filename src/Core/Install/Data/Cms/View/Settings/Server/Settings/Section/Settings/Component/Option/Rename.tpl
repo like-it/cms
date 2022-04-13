@@ -24,6 +24,7 @@ $__.command +
     <i
         class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-rename"
         data-name="{{$node.name}}"
+        data-source="{{$node.url}}"
     >
     </i>
     <span>{{$span.text}}</span>

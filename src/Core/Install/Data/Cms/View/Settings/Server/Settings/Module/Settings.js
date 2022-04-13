@@ -318,7 +318,7 @@ settings.node.item.rename = ({node, section, target}) => {
     node.on('click', (event) => {
         let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.message'))}}";
         message = _('prototype').string.replace('{{$name}}', node.data('name'), message);
-        message += '<label>New name</label><input type="text" name="node.rename" />'
+        message += '<input type="hidden" name="node.source" value="' + node.data('source') + '"<label>' + "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.destination.label')}}" + '</label><input type="text" name="node.destination" />'
         let dialog_create = dialog.create({
             title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.title')}}",
             message : message,
@@ -1218,11 +1218,12 @@ ready(() => {
     require(
     [
         root() + 'Dialog/Css/Dialog.css?' + version(),
-        root() + 'Dialog/Css/Dialog.Delete.css?' + version(),
-        root() + 'Dialog/Css/Dialog.Move.css?' + version(),
+        root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Delete.css?' + version(),
+        root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Move.css?' + version(),
         root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Create.Directory.css?' + version(),
         root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Create.File.css?' + version(),
         root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Create.Symlink.css?' + version(),
+        root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Rename.css?' + version(),
         root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + "{{$require.submodule|file.basename}}" + '.css?' + version()
     ],
     () => {

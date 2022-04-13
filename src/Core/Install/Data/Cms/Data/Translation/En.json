@@ -261,6 +261,13 @@
     ],
     "settings.server.settings.dialog.delete.button.ok" : "Ok",
     "settings.server.settings.dialog.delete.button.cancel" : "Cancel",
+    "settings.server.settings.dialog.rename.title" : "Rename:",
+    "settings.server.settings.dialog.rename.message" : [
+        "Are you sure you want to rename {$name}?"
+    ],
+    "settings.server.settings.dialog.rename.button.ok" : "Ok",
+    "settings.server.settings.dialog.rename.button.cancel" : "Cancel",
+    "settings.server.settings.dialog.rename.destination.label": "New name:",
     "settings.server.settings.dialog.list.delete.title" : "Delete multiple:",
     "settings.server.settings.dialog.list.delete.message" : [
         "Are you sure you want to delete the selected items?"
