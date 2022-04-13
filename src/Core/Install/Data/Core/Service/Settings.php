@@ -1394,8 +1394,8 @@ class Settings extends Main {
      */
     public static function server_settings_rename(App $object): Response
     {
-        $source = $object->request('node.source');
-        $destination = $object->request('node.destination');
+        $source = str_replace(['./','../'],'/', $object->request('node.source'));
+        $destination = str_replace(['./','../'],'/', $object->request('node.destination'));
         if(strpos($destination, $object->config('ds')) !== false){
             $destination = $object->config('project.dir.public') . ltrim($destination, $object->config('ds'));
             $dir = Dir::name($destination);
@@ -1406,6 +1406,7 @@ class Settings extends Main {
             if(substr($source, 0, strlen($object->config('project.dir.public'))) === $object->config('project.dir.public')){
                 File::move($source, $destination);
             } else {
+                $object->logger()->error('fileMoveException', [$source, $destination]);
                 throw new FileMoveException('Not in server settings directory...');
             }
         }
