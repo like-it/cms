@@ -1395,6 +1395,9 @@ class Settings extends Main {
      */
     public static function server_settings_update(App $object, $url): Response
     {
+        dd($object->request());
+
+
         $url_old = $object->request('node.url_old');
         if($url !== $url_old){
             $content = $object->request('node.content');
