@@ -1398,6 +1398,8 @@ class Settings extends Main {
         $destination = $object->request('node.destination');
         if(strpos($destination, $object->config('ds')) !== false){
             $destination = $object->config('project.dir.public') . ltrim($destination, $object->config('ds'));
+            $dir = Dir::name($destination);
+            Dir::create($dir);
             File::move($source, $destination);
         } else {
             $destination = Dir::name($source) . $destination;
