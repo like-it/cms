@@ -17,12 +17,12 @@ $__.command +
 )}}
 {{if(is.empty($node.protected))}}
 <a
-    class="dropdown-item item-controller"
+    class="dropdown-item item-rename"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.name}}/"
     data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-rename-body')}}"
 >
     <i
-        class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-controller"
+        class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-rename"
         data-name="{{$node.name}}"
     >
     </i>

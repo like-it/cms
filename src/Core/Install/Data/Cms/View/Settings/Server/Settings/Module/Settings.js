@@ -308,6 +308,61 @@ settings.node.item.delete = ({node, section, target}) => {
     });
 }
 
+settings.node.item.rename = ({node, section, target}) => {
+    if(!node){
+        return;
+    }
+    if(!section){
+        return;
+    }
+    node.on('click', (event) => {
+        let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.message'))}}";
+        message = _('prototype').string.replace('{{$name}}', node.data('name'), message);
+        message += '<label>New name</label><input type="text" name="node.rename" />'
+        let dialog_create = dialog.create({
+            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.title')}}",
+            message : message,
+            buttons : [
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.button.ok')}}"
+                },
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.button.cancel')}}"
+                }
+            ],
+            section : section,
+            className : "dialog dialog-rename",
+            form : {
+                name : "dialog-rename",
+                url : node.data('url'),
+            }
+        });
+        const form = dialog_create.select('form');
+        if(form){
+            form.on('submit', (event) => {
+                if(node.data('has', 'url')){
+                    let data = {
+                        ...form.data('serialize'),
+                        request : {
+                            method : node.data('request-method') ? node.data('request-method') : "PUT"
+                        }
+                    };
+                    header('authorization', 'Bearer ' + user.token());
+                    request(node.data('url'), data, (url, response) => {
+                        settings.menuItem();
+                        dialog_create.remove();
+                        menu.dispatch(section, target);
+                    });
+                }
+            });
+            const submit = form.select('.button-submit');
+            if(submit){
+                submit.focus();
+            }
+        }
+    });
+}
+
 settings.node.item.create_dir = ({node, section, target}) => {
     if (!node) {
         return;
@@ -804,6 +859,13 @@ settings.options = (target) => {
                     target: target
                 });
             }
+            else if(node.hasClass('item-rename')){
+                settings.node.item.rename({
+                    node : node,
+                    section : section,
+                    target: target
+                });
+            }
             else if(node.hasClass('item-create-dir')){
                 settings.node.item.create_dir({
                     node : node,
@@ -1129,9 +1191,13 @@ settings.menuItem = () => {
     }
 }
 
+settings.onLoad = () => {
+    settings.menuItem();
+}
+
 settings.init = () => {
     settings.body();
-    settings.menuItem();
+    settings.onLoad();
     settings.onSelectInverse();
     settings.onDoubleClick();
     settings.actions({
