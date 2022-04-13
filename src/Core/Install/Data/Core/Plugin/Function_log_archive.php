@@ -30,7 +30,7 @@ function function_log_archive(Parse $parse, Data $data){
             $dir = Dir::name($destination);
             File::chown($dir, 'www-data', 'www-data', true);
             File::remove($source);
-            File::touch($source);
+            File::touch($source, time(), time());
             echo 'Log file has been reset...' . PHP_EOL;
         }
 
