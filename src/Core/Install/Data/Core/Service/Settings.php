@@ -1398,16 +1398,24 @@ class Settings extends Main {
         $destination = str_replace(['./','../'],'/', $object->request('node.destination'));
         if(strpos($destination, $object->config('ds')) !== false){
             $destination = $object->config('project.dir.public') . ltrim($destination, $object->config('ds'));
-            $dir = Dir::name($destination);
-            Dir::create($dir);
-            File::move($source, $destination);
+            if($source === $destination){
+                throw new FileMoveException('Source is destination...');
+            } else {
+                $dir = Dir::name($destination);
+                Dir::create($dir);
+                File::move($source, $destination);
+            }
         } else {
             $destination = $object->config('project.dir.public') . $destination;
-            if(substr($source, 0, strlen($object->config('project.dir.public'))) === $object->config('project.dir.public')){
-                File::move($source, $destination);
+            if($source === $destination){
+                throw new FileMoveException('Source is destination...');
             } else {
-                $object->logger()->error('fileMoveException', [$source, $destination]);
-                throw new FileMoveException('Not in server settings directory...');
+                if(substr($source, 0, strlen($object->config('project.dir.public'))) === $object->config('project.dir.public')){
+                    File::move($source, $destination);
+                } else {
+                    $object->logger()->error('fileMoveException', [$source, $destination]);
+                    throw new FileMoveException('Not in server settings directory...');
+                }
             }
         }
         $response = [];
