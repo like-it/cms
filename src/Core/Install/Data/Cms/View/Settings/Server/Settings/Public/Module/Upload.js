@@ -45,7 +45,7 @@ upload.init = ({
                 }
             );
             drop.on("sending", function (file, xhr, formData) {
-                let data = form.data('serialize') ?? [];
+                let data = form?.data('serialize') ?? [];
                 let index;
                 for(index=0;index< data.length; index++){
                     let item = data[index];
