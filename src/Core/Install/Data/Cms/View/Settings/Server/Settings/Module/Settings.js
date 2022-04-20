@@ -7,6 +7,7 @@ import { getSectionByName } from "/Module/Section.js";
 import { version } from "/Module/Priya.js";
 import { root } from "/Module/Web.js";
 import { contains, replace } from "/Module/String.js";
+import upload from "/Settings/Server/Settings/Module/Upload.js";
 let settings = {};
 
 settings.get = (attribute) => {
@@ -185,6 +186,33 @@ settings.selected = () => {
     }
 }
 
+settings.upload = ({
+    url,
+    token,
+    upload_max_filesize,
+    target,
+    redirect_url
+}) => {
+    require(
+        [
+            root() + 'Dropzone/5.9.2/Min/dropzone.min.js?' + version(),
+            root() + 'Dropzone/5.9.2/Min/dropzone.min.css?' + version()
+        ],
+        function(){
+            if(token){
+                upload.init({
+                    url : url,
+                    token: token,
+                    upload_max_filesize: upload_max_filesize,
+                    target : target
+                });
+            } else {
+                redirect(redirect_url)
+            }
+        }
+    );
+}
+
 settings.actions = (target) => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -318,7 +346,11 @@ settings.node.item.rename = ({node, section, target}) => {
     node.on('click', (event) => {
         let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.message'))}}";
         message = _('prototype').string.replace('{{$name}}', node.data('name'), message);
-        message += '<br><input type="hidden" name="node.source" value="' + node.data('source') + '"<label>' + "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.destination.label')}}" + '</label><input type="text" name="node.destination" />'
+        message += '<br><input type="hidden" name="node.source" value="' + node.data('source') +
+            '"<label>' +
+            "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.destination.label')}}" +
+            '</label><input type="text" name="node.destination" />'
+        ;
         let dialog_create = dialog.create({
             title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.title')}}",
             message : message,
@@ -373,7 +405,10 @@ settings.node.item.create_dir = ({node, section, target}) => {
     node.on('click', (event) => {
         let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.message'))}}";
         message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
-        message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.create.directory.name')}}" + '</label><input type="text" name="node.name" value=""/></p>'
+        message += '<p><label>' +
+            "{{__($__.module + '.' + $__.submodule + '.dialog.create.directory.name')}}" +
+            '</label><input type="text" name="node.name" value=""/></p>'
+        ;
         let dialog_create = dialog.create({
             title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.title')}}",
             message: message,
@@ -471,7 +506,10 @@ settings.node.item.create_file = ({node, section, target}) => {
     node.on('click', (event) => {
         let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.message'))}}";
         message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
-        message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.create.file.name')}}" + '</label><input type="text" name="node.name" value=""/></p>'
+        message += '<p><label>' +
+            "{{__($__.module + '.' + $__.submodule + '.dialog.create.file.name')}}" +
+            '</label><input type="text" name="node.name" value=""/></p>'
+        ;
         let dialog_create = dialog.create({
             title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.title')}}",
             message: message,
@@ -505,7 +543,7 @@ settings.node.item.create_file = ({node, section, target}) => {
                             let error = [];
                             if(response?.message === 'Name cannot be empty...'){
                                 message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.empty.message'))}}";
-                                error.push("{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.empty.file'))}}")
+                                error.push("{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.empty.file'))}}");
                             } else {
                                 message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.exist.message'))}}";
                                 let input = dialog_create.select('input[name="node.name"]');
@@ -570,7 +608,12 @@ settings.node.item.create_symlink = ({node, section, target}) => {
     node.on('click', (event) => {
         let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.symlink.message'))}}";
         message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
-        message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.create.symlink.source')}}" + '</label><input type="text" name="node.source" value=""/><br><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.create.symlink.destination')}}" + '</label><input type="text" name="node.destination" value=""/></p>'
+        message += '<p><label>' +
+            "{{__($__.module + '.' + $__.submodule + '.dialog.create.symlink.source')}}" +
+            '</label><input type="text" name="node.source" value=""/><br><label>' +
+            "{{__($__.module + '.' + $__.submodule + '.dialog.create.symlink.destination')}}" +
+            '</label><input type="text" name="node.destination" value=""/></p>'
+        ;
         let dialog_create = dialog.create({
             title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.symlink.title')}}",
             message: message,
@@ -732,7 +775,10 @@ settings.node.list.move = ({node, section, target}) => {
         //make dialog move with where to move to.
         let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.message'))}}";
         message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
-        message += '<p><label>' + "{{__($__.module + '.' + $__.submodule + '.dialog.list.move.target.directory')}}" + '</label><input type="text" name="node.directory" value=""/></p>'
+        message += '<p><label>' +
+            "{{__($__.module + '.' + $__.submodule + '.dialog.list.move.target.directory')}}" +
+            '</label><input type="text" name="node.directory" value=""/></p>'
+        ;
         let dialog_create = dialog.create({
             title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.title')}}",
             message : message,
@@ -769,13 +815,12 @@ settings.node.list.move = ({node, section, target}) => {
                 };
                 request(form.data('url'), data, (url, response) => {
                     dialog_create.remove();
+                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
                     if(response?.page){
-                        const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
                         if(menuItem){
                             menuItem.data('page', response.page);
                         }
                     }
-                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
                     if(menuItem){
                         menuItem.data('filter-type', filter.type);
                         menuItem.data('limit', "{{$request.limit}}");
@@ -804,6 +849,115 @@ settings.node.list.move = ({node, section, target}) => {
                         if(button){
                             button.focus();
                         }
+                    }
+                    settings.delete('selected')
+                    menu.dispatch(section, target);
+                });
+            }
+        });
+        const input = form.select('input[name="node.directory"]');
+        if(input){
+            input.focus();
+        }
+    });
+}
+
+settings.node.list.upload = ({node, section, target}) => {
+    if (!node) {
+        return;
+    }
+    if (!section) {
+        return;
+    }
+    node.on('click', (event) => {
+        //make dialog move with where to move to.
+        let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.message'))}}";
+        message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
+        message += '<p><label>' +
+            "{{__($__.module + '.' + $__.submodule + '.dialog.list.upload.target.directory')}}" +
+            '</label><input type="text" name="node.directory" value=""/></p>' +
+            '<div class="upload"></div>'
+        ;
+        let dialog_create = dialog.create({
+            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.title')}}",
+            message : message,
+            buttons : [
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.button.ok')}}"
+                },
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.button.cancel')}}"
+                }
+            ],
+            section : section,
+            className : "dialog dialog-upload",
+            form : {
+                name: "dialog-upload",
+                url : node.data('url'),
+            }
+        });
+        let upload_target = dialog_create.select('.upload');
+        settings.upload({
+            url: "{{server.url('core')}}Settings/Server/Settings/Upload/",
+            token: user.token(),
+            upload_max_filesize: "1024 M",
+            target: upload_target,
+            redirect_url: "{{server.url('cms')}}User/Login/"
+        });
+        const form = dialog_create.select('form[name="dialog-upload"]');
+        if(!form){
+            return;
+        }
+        form.on('submit', (event) => {
+            if(form.data('has', 'url')){
+                header('authorization', 'Bearer ' + user.token());
+                let filter = {
+                    type : "{{$request.filter.type}}"
+                };
+                let data = {
+                    directory: section.select('input[name="node.directory"]')?.value,
+                    nodeList: settings.get('selected'),
+                    limit: "{{$request.limit}}",
+                    filter: filter
+                };
+                request(form.data('url'), data, (url, response) => {
+                    dialog_create.remove();
+                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                    if(response?.page){
+                        if(menuItem){
+                            menuItem.data('page', response.page);
+                        }
+                    }
+                    if(menuItem){
+                        menuItem.data('filter-type', filter.type);
+                        menuItem.data('limit', "{{$request.limit}}");
+                    }
+                    if(response?.error){
+                        /*
+                        let dialog_error = dialog.create({
+                            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.title')}}",
+                            message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.message'))}}",
+                            error : response.error,
+                            buttons : [
+                                {
+                                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.button.ok')}}"
+                                }
+                            ],
+                            section : section,
+                            className : "dialog dialog-error dialog-error-move"
+                        });
+                        const form = dialog_error.select('form');
+                        if(!form){
+                            return;
+                        }
+                        form.on('submit', (event) => {
+                            dialog_error.remove();
+                        });
+                        const button = form.select('button[type="submit"]');
+                        if(button){
+                            button.focus();
+                        }
+                         */
                     }
                     settings.delete('selected')
                     menu.dispatch(section, target);
@@ -896,6 +1050,13 @@ settings.options = (target) => {
             }
             else if(node.hasClass('list-move')){
                 settings.node.list.move({
+                    node : node,
+                    section : section,
+                    target: target
+                });
+            }
+            else if(node.hasClass('list-upload')){
+                settings.node.list.upload({
                     node : node,
                     section : section,
                     target: target

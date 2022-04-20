@@ -16,7 +16,7 @@ $__.command +
 '.component.add.upload.text'
 )}}
 <a
-    class="dropdown-item item-upload"
+    class="dropdown-item list-upload"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Upload/"
     data-filter-type="{{$request.filter.type}}"
 >
