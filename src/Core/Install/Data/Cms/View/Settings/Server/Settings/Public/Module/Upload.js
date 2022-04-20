@@ -1,6 +1,7 @@
 let upload = {};
 
 upload.init = ({
+    id,
     url,
     token,
     upload_max_filesize,
@@ -27,7 +28,7 @@ upload.init = ({
     let upload = body.select('.upload');
     if(!upload) {
         upload = priya.create('div', 'dropzone upload');
-        upload.attribute('id', 'upload');
+        upload.attribute('id', id);
         upload.data('url', url);
         upload.data('upload-max-filesize', upload_max_filesize);
         body.appendChild(upload);
