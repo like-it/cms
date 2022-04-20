@@ -870,10 +870,7 @@ settings.node.list.upload = ({node, section, target}) => {
         return;
     }
     node.on('click', (event) => {
-        //make dialog move with where to move to.
-        let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.message'))}}";
-        message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
-        message += '<p><label>' +
+        let message = '<p><label>' +
             "{{__($__.module + '.' + $__.submodule + '.dialog.list.upload.target.directory')}}" +
             '</label><input type="text" name="node.directory" value=""/></p>'
         ;
@@ -1380,6 +1377,7 @@ ready(() => {
         root() + 'Dialog/Css/Dialog.css?' + version(),
         root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Delete.css?' + version(),
         root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Move.css?' + version(),
+        root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Upload.css?' + version(),
         root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Create.Directory.css?' + version(),
         root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Create.File.css?' + version(),
         root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Create.Symlink.css?' + version(),
