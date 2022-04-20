@@ -16,7 +16,7 @@
     border: 0;
 }
 
-.dialog-upload .body .dropzone .dz-message
+.dialog-upload .body .dropzone .dz-message,
 .dialog-upload .body .dropzone.dz-clickable
 {
     cursor: default;
