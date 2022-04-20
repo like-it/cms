@@ -14,7 +14,10 @@
 
 .dialog-upload .body .dropzone {
     border: 0;
-    cursor: pointer;
+}
+
+.dialog-upload .body .dropzone .dz-message {
+    cursor: default;
 }
 
 .dialog-error-upload {

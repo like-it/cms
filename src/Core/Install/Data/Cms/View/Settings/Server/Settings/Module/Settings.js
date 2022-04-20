@@ -910,6 +910,7 @@ settings.node.list.upload = ({node, section, target}) => {
         if(!form){
             return;
         }
+        /*
         form.on('submit', (event) => {
             if(form.data('has', 'url')){
                 header('authorization', 'Bearer ' + user.token());
@@ -959,12 +960,13 @@ settings.node.list.upload = ({node, section, target}) => {
                         if(button){
                             button.focus();
                         }
-                         */
+
                     }
                     settings.delete('selected')
                     menu.dispatch(section, target);
                 });
             }
+         */
         });
         const input = form.select('input[name="node.directory"]');
         if(input){
