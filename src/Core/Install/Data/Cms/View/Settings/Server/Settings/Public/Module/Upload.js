@@ -26,6 +26,7 @@ upload.init = ({
         input.remove();
     }
     let upload = body.select('.upload');
+    console.log(form);
     if(!upload) {
         upload = priya.create('div', 'dropzone upload');
         upload.attribute('id', 'upload');
