@@ -896,6 +896,10 @@ settings.node.list.upload = ({node, section, target}) => {
                 url : node.data('url'),
             }
         });
+        const form = dialog_create.select('form[name="dialog-upload"]');
+        if(!form){
+            return;
+        }
         let upload_target = dialog_create.select('.body');
         settings.upload({
             section: section,
@@ -904,12 +908,9 @@ settings.node.list.upload = ({node, section, target}) => {
             upload_max_filesize: "1024 M",
             target: upload_target,
             redirect_url: "{{server.url('cms')}}User/Login/",
-            message: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.message')}}"
+            message: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.message')}}",
+            form: form
         });
-        const form = dialog_create.select('form[name="dialog-upload"]');
-        if(!form){
-            return;
-        }
         form.on('submit', (event) => {
             dialog_create.remove();
             menu.dispatch(section, target);
