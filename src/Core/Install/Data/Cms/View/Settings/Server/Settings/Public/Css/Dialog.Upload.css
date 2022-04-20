@@ -2,12 +2,12 @@
     left: 33%;
     width: 34%;
     right: 33%;
-    height: 300px;
-    top: calc(50% - 150px);
+    height: 350px;
+    top: calc(50% - 175px);
 }
 
 .dialog-upload .body {
-    height: 220px;
+    height: 270px;
     background: rgba(255, 255, 255, 1);
     overflow: auto;
 }
