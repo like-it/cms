@@ -6,7 +6,8 @@ upload.init = ({
     upload_max_filesize,
     target,
     section,
-    message
+    message,
+    form
 }) => {
     let body;
     if(is.empty(target)){
@@ -44,6 +45,8 @@ upload.init = ({
                 }
             );
             drop.on("sending", function (file, xhr, formData) {
+                let data = form.data('serialize');
+                console.log(data);
                 formData.append("node.directory", section.select('input[name="node.directory"]')?.value);
             });
             drop.on("complete", function (file) {
