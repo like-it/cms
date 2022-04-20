@@ -187,11 +187,13 @@ settings.selected = () => {
 }
 
 settings.upload = ({
+    section,
     url,
     token,
     upload_max_filesize,
     target,
-    redirect_url
+    redirect_url,
+    message
 }) => {
     require(
         [
@@ -204,7 +206,9 @@ settings.upload = ({
                     url : url,
                     token: token,
                     upload_max_filesize: upload_max_filesize,
-                    target : target
+                    target : target,
+                    section: section,
+                    message: message
                 });
             } else {
                 redirect(redirect_url)
@@ -894,11 +898,13 @@ settings.node.list.upload = ({node, section, target}) => {
         });
         let upload_target = dialog_create.select('.body');
         settings.upload({
+            section: section,
             url: "{{server.url('core')}}Settings/Server/Settings/Upload/",
             token: user.token(),
             upload_max_filesize: "1024 M",
             target: upload_target,
-            redirect_url: "{{server.url('cms')}}User/Login/"
+            redirect_url: "{{server.url('cms')}}User/Login/",
+            message: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.message')}}"
         });
         const form = dialog_create.select('form[name="dialog-upload"]');
         if(!form){

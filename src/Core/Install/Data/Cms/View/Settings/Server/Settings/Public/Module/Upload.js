@@ -1,14 +1,21 @@
 let upload = {};
 
-upload.init = (config) => {
+upload.init = ({
+    url,
+    token,
+    upload_max_filesize,
+    target,
+    section,
+    message
+}) => {
     let body;
-    if(is.empty(config.target)){
+    if(is.empty(target)){
         body = select('body');
-    } else if(typeof config.target === 'string'){
-        body = select(config.target);
+    } else if(typeof target === 'string'){
+        body = select(target);
     }
     else {
-        body = config.target;
+        body = target;
     }
     if(!body){
         return;
@@ -18,25 +25,26 @@ upload.init = (config) => {
         input.remove();
     }
     let upload = body.select('.upload');
-    let token = config.token;
     if(!upload) {
         upload = priya.create('div', 'dropzone upload');
         upload.attribute('id', 'upload');
-        upload.data('url', config.url);
-        upload.data('upload-max-filesize', config.upload_max_filesize);
+        upload.data('url', url);
+        upload.data('upload-max-filesize', upload_max_filesize);
         body.appendChild(upload);
         if(token){
             let drop = new Dropzone(
                 '#' + upload.attribute('id'), {
                     url: upload.data('url'),
                     maxFilesize: upload.data('upload-max-filesize'),
+                    filesizeBase: 1024,
+                    dictDefaultMessage: message,
                     headers: {
                         "Authorization": "Bearer " + token
                     }
                 }
             );
             drop.on("sending", function (file, xhr, formData) {
-
+                formData.append("node.directory", section.select('input[name="node.directory"]'));
             });
             drop.on("complete", function (file) {
 
