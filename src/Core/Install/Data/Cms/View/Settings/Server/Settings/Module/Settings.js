@@ -210,7 +210,7 @@ settings.upload = ({
                     target : target,
                     section: section,
                     message: message,
-                    form: form
+                    // form: form
                 });
             } else {
                 redirect(redirect_url)

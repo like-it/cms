@@ -26,7 +26,6 @@ upload.init = ({
         input.remove();
     }
     let upload = body.select('.upload');
-    console.log(form);
     if(!upload) {
         upload = priya.create('div', 'dropzone upload');
         upload.attribute('id', 'upload');
@@ -46,9 +45,12 @@ upload.init = ({
                 }
             );
             drop.on("sending", function (file, xhr, formData) {
-                let data = form.data('serialize');
-                console.log(data);
-                formData.append("node.directory", section.select('input[name="node.directory"]')?.value);
+                let data = form.data('serialize') ?? [];
+                let index;
+                for(index=0;index< data.length; index++){
+                    let item = data[index];
+                    formData.append(item.name, item.value);
+                }
             });
             drop.on("complete", function (file) {
 
