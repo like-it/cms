@@ -44,7 +44,7 @@ upload.init = ({
                 }
             );
             drop.on("sending", function (file, xhr, formData) {
-                formData.append("node.directory", section.select('input[name="node.directory"]'));
+                formData.append("node.directory", section.select('input[name="node.directory"]').value);
             });
             drop.on("complete", function (file) {
 
