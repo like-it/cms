@@ -284,7 +284,7 @@
     "settings.server.settings.dialog.list.upload.title" : "Upload files:",
     "settings.server.settings.dialog.list.upload.message" : "Drop files or click here to upload.",
     "settings.server.settings.dialog.list.upload.target.directory" : "Target directory:",
-    "settings.server.settings.dialog.list.upload.button.ok" : "Ok",
+    "settings.server.settings.dialog.list.upload.button.ok" : "Done uploading",
     "settings.server.settings.dialog.list.upload.button.cancel" : "Cancel",
     "settings.server.settings.dialog.error.list.move.title" : "Error moving files...",
     "settings.server.settings.dialog.error.list.move.message" : [

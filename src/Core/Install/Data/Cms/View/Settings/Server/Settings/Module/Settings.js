@@ -910,6 +910,13 @@ settings.node.list.upload = ({node, section, target}) => {
         if(!form){
             return;
         }
+        const button = form.select('input[type="submit"]');
+        if(button){
+            button.on('click', (event) => {
+                dialog_create.remove();
+                menu.dispatch(section, target);
+            });
+        }
         const input = form.select('input[name="node.directory"]');
         if(input){
             input.focus();
