@@ -5,7 +5,6 @@ upload.init = ({
     token,
     upload_max_filesize,
     target,
-    section,
     message,
     form
 }) => {
