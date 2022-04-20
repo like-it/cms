@@ -187,7 +187,7 @@ settings.selected = () => {
 }
 
 settings.upload = ({
-    id
+    id,
     url,
     token,
     upload_max_filesize,
