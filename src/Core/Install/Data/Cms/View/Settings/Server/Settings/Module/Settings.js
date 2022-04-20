@@ -187,7 +187,6 @@ settings.selected = () => {
 }
 
 settings.upload = ({
-    id,
     url,
     token,
     upload_max_filesize,
@@ -204,7 +203,6 @@ settings.upload = ({
         function(){
             if(token){
                 upload.init({
-                    id: id,
                     url : url,
                     token: token,
                     upload_max_filesize: upload_max_filesize,
@@ -904,7 +902,6 @@ settings.node.list.upload = ({node, section, target}) => {
         }
         let upload_target = dialog_create.select('.body');
         settings.upload({
-            id: "upload-{{uuid()}}",
             url: "{{server.url('core')}}Settings/Server/Settings/Upload/",
             token: user.token(),
             upload_max_filesize: "1024 M",
