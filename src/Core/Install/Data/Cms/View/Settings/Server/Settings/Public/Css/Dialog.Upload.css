@@ -2,18 +2,19 @@
     left: 33%;
     width: 34%;
     right: 33%;
-    height: 350px;
-    top: calc(50% - 175px);
+    height: 360px;
+    top: calc(50% - 180px);
 }
 
 .dialog-upload .body {
-    height: 270px;
+    height: 280px;
     background: rgba(255, 255, 255, 1);
     overflow: auto;
 }
 
 .dialog-upload .body .dropzone {
     border: 0;
+    cursor: pointer;
 }
 
 .dialog-error-upload {
