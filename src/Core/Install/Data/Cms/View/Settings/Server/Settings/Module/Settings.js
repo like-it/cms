@@ -910,64 +910,6 @@ settings.node.list.upload = ({node, section, target}) => {
         if(!form){
             return;
         }
-        /*
-        form.on('submit', (event) => {
-            if(form.data('has', 'url')){
-                header('authorization', 'Bearer ' + user.token());
-                let filter = {
-                    type : "{{$request.filter.type}}"
-                };
-                let data = {
-                    directory: section.select('input[name="node.directory"]')?.value,
-                    nodeList: settings.get('selected'),
-                    limit: "{{$request.limit}}",
-                    filter: filter
-                };
-                request(form.data('url'), data, (url, response) => {
-                    dialog_create.remove();
-                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                    if(response?.page){
-                        if(menuItem){
-                            menuItem.data('page', response.page);
-                        }
-                    }
-                    if(menuItem){
-                        menuItem.data('filter-type', filter.type);
-                        menuItem.data('limit', "{{$request.limit}}");
-                    }
-                    if(response?.error){
-                        /*
-                        let dialog_error = dialog.create({
-                            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.title')}}",
-                            message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.message'))}}",
-                            error : response.error,
-                            buttons : [
-                                {
-                                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.button.ok')}}"
-                                }
-                            ],
-                            section : section,
-                            className : "dialog dialog-error dialog-error-move"
-                        });
-                        const form = dialog_error.select('form');
-                        if(!form){
-                            return;
-                        }
-                        form.on('submit', (event) => {
-                            dialog_error.remove();
-                        });
-                        const button = form.select('button[type="submit"]');
-                        if(button){
-                            button.focus();
-                        }
-
-                    }
-                    settings.delete('selected')
-                    menu.dispatch(section, target);
-                });
-            }
-         */
-        });
         const input = form.select('input[name="node.directory"]');
         if(input){
             input.focus();
