@@ -875,8 +875,7 @@ settings.node.list.upload = ({node, section, target}) => {
         message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
         message += '<p><label>' +
             "{{__($__.module + '.' + $__.submodule + '.dialog.list.upload.target.directory')}}" +
-            '</label><input type="text" name="node.directory" value=""/></p>' +
-            '<div class="upload"></div>'
+            '</label><input type="text" name="node.directory" value=""/></p>'
         ;
         let dialog_create = dialog.create({
             title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.title')}}",
@@ -896,7 +895,7 @@ settings.node.list.upload = ({node, section, target}) => {
                 url : node.data('url'),
             }
         });
-        let upload_target = dialog_create.select('.upload');
+        let upload_target = dialog_create.select('.body');
         settings.upload({
             url: "{{server.url('core')}}Settings/Server/Settings/Upload/",
             token: user.token(),
