@@ -14,7 +14,6 @@
 
 .dialog-upload .body .dropzone {
     border: 0;
-    overflow: auto;
 }
 
 .dialog-error-upload {
