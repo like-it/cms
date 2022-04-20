@@ -193,7 +193,8 @@ settings.upload = ({
     upload_max_filesize,
     target,
     redirect_url,
-    message
+    message,
+    form
 }) => {
     require(
         [
@@ -208,7 +209,8 @@ settings.upload = ({
                     upload_max_filesize: upload_max_filesize,
                     target : target,
                     section: section,
-                    message: message
+                    message: message,
+                    form: form
                 });
             } else {
                 redirect(redirect_url)
