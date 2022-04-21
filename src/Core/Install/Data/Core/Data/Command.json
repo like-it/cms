@@ -459,19 +459,6 @@
             "OPTIONS"
         ]
     },
-    "5f95d385-635f-4e17-811f-a7a7765b7532" : {
-        "module" : "settings",
-        "submodule" : "server-settings",
-        "command" : "command",
-        "path": "Settings/Server/Settings/{{$node.url}}",
-        "method": [
-            "GET",
-            "PUT",
-            "PATCH",
-            "DELETE",
-            "OPTIONS"
-        ]
-    },
     "b4cd86ed-d28b-4119-8ccc-a79b4490ddc4" : {
         "module" : "settings",
         "submodule" : "server-settings",
@@ -488,8 +475,30 @@
         "command" : "move",
         "path": "Settings/Server/Settings/Move/",
         "method" : [
-            "GET",
             "POST",
+            "OPTIONS"
+        ]
+    },
+    "99faf5cd-7108-4ee5-b56d-26d6d732a1d1" : {
+        "module" : "settings",
+        "submodule" : "server-settings",
+        "command" : "upload",
+        "path": "Settings/Server/Settings/Upload/",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "5f95d385-635f-4e17-811f-a7a7765b7532" : {
+        "module" : "settings",
+        "submodule" : "server-settings",
+        "command" : "command",
+        "path": "Settings/Server/Settings/{{$node.url}}",
+        "method": [
+            "GET",
+            "PUT",
+            "PATCH",
+            "DELETE",
             "OPTIONS"
         ]
     },
