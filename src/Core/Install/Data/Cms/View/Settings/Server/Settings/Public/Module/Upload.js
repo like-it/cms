@@ -8,7 +8,8 @@ upload.init = ({
     upload_max_filesize,
     target,
     message,
-    form
+    form,
+    parameter
 }) => {
     let body;
     if(is.empty(target)){
@@ -21,6 +22,9 @@ upload.init = ({
     }
     if(!body){
         return;
+    }
+    if(is.empty(parameter){
+        parameter = 'node.file';
     }
     let input = select('.dz-hidden-input');
     if(input){
@@ -40,6 +44,7 @@ upload.init = ({
                     maxFilesize: upload.data('upload-max-filesize'),
                     filesizeBase: 1024,
                     dictDefaultMessage: message,
+                    paramName: parameter,
                     headers: {
                         "Authorization": "Bearer " + token
                     }
