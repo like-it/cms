@@ -1,4 +1,4 @@
-import { uuid } from "/Module/Priya.js";
+import { uuid } from "/Module/Web.js";
 
 let upload = {};
 
