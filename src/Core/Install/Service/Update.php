@@ -77,33 +77,25 @@ class Update {
         $json = trim(implode(PHP_EOL, $output));
         $data = new Data(Core::object($json));
         foreach($data->get('installed') as $nr => $installed){
-            dd($installed);
-        }
-
-        d($data);
-
-    /*
-
-
-
-
-
-
-        foreach($output as $nr => $line){
-            $explode = explode($list[$nr]['name'], $line);
-            if(array_key_exists(1, $explode)){
-                $temp = explode(' ', trim($explode[1], ' '), 3);
-                if(array_key_exists(2, $temp)){
-                    if(empty($temp[1])){
-                        $list[$nr]['version'] = $temp[0];
-                    } else {
-                        $list[$nr]['version'] = $temp[0] . ' ' . $temp[1];
+            $selected = false;
+            foreach($installed as $attribute => $value){
+                if($attribute === 'name'){
+                    foreach($list as $list_nr => $record){
+                        if(
+                            array_key_exists('name', $record) &&
+                            $record['name'] === $value
+                        ){
+                            $selected = $list_nr;
+                            break;
+                        }
                     }
-                    $list[$nr]['description'] = trim($temp[2], ' ');
+                    continue;
+                }
+                if($selected !== false){
+                    $list[$selected][$attribute] = $value;
                 }
             }
         }
-    */
         return $list;
     }
 
