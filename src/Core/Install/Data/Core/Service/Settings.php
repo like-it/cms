@@ -1082,6 +1082,7 @@ class Settings extends Main {
             $response['nodeList'] = $list;
         } else {
             if($list){
+                dd($list);
                 $response['count'] = count($list);
                 $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
             } else {
@@ -1908,6 +1909,75 @@ class Settings extends Main {
         $response = [];
         $response['node'] = $node;
         return new Response($response, Response::TYPE_JSON);
+    }
+
+    public static function server_settings_upload(App $object)
+    {
+        $upload = $object->upload();
+        dd($upload);
+        //add valid upload //add upload error
+        $data = $upload->data();
+        if(is_array($data) || is_object($data)){
+            $has_data = false;
+            foreach($data as $file){
+                $has_data = true;
+                $file->extension = File::extension($file->name);
+                if(
+                    in_array(
+                        $file->extension,
+                        Import::UPLOAD_ALLOWED_EXTENSION
+                    )
+                ){
+                    $uuid = Core::uuid();
+                    $target =
+                        $object->config('project.dir.data') .
+                        'Import' .
+                        $object->config('ds') .
+                        $uuid .
+                        $object->config('ds')
+                    ;
+                    Dir::create($target);
+                    $result = Import::unzip($file->tmp_name, $target);
+
+                    if(array_key_exists('error', $result)){
+                        $error = [];
+                        $error['error'] = 'Could not unzip without errors:' . PHP_EOL;
+                        foreach($result['error'] as $url){
+                            $error['error'] .= $url . PHP_EOL;
+                        }
+                        return new Response(
+                            $error,
+                            Response::TYPE_JSON,
+                            Response::STATUS_ERROR
+                        );
+                    } else {
+                        Import::update_files($object, $target);
+                        Import::route_dedouble($object);
+                        return new Response(
+                            'Import successful...',
+                            Response::TYPE_JSON,
+                        );
+                    }
+                }
+            }
+            if(!$has_data){
+                $error = [];
+                $error['error'] = 'Cannot detect any upload...' . PHP_EOL;
+                return new Response(
+                    $error,
+                    Response::TYPE_JSON,
+                    Response::STATUS_ERROR
+                );
+            }
+        } else {
+            $error = [];
+            $error['error'] = 'Cannot detect any upload...' . PHP_EOL;
+            return new Response(
+                $error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
+        }
     }
 
     private static function server_settings_page(App $object, $search=[])
