@@ -13,6 +13,7 @@ use R3m\Io\Module\Validate;
 
 use Exception;
 use R3m\Io\Exception\FileWriteException;
+use R3m\Io\Exception\ObjectException;
 
 class Update {
 
@@ -50,6 +51,9 @@ class Update {
         }
     }
 
+    /**
+     * @throws ObjectException
+     */
     private static function getInstalledData(App $object): array
     {
         $command = 'composer show -P';
@@ -65,9 +69,26 @@ class Update {
                 $list[] = $record;
             }
         }
-        $command = 'composer show';
+
+
+        $command = 'composer show -f json';
         $output = [];
         Core::execute($command, $output);
+        $json = trim(implode(PHP_EOL, $output));
+        $data = new Data(Core::object($json));
+        foreach($data->get('installed') as $nr => $installed){
+            dd($installed);
+        }
+
+        d($data);
+
+    /*
+
+
+
+
+
+
         foreach($output as $nr => $line){
             $explode = explode($list[$nr]['name'], $line);
             if(array_key_exists(1, $explode)){
@@ -82,6 +103,7 @@ class Update {
                 }
             }
         }
+    */
         return $list;
     }
 
