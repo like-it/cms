@@ -23,7 +23,7 @@ upload.init = ({
     if(!body){
         return;
     }
-    if(is.empty(parameter){
+    if(is.empty(parameter)){
         parameter = 'node.file';
     }
     let input = select('.dz-hidden-input');
