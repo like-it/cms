@@ -1082,7 +1082,6 @@ class Settings extends Main {
             $response['nodeList'] = $list;
         } else {
             if($list){
-                dd($list);
                 $response['count'] = count($list);
                 $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
             } else {
