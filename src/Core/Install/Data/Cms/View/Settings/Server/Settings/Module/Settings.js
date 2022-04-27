@@ -894,6 +894,45 @@ settings.node.list.upload = ({node, section, target}) => {
             form : {
                 name: "dialog-upload",
                 url : node.data('url'),
+                data : [
+                    {
+                        name : "error",
+                        value : [
+                            {
+                                code: 0,
+                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.0')}}"
+                            },
+                            {
+                                code: 1,
+                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.1')}}"
+                            },
+                            {
+                                code: 2,
+                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.2')}}"
+                            },
+                            {
+                                code: 3,
+                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.3')}}"
+                            },
+                            {
+                                code: 4,
+                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.4')}}"
+                            },
+                            {
+                                code: 6,
+                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.6')}}"
+                            },
+                            {
+                                code: 7,
+                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.7')}}"
+                            },
+                            {
+                                code: 8,
+                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.8')}}"
+                            },
+                        ]
+                    }
+                ]
             }
         });
         const form = dialog_create.select('form[name="dialog-upload"]');

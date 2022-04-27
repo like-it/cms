@@ -286,6 +286,14 @@
     "settings.server.settings.dialog.list.upload.target.directory" : "Target directory:",
     "settings.server.settings.dialog.list.upload.button.ok" : "Done uploading",
     "settings.server.settings.dialog.list.upload.button.cancel" : "Cancel",
+    "settings.server.settings.dialog.list.upload.error.0" : "Ok",
+    "settings.server.settings.dialog.list.upload.error.1" : "The uploaded file exceeds the upload_max_filesize directive in php.ini",
+    "settings.server.settings.dialog.list.upload.error.2" : "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.",
+    "settings.server.settings.dialog.list.upload.error.3" : "The uploaded file was only partially uploaded.",
+    "settings.server.settings.dialog.list.upload.error.4" : "No file was uploaded.",
+    "settings.server.settings.dialog.list.upload.error.6" : "Missing a temporary folder.",
+    "settings.server.settings.dialog.list.upload.error.7" : "Failed to write file to disk.",
+    "settings.server.settings.dialog.list.upload.error.8" : "A PHP extension stopped the file upload.",
     "settings.server.settings.dialog.error.list.move.title" : "Error moving files...",
     "settings.server.settings.dialog.error.list.move.message" : [
         "The above files where unable to move..."

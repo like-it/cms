@@ -24,6 +24,25 @@ dialog.create = ({
         element.attribute('method', 'POST');
     }
     element.data('url', form?.url);
+    if(form?.data){
+        let index;
+        for(index=0; index < form.data.length; index++){
+            let node = form.data[index];
+            if(
+                node &&
+                node?.name == 'error' &&
+                is.array(node.value)
+            ){
+                let i;
+                for(i=0; i < node.value.length; i++){
+                    let error = node.value[i];
+                    if(error?.code && error?.text){
+                        element.data('error-code:' + error.code, error.text);
+                    }
+                }
+            }
+        }
+    }
     const head = create('div', 'head');
     const body = create('div', 'body');
     const footer = create('div', 'footer');
