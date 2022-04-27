@@ -37,7 +37,7 @@ dialog.create = ({
                 for(i=0; i < node.value.length; i++){
                     let error = node.value[i];
                     if(error?.code && error?.text){
-                        element.data('error[' + error.code + ']', error.text);
+                        element.data('error-' + error.code, error.text);
                     }
                 }
             }
