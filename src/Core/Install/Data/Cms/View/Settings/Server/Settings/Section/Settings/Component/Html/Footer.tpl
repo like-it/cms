@@ -1,5 +1,4 @@
 {{R3M}}
-{{block.html()}}
 {{if(!is.empty($request.page))}}
 {{$page.current = (int) $request.page}}
 {{else}}
@@ -34,6 +33,7 @@
             </div>
         </td>
         <td colspan="2" class="text-end">
+            {{block.html()}}
             <span class="page">{{$page.start}}-{{$page.to}} of {{$page.count}}</span>
             {{if($page.current === 1)}}
             {{$i.class = 'fas fa-angle-double-left'}}
@@ -218,7 +218,7 @@
                 >
                 </i>
             </button>
+            {{/block.html}
         </td>
     </tr>
 </tfoot>
-{{/block.html}
