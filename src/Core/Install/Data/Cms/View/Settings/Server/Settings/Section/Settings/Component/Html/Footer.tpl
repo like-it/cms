@@ -1,4 +1,5 @@
 {{R3M}}
+{{block.html()}}
 {{if(!is.empty($request.page))}}
 {{$page.current = (int) $request.page}}
 {{else}}
@@ -220,3 +221,4 @@
         </td>
     </tr>
 </tfoot>
+{{/block.html}
