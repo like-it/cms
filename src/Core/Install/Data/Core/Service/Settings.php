@@ -1913,6 +1913,7 @@ class Settings extends Main {
     public static function server_settings_upload(App $object)
     {
         $directory = $object->request('node.directory');
+        d($object->request());
         dd($directory);
         if(empty($directory)) {
             $target = $object->config('project.dir.public');
