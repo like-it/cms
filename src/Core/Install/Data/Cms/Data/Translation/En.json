@@ -287,7 +287,7 @@
     "settings.server.settings.dialog.list.upload.button.ok" : "Done uploading",
     "settings.server.settings.dialog.list.upload.button.cancel" : "Cancel",
     "settings.server.settings.dialog.list.upload.error.0" : "Ok",
-    "settings.server.settings.dialog.list.upload.error.1" : "The uploaded file exceeds the upload_max_filesize directive in php.ini",
+    "settings.server.settings.dialog.list.upload.error.1" : "The uploaded file exceeds the upload_max_filesize directive in .htaccess",
     "settings.server.settings.dialog.list.upload.error.2" : "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.",
     "settings.server.settings.dialog.list.upload.error.3" : "The uploaded file was only partially uploaded.",
     "settings.server.settings.dialog.list.upload.error.4" : "No file was uploaded.",
