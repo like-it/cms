@@ -1912,15 +1912,12 @@ class Settings extends Main {
 
     public static function server_settings_upload(App $object)
     {
-        $directory = $object->request('node.directory');
-        d($object->request());
-        dd($directory);
+        $directory = $object->request('node_directory');
         if(empty($directory)) {
             $target = $object->config('project.dir.public');
         } else {
             $target = $object->config('project.dir.public') . trim($directory, $object->config('ds')) . $object->config('ds');
         }
-        dd($target);
         $upload = $object->upload();
         $data = $upload->data();
         if(is_array($data) || is_object($data)){
