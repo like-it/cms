@@ -1912,61 +1912,29 @@ class Settings extends Main {
 
     public static function server_settings_upload(App $object)
     {
+        $directory = $object->request('node.directory');
+        if(empty($directory)) {
+            $target = $object->config('project.dir.public');
+        } else {
+            $target = $object->config('project.dir.public') . trim($directory, $object->config('ds')) . $object->config('ds');
+        }
         $upload = $object->upload();
-        dd($upload);
-        //add valid upload //add upload error
         $data = $upload->data();
         if(is_array($data) || is_object($data)){
-            $has_data = false;
-            foreach($data as $file){
-                $has_data = true;
-                $file->extension = File::extension($file->name);
-                if(
-                    in_array(
-                        $file->extension,
-                        Import::UPLOAD_ALLOWED_EXTENSION
-                    )
-                ){
-                    $uuid = Core::uuid();
-                    $target =
-                        $object->config('project.dir.data') .
-                        'Import' .
-                        $object->config('ds') .
-                        $uuid .
-                        $object->config('ds')
-                    ;
+            foreach($data as $file) {
+                $record = new Data($file);
+                if ($record->get('errorMessage')) {
+                    $error = [];
+                    $error['error'] = $record->get('errorMessage') . PHP_EOL;
+                    return new Response(
+                        $error,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                } else {
                     Dir::create($target);
-                    $result = Import::unzip($file->tmp_name, $target);
-
-                    if(array_key_exists('error', $result)){
-                        $error = [];
-                        $error['error'] = 'Could not unzip without errors:' . PHP_EOL;
-                        foreach($result['error'] as $url){
-                            $error['error'] .= $url . PHP_EOL;
-                        }
-                        return new Response(
-                            $error,
-                            Response::TYPE_JSON,
-                            Response::STATUS_ERROR
-                        );
-                    } else {
-                        Import::update_files($object, $target);
-                        Import::route_dedouble($object);
-                        return new Response(
-                            'Import successful...',
-                            Response::TYPE_JSON,
-                        );
-                    }
+                    File::upload($record, $target);
                 }
-            }
-            if(!$has_data){
-                $error = [];
-                $error['error'] = 'Cannot detect any upload...' . PHP_EOL;
-                return new Response(
-                    $error,
-                    Response::TYPE_JSON,
-                    Response::STATUS_ERROR
-                );
             }
         } else {
             $error = [];
