@@ -41,6 +41,10 @@
     float: left;
 }
 
+.settings-server-settings .card-body-settings tfoot .page {
+    margin-right: 0.5rem;
+}
+
 .settings-server-settings .card-body-settings td i.fa-file {
     margin-right: 4px;
 }
