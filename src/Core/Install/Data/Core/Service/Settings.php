@@ -1918,6 +1918,7 @@ class Settings extends Main {
         } else {
             $target = $object->config('project.dir.public') . trim($directory, $object->config('ds')) . $object->config('ds');
         }
+        dd($target);
         $upload = $object->upload();
         $data = $upload->data();
         if(is_array($data) || is_object($data)){
