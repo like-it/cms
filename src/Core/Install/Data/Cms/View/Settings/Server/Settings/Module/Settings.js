@@ -896,10 +896,6 @@ settings.node.list.upload = ({node, section, target}) => {
                 url : node.data('url'),
                 data : [
                     {
-                        name: "error-0",
-                        value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.0')}}"
-                    },
-                    {
                         name: "error-1",
                         value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.1')}}"
                     },
