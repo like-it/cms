@@ -896,41 +896,36 @@ settings.node.list.upload = ({node, section, target}) => {
                 url : node.data('url'),
                 data : [
                     {
-                        name : "error",
-                        value : [
-                            {
-                                code: 0,
-                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.0')}}"
-                            },
-                            {
-                                code: 1,
-                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.1')}}"
-                            },
-                            {
-                                code: 2,
-                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.2')}}"
-                            },
-                            {
-                                code: 3,
-                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.3')}}"
-                            },
-                            {
-                                code: 4,
-                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.4')}}"
-                            },
-                            {
-                                code: 6,
-                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.6')}}"
-                            },
-                            {
-                                code: 7,
-                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.7')}}"
-                            },
-                            {
-                                code: 8,
-                                text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.8')}}"
-                            },
-                        ]
+                        name: "error-0",
+                        value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.0')}}"
+                    },
+                    {
+                        name: "error-1",
+                        value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.1')}}"
+                    },
+                    {
+                        name: "error-2",
+                        value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.2')}}"
+                    },
+                    {
+                        name: "error-3",
+                        value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.3')}}"
+                    },
+                    {
+                        name: "error-4",
+                        value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.4')}}"
+                    },
+                    {
+                        name: "error-6",
+                        value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.6')}}"
+                    },
+                    {
+                        name: "error-7",
+                        value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.7')}}"
+                    },
+                    {
+                        name: "error-8",
+                        value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.8')}}"
                     }
                 ]
             }

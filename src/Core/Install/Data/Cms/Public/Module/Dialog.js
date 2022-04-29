@@ -28,18 +28,12 @@ dialog.create = ({
         let index;
         for(index=0; index < form.data.length; index++){
             let node = form.data[index];
-            if(
+            if (
                 node &&
-                node?.name == 'error' &&
-                is.array(node.value)
+                node?.name &&
+                node?.value
             ){
-                let i;
-                for(i=0; i < node.value.length; i++){
-                    let error = node.value[i];
-                    if(error?.code && error?.text){
-                        element.data('error-' + error.code, error.text);
-                    }
-                }
+                element.data(node.name, node.value);
             }
         }
     }
