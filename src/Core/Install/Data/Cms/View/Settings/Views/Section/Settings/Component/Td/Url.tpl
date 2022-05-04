@@ -1,14 +1,6 @@
 {{R3M}}
-{{$host.subdomain = host.subdomain()}}
-{{$host.domain = host.domain()}}
-{{$host.extension = host.extension()}}
-{{$trait.subdomain = $host.subdomain|uppercase.first}}
-{{$trait.domain = $host.domain|uppercase.first}}
-{{$trait.extension = $host.extension|uppercase.first}}
-{{$trait.namespace =  $trait.subdomain + '.' + $trait.domain + '.' + $trait.extension}}
-
 {{trait({
-"namespace": "{{$trait.namespace}}",
+"namespace": "Core",
 "name": "Node"
 })}}
 public function host_dir($uuid){
@@ -49,6 +41,6 @@ public function host_dir($uuid){
 
 
 <td title="{{$node.url}}">
-    {{$node.dir.view = $trait.namespace:Node:host.dir($node.domain) + 'View/'}}
+    {{$node.dir.view = Core:Node:host.dir($node.domain) + 'View/'}}
     {{$node.url|replace:$node.dir.view:''}}
 </td>
