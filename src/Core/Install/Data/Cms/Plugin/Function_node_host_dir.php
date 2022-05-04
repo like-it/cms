@@ -21,7 +21,7 @@ function function_node_host_dir(Parse $parse, Data $data, $uuid){
             property_exists($node, 'extension')
         ){
             return
-                '/Application/Host/' .
+                $object->config('project.dir.host') .
                 ucfirst($node->subdomain) .
                 '/' .
                 ucfirst($node->host) .
@@ -35,13 +35,12 @@ function function_node_host_dir(Parse $parse, Data $data, $uuid){
             property_exists($node, 'extension')
         ){
             return
-                '/Application/Host/' .
+                $object->config('project.dir.host') .
                 ucfirst($node->host) .
                 '/' .
                 ucfirst($node->extension) .
                 '/'
                 ;
         }
-
     }
 }
