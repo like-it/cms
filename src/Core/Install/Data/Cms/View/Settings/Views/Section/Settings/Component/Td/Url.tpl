@@ -2,7 +2,10 @@
 {{$host.subdomain = host.subdomain()}}
 {{$host.domain = host.domain()}}
 {{$host.extension = host.extension()}}
-{{$trait.namespace = $host.subdomain|uppercase.first + '.' + $host.domain|uppercase.first + '.' + $host.extension|uppercase.first}}
+{{$trait.subdomain = $host.subdomain|uppercase.first}}
+{{$trait.domain = $host.domain|uppercase.first}}
+{{$trait.extension = $host.extension|uppercase.first}}
+{{$trait.namespace =  $trait.subdomain + '.' + $trait.domain + '.' + $trait.extension}}
 
 {{trait({
 "namespace": "{{$trait.namespace}}",
