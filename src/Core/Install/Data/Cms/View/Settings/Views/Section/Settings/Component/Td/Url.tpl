@@ -1,8 +1,5 @@
 {{R3M}}
-{{trait({
-"namespace": "Core",
-"name": "Node"
-})}}
+{{trait("Core", "Node")}}
 public function host_dir($uuid){
     $object = $this->object();
     $host = $object->data_read($object->config('project.dir.data') . 'Host' . $object->config('extension.json'));
