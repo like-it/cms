@@ -5,5 +5,13 @@
   "template" : {
     "name" : "Settings/Views/Main",
     "dir" : "/Application/Host/Cms/Funda/World/View/"
+  },
+  "request" : {
+    "nodeList" : [
+      {
+        "domain" : "test",
+        "url" : "test2"
+      }
+    ]
   }
 }
