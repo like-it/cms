@@ -1,4 +1,3 @@
-/*
 {{R3M}}
 {{trait("Core:Node")}}
 public function host_dir($uuid){
@@ -37,7 +36,7 @@ public function host_dir($uuid){
 }
 {{/trait}}
 
-*/
+
 <td title="{{$node.url}}">
 /*
     {{$node.dir.view = Core:Node:host.dir($node.domain) + 'View/'}}
