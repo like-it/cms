@@ -2,6 +2,8 @@
 {{trait("Core.test:Node")}}
 public function host_dir($uuid){
     $object = $this->object();
+    d($object);
+    dd($this->storage());
     $host = $object->data_read($object->config('project.dir.data') . 'Host' . $object->config('extension.json'));
     if($host){
         $node = $host->get($uuid);
