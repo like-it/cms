@@ -4,6 +4,6 @@
   },
   "template" : {
     "name" : "Main/Main",
-    "dir" : "{{$controller.dir.view}}"
+    "dir" : "/Application/Host/Cms/Funda/World/View/"
   }
 }
