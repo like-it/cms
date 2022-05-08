@@ -3,7 +3,7 @@
     "url" : "test"
   },
   "template" : {
-    "name" : "Import/Main",
+    "name" : "Settings/Views/Main",
     "dir" : "/Application/Host/Cms/Funda/World/View/"
   }
 }
