@@ -1,5 +1,5 @@
 {{R3M}}
-{{trait("Core:Node")}}
+{{trait("R3m\Io\Module\Core:Node")}}
 public function host_dir($uuid){
     $object = $this->object();
     $host = $object->data_read($object->config('project.dir.data') . 'Host' . $object->config('extension.json'));
