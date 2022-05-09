@@ -640,9 +640,9 @@ class Host {
                     if(File::Extension($file->url) === 'php'){
                         $read = File::read($file->url);
                         $read = str_replace([
-                            '\\Subdomain\\Host\\Extension\\'
+                            '\\Subdomain\\Host\\Extension'
                         ],[
-                            '\\'. ucfirst($options['subdomain']) . '\\' . ucfirst($options['host']) . '\\' . ucfirst($options['extension']) . '\\'
+                            '\\'. ucfirst($options['subdomain']) . '\\' . ucfirst($options['host']) . '\\' . ucfirst($options['extension'])
                         ], $read);
                         File::write($target, $read);
                     }
