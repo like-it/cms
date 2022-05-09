@@ -1,5 +1,5 @@
 {{R3M}}
-{{import('Core.Funda.World:Node')}}
+{{import('Host.Core.Funda.World:Node')}}
 
 /*
 {{trait("Core:Node")}}
