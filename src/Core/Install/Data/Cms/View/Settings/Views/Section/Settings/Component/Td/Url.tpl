@@ -1,5 +1,5 @@
 {{R3M}}
-{{import('Core.Universeorange.Com:Node')}}
+{{import('Core.Funda.World:Node')}}
 
 /*
 {{trait("Core:Node")}}
