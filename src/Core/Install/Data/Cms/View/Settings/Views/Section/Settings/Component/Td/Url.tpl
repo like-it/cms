@@ -1,4 +1,5 @@
 {{R3M}}
+{{$test = '123'}}
 {{import('Core:Node')}}
 
 /*
