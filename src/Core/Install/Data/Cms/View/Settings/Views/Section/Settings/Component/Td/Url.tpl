@@ -1,6 +1,5 @@
 {{R3M}}
-{{$test = '123'}}
-{{import('Core:Node')}}
+{{import('Core.Universeorange.Com:Node')}}
 
 /*
 {{trait("Core:Node")}}
