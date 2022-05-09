@@ -1,4 +1,6 @@
 {{R3M}}
+{{import('Core:Node')}}
+/*
 {{trait("Core:Node")}}
 public function host_dir($uuid){
     $object = $this->object();
@@ -35,6 +37,7 @@ public function host_dir($uuid){
     }
 }
 {{/trait}}
+*/
 <td title="{{$node.url}}">
     {{$node.dir.view = Node:host.dir($node.domain) + 'View/'}}
     {{$node.url|replace:$node.dir.view:''}}
