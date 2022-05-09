@@ -1,5 +1,5 @@
 <?php
-namespace Host\Subdomain\Host\Extension\Trait;
+namespace Host\Subdomain\Host\Extension;
 
 trait Node {
 
