@@ -638,6 +638,7 @@ class Host {
                         ucfirst($options['extension']) . $object->config('ds') .
                         $explode[1];
                     if(File::Extension($file->url) === 'php'){
+                        d($file->url);
                         $read = File::read($file->url);
                         $read = str_replace([
                             'Subdomain\\Host\\Extension'
