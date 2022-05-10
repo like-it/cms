@@ -27,14 +27,45 @@ class Source {
             $object->config('ds');
         Dir::create($dir_destination);
         $read = $dir->read(
-            $object->config('controller.dir.data') . ucfirst($options['name']) . $object->config('ds'),
+            $object->config('project.dir.vendor') .
+            'like-it' .
+            $object->config('ds') .
+            'cms' .
+            $object->config('ds') .
+            'src' .
+            $object->config('ds') .
+            'Core' .
+            $object->config('ds') .
+            'Install' .
+            $object->config('ds') .
+            'Data' .
+            $object->config('ds') .
+            ucfirst($options['name']) .
+            $object->config('ds'),
             true
         );
         foreach($read as $nr => $file){
             if($file->type === File::TYPE){
                 continue;
             }
-            $explode = explode($object->config('controller.dir.data') . ucfirst($options['name']) . $object->config('ds'), $file->url, 2);
+            $explode = explode($object->config('project.dir.vendor') .
+                'like-it' .
+                $object->config('ds') .
+                'cms' .
+                $object->config('ds') .
+                'src' .
+                $object->config('ds') .
+                'Core' .
+                $object->config('ds') .
+                'Install' .
+                $object->config('ds') .
+                'Data' .
+                $object->config('ds') .
+                ucfirst($options['name']) .
+                $object->config('ds'),
+                $file->url,
+                2
+            );
             if(array_key_exists(1, $explode)){
                 $target = $object->config('project.dir.root') .
                     'Source' . $object->config('ds') .
@@ -69,13 +100,46 @@ class Source {
         $dir_destination = $object->config('project.dir.root') .
             ucfirst($options['name']) .
             $object->config('ds');
-        dd($object->config());
-        $read = $dir->read($object->config('controller.dir.data') . ucfirst($options['name']) . $object->config('ds'), true);
+        $read = $dir->read(
+            $object->config('project.dir.vendor') .
+            'like-it' .
+            $object->config('ds') .
+            'cms' .
+            $object->config('ds') .
+            'src' .
+            $object->config('ds') .
+            'Core' .
+            $object->config('ds') .
+            'Install' .
+            $object->config('ds') .
+            'Data' .
+            $object->config('ds') .
+            ucfirst($options['name']) .
+            $object->config('ds'),
+            true
+        );
         foreach($read as $nr => $file){
             if($file->type === Dir::TYPE){
                 continue;
             }
-            $explode = explode($object->config('controller.dir.data') . ucfirst($options['name']) . $object->config('ds'), $file->url, 2);
+            $explode = explode($object->config('project.dir.vendor') .
+                'like-it' .
+                $object->config('ds') .
+                'cms' .
+                $object->config('ds') .
+                'src' .
+                $object->config('ds') .
+                'Core' .
+                $object->config('ds') .
+                'Install' .
+                $object->config('ds') .
+                'Data' .
+                $object->config('ds') .
+                ucfirst($options['name']) .
+                $object->config('ds'),
+                $file->url,
+                2
+            );
             if(array_key_exists(1, $explode)){
                 $destination = $dir_destination . $explode[1];
                 File::copy($file->url, $destination);
