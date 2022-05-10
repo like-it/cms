@@ -69,6 +69,7 @@ class Source {
         $dir_destination = $object->config('project.dir.root') .
             ucfirst($options['name']) .
             $object->config('ds');
+        dd($object->config());
         $read = $dir->read($object->config('controller.dir.data') . ucfirst($options['name']) . $object->config('ds'), true);
         foreach($read as $nr => $file){
             if($file->type === Dir::TYPE){
