@@ -22,6 +22,7 @@ class Update {
             $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
             $host_list = $object->data_read($url);
             $result_list = [];
+            $result_list[] = Update::source($object, []);
             foreach($host_list->data() as $uuid => $record){
                 try {
                     if(
@@ -41,6 +42,7 @@ class Update {
                     return $exception;
                 }
             }
+
             $result_list[] = Update::installed($object);
             $result_list[] = '';
             $result_list[] = 'Update complete...' . PHP_EOL;
@@ -48,6 +50,17 @@ class Update {
         } else {
             $result = 'Nothing to update...' . PHP_EOL;
             return new Response($result, Response::TYPE_HTML);
+        }
+    }
+
+    public static function source(App $object, $options=[]){
+        $options = Source::options($object, $options);
+        try {
+            Source::dir_create($object, $options);
+            Source::file_create($object, $options);
+            return 'Traits installed...' . PHP_EOL;
+        } catch (Exception $exception){
+            return $exception;
         }
     }
 

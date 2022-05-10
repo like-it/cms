@@ -44,6 +44,7 @@ class Install {
                 $data = new Data();
                 $uuid = Core::uuid();
                 try {
+                    Install::source($object, []);
                     Install::Host($object, [
                         'host' => $host,
                         'extension' => $extension,
@@ -284,6 +285,16 @@ class Install {
             Host::command_add($object, $options);
             Host::config_server_url($object, $options);
             Host::route_dedouble($object, $options);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function source(App $object, $options=[]){
+        $options = Source::options($object, $options);
+        try {
+            Source::dir_create($object, $options);
+            Source::file_create($object, $options);
         } catch (Exception $exception){
             return $exception;
         }
