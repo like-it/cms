@@ -23,7 +23,7 @@ class Source {
         }
         $dir = new Dir();
         $dir_destination = $object->config('project.dir.root') .
-            ucfirst($options['name']) .
+            'src' .
             $object->config('ds');
         Dir::create($dir_destination);
         $read = $dir->read(
@@ -68,7 +68,7 @@ class Source {
             );
             if(array_key_exists(1, $explode)){
                 $target = $object->config('project.dir.root') .
-                    'Source' . $object->config('ds') .
+                    'src' . $object->config('ds') .
                     $explode[1];
                 if(Dir::is($target) === false){
                     Dir::create($target);
@@ -98,7 +98,7 @@ class Source {
         }
         $dir = new Dir();
         $dir_destination = $object->config('project.dir.root') .
-            ucfirst($options['name']) .
+            'src' .
             $object->config('ds');
         $read = $dir->read(
             $object->config('project.dir.vendor') .
