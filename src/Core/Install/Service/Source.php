@@ -25,6 +25,7 @@ class Source {
         $dir_destination = $object->config('project.dir.root') .
             ucfirst($options['name']) .
             $object->config('ds');
+        Dir::create($dir_destination);
         $read = $dir->read(
             $object->config('controller.dir.data') . ucfirst($options['name']) . $object->config('ds'),
             true
