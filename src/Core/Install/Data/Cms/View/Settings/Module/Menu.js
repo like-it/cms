@@ -99,16 +99,27 @@ menu.is_selected = (node, selected) => {
                 }
                 url = str_replace("{node.domain}", domain.value, url);
             }
+            let is_add = false;
             if(node.data('page')){
                 let page = node.data('page');
                 page = parseInt(page);
                 url += '?page=' + page;
+                is_add = true;
             }
             if(node.data('filter-type')){
-                url += '&filter[type]=' + node.data('filter-type');
+                if(is_add){
+                    url += '&filter[type]=' + node.data('filter-type');
+                } else {
+                    url += '?filter[type]=' + node.data('filter-type');
+                }
+
             }
             if(node.data('limit')){
-                url += '&limit=' + node.data('limit');
+                if(is_add){
+                    url += '&limit=' + node.data('limit');
+                } else {
+                    url += '?limit=' + node.data('limit');
+                }
             }
             loader.start({
                 className : "card-body h-100 card-body-loader",
