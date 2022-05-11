@@ -8,6 +8,69 @@ import { root } from "/Module/Web.js";
 import { contains, replace } from "/Module/String.js";
 let settings = {};
 
+settings.get = (attribute) => {
+    if(is.empty(attribute)){
+        return _('_').collection("{{$__.module}}.{{$__.submodule}}." + 'settings');
+    } else {
+        return _('_').collection("{{$__.module}}.{{$__.submodule}}." + 'settings.' + attribute);
+    }
+}
+
+settings.set = (attribute, value) => {
+    _('_').collection("{{$__.module}}.{{$__.submodule}}." + 'settings.' + attribute, value);
+}
+
+settings.delete = (attribute) => {
+    _('_').collection('delete', "{{$__.module}}.{{$__.submodule}}." + 'settings.' + attribute);
+}
+
+settings.data = (attribute, value) => {
+    return _('_').collection("{{$__.module}}.{{$__.submodule}}." + 'settings.' + attribute, value);
+}
+
+settings.onSelectInverse = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    let selectInverse = section.select('input[name="node.checkInverse"]')
+
+    selectInverse.on('click', () => {
+        let list = section.select('.card-' + "{{$subcommand}}" + '-' + "{{$command}}" + ' tr input[type="checkbox"]');
+        let selected = settings.get('selected');
+        if(is.empty(selected)){
+            selected = [];
+        }
+        if(is.nodeList(list)){
+            let index;
+            for(index = 1; index < list.length; index++){
+                let node = list[index];
+                if(node.checked){
+                    selected = selected.filter((item) => {
+                        return item !== node.value;
+                    });
+                    node.checked = false;
+                } else {
+                    node.checked = true;
+                    selected.push(node.value);
+                }
+            }
+        } else if(list){
+            let node = list;
+            if(node.checked){
+                selected = selected.filter((item) => {
+                    return item !== node.value;
+                });
+                node.checked = false;
+            } else {
+                node.checked = true;
+                selected.push(node.value);
+            }
+        }
+        settings.set('selected', selected);
+    });
+}
+
 settings.onDoubleClick = () => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -45,6 +108,1121 @@ settings.onDoubleClick = () => {
             }
         });
 
+    }
+}
+
+settings.page = (type, section, data) => {
+    if(
+        is.array(data?.select)
+    ){
+        let index;
+        for(index=0; index < data.select.length; index++){
+            let item = data.select[index];
+            if(
+                item?.name
+            ){
+                const menuItem = section.select(item.name);
+                if(menuItem) {
+                    let page = "{{request('page')}}";
+                    page = parseInt(page);
+                    switch (type){
+                        case 'current' :
+                            page = data.page;
+                            menuItem.data('page', page);
+                            break;
+                        case 'next' :
+                            page++;
+                            menuItem.data('page', page);
+                            break;
+                        case 'previous' :
+                            page--;
+                            menuItem.data('page', page);
+                            break;
+                    }
+                }
+            }
+        }
+    } else {
+        if(data?.select){
+            const menuItem = section.select(data.select);
+            if(menuItem){
+                let page = "{{request('page')}}";
+                page = parseInt(page);
+                switch (type){
+                    case 'current' :
+                        page = data.page;
+                        menuItem.data('page', page);
+                        break;
+                    case 'next' :
+                        page++;
+                        menuItem.data('page', page);
+                        break;
+                    case 'previous' :
+                        page--;
+                        menuItem.data('page', page);
+                        break;
+                }
+            }
+        }
+    }
+}
+
+settings.selected = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const selected = settings.get('selected');
+    const input = section.select('input[name="node.nodeList[]"]');
+    if(is.nodeList(input)){
+        let index;
+        for(index=0; index < input.length; index++){
+            let node = input[index];
+            if(in_array(node.value, selected)){
+                node.checked = true;
+            }
+        }
+    } else if(input){
+        let node = input;
+        if(in_array(node.value, selected)){
+            node.checked = true;
+        }
+    }
+}
+
+settings.upload = ({
+   url,
+   token,
+   upload_max_filesize,
+   target,
+   redirect_url,
+   message,
+   form
+}) => {
+    require(
+        [
+            root() + 'Dropzone/5.9.2/Min/dropzone.min.js?' + version(),
+            root() + 'Dropzone/5.9.2/Min/dropzone.min.css?' + version()
+        ],
+        function(){
+            if(token){
+                upload.init({
+                    url : url,
+                    token: token,
+                    upload_max_filesize: upload_max_filesize,
+                    target : target,
+                    message: message,
+                    form: form
+                });
+            } else {
+                redirect(redirect_url)
+            }
+        }
+    );
+}
+
+settings.actions = (target) => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const input = section.select('input[name="node.nodeList[]"]');
+    if(is.nodeList(input)){
+        let index;
+        for(index=0; index < input.length; index++){
+            let node = input[index];
+            node.on('input', (event) => {
+                //event.preventDefault();
+                event.stopPropagation();
+                if(node.checked){
+                    let selected = settings.get('selected');
+                    if(is.empty(selected)){
+                        selected = [];
+                    }
+                    selected.push(node.value);
+                    settings.set('selected', selected);
+                    //add item to nodeList
+                } else {
+                    let selected = settings.get('selected');
+                    if(is.empty(selected)){
+                        selected = [];
+                    }
+                    selected = selected.filter((item) => {
+                        return item !== node.value;
+                    });
+                    settings.set('selected', selected);
+                }
+            });
+        }
+    } else if(input){
+        let node = input;
+        node.on('input', (event) => {
+            //event.preventDefault();
+            event.stopPropagation();
+            if(node.checked){
+                let selected = settings.get('selected');
+                if(is.empty(selected)){
+                    selected = [];
+                }
+                selected.push(node.value);
+                settings.set('selected', selected);
+            } else {
+                let selected = settings.get('selected');
+                if(is.empty(selected)){
+                    selected = [];
+                }
+                selected = selected.filter((item) => {
+                    return item !== node.value;
+                });
+                settings.set('selected', selected);
+            }
+        });
+    }
+}
+
+settings.node = {};
+settings.node.item = {};
+settings.node.list = {};
+
+settings.node.item.delete = ({node, section, target}) => {
+    if(!node){
+        return;
+    }
+    if(!section){
+        return;
+    }
+    node.on('click', (event) => {
+        let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.message'))}}";
+        message = _('prototype').string.replace('{{$name}}', node.data('name'), message);
+        let dialog_create = dialog.create({
+            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.title')}}",
+            message : message,
+            buttons : [
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.button.ok')}}"
+                },
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.delete.button.cancel')}}"
+                }
+            ],
+            section : section,
+            className : "dialog dialog-delete",
+            form : {
+                name : "dialog-delete",
+                url : node.data('url'),
+            }
+        });
+        const form = dialog_create.select('form');
+        if(form){
+            form.on('submit', (event) => {
+                if(node.data('has', 'url')){
+                    let data = {
+                        request : {
+                            method : node.data('request-method') ? node.data('request-method') : "DELETE"
+                        }
+                    };
+                    let filter = {
+                        type : "{{$request.filter.type}}"
+                    };
+                    header('authorization', 'Bearer ' + user.token());
+                    request(node.data('url'), data, (url, response) => {
+                        const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                        if(menuItem){
+                            menuItem.data('filter-type', filter.type);
+                            menuItem.data('limit', "{{$request.limit}}");
+                        }
+                        dialog_create.remove();
+                        menu.dispatch(section, target);
+                    });
+                }
+            });
+            const submit = form.select('.button-submit');
+            if(submit){
+                submit.focus();
+            }
+        }
+    });
+}
+
+settings.node.item.rename = ({node, section, target}) => {
+    if(!node){
+        return;
+    }
+    if(!section){
+        return;
+    }
+    node.on('click', (event) => {
+        let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.message'))}}";
+        message = _('prototype').string.replace('{{$name}}', node.data('name'), message);
+        message += '<br><input type="hidden" name="node.source" value="' + node.data('source') +
+            '"<label>' +
+            "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.destination.label')}}" +
+            '</label><input type="text" name="node.destination" />'
+        ;
+        let dialog_create = dialog.create({
+            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.title')}}",
+            message : message,
+            buttons : [
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.button.ok')}}"
+                },
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.button.cancel')}}"
+                }
+            ],
+            section : section,
+            className : "dialog dialog-rename",
+            form : {
+                name : "dialog-rename",
+                url : node.data('url'),
+            }
+        });
+        const form = dialog_create.select('form');
+        if(form){
+            form.on('submit', (event) => {
+                if(node.data('has', 'url')){
+                    let data = {
+                        ...form.data('serialize'),
+                        request : {
+                            method : node.data('request-method') ? node.data('request-method') : "PATCH"
+                        }
+                    };
+                    header('authorization', 'Bearer ' + user.token());
+                    request(node.data('url'), data, (url, response) => {
+                        settings.menuItem();
+                        dialog_create.remove();
+                        menu.dispatch(section, target);
+                    });
+                }
+            });
+            const input = form.select('input[type="text"]');
+            if(input){
+                input.focus();
+            }
+        }
+    });
+}
+
+settings.node.item.create_dir = ({node, section, target}) => {
+    if (!node) {
+        return;
+    }
+    if (!section) {
+        return;
+    }
+    node.on('click', (event) => {
+        let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.message'))}}";
+        message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
+        message += '<p><label>' +
+            "{{__($__.module + '.' + $__.submodule + '.dialog.create.directory.name')}}" +
+            '</label><input type="text" name="node.name" value=""/></p>'
+        ;
+        let dialog_create = dialog.create({
+            title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.title')}}",
+            message: message,
+            buttons: [
+                {
+                    text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.button.ok')}}"
+                },
+                {
+                    text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.directory.button.cancel')}}"
+                }
+            ],
+            section: section,
+            className: "dialog dialog-create-directory",
+            form: {
+                name: "dialog-create-directory",
+                url: node.data('url'),
+            }
+        });
+        let form = dialog_create.select('form');
+        if(form){
+            form.on('submit', (event) => {
+                if(form.data('has', 'url')){
+                    let data = form.data('serialize');
+                    let filter = {
+                        type : "{{$request.filter.type}}"
+                    };
+                    header('authorization', 'Bearer ' + user.token());
+                    request(form.data('url'), data, (url, response) => {
+                        if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
+                            let error = [];
+                            let message;
+                            if(response?.message === 'Name cannot be empty...'){
+                                message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.empty.message'))}}";
+                                error.push("{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.empty.directory'))}}");
+                            } else {
+                                message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.exist.message'))}}";
+                                const input = dialog_create.select('input[name="node.name"]');
+                                error.push(input.value);
+                            }
+                            let dialog_error = dialog.create({
+                                title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.title')}}",
+                                message : message,
+                                error : error,
+                                buttons : [
+                                    {
+                                        text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.button.ok')}}"
+                                    }
+                                ],
+                                section : section,
+                                className : "dialog dialog-error dialog-error-create-directory"
+                            });
+                            let form = dialog_error.select('form');
+                            if(!form){
+                                return;
+                            }
+                            form.on('submit', (event) => {
+                                dialog_error.remove();
+                                let form = dialog_create.select('form');
+                                let input = form.select('input[name="node.name"]');
+                                if(input){
+                                    input.focus();
+                                }
+                            });
+                            const button = form.select('button[type="submit"]');
+                            if(button){
+                                button.focus();
+                            }
+                        } else {
+                            const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                            if(menuItem){
+                                menuItem.data('filter-type', filter.type);
+                                menuItem.data('limit', "{{$request.limit}}");
+                            }
+                            menu.dispatch(section, target);
+                            dialog_create.remove();
+                        }
+                    });
+                }
+            });
+        }
+        const input = dialog_create.select('input[name="node.name"]');
+        if(input){
+            input.focus();
+        }
+    });
+}
+
+settings.node.item.create_file = ({node, section, target}) => {
+    if (!node) {
+        return;
+    }
+    if (!section) {
+        return;
+    }
+    node.on('click', (event) => {
+        let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.message'))}}";
+        message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
+        message += '<p><label>' +
+            "{{__($__.module + '.' + $__.submodule + '.dialog.create.file.name')}}" +
+            '</label><input type="text" name="node.name" value=""/></p>'
+        ;
+        let dialog_create = dialog.create({
+            title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.title')}}",
+            message: message,
+            buttons: [
+                {
+                    text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.button.ok')}}"
+                },
+                {
+                    text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.button.cancel')}}"
+                }
+            ],
+            section: section,
+            className: "dialog dialog-create-file",
+            form: {
+                name: "dialog-create-file",
+                url: node.data('url'),
+            }
+        });
+        let form = dialog_create.select('form');
+        if(form){
+            form.on('submit', (event) => {
+                if(form.data('has', 'url')){
+                    let data = form.data('serialize');
+                    let filter = {
+                        type : "{{$request.filter.type}}"
+                    };
+                    header('authorization', 'Bearer ' + user.token());
+                    request(form.data('url'), data, (url, response) => {
+                        if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
+                            let message;
+                            let error = [];
+                            if(response?.message === 'Name cannot be empty...'){
+                                message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.empty.message'))}}";
+                                error.push("{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.empty.file'))}}");
+                            } else {
+                                message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.exist.message'))}}";
+                                let input = dialog_create.select('input[name="node.name"]');
+                                error.push(input.value);
+                            }
+
+                            let dialog_error = dialog.create({
+                                title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.title')}}",
+                                message: message,
+                                error : error,
+                                buttons : [
+                                    {
+                                        text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.button.ok')}}"
+                                    }
+                                ],
+                                section : section,
+                                className : "dialog dialog-error dialog-error-create-file"
+                            });
+                            let form = dialog_error.select('form');
+                            if(!form){
+                                return;
+                            }
+                            form.on('submit', (event) => {
+                                dialog_error.remove();
+                                form = dialog_create.select('form');
+                                let input = form.select('input[name="node.name"]');
+                                if(input){
+                                    input.focus();
+                                }
+                            });
+                            let button = form.select('button[type="submit"]');
+                            if(button){
+                                button.focus();
+                            }
+                        } else {
+                            const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                            if(menuItem){
+                                menuItem.data('filter-type', filter.type);
+                                menuItem.data('limit', "{{$request.limit}}");
+                            }
+                            menu.dispatch(section, target);
+                            dialog_create.remove();
+                        }
+                    });
+                }
+            });
+        }
+        const input = dialog_create.select('input[name="node.name"]');
+        if(input){
+            input.focus();
+        }
+    });
+}
+
+settings.node.item.create_symlink = ({node, section, target}) => {
+    if (!node) {
+        return;
+    }
+    if (!section) {
+        return;
+    }
+    node.on('click', (event) => {
+        let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.symlink.message'))}}";
+        message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
+        message += '<p><label>' +
+            "{{__($__.module + '.' + $__.submodule + '.dialog.create.symlink.source')}}" +
+            '</label><input type="text" name="node.source" value=""/><br><label>' +
+            "{{__($__.module + '.' + $__.submodule + '.dialog.create.symlink.destination')}}" +
+            '</label><input type="text" name="node.destination" value=""/></p>'
+        ;
+        let dialog_create = dialog.create({
+            title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.symlink.title')}}",
+            message: message,
+            buttons: [
+                {
+                    text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.symlink.button.ok')}}"
+                },
+                {
+                    text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.symlink.button.cancel')}}"
+                }
+            ],
+            section: section,
+            className: "dialog dialog-create-symlink",
+            form: {
+                name: "dialog-create-symlink",
+                url: node.data('url'),
+            }
+        });
+        let form = dialog_create.select('form');
+        if(form){
+            form.on('submit', (event) => {
+                if(form.data('has', 'url')){
+                    let data = form.data('serialize');
+                    let filter = {
+                        type : "{{$request.filter.type}}"
+                    };
+                    header('authorization', 'Bearer ' + user.token());
+                    request(form.data('url'), data, (url, response) => {
+                        if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
+                            let error = [];
+                            let source = dialog_create.select('input[name="node.source"]');
+                            error.push('Source: ' + source.value);
+                            let destination = dialog_create.select('input[name="node.destination"]');
+                            error.push('Destination: ' + destination.value);
+                            let dialog_error;
+                            let message;
+                            if(response?.message === 'Destination exists...') {
+                                message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.destination.message'))}}";
+                            } else {
+                                message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.source.message'))}}";
+                            }
+                            dialog_error = dialog.create({
+                                title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.title')}}",
+                                message : message,
+                                error : error,
+                                buttons : [
+                                    {
+                                        text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.button.ok')}}"
+                                    }
+                                ],
+                                section : section,
+                                className : "dialog dialog-error dialog-error-create-symlink dialog-error-destination"
+                            });
+                            let form = dialog_error.select('form');
+                            if(!form){
+                                return;
+                            }
+                            form.on('submit', (event) => {
+                                dialog_error.remove();
+                                let form = dialog_create.select('form');
+                                let input = form.select('input[name="node.source"]');
+                                if(input){
+                                    input.focus();
+                                }
+                            });
+                            const button = form.select('button[type="submit"]');
+                            if(button){
+                                button.focus();
+                            }
+                        } else {
+                            const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                            if(menuItem){
+                                menuItem.data('filter-type', filter.type);
+                                menuItem.data('limit', "{{$request.limit}}");
+                            }
+                            menu.dispatch(section, target);
+                            dialog_create.remove();
+                        }
+                    });
+                }
+            });
+        }
+        const input = dialog_create.select('input[name="node.source"]');
+        if(input){
+            input.focus();
+        }
+    });
+}
+
+settings.node.list.delete = ({node, section, target}) => {
+    if (!node) {
+        return;
+    }
+    if (!section) {
+        return;
+    }
+    node.on('click', (event) => {
+        let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.message'))}}";
+        let dialog_create = dialog.create({
+            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.title')}}",
+            message : message,
+            buttons : [
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.button.ok')}}"
+                },
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.delete.button.cancel')}}"
+                }
+            ],
+            section : section,
+            className : "dialog dialog-delete",
+            form : {
+                name : "dialog-delete",
+                url : node.data('url'),
+            }
+        });
+        const form = dialog_create.select('form');
+        if(form){
+            form.on('submit', (event) => {
+                if(node.data('has', 'url')){
+                    let data = {
+                        nodeList : settings.get('selected'),
+                        request : {
+                            method : node.data('request-method') ? node.data('request-method') : "DELETE"
+                        }
+                    };
+                    let filter = {
+                        type : "{{$request.filter.type}}"
+                    };
+                    header('authorization', 'Bearer ' + user.token());
+                    request(node.data('url'), data, (url, response) => {
+                        const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                        if(menuItem){
+                            menuItem.data('filter-type', filter.type);
+                            menuItem.data('limit', "{{$request.limit}}");
+                        }
+                        dialog_create.remove();
+                        settings.delete('selected');
+                        menu.dispatch(section, target);
+                    });
+                }
+            });
+        }
+        const submit = dialog_create.select('.button-submit');
+        if(submit){
+            submit.focus();
+        }
+    });
+}
+
+settings.node.list.move = ({node, section, target}) => {
+    if (!node) {
+        return;
+    }
+    if (!section) {
+        return;
+    }
+    node.on('click', (event) => {
+        //make dialog move with where to move to.
+        let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.message'))}}";
+        message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
+        message += '<p><label>' +
+            "{{__($__.module + '.' + $__.submodule + '.dialog.list.move.target.directory')}}" +
+            '</label><input type="text" name="node.directory" value=""/></p>'
+        ;
+        let dialog_create = dialog.create({
+            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.title')}}",
+            message : message,
+            buttons : [
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.button.ok')}}"
+                },
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.move.button.cancel')}}"
+                }
+            ],
+            section : section,
+            className : "dialog dialog-move",
+            form : {
+                name: "dialog-move",
+                url : node.data('url'),
+            }
+        });
+        const form = dialog_create.select('form[name="dialog-move"]');
+        if(!form){
+            return;
+        }
+        form.on('submit', (event) => {
+            if(form.data('has', 'url')){
+                header('authorization', 'Bearer ' + user.token());
+                let filter = {
+                    type : "{{$request.filter.type}}"
+                };
+                let data = {
+                    directory: section.select('input[name="node.directory"]')?.value,
+                    nodeList: settings.get('selected'),
+                    limit: "{{$request.limit}}",
+                    filter: filter
+                };
+                request(form.data('url'), data, (url, response) => {
+                    dialog_create.remove();
+                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                    if(response?.page){
+                        if(menuItem){
+                            menuItem.data('page', response.page);
+                        }
+                    }
+                    if(menuItem){
+                        menuItem.data('filter-type', filter.type);
+                        menuItem.data('limit', "{{$request.limit}}");
+                    }
+                    if(response?.error){
+                        let dialog_error = dialog.create({
+                            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.title')}}",
+                            message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.message'))}}",
+                            error : response.error,
+                            buttons : [
+                                {
+                                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.move.button.ok')}}"
+                                }
+                            ],
+                            section : section,
+                            className : "dialog dialog-error dialog-error-move"
+                        });
+                        const form = dialog_error.select('form');
+                        if(!form){
+                            return;
+                        }
+                        form.on('submit', (event) => {
+                            dialog_error.remove();
+                        });
+                        const button = form.select('button[type="submit"]');
+                        if(button){
+                            button.focus();
+                        }
+                    }
+                    settings.delete('selected')
+                    menu.dispatch(section, target);
+                });
+            }
+        });
+        const input = form.select('input[name="node.directory"]');
+        if(input){
+            input.focus();
+        }
+    });
+}
+
+settings.node.list.upload = ({node, section, target}) => {
+    if (!node) {
+        return;
+    }
+    if (!section) {
+        return;
+    }
+    node.on('click', (event) => {
+        let message = '<p><label>' +
+            "{{__($__.module + '.' + $__.submodule + '.dialog.list.upload.target.directory')}}" +
+            '</label><input type="text" name="node.directory" value=""/></p>'
+        ;
+        let dialog_create = dialog.create({
+            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.title')}}",
+            message : message,
+            buttons : [
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.button.ok')}}"
+                },
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.button.cancel')}}"
+                }
+            ],
+            section : section,
+            className : "dialog dialog-upload",
+            form : {
+                name: "dialog-upload",
+                url : node.data('url'),
+                data : [
+                    {
+                        name: "error-1",
+                        value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.1')}}"
+                    },
+                    {
+                        name: "error-2",
+                        value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.2')}}"
+                    },
+                    {
+                        name: "error-3",
+                        value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.3')}}"
+                    },
+                    {
+                        name: "error-4",
+                        value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.4')}}"
+                    },
+                    {
+                        name: "error-6",
+                        value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.6')}}"
+                    },
+                    {
+                        name: "error-7",
+                        value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.7')}}"
+                    },
+                    {
+                        name: "error-8",
+                        value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.8')}}"
+                    }
+                ]
+            }
+        });
+        const form = dialog_create.select('form[name="dialog-upload"]');
+        if(!form){
+            return;
+        }
+        let upload_target = dialog_create.select('.body');
+        settings.upload({
+            url: "{{server.url('core')}}Settings/Server/Settings/Upload/",
+            token: user.token(),
+            upload_max_filesize: "1024 M",
+            target: upload_target,
+            redirect_url: "{{server.url('cms')}}User/Login/",
+            message: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.message')}}",
+            form: form
+        });
+        form.on('submit', (event) => {
+            dialog_create.remove();
+            menu.dispatch(section, target);
+        });
+        const input = form.select('input[name="node.directory"]');
+        if(input){
+            input.focus();
+        }
+    });
+}
+
+settings.node.list.filter = ({node, section, target}) => {
+    if (!node) {
+        return;
+    }
+    if (!section) {
+        return;
+    }
+    node.on('click', (event) => {
+        if(node.data('has', 'url') && node.data('has', 'frontend-url')){
+            let data = {};
+            header('authorization', 'Bearer ' + user.token());
+            request(node.data('url'), data, (url, response) => {
+                let filter = section.select('.dropdown .filter-type');
+                if(filter){
+                    filter.text = node.text;
+                }
+                request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+                    settings.selected();
+                });
+            });
+        }
+    });
+}
+
+
+settings.options = (target) => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    let list = section.select('.dropdown-item');
+    if(is.nodeList(list)){
+        let index;
+        for(index=0; index < list.length; index++){
+            let node = list[index];
+            if(node.hasClass('item-delete')){
+                settings.node.item.delete({
+                    node : node,
+                    section : section,
+                    target: target
+                });
+            }
+            else if(node.hasClass('item-rename')){
+                settings.node.item.rename({
+                    node : node,
+                    section : section,
+                    target: target
+                });
+            }
+            else if(node.hasClass('item-create-dir')){
+                settings.node.item.create_dir({
+                    node : node,
+                    section : section,
+                    target: target
+                });
+            }
+            else if(node.hasClass('item-create-file')){
+                settings.node.item.create_file({
+                    node : node,
+                    section : section,
+                    target: target
+                });
+            }
+            else if(node.hasClass('item-create-symlink')){
+                settings.node.item.create_symlink({
+                    node : node,
+                    section : section,
+                    target: target
+                });
+            }
+            else if(node.hasClass('list-delete')){
+                settings.node.list.delete({
+                    node : node,
+                    section : section,
+                    target: target
+                });
+            }
+            else if(node.hasClass('list-move')){
+                settings.node.list.move({
+                    node : node,
+                    section : section,
+                    target: target
+                });
+            }
+            else if(node.hasClass('list-upload')){
+                settings.node.list.upload({
+                    node : node,
+                    section : section,
+                    target: target
+                });
+            }
+            else if(
+                node.hasClass('list-filter-file-dir') ||
+                node.hasClass('list-filter-file') ||
+                node.hasClass('list-filter-dir')
+            ){
+                settings.node.list.filter({
+                    node : node,
+                    section : section,
+                    target: target
+                });
+            }
+            else {
+                node.on('click', (event) => {
+                    if(node.data('has', 'url') && node.data('has', 'frontend-url')){
+                        header('Authorization', 'Bearer ' + user.token());
+                        request(node.data('url'), null, (url, response) => {
+                            request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+                            });
+                        });
+                    }
+                    else if(node.data('has', 'frontend-url')){
+                        request(node.data('frontend-url'), null, (url, response) => {
+                        });
+                    }
+                });
+            }
+        }
+    }
+    else if(list){
+        let node = list;
+        if(node.hasClass('item-delete')){
+            settings.node.item.delete({
+                node : node,
+                section : section,
+                target: target
+            });
+        }
+        else if(node.hasClass('item-create-dir')){
+            settings.node.item.create_dir({
+                node : node,
+                section : section,
+                target: target
+            });
+        }
+        else if(node.hasClass('item-create-file')){
+            settings.node.item.create_file({
+                node : node,
+                section : section,
+                target: target
+            });
+        }
+        else if(node.hasClass('item-create-symlink')){
+            settings.node.item.create_symlink({
+                node : node,
+                section : section,
+                target: target
+            });
+        }
+        else if(node.hasClass('list-delete')){
+            settings.node.list.delete({
+                node : node,
+                section : section,
+                target: target
+            });
+        }
+        else if(node.hasClass('list-move')){
+            settings.node.list.move({
+                node : node,
+                section : section,
+                target: target
+            });
+        }
+
+        else if(
+            node.hasClass('list-filter-file-dir') ||
+            node.hasClass('list-filter-file') ||
+            node.hasClass('list-filter-dir')
+        ){
+            settings.node.list.filter({
+                node : node,
+                section : section,
+                target: target
+            });
+        }
+        else {
+            node.on('click', (event) => {
+                if(node.data('has', 'url') && node.data('has', 'frontend-url')){
+                    header('Authorization', 'Bearer ' + user.token());
+                    request(node.data('url'), null, (url, response) => {
+                        request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+                        });
+                    });
+                }
+                else if(node.data('has', 'frontend-url')){
+                    request(node.data('frontend-url'), null, (url, response) => {
+                    });
+                }
+            });
+        }
+    }
+}
+
+settings.pagination = (target) => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const buttons = section.select('tfoot button');
+    if(!buttons){
+        return;
+    }
+    if(is.nodeList(buttons)){
+        let index;
+        for(index=0; index < buttons.length; index++){
+            let button = buttons[index];
+            button.on('click', () => {
+                let url = button.data('url');
+                if(contains(url, "{node.domain}") !== false){
+                    const section = getSectionByName('main-content');
+                    if(!section){
+                        return;
+                    }
+                    const domain = section.select('input[name="node.domain"]');
+                    if(!domain){
+                        return;
+                    }
+                    url = replace("{node.domain}", domain.value, url);
+                }
+                if(button.data('has', 'page')){
+                    const section = getSectionByName('main-content');
+                    if(!section){
+                        return;
+                    }
+                    target.page = button.data('page');
+                    target.page = parseInt(target.page);
+                    settings.page('current', section, target);
+                }
+                header('Authorization', 'Bearer ' + user.token());
+                request(url, null, (url, response) => {
+                    request(button.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+                        settings.selected();
+                    });
+                });
+            });
+        }
+    }
+    else if(buttons){
+        let button = buttons;
+        button.on('click', () => {
+            let url = button.data('url');
+            if(contains(url, "{node.domain}") !== false){
+                const section = getSectionByName('main-content');
+                if(!section){
+                    return;
+                }
+                const domain = section.select('input[name="node.domain"]');
+                if(!domain){
+                    return;
+                }
+                url = replace("{node.domain}", domain.value, url);
+            }
+            if(button.data('has', 'page')){
+                const section = getSectionByName('main-content');
+                if(!section){
+                    return;
+                }
+                target.page = button.data('page');
+                target.page = parseInt(target.page);
+                settings.page('current', section, target);
+            }
+            header('Authorization', 'Bearer ' + user.token());
+            request(url, null, (url, response) => {
+                request(button.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
+
+                });
+            });
+        });
     }
 }
 
@@ -125,281 +1303,6 @@ settings.deleteDialog = (data) => {
     }
 }
 
-settings.page = (type, section, data) => {
-    console.log(data);
-    if(
-        is.array(data?.select)
-    ){
-        let index;
-        for(index=0; index < data.select.length; index++){
-            let item = data.select[index];
-            if(
-                item?.name
-            ){
-                const menuItem = section.select(item.name);
-                if(menuItem) {
-                    let page = "{{request('page')}}";
-                    page = parseInt(page);
-                    switch (type){
-                        case 'current' :
-                            page = data.page;
-                            console.log('current', page);
-                            menuItem.data('page', page);
-                            break;
-                        case 'next' :
-                            page++;
-                            menuItem.data('page', page);
-                            break;
-                        case 'previous' :
-                            page--;
-                            menuItem.data('page', page);
-                            break;
-                    }
-                }
-            }
-        }
-    } else {
-        if(data?.select){
-            const menuItem = section.select(data.select);
-            if(menuItem){
-                let page = "{{request('page')}}";
-                page = parseInt(page);
-                switch (type){
-                    case 'current' :
-                        page = data.page;
-                        console.log('current', page);
-                        menuItem.data('page', page);
-                        break;
-                    case 'next' :
-                        page++;
-                        menuItem.data('page', page);
-                        break;
-                    case 'previous' :
-                        page--;
-                        menuItem.data('page', page);
-                        break;
-                }
-            }
-        }
-    }
-}
-
-settings.actions = (target) => {
-    const section = getSectionByName('main-content');
-    if(!section){
-        return;
-    }
-    const actions = section.select('.actions');
-    if(!actions){
-        return;
-    }
-    const i = actions.select('i');
-    if(is.nodeList(i)){
-        let index;
-        for(index=0; index < i.length; index++){
-            let node = i[index];
-            node.on('click', (event) => {
-                let url = node.data('url');
-                if(contains(url, "{node.domain}") !== false){
-                    const section = getSectionByName('main-content');
-                    if(!section){
-                        return;
-                    }
-                    const domain = section.select('input[name="node.domain"]');
-                    console.log('domain', domain);
-                    if(!domain){
-                        return;
-                    }
-                    url = replace("{node.domain}", domain.value, url);
-                }
-                let data;
-                if(node.data('request-method')){
-                    data = {
-                        "request-method" : node.data('request-method')
-                    }
-                }
-                header('Authorization', 'Bearer ' + user.token());
-                request(url, data, (url, response) => {
-                    console.log(response);
-                    if(node.data('move-to-next-page')){
-                        settings.page('next', section, target);
-                    }
-                    else if(node.data('move-to-previous-page')){
-                        settings.page('previous', section, target);
-                    }
-                    menu.dispatch(section, target);
-                    /*
-                    request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
-                    });
-                     */
-                });
-            });
-        }
-    } else if(i){
-        let node = i;
-        node.on('click', (event) => {
-            let url = node.data('url');
-            if(contains(url, "{node.domain}") !== false){
-                const section = getSectionByName('main-content');
-                if(!section){
-                    return;
-                }
-                const domain = section.select('input[name="node.domain"]');
-                console.log('domain', domain);
-                if(!domain){
-                    return;
-                }
-                url = replace("{node.domain}", domain.value, url);
-            }
-            let data;
-            if(node.data('request-method')){
-                data = {
-                    "request-method" : node.data('request-method')
-                }
-            }
-            header('Authorization', 'Bearer ' + user.token());
-            request(url, data, (url, response) => {
-                console.log(response);
-                menu.dispatch(section, target);
-                /*
-                request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
-                });
-                 */
-            });
-        });
-    }
-}
-
-
-settings.options = (target) => {
-    const section = getSectionByName('main-content');
-    if(!section){
-        return;
-    }
-    let list = section.select('.dropdown-item');
-    if(is.nodeList(list)){
-        let index;
-        for(index=0; index < list.length; index++){
-            let node = list[index];
-            if(node.hasClass('item-delete')){
-                node.on('click', (event) => {
-                    //make dialog delete with are you sure.
-                    settings.deleteDialog({
-                        node: node,
-                        section: section,
-                        target: target,
-                    });
-                });
-            }
-            else {
-                node.on('click', (event) => {
-                    if(node.data('has', 'url') && node.data('has', 'frontend-url')){
-                        header('Authorization', 'Bearer ' + user.token());
-                        request(node.data('url'), null, (url, response) => {
-                            request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
-                            });
-                        });
-                    }
-                    else if(node.data('has', 'frontend-url')){
-                        request(node.data('frontend-url'), null, (url, response) => {
-
-                        });
-                    }
-                });
-            }
-
-        }
-    }
-    else if(list){
-        let node = list;
-    }
-}
-
-settings.pagination = (target) => {
-    const section = getSectionByName('main-content');
-    if(!section){
-        return;
-    }
-    const buttons = section.select('tfoot button');
-    if(!buttons){
-        return;
-    }
-    if(is.nodeList(buttons)){
-        let index;
-        for(index=0; index < buttons.length; index++){
-            let button = buttons[index];
-            button.on('click', () => {
-                let url = button.data('url');
-                if(contains(url, "{node.domain}") !== false){
-                    const section = getSectionByName('main-content');
-                    if(!section){
-                        return;
-                    }
-                    const domain = section.select('input[name="node.domain"]');
-                    console.log('domain', domain);
-                    if(!domain){
-                        return;
-                    }
-                    url = replace("{node.domain}", domain.value, url);
-                }
-                if(button.data('has', 'page')){
-                    const section = getSectionByName('main-content');
-                    if(!section){
-                        return;
-                    }
-                    console.log('settings.page');
-                    target.page = button.data('page');
-                    target.page = parseInt(target.page);
-                    settings.page('current', section, target);
-                }
-                header('Authorization', 'Bearer ' + user.token());
-                request(url, null, (url, response) => {
-                    request(button.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
-                    });
-                });
-            });
-        }
-    }
-    else if(buttons){
-        let button = buttons;
-        button.on('click', () => {
-            let url = button.data('url');
-            if(contains(url, "{node.domain}") !== false){
-                const section = getSectionByName('main-content');
-                if(!section){
-                    return;
-                }
-                const domain = section.select('input[name="node.domain"]');
-                console.log('domain', domain);
-                if(!domain){
-                    return;
-                }
-                url = replace("{node.domain}", domain.value, url);
-            }
-            if(button.data('has', 'page')){
-                console.log('settings.page');
-                const section = getSectionByName('main-content');
-                if(!section){
-                    return;
-                }
-                target.page = button.data('page');
-                target.page = parseInt(target.page);
-                settings.page('current', section, target);
-            }
-            header('Authorization', 'Bearer ' + user.token());
-            request(url, null, (url, response) => {
-                request(button.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
-
-                });
-            });
-        });
-    }
-}
-
 settings.body = () => {
     const section = getSectionByName('main-content');
     if(!section){
@@ -410,9 +1313,13 @@ settings.body = () => {
         item.data('delete', 'is-hidden');
     } else {
         const body = section.select('.card-body');
-        body.addClass('d-none');
+        if(body){
+            body.addClass('d-none');
+        }
         const selected = section.select('.card-body-' + "{{$command}}");
-        selected.removeClass('d-none');
+        if(selected){
+            selected.removeClass('d-none');
+        }
     }
 }
 
@@ -455,8 +1362,6 @@ settings.search = () => {
         if(!active){
             return;
         }
-        console.log("{{$module}}-{{$submodule}}-{{$command}}");
-        console.log(active);
         if(!active.hasClass("{{$module}}-{{$submodule}}-{{$command}}")){
             input.value = '';
             return;
@@ -496,8 +1401,26 @@ settings.search = () => {
     });
 }
 
+settings.menuItem = () => {
+    const section = getSectionByName('main-content');
+    if(!section){
+        return;
+    }
+    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+    if(menuItem){
+        menuItem.data('filter-type', "{{$request.filter.type}}");
+        menuItem.data('limit', "{{$request.limit}}");
+    }
+}
+
+settings.onLoad = () => {
+    settings.menuItem();
+}
+
 settings.init = () => {
     settings.body();
+    settings.onLoad();
+    settings.onSelectInverse();
     settings.onDoubleClick();
     settings.actions({
         select: ".{{$module}}-{{$submodule}}-{{$command}}",
@@ -515,12 +1438,18 @@ settings.init = () => {
 
 ready(() => {
     require(
-    [
-        root() + 'Dialog/Css/Dialog.css?' + version(),
-        root() + 'Dialog/Css/Dialog.Delete.css?' + version(),
-        root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + "{{$require.submodule}}" + '.css?' + version()
-    ],
-    () => {
-        settings.init();
-    });
+        [
+            root() + 'Dialog/Css/Dialog.css?' + version(),
+            root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Delete.css?' + version(),
+            root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Move.css?' + version(),
+            root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Upload.css?' + version(),
+            root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Create.Directory.css?' + version(),
+            root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Create.File.css?' + version(),
+            root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Create.Symlink.css?' + version(),
+            root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Rename.css?' + version(),
+            root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + "{{$require.submodule|file.basename}}" + '.css?' + version()
+        ],
+        () => {
+            settings.init();
+        });
 });
