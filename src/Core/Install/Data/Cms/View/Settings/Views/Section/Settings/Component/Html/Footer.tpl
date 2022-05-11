@@ -23,10 +23,16 @@
 {{/if}}
 <tfoot>
     <tr>
-        {{$td.colspan = array.count($components) - 1}}
+        {{$td.colspan = array.count($components) - 2}}
         <td colspan="{{$td.colspan}}">
+            <div class="btn-group">
+                {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Dropdown/' + 'Limit.tpl')}}
+                {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Dropdown/' + 'Filter.tpl')}}
+                {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Dropdown/' + 'Action.tpl')}}
+                {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Dropdown/' + 'Add.tpl')}}
+            </div>
         </td>
-        <td class="text-end">
+        <td colspan="2" class="text-end">
             <span class="page">{{$page.start}}-{{$page.to}} of {{$page.count}}</span>
             {{if($page.current === 1)}}
             {{$i.class = 'fas fa-angle-double-left'}}

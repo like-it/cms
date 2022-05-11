@@ -11,6 +11,15 @@
 'rename',
 'delete'
 ]}}
+{{$limits = [
+'10',
+'25',
+'50',
+'100',
+'250',
+'500',
+'1000'
+]}}
 <div class="card-body h-100 card-body-{{$command}}">
     {{if(!is.empty($request.nodeList))}}
     <table class="table table-hover">
@@ -49,7 +58,7 @@
         {{$nr++}}
         {{/for.each}}
         </tbody>
-        {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Html/Pager.tpl')}}
+        {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Html/Footer.tpl')}}
     </table>
     {{/if}}
 </div>
