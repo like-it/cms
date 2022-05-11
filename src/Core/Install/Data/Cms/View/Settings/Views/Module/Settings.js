@@ -980,6 +980,7 @@ settings.node.list.filter = ({node, section, target}) => {
 }
 
 settings.options = (target) => {
+    console.log('options');
     const section = getSectionByName('main-content');
     if(!section){
         return;
