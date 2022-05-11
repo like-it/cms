@@ -1,0 +1,36 @@
+.dialog-create-symlink {
+    left: 33%;
+    width: 34%;
+    right: 33%;
+    height: 220px;
+    top: calc(50% - 110px);
+}
+
+.dialog-create-symlink .body {
+    height: 140px;
+    background: rgba(255, 255, 255, 1);
+    overflow: auto;
+}
+
+.dialog-create-symlink .body label {
+    width: 100px;
+    display: inline-block;
+}
+
+.dialog-create-symlink .body input {
+    width: calc(100% - 100px);
+}
+
+.dialog-error-create-symlink {
+    left: 33%;
+    width: 34%;
+    right: 33%;
+    height: 220px;
+    top: calc(50% - 110px);
+}
+
+.dialog-error-create-symlink .body {
+    height: 140px;
+    background: rgba(255, 255, 255, 1);
+    overflow: auto;
+}
