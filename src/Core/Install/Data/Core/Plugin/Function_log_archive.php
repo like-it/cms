@@ -16,7 +16,7 @@ function function_log_archive(Parse $parse, Data $data){
             'Archive' .
             $object->config('ds') .
             $explode[0] .
-            '."{date(\'Ymd His\')}".' .
+            '."{date(\'Ymd\')}".' .
             $explode[1] .
             '.zip'
         ;
@@ -31,6 +31,8 @@ function function_log_archive(Parse $parse, Data $data){
             File::chown($dir, 'www-data', 'www-data', true);
             File::remove($source);
             File::touch($source, time(), time());
+            $dir = Dir::name($source);
+            File::chown($dir, 'www-data', 'www-data', true);
             echo 'Log file has been reset...' . PHP_EOL;
         }
 
