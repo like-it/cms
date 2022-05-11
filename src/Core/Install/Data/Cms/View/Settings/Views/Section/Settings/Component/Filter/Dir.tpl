@@ -18,7 +18,7 @@ $__.command +
 <a
     class="dropdown-item list-filter-dir"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.command}}/?limit={{$request.limit}}&filter[type]=Dir"
-    data-frontend-url="{{route.get(route.prefix() + '-settings-server-settings-settings-body')}}"
+    data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-body')}}"
 >
 <i
     class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-filter"

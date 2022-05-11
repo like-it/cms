@@ -17,8 +17,8 @@ $__.command +
 )}}
 <a
     class="dropdown-item list-filter-file"
-    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.command}}/?limit={{$request.limit}}&filter[type]=File"
-    data-frontend-url="{{route.get(route.prefix() + '-settings-server-settings-settings-body')}}"
+    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.command}}/?limit={{$request.limit}}&filter[extension]=css"
+    data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-body')}}"
 >
     <i
         class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-filter"

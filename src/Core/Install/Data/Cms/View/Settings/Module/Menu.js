@@ -115,6 +115,15 @@ menu.is_selected = (node, selected) => {
                 is_add = true;
 
             }
+            if(node.data('filter-extension')){
+                if(is_add){
+                    url += '&filter[extension]=' + node.data('filter-extension');
+                } else {
+                    url += '?filter[extension]=' + node.data('filter-extension');
+                }
+                is_add = true;
+
+            }
             if(node.data('limit')){
                 if(is_add){
                     url += '&limit=' + node.data('limit');
@@ -172,11 +181,26 @@ menu.is_selected = (node, selected) => {
                         }
                         url = str_replace("{node.domain}", domain.value, url);
                     }
+                    let is_add = false;
                     if(node.data('filter-type')){
                         url += '?filter[type]=' + node.data('filter-type');
+                        is_add = true;
+                    }
+                    if(node.data('filter-extension')){
+                        if(is_add){
+                            url += '&filter[extension]=' + node.data('filter-extension');
+                        } else {
+                            url += '?filter[extension]=' + node.data('filter-extension');
+                        }
+                        is_add = true;
                     }
                     if(node.data('limit')){
-                        url += '&limit=' + node.data('limit');
+                        if(is_add){
+                            url += '&limit=' + node.data('limit');
+                        } else {
+                            url += '?limit=' + node.data('limit');
+                        }
+                        is_add = true;
                     }
                     request(url, response, () => {
                         loader.delete({
