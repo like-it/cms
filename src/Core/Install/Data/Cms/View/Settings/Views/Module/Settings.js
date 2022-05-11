@@ -1421,6 +1421,7 @@ settings.onLoad = () => {
 }
 
 settings.init = () => {
+    console.log('init');
     settings.body();
     settings.onLoad();
     settings.onSelectInverse();
