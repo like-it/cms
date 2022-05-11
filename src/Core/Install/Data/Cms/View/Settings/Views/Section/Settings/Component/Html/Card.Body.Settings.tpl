@@ -26,7 +26,10 @@
 ]}}
 {{$filters = [
 'dir',
-'file',
+'tpl',
+'js',
+'json',
+'css',
 'all'
 ]}}
 {{$addons = [
