@@ -5,7 +5,7 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.filter.file.icon'
+'.component.filter.tpl.icon'
 )}}
 {{$span.text = __(
 $__.module +
@@ -13,10 +13,10 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.filter.file.text'
+'.component.filter.tpl.text'
 )}}
 <a
-    class="dropdown-item list-filter-file"
+    class="dropdown-item list-filter-tpl"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.command}}/?limit={{$request.limit}}&filter[type]=File"
     data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-body')}}"
 >

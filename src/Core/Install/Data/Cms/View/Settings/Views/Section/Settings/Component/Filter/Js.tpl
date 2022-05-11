@@ -5,7 +5,7 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.filter.file.icon'
+'.component.filter.js.icon'
 )}}
 {{$span.text = __(
 $__.module +
@@ -13,10 +13,10 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.filter.file.text'
+'.component.filter.js.text'
 )}}
 <a
-    class="dropdown-item list-filter-file"
+    class="dropdown-item list-filter-js"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$require.command}}/?limit={{$request.limit}}&filter[extension]=js"
     data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-body')}}"
 >
