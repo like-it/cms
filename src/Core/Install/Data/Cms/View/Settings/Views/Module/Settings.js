@@ -1062,10 +1062,21 @@ settings.options = (target) => {
             }
             else {
                 node.on('click', (event) => {
-                    console.log('yess');
                     if(node.data('has', 'url') && node.data('has', 'frontend-url')){
+                        let url = node.data('url');
+                        if(contains(url, "{node.domain}") !== false){
+                            const section = getSectionByName('main-content');
+                            if(!section){
+                                return;
+                            }
+                            const domain = section.select('input[name="node.domain"]');
+                            if(!domain){
+                                return;
+                            }
+                            url = replace("{node.domain}", domain.value, url);
+                        }
                         header('Authorization', 'Bearer ' + user.token());
-                        request(node.data('url'), null, (url, response) => {
+                        request(url, null, (url, response) => {
                             request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
                             });
                         });
@@ -1136,10 +1147,21 @@ settings.options = (target) => {
         }
         else {
             node.on('click', (event) => {
-                console.log('yess');
                 if(node.data('has', 'url') && node.data('has', 'frontend-url')){
+                    let url = node.data('url');
+                    if(contains(url, "{node.domain}") !== false){
+                        const section = getSectionByName('main-content');
+                        if(!section){
+                            return;
+                        }
+                        const domain = section.select('input[name="node.domain"]');
+                        if(!domain){
+                            return;
+                        }
+                        url = replace("{node.domain}", domain.value, url);
+                    }
                     header('Authorization', 'Bearer ' + user.token());
-                    request(node.data('url'), null, (url, response) => {
+                    request(url, null, (url, response) => {
                         request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
                         });
                     });
