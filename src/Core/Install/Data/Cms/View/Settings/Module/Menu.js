@@ -112,6 +112,7 @@ menu.is_selected = (node, selected) => {
                 } else {
                     url += '?filter[type]=' + node.data('filter-type');
                 }
+                is_add = true;
 
             }
             if(node.data('limit')){
@@ -120,6 +121,7 @@ menu.is_selected = (node, selected) => {
                 } else {
                     url += '?limit=' + node.data('limit');
                 }
+                is_add = true;
             }
             loader.start({
                 className : "card-body h-100 card-body-loader",
