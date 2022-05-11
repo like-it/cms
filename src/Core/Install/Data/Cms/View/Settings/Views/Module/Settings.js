@@ -979,13 +979,13 @@ settings.node.list.filter = ({node, section, target}) => {
     });
 }
 
-
 settings.options = (target) => {
     const section = getSectionByName('main-content');
     if(!section){
         return;
     }
     let list = section.select('.dropdown-item');
+    console.log(list);
     if(is.nodeList(list)){
         let index;
         for(index=0; index < list.length; index++){
@@ -1059,7 +1059,7 @@ settings.options = (target) => {
             }
             else {
                 node.on('click', (event) => {
-                    console.log('click');
+                    console.log('yess');
                     if(node.data('has', 'url') && node.data('has', 'frontend-url')){
                         header('Authorization', 'Bearer ' + user.token());
                         request(node.data('url'), null, (url, response) => {
