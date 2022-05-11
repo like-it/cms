@@ -1059,6 +1059,7 @@ settings.options = (target) => {
             }
             else {
                 node.on('click', (event) => {
+                    console.log('click');
                     if(node.data('has', 'url') && node.data('has', 'frontend-url')){
                         header('Authorization', 'Bearer ' + user.token());
                         request(node.data('url'), null, (url, response) => {
