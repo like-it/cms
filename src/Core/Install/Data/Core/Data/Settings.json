@@ -1,7 +1,7 @@
 {
     "controller" : {
         "default" : {
-            "limit" : 12
+            "limit" : 10
         }
     },
     "server" : {
@@ -20,12 +20,12 @@
     },
     "view" : {
         "default" : {
-            "limit" : 12
+            "limit" : 10
         }
     },
     "route" : {
         "default" : {
-            "limit" : 9
+            "limit" : 10
         }
     }
 }
