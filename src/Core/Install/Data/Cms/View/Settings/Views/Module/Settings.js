@@ -34,7 +34,9 @@ settings.onSelectInverse = () => {
         return;
     }
     let selectInverse = section.select('input[name="node.checkInverse"]')
-
+    if(!selectInverse){
+        return;
+    }
     selectInverse.on('click', () => {
         let list = section.select('.card-' + "{{$subcommand}}" + '-' + "{{$command}}" + ' tr input[type="checkbox"]');
         let selected = settings.get('selected');
@@ -1421,7 +1423,6 @@ settings.onLoad = () => {
 }
 
 settings.init = () => {
-    console.log('init');
     settings.body();
     settings.onLoad();
     settings.onSelectInverse();
