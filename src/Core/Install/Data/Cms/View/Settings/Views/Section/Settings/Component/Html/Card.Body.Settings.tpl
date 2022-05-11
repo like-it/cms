@@ -11,6 +11,10 @@
 'rename',
 'delete'
 ]}}
+{{$actions = [
+'move',
+'delete'
+]}}
 {{$limits = [
 '10',
 '25',
@@ -19,6 +23,17 @@
 '250',
 '500',
 '1000'
+]}}
+{{$filters = [
+'dir',
+'file',
+'all'
+]}}
+{{$addons = [
+'dir',
+'file',
+'symlink',
+'upload'
 ]}}
 <div class="card-body h-100 card-body-{{$command}}">
     {{if(!is.empty($request.nodeList))}}
