@@ -2338,21 +2338,28 @@ class Settings extends Main {
         $read = $dir->read($url, true);
         if($read){
             foreach($read as $nr => $record){
-                if($filter['type'] === File::TYPE){
+                if(
+                    array_key_exists('type', $filter) &&
+                    $filter['type'] === File::TYPE
+                ){
                     if($record->type !== File::TYPE){
                         continue;
                     }
                 }
-                elseif($filter['type'] === Dir::TYPE){
+                elseif(
+                    array_key_exists('type', $filter) &&
+                    $filter['type'] === Dir::TYPE
+                ){
                     if($record->type !== Dir::TYPE){
                         continue;
                     }
                 }
                 $record->extension = File::extension($record->url);
-                if(array_key_exists('extension', $filter)){
-                    if($filter['extension'] !== $record->extension){
+                if(
+                    array_key_exists('extension', $filter) &&
+                    $filter['extension'] !== $record->extension
+                ){
                         continue;
-                    }
                 }
                 $record->domain = $domain->uuid;
                 $key = sha1($record->url);
