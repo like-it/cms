@@ -16,7 +16,7 @@ $__.command +
 '.component.actions.copy.text'
 )}}
 <a
-class="dropdown-item list-move"
+class="dropdown-item list-copy"
 data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Copy/"
 >
 <i

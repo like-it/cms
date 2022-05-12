@@ -753,7 +753,8 @@ settings.node.list.delete = ({node, section, target}) => {
                         }
                     };
                     let filter = {
-                        type : "{{$request.filter.type}}"
+                        type : "{{$request.filter.type}}",
+                        extension: "{{$request.filter.extension}}"
                     };
                     header('authorization', 'Bearer ' + user.token());
                     request(node.data('url'), data, (url, response) => {
@@ -772,6 +773,105 @@ settings.node.list.delete = ({node, section, target}) => {
         const submit = dialog_create.select('.button-submit');
         if(submit){
             submit.focus();
+        }
+    });
+}
+
+settings.node.list.copy = ({node, section, target}) => {
+    if (!node) {
+        return;
+    }
+    if (!section) {
+        return;
+    }
+    node.on('click', (event) => {
+        //make dialog move with where to copy to.
+        let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.list.copy.message'))}}";
+        message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
+        message += '<p><label>' +
+            "{{__($__.module + '.' + $__.submodule + '.dialog.list.copy.target.directory')}}" +
+            '</label><input type="text" name="node.directory" value=""/></p>'
+        ;
+        let dialog_create = dialog.create({
+            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.copy.title')}}",
+            message : message,
+            buttons : [
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.copy.button.ok')}}"
+                },
+                {
+                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.copy.button.cancel')}}"
+                }
+            ],
+            section : section,
+            className : "dialog dialog-copy",
+            form : {
+                name: "dialog-copy",
+                url : node.data('url'),
+            }
+        });
+        const form = dialog_create.select('form[name="dialog-copy"]');
+        if(!form){
+            return;
+        }
+        form.on('submit', (event) => {
+            if(form.data('has', 'url')){
+                header('authorization', 'Bearer ' + user.token());
+                let filter = {
+                    type : "{{$request.filter.type}}",
+                    extension: "{{$request.filter.extension}}"
+                };
+                let data = {
+                    directory: section.select('input[name="node.directory"]')?.value,
+                    nodeList: settings.get('selected'),
+                    limit: "{{$request.limit}}",
+                    filter: filter
+                };
+                request(form.data('url'), data, (url, response) => {
+                    dialog_create.remove();
+                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                    if(response?.page){
+                        if(menuItem){
+                            menuItem.data('page', response.page);
+                        }
+                    }
+                    if(menuItem){
+                        menuItem.data('filter-type', filter.type);
+                        menuItem.data('limit', "{{$request.limit}}");
+                    }
+                    if(response?.error){
+                        let dialog_error = dialog.create({
+                            title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.copy.title')}}",
+                            message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.copy.message'))}}",
+                            error : response.error,
+                            buttons : [
+                                {
+                                    text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.list.copy.button.ok')}}"
+                                }
+                            ],
+                            section : section,
+                            className : "dialog dialog-error dialog-error-copy"
+                        });
+                        const form = dialog_error.select('form');
+                        if(!form){
+                            return;
+                        }
+                        form.on('submit', (event) => {
+                            dialog_error.remove();
+                        });
+                        const button = form.select('button[type="submit"]');
+                        if(button){
+                            button.focus();
+                        }
+                    }
+                    settings.delete('selected')
+                    menu.dispatch(section, target);
+                });
+            }
+        });
+        const input = form.select('input[name="node.directory"]');
+        if(input){
+            input.focus();
         }
     });
 }
@@ -817,7 +917,8 @@ settings.node.list.move = ({node, section, target}) => {
             if(form.data('has', 'url')){
                 header('authorization', 'Bearer ' + user.token());
                 let filter = {
-                    type : "{{$request.filter.type}}"
+                    type : "{{$request.filter.type}}",
+                    extension: "{{$request.filter.extension}}"
                 };
                 let data = {
                     directory: section.select('input[name="node.directory"]')?.value,
@@ -1042,6 +1143,13 @@ settings.options = (target) => {
                     target: target
                 });
             }
+            else if(node.hasClass('list-copy')){
+                settings.node.list.copy({
+                    node : node,
+                    section : section,
+                    target: target
+                });
+            }
             else if(node.hasClass('list-delete')){
                 settings.node.list.delete({
                     node : node,
@@ -1132,6 +1240,13 @@ settings.options = (target) => {
         }
         else if(node.hasClass('item-create-symlink')){
             settings.node.item.create_symlink({
+                node : node,
+                section : section,
+                target: target
+            });
+        }
+        else if(node.hasClass('list-copy')){
+            settings.node.list.copy({
                 node : node,
                 section : section,
                 target: target
