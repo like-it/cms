@@ -61,7 +61,7 @@
             $__.submodule +
             '.section.' +
             $__.command +
-            '.component.filter.tpl.text'
+            '.component.filter.js.text'
             )}}
             {{elseif($request.filter.extension==='json')}}
             {{__(
@@ -70,7 +70,7 @@
             $__.submodule +
             '.section.' +
             $__.command +
-            '.component.filter.tpl.text'
+            '.component.filter.json.text'
             )}}
             {{else}}
             {{__(
