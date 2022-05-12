@@ -78,7 +78,7 @@
             {{/for.each}}
         {{else}}
             <tr>
-                <td>
+                <td colspan="{{count($components)}}">
                     {{__(
                     $__.module +
                     '.' +
