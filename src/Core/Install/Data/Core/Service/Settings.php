@@ -2398,11 +2398,13 @@ class Settings extends Main {
             $response['limit'] = $limit;
             $response['page'] = $page;
             $response['max'] = ceil($response['count'] / $response['limit']);
+            $response['filter'] = $filter;
             return new Response($response, Response::TYPE_JSON);
         } else {
             $response = [];
             $response['count'] = 0;
             $response['nodeList'] = [];
+            $response['filter'] = $filter;
             return new Response($response, Response::TYPE_JSON);
         }
     }
