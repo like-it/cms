@@ -13,6 +13,7 @@
 'delete'
 ]}}
 {{$actions = [
+'copy',
 'move',
 'delete'
 ]}}
