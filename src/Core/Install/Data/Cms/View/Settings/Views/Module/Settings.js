@@ -966,9 +966,21 @@ settings.node.list.filter = ({node, section, target}) => {
     }
     node.on('click', (event) => {
         if(node.data('has', 'url') && node.data('has', 'frontend-url')){
+            let url = node.data('url');
+            if(contains(url, "{node.domain}") !== false){
+                const section = getSectionByName('main-content');
+                if(!section){
+                    return;
+                }
+                const domain = section.select('input[name="node.domain"]');
+                if(!domain){
+                    return;
+                }
+                url = replace("{node.domain}", domain.value, url);
+            }
             let data = {};
             header('authorization', 'Bearer ' + user.token());
-            request(node.data('url'), data, (url, response) => {
+            request(url, data, (url, response) => {
                 let filter = section.select('.dropdown .filter-type');
                 if(filter){
                     filter.text = node.text;
@@ -1050,9 +1062,13 @@ settings.options = (target) => {
                 });
             }
             else if(
-                node.hasClass('list-filter-file-dir') ||
+                node.hasClass('list-filter-all') ||
                 node.hasClass('list-filter-file') ||
-                node.hasClass('list-filter-dir')
+                node.hasClass('list-filter-dir') ||
+                node.hasClass('list-filter-tpl') ||
+                node.hasClass('list-filter-js') ||
+                node.hasClass('list-filter-json') ||
+                node.hasClass('list-filter-css')
             ){
                 settings.node.list.filter({
                     node : node,
