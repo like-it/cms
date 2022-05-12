@@ -36,6 +36,42 @@
             $__.command +
             '.component.filter.dir.text'
             )}}
+            {{elseif($request.filter.extension==='tpl')}}
+            {{__(
+            $__.module +
+            '.' +
+            $__.submodule +
+            '.section.' +
+            $__.command +
+            '.component.filter.tpl.text'
+            )}}
+            {{elseif($request.filter.extension==='css')}}
+            {{__(
+            $__.module +
+            '.' +
+            $__.submodule +
+            '.section.' +
+            $__.command +
+            '.component.filter.css.text'
+            )}}
+            {{elseif($request.filter.extension==='js')}}
+            {{__(
+            $__.module +
+            '.' +
+            $__.submodule +
+            '.section.' +
+            $__.command +
+            '.component.filter.tpl.text'
+            )}}
+            {{elseif($request.filter.extension==='json')}}
+            {{__(
+            $__.module +
+            '.' +
+            $__.submodule +
+            '.section.' +
+            $__.command +
+            '.component.filter.tpl.text'
+            )}}
             {{else}}
             {{__(
             $__.module +
