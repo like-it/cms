@@ -2328,13 +2328,34 @@ class Settings extends Main {
             throw new Exception('Domain dir not set...');
         }
         $url = $domain->dir . $object->config('dictionary.view') . $object->config('ds');
+        $filter = $object->request('filter');
+        if(empty($filter) || !is_array($filter)){
+            $filter = [];
+            $filter['type'] = 'All';
+        }
+        if(!array_key_exists('type', $filter)){
+            $filter['type'] = 'All';
+        }
         $dir = new Dir();
         $data = new Data();
         $read = $dir->read($url, true);
         if($read){
             foreach($read as $nr => $record){
-                if($record->type !== File::TYPE){
-                    continue;
+                if($filter['type'] === File::TYPE){
+                    if($record->type !== File::TYPE){
+                        continue;
+                    }
+                }
+                elseif($filter['type'] === Dir::TYPE){
+                    if($record->type !== Dir::TYPE){
+                        continue;
+                    }
+                }
+                $record->extension = File::extension($record->url);
+                if(array_key_exists('extension', $filter)){
+                    if($filter['extension'] !== $record->extension){
+                        continue;
+                    }
                 }
                 $record->domain = $domain->uuid;
                 $key = sha1($record->url);
