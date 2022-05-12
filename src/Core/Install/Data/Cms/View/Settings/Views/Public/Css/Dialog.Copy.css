@@ -1,0 +1,27 @@
+.dialog-copy {
+    left: 33%;
+    width: 34%;
+    right: 33%;
+    height: 180px;
+    top: calc(50% - 90px);
+}
+
+.dialog-copy .body {
+    height: 100px;
+    background: rgba(255, 255, 255, 1);
+    overflow: auto;
+}
+
+.dialog-error-copy {
+    left: 33%;
+    width: 34%;
+    right: 33%;
+    height: 250px;
+    top: calc(50% - 125px);
+}
+
+.dialog-error-copy .body {
+    height: 170px;
+    background: rgba(255, 255, 255, 1);
+    overflow: auto;
+}
