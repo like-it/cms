@@ -1116,7 +1116,7 @@ settings.options = (target) => {
         }
 
         else if(
-            node.hasClass('list-filter-file-dir') ||
+            node.hasClass('list-filter-all') ||
             node.hasClass('list-filter-file') ||
             node.hasClass('list-filter-dir')
         ){
