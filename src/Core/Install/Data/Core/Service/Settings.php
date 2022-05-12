@@ -2333,9 +2333,6 @@ class Settings extends Main {
             $filter = [];
             $filter['type'] = 'All';
         }
-        if(!array_key_exists('type', $filter)){
-            $filter['type'] = 'All';
-        }
         $dir = new Dir();
         $data = new Data();
         $read = $dir->read($url, true);
