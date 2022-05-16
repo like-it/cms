@@ -2674,9 +2674,7 @@ class Settings extends Main {
             $count = count($list);
             $nr = 1;
             $is_found = false;
-            d($search);
             foreach($list as $key => $record){
-                d($record->url);
                 if(
                     array_key_exists('url', $search) &&
                     $search['url'] === $record->url
@@ -2699,8 +2697,6 @@ class Settings extends Main {
                     $limit = Limit::MAX;
                 }
             }
-            d($nr);
-            dd($limit);
             $page = floor($nr / $limit) + 1;
         }
         return $page;
