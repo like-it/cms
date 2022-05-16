@@ -11,7 +11,7 @@ add.title = () => {
     if(!section){
         return;
     }
-    const is_link = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.attribute}}");
+    const is_link = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}");
     if(is_link){
         const nav = section.select('.nav');
         const active = nav.select('.active');
@@ -24,10 +24,10 @@ add.title = () => {
     }
     const nav = section.select('.nav');
     const li = create('li', 'nav-item');
-    const a = create('a', 'nav-link ' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.attribute}}");
+    const a = create('a', 'nav-link ' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}");
     a.data('frontend-url', "");
     a.data('url', "");
-    a.html("<span class='title'>{{$request.title}}</span><i class=\"fas fa-window-close\"></i>");
+    a.html("<span class='title'>{{__($__.module + '.' + $__.submodule + '.module.add.title')}}</span><i class=\"fas fa-window-close\"></i>");
     li.append(a);
     nav.append(li);
     a.on('click', (event) => {

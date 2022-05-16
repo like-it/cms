@@ -9,7 +9,15 @@
             aria-haspopup="true"
             aria-expanded="false"
         >
-            <i class="{{__('settings.server.settings.section.settings.component.html.dropdown.addons.icon')}}"></i>
+            <i class="{{
+            __(
+            $__.module +
+            '.' +
+            $__.submodule +
+            '.section.' +
+            $__.command +
+            '.component.html.dropdown.addons.icon'
+            )}}"></i>
         </button>
         <div
             class="dropdown-menu"

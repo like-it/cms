@@ -520,11 +520,7 @@ settings.node.item.create_file = ({node, section, target}) => {
     }
     node.on('click', (event) => {
         if(node.data('has', 'frontend-url')){
-            const data = {
-                attribute : uuid(),
-                title : "Add file"
-            };
-            request(node.data('frontend-url'), data);
+            request(node.data('frontend-url'));
         }
         /*
         let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.message'))}}";
