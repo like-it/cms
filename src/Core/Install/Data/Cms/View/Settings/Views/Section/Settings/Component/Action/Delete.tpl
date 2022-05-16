@@ -5,7 +5,7 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.actions.delete.icon'
+'.component.action.delete.icon'
 )}}
 {{$span.text = __(
 $__.module +
@@ -13,7 +13,7 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.actions.delete.text'
+'.component.action.delete.text'
 )}}
 <a
     class="dropdown-item list-delete"

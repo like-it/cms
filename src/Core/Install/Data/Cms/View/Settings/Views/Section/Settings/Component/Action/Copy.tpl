@@ -5,7 +5,7 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.actions.copy.icon'
+'.component.action.copy.icon'
 )}}
 {{$span.text = __(
 $__.module +
@@ -13,7 +13,7 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.actions.copy.text'
+'.component.action.copy.text'
 )}}
 <a
 class="dropdown-item list-copy"

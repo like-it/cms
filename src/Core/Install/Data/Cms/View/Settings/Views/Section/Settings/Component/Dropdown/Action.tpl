@@ -9,7 +9,7 @@
             aria-haspopup="true"
             aria-expanded="false"
         >
-            {{__($__.module + '.' + $__.submodule + '.section.' + $__.command + '.component.html.dropdown.actions.text')}}
+            {{__($__.module + '.' + $__.submodule + '.section.' + $__.command + '.component.action.with.selected.text')}}
         </button>
         <div
             class="dropdown-menu"

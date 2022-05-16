@@ -5,7 +5,7 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.actions.move.icon'
+'.component.action.move.icon'
 )}}
 {{$span.text = __(
 $__.module +
@@ -13,7 +13,7 @@ $__.module +
 $__.submodule +
 '.section.' +
 $__.command +
-'.component.actions.move.text'
+'.component.action.move.text'
 )}}
 <a
 class="dropdown-item list-move"
