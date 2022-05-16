@@ -2655,7 +2655,7 @@ class Settings extends Main {
                     $record->extension = File::extension($record->url);
                     if(
                         array_key_exists('extension', $filter) &&
-                        !empty($filter['extension']) && 
+                        !empty($filter['extension']) &&
                         $filter['extension'] !== $record->extension
                     ){
                         continue;
@@ -2692,6 +2692,8 @@ class Settings extends Main {
                     $limit = Limit::MAX;
                 }
             }
+            d($nr);
+            dd($limit);
             $page = floor($nr / $limit) + 1;
         }
         return $page;
