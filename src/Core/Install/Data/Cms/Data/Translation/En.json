@@ -480,6 +480,19 @@
     "settings.views.dialog.list.copy.target.directory" : "Target directory: ",
     "settings.views.dialog.list.copy.button.ok" : "Ok",
     "settings.views.dialog.list.copy.button.cancel" : "Cancel",
+    "settings.views.dialog.list.move.title" : "Move",
+    "settings.views.dialog.list.move.message" : [
+        "Where do you want to move the selected items to?"
+    ],
+    "settings.views.dialog.list.move.target.directory" : "Target directory: ",
+    "settings.views.dialog.list.move.button.ok" : "Ok",
+    "settings.views.dialog.list.move.button.cancel" : "Cancel",
+    "settings.views.dialog.list.delete.title" : "Delete",
+    "settings.views.dialog.list.delete.message" : [
+        "Are you sure you want to delete the selected items?"
+    ],
+    "settings.views.dialog.list.delete.button.ok" : "Ok",
+    "settings.views.dialog.list.delete.button.cancel" : "Cancel",
     "settings.views.module.settings.delete" : "Are you sure you want to delete this item",
     "settings.views.section.view.routes.body.title" : "Routes",
     "settings.views.section.view.routes.body.node.url" : "Url",
@@ -558,7 +571,7 @@
     "settings.views.section.form.error.url.validate_url" : "The name already exists. Please use a different url...",
     "settings.views.section.settings.component.action.copy.text" : "Copy",
     "settings.views.section.settings.component.action.delete.text" : "Delete",
-    "settings.views.section.settings.component.action.move.text" : "move",
+    "settings.views.section.settings.component.action.move.text" : "Move",
     "settings.views.section.settings.component.action.with.selected.text" : "With selected...",
     "settings.views.section.settings.component.add.dir.text" : "Add directory",
     "settings.views.section.settings.component.add.file.text" : "Add file",
