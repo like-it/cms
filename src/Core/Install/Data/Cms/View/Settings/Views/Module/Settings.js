@@ -516,6 +516,10 @@ settings.node.item.create_file = ({node, section, target}) => {
         return;
     }
     node.on('click', (event) => {
+        if(node.data('has', 'frontend-url')){
+            request(node.data('frontend-url'));
+        }
+        /*
         let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.message'))}}";
         message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
         message += '<p><label>' +
@@ -607,6 +611,7 @@ settings.node.item.create_file = ({node, section, target}) => {
         if(input){
             input.focus();
         }
+         */
     });
 }
 
