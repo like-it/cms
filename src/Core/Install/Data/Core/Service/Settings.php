@@ -2552,8 +2552,15 @@ class Settings extends Main {
         if($directory === $object->config('ds')){
             $directory = '';
         }
-        dd($object->config('project.dir'));
-        $url = $object->config('project.dir.views') . $directory;
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $url = $domain->dir . $object->config('dictionary.view') . $object->config('ds') . $directory;
+        dd($url);
         $list = [];
         $error = [];
         $destination = false;
