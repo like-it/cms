@@ -335,7 +335,7 @@ class Settings extends View {
     public static function views_copy(App $object)
     {
         try {
-            return Service::views_move_copy($object);
+            return Service::views_copy_list($object);
         } catch (Exception $exception){
             return $exception;
         }
