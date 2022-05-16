@@ -369,10 +369,10 @@ class Settings extends View {
         }
     }
 
-    public static function server_settings_upload(App $object)
+    public static function views_upload(App $object)
     {
         try {
-            return Service::server_settings_upload($object);
+            return Service::views_upload($object);
         } catch (Exception $exception){
             return $exception;
         }
