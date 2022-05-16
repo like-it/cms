@@ -1757,7 +1757,6 @@ class Settings extends Main {
                     continue;
                 } else {
                     $move = Dir::move($source, $destination, $overwrite);
-                    d($move);
                 }
                 if($move){
                     $list[] = $destination;
@@ -1775,7 +1774,6 @@ class Settings extends Main {
                     continue;
                 } else {
                     $move = File::move($source, $destination, $overwrite);
-                    d($move);
                 }
                 if($move){
                     $list[] = $destination;
@@ -2411,6 +2409,204 @@ class Settings extends Main {
             $response['filter'] = $filter;
             return new Response($response, Response::TYPE_JSON);
         }
+    }
+
+    /**
+     * @throws Exception
+     * @throws ErrorException
+     * @throws FileMoveException
+     */
+    public static function views_move_list(App $object): Response
+    {
+        $nodeList = $object->request('nodeList');
+        $list = [];
+        if(is_array($nodeList)){
+            foreach($nodeList as $nr => $url){
+                $basename = File::basename($url);
+                if(in_array($basename, $list)){
+                    throw new ErrorException('Duplicate basename...');
+                }
+                if(Dir::is($url)){
+                    $dir = $url;
+                } else {
+                    $dir = Dir::name($url);
+                }
+                $explode = explode($object->config('ds'), $dir);
+                for($i=count($explode); $i >= 2; $i--){
+                    $dir_example = implode($object->config('ds'), $explode);
+                    if(substr($dir_example, 0, -1) !== $object->config('ds')){
+                        $dir_example .= $object->config('ds');
+                    }
+                    $pop = array_pop($explode);
+                    if(empty($pop)){
+                        continue;
+                    }
+                    if(File::is_link($dir_example)){
+                        throw new Exception('Cannot move protected symlink file...');
+                    }
+                }
+                $list[] = File::basename($url);
+            }
+        }
+        $overwrite = true;
+        $directory = $object->request('directory');
+        $directory = trim($directory, $object->config('ds')) . $object->config('ds');
+        if($directory === $object->config('ds')){
+            $directory = '';
+        }
+        $url = $object->config('project.dir.public') . $directory;
+        $list = [];
+        $error = [];
+        $destination = false;
+        if(is_array($nodeList)){
+            if(!File::exist($url)){
+                Dir::create($url);
+            }
+            foreach($nodeList as $nr => $source){
+                $destination = $url;
+                if($source == $destination){
+                    $list[] = $destination;
+                    continue;
+                }
+                if(!Dir::is($source)){
+                    continue;
+                } else {
+                    $move = Dir::move($source, $destination, $overwrite);
+                }
+                if($move){
+                    $list[] = $destination;
+                } else {
+                    $error[] = $source;
+                }
+            }
+            foreach($nodeList as $nr => $source){
+                $destination = $url . File::basename($source);
+                if($source == $destination){
+                    $list[] = $destination;
+                    continue;
+                }
+                if(Dir::is($source)){
+                    continue;
+                } else {
+                    $move = File::move($source, $destination, $overwrite);
+                }
+                if($move){
+                    $list[] = $destination;
+                } else {
+                    $error[] = $source;
+                }
+            }
+        }
+        $response = [];
+        $response['nodeList'] = $list;
+        if($destination){
+            $response['page'] = Settings::server_settings_page($object, [
+                'url' => $destination
+            ]);
+        }
+        if(!empty($error)){
+            $response['error'] = $error;
+        }
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws Exception
+     * @throws ErrorException
+     * @throws FileMoveException
+     */
+    public static function views_copy_list(App $object): Response
+    {
+        $nodeList = $object->request('nodeList');
+        $list = [];
+        if(is_array($nodeList)){
+            foreach($nodeList as $nr => $url){
+                $basename = File::basename($url);
+                if(in_array($basename, $list)){
+                    throw new ErrorException('Duplicate basename...');
+                }
+                if(Dir::is($url)){
+                    $dir = $url;
+                } else {
+                    $dir = Dir::name($url);
+                }
+                $explode = explode($object->config('ds'), $dir);
+                for($i=count($explode); $i >= 2; $i--){
+                    $dir_example = implode($object->config('ds'), $explode);
+                    if(substr($dir_example, 0, -1) !== $object->config('ds')){
+                        $dir_example .= $object->config('ds');
+                    }
+                    $pop = array_pop($explode);
+                    if(empty($pop)){
+                        continue;
+                    }
+                    if(File::is_link($dir_example)){
+                        throw new Exception('Cannot copy protected symlink file...');
+                    }
+                }
+                $list[] = File::basename($url);
+            }
+        }
+        $directory = $object->request('directory');
+        $directory = trim($directory, $object->config('ds')) . $object->config('ds');
+        if($directory === $object->config('ds')){
+            $directory = '';
+        }
+        dd($object->config('project.dir'));
+        $url = $object->config('project.dir.views') . $directory;
+        $list = [];
+        $error = [];
+        $destination = false;
+        if(is_array($nodeList)){
+            if(!File::exist($url)){
+                Dir::create($url);
+            }
+            foreach($nodeList as $nr => $source){
+                $destination = $url;
+                if($source == $destination){
+                    $list[] = $destination;
+                    continue;
+                }
+                if(!Dir::is($source)){
+                    continue;
+                } else {
+                    $move = Dir::copy($source, $destination);
+                }
+                if($move){
+                    $list[] = $destination;
+                } else {
+                    $error[] = $source;
+                }
+            }
+            foreach($nodeList as $nr => $source){
+                $destination = $url . File::basename($source);
+                if($source == $destination){
+                    $list[] = $destination;
+                    continue;
+                }
+                if(Dir::is($source)){
+                    continue;
+                } else {
+                    $move = File::copy($source, $destination);
+                }
+                if($move){
+                    $list[] = $destination;
+                } else {
+                    $error[] = $source;
+                }
+            }
+        }
+        $response = [];
+        $response['nodeList'] = $list;
+        if($destination){
+            $response['page'] = Settings::server_settings_page($object, [
+                'url' => $destination
+            ]);
+        }
+        if(!empty($error)){
+            $response['error'] = $error;
+        }
+        return new Response($response, Response::TYPE_JSON);
     }
 
     /**

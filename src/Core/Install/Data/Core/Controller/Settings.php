@@ -331,4 +331,50 @@ class Settings extends View {
             return $exception;
         }
     }
+
+    public static function views_copy(App $object)
+    {
+        try {
+            return Service::views_move_copy($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function views_move(App $object)
+    {
+        try {
+            return Service::views_move_list($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function views_create(App $object)
+    {
+        $type = $object->request('type');
+        try {
+            switch (Handler::method()) {
+                case 'POST':
+                    switch ($type){
+                        case 'Directory':
+                            return Service::views_create_directory($object);
+                        case 'Symlink':
+                            return Service::views_create_symlink($object);
+                    }
+                    break;
+            }
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function server_settings_upload(App $object)
+    {
+        try {
+            return Service::server_settings_upload($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
 }
