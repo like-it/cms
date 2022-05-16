@@ -473,6 +473,13 @@
         "Did you forget to add a domain?"
     ],
     "settings.views.dialog.error.domain.button.ok" : "Ok",
+    "settings.views.dialog.list.copy.title" : "Copy",
+    "settings.views.dialog.list.copy.message" : [
+        "Where do you want to copy the selected items to?"
+    ],
+    "settings.views.dialog.list.copy.target.directory" : "Target directory: ",
+    "settings.views.dialog.list.copy.button.ok" : "Ok",
+    "settings.views.dialog.list.copy.button.cancel" : "Cancel",
     "settings.views.module.settings.delete" : "Are you sure you want to delete this item",
     "settings.views.section.view.routes.body.title" : "Routes",
     "settings.views.section.view.routes.body.node.url" : "Url",
