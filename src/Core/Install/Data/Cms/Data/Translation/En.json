@@ -253,7 +253,6 @@
     "settings.routes.section.settings.component.td.options.text" : "Actions",
     "settings.server.settings.component.header.a.main.link" : "Main",
     "settings.server.settings.component.header.a.settings.link" : "Settings",
-    "settings.server.settings.component.header.a.add.file.link" : "Add file",
     "settings.server.settings.component.header.button.domains.settings.link" : "Loading...",
     "settings.server.settings.dialog.delete.title" : "Delete:",
     "settings.server.settings.dialog.delete.message" : [
@@ -466,7 +465,7 @@
     "settings.server.settings.section.settings.component.actions.move.text" : "Move",
     "settings.views.component.header.a.main.link" : "Main",
     "settings.views.component.header.a.settings.link" : "Settings",
-    "settings.views.component.header.a.add.template.link" : "Add template",
+    "settings.views.component.header.a.add.file.link" : "Add file",
     "settings.views.component.header.button.domains.settings.link" : "Loading...",
     "settings.views.dialog.error.domain.title" : "Error:",
     "settings.views.dialog.error.domain.message" : [
