@@ -1,6 +1,7 @@
 {{R3M}}
 {{$components = [
 'actions',
+'icon',
 'name',
 'url',
 'options'
