@@ -21,7 +21,7 @@ $__.command +
     data-filter-type="{{$request.filter.type}}"
 >
     <i
-        class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-move"
+        class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-create-symlink"
     >
     </i>
     <span>{{$span.text}}</span>

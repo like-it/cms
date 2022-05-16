@@ -21,7 +21,7 @@ $__.command +
     data-filter-type="{{$request.filter.type}}"
 >
     <i
-        class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-delete"
+        class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-create-file"
     >
     </i>
     <span>{{$span.text}}</span>

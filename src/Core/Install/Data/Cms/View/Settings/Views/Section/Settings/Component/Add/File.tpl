@@ -17,11 +17,23 @@ $__.command +
 )}}
 <a
     class="dropdown-item item-create-file"
-    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Create/File/"
+    data-frontend-url="{{
+        route.get(
+        route.prefix() +
+        '-' +
+        $module +
+        '-' +
+        $submodule +
+        '-' +
+        $section +
+        '-' +
+        $node, [
+        'node.domain' => '{node.domain}'
+    ])}}"
     data-filter-type="{{$request.filter.type}}"
 >
     <i
-        class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-delete"
+        class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-create-file"
     >
     </i>
     <span>{{$span.text}}</span>
