@@ -70,13 +70,25 @@ add.body = () => {
         return;
     }
     const item = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}");
-    if(item.data('is-hidden')){
-        item.data('delete', 'is-hidden');
+    if(item){
+        if(item.data('is-hidden')){
+            item.data('delete', 'is-hidden');
+        } else {
+            const body = section.select('.card-body');
+            body.addClass('d-none');
+            const selected = section.select('.card-' + "{{$command}}" + '-body');
+            if(selected){
+                selected.removeClass('d-none');
+            }
+        }
     } else {
         const body = section.select('.card-body');
         body.addClass('d-none');
         const selected = section.select('.card-' + "{{$command}}" + '-body');
-        selected.removeClass('d-none');
+        if(selected){
+            selected.removeClass('d-none');
+        }
+
     }
 }
 
