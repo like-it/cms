@@ -25,9 +25,9 @@ $__.command +
         '-' +
         $submodule +
         '-' +
-        $section +
+        'add-template' +
         '-' +
-        $node, [
+        'body-node-domain', [
         'node.domain' => '{node.domain}'
     ])}}"
     data-filter-type="{{$request.filter.type}}"
