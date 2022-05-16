@@ -522,6 +522,46 @@
             "OPTIONS"
         ]
     },
+    "6a8942a8-bdb7-439c-ab46-97d4a0e8b084" : {
+        "module" : "settings",
+        "submodule" : "views",
+        "command" : "create",
+        "path": "Settings/Views/Create/{{$type}}",
+        "method": [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "5f5ce039-cabf-463e-9529-33bbfeff1662" : {
+        "module" : "settings",
+        "submodule" : "views",
+        "command" : "copy",
+        "path": "Settings/Views/Copy/{{$node.domain}}",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "72970d16-8a6c-4f8b-9653-e9efd70c3185" : {
+        "module" : "settings",
+        "submodule" : "views",
+        "command" : "move",
+        "path": "Settings/Views/Move/{{$node.domain}}",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "f795d20a-6f8f-4809-9940-185eed018119" : {
+        "module" : "settings",
+        "submodule" : "views",
+        "command" : "upload",
+        "path": "Settings/Views/Upload/{{$node.domain}}",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
     "cca7e1c9-2083-49e0-9560-c916f3a1a29b" : {
         "module" : "settings",
         "submodule" : "views",
