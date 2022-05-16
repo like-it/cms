@@ -2673,14 +2673,21 @@ class Settings extends Main {
             $list = Sort::list($data->data())->with(['url' => 'ASC']);
             $count = count($list);
             $nr = 1;
+            $is_found = false;
+            d($search);
             foreach($list as $key => $record){
+                d($record->url);
                 if(
                     array_key_exists('url', $search) &&
                     $search['url'] === $record->url
                 ){
+                    $is_found = true;
                     break;
                 }
                 $nr++;
+            }
+            if(!$is_found){
+                $nr = 1;
             }
             $limit = Limit::LIMIT;
             if($settings->data('view.default.limit')){
