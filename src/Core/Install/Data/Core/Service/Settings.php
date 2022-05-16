@@ -2605,14 +2605,96 @@ class Settings extends Main {
         $response = [];
         $response['nodeList'] = $list;
         if($destination){
-            $response['page'] = Settings::server_settings_page($object, [
+            $response['page'] = Settings::views_page($object, [
                 'url' => $destination
-            ]);
+            ],
+            $domain->dir . $object->config('dictionary.view') . $object->config('ds'));
         }
         if(!empty($error)){
             $response['error'] = $error;
         }
         return new Response($response, Response::TYPE_JSON);
+    }
+
+    private static function views_page(App $object, $search=[], $url='')
+    {
+        $dir = new Dir();
+        $data = new Data();
+        $read = $dir->read($url, true);
+        $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
+        $settings = $object->data_read($settings_url);
+        $filter = (array) $object->request('filter');
+        if(empty($filter) || !is_array($filter)){
+            $filter = [];
+            $filter['type'] = 'All';
+        }
+        $protected = [];
+        $page = false;
+        if ($settings->data('server.settings.protected')) {
+            $protected = $settings->data('server.settings.protected');
+        }
+        if ($read) {
+            foreach ($read as $nr => $record) {
+                if(
+                    array_key_exists('type', $filter) &&
+                    $filter['type'] === File::TYPE
+                ){
+                    if($record->type !== File::TYPE){
+                        continue;
+                    }
+                }
+                elseif(
+                    array_key_exists('type', $filter) &&
+                    $filter['type'] === Dir::TYPE
+                ){
+                    if($record->type !== Dir::TYPE){
+                        continue;
+                    }
+                }
+                if($record->type !== Dir::TYPE){
+                    $record->extension = File::extension($record->url);
+                    if(
+                        array_key_exists('extension', $filter) &&
+                        !empty($filter['extension']) && 
+                        $filter['extension'] !== $record->extension
+                    ){
+                        continue;
+                    }
+                }
+                if (in_array(
+                    $record->url,
+                    $protected
+                )) {
+                    $record->protected = true;
+                }
+                $key = sha1($record->url);
+                $data->set($key, $record);
+            }
+            $list = Sort::list($data->data())->with(['url' => 'ASC']);
+            $count = count($list);
+            $nr = 1;
+            foreach($list as $key => $record){
+                if(
+                    array_key_exists('url', $search) &&
+                    $search['url'] === $record->url
+                ){
+                    break;
+                }
+                $nr++;
+            }
+            $limit = Limit::LIMIT;
+            if($settings->data('view.default.limit')){
+                $limit = $settings->data('view.default.limit');
+            }
+            if($object->request('limit')){
+                $limit = (int) $object->request('limit');
+                if($limit > Limit::MAX){
+                    $limit = Limit::MAX;
+                }
+            }
+            $page = floor($nr / $limit) + 1;
+        }
+        return $page;
     }
 
     /**
