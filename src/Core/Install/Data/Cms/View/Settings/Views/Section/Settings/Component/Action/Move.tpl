@@ -17,7 +17,7 @@ $__.command +
 )}}
 <a
 class="dropdown-item list-move"
-data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Move/"
+data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Move/{node.domain}/"
 >
 <i
 class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-move"

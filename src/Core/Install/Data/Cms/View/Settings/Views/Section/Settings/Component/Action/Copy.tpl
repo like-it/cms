@@ -17,7 +17,7 @@ $__.command +
 )}}
 <a
 class="dropdown-item list-copy"
-data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Copy/"
+data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Copy/{node.domain}/"
 >
 <i
 class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-copy"
