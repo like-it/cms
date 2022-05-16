@@ -7,7 +7,10 @@ import { getSectionByName } from "/Module/Section.js";
 import { version } from "/Module/Priya.js";
 import { root } from "/Module/Web.js";
 import { contains, replace } from "/Module/String.js";
+import { uuid } from "/Module/Web.js";
+
 import upload from "/Settings/Views/Module/Upload.js";
+
 let settings = {};
 
 settings.get = (attribute) => {
@@ -517,7 +520,11 @@ settings.node.item.create_file = ({node, section, target}) => {
     }
     node.on('click', (event) => {
         if(node.data('has', 'frontend-url')){
-            request(node.data('frontend-url'));
+            const data = {
+                attribute : uuid(),
+                title : "Add file"
+            };
+            request(node.data('frontend-url'), data);
         }
         /*
         let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.message'))}}";

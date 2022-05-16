@@ -1,9 +1,7 @@
 //{{R3M}}
-import create from "/Module/Create.js";
 import user from "/Module/User.js";
 import menu from "/Module/Menu.js";
 import { getSectionByName } from "/Module/Section.js";
-import { uuid } from "/Module/Web.js";
 
 let add = {};
 
@@ -12,8 +10,7 @@ add.title = () => {
     if(!section){
         return;
     }
-    const attribute = uuid();
-    const is_link = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + attribute);
+    const is_link = section.select('.' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.attribute}}");
     if(is_link){
         const nav = section.select('.nav');
         const active = nav.select('.active');
@@ -26,10 +23,10 @@ add.title = () => {
     }
     const nav = section.select('.nav');
     const li = create('li', 'nav-item');
-    const a = create('a', 'nav-link ' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + attribute);
+    const a = create('a', 'nav-link ' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}" + '-' + "{{$request.attribute}}");
     a.data('frontend-url', "");
     a.data('url', "");
-    a.html("<span class='title'>Add file</span><i class=\"fas fa-window-close\"></i>");
+    a.html("<span class='title'>{{$request.title}}</span><i class=\"fas fa-window-close\"></i>");
     li.append(a);
     nav.append(li);
     a.on('click', (event) => {
@@ -64,6 +61,7 @@ add.title = () => {
     }
     a.addClass('active');
 }
+
 
 add.body = () => {
     const section = getSectionByName('main-content');
