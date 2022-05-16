@@ -2560,7 +2560,6 @@ class Settings extends Main {
             throw new Exception('Domain dir not set...');
         }
         $url = $domain->dir . $object->config('dictionary.view') . $object->config('ds') . $directory;
-        dd($url);
         $list = [];
         $error = [];
         $destination = false;
