@@ -2769,6 +2769,8 @@ class Settings extends Main {
             if(!$is_found){
                 $nr = 1;
             }
+            d($search);
+            dd($record);
             $limit = Limit::LIMIT;
             if($settings->data('view.default.limit')){
                 $limit = $settings->data('view.default.limit');
