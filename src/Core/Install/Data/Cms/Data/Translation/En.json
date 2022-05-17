@@ -595,6 +595,7 @@
     "settings.views.section.settings.component.options.rename.icon" : "fas fa-cog",
     "settings.views.section.settings.component.options.rename.text" : "Rename",
     "settings.views.section.settings.component.thead.actions" : "",
+    "settings.views.section.settings.component.thead.icon" : "",
     "settings.views.section.settings.component.thead.name" : "Name",
     "settings.views.section.settings.component.thead.url" : "Url",
     "settings.views.section.settings.component.thead.routes" : "Amount of<br>Routes",
