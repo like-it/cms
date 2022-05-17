@@ -2267,6 +2267,10 @@ class Settings extends Main {
         ){
             throw new Exception('Domain dir not set...');
         }
+        $pos = strpos($url, $domain->dir . $object->config('dictionary.view') . $object->config('ds'));
+        if ($pos !== 0) {
+            throw new Exception('Cannot update outside domain.dir.view');
+        }
         if($url !== $url_old){
             $content = $object->request('node.content');
             if(File::exist($url)){
@@ -2357,6 +2361,10 @@ class Settings extends Main {
                 $response['nodeList'][] = $node;
             }
         } else {
+            $pos = strpos($url, $domain->dir . $object->config('dictionary.view') . $object->config('ds'));
+            if ($pos !== 0) {
+                throw new Exception('Cannot delete outside domain.dir.view');
+            }
             if(File::is_link($url)){
                 File::delete($url);
             }
