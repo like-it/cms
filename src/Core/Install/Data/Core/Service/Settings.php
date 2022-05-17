@@ -2779,8 +2779,6 @@ class Settings extends Main {
                     $limit = Limit::MAX;
                 }
             }
-            d($nr);
-            d($limit);
             $page = floor($nr / $limit) + 1;
         }
         return $page;
