@@ -2302,14 +2302,77 @@ class Settings extends Main {
         ){
             throw new Exception('Domain dir not set...');
         }
-        File::delete($url);
-        $response = [];
-        $response['node'] = [
-            'url' => $url,
-            'is' => [
-                'deleted' => new DateTime('NOW')
-            ]
-        ];
+        if(is_array($url)){
+            $nodeList = $url;
+            foreach($nodeList as $nr => $url) {
+                $nodeList[$nr] = str_replace([
+                    '../',
+                    './'
+                ], [
+                    '',
+                    '',
+                ], $url);
+                $pos = strpos($url, $domain->dir . $object->config('dictionary.view') . $object->config('ds'));
+                if ($pos !== 0) {
+                    throw new Exception('Cannot delete outside domain.dir.view');
+                }
+            }
+            foreach($nodeList as $url) {
+                if(Dir::is($url)){
+                    $dir = $url;
+                } else {
+                    $dir = Dir::name($url);
+                }
+                $explode = explode($object->config('ds'), $dir);
+                for($i=count($explode); $i >= 2; $i--){
+                    $dir_example = implode($object->config('ds'), $explode);
+                    if(substr($dir_example, 0, -1) !== $object->config('ds')){
+                        $dir_example .= $object->config('ds');
+                    }
+                    $pop = array_pop($explode);
+                    if(empty($pop)){
+                        continue;
+                    }
+                    if(
+                        File::is_link($dir_example) &&
+                        $url !== $dir_example
+                    ){
+                        throw new Exception('Cannot delete protected symlink file...');
+                    }
+                }
+            }
+            $response = [];
+            foreach($nodeList as $url) {
+                if(File::is_link($url)){
+                    File::delete($url);
+                }
+                elseif(Dir::is($url)){
+                    Dir::remove($url);
+                } else {
+                    File::delete($url);
+                }
+                $node = [];
+                $node['url'] = $url;
+                $node['isDeleted'] = new DateTime();
+                $response['nodeList'][] = $node;
+            }
+        } else {
+            if(File::is_link($url)){
+                File::delete($url);
+            }
+            elseif(Dir::is($url)){
+                Dir::remove($url);
+            } else {
+                File::delete($url);
+            }
+            $response = [];
+            $response['node'] = [
+                'url' => $url,
+                'is' => [
+                    'deleted' => new DateTime()
+                ]
+            ];
+        }
         return new Response($response, Response::TYPE_JSON);
     }
 
@@ -2416,105 +2479,6 @@ class Settings extends Main {
      * @throws ErrorException
      * @throws FileMoveException
      */
-    public static function views_move_list(App $object): Response
-    {
-        $nodeList = $object->request('nodeList');
-        $list = [];
-        if(is_array($nodeList)){
-            foreach($nodeList as $nr => $url){
-                $basename = File::basename($url);
-                if(in_array($basename, $list)){
-                    throw new ErrorException('Duplicate basename...');
-                }
-                if(Dir::is($url)){
-                    $dir = $url;
-                } else {
-                    $dir = Dir::name($url);
-                }
-                $explode = explode($object->config('ds'), $dir);
-                for($i=count($explode); $i >= 2; $i--){
-                    $dir_example = implode($object->config('ds'), $explode);
-                    if(substr($dir_example, 0, -1) !== $object->config('ds')){
-                        $dir_example .= $object->config('ds');
-                    }
-                    $pop = array_pop($explode);
-                    if(empty($pop)){
-                        continue;
-                    }
-                    if(File::is_link($dir_example)){
-                        throw new Exception('Cannot move protected symlink file...');
-                    }
-                }
-                $list[] = File::basename($url);
-            }
-        }
-        $overwrite = true;
-        $directory = $object->request('directory');
-        $directory = trim($directory, $object->config('ds')) . $object->config('ds');
-        if($directory === $object->config('ds')){
-            $directory = '';
-        }
-        $url = $object->config('project.dir.public') . $directory;
-        $list = [];
-        $error = [];
-        $destination = false;
-        if(is_array($nodeList)){
-            if(!File::exist($url)){
-                Dir::create($url);
-            }
-            foreach($nodeList as $nr => $source){
-                $destination = $url;
-                if($source == $destination){
-                    $list[] = $destination;
-                    continue;
-                }
-                if(!Dir::is($source)){
-                    continue;
-                } else {
-                    $move = Dir::move($source, $destination, $overwrite);
-                }
-                if($move){
-                    $list[] = $destination;
-                } else {
-                    $error[] = $source;
-                }
-            }
-            foreach($nodeList as $nr => $source){
-                $destination = $url . File::basename($source);
-                if($source == $destination){
-                    $list[] = $destination;
-                    continue;
-                }
-                if(Dir::is($source)){
-                    continue;
-                } else {
-                    $move = File::move($source, $destination, $overwrite);
-                }
-                if($move){
-                    $list[] = $destination;
-                } else {
-                    $error[] = $source;
-                }
-            }
-        }
-        $response = [];
-        $response['nodeList'] = $list;
-        if($destination){
-            $response['page'] = Settings::server_settings_page($object, [
-                'url' => $destination
-            ]);
-        }
-        if(!empty($error)){
-            $response['error'] = $error;
-        }
-        return new Response($response, Response::TYPE_JSON);
-    }
-
-    /**
-     * @throws Exception
-     * @throws ErrorException
-     * @throws FileMoveException
-     */
     public static function views_copy_list(App $object): Response
     {
         $nodeList = $object->request('nodeList');
@@ -2609,6 +2573,116 @@ class Settings extends Main {
                 'url' => $destination
             ],
             $domain->dir . $object->config('dictionary.view') . $object->config('ds'));
+        }
+        if(!empty($error)){
+            $response['error'] = $error;
+        }
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws Exception
+     * @throws ErrorException
+     * @throws FileMoveException
+     */
+    public static function views_move_list(App $object): Response
+    {
+        $nodeList = $object->request('nodeList');
+        $list = [];
+        if(is_array($nodeList)){
+            foreach($nodeList as $nr => $url){
+                $basename = File::basename($url);
+                if(in_array($basename, $list)){
+                    throw new ErrorException('Duplicate basename...');
+                }
+                if(Dir::is($url)){
+                    $dir = $url;
+                } else {
+                    $dir = Dir::name($url);
+                }
+                $explode = explode($object->config('ds'), $dir);
+                for($i=count($explode); $i >= 2; $i--){
+                    $dir_example = implode($object->config('ds'), $explode);
+                    if(substr($dir_example, 0, -1) !== $object->config('ds')){
+                        $dir_example .= $object->config('ds');
+                    }
+                    $pop = array_pop($explode);
+                    if(empty($pop)){
+                        continue;
+                    }
+                    if(File::is_link($dir_example)){
+                        throw new Exception('Cannot move protected symlink file...');
+                    }
+                }
+                $list[] = File::basename($url);
+            }
+        }
+        $overwrite = true;
+        $directory = $object->request('directory');
+        $directory = trim($directory, $object->config('ds')) . $object->config('ds');
+        if($directory === $object->config('ds')){
+            $directory = '';
+        }
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $url = $domain->dir . $object->config('dictionary.view') . $object->config('ds') . $directory;
+        $list = [];
+        $error = [];
+        $destination = false;
+        if(is_array($nodeList)){
+            if(!File::exist($url)){
+                Dir::create($url);
+            }
+            foreach($nodeList as $nr => $source){
+                $destination = $url;
+                if($source == $destination){
+                    $list[] = $destination;
+                    continue;
+                }
+                if(!Dir::is($source)){
+                    continue;
+                } else {
+                    $move = Dir::move($source, $destination, $overwrite);
+                }
+                if($move){
+                    $list[] = $destination;
+                } else {
+                    $error[] = $source;
+                }
+            }
+            foreach($nodeList as $nr => $source){
+                $destination = $url . File::basename($source);
+                if($source == $destination){
+                    $list[] = $destination;
+                    continue;
+                }
+                if(Dir::is($source)){
+                    continue;
+                } else {
+                    $move = File::move($source, $destination, $overwrite);
+                }
+                if($move){
+                    $list[] = $destination;
+                } else {
+                    $error[] = $source;
+                }
+            }
+        }
+        $response = [];
+        $response['nodeList'] = $list;
+        if($destination){
+            $response['page'] = Settings::views_page(
+                $object,
+                [
+                    'url' => $destination
+                ],
+            $domain->dir . $object->config('dictionary.view') . $object->config('ds')
+            );
         }
         if(!empty($error)){
             $response['error'] = $error;
