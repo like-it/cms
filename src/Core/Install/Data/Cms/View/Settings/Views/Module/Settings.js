@@ -754,6 +754,18 @@ settings.node.list.delete = ({node, section, target}) => {
         if(form){
             form.on('submit', (event) => {
                 if(node.data('has', 'url')){
+                    let url = node.data('url');
+                    if(contains(url, "{node.domain}") !== false){
+                        const section = getSectionByName('main-content');
+                        if(!section){
+                            return;
+                        }
+                        const domain = section.select('input[name="node.domain"]');
+                        if(!domain){
+                            return;
+                        }
+                        url = replace("{node.domain}", domain.value, url);
+                    }
                     let data = {
                         nodeList : settings.get('selected'),
                         request : {
@@ -765,7 +777,7 @@ settings.node.list.delete = ({node, section, target}) => {
                         extension: "{{$request.filter.extension}}"
                     };
                     header('authorization', 'Bearer ' + user.token());
-                    request(node.data('url'), data, (url, response) => {
+                    request(url, data, (url, response) => {
                         const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
                         if(menuItem){
                             menuItem.data('filter-type', filter.type);
@@ -935,6 +947,18 @@ settings.node.list.move = ({node, section, target}) => {
         }
         form.on('submit', (event) => {
             if(form.data('has', 'url')){
+                let url = node.data('url');
+                if(contains(url, "{node.domain}") !== false){
+                    const section = getSectionByName('main-content');
+                    if(!section){
+                        return;
+                    }
+                    const domain = section.select('input[name="node.domain"]');
+                    if(!domain){
+                        return;
+                    }
+                    url = replace("{node.domain}", domain.value, url);
+                }
                 header('authorization', 'Bearer ' + user.token());
                 let filter = {
                     type : "{{$request.filter.type}}",
@@ -946,7 +970,7 @@ settings.node.list.move = ({node, section, target}) => {
                     limit: "{{$request.limit}}",
                     filter: filter
                 };
-                request(form.data('url'), data, (url, response) => {
+                request(url, data, (url, response) => {
                     dialog_create.remove();
                     const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
                     if(response?.page){
