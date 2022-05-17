@@ -1996,7 +1996,7 @@ class Settings extends Main {
             foreach($list as $key => $record){
                 if(
                     array_key_exists('url', $search) &&
-                    $search['url'] === $record->url
+                    strstr($record->url, $search['url'])  !== false
                 ){
                    break;
                 }
@@ -2759,7 +2759,7 @@ class Settings extends Main {
             foreach($list as $key => $record){
                 if(
                     array_key_exists('url', $search) &&
-                    $search['url'] === $record->url
+                    strstr($record->url, $search['url'])  !== false
                 ){
                     $is_found = true;
                     break;
@@ -2769,8 +2769,6 @@ class Settings extends Main {
             if(!$is_found){
                 $nr = 1;
             }
-            d($search);
-            dd($record);
             $limit = Limit::LIMIT;
             if($settings->data('view.default.limit')){
                 $limit = $settings->data('view.default.limit');
