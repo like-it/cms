@@ -322,13 +322,12 @@ class Settings extends View {
         try {
             switch (Handler::method()) {
                 case 'DELETE' :
-                    if($url){
-                        return Service::views_delete($object, $url);
-                    } elseif($nodeList){
+                    if($nodeList){
                         dd($object->request());
                         return Service::views_delete($object, $nodeList);
+                    } elseif($url){
+                        return Service::views_delete($object, $url);
                     }
-
                 case 'GET' :
                     return Service::views_read($object, $url);
                 case 'PUT' :
