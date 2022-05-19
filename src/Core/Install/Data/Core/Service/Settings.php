@@ -1996,7 +1996,7 @@ class Settings extends Main {
             foreach($list as $key => $record){
                 if(
                     array_key_exists('url', $search) &&
-                    strstr($record->url, $search['url'])  !== false
+                    stristr($record->url, $search['url'])  !== false
                 ){
                    break;
                 }
@@ -2759,7 +2759,7 @@ class Settings extends Main {
             foreach($list as $key => $record){
                 if(
                     array_key_exists('url', $search) &&
-                    strstr($record->url, $search['url'])  !== false
+                    stristr($record->url, $search['url'])  !== false
                 ){
                     $is_found = true;
                     break;

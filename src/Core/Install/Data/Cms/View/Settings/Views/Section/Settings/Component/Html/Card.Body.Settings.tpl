@@ -46,7 +46,7 @@
         <thead>
         <tr>
             {{for.each($components as $component)}}
-            <th scope="col">{{__(
+            <th scope="col" class="th-{{$component}}">{{__(
                 $__.module +
                 '.' +
                 $__.submodule +
