@@ -210,7 +210,7 @@
                 >
                 </i>
             </button>
-            {/block.html}
+            {{/block.html}}
         </td>
     </tr>
 </tfoot>
