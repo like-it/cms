@@ -570,6 +570,7 @@
         "method": [
             "GET",
             "PUT",
+            "PATCH",
             "DELETE",
             "OPTIONS"
         ]

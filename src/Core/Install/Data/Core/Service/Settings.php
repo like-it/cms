@@ -2385,6 +2385,42 @@ class Settings extends Main {
     }
 
     /**
+     * @throws FileMoveException
+     */
+    public static function views_rename(App $object): Response
+    {
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $source = str_replace(['./','../'],'/', $object->request('node.source'));
+        $destination = str_replace(['./','../'],'/', $object->request('node.destination'));
+        if(strpos($destination, $object->config('ds')) !== false){
+            $destination = $domain->dir . ltrim($destination, $object->config('ds'));
+            $dir = Dir::name($destination);
+            Dir::create($dir);
+            File::move($source, $destination);
+        } else {
+            $destination = $object->config('project.dir.public') . $destination;
+            if(substr($source, 0, strlen($domain->dir)) === $domain->dir){
+                File::move($source, $destination);
+            } else {
+                $object->logger()->error('fileMoveException', [$source, $destination]);
+                throw new FileMoveException('Not in domain directory...');
+            }
+        }
+        $response = [];
+        $response['node'] = [
+            'source' => $source,
+            'destination' => $destination,
+        ];
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
      * @throws Exception
      */
     public static function views_list(App $object): Response
