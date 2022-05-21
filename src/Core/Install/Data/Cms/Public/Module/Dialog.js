@@ -41,10 +41,12 @@ dialog.create = ({
     const body = create('div', 'body');
     const footer = create('div', 'footer');
     head.html('<h1>' + title + '</h1><span class="close"><i class="fas fa-window-close"></i></span>');
-    if(error?.length > 0){
-        body.html('<p class="alert alert-danger">' + error.join('<br>')  + '</p>');
-    } else if (typeof error === 'string'){
+    console.log(typeof error);
+    if (typeof error === 'string'){
         body.html('<p class="alert alert-danger">' + error + '<br>'  + '</p>');
+    }
+    else if(error?.length > 0){
+        body.html('<p class="alert alert-danger">' + error.join('<br>')  + '</p>');
     }
     if(message.substring(0,1) === '<' && message.substring(-1,1) === '>'){
         body.html(body.html() + message);
