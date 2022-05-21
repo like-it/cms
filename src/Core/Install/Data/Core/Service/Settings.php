@@ -2389,7 +2389,7 @@ class Settings extends Main {
      * @throws ErrorException
      * @throws Exception
      */
-    public static function views_rename(App $object): Response
+    public static function views_rename(App $object, $url): Response
     {
         $domain = Settings::domain_get($object);
         if(

@@ -473,6 +473,19 @@
         "Did you forget to add a domain?"
     ],
     "settings.views.dialog.error.domain.button.ok" : "Ok",
+    "settings.views.dialog.rename.title" : "Rename",
+    "settings.views.dialog.rename.message" : [
+        "Are you sure you want to rename {$name}?"
+    ],
+    "settings.views.dialog.rename.button.ok" : "Ok",
+    "settings.views.dialog.rename.button.cancel" : "Cancel",
+    "settings.views.dialog.rename.destination.label" : "New name",
+    "settings.views.dialog.delete.title" : "Delete",
+    "settings.views.dialog.delete.message" : [
+        "Are you sure you want to delete {$name}?"
+    ],
+    "settings.views.dialog.delete.button.ok" : "Ok",
+    "settings.views.dialog.delete.button.cancel" : "Cancel",
     "settings.views.dialog.list.copy.title" : "Copy",
     "settings.views.dialog.list.copy.message" : [
         "Where do you want to copy the selected items to?"
@@ -487,13 +500,6 @@
     "settings.views.dialog.list.move.target.directory" : "Target directory: ",
     "settings.views.dialog.list.move.button.ok" : "Ok",
     "settings.views.dialog.list.move.button.cancel" : "Cancel",
-    "settings.views.dialog.rename.title" : "Rename",
-    "settings.views.dialog.rename.message" : [
-        "Are you sure you want to rename {$name}?"
-    ],
-    "settings.views.dialog.rename.button.ok" : "Ok",
-    "settings.views.dialog.rename.button.cancel" : "Cancel",
-    "settings.views.dialog.rename.destination.label" : "New name",
     "settings.views.dialog.list.delete.title" : "Delete",
     "settings.views.dialog.list.delete.message" : [
         "Are you sure you want to delete the selected items?"
