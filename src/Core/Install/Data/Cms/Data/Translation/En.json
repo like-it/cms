@@ -489,11 +489,11 @@
     "settings.views.dialog.list.move.button.cancel" : "Cancel",
     "settings.views.dialog.rename.title" : "Rename",
     "settings.views.dialog.rename.message" : [
-        "Please fill in the new destination?"
+        "Are you sure you want to rename {$name}?"
     ],
     "settings.views.dialog.rename.button.ok" : "Ok",
     "settings.views.dialog.rename.button.cancel" : "Cancel",
-    "settings.views.dialog.rename.destination.label" : "New destination",
+    "settings.views.dialog.rename.destination.label" : "New name",
     "settings.views.dialog.list.delete.title" : "Delete",
     "settings.views.dialog.list.delete.message" : [
         "Are you sure you want to delete the selected items?"
