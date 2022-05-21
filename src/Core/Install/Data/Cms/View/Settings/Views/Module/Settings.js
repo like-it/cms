@@ -359,7 +359,6 @@ settings.node.item.rename = ({node, section, target}) => {
         return;
     }
     node.on('click', (event) => {
-        console.log(node);
         let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.message'))}}";
         message = _('prototype').string.replace('{{$name}}', node.data('name'), message);
         message += '<br><input type="hidden" name="node.source" value="' + node.data('source') +
@@ -403,6 +402,7 @@ settings.node.item.rename = ({node, section, target}) => {
                     };
                     header('authorization', 'Bearer ' + user.token());
                     request(node.data('url'), data, (url, response) => {
+                        console.log(response);
                         settings.menuItem();
                         dialog_create.remove();
                         menu.dispatch(section, target);
