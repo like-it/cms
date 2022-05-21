@@ -402,7 +402,45 @@ settings.node.item.rename = ({node, section, target}) => {
                     };
                     header('authorization', 'Bearer ' + user.token());
                     request(node.data('url'), data, (url, response) => {
-                        console.log(response);
+                        const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                        if(response?.page){
+                            if(menuItem){
+                                menuItem.data('page', response.page);
+                            }
+                        }
+                        if(menuItem){
+                            menuItem.data('filter-type', filter.type);
+                            menuItem.data('limit', "{{$request.limit}}");
+                        }
+                        if(response?.class === "{{__($__.module + \'.\' + $__.submodule + \'.\' + \'dialog.error.rename.response.class)}}"){
+                            let error = '';
+                            if(response?.message === "{{__($__.module + \'.\' + $__.submodule + \'.\' + \'dialog.error.rename.response.message.file.exist)}}"){
+                                error = "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.file.exist)}}";
+                            }
+                            let dialog_error = dialog.create({
+                                title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.title')}}",
+                                message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.message'))}}",
+                                error : error,
+                                buttons : [
+                                    {
+                                        text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.button.ok')}}"
+                                    }
+                                ],
+                                section : section,
+                                className : "dialog dialog-error dialog-error-move"
+                            });
+                            const form = dialog_error.select('form');
+                            if(!form){
+                                return;
+                            }
+                            form.on('submit', (event) => {
+                                dialog_error.remove();
+                            });
+                            const button = form.select('button[type="submit"]');
+                            if(button){
+                                button.focus();
+                            }
+                        }
                         settings.menuItem();
                         dialog_create.remove();
                         menu.dispatch(section, target);
