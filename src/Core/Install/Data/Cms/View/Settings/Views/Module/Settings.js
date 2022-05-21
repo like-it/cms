@@ -359,11 +359,11 @@ settings.node.item.rename = ({node, section, target}) => {
         return;
     }
     node.on('click', (event) => {
-        console.log('clcick');
+        console.log(node);
         let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.message'))}}";
         message = _('prototype').string.replace('{{$name}}', node.data('name'), message);
         message += '<br><input type="hidden" name="node.source" value="' + node.data('source') +
-            '"<label>' +
+            '"/><label>' +
             "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.rename.destination.label')}}" +
             '</label><input type="text" name="node.destination" />'
         ;
