@@ -2404,7 +2404,7 @@ class Settings extends Main {
             Dir::create($dir);
             File::move($source, $destination);
         } else {
-            $destination = $object->config('project.dir.public') . $destination;
+            $destination = $domain->dir . $destination;
             if(substr($source, 0, strlen($domain->dir)) === $domain->dir){
                 File::move($source, $destination);
             } else {
