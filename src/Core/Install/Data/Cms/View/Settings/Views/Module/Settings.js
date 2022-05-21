@@ -389,11 +389,17 @@ settings.node.item.rename = ({node, section, target}) => {
         if(form){
             form.on('submit', (event) => {
                 if(node.data('has', 'url')){
+                    let filter = {
+                        type : "{{$request.filter.type}}",
+                        extension : "{{$request.filter.extension}}",
+                    };
                     let data = {
                         ...form.data('serialize'),
                         request : {
                             method : node.data('request-method') ? node.data('request-method') : "PATCH"
-                        }
+                        },
+                        limit: "{{$request.limit}}",
+                        filter: filter
                     };
                     header('authorization', 'Bearer ' + user.token());
                     request(node.data('url'), data, (url, response) => {
