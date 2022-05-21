@@ -18,7 +18,6 @@ $__.command +
 <a
     class="dropdown-item item-rename"
     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.name}}/{{$node.domain}}"
-    data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-rename-body')}}"
     data-name="{{$node.name}}"
     data-source="{{$node.url}}"
 >
