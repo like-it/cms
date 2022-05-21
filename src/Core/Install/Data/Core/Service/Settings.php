@@ -2386,6 +2386,8 @@ class Settings extends Main {
 
     /**
      * @throws FileMoveException
+     * @throws ErrorException
+     * @throws Exception
      */
     public static function views_rename(App $object): Response
     {
@@ -2399,13 +2401,21 @@ class Settings extends Main {
         $source = str_replace(['./','../'],'/', $object->request('node.source'));
         $destination = str_replace(['./','../'],'/', $object->request('node.destination'));
         if(strpos($destination, $object->config('ds')) !== false){
-            $destination = $domain->dir . ltrim($destination, $object->config('ds'));
+            $destination = $domain->dir .
+                $object->config('dictionary.view') .
+                $object->config('ds') .
+                ltrim($destination, $object->config('ds'));
             $dir = Dir::name($destination);
             Dir::create($dir);
             File::move($source, $destination);
         } else {
-            $destination = $domain->dir . $destination;
-            if(substr($source, 0, strlen($domain->dir)) === $domain->dir){
+            $destination = $domain->dir . $object->config('dictionary.view') . $object->config('ds') . $destination;
+            if(substr(
+                $source,
+                0,
+                strlen($domain->dir . $object->config('dictionary.view') . $object->config('ds'))
+                ) === $domain->dir . $object->config('dictionary.view') . $object->config('ds')
+            ){
                 File::move($source, $destination);
             } else {
                 $object->logger()->error('fileMoveException', [$source, $destination]);
