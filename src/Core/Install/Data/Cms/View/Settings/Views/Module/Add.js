@@ -175,7 +175,12 @@ add.form = (target) => {
                     });
                 } else {
                     const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                    console.log(menuItem);
+                    if(menuItem){
+                        const close = menuItem.select('.close');
+                        if(close){
+                            close.trigger('click');
+                        }
+                    }
                     menu.dispatch(section, target);
                 }
             });
