@@ -590,6 +590,7 @@
     "settings.views.section.form.error.extension.validate_string_length" : "The name needs an extension...",
     "settings.views.section.form.error.extension.validate_in_array" : "Please use one of the following extensions: .tpl, .js, .json or .css",
     "settings.views.section.form.error.url.validate_string_length" : "The name is required.",
+    "settings.views.section.form.error.url.validate_string_contains" : "The name must just be [A-Za-z] (alphabetical)",
     "settings.views.section.form.error.url.validate_url" : "The name already exists. Please use a different url...",
     "settings.views.section.settings.component.action.copy.text" : "Copy",
     "settings.views.section.settings.component.action.delete.text" : "Delete",
