@@ -412,14 +412,23 @@ settings.node.item.rename = ({node, section, target}) => {
                             menuItem.data('filter-type', filter.type);
                             menuItem.data('limit', "{{$request.limit}}");
                         }
-                        let source = data[2]?.node?.source;
+                        let source;
+                        let destination;
+                        for(let attribute in data){
+                            let item  = data[attribute];
+                            if(item.name === 'node.source'){
+                                source = item.value;
+                            }
+                            else if(item.name === 'node.destination'){
+                                destination = item.value;
+                            }
+                        }
                         if(source){
                             let from = _('_').basename(source);
                             console.log(from);
                         }
-
-
                         console.log(source);
+                        console.log(destination);   
                         console.log(data);
                         if(response?.class === "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.response.class')}}"){
                             let error = '';
