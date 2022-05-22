@@ -492,6 +492,22 @@
         "Cannot rename file.",
         "Source: {$source} to destination: {$destination}"
     ],
+    "settings.views.dialog.error.item.create.symlink.title": "Error creating symlink",
+    "settings.views.dialog.error.item.create.symlink.destination.message" : [
+        "Unable to create the symlink, the destination already exists..."
+    ],
+    "settings.views.dialog.error.item.create.symlink.source.message" : [
+        "Unable to create the symlink, cannot find the source..."
+    ],
+    "settings.views.dialog.error.item.create.symlink.button.ok" : "Ok",
+    "settings.views.dialog.create.symlink.title" : "Create new symlink",
+    "settings.views.dialog.create.symlink.message" : [
+        "Please give the source & destination of the symlink which you want to create..."
+    ],
+    "settings.views.dialog.create.symlink.button.ok" : "Ok",
+    "settings.views.dialog.create.symlink.button.cancel" : "Cancel",
+    "settings.views.dialog.create.symlink.source" : "Source: ",
+    "settings.server.settings.dialog.create.symlink.destination" : "Destination: ",
     "settings.views.dialog.rename.title" : "Rename",
     "settings.views.dialog.rename.message" : [
         "Are you sure you want to rename {$name}?"
