@@ -469,7 +469,7 @@ settings.node.item.rename = ({node, section, target}) => {
                                 error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.name.validate_string_contains')}}");
                             }
                             if(response.error.extension.validate_string_length[0] === false){
-                                error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.extension.validate_string_length')}");
+                                error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.extension.validate_string_length')}}");
                             }
                             if(response.error.extension.validate_string_contains[0] === false){
                                 error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.extension.validate_string_contains')}}");
