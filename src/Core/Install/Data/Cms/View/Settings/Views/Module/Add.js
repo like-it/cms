@@ -181,6 +181,12 @@ add.form = (target) => {
                             close.trigger('click');
                         }
                     }
+                    if(response?.page){
+                        const menuItem = section.select(".{{$module}}-{{$submodule}}-settings");
+                        if(menuItem){
+                            menuItem.data('page', response.page);
+                        }
+                    }
                     menu.dispatch(section, target);
                 }
             });
