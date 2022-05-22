@@ -431,9 +431,9 @@ settings.node.item.rename = ({node, section, target}) => {
                             if(response?.message === "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.response.message.file.exist')}}"){
                                 error = "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.file.exist')}}";
                             }
-                            let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.message'))}}";;
-                            message.replace('{source}', source);
-                            message.replace('{destination}', destination);
+                            let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.message'))}}";
+                            message.replace('{$source}', source);
+                            message.replace('{$destination}', destination);
                             let dialog_error = dialog.create({
                                 title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.title')}}",
                                 message : message,
