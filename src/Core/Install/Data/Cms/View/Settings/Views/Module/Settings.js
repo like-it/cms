@@ -433,8 +433,8 @@ settings.node.item.rename = ({node, section, target}) => {
                             }
                             let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.message'))}}";
                             console.log(message);
-                            message = message.replace('{$source}', source);
-                            message = message.replace('{$destination}', destination);
+                            message = _('_').string.replace('{$source}', source, message);
+                            message = _('_').string.replace('{$destination}', destination, message);
                             let dialog_error = dialog.create({
                                 title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.title')}}",
                                 message : message,
