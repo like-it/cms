@@ -413,8 +413,12 @@ settings.node.item.rename = ({node, section, target}) => {
                             menuItem.data('limit', "{{$request.limit}}");
                         }
                         let source = data[2]?.node?.source;
-                        let from = _('_').basename(source);
-                        console.log(from);
+                        if(source){
+                            let from = _('_').basename(source);
+                            console.log(from);
+                        }
+
+
                         console.log(source);
                         console.log(data);
                         if(response?.class === "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.response.class')}}"){
