@@ -2427,6 +2427,11 @@ class Settings extends Main {
             'source' => $source,
             'destination' => $destination,
         ];
+        $response['page'] = Settings::views_page($object, [
+            'url' => $destination
+        ],
+            $domain->dir . $object->config('dictionary.view') . $object->config('ds')
+        );
         return new Response($response, Response::TYPE_JSON);
     }
 
@@ -2626,7 +2631,8 @@ class Settings extends Main {
             $response['page'] = Settings::views_page($object, [
                 'url' => $destination
             ],
-            $domain->dir . $object->config('dictionary.view') . $object->config('ds'));
+            $domain->dir . $object->config('dictionary.view') . $object->config('ds')
+            );
         }
         if(!empty($error)){
             $response['error'] = $error;
