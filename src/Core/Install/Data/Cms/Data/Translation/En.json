@@ -505,6 +505,9 @@
     "settings.views.dialog.error.item.create.directory.empty.message" : [
         "Please give a valid name..."
     ],
+    "settings.views.dialog.error.item.create.directory.dir.exist.message" : [
+        "Unable to create the directory ({$directory}), the directory already exists..."
+    ],
     "settings.views.dialog.error.item.create.directory.exist.message" : [
         "Unable to create the directory, the directory already exists..."
     ],
