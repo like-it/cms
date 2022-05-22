@@ -506,9 +506,9 @@ settings.node.item.rename = ({node, section, target}) => {
                             }
                         } else {
                             settings.menuItem();
-                            dialog_create.remove();
                             menu.dispatch(section, target);
                         }
+                        dialog_create.remove();
                     });
                 }
             });
