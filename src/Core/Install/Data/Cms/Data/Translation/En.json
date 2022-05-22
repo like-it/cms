@@ -474,7 +474,7 @@
     ],
     "settings.views.dialog.error.domain.button.ok" : "Ok",
     "settings.views.dialog.error.rename.button.ok" : "Ok",
-    "settings.views.dialog.error.rename.file.exist" : "Destination file ({$destination})already exists...",
+    "settings.views.dialog.error.rename.file.exist" : "Destination file ({$destination}) already exists...",
     "settings.views.dialog.error.rename.message" : [
         "Cannot rename file.",
         "Source: {$source} to destination: {$destination}"
