@@ -2842,6 +2842,13 @@ class Settings extends Main {
      */
     private static function views_put(App $object, $domain)
     {
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
         $object->request('node.extension', File::extension($object->request('node.name')));
         $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view');
         $object->request('node.url',
@@ -2886,6 +2893,11 @@ class Settings extends Main {
                     $object->request('node.content', $content);
                     $data = [];
                     $data['node'] = $object->request('node');
+                    $data['page'] = Settings::views_page($object, [
+                        'url' => $object->request('node.url')
+                    ],
+                        $domain->dir . $object->config('dictionary.view') . $object->config('ds')
+                    );
                     return new Response($data, Response::TYPE_JSON);
                 }
             } else {
