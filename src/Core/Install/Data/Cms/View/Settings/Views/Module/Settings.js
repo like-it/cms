@@ -582,6 +582,7 @@ settings.node.item.create_dir = ({node, section, target}) => {
                             let message;
 
                             if(response?.error){
+                                message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.name.message'))}}";
                                 if(response.error.name.validate_string_length[0] === false){
                                     error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.name.validate_string_length')}}");
                                 }
