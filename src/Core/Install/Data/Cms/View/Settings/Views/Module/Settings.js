@@ -574,10 +574,10 @@ settings.node.item.create_dir = ({node, section, target}) => {
                     };
                     header('authorization', 'Bearer ' + user.token());
                     request(url, data, (url, response) => {
-                        if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
+                        if(response?.class === "{{__($__.module + '.' + $__.submodule + '.' + 'exception.error')}}"){
                             let error = [];
                             let message;
-                            if(response?.message === 'Name cannot be empty...'){
+                            if(response?.message === "{{__($__.module + '.' + $__.submodule + '.' + 'section' + '.' + $__.command + '.' + 'create.directory.response.message')}}"){
                                 message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.empty.message'))}}";
                                 error.push("{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.empty.directory'))}}");
                             } else {
