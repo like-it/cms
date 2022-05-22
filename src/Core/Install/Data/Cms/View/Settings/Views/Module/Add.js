@@ -174,6 +174,8 @@ add.form = (target) => {
 
                     });
                 } else {
+                    const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
+                    console.log(menuItem);
                     menu.dispatch(section, target);
                 }
             });

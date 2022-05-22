@@ -8,7 +8,7 @@
 'extension.validate_in_array',
 'extension.validate_string_contains',
 'name.validate_string_contains',
-'url.validate_string_length',
+'name.validate_string_length',
 'url.validate_url',
 ]}}
 {{for.each($errors as $error)}}

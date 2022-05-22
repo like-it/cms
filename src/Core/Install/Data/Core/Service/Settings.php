@@ -2842,7 +2842,6 @@ class Settings extends Main {
      */
     private static function views_put(App $object, $domain)
     {
-        $domain = Settings::domain_get($object);
         if(
             !property_exists($domain, 'dir') ||
             !property_exists($domain, 'uuid')
