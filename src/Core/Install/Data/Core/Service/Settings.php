@@ -2405,17 +2405,28 @@ class Settings extends Main {
                 $object->config('dictionary.view') .
                 $object->config('ds') .
                 ltrim($destination, $object->config('ds'));
+            $object->request('node.extension', File::extension($destination));
+            $object->request('node.name', File::basename($destination, '.' . $object->request('node.extension')));
+            $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view.rename');
+            dd($validate);
             $dir = Dir::name($destination);
             Dir::create($dir);
             File::move($source, $destination);
         } else {
-            $destination = $domain->dir . $object->config('dictionary.view') . $object->config('ds') . $destination;
+            $destination = $domain->dir .
+                $object->config('dictionary.view') .
+                $object->config('ds') .
+                $destination;
             if(substr(
                 $source,
                 0,
                 strlen($domain->dir . $object->config('dictionary.view') . $object->config('ds'))
                 ) === $domain->dir . $object->config('dictionary.view') . $object->config('ds')
             ){
+                $object->request('node.extension', File::extension($destination));
+                $object->request('node.name', File::basename($destination, '.' . $object->request('node.extension')));
+                $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view.rename');
+                dd($validate);
                 File::move($source, $destination);
             } else {
                 $object->logger()->error('fileMoveException', [$source, $destination]);

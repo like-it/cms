@@ -1,6 +1,6 @@
 {
     "view": {
-        "patch" : {
+        "rename" : {
             "validate": {
                 "name": [
                     {
@@ -11,8 +11,26 @@
                             "regex": "^[a-zA-Z0-9.\/]+$^"
                         }
                     }
+                ],
+                "extension": [
+                    {
+                        "string.length": ">=1"
+                    },
+                    {
+                        "string.contains": {
+                            "regex": "^[a-z.]+$^"
+                        }
+                    },
+                    {
+                        "in.array": [
+                            "tpl",
+                            "js",
+                            "css",
+                            "json"
+                        ]
+                    }
                 ]
-},
+            },
         "put" : {
             "validate": {
                 "name": [
