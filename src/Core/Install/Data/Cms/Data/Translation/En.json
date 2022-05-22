@@ -512,6 +512,8 @@
         "Unable to create the directory, the directory already exists..."
     ],
     "settings.views.dialog.error.item.create.directory.button.ok" : "Ok",
+    "settings.views.dialog.error.item.create.directory.name.validate_string_length" : "The name is required.",
+    "settings.views.dialog.error.item.create.directory.name.validate_string_contains" : "The name must just be [A-Za-z][0-9] (alphabetical and or numeric)",
     "settings.views.dialog.create.directory.title" : "Create new directory",
     "settings.views.dialog.create.directory.message" : [
         "Please give the name of the directory which you want to create..."

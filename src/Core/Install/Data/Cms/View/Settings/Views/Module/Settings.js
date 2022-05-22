@@ -574,23 +574,36 @@ settings.node.item.create_dir = ({node, section, target}) => {
                     };
                     header('authorization', 'Bearer ' + user.token());
                     request(url, data, (url, response) => {
-                        if(response?.class === "{{__($__.module + '.' + $__.submodule + '.' + 'exception.error')}}"){
+                        if(
+                            response?.class === "{{__($__.module + '.' + $__.submodule + '.' + 'exception.error')}}" ||
+                            response?.error
+                        ){
                             let error = [];
                             let message;
-                            if(response?.message === "{{__($__.module + '.' + $__.submodule + '.' + 'section' + '.' + $__.command + '.' + 'create.directory.response.message')}}"){
-                                message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.empty.message'))}}";
-                                error.push("{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.empty.directory'))}}");
-                            } else {
-                                message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.dir.exist.message'))}}";
-                                error.push("{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.exist.message'))}}");
-                                const input = dialog_create.select('input[name="node.name"]');
-                                if(input?.value){
-                                    message = _('prototype').string.replace("{$directory}", input.value, message);
+
+                            if(response?.error){
+                                if(response.error.name.validate_string_length[0] === false){
+                                    error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.name.validate_string_length')}}");
                                 }
-
-
-                                //error.push(input.value);
+                                if(response.error.name.validate_string_contains[0] === false){
+                                    error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.name.validate_string_contains')}}");
+                                }
+                            } else {
+                                if(response?.message === "{{__($__.module + '.' + $__.submodule + '.' + 'section' + '.' + $__.command + '.' + 'create.directory.response.message')}}"){
+                                    message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.empty.message'))}}";
+                                    error.push("{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.empty.directory'))}}");
+                                } else {
+                                    message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.dir.exist.message'))}}";
+                                    error.push("{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.exist.message'))}}");
+                                    const input = dialog_create.select('input[name="node.name"]');
+                                    if(input?.value){
+                                        message = _('prototype').string.replace("{$directory}", input.value, message);
+                                    }
+                                }
                             }
+
+
+
                             let dialog_error = dialog.create({
                                 title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.title')}}",
                                 message : message,
