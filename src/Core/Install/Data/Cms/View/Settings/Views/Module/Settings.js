@@ -475,7 +475,7 @@ settings.node.item.rename = ({node, section, target}) => {
                                 error += "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.extension.validate_string_contains')}}<br>";
                             }
                             if(response.error.extension.validate_in_array[0] === false){
-                                error += "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.name.validate_in_array')}}<br>";
+                                error += "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.extension.validate_in_array')}}<br>";
                             }
                             error = _('prototype').string.replace("{$destination}", destination, error);
                             let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.validation.message'))}}";
