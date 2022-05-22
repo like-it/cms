@@ -4,11 +4,12 @@
         <p class="alert alert-danger">
 {{/if}}
 {{$errors = [
-'url.validate_string_length',
-'url.validate_string_contains',
-'url.validate_url',
 'extension.validate_string_length',
 'extension.validate_in_array',
+'extension.validate_string_contains',
+'name.validate_string_contains',
+'url.validate_string_length',
+'url.validate_url',
 ]}}
 {{for.each($errors as $error)}}
     {{if(request.error($error) === true)}}
