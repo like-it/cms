@@ -586,99 +586,6 @@ settings.node.item.create_file = ({node, section, target}) => {
         if(node.data('has', 'frontend-url')){
             request(node.data('frontend-url'));
         }
-        /*
-        let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.message'))}}";
-        message = '<p>' +_('prototype').string.replace('{{$name}}', node.data('name'), message) + '</p>';
-        message += '<p><label>' +
-            "{{__($__.module + '.' + $__.submodule + '.dialog.create.file.name')}}" +
-            '</label><input type="text" name="node.name" value=""/></p>'
-        ;
-        let dialog_create = dialog.create({
-            title: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.title')}}",
-            message: message,
-            buttons: [
-                {
-                    text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.button.ok')}}"
-                },
-                {
-                    text: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.create.file.button.cancel')}}"
-                }
-            ],
-            section: section,
-            className: "dialog dialog-create-file",
-            form: {
-                name: "dialog-create-file",
-                url: node.data('url'),
-            }
-        });
-        let form = dialog_create.select('form');
-        if(form){
-            form.on('submit', (event) => {
-                if(form.data('has', 'url')){
-                    let data = form.data('serialize');
-                    let filter = {
-                        type : "{{$request.filter.type}}"
-                    };
-                    header('authorization', 'Bearer ' + user.token());
-                    request(form.data('url'), data, (url, response) => {
-                        if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
-                            let message;
-                            let error = [];
-                            if(response?.message === 'Name cannot be empty...'){
-                                message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.empty.message'))}}";
-                                error.push("{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.empty.file'))}}");
-                            } else {
-                                message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.exist.message'))}}";
-                                let input = dialog_create.select('input[name="node.name"]');
-                                error.push(input.value);
-                            }
-
-                            let dialog_error = dialog.create({
-                                title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.title')}}",
-                                message: message,
-                                error : error,
-                                buttons : [
-                                    {
-                                        text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.file.button.ok')}}"
-                                    }
-                                ],
-                                section : section,
-                                className : "dialog dialog-error dialog-error-create-file"
-                            });
-                            let form = dialog_error.select('form');
-                            if(!form){
-                                return;
-                            }
-                            form.on('submit', (event) => {
-                                dialog_error.remove();
-                                form = dialog_create.select('form');
-                                let input = form.select('input[name="node.name"]');
-                                if(input){
-                                    input.focus();
-                                }
-                            });
-                            let button = form.select('button[type="submit"]');
-                            if(button){
-                                button.focus();
-                            }
-                        } else {
-                            const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
-                            if(menuItem){
-                                menuItem.data('filter-type', filter.type);
-                                menuItem.data('limit', "{{$request.limit}}");
-                            }
-                            menu.dispatch(section, target);
-                            dialog_create.remove();
-                        }
-                    });
-                }
-            });
-        }
-        const input = dialog_create.select('input[name="node.name"]');
-        if(input){
-            input.focus();
-        }
-         */
     });
 }
 
@@ -1205,13 +1112,11 @@ settings.node.list.filter = ({node, section, target}) => {
 }
 
 settings.options = (target) => {
-    console.log('options');
     const section = getSectionByName('main-content');
     if(!section){
         return;
     }
     let list = section.select('.dropdown-item');
-    console.log(list);
     if(is.nodeList(list)){
         let index;
         for(index=0; index < list.length; index++){
@@ -1374,7 +1279,6 @@ settings.options = (target) => {
                 target: target
             });
         }
-
         else if(
             node.hasClass('list-filter-all') ||
             node.hasClass('list-filter-file') ||
