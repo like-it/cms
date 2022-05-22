@@ -2787,6 +2787,47 @@ class Settings extends Main {
         return new Response($response, Response::TYPE_JSON);
     }
 
+    /**
+     * @throws ErrorException
+     * @throws Exception
+     */
+    public static function views_create_directory(App $object): Response
+    {
+        $name = $object->request('node.name');
+        $name = ltrim(
+            str_replace([
+                '../',
+                './'
+            ], [
+                $object->config('ds'),
+                $object->config('ds'),
+            ], $name),
+            $object->config('ds'),
+        );
+        if(empty($name)){
+            throw new ErrorException('Name cannot be empty...');
+        }
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $url = $domain->dir . $object->config('dictionary.view') . $object->config('ds') . $name;
+        if(file::exist($url)){
+            throw new ErrorException('Url exists...');
+        } else {
+            Dir::create($url);
+        }
+        $node = [];
+        $node['url'] = $url;
+        $node['created'] = new DateTime();
+        $response = [];
+        $response['node'] = $node;
+        return new Response($response, Response::TYPE_JSON);
+    }
+
     private static function views_page(App $object, $search=[], $url='')
     {
         $dir = new Dir();
