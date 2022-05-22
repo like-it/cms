@@ -463,19 +463,19 @@ settings.node.item.rename = ({node, section, target}) => {
                         else if(response?.error){
                             let error = [];
                             if(response.error.name.validate_string_length[0] === false){
-                                error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.name.validate_string_length')}}<br>");
+                                error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.name.validate_string_length')}}");
                             }
                             if(response.error.name.validate_string_contains[0] === false){
-                                error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.name.validate_string_contains')}}<br>");
+                                error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.name.validate_string_contains')}}");
                             }
                             if(response.error.extension.validate_string_length[0] === false){
-                                error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.extension.validate_string_length')}}<br>");
+                                error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.extension.validate_string_length')}");
                             }
                             if(response.error.extension.validate_string_contains[0] === false){
-                                error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.extension.validate_string_contains')}}<br>");
+                                error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.extension.validate_string_contains')}}");
                             }
                             if(response.error.extension.validate_in_array[0] === false){
-                                error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.extension.validate_in_array')}}<br>");
+                                error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.extension.validate_in_array')}}");
                             }
                             let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.validation.message'))}}";
                             message = _('prototype').string.replace("{$source}", source, message);
