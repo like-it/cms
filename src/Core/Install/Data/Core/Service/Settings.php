@@ -2820,7 +2820,6 @@ class Settings extends Main {
         } else {
             $object->request('node.name', $name);
             $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view.create.directory');
-            dd($validate);
             if($validate) {
                 if ($validate->success === true) {
                     Dir::create($url);
