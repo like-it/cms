@@ -504,10 +504,11 @@ settings.node.item.rename = ({node, section, target}) => {
                             if(button){
                                 button.focus();
                             }
+                        } else {
+                            settings.menuItem();
+                            dialog_create.remove();
+                            menu.dispatch(section, target);
                         }
-                        settings.menuItem();
-                        dialog_create.remove();
-                        menu.dispatch(section, target);
                     });
                 }
             });
