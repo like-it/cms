@@ -412,8 +412,7 @@ settings.node.item.rename = ({node, section, target}) => {
                             menuItem.data('filter-type', filter.type);
                             menuItem.data('limit', "{{$request.limit}}");
                         }
-                        console.log(response);
-                        console.log("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.response.class')}}");
+                        console.log(data);
                         if(response?.class === "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.response.class')}}"){
                             let error = '';
                             if(response?.message === "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.response.message.file.exist')}}"){
