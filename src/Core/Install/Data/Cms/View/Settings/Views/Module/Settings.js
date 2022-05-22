@@ -424,20 +424,19 @@ settings.node.item.rename = ({node, section, target}) => {
                             }
                         }
                         if(source){
-                            let from = _('_').basename(source);
-                            console.log(from);
+                            source = _('_').basename(source);
                         }
-                        console.log(source);
-                        console.log(destination);   
-                        console.log(data);
                         if(response?.class === "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.response.class')}}"){
                             let error = '';
                             if(response?.message === "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.response.message.file.exist')}}"){
                                 error = "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.file.exist')}}";
                             }
+                            let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.message'))}}";;
+                            message.replace('{source}', source);
+                            message.replace('{destination}', destination);
                             let dialog_error = dialog.create({
                                 title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.title')}}",
-                                message : "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.message'))}}",
+                                message : message,
                                 error : error,
                                 buttons : [
                                     {
