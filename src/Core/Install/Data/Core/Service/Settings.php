@@ -2818,7 +2818,24 @@ class Settings extends Main {
         if(file::exist($url)){
             throw new ErrorException('Url exists...');
         } else {
-            Dir::create($url);
+            $object->request('node.name', $name);
+            $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view.create.directory');
+            dd($validate);
+            if($validate) {
+                if ($validate->success === true) {
+                    Dir::create($url);
+                } else {
+                    $data = [];
+                    $data['error'] = $validate->test;
+                    return new Response(
+                        $data,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                }
+            } else {
+                throw new Exception('Cannot validate view at: ' . Settings::views_getValidatorUrl($object));
+            }
         }
         $node = [];
         $node['url'] = $url;

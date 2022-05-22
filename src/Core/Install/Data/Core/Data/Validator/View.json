@@ -1,5 +1,21 @@
 {
     "view": {
+        "create" : {
+            "directory" : {
+                "validate": {
+                    "name": [
+                        {
+                            "string.length": ">=1"
+                        },
+                        {
+                            "string.contains": {
+                                "regex": "^[a-zA-Z0-9.\/]+$^"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
         "rename" : {
             "validate": {
                 "name": [
