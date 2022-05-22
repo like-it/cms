@@ -526,7 +526,7 @@
         "module" : "settings",
         "submodule" : "views",
         "command" : "create",
-        "path": "Settings/Views/Create/{{$type}}",
+        "path": "Settings/Views/Create/{{$type}}/{{$node.domain}}",
         "method": [
             "POST",
             "OPTIONS"

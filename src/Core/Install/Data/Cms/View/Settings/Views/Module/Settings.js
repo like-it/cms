@@ -556,12 +556,24 @@ settings.node.item.create_dir = ({node, section, target}) => {
         if(form){
             form.on('submit', (event) => {
                 if(form.data('has', 'url')){
+                    let url = form.data('url');
+                    if(contains(url, "{node.domain}") !== false){
+                        const section = getSectionByName('main-content');
+                        if(!section){
+                            return;
+                        }
+                        const domain = section.select('input[name="node.domain"]');
+                        if(!domain){
+                            return;
+                        }
+                        url = replace("{node.domain}", domain.value, url);
+                    }
                     let data = form.data('serialize');
                     let filter = {
                         type : "{{$request.filter.type}}"
                     };
                     header('authorization', 'Bearer ' + user.token());
-                    request(form.data('url'), data, (url, response) => {
+                    request(url, data, (url, response) => {
                         if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
                             let error = [];
                             let message;
