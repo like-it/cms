@@ -507,7 +507,7 @@
     "settings.views.dialog.create.symlink.button.ok" : "Ok",
     "settings.views.dialog.create.symlink.button.cancel" : "Cancel",
     "settings.views.dialog.create.symlink.source" : "Source: ",
-    "settings.server.settings.dialog.create.symlink.destination" : "Destination: ",
+    "settings.views.dialog.create.symlink.destination" : "Destination: ",
     "settings.views.dialog.rename.title" : "Rename",
     "settings.views.dialog.rename.message" : [
         "Are you sure you want to rename {$name}?"
