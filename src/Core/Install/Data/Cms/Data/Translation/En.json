@@ -512,7 +512,7 @@
         "Unable to create the directory, the directory already exists..."
     ],
     "settings.views.dialog.error.item.create.directory.name.message" : [
-        "Unable to create the directory..."
+        "Unable to create the directory ({$directory})..."
     ],
     "settings.views.dialog.error.item.create.directory.button.ok" : "Ok",
     "settings.views.dialog.error.item.create.directory.name.validate_string_length" : "The name is required.",

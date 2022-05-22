@@ -589,6 +589,10 @@ settings.node.item.create_dir = ({node, section, target}) => {
                                 if(response.error.name.validate_string_contains[0] === false){
                                     error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.name.validate_string_contains')}}");
                                 }
+                                const input = dialog_create.select('input[name="node.name"]');
+                                if(input?.value){
+                                    message = _('prototype').string.replace("{$directory}", input.value, message);
+                                }
                             } else {
                                 if(response?.message === "{{__($__.module + '.' + $__.submodule + '.' + 'section' + '.' + $__.command + '.' + 'create.directory.response.message')}}"){
                                     message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.empty.message'))}}";
