@@ -482,6 +482,16 @@
     "settings.views.dialog.error.rename.response.class" : "R3m\\\\Io\\\\Exception\\\\FileMoveException",
     "settings.views.dialog.error.rename.response.message.file.exist" : "Destination file already exists...",
     "settings.views.dialog.error.rename.title" : "Error:",
+    "settings.views.dialog.error.rename.extension.validate_string_length" : "The name needs an extension...",
+    "settings.views.dialog.error.rename.extension.validate_in_array" : "Please use one of the following extensions: .tpl, .js, .json or .css",
+    "settings.views.dialog.error.rename.extension.validate_string_contains" : "The extension must just be [A-Za-z] (alphabetical)",
+    "settings.views.dialog.error.rename.name.validate_string_contains" : "The name must just be [A-Za-z][0-9] (alphabetical and or numeric)",
+    "settings.views.dialog.error.rename.name.validate_string_length" : "The name is required.",
+    "settings.views.dialog.error.rename.url.validate_url" : "The name already exists. Please use a different url...",
+    "settings.views.dialog.error.rename.validation.message" : [
+        "Cannot rename file.",
+        "Source: {$source} to destination: {$destination}"
+    ],
     "settings.views.dialog.rename.title" : "Rename",
     "settings.views.dialog.rename.message" : [
         "Are you sure you want to rename {$name}?"

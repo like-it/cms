@@ -460,6 +460,52 @@ settings.node.item.rename = ({node, section, target}) => {
                                 button.focus();
                             }
                         }
+                        else if(response?.error){
+                            let error = '';
+                            if(response.error.name.validate_string_length[0] === false){
+                                error += "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.name.validate_string_length')}}<br>";
+                            }
+                            if(response.error.name.validate_string_contains[0] === false){
+                                error += "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.name.validate_string_contains')}}<br>";
+                            }
+                            if(response.error.extension.validate_string_length[0] === false){
+                                error += "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.extension.validate_string_length')}}<br>";
+                            }
+                            if(response.error.extension.validate_string_contains[0] === false){
+                                error += "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.extension.validate_string_contains')}}<br>";
+                            }
+                            if(response.error.extension.validate_in_array[0] === false){
+                                error += "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.name.validate_in_array')}}<br>";
+                            }
+                            error = _('prototype').string.replace("{$destination}", destination, error);
+                            let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.validation.message'))}}";
+                            message = _('prototype').string.replace("{$source}", source, message);
+                            message = _('prototype').string.replace("{$destination}", destination, message);
+
+                            let dialog_error = dialog.create({
+                                title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.title')}}",
+                                message : message,
+                                error : error,
+                                buttons : [
+                                    {
+                                        text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.button.ok')}}"
+                                    }
+                                ],
+                                section : section,
+                                className : "dialog dialog-error dialog-error-rename"
+                            });
+                            const form = dialog_error.select('form');
+                            if(!form){
+                                return;
+                            }
+                            form.on('submit', (event) => {
+                                dialog_error.remove();
+                            });
+                            const button = form.select('button[type="submit"]');
+                            if(button){
+                                button.focus();
+                            }
+                        }
                         settings.menuItem();
                         dialog_create.remove();
                         menu.dispatch(section, target);
