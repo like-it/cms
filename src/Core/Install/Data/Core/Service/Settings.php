@@ -2849,7 +2849,7 @@ class Settings extends Main {
             throw new Exception('Domain dir not set...');
         }
         $object->request('node.extension', File::extension($object->request('node.name')));
-        $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view');
+        $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view.put');
         $object->request('node.url',
             $domain->dir .
             $object->config('dictionary.view') .
