@@ -2408,10 +2408,23 @@ class Settings extends Main {
             $object->request('node.extension', File::extension($destination));
             $object->request('node.name', File::basename($destination, '.' . $object->request('node.extension')));
             $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view.rename');
-            dd($validate);
-            $dir = Dir::name($destination);
-            Dir::create($dir);
-            File::move($source, $destination);
+            if($validate) {
+                if ($validate->success === true) {
+                    $dir = Dir::name($destination);
+                    Dir::create($dir);
+                    File::move($source, $destination);
+                } else {
+                    $data = [];
+                    $data['error'] = $validate->test;
+                    return new Response(
+                        $data,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                }
+            } else {
+                throw new Exception('Cannot validate view at: ' . Settings::views_getValidatorUrl($object));
+            }
         } else {
             $destination = $domain->dir .
                 $object->config('dictionary.view') .
@@ -2426,8 +2439,21 @@ class Settings extends Main {
                 $object->request('node.extension', File::extension($destination));
                 $object->request('node.name', File::basename($destination, '.' . $object->request('node.extension')));
                 $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view.rename');
-                dd($validate);
-                File::move($source, $destination);
+                if($validate) {
+                    if ($validate->success === true) {
+                        File::move($source, $destination);
+                    } else {
+                        $data = [];
+                        $data['error'] = $validate->test;
+                        return new Response(
+                            $data,
+                            Response::TYPE_JSON,
+                            Response::STATUS_ERROR
+                        );
+                    }
+                } else {
+                    throw new Exception('Cannot validate view at: ' . Settings::views_getValidatorUrl($object));
+                }
             } else {
                 $object->logger()->error('fileMoveException', [$source, $destination]);
                 throw new FileMoveException('Not in domain directory...');
