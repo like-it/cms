@@ -474,10 +474,10 @@
     ],
     "settings.views.dialog.error.domain.button.ok" : "Ok",
     "settings.views.dialog.error.rename.button.ok" : "Ok",
-    "settings.views.dialog.error.rename.file.exist" : "Destination file already exists...",
+    "settings.views.dialog.error.rename.file.exist" : "Destination file ({$destination})already exists...",
     "settings.views.dialog.error.rename.message" : [
         "Cannot rename file.",
-        "Source: {$source} to {$destination}"
+        "Source: {$source} to destination: {$destination}"
     ],
     "settings.views.dialog.error.rename.response.class" : "R3m\\\\Io\\\\Exception\\\\FileMoveException",
     "settings.views.dialog.error.rename.response.message.file.exist" : "Destination file already exists...",
