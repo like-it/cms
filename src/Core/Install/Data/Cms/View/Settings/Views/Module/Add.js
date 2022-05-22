@@ -176,7 +176,7 @@ add.form = (target) => {
                 } else {
                     const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
                     if(menuItem){
-                        const close = menuItem.select('.close');
+                        const close = menuItem.select('.fa-window-close');
                         if(close){
                             close.trigger('click');
                         }
