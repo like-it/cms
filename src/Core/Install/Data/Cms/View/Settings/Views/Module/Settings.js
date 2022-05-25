@@ -734,7 +734,7 @@ settings.node.item.create_symlink = ({node, section, target}) => {
                     };
                     let data = {
                         ...form.data('serialize'),
-                        limit: "{{$request.limit}}",
+                        limit: "{{$request.limit|integer}}",
                         filter: filter
                     };
                     header('authorization', 'Bearer ' + user.token());
