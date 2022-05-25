@@ -17,8 +17,10 @@ $__.command +
 )}}
 <a
     class="dropdown-item item-create-symlink"
-    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Create/Symlink/"
+    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Create/Symlink/{node.domain}"
     data-filter-type="{{$request.filter.type}}"
+    data-filter-extension="{{$request.filter.extension}}"
+    data-limit="{{$request.limit}}"
 >
     <i
         class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-create-symlink"

@@ -716,12 +716,29 @@ settings.node.item.create_symlink = ({node, section, target}) => {
         if(form){
             form.on('submit', (event) => {
                 if(form.data('has', 'url')){
-                    let data = form.data('serialize');
+                    let url = form.data('url');
+                    if(contains(url, "{node.domain}") !== false){
+                        const section = getSectionByName('main-content');
+                        if(!section){
+                            return;
+                        }
+                        const domain = section.select('input[name="node.domain"]');
+                        if(!domain){
+                            return;
+                        }
+                        url = replace("{node.domain}", domain.value, url);
+                    }
                     let filter = {
-                        type : "{{$request.filter.type}}"
+                        type : "{{$request.filter.type}}",
+                        extension : "{{$request.filter.extension}}"
+                    };
+                    let data = {
+                        ...form.data('serialize'),
+                        limit: "{{$request.limit}}",
+                        filter: filter
                     };
                     header('authorization', 'Bearer ' + user.token());
-                    request(form.data('url'), data, (url, response) => {
+                    request(url, data, (url, response) => {
                         if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
                             let error = [];
                             let source = dialog_create.select('input[name="node.source"]');
@@ -767,6 +784,7 @@ settings.node.item.create_symlink = ({node, section, target}) => {
                             const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
                             if(menuItem){
                                 menuItem.data('filter-type', filter.type);
+                                menuItem.data('filter-extension', filter.extension);
                                 menuItem.data('limit', "{{$request.limit}}");
                             }
                             menu.dispatch(section, target);
