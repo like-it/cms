@@ -2916,7 +2916,7 @@ class Settings extends Main {
                 }
                 $nr++;
             }
-            if(!$is_found){
+            if(empty($is_found)){
                 $nr = 1;
             } elseif(count($is_found) === 1){
                 $nr = reset($is_found);
@@ -2924,7 +2924,7 @@ class Settings extends Main {
                 foreach($is_found as $key => $nr){
                     if(
                         array_key_exists('url', $search) &&
-                        strstr($list[$key]->url, $search['url'])
+                        strstr($list[$key]->url, $search['url']) !== false
                     ){
                         break;
                     }
