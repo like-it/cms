@@ -783,9 +783,18 @@ settings.node.item.create_symlink = ({node, section, target}) => {
                         } else {
                             const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
                             if(menuItem){
-                                menuItem.data('filter-type', filter.type);
-                                menuItem.data('filter-extension', filter.extension);
-                                menuItem.data('limit', "{{$request.limit}}");
+                                if(!menuItem.data('has', 'filter-type')){
+                                    menuItem.data('filter-type', filter.type);
+                                }
+                                if(!menuItem.data('has', 'filter-extension')){
+                                    menuItem.data('filter-extension', filter.extension);
+                                }
+                                if(!menuItem.data('has', 'limit')){
+                                    menuItem.data('limit', "{{$request.limit|integer}}");
+                                }
+                                if(response?.page){
+                                    menuItem.data('page', response.page);
+                                }
                             }
                             menu.dispatch(section, target);
                             dialog_create.remove();
