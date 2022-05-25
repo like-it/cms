@@ -568,9 +568,14 @@ settings.node.item.create_dir = ({node, section, target}) => {
                         }
                         url = replace("{node.domain}", domain.value, url);
                     }
-                    let data = form.data('serialize');
                     let filter = {
-                        type : "{{$request.filter.type}}"
+                        type : "{{$request.filter.type}}",
+                        extension : "{{$request.filter.extension}}"
+                    };
+                    let data = {
+                        ...form.data('serialize'),
+                        limit: "{{$request.limit}}",
+                        filter: filter
                     };
                     header('authorization', 'Bearer ' + user.token());
                     request(url, data, (url, response) => {
@@ -641,6 +646,7 @@ settings.node.item.create_dir = ({node, section, target}) => {
                             const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
                             if(menuItem){
                                 menuItem.data('filter-type', filter.type);
+                                menuItem.data('filter-extension', filter.extension);
                                 menuItem.data('limit', "{{$request.limit}}");
                             }
                             menu.dispatch(section, target);
