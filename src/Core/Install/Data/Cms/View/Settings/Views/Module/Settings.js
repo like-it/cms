@@ -410,6 +410,7 @@ settings.node.item.rename = ({node, section, target}) => {
                         }
                         if(menuItem){
                             menuItem.data('filter-type', filter.type);
+                            menuItem.data('filter-extension', filter.extension);
                             menuItem.data('limit', "{{$request.limit}}");
                         }
                         let source;
@@ -611,9 +612,6 @@ settings.node.item.create_dir = ({node, section, target}) => {
                                     }
                                 }
                             }
-
-
-
                             let dialog_error = dialog.create({
                                 title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.title')}}",
                                 message : message,
@@ -645,6 +643,9 @@ settings.node.item.create_dir = ({node, section, target}) => {
                         } else {
                             const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
                             if(menuItem){
+                                if(response?.page){
+                                    menuItem.data('page', response.page);
+                                }
                                 menuItem.data('filter-type', filter.type);
                                 menuItem.data('filter-extension', filter.extension);
                                 menuItem.data('limit', "{{$request.limit}}");
