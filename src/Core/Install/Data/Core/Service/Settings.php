@@ -1884,7 +1884,7 @@ class Settings extends Main {
         ],
             $destination
         );
-        $match = $object->config('project.dir.host');
+        $match = $object->config('project.dir.public');
         if(substr($source, 0, strlen($match)) === $match){
             $url_source = $source;
         } else {
@@ -2024,7 +2024,7 @@ class Settings extends Main {
     private static function server_settings_put(App $object, $domain)
     {
         $object->request('node.extension', File::extension($object->request('node.name')));
-        $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view');
+        $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view.put');
         $object->request('node.url',
             $domain->dir .
             $object->config('dictionary.view') .
@@ -2846,6 +2846,75 @@ class Settings extends Main {
         ],
             $domain->dir . $object->config('dictionary.view') . $object->config('ds')
         );
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws ErrorException
+     */
+    public static function views_create_symlink(App $object): Response
+    {
+        $source = $object->request('node.source');
+        $source = str_replace([
+            '../',
+            './'
+        ], [
+            $object->config('ds'),
+            $object->config('ds'),
+        ],
+            $source
+        );
+        $destination = $object->request('node.destination');
+        $destination = str_replace([
+            '../',
+            './'
+        ], [
+            $object->config('ds'),
+            $object->config('ds'),
+        ],
+            $destination
+        );
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $match = $domain->dir .
+            $object->config('dictionary.view') .
+            $object->config('ds');
+
+        if(substr($source, 0, strlen($match)) === $match){
+            $url_source = $source;
+        } else {
+            $url_source = $domain->dir .
+                $object->config('dictionary.view') .
+                $object->config('ds') .
+                $source;
+        }
+        if(substr($destination, 0, strlen($match)) === $match){
+                $url_destination = $destination;
+        } else {
+            $url_destination = $domain->dir .
+                $object->config('dictionary.view') .
+                $object->config('ds') .
+                $destination;
+        }
+
+        if(!file::exist($url_source)){
+            throw new ErrorException('Source not exists...');
+        }
+        elseif(file::exist($url_destination)){
+            throw new ErrorException('Destination exists...');
+        } else {
+            File::link($url_source, $url_destination);
+        }
+        $node = [];
+        $node['url'] = $url_destination;
+        $node['created'] = new DateTime();
+        $response = [];
+        $response['node'] = $node;
         return new Response($response, Response::TYPE_JSON);
     }
 
