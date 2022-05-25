@@ -163,8 +163,22 @@ add.form = (target) => {
         form.on('submit', ( event ) => {
             event.preventDefault();
             header('Authorization', 'Bearer ' + user.token());
-            let data = form.data('serialize');
-            form.request(null, null, (url, response) => {
+            let data;
+            const menuItem = section.select(".{{$module}}-{{$submodule}}-settings");
+            if(menuItem){
+                let filter = {
+                    type : menuItem.data('filter-type'),
+                    extension : menuItem.data('filter-extension')
+                };
+                data = {
+                    ...form.data('serialize'),
+                    filter : filter,
+                    limit : menuItem.data('limit')
+                };
+            } else {
+                data = form.data('serialize');
+            }
+            form.request(null, data, (url, response) => {
                 if(response?.error){
                     data.push({
                         name: "error",
