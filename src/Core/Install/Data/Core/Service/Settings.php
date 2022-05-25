@@ -2906,19 +2906,29 @@ class Settings extends Main {
             $list = Sort::list($data->data())->with(['url' => 'ASC']);
             $count = count($list);
             $nr = 1;
-            $is_found = false;
+            $is_found = [];
             foreach($list as $key => $record){
                 if(
                     array_key_exists('url', $search) &&
                     stristr($record->url, $search['url'])  !== false
                 ){
-                    $is_found = true;
-                    break;
+                    $is_found[$key] = $nr;
                 }
                 $nr++;
             }
             if(!$is_found){
                 $nr = 1;
+            } elseif(count($is_found) === 1){
+                $nr = reset($is_found);
+            } else {
+                foreach($is_found as $key => $nr){
+                    if(
+                        array_key_exists('url', $search) &&
+                        strstr($list[$key]->url, $search['url'])
+                    ){
+                        break;
+                    }
+                }
             }
             $limit = Limit::LIMIT;
             if($settings->data('view.default.limit')){
