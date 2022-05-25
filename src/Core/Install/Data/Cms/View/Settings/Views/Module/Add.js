@@ -173,7 +173,7 @@ add.form = (target) => {
                 data = {
                     ...form.data('serialize'),
                     filter : filter,
-                    limit : menuItem.data('limit')
+                    limit : parseInt(menuItem.data('limit'))
                 };
             } else {
                 data = form.data('serialize');
