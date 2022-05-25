@@ -2841,6 +2841,11 @@ class Settings extends Main {
         $node['created'] = new DateTime();
         $response = [];
         $response['node'] = $node;
+        $response['page'] = Settings::views_page($object, [
+            'url' => $url
+        ],
+            $domain->dir . $object->config('dictionary.view') . $object->config('ds')
+        );
         return new Response($response, Response::TYPE_JSON);
     }
 
