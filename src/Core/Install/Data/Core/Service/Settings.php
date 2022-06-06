@@ -2279,7 +2279,7 @@ class Settings extends Main {
                 $dir = dir::name($url);
                 Dir::create($dir);
                 File::write($url, $content);
-                File::delete($url_old);
+                //File::delete($url_old); //save as does not delete
             }
         } else {
             $content = $object->request('node.content');
