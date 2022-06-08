@@ -85,15 +85,12 @@ source.panel = () => {
                 let editor = source.get('editor.' + "{{$pre.id}}");
                 if(tr.hasClass('open')){
                     let settings = section.select('.nav-item .' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "settings");
-                    console.log('open');
-                    console.log(settings);
                     panel.addClass('d-none');
                     if(settings){
                         settings.trigger('click');
                     }
                 }
                 if(tr.hasClass('close')){
-                    console.log('close');
                     source.close("{{$module}}" + '-' + "{{$submodule}}" + '-' + "edit-template-{{$request.node.key}}");
                     panel.addClass('d-none');
                 }
@@ -424,7 +421,7 @@ source.editor = () => {
                         break;
                     case 'q': //w will close the browser tab
                         event.preventDefault();
-                        source.close("settings-controllers-edit-controller-{{$request.node.key}}");
+                        source.close("{{$module}}-{{$submodule}}-edit-template-{{$request.node.key}}");
                         break;
                 }
             }
