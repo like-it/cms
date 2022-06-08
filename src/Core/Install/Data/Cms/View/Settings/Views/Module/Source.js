@@ -440,7 +440,10 @@ source.editor = () => {
                         event.preventDefault();
                         let card = pre.closest('.card-body-edit');
                         if(card){
-                            console.log(card);
+                            let panel = card.select('.panel-file');
+                            if(panel){
+                                panel.toggleClass('d-none');
+                            }
                         }
                         break;
                 }
