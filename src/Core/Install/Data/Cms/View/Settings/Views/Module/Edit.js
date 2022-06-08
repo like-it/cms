@@ -6,7 +6,6 @@ import { version } from "/Module/Priya.js";
 import { root } from "/Module/Web.js";
 import { getSectionByName } from "/Module/Section.js";
 import { contains, replace } from "/Module/String.js";
-import source from "/Settings/Views/Module/Source.js";
 
 let edit = {};
 
@@ -45,7 +44,7 @@ edit.title = () => {
             edit.body('show');
             let pre = section.select('.card-body-' + "{{$request.node.key}} pre");
             if(pre){
-                let editor = source.get('editor.' + pre.id);
+                let editor = _('_').collection('source.editor.' + pre.id);
                 if(editor){
                     editor.focus();
                 }
