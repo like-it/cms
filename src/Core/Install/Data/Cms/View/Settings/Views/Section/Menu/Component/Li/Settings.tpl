@@ -20,6 +20,9 @@
         $node
         )}}"
         data-selected=".card-body-{{$section}}"
+        data-limit="{{$request.limit|integer}}"
+        data-filter-type="{{$request.limit.filter.type}}"
+        data-filter-extension="{{$request.limit.filter.extension}}"
     >
         {{__(
         $__.module +
