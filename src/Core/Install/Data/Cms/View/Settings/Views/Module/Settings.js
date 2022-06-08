@@ -1218,6 +1218,7 @@ settings.node.list.filter = ({node, section, target}) => {
                 let filter = section.select('.dropdown .filter-type');
                 if(filter){
                     filter.text = node.text;
+                    settings.menuItem();
                 }
                 request(node.data('frontend-url'), response, (frontendUrl, frontendResponse) => {
                     settings.selected();
@@ -1701,6 +1702,7 @@ settings.menuItem = () => {
     const menuItem = section.select(".{{$module}}-{{$submodule}}-{{$command}}");
     if(menuItem){
         menuItem.data('filter-type', "{{$request.filter.type}}");
+        menuItem.data('filter-extension', "{{$request.filter.extension}}");
         menuItem.data('limit', "{{$request.limit}}");
     }
 }
