@@ -2405,9 +2405,14 @@ class Settings extends Main {
                 $object->config('dictionary.view') .
                 $object->config('ds') .
                 ltrim($destination, $object->config('ds'));
-            $object->request('node.extension', File::extension($destination));
-            $object->request('node.name', File::basename($destination, '.' . $object->request('node.extension')));
-            $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view.rename');
+            if(Dir::is($source)){
+                $object->request('node.destination', $destination);
+                $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view.rename.directory');
+            } else {
+                $object->request('node.extension', File::extension($destination));
+                $object->request('node.name', File::basename($destination, '.' . $object->request('node.extension')));
+                $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view.rename.file');
+            }
             if($validate) {
                 if ($validate->success === true) {
                     $dir = Dir::name($destination);
@@ -2436,9 +2441,14 @@ class Settings extends Main {
                 strlen($domain->dir . $object->config('dictionary.view') . $object->config('ds'))
                 ) === $domain->dir . $object->config('dictionary.view') . $object->config('ds')
             ){
-                $object->request('node.extension', File::extension($destination));
-                $object->request('node.name', File::basename($destination, '.' . $object->request('node.extension')));
-                $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view.rename');
+                if(Dir::is($source)){
+                    $object->request('node.destination', $destination);
+                    $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view.rename.directory');
+                } else {
+                    $object->request('node.extension', File::extension($destination));
+                    $object->request('node.name', File::basename($destination, '.' . $object->request('node.extension')));
+                    $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view.rename.file');
+                }
                 if($validate) {
                     if ($validate->success === true) {
                         File::move($source, $destination);
