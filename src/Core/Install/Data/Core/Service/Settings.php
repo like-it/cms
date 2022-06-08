@@ -2416,9 +2416,13 @@ class Settings extends Main {
             }
             if($validate) {
                 if ($validate->success === true) {
-                    $dir = Dir::name($destination);
-                    Dir::create($dir);
-                    File::move($source, $destination);
+                    if(Dir::is($source)){
+                        Dir::rename($source, $destination);
+                    } else {
+                        $dir = Dir::name($destination);
+                        Dir::create($dir);
+                        File::move($source, $destination);
+                    }
                 } else {
                     $data = [];
                     $data['error'] = $validate->test;
@@ -2454,7 +2458,11 @@ class Settings extends Main {
                 if($validate) {
                     if ($validate->success === true) {
                         $object->logger()->error('fileMoveAction', [$source, $destination]);
-                        File::move($source, $destination);
+                        if(Dir::is($source)){
+                            Dir::rename($source, $destination);
+                        } else {
+                            File::move($source, $destination);
+                        }
                     } else {
                         $data = [];
                         $data['error'] = $validate->test;
