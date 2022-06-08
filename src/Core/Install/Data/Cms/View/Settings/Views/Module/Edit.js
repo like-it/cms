@@ -42,6 +42,14 @@ edit.title = () => {
             }
             a.addClass('active');
             edit.body('show');
+            let pre = section.select('.card-body-' + "{{$request.node.key}} pre");
+            if(pre){
+                let editor = source.get('editor.' + pre.id);
+                if(editor){
+                    editor.focus();
+                }
+                console.log(editor);
+            }
         } else {
             //reload from data url & frontend url
         }

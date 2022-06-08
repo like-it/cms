@@ -468,11 +468,7 @@ source.editor = () => {
             element.data('content', editor.getValue());
         });
         editor.focus();
-        let session = editor.getSession();
-        //Get the number of lines
-        let count = session.getLength();
-        //Go to end of the last line
-        editor.gotoLine(count, session.getLine(count-1).length);
+        editor.gotoLine(editor.getSession().getLength(), editor.getSession().getLine(editor.getSession().getLength()-1).length);
         source.set('editor.' + "{{$pre.id}}", editor);
     }
     return editor;
