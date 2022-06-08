@@ -438,7 +438,10 @@ source.editor = () => {
                 switch (String.fromCharCode(event.which).toLowerCase()) {
                     case 'f':
                         event.preventDefault();
-                        console.log('open file panel');
+                        let card = pre.closest('.card-body-edit');
+                        if(card){
+                            console.log(card);
+                        }
                         break;
                 }
             }
