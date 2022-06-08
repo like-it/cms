@@ -434,6 +434,14 @@ source.editor = () => {
                         break;
                 }
             }
+            else if (event.altKey){
+                switch (String.fromCharCode(event.which).toLowerCase()) {
+                    case 'f':
+                        event.preventDefault();
+                        console.log('open file panel');
+                        break;
+                }
+            }
         });
         editor.session.setValue(element.data('content'));
         editor.on('change', (e) => {
