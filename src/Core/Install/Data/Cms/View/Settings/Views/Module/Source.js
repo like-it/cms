@@ -85,12 +85,15 @@ source.panel = () => {
                 let editor = source.get('editor.' + "{{$pre.id}}");
                 if(tr.hasClass('open')){
                     let settings = section.select('.nav-item .' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}");
+                    console.log('open');
+                    console.log(settings);
                     panel.addClass('d-none');
                     if(settings){
                         settings.trigger('click');
                     }
                 }
                 if(tr.hasClass('close')){
+                    console.log('close');
                     source.close("card-body-{{$request.node.key}}");
                     panel.addClass('d-none');
                 }
