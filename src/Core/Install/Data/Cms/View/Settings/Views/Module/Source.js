@@ -489,3 +489,5 @@ require(
     source.init();
 });
 });
+
+export default source;
