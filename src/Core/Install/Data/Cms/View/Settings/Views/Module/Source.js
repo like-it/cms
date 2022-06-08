@@ -407,6 +407,8 @@ source.editor = () => {
             enableLiveAutocompletion: true
         });
         let element = select("#{{$pre.id}}");
+        let card;
+        let panel;
         element.on('keydown', function(event) {
             if ((event.ctrlKey || event.metaKey) && !event.shiftKey) {
                 switch (String.fromCharCode(event.which).toLowerCase()) {
@@ -439,9 +441,9 @@ source.editor = () => {
                     case 'f':
                     case '1' :
                         event.preventDefault();
-                        let card = pre.closest('.card-body-edit');
+                        card = pre.closest('.card-body-edit');
                         if(card){
-                            let panel = card.select('.panel-file');
+                            panel = card.select('.panel-file');
                             if(panel){
                                 panel.toggleClass('d-none');
                             }
@@ -449,9 +451,9 @@ source.editor = () => {
                         break;
                     case '2' :
                         event.preventDefault();
-                        let card = pre.closest('.card-body-edit');
+                        card = pre.closest('.card-body-edit');
                         if(card){
-                            let panel = card.select('.panel-edit');
+                            panel = card.select('.panel-edit');
                             if(panel){
                                 panel.toggleClass('d-none');
                             }
