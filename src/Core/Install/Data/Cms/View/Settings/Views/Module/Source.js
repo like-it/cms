@@ -84,7 +84,7 @@ source.panel = () => {
             tr.on('click', (event) => {
                 let editor = source.get('editor.' + "{{$pre.id}}");
                 if(tr.hasClass('open')){
-                    let settings = section.select('.nav-item .' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}");
+                    let settings = section.select('.nav-item .' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "settings");
                     console.log('open');
                     console.log(settings);
                     panel.addClass('d-none');
@@ -94,7 +94,7 @@ source.panel = () => {
                 }
                 if(tr.hasClass('close')){
                     console.log('close');
-                    source.close("card-body-{{$request.node.key}}");
+                    source.close("{{$module}}" + '-' + "{{$submodule}}" + '-' + "edit-template-{{$request.node.key}}");
                     panel.addClass('d-none');
                 }
                 if(tr.hasClass('save')){
