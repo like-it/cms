@@ -2451,6 +2451,7 @@ class Settings extends Main {
                 }
                 if($validate) {
                     if ($validate->success === true) {
+                        $object->logger()->error('fileMoveAction', [$source, $destination]);
                         File::move($source, $destination);
                     } else {
                         $data = [];
