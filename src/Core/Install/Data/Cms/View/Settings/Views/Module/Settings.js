@@ -463,19 +463,25 @@ settings.node.item.rename = ({node, section, target}) => {
                         }
                         else if(response?.error){
                             let error = [];
-                            if(response.error.name.validate_string_length[0] === false){
+                            if(response.error?.destination.validate_string_length[0] === false){
+                                error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.destination.validate_string_length')}}");
+                            }
+                            if(response.error?.destination.validate_string_contains[0] === false){
+                                error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.destination.validate_string_contains')}}");
+                            }
+                            if(response.error?.name.validate_string_length[0] === false){
                                 error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.name.validate_string_length')}}");
                             }
-                            if(response.error.name.validate_string_contains[0] === false){
+                            if(response.error?.name.validate_string_contains[0] === false){
                                 error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.name.validate_string_contains')}}");
                             }
-                            if(response.error.extension.validate_string_length[0] === false){
+                            if(response.error?.extension.validate_string_length[0] === false){
                                 error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.extension.validate_string_length')}}");
                             }
-                            if(response.error.extension.validate_string_contains[0] === false){
+                            if(response.error?.extension.validate_string_contains[0] === false){
                                 error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.extension.validate_string_contains')}}");
                             }
-                            if(response.error.extension.validate_in_array[0] === false){
+                            if(response.error?.extension.validate_in_array[0] === false){
                                 error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.extension.validate_in_array')}}");
                             }
                             let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.validation.message'))}}";
@@ -739,7 +745,6 @@ settings.node.item.create_symlink = ({node, section, target}) => {
                     };
                     header('authorization', 'Bearer ' + user.token());
                     request(url, data, (url, response) => {
-                        console.log(response);
                         if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
                             let error = [];
                             let source = dialog_create.select('input[name="node.source"]');

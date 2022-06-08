@@ -487,6 +487,8 @@
     "settings.views.dialog.error.rename.extension.validate_string_contains" : "The extension must just be [A-Za-z] (alphabetical)",
     "settings.views.dialog.error.rename.name.validate_string_contains" : "The name must just be [A-Za-z][0-9] (alphabetical and or numeric)",
     "settings.views.dialog.error.rename.name.validate_string_length" : "The name is required.",
+    "settings.views.dialog.error.rename.destination.validate_string_contains" : "The destination must just be [A-Za-z][0-9] (alphabetical and or numeric)",
+    "settings.views.dialog.error.rename.destination.validate_string_length" : "The destination is required.",
     "settings.views.dialog.error.rename.url.validate_url" : "The name already exists. Please use a different url...",
     "settings.views.dialog.error.rename.validation.message" : [
         "Cannot rename file.",
