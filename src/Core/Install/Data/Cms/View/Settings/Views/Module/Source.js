@@ -84,11 +84,15 @@ source.panel = () => {
             tr.on('click', (event) => {
                 let editor = source.get('editor.' + "{{$pre.id}}");
                 if(tr.hasClass('open')){
-                    let settings = section.select('.nav-item .settings-controllers-settings');
+                    let settings = section.select('.nav-item .' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}");
                     panel.addClass('d-none');
                     if(settings){
                         settings.trigger('click');
                     }
+                }
+                if(tr.hasClass('close')){
+                    source.close("card-body-{{$request.node.key}}");
+                    panel.addClass('d-none');
                 }
                 if(tr.hasClass('save')){
                     source.save("card-body-{{$request.node.key}}");
