@@ -2417,7 +2417,7 @@ class Settings extends Main {
             if($validate) {
                 if ($validate->success === true) {
                     if(Dir::is($source)){
-                        Dir::rename($source, $destination);
+                        Dir::rename($source, $destination, true);
                     } else {
                         $dir = Dir::name($destination);
                         Dir::create($dir);
@@ -2459,7 +2459,7 @@ class Settings extends Main {
                     if ($validate->success === true) {
                         $object->logger()->error('fileMoveAction', [$source, $destination]);
                         if(Dir::is($source)){
-                            Dir::rename($source, $destination);
+                            Dir::rename($source, $destination, true);
                         } else {
                             File::move($source, $destination);
                         }
