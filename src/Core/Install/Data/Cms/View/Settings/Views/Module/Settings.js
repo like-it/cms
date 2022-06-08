@@ -739,6 +739,7 @@ settings.node.item.create_symlink = ({node, section, target}) => {
                     };
                     header('authorization', 'Bearer ' + user.token());
                     request(url, data, (url, response) => {
+                        console.log(response);
                         if(response?.class === 'R3m\\Io\\Exception\\ErrorException'){
                             let error = [];
                             let source = dialog_create.select('input[name="node.source"]');
