@@ -437,10 +437,21 @@ source.editor = () => {
             else if (event.altKey){
                 switch (String.fromCharCode(event.which).toLowerCase()) {
                     case 'f':
+                    case '1' :
                         event.preventDefault();
                         let card = pre.closest('.card-body-edit');
                         if(card){
                             let panel = card.select('.panel-file');
+                            if(panel){
+                                panel.toggleClass('d-none');
+                            }
+                        }
+                        break;
+                    case '2' :
+                        event.preventDefault();
+                        let card = pre.closest('.card-body-edit');
+                        if(card){
+                            let panel = card.select('.panel-edit');
                             if(panel){
                                 panel.toggleClass('d-none');
                             }
