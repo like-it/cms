@@ -2406,6 +2406,7 @@ class Settings extends Main {
                 $object->config('ds') .
                 ltrim($destination, $object->config('ds'));
             if(Dir::is($source)){
+                $destination .= $object->config('ds');
                 $object->request('node.destination', $destination);
                 $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view.rename.directory');
             } else {
@@ -2442,6 +2443,7 @@ class Settings extends Main {
                 ) === $domain->dir . $object->config('dictionary.view') . $object->config('ds')
             ){
                 if(Dir::is($source)){
+                    $destination .= $object->config('ds');
                     $object->request('node.destination', $destination);
                     $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view.rename.directory');
                 } else {
