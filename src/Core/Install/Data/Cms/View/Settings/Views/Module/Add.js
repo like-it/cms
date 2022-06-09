@@ -180,10 +180,17 @@ add.form = (target) => {
             }
             form.request(null, data, (url, response) => {
                 if(response?.error){
-                    data.push({
-                        name: "error",
-                        value: response.error
-                    });
+                    if(is.array(data)){
+                        data.push({
+                            name: "error",
+                            value: response.error
+                        });
+                    } else {
+                        data = {
+                            ...data,
+                            error: response.error
+                        }
+                    }
                     request(form.data('url-error'), data, ( urlError, responseError ) => {
 
                     });
