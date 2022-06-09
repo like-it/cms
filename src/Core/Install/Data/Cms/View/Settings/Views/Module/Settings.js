@@ -790,9 +790,7 @@ settings.node.item.create_symlink = ({node, section, target}) => {
                         else if(response?.error){
                             let error = [];
                             let source = dialog_create.select('input[name="node.source"]');
-                            error.push('Source: ' + source.value);
                             let destination = dialog_create.select('input[name="node.destination"]');
-                            error.push('Destination: ' + destination.value);
                             let dialog_error;
                             let message;
                             message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.destination.invalid'))}}";
@@ -802,10 +800,9 @@ settings.node.item.create_symlink = ({node, section, target}) => {
                             if(response?.error?.destination?.validate_string_contains[0] === false){
                                 error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.destination.validate_string_contains')}}");
                             }
-                            const input = dialog_create.select('input[name="node.name"]');
-                            if(input?.value){
-                                message = _('prototype').string.replace("{$directory}", input.value, message);
-                            }
+                            message = _('prototype').string.replace("{$source}", source.value, message);
+                            message = _('prototype').string.replace("{$destination}", destination.value, message);
+
                             dialog_error = dialog.create({
                                 title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.title')}}",
                                 message : message,

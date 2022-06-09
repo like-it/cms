@@ -496,15 +496,18 @@
     ],
     "settings.views.dialog.error.item.create.symlink.title": "Error creating symlink",
     "settings.views.dialog.error.item.create.symlink.destination.message" : [
-        "Unable to create the symlink, the destination already exists..."
+        "Unable to create the symlink, the destination already exists...",
+        "Source: {$source} to destination: {$destination}"
     ],
     "settings.views.dialog.error.item.create.symlink.destination.invalid" : [
-        "Unable to create the symlink, the destination name is invalid..."
+        "Unable to create the symlink, the destination name is invalid...",
+        "Source: {$source} to destination: {$destination}"
     ],
     "settings.views.dialog.error.item.create.symlink.destination.validate_string_length" : "The destination is required...",
     "settings.views.dialog.error.item.create.symlink.destination.validate_string_contains" : "The destination must just be [A-Za-z][0-9] (alphabetical and or numeric)",
     "settings.views.dialog.error.item.create.symlink.source.message" : [
-        "Unable to create the symlink, cannot find the source..."
+        "Unable to create the symlink, cannot find the source...",
+        "Source: {$source} to destination: {$destination}"
     ],
 
     "settings.views.dialog.error.item.create.symlink.button.ok" : "Ok",
