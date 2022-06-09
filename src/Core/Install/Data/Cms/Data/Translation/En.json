@@ -501,9 +501,12 @@
     "settings.views.dialog.error.item.create.symlink.destination.invalid" : [
         "Unable to create the symlink, the destination name is invalid..."
     ],
+    "settings.views.dialog.error.item.create.symlink.destination.validate_string_length" : "The destination is required...",
+    "settings.views.dialog.error.item.create.symlink.destination.validate_string_contains" : "The destination must just be [A-Za-z][0-9] (alphabetical and or numeric)",
     "settings.views.dialog.error.item.create.symlink.source.message" : [
         "Unable to create the symlink, cannot find the source..."
     ],
+
     "settings.views.dialog.error.item.create.symlink.button.ok" : "Ok",
     "settings.views.dialog.error.item.create.directory.title": "Error creating directory",
     "settings.views.dialog.error.item.create.directory.empty.directory" : "Empty directory",
