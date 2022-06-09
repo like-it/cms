@@ -758,6 +758,8 @@ settings.node.item.create_symlink = ({node, section, target}) => {
                             } else {
                                 message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.source.message'))}}";
                             }
+                            message = _('prototype').string.replace("{$source}", source.value, message);
+                            message = _('prototype').string.replace("{$destination}", destination.value, message);
                             dialog_error = dialog.create({
                                 title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.title')}}",
                                 message : message,
