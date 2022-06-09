@@ -498,6 +498,9 @@
     "settings.views.dialog.error.item.create.symlink.destination.message" : [
         "Unable to create the symlink, the destination already exists..."
     ],
+    "settings.views.dialog.error.item.create.symlink.destination.invalid" : [
+        "Unable to create the symlink, the destination name is invalid..."
+    ],
     "settings.views.dialog.error.item.create.symlink.source.message" : [
         "Unable to create the symlink, cannot find the source..."
     ],

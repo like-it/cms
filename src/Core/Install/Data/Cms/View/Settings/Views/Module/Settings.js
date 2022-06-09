@@ -595,10 +595,10 @@ settings.node.item.create_dir = ({node, section, target}) => {
 
                             if(response?.error){
                                 message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.name.message'))}}";
-                                if(response.error.name.validate_string_length[0] === false){
+                                if(response?.error?.name?.validate_string_length[0] === false){
                                     error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.name.validate_string_length')}}");
                                 }
-                                if(response.error.name.validate_string_contains[0] === false){
+                                if(response?.error?.name?.validate_string_contains[0] === false){
                                     error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.directory.name.validate_string_contains')}}");
                                 }
                                 const input = dialog_create.select('input[name="node.name"]');
@@ -757,6 +757,54 @@ settings.node.item.create_symlink = ({node, section, target}) => {
                                 message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.destination.message'))}}";
                             } else {
                                 message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.source.message'))}}";
+                            }
+                            dialog_error = dialog.create({
+                                title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.title')}}",
+                                message : message,
+                                error : error,
+                                buttons : [
+                                    {
+                                        text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.button.ok')}}"
+                                    }
+                                ],
+                                section : section,
+                                className : "dialog dialog-error dialog-error-create-symlink dialog-error-destination"
+                            });
+                            let form = dialog_error.select('form');
+                            if(!form){
+                                return;
+                            }
+                            form.on('submit', (event) => {
+                                dialog_error.remove();
+                                let form = dialog_create.select('form');
+                                let input = form.select('input[name="node.source"]');
+                                if(input){
+                                    input.focus();
+                                }
+                            });
+                            const button = form.select('button[type="submit"]');
+                            if(button){
+                                button.focus();
+                            }
+                        }
+                        else if(response?.error){
+                            let error = [];
+                            let source = dialog_create.select('input[name="node.source"]');
+                            error.push('Source: ' + source.value);
+                            let destination = dialog_create.select('input[name="node.destination"]');
+                            error.push('Destination: ' + destination.value);
+                            let dialog_error;
+                            let message;
+                            message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.destination.invalid'))}}";
+                            if(response?.error?.destination?.validate_string_length[0] === false){
+                                error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.destination.validate_string_length')}}");
+                            }
+                            if(response?.error?.destination?.validate_string_contains[0] === false){
+                                error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.destination.validate_string_contains')}}");
+                            }
+                            const input = dialog_create.select('input[name="node.name"]');
+                            if(input?.value){
+                                message = _('prototype').string.replace("{$directory}", input.value, message);
                             }
                             dialog_error = dialog.create({
                                 title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.item.create.symlink.title')}}",
