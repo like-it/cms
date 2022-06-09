@@ -2929,7 +2929,23 @@ class Settings extends Main {
         elseif(file::exist($url_destination)){
             throw new ErrorException('Destination exists...');
         } else {
-            File::link($url_source, $url_destination);
+            $object->request('node.destination', $url_destination);
+            $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view.create.symlink');
+            if($validate) {
+                if ($validate->success === true) {
+                    File::link($url_source, $url_destination);
+                } else {
+                    $data = [];
+                    $data['error'] = $validate->test;
+                    return new Response(
+                        $data,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                }
+            } else {
+                throw new Exception('Cannot validate view at: ' . Settings::views_getValidatorUrl($object));
+            }
         }
         $node = [];
         $node['url'] = $url_destination;
