@@ -224,25 +224,13 @@ edit.focus = () => {
     if(!section){
         return;
     }
-    const selected = section.select('.card-body-' + "{{$request.node.key}}");
-    if(!selected){
-        return;
+    let pre = section.select('.card-body-' + "{{$request.node.key}} pre");
+    if(pre){
+        let editor = _('_').collection('source.editor.' + pre.id);
+        if(editor){
+            editor.focus();
+        }
     }
-    const form = selected.select('form');
-    if(!form){
-        return;
-    }
-    const focus = "{{$request.focus}}";
-    let input;
-    if(focus){
-        input = form.select('input[name="' + focus +'"]');
-    } else {
-        input = form.select('input[name="node.subdomain"]');
-    }
-    if(!input){
-        return;
-    }
-    input.focus();
 }
 
 edit.dialogSaveAs = () => {
