@@ -2561,6 +2561,7 @@ class Settings extends Main {
                 }
             }
             $response = [];
+            $object->logger()->debug(count($data->data()));
             $list = Sort::list($data->data())->with(['url' => 'ASC']);
             if($object->request('q')){
                 $q = [];
