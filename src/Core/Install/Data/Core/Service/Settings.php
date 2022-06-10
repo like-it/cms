@@ -2562,7 +2562,6 @@ class Settings extends Main {
             }
             $response = [];
             $list = Sort::list($data->data())->with(['url' => 'ASC']);
-            dd($list);
             if($object->request('q')){
                 $q = [];
                 foreach($list as $key => $record){
