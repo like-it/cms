@@ -2997,7 +2997,9 @@ class Settings extends Main {
                     );
                 } else {
                     //add mime-type check
-                    dd($record);
+                    $command = 'file --mime-type -b ' . escapeshellarg($record->get('tmp_name'));
+                    Core::execute($command, $mimeType);
+                    dd($mimeType);
                     Dir::create($target);
                     File::upload($record, $target);
                 }
