@@ -2997,6 +2997,7 @@ class Settings extends Main {
                     );
                 } else {
                     //add mime-type check
+                    dd($record);
                     Dir::create($target);
                     File::upload($record, $target);
                 }
