@@ -2998,10 +2998,26 @@ class Settings extends Main {
                 } else {
                     //add mime-type check
                     $command = 'file --mime-type -b ' . escapeshellarg($record->get('tmp_name'));
-                    Core::execute($command, $mimeType);
-                    dd($mimeType);
-                    Dir::create($target);
-                    File::upload($record, $target);
+                    Core::execute($command, $output);
+                    if(array_key_exists(0, $output)){
+                        $mimeType = $output[0];
+                        if(!in_array($mimeType, [
+                            'text/plain',
+                            'text/css',
+                            'text/json'
+                        ])){
+                            $error = [];
+                            $error['error'] = $object->request('error-5') . PHP_EOL;
+                            return new Response(
+                                $error,
+                                Response::TYPE_JSON,
+                                Response::STATUS_ERROR
+                            );
+                        } else {
+                            Dir::create($target);
+                            File::upload($record, $target);
+                        }
+                    }
                 }
             }
         } else {
