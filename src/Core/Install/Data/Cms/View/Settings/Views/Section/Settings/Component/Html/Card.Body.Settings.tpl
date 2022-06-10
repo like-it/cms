@@ -62,10 +62,10 @@
         <tbody>
         {{$nr = 0 }}
         {{$count = 0}}
-        {{for.each($request.nodeList as $node_nr => $node)}}
-            {{$count++}}
-        {{/for.each}}
         {{if(!is.empty($request.nodeList))}}
+            {{for.each($request.nodeList as $node_nr => $node)}}
+            {{$count++}}
+            {{/for.each}}
             {{for.each($request.nodeList as $node_nr => $node)}}
                 <tr
                     data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.url|url.raw.encode}}/{{$node.domain}}"
