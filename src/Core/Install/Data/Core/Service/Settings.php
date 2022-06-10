@@ -2535,6 +2535,7 @@ class Settings extends Main {
                 $record->extension = File::extension($record->url);
                 if(
                     array_key_exists('extension', $filter) &&
+                    !empty($filter['extension']) && 
                     $filter['extension'] !== $record->extension
                 ){
                         continue;
