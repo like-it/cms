@@ -587,7 +587,7 @@
     "settings.views.dialog.list.upload.error.6" : "Missing a temporary folder.",
     "settings.views.dialog.list.upload.error.7" : "Failed to write file to disk.",
     "settings.views.dialog.list.upload.error.8" : "A PHP extension stopped the file upload.",
-    "settings.views.dialog.list.upload.error.9" : "The uploaded file was rejected due to it's extension. \nValid extensions are .tpl, .js, .json & .css",
+    "settings.views.dialog.list.upload.error.9" : "The uploaded file was rejected due to it's extension. \\\nValid extensions are .tpl, .js, .json & .css",
     "settings.views.exception.error" : "R3m\\\\Io\\\\Exception\\\\ErrorException",
     "settings.views.section.settings.create.directory.response.message" : "Name cannot be empty...",
     "settings.views.module.settings.delete" : "Are you sure you want to delete this item",
