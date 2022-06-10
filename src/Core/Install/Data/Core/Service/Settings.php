@@ -2982,6 +2982,7 @@ class Settings extends Main {
                 trim($directory, $object->config('ds')) .
                 $object->config('ds');
         }
+        dd($object->request());
         dd($target);
         $upload = $object->upload();
         $data = $upload->data();
