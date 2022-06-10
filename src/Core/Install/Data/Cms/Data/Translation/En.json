@@ -693,6 +693,7 @@
     "settings.views.section.settings.component.options.view.text" : "View details",
     "settings.views.section.settings.component.options.rename.icon" : "fas fa-cog",
     "settings.views.section.settings.component.options.rename.text" : "Rename",
+    "settings.views.section.settings.component.tbody.no.records": "No more records...",
     "settings.views.section.settings.component.thead.actions" : "",
     "settings.views.section.settings.component.thead.icon" : "",
     "settings.views.section.settings.component.thead.name" : "Name",
