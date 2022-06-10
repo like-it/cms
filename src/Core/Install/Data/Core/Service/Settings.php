@@ -2960,6 +2960,57 @@ class Settings extends Main {
         return new Response($response, Response::TYPE_JSON);
     }
 
+    public static function views_upload(App $object)
+    {
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+
+        $directory = $object->request('node_directory');
+        if(empty($directory)) {
+            $target = $domain->dir .
+                $object->config('dictionary.view') .
+                $object->config('ds');
+        } else {
+            $target = $domain->dir .
+                $object->config('dictionary.view') .
+                trim($directory, $object->config('ds')) .
+                $object->config('ds');
+        }
+        $upload = $object->upload();
+        $data = $upload->data();
+        if(is_array($data) || is_object($data)){
+            foreach($data as $file) {
+                $record = new Data($file);
+                if ($record->get('errorMessage')) {
+                    $error = [];
+                    $error['error'] = $record->get('errorMessage') . PHP_EOL;
+                    return new Response(
+                        $error,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                } else {
+                    //add mime-type check
+                    Dir::create($target);
+                    File::upload($record, $target);
+                }
+            }
+        } else {
+            $error = [];
+            $error['error'] = 'Cannot detect any upload...' . PHP_EOL;
+            return new Response(
+                $error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
+        }
+    }
+
     private static function views_page(App $object, $search=[], $url='')
     {
         $dir = new Dir();
