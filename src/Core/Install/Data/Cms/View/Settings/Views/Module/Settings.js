@@ -213,6 +213,17 @@ settings.upload = ({
         ],
         function(){
             if(token){
+                if(contains(url, "{node.domain}") !== false){
+                    const section = getSectionByName('main-content');
+                    if(!section){
+                        return;
+                    }
+                    const domain = section.select('input[name="node.domain"]');
+                    if(!domain){
+                        return;
+                    }
+                    url = replace("{node.domain}", domain.value, url);
+                }
                 upload.init({
                     url : url,
                     token: token,
@@ -1229,7 +1240,7 @@ settings.node.list.upload = ({node, section, target}) => {
         }
         let upload_target = dialog_create.select('.body');
         settings.upload({
-            url: "{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Upload/",
+            url: "{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Upload/{node.domain}/",
             token: user.token(),
             upload_max_filesize: "1024 M",
             target: upload_target,
