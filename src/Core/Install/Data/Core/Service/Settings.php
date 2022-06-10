@@ -3014,6 +3014,11 @@ class Settings extends Main {
                                 Response::STATUS_ERROR
                             );
                         } else {
+                            dd($record);
+                            //.tpl, .js, .json or .css
+
+
+
                             Dir::create($target);
                             File::upload($record, $target);
                         }
