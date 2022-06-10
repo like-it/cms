@@ -1205,6 +1205,10 @@ settings.node.list.upload = ({node, section, target}) => {
                         value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.4')}}"
                     },
                     {
+                        name: "error-5",
+                        value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.5')}}"
+                    },
+                    {
                         name: "error-6",
                         value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.6')}}"
                     },
@@ -1225,7 +1229,7 @@ settings.node.list.upload = ({node, section, target}) => {
         }
         let upload_target = dialog_create.select('.body');
         settings.upload({
-            url: "{{server.url('core')}}Settings/Server/Settings/Upload/",
+            url: "{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/Upload/",
             token: user.token(),
             upload_max_filesize: "1024 M",
             target: upload_target,
