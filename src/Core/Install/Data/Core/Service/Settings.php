@@ -3014,8 +3014,21 @@ class Settings extends Main {
                                 Response::STATUS_ERROR
                             );
                         } else {
-                            dd($record);
-                            //.tpl, .js, .json or .css
+                            $extension = File::extension($record->get('name'));
+                            if(!in_array($extension, [
+                                'tpl',
+                                'js',
+                                'json',
+                                'css'
+                            ])){
+                                $error = [];
+                                $error['error'] = $object->request('error-9') . PHP_EOL;
+                                return new Response(
+                                    $error,
+                                    Response::TYPE_JSON,
+                                    Response::STATUS_ERROR
+                                );
+                            }
 
 
 

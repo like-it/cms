@@ -1230,6 +1230,10 @@ settings.node.list.upload = ({node, section, target}) => {
                     {
                         name: "error-8",
                         value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.8')}}"
+                    },
+                    {
+                        name: "error-9",
+                        value: "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.error.9')}}"
                     }
                 ]
             }
