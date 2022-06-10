@@ -2978,10 +2978,10 @@ class Settings extends Main {
         } else {
             $target = $domain->dir .
                 $object->config('dictionary.view') .
+                $object->config('ds');
                 trim($directory, $object->config('ds')) .
                 $object->config('ds');
         }
-        dd($target);
         $upload = $object->upload();
         $data = $upload->data();
         if(is_array($data) || is_object($data)){
