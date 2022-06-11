@@ -1814,7 +1814,6 @@ ready(() => {
             root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Create.File.css?' + version(),
             root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Create.Symlink.css?' + version(),
             root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + 'Dialog.Rename.css?' + version(),
-            root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + "{{$require.submodule|file.basename}}" + '.css?' + version()
         ],
         () => {
             settings.init();

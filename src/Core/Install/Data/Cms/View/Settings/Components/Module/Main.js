@@ -25,6 +25,7 @@ ready(() => {
         [
             root() + 'Dialog/Css/Dialog.css?' + version(),
             root() + 'Dialog/Css/Dialog.Error.css?' + version(),
+            root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + "{{$require.submodule|file.basename}}" + '.css?' + version()
         ],
         () => {
             main.init();
