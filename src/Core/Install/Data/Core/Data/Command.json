@@ -235,6 +235,79 @@
             "OPTIONS"
         ]
     },
+    "0f49108d-0de8-4ddf-9aa7-ce71efec7e2f" : {
+        "module" : "settings",
+        "submodule" : "components",
+        "command" : "settings",
+        "path": "Settings/Components/Settings/{{$node.domain}}",
+        "method" : [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "f6538074-a532-47ee-8ba9-822048c55559" : {
+        "module" : "settings",
+        "submodule" : "components",
+        "command" : "add",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "2d01840a-c233-45e5-ae6b-e82241e3acf4" : {
+        "module" : "settings",
+        "submodule" : "components",
+        "command" : "create",
+        "path": "Settings/Components/Create/{{$type}}/{{$node.domain}}",
+        "method": [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "69e60c4b-5d57-4223-ab15-aa73cf883a1a" : {
+        "module" : "settings",
+        "submodule" : "components",
+        "command" : "copy",
+        "path": "Settings/Components/Copy/{{$node.domain}}",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "16ad70d5-143a-4ea0-882a-126cd9810320" : {
+        "module" : "settings",
+        "submodule" : "components",
+        "command" : "move",
+        "path": "Settings/Components/Move/{{$node.domain}}",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "46aff2e0-a72f-4a54-bf87-6cb832374e53" : {
+        "module" : "settings",
+        "submodule" : "components",
+        "command" : "upload",
+        "path": "Settings/Components/Upload/{{$node.domain}}",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "4961575b-8e0d-4d58-8ced-c7c764da5f37" : {
+        "module" : "settings",
+        "submodule" : "components",
+        "command" : "command",
+        "path": "Settings/Components/{{$node.url}}/{{$node.domain}}",
+        "method": [
+            "GET",
+            "PUT",
+            "PATCH",
+            "DELETE",
+            "OPTIONS"
+        ]
+    },
     "427e9a39-ab46-4015-bb7f-3e37faa42ad0" : {
         "module" : "settings",
         "submodule" : "domains",

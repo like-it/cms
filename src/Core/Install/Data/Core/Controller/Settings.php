@@ -55,6 +55,93 @@ class Settings extends View {
         }
     }
 
+    public static function components_settings(App $object)
+    {
+        try {
+            return Service::views_list($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function components_add(App $object)
+    {
+        try {
+            return Service::views_create($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function components_command(App $object){
+        $url = $object->request('node.url');
+        $nodeList = $object->request('nodeList');
+        try {
+            switch (Handler::method()) {
+                case 'DELETE' :
+                    if($nodeList){
+                        return Service::views_delete($object, $nodeList);
+                    } elseif($url){
+                        return Service::views_delete($object, $url);
+                    }
+                case 'GET' :
+                    return Service::views_read($object, $url);
+                case 'PUT' :
+                    return Service::views_update($object, $url);
+                case 'PATCH' :
+                    return Service::views_rename($object, $url);
+            }
+        } catch (Exception $exception) {
+            return $exception;
+        }
+    }
+
+    public static function components_copy(App $object)
+    {
+        try {
+            return Service::views_copy_list($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function components_move(App $object)
+    {
+        try {
+            return Service::views_move_list($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function components_create(App $object)
+    {
+        $type = $object->request('type');
+        try {
+            switch (Handler::method()) {
+                case 'POST':
+                    switch ($type){
+                        case 'Directory':
+                            return Service::views_create_directory($object);
+                        case 'Symlink':
+                            return Service::views_create_symlink($object);
+                    }
+                    break;
+            }
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function components_upload(App $object)
+    {
+        try {
+            return Service::views_upload($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
     public static function domains_settings(App $object): Response
     {
         return Service::domains_list($object);
