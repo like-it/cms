@@ -21,13 +21,17 @@
         data-selected=".card-body-{{$section}}"
     >
         {{__(
+        'component' +
+        '.' +
         $__.module +
         '.' +
-        $__.submodule +
-        '.component.header.a.' +
+        'menu' +
+        '.' +
+        'li' +
+        '.' +
         $__.section +
         '.' +
-        'link'
+        'title'
         )}}
     </a>
 </li>
