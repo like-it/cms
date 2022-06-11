@@ -1,0 +1,54 @@
+.settings-views .card-body-settings {
+    overflow: auto;
+    padding: 0;
+}
+
+.settings-views .card-body-settings table {
+    margin: 1rem;
+    width: calc(100% - 2rem);
+    min-height: 300px;
+}
+
+.settings-views .card-body-settings thead th{
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 1);
+}
+
+.settings-views .card-body-settings thead .th-icon {
+    width: 32px;
+}
+
+.settings-views .card-body-settings thead .th-actions {
+    width: 32px;
+}
+
+.settings-views .card-body-settings tbody td.icon {
+    color: #0b5ed7;
+}
+
+.settings-views .card-body-settings tbody td.icon .is-link {
+    color: rgba(255, 124, 13, 1);
+}
+
+.settings-views .card-body-settings tfoot td {
+    position: sticky;
+    bottom: 0;
+    background: rgba(255, 255, 255, 1);
+}
+
+.settings-views .card-body-settings tfoot .dropdown {
+    float: left;
+}
+
+.settings-views .card-body-settings tfoot .page {
+    margin-right: 0.5rem;
+}
+
+.settings-views .card-body-settings td i.fa-file {
+    margin-right: 4px;
+}
+
+.settings-views .card-body-settings td i.fa-folder {
+}
+
