@@ -1,15 +1,16 @@
 {{R3M}}
 <div class="card-body h-100 card-{{$command}}-body">
-    {{dd('{{$this}}')}}
     {{markdown.read(
-    $prefix +
-    $require.submodule +
-    '/Section/' +
-    $require.command +
-    '/Component/Markdown/' +
+    $controller.dir.data +
+    'Markdown' +
+    '/' +
     $require.language +
     '/' +
+    $require.module +
+    '.' +
     $require.submodule +
+    '.' +
+    $require.command +
     '.md'
     )}}
 </div>
