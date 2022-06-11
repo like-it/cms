@@ -1,7 +1,9 @@
 {{R3M}}
+/*
 {{script('module')}}
 {{require($prefix + 'Module/Menu.js')}}
 {{/script}}
+*/
 {{$li = [
 'Domain',
 'Main',

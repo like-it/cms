@@ -7,13 +7,17 @@
         <input type="hidden" name="node.domain" value="uuid" />
         <button type="button" class="btn btn-secondary dropdown-toggle {{$section}}" data-bs-toggle="dropdown">
             {{__(
+            'component' +
+            '.' +
             $__.module +
             '.' +
-            $__.submodule +
-            '.component.header.button.' +
+            'menu' +
+            '.' +
+            'button' +
+            '.' +
             $__.section +
             '.' +
-            'link'
+            'title'
             )}}
         </button>
         <ul class="dropdown-menu">
