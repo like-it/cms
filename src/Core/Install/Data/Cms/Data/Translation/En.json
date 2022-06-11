@@ -3,7 +3,7 @@
     "meta.description" : "Funda CMS Admin panel",
     "meta.keywords" : "cms, funda, r3m, universe, orange, php, javascript, js",
     "meta.title" : "Admin | universeorange.com",
-    "component.settings.menu.button.domain.settings.title" : "Loading...",
+    "component.settings.menu.button.domains.settings.title" : "Loading...",
     "component.settings.menu.li.main.title" : "Main",
     "component.settings.menu.li.settings.title" : "Settings",
     "navbar.brand" : "Funda CMS",
