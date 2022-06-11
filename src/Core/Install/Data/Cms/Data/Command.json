@@ -199,6 +199,77 @@
             "POST"
         ]
     },
+    "1cdb85b0-ef09-45b4-81cc-985c76a7a1c1" : {
+        "module" : "settings",
+        "submodule" : "components",
+        "command" : "main",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "52975a46-75ae-4c2e-af10-08b12867cf73" : {
+        "module" : "settings",
+        "submodule" : "components",
+        "command" : "main",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "adc62110-7733-49cd-92a1-3540860c1dbf" : {
+        "module" : "settings",
+        "submodule" : "components",
+        "command" : "settings",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "26f9eeef-94f3-4aab-93c2-17d54ff7570e" : {
+        "module" : "settings",
+        "submodule" : "components",
+        "command" : "add-template",
+        "subcommand" : "body",
+        "path" : "Settings/Components/Add/Template/Body/{$node.domain}",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "656f060f-14d5-4cd2-b735-213f5bccc3bf" : {
+        "module" : "settings",
+        "submodule" : "components",
+        "command" : "edit-template",
+        "subcommand" : "body",
+        "path" : "Settings/Components/Edit/Template/Body/",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "99ab17cc-f0bc-41d4-b715-8eef8fcb2965" : {
+        "module" : "settings",
+        "submodule" : "components",
+        "command" : "view",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "c6b998ef-74d0-4b4b-9c35-f7ee9fd4be66" : {
+        "module" : "settings",
+        "submodule" : "components",
+        "command" : "view-routes",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
     "e9ccd042-3c5e-4dac-a5c7-aef9df8f9046" : {
         "module" : "settings",
         "submodule" : "domains",
