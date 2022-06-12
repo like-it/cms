@@ -47,12 +47,16 @@
         <tr>
             {{for.each($components as $component)}}
             <th scope="col" class="th-{{$component}}">{{__(
+                'component' +
+                '.' +
                 $__.module +
                 '.' +
-                $__.submodule +
-                '.section.' +
-                $__.command +
-                '.component.thead.' +
+                'settings' +
+                '.' +
+                'body' +
+                '.' +
+                'thead' +
+                '.' +
                 $component
             )}}
             </th>
@@ -77,7 +81,7 @@
                 {{/if}}
                 {{for.each($components as $component)}}
                     {{$require.basename = $component|uppercase.first.sentence:'.'}}
-                    {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Td/' + $require.basename + '.tpl')}}
+                    {{require($controller.dir.component + $require.module + '/' + $require.submodule + '/Td/' + $require.basename + '.tpl')}}
                 {{/for.each}}
                 </tr>
                 {{$nr++}}
@@ -86,19 +90,25 @@
             <tr>
                 <td colspan="{{array.count($components)}}">
                     {{__(
+                    'component' +
+                    '.' +
                     $__.module +
                     '.' +
-                    $__.submodule +
-                    '.section.' +
-                    $__.command +
-                    '.component.tbody.' +
-                    'no.records'
+                    'settings' +
+                    '.' +
+                    'body' +
+                    '.' +
+                    'tbody' +
+                    '.' +
+                    'no' +
+                    '.' +
+                    'records'
                     )}}
                 </td>
             </tr>
         {{/if}}
         </tbody>
-        {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Html/Footer.tpl')}}
+        {{require($controller.dir.component + $require.module + '/' + $require.submodule + '/Footer.tpl')}}
     </table>
 
 </div>
