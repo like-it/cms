@@ -18,7 +18,6 @@ use R3m\Io\Module\Sort;
 class Execute {
 
     public static function dir_create(App $object, $options=[]){
-        dd($options);   
         if(!array_key_exists('name', $options)){
             return false;
         }
@@ -45,6 +44,7 @@ class Execute {
             $object->config('ds'),
             true
         );
+        dd($read);
         foreach($read as $nr => $file){
             if($file->type === File::TYPE){
                 continue;
@@ -69,7 +69,8 @@ class Execute {
             );
             if(array_key_exists(1, $explode)){
                 $target = $object->config('project.dir.root') .
-                    'src' . $object->config('ds') .
+                    'src' .
+                    $object->config('ds') .
                     $explode[1];
                 if(Dir::is($target) === false){
                     Dir::create($target);
