@@ -61,13 +61,20 @@ class Execute {
                     $object->config('ds') .
                     'Data' .
                     $object->config('ds'),
-                    $file->url,
+                    $dir,
                     2
                 );
                 dd($explode);
+                if(array_key_exists(1, $explode)) {
+                    $target = $object->config('project.dir.root') .
+                        'src' .
+                        $object->config('ds') .
+                        $explode[1];
                     if(Dir::is($target) === false){
                         Dir::create($target);
                     }
+                }
+
 
                 continue;
             }
