@@ -18,6 +18,7 @@ use R3m\Io\Module\Sort;
 class Execute {
 
     public static function dir_create(App $object, $options=[]){
+        dd($options);   
         if(!array_key_exists('name', $options)){
             return false;
         }
