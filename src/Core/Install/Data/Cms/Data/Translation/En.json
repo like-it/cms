@@ -14,7 +14,7 @@
     "component.settings.settings.options.rename.text" : "Rename",
     "component.settings.settings.options.delete.text" : "Delete",
     "component.settings.settings.options.edit.text" : "Edit",
-    "component.settings.settings.options.View.text" : "View",
+    "component.settings.settings.options.view.text" : "View",
     "component.settings.settings.td.options.text" : "Actions",
     "component.settings.settings.action.copy.text" : "Copy",
     "component.settings.settings.action.move.text" : "Move",
