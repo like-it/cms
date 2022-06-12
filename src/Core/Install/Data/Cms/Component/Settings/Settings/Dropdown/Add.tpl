@@ -9,6 +9,7 @@
             aria-haspopup="true"
             aria-expanded="false"
         >
+            <i class="
             {{__(
             'component' +
             '.' +
@@ -23,7 +24,7 @@
             'addons' +
             '.' +
             'icon'
-            )}}
+            )}}"></i>
         </button>
         <div
             class="dropdown-menu"
