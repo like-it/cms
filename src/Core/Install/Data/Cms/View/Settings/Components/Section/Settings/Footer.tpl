@@ -1,4 +1,10 @@
 {{R3M}}
+{{$dropdowns = [
+'Limit',
+'Filter',
+'Action',
+'Add'
+]}}
 {{if(!is.empty($request.page))}}
 {{$page.current = (int) $request.page}}
 {{else}}
@@ -26,10 +32,9 @@
         {{$td.colspan = array.count($components) - 2}}
         <td colspan="{{$td.colspan}}">
             <div class="btn-group">
-                {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Dropdown/' + 'Limit.tpl')}}
-                {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Dropdown/' + 'Filter.tpl')}}
-                {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Dropdown/' + 'Action.tpl')}}
-                {{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Dropdown/' + 'Add.tpl')}}
+                {{for.each($dropdowns as $dropdown)}}
+                {{require($controller.dir.component + $require.module + '/' + $require.command + '/Dropdown/' + $dropdown + '.tpl')}}
+                {{/for.each}}
             </div>
         </td>
         <td colspan="2" class="text-end">
