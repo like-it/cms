@@ -32,6 +32,127 @@
     "component.settings.settings.filter.js.text" : "Javascript files only",
     "component.settings.settings.filter.json.text" : "JSON files only",
     "component.settings.settings.filter.css.text" : "Stylesheet files only",
+    "settings.components.dialog.error.domain.title" : "Error:",
+    "settings.components.dialog.error.domain.message" : [
+        "Unable to find a domain.",
+        "Did you forget to add a domain?"
+    ],
+    "settings.components.dialog.error.domain.button.ok" : "Ok",
+    "settings.components.dialog.error.rename.button.ok" : "Ok",
+    "settings.components.dialog.error.rename.file.exist" : "Destination file ({$destination}) already exists...",
+    "settings.components.dialog.error.rename.message" : [
+        "Cannot rename file.",
+        "Source: {$source} to destination: {$destination}"
+    ],
+    "settings.components.dialog.error.rename.response.class" : "R3m\\\\Io\\\\Exception\\\\FileMoveException",
+    "settings.components.dialog.error.rename.response.message.file.exist" : "Destination file already exists...",
+    "settings.components.dialog.error.rename.title" : "Error:",
+    "settings.components.dialog.error.rename.extension.validate_string_length" : "The name needs an extension...",
+    "settings.components.dialog.error.rename.extension.validate_in_array" : "Please use one of the following extensions: .tpl, .js, .json or .css",
+    "settings.components.dialog.error.rename.extension.validate_string_contains" : "The extension must just be [A-Za-z] (alphabetical)",
+    "settings.components.dialog.error.rename.name.validate_string_contains" : "The name must just be [A-Za-z][0-9] (alphabetical and or numeric)",
+    "settings.components.dialog.error.rename.name.validate_string_length" : "The name is required.",
+    "settings.components.dialog.error.rename.destination.validate_string_contains" : "The destination must just be [A-Za-z][0-9] (alphabetical and or numeric)",
+    "settings.components.dialog.error.rename.destination.validate_string_length" : "The destination is required.",
+    "settings.components.dialog.error.rename.url.validate_url" : "The name already exists. Please use a different url...",
+    "settings.components.dialog.error.rename.validation.message" : [
+        "Cannot rename file.",
+        "Source: {$source} to destination: {$destination}"
+    ],
+    "settings.components.dialog.error.item.create.symlink.title": "Error creating symlink",
+    "settings.components.dialog.error.item.create.symlink.destination.message" : [
+        "Unable to create the symlink, the destination already exists..."
+    ],
+    "settings.components.dialog.error.item.create.symlink.destination.invalid" : [
+        "Unable to create the symlink, the destination name is invalid...",
+        "Source: {$source} to destination: {$destination}"
+    ],
+    "settings.components.dialog.error.item.create.symlink.destination.validate_string_length" : "The destination is required...",
+    "settings.components.dialog.error.item.create.symlink.destination.validate_string_contains" : "The destination must just be [A-Za-z][0-9] (alphabetical and or numeric)",
+    "settings.components.dialog.error.item.create.symlink.source.message" : [
+        "Unable to create the symlink, cannot find the source..."
+    ],
+    "settings.components.dialog.error.item.create.symlink.button.ok" : "Ok",
+    "settings.components.dialog.error.item.create.directory.title": "Error creating directory",
+    "settings.components.dialog.error.item.create.directory.empty.directory" : "Empty directory",
+    "settings.components.dialog.error.item.create.directory.empty.message" : [
+        "Please give a valid name..."
+    ],
+    "settings.components.dialog.error.item.create.directory.dir.exist.message" : [
+        "Unable to create the directory ({$directory}), the directory already exists..."
+    ],
+    "settings.components.dialog.error.item.create.directory.exist.message" : [
+        "Unable to create the directory, the directory already exists..."
+    ],
+    "settings.components.dialog.error.item.create.directory.name.message" : [
+        "Unable to create the directory ({$directory})..."
+    ],
+    "settings.components.dialog.error.item.create.directory.button.ok" : "Ok",
+    "settings.components.dialog.error.item.create.directory.name.validate_string_length" : "The name is required.",
+    "settings.components.dialog.error.item.create.directory.name.validate_string_contains" : "The name must just be [A-Za-z][0-9] (alphabetical and or numeric)",
+    "settings.components.dialog.create.directory.title" : "Create new directory",
+    "settings.components.dialog.create.directory.message" : [
+        "Please give the name of the directory which you want to create..."
+    ],
+    "settings.components.dialog.create.directory.button.ok" : "Ok",
+    "settings.components.dialog.create.directory.button.cancel" : "Cancel",
+    "settings.components.dialog.create.directory.name" : "Name: ",
+    "settings.components.dialog.create.symlink.title" : "Create new symlink",
+    "settings.components.dialog.create.symlink.message" : [
+        "Please give the source & destination of the symlink which you want to create..."
+    ],
+    "settings.components.dialog.create.symlink.button.ok" : "Ok",
+    "settings.components.dialog.create.symlink.button.cancel" : "Cancel",
+    "settings.components.dialog.create.symlink.source" : "Source: ",
+    "settings.components.dialog.create.symlink.destination" : "Destination: ",
+    "settings.components.dialog.rename.title" : "Rename",
+    "settings.components.dialog.rename.message" : [
+        "Are you sure you want to rename {$name}?"
+    ],
+    "settings.components.dialog.rename.button.ok" : "Ok",
+    "settings.components.dialog.rename.button.cancel" : "Cancel",
+    "settings.components.dialog.rename.destination.label" : "New name",
+    "settings.components.dialog.delete.title" : "Delete",
+    "settings.components.dialog.delete.message" : [
+        "Are you sure you want to delete {$name}?"
+    ],
+    "settings.components.dialog.delete.button.ok" : "Ok",
+    "settings.components.dialog.delete.button.cancel" : "Cancel",
+    "settings.components.dialog.list.copy.title" : "Copy",
+    "settings.components.dialog.list.copy.message" : [
+        "Where do you want to copy the selected items to?"
+    ],
+    "settings.components.dialog.list.copy.target.directory" : "Target directory: ",
+    "settings.components.dialog.list.copy.button.ok" : "Ok",
+    "settings.components.dialog.list.copy.button.cancel" : "Cancel",
+    "settings.components.dialog.list.move.title" : "Move",
+    "settings.components.dialog.list.move.message" : [
+        "Where do you want to move the selected items to?"
+    ],
+    "settings.components.dialog.list.move.target.directory" : "Target directory: ",
+    "settings.components.dialog.list.move.button.ok" : "Ok",
+    "settings.components.dialog.list.move.button.cancel" : "Cancel",
+    "settings.components.dialog.list.delete.title" : "Delete",
+    "settings.components.dialog.list.delete.message" : [
+        "Are you sure you want to delete the selected items?"
+    ],
+    "settings.components.dialog.list.delete.button.ok" : "Ok",
+    "settings.components.dialog.list.delete.button.cancel" : "Cancel",
+    "settings.components.dialog.list.upload.title" : "Upload files:",
+    "settings.components.dialog.list.upload.message" : "Drop files or click here to upload.",
+    "settings.components.dialog.list.upload.target.directory" : "Target directory:",
+    "settings.components.dialog.list.upload.button.ok" : "Done uploading",
+    "settings.components.dialog.list.upload.button.cancel" : "Cancel",
+    "settings.components.dialog.list.upload.error.0" : "Ok",
+    "settings.components.dialog.list.upload.error.1" : "The uploaded file exceeds the upload_max_filesize directive in .htaccess",
+    "settings.components.dialog.list.upload.error.2" : "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.",
+    "settings.components.dialog.list.upload.error.3" : "The uploaded file was only partially uploaded.",
+    "settings.components.dialog.list.upload.error.4" : "No file was uploaded.",
+    "settings.components.dialog.list.upload.error.5" : "The uploaded file was rejected due to it's mime-type.",
+    "settings.components.dialog.list.upload.error.6" : "Missing a temporary folder.",
+    "settings.components.dialog.list.upload.error.7" : "Failed to write file to disk.",
+    "settings.components.dialog.list.upload.error.8" : "A PHP extension stopped the file upload.",
+    "settings.components.dialog.list.upload.error.9" : "The uploaded file was rejected due to it's extension. \\\nValid extensions are .tpl, .js, .json & .css",
     "navbar.brand" : "Funda CMS",
     "navbar.home" : "Home",
     "navbar.content" : "Content",
@@ -87,7 +208,7 @@
     "settings.controllers.section.form.component.menu.panel.edit.undo.icon" : "fas fa-undo",
     "settings.controllers.section.form.component.menu.panel.edit.undo.text" : "Undo",
     "settings.controllers.section.form.component.menu.panel.edit.undo.shortcut" : "CTRL-Z",
-    "settings.controllersv.section.form.component.menu.panel.edit.redo.icon" : "fas fa-redo",
+    "settings.controllers.section.form.component.menu.panel.edit.redo.icon" : "fas fa-redo",
     "settings.controllers.section.form.component.menu.panel.edit.redo.text" : "Redo",
     "settings.controllers.section.form.component.menu.panel.edit.redo.shortcut" : "CTRL-SHIFT-Z",
     "settings.controllers.section.form.component.menu.panel.edit.cut.icon" : "",
