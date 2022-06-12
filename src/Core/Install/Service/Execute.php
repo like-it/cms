@@ -47,7 +47,6 @@ class Execute {
         foreach($read as $nr => $file){
             if($file->type === File::TYPE){
                 $dir = Dir::name($file->url);
-                dd($dir);
                 $explode = explode($object->config('project.dir.vendor') .
                     'like-it' .
                     $object->config('ds') .
