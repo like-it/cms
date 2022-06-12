@@ -44,7 +44,7 @@ class Install {
                 $data = new Data();
                 $uuid = Core::uuid();
                 try {
-                    Install::source($object, []);
+                    Install::execute($object, []);
                     Install::Host($object, [
                         'host' => $host,
                         'extension' => $extension,
@@ -137,7 +137,8 @@ class Install {
                                 ucfirst($host) .
                                 '\\' .
                                 ucfirst($extension) .
-                                '\\Controller\\Settings';
+                                '\\Controller' .
+                                '\\Settings';
 
                             $settings_controller::configure($object);
                             $object->config(
@@ -290,11 +291,11 @@ class Install {
         }
     }
 
-    public static function source(App $object, $options=[]){
-        $options = Source::options($object, $options);
+    public static function execute(App $object, $options=[]){
+        $options = Execute::options($object, $options);
         try {
-            Source::dir_create($object, $options);
-            Source::file_create($object, $options);
+            Execute::dir_create($object, $options);
+            Execute::file_create($object, $options);
         } catch (Exception $exception){
             return $exception;
         }

@@ -1,0 +1,45 @@
+{{R3M}}
+{{$i.icon = __(
+'component' +
+'.' +
+$__.module +
+'.' +
+'settings' +
+'.' +
+'options' +
+'.' +
+'view' +
+'.' +
+'icon'
+)}}
+{{$span.text = __(
+'component' +
+'.' +
+$__.module +
+'.' +
+'settings' +
+'.' +
+'options' +
+'.' +
+'view' +
+'.' +
+'text'
+)}}
+{{$node.extension = file.extension($node.url)}}
+{{if(
+!in.array($node.extension, image.extensions()) &&
+$node.type !== 'Dir'
+)}}
+<a
+    class="dropdown-item item-view"
+    data-url="{{server.url('core')}}{{$require.module}}/{{$require.submodule}}/{{$node.url|url.raw.encode}}/{{$node.domain}}"
+    data-frontend-url="{{route.get(route.prefix() + '-' + $module + '-' + $submodule + '-view-body')}}"
+>
+    <i
+        class="{{$i.icon}} {{$module}}-{{$submodule}}-{{$command}}-view"
+        data-name="{{$node.name}}"
+    >
+    </i>
+    <span>{{$span.text}}</span>
+</a>
+{{/if}}

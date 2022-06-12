@@ -22,7 +22,7 @@ class Update {
             $url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
             $host_list = $object->data_read($url);
             $result_list = [];
-            $result_list[] = Update::source($object, []);
+            $result_list[] = Update::execute($object, []);
             foreach($host_list->data() as $uuid => $record){
                 try {
                     if(
@@ -53,11 +53,11 @@ class Update {
         }
     }
 
-    public static function source(App $object, $options=[]){
-        $options = Source::options($object, $options);
+    public static function execute(App $object, $options=[]){
+        $options = Execute::options($object, $options);
         try {
-            Source::dir_create($object, $options);
-            Source::file_create($object, $options);
+            Execute::dir_create($object, $options);
+            Execute::file_create($object, $options);
             return 'Traits installed...' . PHP_EOL;
         } catch (Exception $exception){
             return $exception;
