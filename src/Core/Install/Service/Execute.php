@@ -44,9 +44,36 @@ class Execute {
             $object->config('ds'),
             true
         );
-        dd($read);
         foreach($read as $nr => $file){
             if($file->type === File::TYPE){
+                $dir = Dir::name($file->url);
+                $explode = explode($object->config('project.dir.vendor') .
+                    'like-it' .
+                    $object->config('ds') .
+                    'cms' .
+                    $object->config('ds') .
+                    'src' .
+                    $object->config('ds') .
+                    'Core' .
+                    $object->config('ds') .
+                    'Install' .
+                    $object->config('ds') .
+                    'Data' .
+                    $object->config('ds') .
+                    ucfirst($options['name']) .
+                    $object->config('ds'),
+                    $dir,
+                    2
+                );
+                if(array_key_exists(1, $explode)){
+                    $target = $object->config('project.dir.root') .
+                        'src' .
+                        $object->config('ds') .
+                        $explode[1];
+                    if(Dir::is($target) === false){
+                        Dir::create($target);
+                    }
+                }
                 continue;
             }
             $explode = explode($object->config('project.dir.vendor') .
