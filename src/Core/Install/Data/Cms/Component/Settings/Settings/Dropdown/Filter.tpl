@@ -17,10 +17,6 @@
             '.' +
             'settings' +
             '.' +
-            'dropdown' +
-            '.' +
-            'button' +
-            '.' +
             'filter' +
             '.' +
             'all' +
@@ -34,10 +30,6 @@
             $__.module +
             '.' +
             'settings' +
-            '.' +
-            'dropdown' +
-            '.' +
-            'button' +
             '.' +
             'filter' +
             '.' +
@@ -53,10 +45,6 @@
             '.' +
             'settings' +
             '.' +
-            'dropdown' +
-            '.' +
-            'button' +
-            '.' +
             'filter' +
             '.' +
             'dir' +
@@ -70,10 +58,6 @@
             $__.module +
             '.' +
             'settings' +
-            '.' +
-            'dropdown' +
-            '.' +
-            'button' +
             '.' +
             'filter' +
             '.' +
@@ -89,10 +73,6 @@
             '.' +
             'settings' +
             '.' +
-            'dropdown' +
-            '.' +
-            'button' +
-            '.' +
             'filter' +
             '.' +
             'css' +
@@ -106,10 +86,6 @@
             $__.module +
             '.' +
             'settings' +
-            '.' +
-            'dropdown' +
-            '.' +
-            'button' +
             '.' +
             'filter' +
             '.' +
@@ -125,10 +101,6 @@
             '.' +
             'settings' +
             '.' +
-            'dropdown' +
-            '.' +
-            'button' +
-            '.' +
             'filter' +
             '.' +
             'json' +
@@ -142,10 +114,6 @@
             $__.module +
             '.' +
             'settings' +
-            '.' +
-            'dropdown' +
-            '.' +
-            'button' +
             '.' +
             'filter' +
             '.' +
