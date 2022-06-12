@@ -23,7 +23,7 @@ class Execute {
         }
         $dir = new Dir();
         $dir_destination = $object->config('project.dir.root') .
-            'src' .
+            'Execute' .
             $object->config('ds');
         Dir::create($dir_destination);
         $read = $dir->read(
@@ -63,18 +63,15 @@ class Execute {
                     $dir,
                     2
                 );
-                dd($explode);
                 if(array_key_exists(1, $explode)) {
                     $target = $object->config('project.dir.root') .
-                        'src' .
+                        'Execute' .
                         $object->config('ds') .
                         $explode[1];
                     if(Dir::is($target) === false){
                         Dir::create($target);
                     }
                 }
-
-
                 continue;
             }
             $explode = explode($object->config('project.dir.vendor') .
@@ -95,7 +92,7 @@ class Execute {
             );
             if(array_key_exists(1, $explode)){
                 $target = $object->config('project.dir.root') .
-                    'src' .
+                    'Execute' .
                     $object->config('ds') .
                     $explode[1];
                 if(Dir::is($target) === false){
