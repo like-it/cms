@@ -6,6 +6,7 @@
     "component.settings.menu.button.domains.settings.title" : "Loading...",
     "component.settings.menu.li.main.title" : "Main",
     "component.settings.menu.li.settings.title" : "Settings",
+    "component.settings.settings.body.tbody.no.records" : "No records...",
     "component.settings.settings.body.thead.actions" : "",
     "component.settings.settings.body.thead.icon" : "",
     "component.settings.settings.body.thead.name" : "Name",
