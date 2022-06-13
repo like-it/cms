@@ -28,7 +28,7 @@ class Settings extends Main {
      * @throws Exception
      * @throws ObjectException
      */
-    public static function component_create(App $object): Response
+    public static function components_create(App $object): Response
     {
         $domain = Settings::domain_get($object);
         if(
@@ -37,14 +37,14 @@ class Settings extends Main {
         ){
             throw new Exception('Domain dir not set...');
         }
-        return Settings::component_put($object, $domain);
+        return Settings::components_put($object, $domain);
     }
 
     /**
      * @throws Exception
      * @throws FileNotExistException
      */
-    public static function component_read(App $object, $url): Response
+    public static function components_read(App $object, $url): Response
     {
         $domain = Settings::domain_get($object);
         if(
@@ -74,7 +74,7 @@ class Settings extends Main {
      * @throws Exception
      * @throws FileExistException
      */
-    public static function component_update(App $object, $url): Response
+    public static function components_update(App $object, $url): Response
     {
         $url_old = $object->request('node.url_old');
         $domain = Settings::domain_get($object);
@@ -114,7 +114,7 @@ class Settings extends Main {
     /**
      * @throws Exception
      */
-    public static function component_delete(App $object, $url): Response
+    public static function components_delete(App $object, $url): Response
     {
         $domain = Settings::domain_get($object);
         if(
@@ -206,7 +206,7 @@ class Settings extends Main {
      * @throws ErrorException
      * @throws Exception
      */
-    public static function component_rename(App $object, $url): Response
+    public static function components_rename(App $object, $url): Response
     {
         $domain = Settings::domain_get($object);
         if(
@@ -225,11 +225,11 @@ class Settings extends Main {
             if(Dir::is($source)){
                 $destination .= $object->config('ds');
                 $object->request('node.destination', $destination);
-                $validate = Main::validate($object, Settings::component_getValidatorUrl($object), 'view.rename.directory');
+                $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'view.rename.directory');
             } else {
                 $object->request('node.extension', File::extension($destination));
                 $object->request('node.name', File::basename($destination, '.' . $object->request('node.extension')));
-                $validate = Main::validate($object, Settings::component_getValidatorUrl($object), 'view.rename.file');
+                $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'view.rename.file');
             }
             if($validate) {
                 if ($validate->success === true) {
@@ -250,7 +250,7 @@ class Settings extends Main {
                     );
                 }
             } else {
-                throw new Exception('Cannot validate view at: ' . Settings::component_getValidatorUrl($object));
+                throw new Exception('Cannot validate view at: ' . Settings::components_getValidatorUrl($object));
             }
         } else {
             $destination = $domain->dir .
@@ -266,11 +266,11 @@ class Settings extends Main {
                 if(Dir::is($source)){
                     $destination .= $object->config('ds');
                     $object->request('node.destination', $destination);
-                    $validate = Main::validate($object, Settings::component_getValidatorUrl($object), 'view.rename.directory');
+                    $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'view.rename.directory');
                 } else {
                     $object->request('node.extension', File::extension($destination));
                     $object->request('node.name', File::basename($destination, '.' . $object->request('node.extension')));
-                    $validate = Main::validate($object, Settings::component_getValidatorUrl($object), 'view.rename.file');
+                    $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'view.rename.file');
                 }
                 if($validate) {
                     if ($validate->success === true) {
@@ -290,7 +290,7 @@ class Settings extends Main {
                         );
                     }
                 } else {
-                    throw new Exception('Cannot validate view at: ' . Settings::component_getValidatorUrl($object));
+                    throw new Exception('Cannot validate view at: ' . Settings::components_getValidatorUrl($object));
                 }
             } else {
                 $object->logger()->error('fileMoveException', [$source, $destination]);
@@ -302,7 +302,7 @@ class Settings extends Main {
             'source' => $source,
             'destination' => $destination,
         ];
-        $response['page'] = Settings::component_page($object, [
+        $response['page'] = Settings::components_page($object, [
             'url' => $destination
         ],
             $domain->dir . $object->config('dictionary.view') . $object->config('ds')
@@ -313,7 +313,7 @@ class Settings extends Main {
     /**
      * @throws Exception
      */
-    public static function component_list(App $object): Response
+    public static function components_list(App $object): Response
     {
         $domain = Settings::domain_get($object);
         if(
@@ -414,7 +414,7 @@ class Settings extends Main {
      * @throws ErrorException
      * @throws FileMoveException
      */
-    public static function component_copy_list(App $object): Response
+    public static function components_copy_list(App $object): Response
     {
         $nodeList = $object->request('nodeList');
         $list = [];
@@ -504,7 +504,7 @@ class Settings extends Main {
         $response = [];
         $response['nodeList'] = $list;
         if($destination){
-            $response['page'] = Settings::component_page($object, [
+            $response['page'] = Settings::components_page($object, [
                 'url' => $destination
             ],
                 $domain->dir . $object->config('dictionary.component') . $object->config('ds')
@@ -521,7 +521,7 @@ class Settings extends Main {
      * @throws ErrorException
      * @throws FileMoveException
      */
-    public static function component_move_list(App $object): Response
+    public static function components_move_list(App $object): Response
     {
         $nodeList = $object->request('nodeList');
         $list = [];
@@ -612,7 +612,7 @@ class Settings extends Main {
         $response = [];
         $response['nodeList'] = $list;
         if($destination){
-            $response['page'] = Settings::component_page(
+            $response['page'] = Settings::components_page(
                 $object,
                 [
                     'url' => $destination
@@ -630,7 +630,7 @@ class Settings extends Main {
      * @throws ErrorException
      * @throws Exception
      */
-    public static function component_create_directory(App $object): Response
+    public static function components_create_directory(App $object): Response
     {
         $name = $object->request('node.name');
         $name = ltrim(
@@ -658,7 +658,7 @@ class Settings extends Main {
             throw new ErrorException('Url exists...');
         } else {
             $object->request('node.name', $name);
-            $validate = Main::validate($object, Settings::component_getValidatorUrl($object), 'view.create.directory');
+            $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'view.create.directory');
             if($validate) {
                 if ($validate->success === true) {
                     Dir::create($url);
@@ -672,7 +672,7 @@ class Settings extends Main {
                     );
                 }
             } else {
-                throw new Exception('Cannot validate view at: ' . Settings::component_getValidatorUrl($object));
+                throw new Exception('Cannot validate view at: ' . Settings::components_getValidatorUrl($object));
             }
         }
         $node = [];
@@ -680,7 +680,7 @@ class Settings extends Main {
         $node['created'] = new DateTime();
         $response = [];
         $response['node'] = $node;
-        $response['page'] = Settings::component_page($object, [
+        $response['page'] = Settings::components_page($object, [
             'url' => $url
         ],
             $domain->dir . $object->config('dictionary.component') . $object->config('ds')
@@ -691,7 +691,7 @@ class Settings extends Main {
     /**
      * @throws ErrorException
      */
-    public static function component_create_symlink(App $object): Response
+    public static function components_create_symlink(App $object): Response
     {
         $source = $object->request('node.source');
         $source = str_replace([
@@ -748,7 +748,7 @@ class Settings extends Main {
             throw new ErrorException('Destination exists...');
         } else {
             $object->request('node.destination', $url_destination);
-            $validate = Main::validate($object, Settings::component_getValidatorUrl($object), 'view.create.symlink');
+            $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'view.create.symlink');
             if($validate) {
                 if ($validate->success === true) {
                     File::link($url_source, $url_destination);
@@ -762,7 +762,7 @@ class Settings extends Main {
                     );
                 }
             } else {
-                throw new Exception('Cannot validate view at: ' . Settings::component_getValidatorUrl($object));
+                throw new Exception('Cannot validate view at: ' . Settings::components_getValidatorUrl($object));
             }
         }
         $node = [];
@@ -770,7 +770,7 @@ class Settings extends Main {
         $node['created'] = new DateTime();
         $response = [];
         $response['node'] = $node;
-        $response['page'] = Settings::component_page($object, [
+        $response['page'] = Settings::components_page($object, [
             'url' => $url_destination
         ],
             $domain->dir . $object->config('dictionary.component') . $object->config('ds')
@@ -778,7 +778,7 @@ class Settings extends Main {
         return new Response($response, Response::TYPE_JSON);
     }
 
-    public static function component_upload(App $object)
+    public static function components_upload(App $object)
     {
         $domain = Settings::domain_get($object);
         if(
@@ -864,7 +864,7 @@ class Settings extends Main {
         }
     }
 
-    private static function component_page(App $object, $search=[], $url='')
+    private static function components_page(App $object, $search=[], $url='')
     {
         $dir = new Dir();
         $data = new Data();
@@ -964,7 +964,7 @@ class Settings extends Main {
      * @throws Exception
      * @throws ObjectException;
      */
-    private static function component_put(App $object, $domain)
+    private static function components_put(App $object, $domain)
     {
         if(
             !property_exists($domain, 'dir') ||
@@ -973,7 +973,7 @@ class Settings extends Main {
             throw new Exception('Domain dir not set...');
         }
         $object->request('node.extension', File::extension($object->request('node.name')));
-        $validate = Main::validate($object, Settings::component_getValidatorUrl($object), 'view.put');
+        $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'view.put');
         $object->request('node.url',
             $domain->dir .
             $object->config('dictionary.component') .
@@ -1016,7 +1016,7 @@ class Settings extends Main {
                     $object->request('node.content', $content);
                     $data = [];
                     $data['node'] = $object->request('node');
-                    $data['page'] = Settings::component_page($object, [
+                    $data['page'] = Settings::components_page($object, [
                         'url' => $object->request('node.url')
                     ],
                         $domain->dir . $object->config('dictionary.component') . $object->config('ds')
@@ -1033,11 +1033,11 @@ class Settings extends Main {
                 );
             }
         } else {
-            throw new Exception('Cannot validate view at: ' . Settings::component_getValidatorUrl($object));
+            throw new Exception('Cannot validate view at: ' . Settings::components_getValidatorUrl($object));
         }
     }
 
-    private static function component_getValidatorUrl(App $object): string
+    private static function components_getValidatorUrl(App $object): string
     {
         return $object->config('host.dir.data') .
             'Validator' .
