@@ -218,9 +218,7 @@ class Settings extends Main {
         $source = str_replace(['./','../'],'/', $object->request('node.source'));
         $destination = str_replace(['./','../'],'/', $object->request('node.destination'));
         if(strpos($destination, $object->config('ds')) !== false){
-            $destination = $domain->dir .
-                $object->config('dictionary.component') .
-                $object->config('ds') .
+            $destination = Dir::name($source) .
                 ltrim($destination, $object->config('ds'));
             if(Dir::is($source)){
                 $destination .= $object->config('ds');
