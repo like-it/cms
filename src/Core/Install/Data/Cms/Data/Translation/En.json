@@ -23,7 +23,7 @@
     "component.settings.settings.add.file.text" : "Add file",
     "component.settings.settings.add.symlink.text" : "Add symbolic link",
     "component.settings.settings.add.upload.text" : "Upload",
-    "component.settings.settings.dropdown.button.action.text" : "With selected ...",
+    "component.settings.settings.dropdown.button.action.text" : "With selected...",
     "component.settings.settings.dropdown.button.addons.icon" : "fas fa-plus",
     "component.settings.settings.filter.all.text" : "Files & Directories",
     "component.settings.settings.filter.dir.text" : "Directories only",
