@@ -86,7 +86,7 @@ class Settings extends Main {
         }
         $pos = strpos($url, $domain->dir . $object->config('dictionary.component') . $object->config('ds'));
         if ($pos !== 0) {
-            throw new Exception('Cannot update outside domain.dir.view');
+            throw new Exception('Cannot update outside domain.dir.component');
         }
         if($url !== $url_old){
             $content = $object->request('node.content');
@@ -133,9 +133,9 @@ class Settings extends Main {
                     '',
                     '',
                 ], $url);
-                $pos = strpos($url, $domain->dir . $object->config('dictionary.view') . $object->config('ds'));
+                $pos = strpos($url, $domain->dir . $object->config('dictionary.component') . $object->config('ds'));
                 if ($pos !== 0) {
-                    throw new Exception('Cannot delete outside domain.dir.view');
+                    throw new Exception('Cannot delete outside domain.dir.component');
                 }
             }
             foreach($nodeList as $url) {
@@ -178,9 +178,9 @@ class Settings extends Main {
                 $response['nodeList'][] = $node;
             }
         } else {
-            $pos = strpos($url, $domain->dir . $object->config('dictionary.view') . $object->config('ds'));
+            $pos = strpos($url, $domain->dir . $object->config('dictionary.component') . $object->config('ds'));
             if ($pos !== 0) {
-                throw new Exception('Cannot delete outside domain.dir.view');
+                throw new Exception('Cannot delete outside domain.dir.component');
             }
             if(File::is_link($url)){
                 File::delete($url);
@@ -219,17 +219,17 @@ class Settings extends Main {
         $destination = str_replace(['./','../'],'/', $object->request('node.destination'));
         if(strpos($destination, $object->config('ds')) !== false){
             $destination = $domain->dir .
-                $object->config('dictionary.view') .
+                $object->config('dictionary.component') .
                 $object->config('ds') .
                 ltrim($destination, $object->config('ds'));
             if(Dir::is($source)){
                 $destination .= $object->config('ds');
                 $object->request('node.destination', $destination);
-                $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'view.rename.directory');
+                $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'component.rename.directory');
             } else {
                 $object->request('node.extension', File::extension($destination));
                 $object->request('node.name', File::basename($destination, '.' . $object->request('node.extension')));
-                $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'view.rename.file');
+                $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'component.rename.file');
             }
             if($validate) {
                 if ($validate->success === true) {
@@ -250,27 +250,27 @@ class Settings extends Main {
                     );
                 }
             } else {
-                throw new Exception('Cannot validate view at: ' . Settings::components_getValidatorUrl($object));
+                throw new Exception('Cannot validate component at: ' . Settings::components_getValidatorUrl($object));
             }
         } else {
             $destination = $domain->dir .
-                $object->config('dictionary.view') .
+                $object->config('dictionary.component') .
                 $object->config('ds') .
                 $destination;
             if(substr(
                     $source,
                     0,
-                    strlen($domain->dir . $object->config('dictionary.view') . $object->config('ds'))
-                ) === $domain->dir . $object->config('dictionary.view') . $object->config('ds')
+                    strlen($domain->dir . $object->config('dictionary.component') . $object->config('ds'))
+                ) === $domain->dir . $object->config('dictionary.component') . $object->config('ds')
             ){
                 if(Dir::is($source)){
                     $destination .= $object->config('ds');
                     $object->request('node.destination', $destination);
-                    $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'view.rename.directory');
+                    $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'component.rename.directory');
                 } else {
                     $object->request('node.extension', File::extension($destination));
                     $object->request('node.name', File::basename($destination, '.' . $object->request('node.extension')));
-                    $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'view.rename.file');
+                    $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'component.rename.file');
                 }
                 if($validate) {
                     if ($validate->success === true) {
@@ -290,7 +290,7 @@ class Settings extends Main {
                         );
                     }
                 } else {
-                    throw new Exception('Cannot validate view at: ' . Settings::components_getValidatorUrl($object));
+                    throw new Exception('Cannot validate component at: ' . Settings::components_getValidatorUrl($object));
                 }
             } else {
                 $object->logger()->error('fileMoveException', [$source, $destination]);
@@ -305,7 +305,7 @@ class Settings extends Main {
         $response['page'] = Settings::components_page($object, [
             'url' => $destination
         ],
-            $domain->dir . $object->config('dictionary.view') . $object->config('ds')
+            $domain->dir . $object->config('dictionary.component') . $object->config('ds')
         );
         return new Response($response, Response::TYPE_JSON);
     }
@@ -369,8 +369,8 @@ class Settings extends Main {
             $limit = Limit::LIMIT;
             $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
             $settings =  $object->data_read($settings_url);
-            if($settings->data('view.default.limit')){
-                $limit = $settings->data('view.default.limit');
+            if($settings->data('component.default.limit')){
+                $limit = $settings->data('component.default.limit');
             }
             if($object->request('limit')){
                 $limit = (int) $object->request('limit');
@@ -658,7 +658,7 @@ class Settings extends Main {
             throw new ErrorException('Url exists...');
         } else {
             $object->request('node.name', $name);
-            $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'view.create.directory');
+            $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'component.create.directory');
             if($validate) {
                 if ($validate->success === true) {
                     Dir::create($url);
@@ -672,7 +672,7 @@ class Settings extends Main {
                     );
                 }
             } else {
-                throw new Exception('Cannot validate view at: ' . Settings::components_getValidatorUrl($object));
+                throw new Exception('Cannot validate component at: ' . Settings::components_getValidatorUrl($object));
             }
         }
         $node = [];
@@ -748,7 +748,7 @@ class Settings extends Main {
             throw new ErrorException('Destination exists...');
         } else {
             $object->request('node.destination', $url_destination);
-            $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'view.create.symlink');
+            $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'component.create.symlink');
             if($validate) {
                 if ($validate->success === true) {
                     File::link($url_source, $url_destination);
@@ -762,7 +762,7 @@ class Settings extends Main {
                     );
                 }
             } else {
-                throw new Exception('Cannot validate view at: ' . Settings::components_getValidatorUrl($object));
+                throw new Exception('Cannot validate component at: ' . Settings::components_getValidatorUrl($object));
             }
         }
         $node = [];
@@ -791,7 +791,7 @@ class Settings extends Main {
         $directory = $object->request('node_directory');
         if(empty($directory)) {
             $target = $domain->dir .
-                $object->config('dictionary.view') .
+                $object->config('dictionary.component') .
                 $object->config('ds');
         } else {
             $target = $domain->dir .
@@ -946,8 +946,8 @@ class Settings extends Main {
                 }
             }
             $limit = Limit::LIMIT;
-            if($settings->data('view.default.limit')){
-                $limit = $settings->data('view.default.limit');
+            if($settings->data('component.default.limit')){
+                $limit = $settings->data('component.default.limit');
             }
             if($object->request('limit')){
                 $limit = (int) $object->request('limit');
@@ -973,7 +973,7 @@ class Settings extends Main {
             throw new Exception('Domain dir not set...');
         }
         $object->request('node.extension', File::extension($object->request('node.name')));
-        $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'view.put');
+        $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'component.put');
         $object->request('node.url',
             $domain->dir .
             $object->config('dictionary.component') .
@@ -1033,7 +1033,7 @@ class Settings extends Main {
                 );
             }
         } else {
-            throw new Exception('Cannot validate view at: ' . Settings::components_getValidatorUrl($object));
+            throw new Exception('Cannot validate component at: ' . Settings::components_getValidatorUrl($object));
         }
     }
 
@@ -1042,7 +1042,7 @@ class Settings extends Main {
         return $object->config('host.dir.data') .
             'Validator' .
             $object->config('ds') .
-            'View' .
+            'Component' .
             $object->config('extension.json');
     }
     
