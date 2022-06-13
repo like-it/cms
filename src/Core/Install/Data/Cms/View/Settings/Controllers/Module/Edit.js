@@ -42,6 +42,14 @@ edit.title = () => {
             }
             a.addClass('active');
             edit.body('show');
+            let pre = section.select('.card-body-' + "{{$request.node.key}} pre");
+            if(pre){
+                let editor = _('_').collection('source.editor.' + pre.id);
+                if(editor){
+                    editor.focus();
+                }
+                console.log(editor);
+            }
         } else {
             //reload from data url & frontend url
         }
@@ -157,7 +165,12 @@ edit.form = (target) => {
                     const label = dialog.select('label');
                     let div = create('div', 'alert alert-danger');
                     div.html(response?.message)
-                    label[0].parentNode.insertBefore(div, label[0]);
+                    if(is.nodeList(label)){
+                        label[0].parentNode.insertBefore(div, label[0]);
+                    }
+                    else if(label){
+                        label.parentNode.insertBefore(div, label);
+                    }
                 } else {
                     error.html(response?.message);
                 }
@@ -211,25 +224,13 @@ edit.focus = () => {
     if(!section){
         return;
     }
-    const selected = section.select('.card-body-' + "{{$request.node.key}}");
-    if(!selected){
-        return;
+    let pre = section.select('.card-body-' + "{{$request.node.key}} pre");
+    if(pre){
+        let editor = _('_').collection('source.editor.' + pre.id);
+        if(editor){
+            editor.focus();
+        }
     }
-    const form = selected.select('form');
-    if(!form){
-        return;
-    }
-    const focus = "{{$request.focus}}";
-    let input;
-    if(focus){
-        input = form.select('input[name="' + focus +'"]');
-    } else {
-        input = form.select('input[name="node.subdomain"]');
-    }
-    if(!input){
-        return;
-    }
-    input.focus();
 }
 
 edit.dialogSaveAs = () => {
@@ -325,7 +326,7 @@ edit.init = () => {
 ready(() => {
     require(
     [
-        root() + 'Settings/Controllers/Css/Edit.css?' + version(),
+        root() + "{{$require.module}}" + '/'+ "{{$require.submodule}}"+'/Css/Edit.css?' + version(),
         root() + 'Dialog/Css/Dialog.Save.As.css?' + version(),
     ],
     () => {

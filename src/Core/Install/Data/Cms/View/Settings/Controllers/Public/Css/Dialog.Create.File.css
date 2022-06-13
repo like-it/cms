@@ -1,0 +1,27 @@
+.dialog-create-file {
+    left: 33%;
+    width: 34%;
+    right: 33%;
+    height: 190px;
+    top: calc(50% - 95px);
+}
+
+.dialog-create-file .body {
+    height: 110px;
+    background: rgba(255, 255, 255, 1);
+    overflow: auto;
+}
+
+.dialog-error-create-file {
+    left: 33%;
+    width: 34%;
+    right: 33%;
+    height: 205px;
+    top: calc(50% - 102px);
+}
+
+.dialog-error-create-file .body {
+    height: 125px;
+    background: rgba(255, 255, 255, 1);
+    overflow: auto;
+}

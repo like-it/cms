@@ -10,7 +10,7 @@
     {{$request.append.to = 'section[name="' + $section.name + '"] .card'}}
 {{/if}}
 {{$require.basename = 'Card.Body.' + $command|uppercase.first.sentence:'-'|replace:'-':'.'}}
-{{require($prefix + $require.submodule + '/Section/' + $require.command + '/Component/Html/' + $require.basename + '.tpl')}}
+{{require($controller.dir.component + $require.module + '/' + $require.command +'/'+ $require.basename + '.tpl')}}
 {{script('module')}}
     {{require($prefix + $require.submodule + '/Module/' + $require.command + '.js')}}
 {{/script}}

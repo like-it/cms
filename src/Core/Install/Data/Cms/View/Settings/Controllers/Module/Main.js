@@ -1,4 +1,6 @@
 //{{R3M}}
+import { version } from "/Module/Priya.js";
+import { root } from "/Module/Web.js";
 import { getSectionByName } from "/Module/Section.js";
 
 let main = {};
@@ -19,5 +21,13 @@ main.init = () => {
 };
 
 ready(() => {
-    main.init();
+    require(
+        [
+            root() + 'Dialog/Css/Dialog.css?' + version(),
+            root() + 'Dialog/Css/Dialog.Error.css?' + version(),
+            root() + "{{$require.module}}" + '/' + "{{$require.submodule}}" + '/Css/' + "{{$require.submodule|file.basename}}" + '.css?' + version()
+        ],
+        () => {
+            main.init();
+        });
 });

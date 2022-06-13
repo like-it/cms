@@ -84,11 +84,15 @@ source.panel = () => {
             tr.on('click', (event) => {
                 let editor = source.get('editor.' + "{{$pre.id}}");
                 if(tr.hasClass('open')){
-                    let settings = section.select('.nav-item .settings-controllers-settings');
+                    let settings = section.select('.nav-item .' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "settings");
                     panel.addClass('d-none');
                     if(settings){
                         settings.trigger('click');
                     }
+                }
+                if(tr.hasClass('close')){
+                    source.close("{{$module}}" + '-' + "{{$submodule}}" + '-' + "edit-template-{{$request.node.key}}");
+                    panel.addClass('d-none');
                 }
                 if(tr.hasClass('save')){
                     source.save("card-body-{{$request.node.key}}");
@@ -288,9 +292,9 @@ source.saveAs = (className) => {
         return;
     }
     dialog.removeClass('d-none');
-    const name = form.select('input[name="node.name"]');
-    if(name){
-        name.focus();
+    const node_url = form.select('input[name="node.url"]');
+    if(node_url){
+        node_url.focus();
     }
 }
 
@@ -371,7 +375,30 @@ source.editor = () => {
     if(is.empty(editor)){
         ace.require("ace/ext/language_tools");
         editor = ace.edit("{{$pre.id}}");
-        editor.session.setMode("ace/mode/php");
+        let pre = select("#{{$pre.id}}");
+        let extension;
+        if(pre){
+            extension = pre.data('extension');
+        }
+        switch(extension){
+            case 'php' :
+                editor.session.setMode("ace/mode/php");
+                break;
+            case 'tpl' :
+                editor.session.setMode("ace/mode/smarty");
+                break;
+            case 'css' :
+                editor.session.setMode("ace/mode/css");
+                break;
+            case 'js' :
+                editor.session.setMode("ace/mode/javascript");
+                break;
+            case 'json' :
+                editor.session.setMode("ace/mode/json");
+                break;
+            default :
+                editor.session.setMode("ace/mode/php");
+        }
         editor.setTheme("ace/theme/tomorrow");
         // enable autocompletion and snippets
         editor.setOptions({
@@ -380,8 +407,9 @@ source.editor = () => {
             enableLiveAutocompletion: true
         });
         let element = select("#{{$pre.id}}");
+        let card;
+        let panel;
         element.on('keydown', function(event) {
-            console.log(event);
             if ((event.ctrlKey || event.metaKey) && !event.shiftKey) {
                 switch (String.fromCharCode(event.which).toLowerCase()) {
                     case 's':
@@ -395,7 +423,7 @@ source.editor = () => {
                         break;
                     case 'q': //w will close the browser tab
                         event.preventDefault();
-                        source.close("settings-controllers-edit-controller-{{$request.node.key}}");
+                        source.close("{{$module}}-{{$submodule}}-edit-template-{{$request.node.key}}");
                         break;
                 }
             }
@@ -408,12 +436,39 @@ source.editor = () => {
                         break;
                 }
             }
+            else if (event.altKey){
+                switch (String.fromCharCode(event.which).toLowerCase()) {
+                    case 'f':
+                    case '1' :
+                        event.preventDefault();
+                        card = pre.closest('.card-body-edit');
+                        if(card){
+                            panel = card.select('.panel-file');
+                            if(panel){
+                                panel.toggleClass('d-none');
+                            }
+                        }
+                        break;
+                    case '2' :
+                        event.preventDefault();
+                        card = pre.closest('.card-body-edit');
+                        if(card){
+                            panel = card.select('.panel-edit');
+                            if(panel){
+                                panel.toggleClass('d-none');
+                            }
+                        }
+                        break;
+                }
+            }
         });
         editor.session.setValue(element.data('content'));
         editor.on('change', (e) => {
             let element = select("#{{$pre.id}}");
             element.data('content', editor.getValue());
         });
+        editor.focus();
+        editor.gotoLine(editor.getSession().getLength(), editor.getSession().getLine(editor.getSession().getLength()-1).length);
         source.set('editor.' + "{{$pre.id}}", editor);
     }
     return editor;
@@ -423,7 +478,6 @@ source.init = () => {
     source.editor();
     source.menu();
     source.panel();
-    console.log('source init');
 };
 
 ready(() => {

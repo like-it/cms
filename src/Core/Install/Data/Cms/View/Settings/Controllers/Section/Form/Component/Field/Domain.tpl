@@ -5,7 +5,11 @@
 {{$validates = [
 'validate_in_list_json',
 ]}}
+{{if(!is.empty($request.node.key))}}
 {{$select.id = $module + '-' + $submodule + '-' + $field + '-' + $request.node.key}}
+{{else}}
+{{$select.id = $module + '-' + $submodule + '-' + $field}}
+{{/if}}
 {{$select.class = 'form-control'}}
 {{for.each($validates as $validate)}}
     {{if(request.error($field + '.' + $validate) === true)}}
@@ -18,7 +22,7 @@
 {{$select.name = 'node.' + $field}}
 {{$select.selected = request('node.' + $field)}}
 {{$select.url = config('project.dir.data') + 'Host.json'}}
-{{$select.options = json.select($select.url, null)}}
+{{$select.options = json.select($select.url)}}
 <label for="{{$select.id}}">{{$label}}</label>
 <select
     id="{{$select.id}}"
