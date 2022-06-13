@@ -218,7 +218,9 @@ class Settings extends Main {
         $source = str_replace(['./','../'],'/', $object->request('node.source'));
         $destination = str_replace(['./','../'],'/', $object->request('node.destination'));
         if(strpos($destination, $object->config('ds')) !== false){
-            $destination = Dir::name($source) .
+            $destination = $domain->dir .
+                $object->config('dictionary.component') .
+                $object->config('ds') .
                 ltrim($destination, $object->config('ds'));
             if(Dir::is($source)){
                 $destination .= $object->config('ds');
@@ -251,9 +253,7 @@ class Settings extends Main {
                 throw new Exception('Cannot validate component at: ' . Settings::components_getValidatorUrl($object));
             }
         } else {
-            $destination = $domain->dir .
-                $object->config('dictionary.component') .
-                $object->config('ds') .
+            $destination = Dir::name($source) .
                 $destination;
             if(substr(
                     $source,
