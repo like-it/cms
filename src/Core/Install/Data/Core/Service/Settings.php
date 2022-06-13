@@ -24,7 +24,1028 @@ use DateTime;
 
 class Settings extends Main {
 
+    /**
+     * @throws Exception
+     * @throws ObjectException
+     */
+    public static function component_create(App $object): Response
+    {
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        return Settings::component_put($object, $domain);
+    }
 
+    /**
+     * @throws Exception
+     * @throws FileNotExistException
+     */
+    public static function component_read(App $object, $url): Response
+    {
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        if(File::exist($url)){
+            $name = File::basename($url);
+            $read = File::read($url);
+            $record = [];
+            $record['key'] = sha1($url);
+            $record['name'] = $name;
+            $record['url'] = $url;
+            $record['content'] = $read;
+            $record['domain'] = $domain;
+            $response = [];
+            $response['node'] = $record;
+            return new Response($response, Response::TYPE_JSON);
+        } else {
+            throw new FileNotExistException('File (' . $url .') not found...');
+        }
+    }
+
+    /**
+     * @throws Exception
+     * @throws FileExistException
+     */
+    public static function component_update(App $object, $url): Response
+    {
+        $url_old = $object->request('node.url_old');
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $pos = strpos($url, $domain->dir . $object->config('dictionary.view') . $object->config('ds'));
+        if ($pos !== 0) {
+            throw new Exception('Cannot update outside domain.dir.view');
+        }
+        if($url !== $url_old){
+            $content = $object->request('node.content');
+            if(File::exist($url)){
+                throw new FileExistException('Target url (' . $url .') exist.');
+            } else {
+                $dir = dir::name($url);
+                Dir::create($dir);
+                File::write($url, $content);
+                //File::delete($url_old); //save as does not delete
+            }
+        } else {
+            $content = $object->request('node.content');
+            File::write($url, $content);
+        }
+        $response = [];
+        $response['node'] = [
+            'url' => $url,
+            'name' => File::basename($url),
+            'content' => $content
+        ];
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function component_delete(App $object, $url): Response
+    {
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        if(is_array($url)){
+            $nodeList = $url;
+            foreach($nodeList as $nr => $url) {
+                $nodeList[$nr] = str_replace([
+                    '../',
+                    './'
+                ], [
+                    '',
+                    '',
+                ], $url);
+                $pos = strpos($url, $domain->dir . $object->config('dictionary.view') . $object->config('ds'));
+                if ($pos !== 0) {
+                    throw new Exception('Cannot delete outside domain.dir.view');
+                }
+            }
+            foreach($nodeList as $url) {
+                if(Dir::is($url)){
+                    $dir = $url;
+                } else {
+                    $dir = Dir::name($url);
+                }
+                $explode = explode($object->config('ds'), $dir);
+                for($i=count($explode); $i >= 2; $i--){
+                    $dir_example = implode($object->config('ds'), $explode);
+                    if(substr($dir_example, 0, -1) !== $object->config('ds')){
+                        $dir_example .= $object->config('ds');
+                    }
+                    $pop = array_pop($explode);
+                    if(empty($pop)){
+                        continue;
+                    }
+                    if(
+                        File::is_link($dir_example) &&
+                        $url !== $dir_example
+                    ){
+                        throw new Exception('Cannot delete protected symlink file...');
+                    }
+                }
+            }
+            $response = [];
+            foreach($nodeList as $url) {
+                if(File::is_link($url)){
+                    File::delete($url);
+                }
+                elseif(Dir::is($url)){
+                    Dir::remove($url);
+                } else {
+                    File::delete($url);
+                }
+                $node = [];
+                $node['url'] = $url;
+                $node['isDeleted'] = new DateTime();
+                $response['nodeList'][] = $node;
+            }
+        } else {
+            $pos = strpos($url, $domain->dir . $object->config('dictionary.view') . $object->config('ds'));
+            if ($pos !== 0) {
+                throw new Exception('Cannot delete outside domain.dir.view');
+            }
+            if(File::is_link($url)){
+                File::delete($url);
+            }
+            elseif(Dir::is($url)){
+                Dir::remove($url);
+            } else {
+                File::delete($url);
+            }
+            $response = [];
+            $response['node'] = [
+                'url' => $url,
+                'is' => [
+                    'deleted' => new DateTime()
+                ]
+            ];
+        }
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws FileMoveException
+     * @throws ErrorException
+     * @throws Exception
+     */
+    public static function component_rename(App $object, $url): Response
+    {
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $source = str_replace(['./','../'],'/', $object->request('node.source'));
+        $destination = str_replace(['./','../'],'/', $object->request('node.destination'));
+        if(strpos($destination, $object->config('ds')) !== false){
+            $destination = $domain->dir .
+                $object->config('dictionary.view') .
+                $object->config('ds') .
+                ltrim($destination, $object->config('ds'));
+            if(Dir::is($source)){
+                $destination .= $object->config('ds');
+                $object->request('node.destination', $destination);
+                $validate = Main::validate($object, Settings::component_getValidatorUrl($object), 'view.rename.directory');
+            } else {
+                $object->request('node.extension', File::extension($destination));
+                $object->request('node.name', File::basename($destination, '.' . $object->request('node.extension')));
+                $validate = Main::validate($object, Settings::component_getValidatorUrl($object), 'view.rename.file');
+            }
+            if($validate) {
+                if ($validate->success === true) {
+                    if(Dir::is($source)){
+                        Dir::move($source, $destination, true);
+                    } else {
+                        $dir = Dir::name($destination);
+                        Dir::create($dir);
+                        File::move($source, $destination);
+                    }
+                } else {
+                    $data = [];
+                    $data['error'] = $validate->test;
+                    return new Response(
+                        $data,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                }
+            } else {
+                throw new Exception('Cannot validate view at: ' . Settings::component_getValidatorUrl($object));
+            }
+        } else {
+            $destination = $domain->dir .
+                $object->config('dictionary.view') .
+                $object->config('ds') .
+                $destination;
+            if(substr(
+                    $source,
+                    0,
+                    strlen($domain->dir . $object->config('dictionary.view') . $object->config('ds'))
+                ) === $domain->dir . $object->config('dictionary.view') . $object->config('ds')
+            ){
+                if(Dir::is($source)){
+                    $destination .= $object->config('ds');
+                    $object->request('node.destination', $destination);
+                    $validate = Main::validate($object, Settings::component_getValidatorUrl($object), 'view.rename.directory');
+                } else {
+                    $object->request('node.extension', File::extension($destination));
+                    $object->request('node.name', File::basename($destination, '.' . $object->request('node.extension')));
+                    $validate = Main::validate($object, Settings::component_getValidatorUrl($object), 'view.rename.file');
+                }
+                if($validate) {
+                    if ($validate->success === true) {
+                        $object->logger()->error('fileMoveAction', [$source, $destination]);
+                        if(Dir::is($source)){
+                            Dir::move($source, $destination, true);
+                        } else {
+                            File::move($source, $destination);
+                        }
+                    } else {
+                        $data = [];
+                        $data['error'] = $validate->test;
+                        return new Response(
+                            $data,
+                            Response::TYPE_JSON,
+                            Response::STATUS_ERROR
+                        );
+                    }
+                } else {
+                    throw new Exception('Cannot validate view at: ' . Settings::component_getValidatorUrl($object));
+                }
+            } else {
+                $object->logger()->error('fileMoveException', [$source, $destination]);
+                throw new FileMoveException('Not in domain directory...');
+            }
+        }
+        $response = [];
+        $response['node'] = [
+            'source' => $source,
+            'destination' => $destination,
+        ];
+        $response['page'] = Settings::component_page($object, [
+            'url' => $destination
+        ],
+            $domain->dir . $object->config('dictionary.view') . $object->config('ds')
+        );
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function component_list(App $object): Response
+    {
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $url = $domain->dir . $object->config('dictionary.component') . $object->config('ds');
+        $filter = $object->request('filter');
+        if(empty($filter) || !is_array($filter)){
+            $filter = [];
+            $filter['type'] = 'All';
+        }
+        $dir = new Dir();
+        $data = new Data();
+        $read = $dir->read($url, true);
+        if($read){
+            foreach($read as $nr => $record){
+                if(
+                    array_key_exists('type', $filter) &&
+                    $filter['type'] === File::TYPE
+                ){
+                    if($record->type !== File::TYPE){
+                        continue;
+                    }
+                }
+                elseif(
+                    array_key_exists('type', $filter) &&
+                    $filter['type'] === Dir::TYPE
+                ){
+                    if($record->type !== Dir::TYPE){
+                        continue;
+                    }
+                }
+                $record->extension = File::extension($record->url);
+                if(
+                    array_key_exists('extension', $filter) &&
+                    !empty($filter['extension']) &&
+                    $filter['extension'] !== $record->extension
+                ){
+                    continue;
+                }
+                $record->domain = $domain->uuid;
+                $key = sha1($record->url);
+                $data->set($key, $record);
+            }
+            if($object->request('page')){
+                $page = (int) $object->request('page');
+            } else {
+                $page = 1;
+            }
+            $limit = Limit::LIMIT;
+            $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
+            $settings =  $object->data_read($settings_url);
+            if($settings->data('view.default.limit')){
+                $limit = $settings->data('view.default.limit');
+            }
+            if($object->request('limit')){
+                $limit = (int) $object->request('limit');
+                if($limit > Limit::MAX){
+                    $limit = Limit::MAX;
+                }
+            }
+            $response = [];
+            $list = Sort::list($data->data())->with(['url' => 'ASC']);
+            if($object->request('q')){
+                $q = [];
+                foreach($list as $key => $record){
+                    if(property_exists($record, 'url')){
+                        if(stristr($record->url, $object->request('q')) !== false){
+                            $q[] = $record;
+                        }
+                    }
+                }
+                $list = $q;
+                $response['q'] = $object->request('q');
+            }
+            $response['count'] = count($list);
+            $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
+            $response['nodeList'] = $list;
+            $response['limit'] = $limit;
+            $response['page'] = $page;
+            $response['max'] = ceil($response['count'] / $response['limit']);
+            $response['filter'] = $filter;
+            return new Response($response, Response::TYPE_JSON);
+        } else {
+            $response = [];
+            $response['count'] = 0;
+            $response['nodeList'] = [];
+            $response['filter'] = $filter;
+            return new Response($response, Response::TYPE_JSON);
+        }
+    }
+
+    /**
+     * @throws Exception
+     * @throws ErrorException
+     * @throws FileMoveException
+     */
+    public static function component_copy_list(App $object): Response
+    {
+        $nodeList = $object->request('nodeList');
+        $list = [];
+        if(is_array($nodeList)){
+            foreach($nodeList as $nr => $url){
+                $basename = File::basename($url);
+                if(in_array($basename, $list)){
+                    throw new ErrorException('Duplicate basename...');
+                }
+                if(Dir::is($url)){
+                    $dir = $url;
+                } else {
+                    $dir = Dir::name($url);
+                }
+                $explode = explode($object->config('ds'), $dir);
+                for($i=count($explode); $i >= 2; $i--){
+                    $dir_example = implode($object->config('ds'), $explode);
+                    if(substr($dir_example, 0, -1) !== $object->config('ds')){
+                        $dir_example .= $object->config('ds');
+                    }
+                    $pop = array_pop($explode);
+                    if(empty($pop)){
+                        continue;
+                    }
+                    if(File::is_link($dir_example)){
+                        throw new Exception('Cannot copy protected symlink file...');
+                    }
+                }
+                $list[] = File::basename($url);
+            }
+        }
+        $directory = $object->request('directory');
+        $directory = trim($directory, $object->config('ds')) . $object->config('ds');
+        if($directory === $object->config('ds')){
+            $directory = '';
+        }
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $url = $domain->dir . $object->config('dictionary.component') . $object->config('ds') . $directory;
+        $list = [];
+        $error = [];
+        $destination = false;
+        if(is_array($nodeList)){
+            if(!File::exist($url)){
+                Dir::create($url);
+            }
+            foreach($nodeList as $nr => $source){
+                $destination = $url;
+                if($source == $destination){
+                    $list[] = $destination;
+                    continue;
+                }
+                if(!Dir::is($source)){
+                    continue;
+                } else {
+                    $move = Dir::copy($source, $destination);
+                }
+                if($move){
+                    $list[] = $destination;
+                } else {
+                    $error[] = $source;
+                }
+            }
+            foreach($nodeList as $nr => $source){
+                $destination = $url . File::basename($source);
+                if($source == $destination){
+                    $list[] = $destination;
+                    continue;
+                }
+                if(Dir::is($source)){
+                    continue;
+                } else {
+                    $move = File::copy($source, $destination);
+                }
+                if($move){
+                    $list[] = $destination;
+                } else {
+                    $error[] = $source;
+                }
+            }
+        }
+        $response = [];
+        $response['nodeList'] = $list;
+        if($destination){
+            $response['page'] = Settings::component_page($object, [
+                'url' => $destination
+            ],
+                $domain->dir . $object->config('dictionary.component') . $object->config('ds')
+            );
+        }
+        if(!empty($error)){
+            $response['error'] = $error;
+        }
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws Exception
+     * @throws ErrorException
+     * @throws FileMoveException
+     */
+    public static function component_move_list(App $object): Response
+    {
+        $nodeList = $object->request('nodeList');
+        $list = [];
+        if(is_array($nodeList)){
+            foreach($nodeList as $nr => $url){
+                $basename = File::basename($url);
+                if(in_array($basename, $list)){
+                    throw new ErrorException('Duplicate basename...');
+                }
+                if(Dir::is($url)){
+                    $dir = $url;
+                } else {
+                    $dir = Dir::name($url);
+                }
+                $explode = explode($object->config('ds'), $dir);
+                for($i=count($explode); $i >= 2; $i--){
+                    $dir_example = implode($object->config('ds'), $explode);
+                    if(substr($dir_example, 0, -1) !== $object->config('ds')){
+                        $dir_example .= $object->config('ds');
+                    }
+                    $pop = array_pop($explode);
+                    if(empty($pop)){
+                        continue;
+                    }
+                    if(File::is_link($dir_example)){
+                        throw new Exception('Cannot move protected symlink file...');
+                    }
+                }
+                $list[] = File::basename($url);
+            }
+        }
+        $overwrite = true;
+        $directory = $object->request('directory');
+        $directory = trim($directory, $object->config('ds')) . $object->config('ds');
+        if($directory === $object->config('ds')){
+            $directory = '';
+        }
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $url = $domain->dir . $object->config('dictionary.component') . $object->config('ds') . $directory;
+        $list = [];
+        $error = [];
+        $destination = false;
+        if(is_array($nodeList)){
+            if(!File::exist($url)){
+                Dir::create($url);
+            }
+            foreach($nodeList as $nr => $source){
+                $destination = $url;
+                if($source == $destination){
+                    $list[] = $destination;
+                    continue;
+                }
+                if(!Dir::is($source)){
+                    continue;
+                } else {
+                    $move = Dir::move($source, $destination, $overwrite);
+                }
+                if($move){
+                    $list[] = $destination;
+                } else {
+                    $error[] = $source;
+                }
+            }
+            foreach($nodeList as $nr => $source){
+                $destination = $url . File::basename($source);
+                if($source == $destination){
+                    $list[] = $destination;
+                    continue;
+                }
+                if(Dir::is($source)){
+                    continue;
+                } else {
+                    $move = File::move($source, $destination, $overwrite);
+                }
+                if($move){
+                    $list[] = $destination;
+                } else {
+                    $error[] = $source;
+                }
+            }
+        }
+        $response = [];
+        $response['nodeList'] = $list;
+        if($destination){
+            $response['page'] = Settings::component_page(
+                $object,
+                [
+                    'url' => $destination
+                ],
+                $domain->dir . $object->config('dictionary.component') . $object->config('ds')
+            );
+        }
+        if(!empty($error)){
+            $response['error'] = $error;
+        }
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws ErrorException
+     * @throws Exception
+     */
+    public static function component_create_directory(App $object): Response
+    {
+        $name = $object->request('node.name');
+        $name = ltrim(
+            str_replace([
+                '../',
+                './'
+            ], [
+                $object->config('ds'),
+                $object->config('ds'),
+            ], $name),
+            $object->config('ds'),
+        );
+        if(empty($name)){
+            throw new ErrorException('Name cannot be empty...');
+        }
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $url = $domain->dir . $object->config('dictionary.component') . $object->config('ds') . $name;
+        if(file::exist($url)){
+            throw new ErrorException('Url exists...');
+        } else {
+            $object->request('node.name', $name);
+            $validate = Main::validate($object, Settings::component_getValidatorUrl($object), 'view.create.directory');
+            if($validate) {
+                if ($validate->success === true) {
+                    Dir::create($url);
+                } else {
+                    $data = [];
+                    $data['error'] = $validate->test;
+                    return new Response(
+                        $data,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                }
+            } else {
+                throw new Exception('Cannot validate view at: ' . Settings::component_getValidatorUrl($object));
+            }
+        }
+        $node = [];
+        $node['url'] = $url;
+        $node['created'] = new DateTime();
+        $response = [];
+        $response['node'] = $node;
+        $response['page'] = Settings::component_page($object, [
+            'url' => $url
+        ],
+            $domain->dir . $object->config('dictionary.component') . $object->config('ds')
+        );
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws ErrorException
+     */
+    public static function component_create_symlink(App $object): Response
+    {
+        $source = $object->request('node.source');
+        $source = str_replace([
+            '../',
+            './'
+        ], [
+            $object->config('ds'),
+            $object->config('ds'),
+        ],
+            $source
+        );
+        $destination = $object->request('node.destination');
+        $destination = str_replace([
+            '../',
+            './'
+        ], [
+            $object->config('ds'),
+            $object->config('ds'),
+        ],
+            $destination
+        );
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $match = $domain->dir .
+            $object->config('dictionary.component') .
+            $object->config('ds');
+
+        if(substr($source, 0, strlen($match)) === $match){
+            $url_source = $source;
+        } else {
+            $url_source = $domain->dir .
+                $object->config('dictionary.component') .
+                $object->config('ds') .
+                $source;
+        }
+        if(substr($destination, 0, strlen($match)) === $match){
+            $url_destination = $destination;
+        } else {
+            $url_destination = $domain->dir .
+                $object->config('dictionary.component') .
+                $object->config('ds') .
+                $destination;
+        }
+
+        if(!file::exist($url_source)){
+            throw new ErrorException('Source not exists...');
+        }
+        elseif(file::exist($url_destination)){
+            throw new ErrorException('Destination exists...');
+        } else {
+            $object->request('node.destination', $url_destination);
+            $validate = Main::validate($object, Settings::component_getValidatorUrl($object), 'view.create.symlink');
+            if($validate) {
+                if ($validate->success === true) {
+                    File::link($url_source, $url_destination);
+                } else {
+                    $data = [];
+                    $data['error'] = $validate->test;
+                    return new Response(
+                        $data,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                }
+            } else {
+                throw new Exception('Cannot validate view at: ' . Settings::component_getValidatorUrl($object));
+            }
+        }
+        $node = [];
+        $node['url'] = $url_destination;
+        $node['created'] = new DateTime();
+        $response = [];
+        $response['node'] = $node;
+        $response['page'] = Settings::component_page($object, [
+            'url' => $url_destination
+        ],
+            $domain->dir . $object->config('dictionary.component') . $object->config('ds')
+        );
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    public static function component_upload(App $object)
+    {
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+
+        $directory = $object->request('node_directory');
+        if(empty($directory)) {
+            $target = $domain->dir .
+                $object->config('dictionary.view') .
+                $object->config('ds');
+        } else {
+            $target = $domain->dir .
+                $object->config('dictionary.component') .
+                $object->config('ds') .
+                trim($directory, $object->config('ds')) .
+                $object->config('ds');
+        }
+        $upload = $object->upload();
+        $data = $upload->data();
+        if(is_array($data) || is_object($data)){
+            foreach($data as $file) {
+                $record = new Data($file);
+                if ($record->get('errorMessage')) {
+                    $error = [];
+                    $error['error'] = $record->get('errorMessage') . PHP_EOL;
+                    return new Response(
+                        $error,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                } else {
+                    //add mime-type check
+                    $command = 'file --mime-type -b ' . escapeshellarg($record->get('tmp_name'));
+                    Core::execute($command, $output);
+                    if(array_key_exists(0, $output)){
+                        $mimeType = $output[0];
+                        if(!in_array($mimeType, [
+                            'text/plain',
+                            'text/css',
+                            'text/json'
+                        ])){
+                            $error = [];
+                            $error['error'] = $object->request('error-5') . PHP_EOL;
+                            return new Response(
+                                $error,
+                                Response::TYPE_JSON,
+                                Response::STATUS_ERROR
+                            );
+                        } else {
+                            $extension = File::extension($record->get('name'));
+                            if(!in_array($extension, [
+                                'tpl',
+                                'js',
+                                'json',
+                                'css'
+                            ])){
+                                $error = [];
+                                $error['error'] = $object->request('error-9') . PHP_EOL;
+                                return new Response(
+                                    $error,
+                                    Response::TYPE_JSON,
+                                    Response::STATUS_ERROR
+                                );
+                            }
+                            Dir::create($target);
+                            File::upload($record, $target);
+                        }
+                    }
+                }
+            }
+        } else {
+            $error = [];
+            $error['error'] = 'Cannot detect any upload...' . PHP_EOL;
+            return new Response(
+                $error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
+        }
+    }
+
+    private static function component_page(App $object, $search=[], $url='')
+    {
+        $dir = new Dir();
+        $data = new Data();
+        $read = $dir->read($url, true);
+        $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
+        $settings = $object->data_read($settings_url);
+        $filter = (array) $object->request('filter');
+        if(empty($filter) || !is_array($filter)){
+            $filter = [];
+            $filter['type'] = 'All';
+        }
+        $protected = [];
+        $page = false;
+        if ($settings->data('server.settings.protected')) {
+            $protected = $settings->data('server.settings.protected');
+        }
+        if ($read) {
+            foreach ($read as $nr => $record) {
+                if(
+                    array_key_exists('type', $filter) &&
+                    $filter['type'] === File::TYPE
+                ){
+                    if($record->type !== File::TYPE){
+                        continue;
+                    }
+                }
+                elseif(
+                    array_key_exists('type', $filter) &&
+                    $filter['type'] === Dir::TYPE
+                ){
+                    if($record->type !== Dir::TYPE){
+                        continue;
+                    }
+                }
+                if($record->type !== Dir::TYPE){
+                    $record->extension = File::extension($record->url);
+                    if(
+                        array_key_exists('extension', $filter) &&
+                        !empty($filter['extension']) &&
+                        $filter['extension'] !== $record->extension
+                    ){
+                        continue;
+                    }
+                }
+                if (in_array(
+                    $record->url,
+                    $protected
+                )) {
+                    $record->protected = true;
+                }
+                $key = sha1($record->url);
+                $data->set($key, $record);
+            }
+            $list = Sort::list($data->data())->with(['url' => 'ASC']);
+            $count = count($list);
+            $nr = 1;
+            $is_found = [];
+            foreach($list as $key => $record){
+                if(
+                    array_key_exists('url', $search) &&
+                    stristr($record->url, $search['url'])  !== false
+                ){
+                    $is_found[$key] = $nr;
+                }
+                $nr++;
+            }
+            if(empty($is_found)){
+                $nr = 1;
+            } elseif(count($is_found) === 1){
+                $nr = reset($is_found);
+            } else {
+                foreach($is_found as $key => $nr){
+                    if(
+                        array_key_exists('url', $search) &&
+                        strstr($list[$key]->url, $search['url']) !== false
+                    ){
+                        break;
+                    }
+                }
+            }
+            $limit = Limit::LIMIT;
+            if($settings->data('view.default.limit')){
+                $limit = $settings->data('view.default.limit');
+            }
+            if($object->request('limit')){
+                $limit = (int) $object->request('limit');
+                if($limit > Limit::MAX){
+                    $limit = Limit::MAX;
+                }
+            }
+            $page = floor($nr / $limit) + 1;
+        }
+        return $page;
+    }
+
+    /**
+     * @throws Exception
+     * @throws ObjectException;
+     */
+    private static function component_put(App $object, $domain)
+    {
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $object->request('node.extension', File::extension($object->request('node.name')));
+        $validate = Main::validate($object, Settings::component_getValidatorUrl($object), 'view.put');
+        $object->request('node.url',
+            $domain->dir .
+            $object->config('dictionary.component') .
+            $object->config('ds') .
+            $object->request('node.name')
+        );
+        if($validate) {
+            if ($validate->success === true) {
+                if(File::exist($object->request('node.url'))){
+                    $data = [];
+                    $data['error'] = [
+                        'url' => [
+                            'validate_url' => [
+                                false
+                            ]
+                        ]
+                    ];
+                    return new Response(
+                        $data,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                } else {
+                    $source = $object->config('host.dir.data') .
+                        'Source' .
+                        $object->config('ds') .
+                        'Template' .
+                        '.' .
+                        ucfirst(File::extension($object->request('node.name'))) .
+                        $object->config('extension.tpl');
+                    $parse = new Parse($object);
+                    $data = new Data($object->data());
+                    $data->set('domain', $domain);
+                    $content = $parse->compile(File::read($source), $data->get());
+                    $dir = Dir::name($object->request('node.url'));
+                    if($dir){
+                        Dir::create($dir);
+                    }
+                    File::write($object->request('node.url'), $content);
+                    $object->request('node.content', $content);
+                    $data = [];
+                    $data['node'] = $object->request('node');
+                    $data['page'] = Settings::component_page($object, [
+                        'url' => $object->request('node.url')
+                    ],
+                        $domain->dir . $object->config('dictionary.component') . $object->config('ds')
+                    );
+                    return new Response($data, Response::TYPE_JSON);
+                }
+            } else {
+                $data = [];
+                $data['error'] = $validate->test;
+                return new Response(
+                    $data,
+                    Response::TYPE_JSON,
+                    Response::STATUS_ERROR
+                );
+            }
+        } else {
+            throw new Exception('Cannot validate view at: ' . Settings::component_getValidatorUrl($object));
+        }
+    }
+
+    private static function component_getValidatorUrl(App $object): string
+    {
+        return $object->config('host.dir.data') .
+            'Validator' .
+            $object->config('ds') .
+            'View' .
+            $object->config('extension.json');
+    }
+    
     /**
      * @throws Exception
      * @throws ObjectException
@@ -2024,7 +3045,7 @@ class Settings extends Main {
     private static function server_settings_put(App $object, $domain)
     {
         $object->request('node.extension', File::extension($object->request('node.name')));
-        $validate = Main::validate($object, Settings::views_getValidatorUrl($object), 'view.put');
+        $validate = Main::validate($object, Settings::server_settings_getValidatorUrl($object), 'server.settings.put');
         $object->request('node.url',
             $domain->dir .
             $object->config('dictionary.view') .
@@ -2079,7 +3100,7 @@ class Settings extends Main {
                 );
             }
         } else {
-            throw new Exception('Cannot validate view at: ' . Settings::views_getValidatorUrl($object));
+            throw new Exception('Cannot validate view at: ' . Settings::server_settings_getValidatorUrl($object));
         }
     }
 
@@ -3030,9 +4051,6 @@ class Settings extends Main {
                                     Response::STATUS_ERROR
                                 );
                             }
-
-
-
                             Dir::create($target);
                             File::upload($record, $target);
                         }

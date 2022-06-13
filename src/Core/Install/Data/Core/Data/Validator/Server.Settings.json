@@ -1,0 +1,124 @@
+{
+    "server": {
+        "settings" : {
+            "create" : {
+                "directory" : {
+                    "validate": {
+                        "name": [
+                            {
+                                "string.length": ">=1"
+                            },
+                            {
+                                "string.contains": {
+                                    "regex": "^[a-zA-Z0-9.\/]+$^"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "symlink" : {
+                    "validate": {
+                        "destination": [
+                            {
+                                "string.length": ">=1"
+                            },
+                            {
+                                "string.contains": {
+                                    "regex": "^[a-zA-Z0-9.\/]+$^"
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "rename" : {
+                "directory" :  {
+                    "validate": {
+                        "destination": [
+                            {
+                                "string.length": ">=1"
+                            },
+                            {
+                                "string.contains": {
+                                    "regex": "^[a-zA-Z0-9.\/]+$^"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "file" :  {
+                    "validate": {
+                        "name": [
+                            {
+                                "string.length": ">=1"
+                            },
+                            {
+                                "string.contains": {
+                                    "regex": "^[a-zA-Z0-9.\/]+$^"
+                                }
+                            }
+                        ],
+                        "extension": [
+                            {
+                                "string.length": ">=1"
+                            },
+                            {
+                                "string.contains": {
+                                    "regex": "^[a-z.]+$^"
+                                }
+                            },
+                            {
+                                "in.array": [
+                                    "tpl",
+                                    "js",
+                                    "css",
+                                    "json"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            "put" : {
+                "validate": {
+                    "name": [
+                        {
+                            "string.length": ">=1"
+                        },
+                        {
+                            "string.contains": {
+                                "regex": "^[a-zA-Z0-9.\/]+$^"
+                            }
+                        }
+                    ],
+                    "extension": [
+                        {
+                            "string.length": ">=1"
+                        },
+                        {
+                            "string.contains": {
+                                "regex": "^[a-z.]+$^"
+                            }
+                        },
+                        {
+                            "in.array": [
+                                "tpl",
+                                "js",
+                                "css",
+                                "json"
+                            ]
+                        }
+                    ],
+                    "domain": [
+                        {
+                            "string.length": "==36"
+                        },
+                        {
+                            "is.uuid": true
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

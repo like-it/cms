@@ -1,4 +1,9 @@
 {
+    "component" : {
+        "default" : {
+            "limit" : 10
+        }
+    },
     "controller" : {
         "default" : {
             "limit" : 10

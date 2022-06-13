@@ -21,6 +21,93 @@ class Settings extends View {
         return new Response($data, Response::TYPE_JSON);
     }
 
+    public static function components_settings(App $object)
+    {
+        try {
+            return Service::components_list($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function components_add(App $object)
+    {
+        try {
+            return Service::components_create($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function components_command(App $object){
+        $url = $object->request('node.url');
+        $nodeList = $object->request('nodeList');
+        try {
+            switch (Handler::method()) {
+                case 'DELETE' :
+                    if($nodeList){
+                        return Service::components_delete($object, $nodeList);
+                    } elseif($url){
+                        return Service::components_delete($object, $url);
+                    }
+                case 'GET' :
+                    return Service::components_read($object, $url);
+                case 'PUT' :
+                    return Service::components_update($object, $url);
+                case 'PATCH' :
+                    return Service::components_rename($object, $url);
+            }
+        } catch (Exception $exception) {
+            return $exception;
+        }
+    }
+
+    public static function components_copy(App $object)
+    {
+        try {
+            return Service::components_copy_list($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function components_move(App $object)
+    {
+        try {
+            return Service::components_move_list($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function components_create(App $object)
+    {
+        $type = $object->request('type');
+        try {
+            switch (Handler::method()) {
+                case 'POST':
+                    switch ($type){
+                        case 'Directory':
+                            return Service::components_create_directory($object);
+                        case 'Symlink':
+                            return Service::components_create_symlink($object);
+                    }
+                    break;
+            }
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
+    public static function components_upload(App $object)
+    {
+        try {
+            return Service::components_upload($object);
+        } catch (Exception $exception){
+            return $exception;
+        }
+    }
+
     public static function controllers_settings(App $object)
     {
         try {
@@ -51,93 +138,6 @@ class Settings extends View {
                     return Service::controllers_update($object, $name);
             }
         } catch (Exception $exception) {
-            return $exception;
-        }
-    }
-
-    public static function components_settings(App $object)
-    {
-        try {
-            return Service::views_list($object);
-        } catch (Exception $exception){
-            return $exception;
-        }
-    }
-
-    public static function components_add(App $object)
-    {
-        try {
-            return Service::views_create($object);
-        } catch (Exception $exception){
-            return $exception;
-        }
-    }
-
-    public static function components_command(App $object){
-        $url = $object->request('node.url');
-        $nodeList = $object->request('nodeList');
-        try {
-            switch (Handler::method()) {
-                case 'DELETE' :
-                    if($nodeList){
-                        return Service::views_delete($object, $nodeList);
-                    } elseif($url){
-                        return Service::views_delete($object, $url);
-                    }
-                case 'GET' :
-                    return Service::views_read($object, $url);
-                case 'PUT' :
-                    return Service::views_update($object, $url);
-                case 'PATCH' :
-                    return Service::views_rename($object, $url);
-            }
-        } catch (Exception $exception) {
-            return $exception;
-        }
-    }
-
-    public static function components_copy(App $object)
-    {
-        try {
-            return Service::views_copy_list($object);
-        } catch (Exception $exception){
-            return $exception;
-        }
-    }
-
-    public static function components_move(App $object)
-    {
-        try {
-            return Service::views_move_list($object);
-        } catch (Exception $exception){
-            return $exception;
-        }
-    }
-
-    public static function components_create(App $object)
-    {
-        $type = $object->request('type');
-        try {
-            switch (Handler::method()) {
-                case 'POST':
-                    switch ($type){
-                        case 'Directory':
-                            return Service::views_create_directory($object);
-                        case 'Symlink':
-                            return Service::views_create_symlink($object);
-                    }
-                    break;
-            }
-        } catch (Exception $exception){
-            return $exception;
-        }
-    }
-
-    public static function components_upload(App $object)
-    {
-        try {
-            return Service::views_upload($object);
-        } catch (Exception $exception){
             return $exception;
         }
     }
