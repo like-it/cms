@@ -30,7 +30,7 @@
         >
             {{for.each($limits as $limit)}}
             {{$require.basename = $limit|uppercase.first.sentence:'.'}}
-            {{require($controller.dir.component + $require.module + '/Settings/Limit/' + $require.basename + '.tpl')}}
+            {{require($controller.dir.component + $require.module + '/Settings/Domain/Limit/' + $require.basename + '.tpl')}}
             {{/for.each}}
         </div>
     </div>

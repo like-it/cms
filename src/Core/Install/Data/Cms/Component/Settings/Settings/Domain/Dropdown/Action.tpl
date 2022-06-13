@@ -30,7 +30,7 @@
         >
             {{for.each($actions as $action)}}
             {{$require.basename = $action|uppercase.first.sentence:'.'}}
-            {{require($controller.dir.component + $require.module + '/Settings/Action/' + $require.basename + '.tpl')}}
+            {{require($controller.dir.component + $require.module + '/Settings/Domain/Action/' + $require.basename + '.tpl')}}
             {{/for.each}}
         </div>
     </div>

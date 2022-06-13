@@ -128,7 +128,7 @@
         >
             {{for.each($filters as $filter)}}
             {{$require.basename = $filter|uppercase.first.sentence:'.'}}
-            {{require($controller.dir.component + $require.module + '/Settings/Filter/' + $require.basename + '.tpl')}}
+            {{require($controller.dir.component + $require.module + '/Settings/Domain/Filter/' + $require.basename + '.tpl')}}
             {{/for.each}}
         </div>
     </div>

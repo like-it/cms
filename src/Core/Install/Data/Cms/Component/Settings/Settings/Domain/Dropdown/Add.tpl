@@ -31,7 +31,7 @@
         >
             {{for.each($addons as $add)}}
             {{$require.basename = $add|uppercase.first.sentence:'.'}}
-            {{require($controller.dir.component + $require.module + '/Settings/Add/' + $require.basename + '.tpl')}}
+            {{require($controller.dir.component + $require.module + '/Settings/Domain/Add/' + $require.basename + '.tpl')}}
             {{/for.each}}
         </div>
     </div>

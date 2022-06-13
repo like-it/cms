@@ -29,7 +29,7 @@
             >
                 {{for.each($options as $option)}}
                     {{$require.basename = $option|uppercase.first.sentence:'.'}}
-                    {{require($controller.dir.component + $require.module + '/Settings/Options/' + $require.basename + '.tpl')}}
+                    {{require($controller.dir.component + $require.module + '/Settings/Domain/Options/' + $require.basename + '.tpl')}}
                 {{/for.each}}
             </div>
         </div>
