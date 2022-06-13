@@ -33,7 +33,7 @@
         <td colspan="{{$td.colspan}}">
             <div class="btn-group">
                 {{for.each($dropdowns as $dropdown)}}
-                {{require($controller.dir.component + $require.module + '/' + $require.command + '/Dropdown/' + $dropdown + '.tpl')}}
+                {{require($controller.dir.component + $require.module + '/' + $require.command + '/Domain/Dropdown/' + $dropdown + '.tpl')}}
                 {{/for.each}}
             </div>
         </td>

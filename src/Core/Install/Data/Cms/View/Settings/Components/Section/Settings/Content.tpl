@@ -81,7 +81,7 @@
                 {{/if}}
                 {{for.each($components as $component)}}
                     {{$require.basename = $component|uppercase.first.sentence:'.'}}
-                    {{require($controller.dir.component + $require.module + '/' + $require.command + '/Td/' + $require.basename + '.tpl')}}
+                    {{require($controller.dir.component + $require.module + '/' + $require.command + '/Domain/Td/' + $require.basename + '.tpl')}}
                 {{/for.each}}
                 </tr>
                 {{$nr++}}
