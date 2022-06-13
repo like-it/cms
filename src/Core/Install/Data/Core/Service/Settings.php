@@ -84,7 +84,7 @@ class Settings extends Main {
         ){
             throw new Exception('Domain dir not set...');
         }
-        $pos = strpos($url, $domain->dir . $object->config('dictionary.view') . $object->config('ds'));
+        $pos = strpos($url, $domain->dir . $object->config('dictionary.component') . $object->config('ds'));
         if ($pos !== 0) {
             throw new Exception('Cannot update outside domain.dir.view');
         }
