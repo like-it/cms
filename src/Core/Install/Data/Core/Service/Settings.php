@@ -3455,9 +3455,7 @@ class Settings extends Main {
                 throw new Exception('Cannot validate view at: ' . Settings::views_getValidatorUrl($object));
             }
         } else {
-            $destination = $domain->dir .
-                $object->config('dictionary.view') .
-                $object->config('ds') .
+            $destination = Dir::name($source) .
                 $destination;
             if(substr(
                 $source,
