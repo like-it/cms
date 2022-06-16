@@ -1635,7 +1635,6 @@ class Settings extends Main {
             $object->config('dictionary.controller') .
             $object->config('ds') .
             $object->request('node.name') .
-            '.' .
             $object->request('node.extension')
         );
         if($validate) {
