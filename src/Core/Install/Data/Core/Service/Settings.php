@@ -833,19 +833,22 @@ class Settings extends Main {
                             } else {
                                 $error = [];
                                 $result = Core::object($validate, Core::OBJECT_ARRAY);
-                                dd($result);
                                 if(
-                                    property_exists($validate, 'mimetype') &&
-                                    property_exists($validate->mimetype, 'validate_in_array') &&
-                                    $validate->mimetype->validate_in_array[0] === false
+                                    array_key_exists('test', $result) &&
+                                    array_key_exists('mimetype', $result['test']) &&
+                                    array_key_exists('validate_in_array', $result['test']['mimetype']) &&
+                                    array_key_exists(0, $result['test']['mimetype']['validate_in_array']) &&
+                                    $result['test']['mimetype']['validate_in_array'][0] === false
                                 ){
                                     $error['error'] = $object->request('error-5') . PHP_EOL;
                                 }
                                 if(
-                                    property_exists($validate, 'extension') &&
-                                    property_exists($validate->extension, 'validate_in_array') &&
-                                    $validate->extension->validate_in_array[0] === false)
-                                {
+                                    array_key_exists('test', $result) &&
+                                    array_key_exists('extension', $result['test']) &&
+                                    array_key_exists('validate_in_array', $result['test']['mimetype']) &&
+                                    array_key_exists(0, $result['test']['mimetype']['validate_in_array']) &&
+                                    $result['test']['extension']['validate_in_array'][0] === false
+                                ){
                                     $error['error'] = $object->request('error-9') . PHP_EOL;
                                 }
                                 return new Response(
