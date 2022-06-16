@@ -128,77 +128,6 @@
             "POST"
         ]
     },
-    "6be68aa6-3e8c-4080-977d-545bc6680995" : {
-        "module" : "settings",
-        "submodule" : "controllers",
-        "command" : "main",
-        "method": [
-            "GET",
-            "POST"
-        ]
-    },
-    "a42b4b91-abd1-4f3a-a8d8-31d5c33fc0d4" : {
-        "module" : "settings",
-        "submodule" : "controllers",
-        "command" : "main",
-        "subcommand" : "body",
-        "method": [
-            "GET",
-            "POST"
-        ]
-    },
-    "44a3330f-7327-4c11-8c89-322db3868c2f" : {
-        "module" : "settings",
-        "submodule" : "controllers",
-        "command" : "settings",
-        "subcommand" : "body",
-        "method": [
-            "GET",
-            "POST"
-        ]
-    },
-    "907bd5cc-6b8d-4cce-a13c-d7790ed3487f" : {
-        "module" : "settings",
-        "submodule" : "controllers",
-        "command" : "add-controller",
-        "subcommand" : "body",
-        "path" : "Settings/Controllers/Add/Controller/Body/{$node.domain}",
-        "method": [
-            "GET",
-            "POST"
-        ]
-    },
-    "fc754249-03c7-4502-9c3b-58c5b8ff58f7" : {
-        "module" : "settings",
-        "submodule" : "controllers",
-        "command" : "edit-controller",
-        "subcommand" : "body",
-        "path" : "Settings/Controllers/Edit/Controller/Body/",
-        "method": [
-            "GET",
-            "POST"
-        ]
-    },
-    "0296a749-6c5a-4948-9a40-1f0179ebf754" : {
-        "module" : "settings",
-        "submodule" : "controllers",
-        "command" : "view",
-        "subcommand" : "body",
-        "method": [
-            "GET",
-            "POST"
-        ]
-    },
-    "56c2865e-e591-45f7-bc49-c3deaee9a98c" : {
-        "module" : "settings",
-        "submodule" : "controllers",
-        "command" : "view-routes",
-        "subcommand" : "body",
-        "method": [
-            "GET",
-            "POST"
-        ]
-    },
     "1cdb85b0-ef09-45b4-81cc-985c76a7a1c1" : {
         "module" : "settings",
         "submodule" : "components",
@@ -263,6 +192,77 @@
     "c6b998ef-74d0-4b4b-9c35-f7ee9fd4be66" : {
         "module" : "settings",
         "submodule" : "components",
+        "command" : "view-routes",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "3ad13781-a43d-47d1-8005-ba7fb7cd4a6a" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "main",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "3fffe244-8093-428d-94fe-63d1d562340e" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "main",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "7a903a87-9e8c-42eb-8694-45b6789a3bf8" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "settings",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "e03b4e41-a190-44ad-bbc3-8a2985ba2d9a" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "add-template",
+        "subcommand" : "body",
+        "path" : "Settings/Controllers/Add/Template/Body/{$node.domain}",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "9f9bc0af-6e39-4b6a-b1c3-3092676ad23b" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "edit-template",
+        "subcommand" : "body",
+        "path" : "Settings/Controllers/Edit/Template/Body/",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "c2b34734-3626-443b-aec9-6ed8c1da2f59" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "view",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "8e028580-fa73-49d8-9509-13916346c982" : {
+        "module" : "settings",
+        "submodule" : "controllers",
         "command" : "view-routes",
         "subcommand" : "body",
         "method": [
