@@ -1,39 +1,117 @@
 {
     "controller": {
-        "validate": {
-            "name": [
-                {
-                    "string.length": ">=1"
-                },
-                {
-                    "string.contains": {
-                        "regex": "^[a-zA-Z]+$^"
-                    }
-                }
-            ],
-            "extension": [
-                {
-                    "string.length": ">=1"
-                },
-                {
-                    "string.contains": {
-                        "regex": "^[a-z.]+$^"
-                    }
-                },
-                {
-                    "in.array": [
-                        ".php"
+        "rename" : {
+            "file" :  {
+                "validate": {
+                    "name": [
+                        {
+                            "string.length": ">=1"
+                        },
+                        {
+                            "string.contains": {
+                                "regex": "^[a-zA-Z0-9.\/]+$^"
+                            }
+                        }
+                    ],
+                    "extension": [
+                        {
+                            "string.length": ">=1"
+                        },
+                        {
+                            "string.contains": {
+                                "regex": "^[a-z.]+$^"
+                            }
+                        },
+                        {
+                            "in.array": [
+                                "php"
+                            ]
+                        }
                     ]
                 }
-            ],
-            "domain": [
-                {
-                    "string.length": "==36"
-                },
-                {
-                    "is.uuid": true
-                }
-            ]
+            }
+        },
+        "put" : {
+            "validate": {
+                "name": [
+                    {
+                        "string.length": ">=1"
+                    },
+                    {
+                        "string.contains": {
+                            "regex": "^[a-zA-Z0-9.\/]+$^"
+                        }
+                    }
+                ],
+                "extension": [
+                    {
+                        "string.length": ">=1"
+                    },
+                    {
+                        "string.contains": {
+                            "regex": "^[a-z.]+$^"
+                        }
+                    },
+                    {
+                        "in.array": [
+                            "php"
+                        ]
+                    }
+                ],
+                "domain": [
+                    {
+                        "string.length": "==36"
+                    },
+                    {
+                        "is.uuid": true
+                    }
+                ]
+            }
+        },
+        "upload" : {
+            "validate": {
+                "name": [
+                    {
+                        "string.length": ">=1"
+                    },
+                    {
+                        "string.contains": {
+                            "regex": "^[a-zA-Z0-9.\/]+$^"
+                        }
+                    }
+                ],
+                "mimetype" : [
+                    {
+                        "in.array": [
+                            "text/plain",
+                            "text/php"
+                        ]
+                    }
+                ],
+                "extension": [
+                    {
+                        "string.length": ">=1"
+                    },
+                    {
+                        "string.contains": {
+                            "regex": "^[a-z.]+$^"
+                        }
+                    },
+                    {
+                        "in.array": [
+                            "php"
+                        ]
+                    }
+                ],
+                "domain": [
+                    {
+                        "string.length": "==36"
+                    },
+                    {
+                        "is.uuid": true
+                    }
+                ]
+            }
         }
     }
 }
