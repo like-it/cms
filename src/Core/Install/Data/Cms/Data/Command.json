@@ -260,7 +260,7 @@
             "POST"
         ]
     },
-    "8e028580-fa73-49d8-9509-13916346c982" : {
+    "8e028580-fa73-49d8-9509-13916346c982   " : {
         "module" : "settings",
         "submodule" : "controllers",
         "command" : "view-routes",
