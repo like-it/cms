@@ -842,11 +842,11 @@ class Settings extends Main {
                                 ){
                                     $error['error'] = $object->request('error-5') . PHP_EOL;
                                 }
-                                if(
+                                else if(
                                     array_key_exists('test', $result) &&
                                     array_key_exists('extension', $result['test']) &&
                                     array_key_exists('validate_in_array', $result['test']['mimetype']) &&
-                                    array_key_exists(0, $result['test']['mimetype']['validate_in_array']) &&
+                                    array_key_exists(0, $result['test']['extension']['validate_in_array']) &&
                                     $result['test']['extension']['validate_in_array'][0] === false
                                 ){
                                     $error['error'] = $object->request('error-9') . PHP_EOL;
