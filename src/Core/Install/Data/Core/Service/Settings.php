@@ -832,15 +832,20 @@ class Settings extends Main {
                                 File::upload($record, $target);
                             } else {
                                 $error = [];
-                                $error['error'] = $validate->test;
-
-                                /*
-                                $error = [];
-                                $error['error'] = $object->request('error-5') . PHP_EOL;
-                                $error = [];
-                                $error['error'] = $object->request('error-9') . PHP_EOL;
-                                */
-
+                                if(
+                                    property_exists($validate, 'mimetype') &&
+                                    property_exists($validate->mimetype, 'validate_in_array') &&
+                                    $validate->mimetype->validate_in_array[0] === false
+                                ){
+                                    $error['error'] = $object->request('error-5') . PHP_EOL;
+                                }
+                                if(
+                                    property_exists($validate, 'extension') &&
+                                    property_exists($validate->extension, 'validate_in_array') &&
+                                    $validate->extension->validate_in_array[0] === false)
+                                {
+                                    $error['error'] = $object->request('error-9') . PHP_EOL;
+                                }
                                 return new Response(
                                     $error,
                                     Response::TYPE_JSON,
