@@ -28,3 +28,4 @@ class {{$node.name|uppercase.first}} extends View {
     const DIR = __DIR__ . DIRECTORY_SEPARATOR;
 
 }
+    
