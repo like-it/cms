@@ -1662,7 +1662,6 @@ class Settings extends Main {
                         '.' .
                         'Controller' .
                         $object->config('extension.tpl');
-                    dd($source);
                     $parse = new Parse($object);
                     $data = new Data($object->data());
                     $data->set('domain', $domain);
