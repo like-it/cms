@@ -823,7 +823,6 @@ class Settings extends Main {
                         $mimeType = $output[0];
                         $extension = File::extension($record->get('name'));
                         $object->request('node.mimetype', $mimeType);
-                        dd($object->request('node'));
                         $object->request('node.extension', $extension);
                         $object->request('node.name', $record->get('name'));
                         $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'component.upload');
