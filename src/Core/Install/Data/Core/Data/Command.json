@@ -203,38 +203,6 @@
             "OPTIONS"
         ]
     },
-    "0fbb1e05-350b-465e-91a1-288ccb55d0a9" : {
-        "module" : "settings",
-        "submodule" : "controllers",
-        "command" : "settings",
-        "path": "Settings/Controllers/Settings/{{$node.domain}}",
-        "method" : [
-            "GET",
-            "POST",
-            "OPTIONS"
-        ]
-    },
-    "838d8a75-823e-48ed-b29f-da8163fe59a9" : {
-        "module" : "settings",
-        "submodule" : "controllers",
-        "command" : "add",
-        "method" : [
-            "POST",
-            "OPTIONS"
-        ]
-    },
-    "7832c65f-1610-4818-b54b-56e57ae0093b" : {
-        "module" : "settings",
-        "submodule" : "controllers",
-        "command" : "command",
-        "path": "Settings/Controllers/{{$node.name}}/{{$node.domain}}",
-        "method": [
-            "GET",
-            "PUT",
-            "DELETE",
-            "OPTIONS"
-        ]
-    },
     "0f49108d-0de8-4ddf-9aa7-ce71efec7e2f" : {
         "module" : "settings",
         "submodule" : "components",
@@ -300,6 +268,79 @@
         "submodule" : "components",
         "command" : "command",
         "path": "Settings/Components/{{$node.url}}/{{$node.domain}}",
+        "method": [
+            "GET",
+            "PUT",
+            "PATCH",
+            "DELETE",
+            "OPTIONS"
+        ]
+    },
+    "78b45856-7456-43c5-ac03-d3d00461acfd" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "settings",
+        "path": "Settings/Controllers/Settings/{{$node.domain}}",
+        "method" : [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "f0f037b2-7b7b-4c1d-871a-0537f2865cac" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "add",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "fca71036-0738-4eb2-881f-f450aaca3c99" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "create",
+        "path": "Settings/Controllers/Create/{{$type}}/{{$node.domain}}",
+        "method": [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "eee2869b-b389-435b-8a8f-9c47493017d0" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "copy",
+        "path": "Settings/Controllers/Copy/{{$node.domain}}",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "639c542a-9f23-4c26-9000-11d167434c41" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "move",
+        "path": "Settings/Controllers/Move/{{$node.domain}}",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "34c0db54-a66d-40a9-9e17-d1ee24dca997" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "upload",
+        "path": "Settings/Controllers/Upload/{{$node.domain}}",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "5566f2f9-1c89-447e-9a6c-045731701eb6" : {
+        "module" : "settings",
+        "submodule" : "controllers",
+        "command" : "command",
+        "path": "Settings/Controllers/{{$node.url}}/{{$node.domain}}",
         "method": [
             "GET",
             "PUT",
