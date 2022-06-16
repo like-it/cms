@@ -127,17 +127,28 @@ class Settings extends View {
     }
 
     public static function controllers_command(App $object){
-        $name = $object->request('node.name');
+        $url = $object->request('node.url');
         try {
             switch (Handler::method()) {
                 case 'DELETE' :
-                    return Service::controllers_delete($object, $name);
+                    return Service::controllers_delete($object, $url);
                 case 'GET' :
-                    return Service::controllers_read($object, $name);
+                    return Service::controllers_read($object, $url);
                 case 'PUT' :
-                    return Service::controllers_update($object, $name);
+                    return Service::controllers_update($object, $url);
+                case 'PATCH' :
+                    return Service::controllers_rename($object, $url);
             }
         } catch (Exception $exception) {
+            return $exception;
+        }
+    }
+
+    public static function controllers_upload(App $object)
+    {
+        try {
+            return Service::controllers_upload($object);
+        } catch (Exception $exception){
             return $exception;
         }
     }

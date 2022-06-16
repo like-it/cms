@@ -776,22 +776,18 @@ class Settings extends Main {
         return new Response($response, Response::TYPE_JSON);
     }
 
-    /**
-     * @throws ErrorException
-     * @throws Exception
-     */
     public static function components_upload(App $object)
     {
         $domain = Settings::domain_get($object);
-        if (
+        if(
             !property_exists($domain, 'dir') ||
             !property_exists($domain, 'uuid')
-        ) {
+        ){
             throw new Exception('Domain dir not set...');
         }
 
         $directory = $object->request('node_directory');
-        if (empty($directory)) {
+        if(empty($directory)) {
             $target = $domain->dir .
                 $object->config('dictionary.component') .
                 $object->config('ds');
@@ -804,8 +800,8 @@ class Settings extends Main {
         }
         $upload = $object->upload();
         $data = $upload->data();
-        if (is_array($data) || is_object($data)) {
-            foreach ($data as $file) {
+        if(is_array($data) || is_object($data)){
+            foreach($data as $file) {
                 $record = new Data($file);
                 if ($record->get('errorMessage')) {
                     $error = [];
@@ -819,72 +815,50 @@ class Settings extends Main {
                     //add mime-type check
                     $command = 'file --mime-type -b ' . escapeshellarg($record->get('tmp_name'));
                     Core::execute($command, $output);
-                    if (array_key_exists(0, $output)) {
+                    if(array_key_exists(0, $output)){
                         $mimeType = $output[0];
-                        $extension = File::extension($record->get('name'));
-                        $object->request('node.mimetype', $mimeType);
-                        $object->request('node.extension', $extension);
-                        $object->request('node.name', $record->get('name'));
-                        $validate = Main::validate($object, Settings::components_getValidatorUrl($object), 'component.upload');
-                        if ($validate) {
-                            if ($validate->success === true) {
-                                Dir::create($target);
-                                File::upload($record, $target);
-                            } else {
-                                $error = [];
-                                $error['error'] = $validate->test;
-
-                                /*
-                                $error = [];
-                                $error['error'] = $object->request('error-5') . PHP_EOL;
+                        if(!in_array($mimeType, [
+                            'text/plain',
+                            'text/css',
+                            'text/json'
+                        ])){
+                            $error = [];
+                            $error['error'] = $object->request('error-5') . PHP_EOL;
+                            return new Response(
+                                $error,
+                                Response::TYPE_JSON,
+                                Response::STATUS_ERROR
+                            );
+                        } else {
+                            $extension = File::extension($record->get('name'));
+                            if(!in_array($extension, [
+                                'tpl',
+                                'js',
+                                'json',
+                                'css'
+                            ])){
                                 $error = [];
                                 $error['error'] = $object->request('error-9') . PHP_EOL;
-                                */
-
                                 return new Response(
                                     $error,
                                     Response::TYPE_JSON,
                                     Response::STATUS_ERROR
                                 );
                             }
-                        } else {
-                            throw new Exception('Cannot validate component at: ' . Settings::components_getValidatorUrl($object));
+                            Dir::create($target);
+                            File::upload($record, $target);
                         }
                     }
-                    /*
-                    if(!in_array($mimeType, [
-                        'text/plain',
-                        'text/css',
-                        'text/json'
-                    ])){
-                        $error = [];
-                        $error['error'] = $object->request('error-5') . PHP_EOL;
-                        return new Response(
-                            $error,
-                            Response::TYPE_JSON,
-                            Response::STATUS_ERROR
-                        );
-                    */
-                    /*
-                    } else {
-                        $extension = File::extension($record->get('name'));
-                        if(!in_array($extension, [
-                            'tpl',
-                            'js',
-                            'json',
-                            'css'
-                        ])){
-                            $error = [];
-                            $error['error'] = $object->request('error-9') . PHP_EOL;
-                            return new Response(
-                                $error,
-                                Response::TYPE_JSON,
-                                Response::STATUS_ERROR
-                            );
-                        }
-                    */
                 }
             }
+        } else {
+            $error = [];
+            $error['error'] = 'Cannot detect any upload...' . PHP_EOL;
+            return new Response(
+                $error,
+                Response::TYPE_JSON,
+                Response::STATUS_ERROR
+            );
         }
     }
 
