@@ -832,7 +832,8 @@ class Settings extends Main {
                                 File::upload($record, $target);
                             } else {
                                 $error = [];
-                                dd($validate->mimetype);
+                                $result = Core::object($validate, Core::OBJECT_ARRAY);
+                                dd($result);
                                 if(
                                     property_exists($validate, 'mimetype') &&
                                     property_exists($validate->mimetype, 'validate_in_array') &&
