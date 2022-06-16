@@ -6,7 +6,7 @@
 {{$input.class = 'form-control'}}
 {{$input.type = 'radio'}}
 {{$input.name = 'node.' + $field}}
-{{$input.value = '.php'}}
+{{$input.value = 'php'}}
 {{$input.checked = true}}
 <label for="{{$input.id}}">{{$label}}</label><br>
 <input
