@@ -11,7 +11,7 @@
 <label for="{{$input.id}}">{{$label}}</label><br>
 <input
         type="{{$input.type}}"
-        id="{{$input.id}}-tpl"
+        id="{{$input.id}}-php"
         name="{{$input.name}}"
         {{if(!is.empty($input.checked))}}
         checked="checked"

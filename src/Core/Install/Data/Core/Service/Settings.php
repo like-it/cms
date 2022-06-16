@@ -1629,13 +1629,14 @@ class Settings extends Main {
         ){
             throw new Exception('Domain dir not set...');
         }
-        $object->request('node.extension', File::extension($object->request('node.name')));
         $validate = Main::validate($object, Settings::controllers_getValidatorUrl($object), 'controller.put');
         $object->request('node.url',
             $domain->dir .
             $object->config('dictionary.controller') .
             $object->config('ds') .
-            $object->request('node.name')
+            $object->request('node.name') .
+            '.' .
+            $object->request('node.extension')
         );
         if($validate) {
             if ($validate->success === true) {
