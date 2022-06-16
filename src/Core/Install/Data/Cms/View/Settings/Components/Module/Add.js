@@ -27,7 +27,7 @@ add.title = () => {
     const a = create('a', 'nav-link ' + "{{$module}}" + '-' + "{{$submodule}}" + '-' + "{{$command}}");
     a.data('frontend-url', "");
     a.data('url', "");
-    a.html("<span class='title'>{{__($__.module + '.' + $__.submodule + '.component.header.a.add.file.link')}}</span><i class=\"fas fa-window-close\"></i>");
+    a.html("<span class='title'>{{__('component.' + $__.module + '.settings.add.file.text')}}</span><i class=\"fas fa-window-close\"></i>");
     li.append(a);
     nav.append(li);
     a.on('click', (event) => {
