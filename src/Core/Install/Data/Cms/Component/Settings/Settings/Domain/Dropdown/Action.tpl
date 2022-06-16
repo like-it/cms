@@ -28,10 +28,12 @@
         <div
             class="dropdown-menu"
         >
+            {{if(is.array($actions))}}
             {{for.each($actions as $action)}}
             {{$require.basename = $action|uppercase.first.sentence:'.'}}
             {{require($controller.dir.component + $require.module + '/Settings/Domain/Action/' + $require.basename + '.tpl')}}
             {{/for.each}}
+            {{/if}}
         </div>
     </div>
 </div>

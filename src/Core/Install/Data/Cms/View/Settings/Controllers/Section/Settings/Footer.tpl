@@ -1,8 +1,6 @@
 {{R3M}}
 {{$dropdowns = [
 'Limit',
-'Filter',
-'Action',
 'Add'
 ]}}
 {{if(!is.empty($request.page))}}

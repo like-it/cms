@@ -29,10 +29,12 @@
         <div
             class="dropdown-menu"
         >
+            {{if(is.array($addons))}}
             {{for.each($addons as $add)}}
             {{$require.basename = $add|uppercase.first.sentence:'.'}}
             {{require($controller.dir.component + $require.module + '/Settings/Domain/Add/' + $require.basename + '.tpl')}}
             {{/for.each}}
+            {{/if}}
         </div>
     </div>
 </div>

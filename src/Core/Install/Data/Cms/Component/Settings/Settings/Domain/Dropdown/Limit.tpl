@@ -28,10 +28,12 @@
         <div
             class="dropdown-menu"
         >
+            {{if(is.array($limits))}}
             {{for.each($limits as $limit)}}
             {{$require.basename = $limit|uppercase.first.sentence:'.'}}
             {{require($controller.dir.component + $require.module + '/Settings/Domain/Limit/' + $require.basename + '.tpl')}}
             {{/for.each}}
+            {{/if}}
         </div>
     </div>
 </div>
