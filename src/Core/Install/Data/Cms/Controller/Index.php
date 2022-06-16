@@ -30,3 +30,4 @@ class Index extends View {
         }
     }
 }
+

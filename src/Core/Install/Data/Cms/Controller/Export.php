@@ -1,7 +1,6 @@
 <?php
 namespace Host\Subdomain\Host\Extension\Controller;
 
-
 use R3m\Io\App;
 use R3m\Io\Module\View;
 

@@ -40,3 +40,4 @@ class Home extends View {
         }
     }
 }
+
