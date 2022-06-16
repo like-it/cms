@@ -135,7 +135,7 @@
                         "in.array": [
                             "text/plain",
                             "text/css",
-                            "text/json"
+                            "application/json"
                         ]
                     }
                 ],
