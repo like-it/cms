@@ -1660,8 +1660,9 @@ class Settings extends Main {
                         $object->config('ds') .
                         'Template' .
                         '.' .
-                        ucfirst(File::extension($object->request('node.name'))) .
+                        'Controller' .
                         $object->config('extension.tpl');
+                    dd($source);
                     $parse = new Parse($object);
                     $data = new Data($object->data());
                     $data->set('domain', $domain);
