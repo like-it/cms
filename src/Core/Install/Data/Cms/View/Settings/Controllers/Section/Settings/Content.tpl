@@ -1,6 +1,5 @@
 {{R3M}}
 {{$components = [
-'actions',
 'icon',
 'name',
 'url',
@@ -12,11 +11,6 @@
 'rename',
 'delete'
 ]}}
-{{$actions = [
-'copy',
-'move',
-'delete'
-]}}
 {{$limits = [
 '10',
 '25',
@@ -26,19 +20,8 @@
 '500',
 '1000'
 ]}}
-{{$filters = [
-'dir',
-'file',
-'tpl',
-'js',
-'json',
-'css',
-'all'
-]}}
 {{$addons = [
-'dir',
 'file',
-'symlink',
 'upload'
 ]}}
 <div class="card-body h-100 card-body-{{$command}}">
