@@ -1178,10 +1178,7 @@ settings.node.list.upload = ({node, section, target}) => {
         return;
     }
     node.on('click', (event) => {
-        let message = '<p><label>' +
-            "{{__($__.module + '.' + $__.submodule + '.dialog.list.upload.target.directory')}}" +
-            '</label><input type="text" name="node.directory" value=""/></p>'
-        ;
+        let message = '';
         let dialog_create = dialog.create({
             title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.list.upload.title')}}",
             message : message,
