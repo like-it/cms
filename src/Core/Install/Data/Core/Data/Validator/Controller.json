@@ -84,7 +84,7 @@
                     {
                         "in.array": [
                             "text/plain",
-                            "text/php"
+                            "text/x-php"
                         ]
                     }
                 ],
