@@ -2,8 +2,8 @@
     left: 33%;
     width: 34%;
     right: 33%;
-    height: 360px;
-    top: calc(50% - 180px);
+    height: 400px;
+    top: calc(50% - 200px);
 }
 
 .dialog-upload .body {
