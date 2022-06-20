@@ -1444,19 +1444,9 @@ class Settings extends Main {
         ) {
             throw new Exception('Domain dir not set...');
         }
-
-        $directory = $object->request('node_directory');
-        if (empty($directory)) {
-            $target = $domain->dir .
-                $object->config('dictionary.controller') .
-                $object->config('ds');
-        } else {
-            $target = $domain->dir .
-                $object->config('dictionary.controller') .
-                $object->config('ds') .
-                trim($directory, $object->config('ds')) .
-                $object->config('ds');
-        }
+        $target = $domain->dir .
+            $object->config('dictionary.controller') .
+            $object->config('ds');
         $upload = $object->upload();
         $data = $upload->data();
         if (is_array($data) || is_object($data)) {
