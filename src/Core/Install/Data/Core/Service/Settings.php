@@ -1476,7 +1476,6 @@ class Settings extends Main {
                     Core::execute($command, $output);
                     if (array_key_exists(0, $output)) {
                         $mimeType = $output[0];
-                        dd($mimeType);
                         $extension = File::extension($record->get('name'));
                         $object->request('node.mimetype', $mimeType);
                         $object->request('node.extension', $extension);
