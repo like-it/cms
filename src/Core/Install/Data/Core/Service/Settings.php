@@ -1242,40 +1242,7 @@ class Settings extends Main {
         $source = str_replace(['./','../'],'/', $object->request('node.source'));
         $destination = str_replace(['./','../'],'/', $object->request('node.destination'));
         if(strpos($destination, $object->config('ds')) !== false){
-            $destination = $domain->dir .
-                $object->config('dictionary.controller') .
-                $object->config('ds') .
-                ltrim($destination, $object->config('ds'));
-            if(Dir::is($source)){
-                $destination .= $object->config('ds');
-                $object->request('node.destination', $destination);
-                $validate = Main::validate($object, Settings::controllers_getValidatorUrl($object), 'component.rename.directory');
-            } else {
-                $object->request('node.extension', File::extension($destination));
-                $object->request('node.name', File::basename($destination, '.' . $object->request('node.extension')));
-                $validate = Main::validate($object, Settings::controllers_getValidatorUrl($object), 'component.rename.file');
-            }
-            if($validate) {
-                if ($validate->success === true) {
-                    if(Dir::is($source)){
-                        Dir::move($source, $destination, true);
-                    } else {
-                        $dir = Dir::name($destination);
-                        Dir::create($dir);
-                        File::move($source, $destination);
-                    }
-                } else {
-                    $data = [];
-                    $data['error'] = $validate->test;
-                    return new Response(
-                        $data,
-                        Response::TYPE_JSON,
-                        Response::STATUS_ERROR
-                    );
-                }
-            } else {
-                throw new Exception('Cannot validate controller at: ' . Settings::controllers_getValidatorUrl($object));
-            }
+            throw new Exception('Cannot validate subdirectory of controller directory...');
         } else {
             $destination = Dir::name($source) .
                 $destination;
@@ -1286,9 +1253,7 @@ class Settings extends Main {
                 ) === $domain->dir . $object->config('dictionary.controller') . $object->config('ds')
             ){
                 if(Dir::is($source)){
-                    $destination .= $object->config('ds');
-                    $object->request('node.destination', $destination);
-                    $validate = Main::validate($object, Settings::controllers_getValidatorUrl($object), 'controller.rename.directory');
+                    throw new Exception('Cannot validate subdirectory of controller directory...');
                 } else {
                     $object->request('node.extension', File::extension($destination));
                     $object->request('node.name', File::basename($destination, '.' . $object->request('node.extension')));
