@@ -40,7 +40,6 @@
     ],
     "settings.components.dialog.error.domain.button.ok" : "Ok",
     "settings.components.dialog.error.rename.button.ok" : "Ok",
-    "settings.components.dialog.error.rename.file.subdirectory" : "Controller cannot have a subdirectory...",
     "settings.components.dialog.error.rename.file.exist" : "Destination file ({$destination}) already exists...",
     "settings.components.dialog.error.rename.message" : [
         "Cannot rename file.",
@@ -48,7 +47,6 @@
     ],
     "settings.components.dialog.error.rename.response.class" : "R3m\\\\Io\\\\Exception\\\\FileMoveException",
     "settings.components.dialog.error.rename.response.message.file.exist" : "Destination file already exists...",
-    "settings.components.dialog.error.rename.response.message.file.subdirectory" : "Controllers don't have subdirectories...",
     "settings.components.dialog.error.rename.title" : "Error:",
     "settings.components.dialog.error.rename.extension.validate_string_length" : "The name needs an extension...",
     "settings.components.dialog.error.rename.extension.validate_in_array" : "Please use one of the following extensions: .tpl, .js, .json or .css",
@@ -195,6 +193,7 @@
     ],
     "settings.controllers.dialog.error.domain.button.ok" : "Ok",
     "settings.controllers.dialog.error.rename.button.ok" : "Ok",
+    "settings.controllers.dialog.error.rename.file.subdirectory" : "Controllers don't have a subdirectory...",
     "settings.controllers.dialog.error.rename.file.exist" : "Destination file ({$destination}) already exists...",
     "settings.controllers.dialog.error.rename.message" : [
         "Cannot rename file.",
@@ -202,6 +201,7 @@
     ],
     "settings.controllers.dialog.error.rename.response.class" : "R3m\\\\Io\\\\Exception\\\\FileMoveException",
     "settings.controllers.dialog.error.rename.response.message.file.exist" : "Destination file already exists...",
+    "settings.controllers.dialog.error.rename.response.message.file.subdirectory" : "Controllers don't have subdirectories...",
     "settings.controllers.dialog.error.rename.title" : "Error:",
     "settings.controllers.dialog.error.rename.extension.validate_string_length" : "The name needs an extension...",
     "settings.controllers.dialog.error.rename.extension.validate_in_array" : "Please use one of the following extensions: .tpl, .js, .json or .css",
