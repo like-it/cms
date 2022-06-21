@@ -446,6 +446,8 @@ settings.node.item.rename = ({node, section, target}) => {
                             let error = '';
                             let message = '';
                             if(response.class === "R3m\\\\Io\\\\Exception\\\\ErrorException"){
+                                console.log("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.response.message.file.subdirectory')}}");
+                                console.log(response?.message);
                                 if(response?.message === "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.response.message.file.subdirectory')}}"){
                                     error = "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.file.subdirectory')}}";
                                     message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.message'))}}";
