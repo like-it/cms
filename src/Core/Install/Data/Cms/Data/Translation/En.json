@@ -193,7 +193,7 @@
     ],
     "settings.controllers.dialog.error.domain.button.ok" : "Ok",
     "settings.controllers.dialog.error.rename.button.ok" : "Ok",
-    "settings.controllers.dialog.error.rename.file.subdirectory" : "Controllers don't have a subdirectory...",
+    "settings.controllers.dialog.error.rename.file.subdirectory" : "Controllers don't have subdirectories...",
     "settings.controllers.dialog.error.rename.file.exist" : "Destination file ({$destination}) already exists...",
     "settings.controllers.dialog.error.rename.message" : [
         "Cannot rename file.",
