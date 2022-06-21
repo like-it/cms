@@ -445,9 +445,11 @@ settings.node.item.rename = ({node, section, target}) => {
                         ])){
                             let error = '';
                             let message = '';
-                            if(response.class === "R3m\\Io\\Exception\\ErrorException"){
+                            if(response.class === "R3m\\\\Io\\\\Exception\\\\ErrorException"){
                                 error = 'Controller cannot have a subdirectory...';
-                                message = 'The controller cannot have a subdirectory.';
+                                message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.message'))}}";
+                                message = _('prototype').string.replace("{$source}", source, message);
+                                message = _('prototype').string.replace("{$destination}", destination, message);
                             } else {
                                 if(response?.message === "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.response.message.file.exist')}}"){
                                     error = "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.file.exist')}}";
