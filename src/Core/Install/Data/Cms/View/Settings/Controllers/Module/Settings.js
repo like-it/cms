@@ -438,16 +438,25 @@ settings.node.item.rename = ({node, section, target}) => {
                         if(source){
                             source = _('_').basename(source);
                         }
-                        if(response?.class === "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.response.class')}}"){
+                        if(in_array(
+                            response?.class,[
+                                "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.response.class')}}",
+                                "R3m\\Io\\Exception\\ErrorException"
+                        ])){
                             let error = '';
-                            if(response?.message === "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.response.message.file.exist')}}"){
-                                error = "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.file.exist')}}";
+                            let message = '';
+                            if(response.class === "R3m\\Io\\Exception\\ErrorException"){
+                                error = 'Controller cannot have a subdirectory...';
+                                message = 'The controller cannot have a subdirectory.';
+                            } else {
+                                if(response?.message === "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.response.message.file.exist')}}"){
+                                    error = "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.file.exist')}}";
+                                }
+                                error = _('prototype').string.replace("{$destination}", destination, error);
+                                message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.message'))}}";
+                                message = _('prototype').string.replace("{$source}", source, message);
+                                message = _('prototype').string.replace("{$destination}", destination, message);
                             }
-                            error = _('prototype').string.replace("{$destination}", destination, error);
-                            let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.message'))}}";
-                            message = _('prototype').string.replace("{$source}", source, message);
-                            message = _('prototype').string.replace("{$destination}", destination, message);
-
                             let dialog_error = dialog.create({
                                 title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.title')}}",
                                 message : message,

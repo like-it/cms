@@ -1242,7 +1242,7 @@ class Settings extends Main {
         $source = str_replace(['./','../'],'/', $object->request('node.source'));
         $destination = str_replace(['./','../'],'/', $object->request('node.destination'));
         if(strpos($destination, $object->config('ds')) !== false){
-            throw new Exception('Cannot validate subdirectory of controller directory...');
+            throw new ErrorException('Controllers don\'t have subdirectories...');
         } else {
             $destination = Dir::name($source) .
                 $destination;
@@ -1253,7 +1253,7 @@ class Settings extends Main {
                 ) === $domain->dir . $object->config('dictionary.controller') . $object->config('ds')
             ){
                 if(Dir::is($source)){
-                    throw new Exception('Cannot validate subdirectory of controller directory...');
+                    throw new ErrorException('Controllers don\'t have subdirectories...');
                 } else {
                     $object->request('node.extension', File::extension($destination));
                     $object->request('node.name', File::basename($destination, '.' . $object->request('node.extension')));
