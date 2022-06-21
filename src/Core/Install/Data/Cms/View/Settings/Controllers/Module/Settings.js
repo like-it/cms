@@ -441,7 +441,7 @@ settings.node.item.rename = ({node, section, target}) => {
                         if(in_array(
                             response?.class,[
                                 "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.rename.response.class')}}",
-                                "R3m\\Io\\Exception\\ErrorException"
+                                "R3m\\\\Io\\\\Exception\\\\ErrorException"
                         ])){
                             let error = '';
                             let message = '';
