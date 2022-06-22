@@ -1117,10 +1117,33 @@ class Settings extends Main {
             if(File::exist($url)){
                 throw new FileExistException('Target url (' . $url .') exist.');
             } else {
-                $dir = dir::name($url);
-                Dir::create($dir);
-                File::write($url, $content);
-                //File::delete($url_old); //save as does not delete
+                $validate = false;
+                // need validate controller.rename.file
+                if(File::extension($url) === 'php'){
+                    $object->request('node.name', File::basename($url, '.php'));
+                    $object->request('node.extension', File::extension($url));
+                    $validate = Main::validate($object, Settings::controllers_getValidatorUrl($object), 'controller.rename.file');
+                }
+                if($validate) {
+                    if ($validate->success === true) {
+                        $object->logger()->error('fileSaveAs', [$url]);
+                        $dir = dir::name($url);
+                        Dir::create($dir);
+                        File::write($url, $content);
+                        //File::delete($url_old); //save as does not delete
+                    } else {
+                        $data = [];
+                        $data['error'] = $validate->test;
+                        return new Response(
+                            $data,
+                            Response::TYPE_JSON,
+                            Response::STATUS_ERROR
+                        );
+                    }
+                } else {
+                    throw new Exception('Cannot validate controller at: ' . Settings::controllers_getValidatorUrl($object));
+                }
+
             }
         } else {
             $content = $object->request('node.content');
@@ -2121,6 +2144,618 @@ class Settings extends Main {
             'Validator' .
             $object->config('ds') .
             'Email' .
+            $object->config('extension.json');
+    }
+
+    /**
+     * @throws Exception
+     * @throws ObjectException
+     */
+    public static function plugins_create(App $object): Response
+    {
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        return Settings::plugins_put($object, $domain);
+    }
+
+    /**
+     * @throws Exception
+     * @throws FileNotExistException
+     */
+    public static function plugins_read(App $object, $url): Response
+    {
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        if(File::exist($url)){
+            $name = File::basename($url);
+            $read = File::read($url);
+            $record = [];
+            $record['key'] = sha1($url);
+            $record['name'] = $name;
+            $record['url'] = $url;
+            $record['content'] = $read;
+            $record['domain'] = $domain;
+            $response = [];
+            $response['node'] = $record;
+            return new Response($response, Response::TYPE_JSON);
+        } else {
+            throw new FileNotExistException('File (' . $url .') not found...');
+        }
+    }
+
+    /**
+     * @throws Exception
+     * @throws FileExistException
+     */
+    public static function plugins_update(App $object, $url): Response
+    {
+        $url_old = $object->request('node.url_old');
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $pos = strpos($url, $domain->dir . $object->config('dictionary.controller') . $object->config('ds'));
+        if ($pos !== 0) {
+            throw new Exception('Cannot update outside domain.dir.controller');
+        }
+        if($url !== $url_old){
+            $content = $object->request('node.content');
+            if(File::exist($url)){
+                throw new FileExistException('Target url (' . $url .') exist.');
+            } else {
+                // need validate plugin.rename.file
+                $dir = dir::name($url);
+                Dir::create($dir);
+                File::write($url, $content);
+                //File::delete($url_old); //save as does not delete
+            }
+        } else {
+            $content = $object->request('node.content');
+            File::write($url, $content);
+        }
+        $response = [];
+        $response['node'] = [
+            'url' => $url,
+            'name' => File::basename($url),
+            'content' => $content
+        ];
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function plugins_delete(App $object, $url): Response
+    {
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        if(is_array($url)){
+            $nodeList = $url;
+            foreach($nodeList as $nr => $url) {
+                $nodeList[$nr] = str_replace([
+                    '../',
+                    './'
+                ], [
+                    '',
+                    '',
+                ], $url);
+                $pos = strpos($url, $domain->dir . $object->config('dictionary.controller') . $object->config('ds'));
+                if ($pos !== 0) {
+                    throw new Exception('Cannot delete outside domain.dir.controller');
+                }
+            }
+            foreach($nodeList as $url) {
+                if(Dir::is($url)){
+                    $dir = $url;
+                } else {
+                    $dir = Dir::name($url);
+                }
+                $explode = explode($object->config('ds'), $dir);
+                for($i=count($explode); $i >= 2; $i--){
+                    $dir_example = implode($object->config('ds'), $explode);
+                    if(substr($dir_example, 0, -1) !== $object->config('ds')){
+                        $dir_example .= $object->config('ds');
+                    }
+                    $pop = array_pop($explode);
+                    if(empty($pop)){
+                        continue;
+                    }
+                    if(
+                        File::is_link($dir_example) &&
+                        $url !== $dir_example
+                    ){
+                        throw new Exception('Cannot delete protected symlink file...');
+                    }
+                }
+            }
+            $response = [];
+            foreach($nodeList as $url) {
+                if(File::is_link($url)){
+                    File::delete($url);
+                }
+                elseif(Dir::is($url)){
+                    Dir::remove($url);
+                } else {
+                    File::delete($url);
+                }
+                $node = [];
+                $node['url'] = $url;
+                $node['isDeleted'] = new DateTime();
+                $response['nodeList'][] = $node;
+            }
+        } else {
+            $pos = strpos($url, $domain->dir . $object->config('dictionary.controller') . $object->config('ds'));
+            if ($pos !== 0) {
+                throw new Exception('Cannot delete outside domain.dir.component');
+            }
+            if(File::is_link($url)){
+                File::delete($url);
+            }
+            elseif(Dir::is($url)){
+                Dir::remove($url);
+            } else {
+                File::delete($url);
+            }
+            $response = [];
+            $response['node'] = [
+                'url' => $url,
+                'is' => [
+                    'deleted' => new DateTime()
+                ]
+            ];
+        }
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws FileMoveException
+     * @throws ErrorException
+     * @throws Exception
+     */
+    public static function plugins_rename(App $object, $url): Response
+    {
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $source = str_replace(['./','../'],'/', $object->request('node.source'));
+        $destination = str_replace(['./','../'],'/', $object->request('node.destination'));
+        if(strpos($destination, $object->config('ds')) !== false){
+            throw new ErrorException('Controllers don\'t have subdirectories...');
+        } else {
+            $destination = Dir::name($source) .
+                $destination;
+            if(substr(
+                    $source,
+                    0,
+                    strlen($domain->dir . $object->config('dictionary.controller') . $object->config('ds'))
+                ) === $domain->dir . $object->config('dictionary.controller') . $object->config('ds')
+            ){
+                if(Dir::is($source)){
+                    throw new ErrorException('Controllers don\'t have subdirectories...');
+                } else {
+                    $object->request('node.extension', File::extension($destination));
+                    $object->request('node.name', File::basename($destination, '.' . $object->request('node.extension')));
+                    $validate = Main::validate($object, Settings::controllers_getValidatorUrl($object), 'plugin.rename.file');
+                }
+                if($validate) {
+                    if ($validate->success === true) {
+                        $object->logger()->error('fileMoveAction', [$source, $destination]);
+                        if(Dir::is($source)){
+                            Dir::move($source, $destination, true);
+                        } else {
+                            File::move($source, $destination);
+                        }
+                    } else {
+                        $data = [];
+                        $data['error'] = $validate->test;
+                        return new Response(
+                            $data,
+                            Response::TYPE_JSON,
+                            Response::STATUS_ERROR
+                        );
+                    }
+                } else {
+                    throw new Exception('Cannot validate controller at: ' . Settings::plugins_getValidatorUrl($object));
+                }
+            } else {
+                $object->logger()->error('fileMoveException', [$source, $destination]);
+                throw new FileMoveException('Not in domain directory...');
+            }
+        }
+        $response = [];
+        $response['node'] = [
+            'source' => $source,
+            'destination' => $destination,
+        ];
+        $response['page'] = Settings::plugins_page($object, [
+            'url' => $destination
+        ],
+            $domain->dir . $object->config('dictionary.controller') . $object->config('ds')
+        );
+        return new Response($response, Response::TYPE_JSON);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function plugins_list(App $object): Response
+    {
+        $domain = Settings::domain_get($object);
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $url = $domain->dir . $object->config('dictionary.controller') . $object->config('ds');
+        $filter = $object->request('filter');
+        if(empty($filter) || !is_array($filter)){
+            $filter = [];
+            $filter['type'] = 'All';
+        }
+        $dir = new Dir();
+        $data = new Data();
+        $read = $dir->read($url, true);
+        if($read){
+            foreach($read as $nr => $record){
+                if(
+                    array_key_exists('type', $filter) &&
+                    $filter['type'] === File::TYPE
+                ){
+                    if($record->type !== File::TYPE){
+                        continue;
+                    }
+                }
+                elseif(
+                    array_key_exists('type', $filter) &&
+                    $filter['type'] === Dir::TYPE
+                ){
+                    if($record->type !== Dir::TYPE){
+                        continue;
+                    }
+                }
+                $record->extension = File::extension($record->url);
+                if(
+                    array_key_exists('extension', $filter) &&
+                    !empty($filter['extension']) &&
+                    $filter['extension'] !== $record->extension
+                ){
+                    continue;
+                }
+                $record->domain = $domain->uuid;
+                $key = sha1($record->url);
+                $data->set($key, $record);
+            }
+            if($object->request('page')){
+                $page = (int) $object->request('page');
+            } else {
+                $page = 1;
+            }
+            $limit = Limit::LIMIT;
+            $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
+            $settings =  $object->data_read($settings_url);
+            if($settings->data('controller.default.limit')){
+                $limit = $settings->data('controller.default.limit');
+            }
+            if($object->request('limit')){
+                $limit = (int) $object->request('limit');
+                if($limit > Limit::MAX){
+                    $limit = Limit::MAX;
+                }
+            }
+            $response = [];
+            $list = Sort::list($data->data())->with(['url' => 'ASC']);
+            if($object->request('q')){
+                $q = [];
+                foreach($list as $key => $record){
+                    if(property_exists($record, 'url')){
+                        if(stristr($record->url, $object->request('q')) !== false){
+                            $q[] = $record;
+                        }
+                    }
+                }
+                $list = $q;
+                $response['q'] = $object->request('q');
+            }
+            $response['count'] = count($list);
+            $list = Limit::list($list)->with(['page' => $page, 'limit' => $limit]);
+            $response['nodeList'] = $list;
+            $response['limit'] = $limit;
+            $response['page'] = $page;
+            $response['max'] = ceil($response['count'] / $response['limit']);
+            $response['filter'] = $filter;
+            return new Response($response, Response::TYPE_JSON);
+        } else {
+            $response = [];
+            $response['count'] = 0;
+            $response['nodeList'] = [];
+            $response['filter'] = $filter;
+            return new Response($response, Response::TYPE_JSON);
+        }
+    }
+
+    /**
+     * @throws ErrorException
+     * @throws Exception
+     */
+    public static function plugins_upload(App $object)
+    {
+        $domain = Settings::domain_get($object);
+        if (
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ) {
+            throw new Exception('Domain dir not set...');
+        }
+        $target = $domain->dir .
+            $object->config('dictionary.controller') .
+            $object->config('ds');
+        $upload = $object->upload();
+        $data = $upload->data();
+        if (is_array($data) || is_object($data)) {
+            foreach ($data as $file) {
+                $record = new Data($file);
+                if ($record->get('errorMessage')) {
+                    $error = [];
+                    $error['error'] = $record->get('errorMessage') . PHP_EOL;
+                    return new Response(
+                        $error,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                } else {
+                    //add mime-type check
+                    $command = 'file --mime-type -b ' . escapeshellarg($record->get('tmp_name'));
+                    Core::execute($command, $output);
+                    if (array_key_exists(0, $output)) {
+                        $mimeType = $output[0];
+                        $extension = File::extension($record->get('name'));
+                        $object->request('node.mimetype', $mimeType);
+                        $object->request('node.extension', $extension);
+                        $object->request('node.name', $record->get('name'));
+                        $validate = Main::validate($object, Settings::plugins_getValidatorUrl($object), 'plugin.upload');
+                        if ($validate) {
+                            if ($validate->success === true) {
+                                Dir::create($target);
+                                File::upload($record, $target);
+                            } else {
+                                $error = [];
+                                $result = Core::object($validate, Core::OBJECT_ARRAY);
+                                if(
+                                    array_key_exists('test', $result) &&
+                                    array_key_exists('mimetype', $result['test']) &&
+                                    array_key_exists('validate_in_array', $result['test']['mimetype']) &&
+                                    array_key_exists(0, $result['test']['mimetype']['validate_in_array']) &&
+                                    $result['test']['mimetype']['validate_in_array'][0] === false
+                                ){
+                                    $error['error'] = $object->request('error-5') . PHP_EOL;
+                                }
+                                else if(
+                                    array_key_exists('test', $result) &&
+                                    array_key_exists('extension', $result['test']) &&
+                                    array_key_exists('validate_in_array', $result['test']['mimetype']) &&
+                                    array_key_exists(0, $result['test']['extension']['validate_in_array']) &&
+                                    $result['test']['extension']['validate_in_array'][0] === false
+                                ){
+                                    $error['error'] = $object->request('error-9') . PHP_EOL;
+                                }
+                                return new Response(
+                                    $error,
+                                    Response::TYPE_JSON,
+                                    Response::STATUS_ERROR
+                                );
+                            }
+                        } else {
+                            throw new Exception('Cannot validate controller at: ' . Settings::plugins_getValidatorUrl($object));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private static function plugins_page(App $object, $search=[], $url='')
+    {
+        $dir = new Dir();
+        $data = new Data();
+        $read = $dir->read($url, true);
+        $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
+        $settings = $object->data_read($settings_url);
+        $filter = (array) $object->request('filter');
+        if(empty($filter) || !is_array($filter)){
+            $filter = [];
+            $filter['type'] = 'All';
+        }
+        $protected = [];
+        $page = false;
+        if ($settings->data('controller.protected')) {
+            $protected = $settings->data('controller.protected');
+        }
+        if ($read) {
+            foreach ($read as $nr => $record) {
+                if(
+                    array_key_exists('type', $filter) &&
+                    $filter['type'] === File::TYPE
+                ){
+                    if($record->type !== File::TYPE){
+                        continue;
+                    }
+                }
+                elseif(
+                    array_key_exists('type', $filter) &&
+                    $filter['type'] === Dir::TYPE
+                ){
+                    if($record->type !== Dir::TYPE){
+                        continue;
+                    }
+                }
+                if($record->type !== Dir::TYPE){
+                    $record->extension = File::extension($record->url);
+                    if(
+                        array_key_exists('extension', $filter) &&
+                        !empty($filter['extension']) &&
+                        $filter['extension'] !== $record->extension
+                    ){
+                        continue;
+                    }
+                }
+                if (in_array(
+                    $record->url,
+                    $protected
+                )) {
+                    $record->protected = true;
+                }
+                $key = sha1($record->url);
+                $data->set($key, $record);
+            }
+            $list = Sort::list($data->data())->with(['url' => 'ASC']);
+            $count = count($list);
+            $nr = 1;
+            $is_found = [];
+            foreach($list as $key => $record){
+                if(
+                    array_key_exists('url', $search) &&
+                    stristr($record->url, $search['url'])  !== false
+                ){
+                    $is_found[$key] = $nr;
+                }
+                $nr++;
+            }
+            if(empty($is_found)){
+                $nr = 1;
+            } elseif(count($is_found) === 1){
+                $nr = reset($is_found);
+            } else {
+                foreach($is_found as $key => $nr){
+                    if(
+                        array_key_exists('url', $search) &&
+                        strstr($list[$key]->url, $search['url']) !== false
+                    ){
+                        break;
+                    }
+                }
+            }
+            $limit = Limit::LIMIT;
+            if($settings->data('controller.default.limit')){
+                $limit = $settings->data('controller.default.limit');
+            }
+            if($object->request('limit')){
+                $limit = (int) $object->request('limit');
+                if($limit > Limit::MAX){
+                    $limit = Limit::MAX;
+                }
+            }
+            $page = floor($nr / $limit) + 1;
+        }
+        return $page;
+    }
+
+    /**
+     * @throws Exception
+     * @throws ObjectException;
+     */
+    private static function plugins_put(App $object, $domain)
+    {
+        if(
+            !property_exists($domain, 'dir') ||
+            !property_exists($domain, 'uuid')
+        ){
+            throw new Exception('Domain dir not set...');
+        }
+        $validate = Main::validate($object, Settings::plugins_getValidatorUrl($object), 'plugin.put');
+        $object->request('node.url',
+            $domain->dir .
+            $object->config('dictionary.controller') .
+            $object->config('ds') .
+            $object->request('node.name') .
+            '.' .
+            $object->request('node.extension')
+        );
+        if($validate) {
+            if ($validate->success === true) {
+                if(File::exist($object->request('node.url'))){
+                    $data = [];
+                    $data['error'] = [
+                        'url' => [
+                            'validate_url' => [
+                                false
+                            ]
+                        ]
+                    ];
+                    return new Response(
+                        $data,
+                        Response::TYPE_JSON,
+                        Response::STATUS_ERROR
+                    );
+                } else {
+                    $source = $object->config('host.dir.data') .
+                        'Source' .
+                        $object->config('ds') .
+                        'Template' .
+                        '.' .
+                        'Controller' .
+                        $object->config('extension.tpl');
+                    $parse = new Parse($object);
+                    $data = new Data($object->data());
+                    $data->set('domain', $domain);
+                    $content = $parse->compile(File::read($source), $data->get());
+                    $dir = Dir::name($object->request('node.url'));
+                    if($dir){
+                        Dir::create($dir);
+                    }
+                    File::write($object->request('node.url'), $content);
+                    $object->request('node.content', $content);
+                    $data = [];
+                    $data['node'] = $object->request('node');
+                    $data['page'] = Settings::plugins_page($object, [
+                        'url' => $object->request('node.url')
+                    ],
+                        $domain->dir . $object->config('dictionary.controller') . $object->config('ds')
+                    );
+                    return new Response($data, Response::TYPE_JSON);
+                }
+            } else {
+                $data = [];
+                $data['error'] = $validate->test;
+                return new Response(
+                    $data,
+                    Response::TYPE_JSON,
+                    Response::STATUS_ERROR
+                );
+            }
+        } else {
+            throw new Exception('Cannot validate controller at: ' . Settings::plugins_getValidatorUrl($object));
+        }
+    }
+
+    private static function plugins_getValidatorUrl(App $object): string
+    {
+        return $object->config('host.dir.data') .
+            'Validator' .
+            $object->config('ds') .
+            'Plugin' .
             $object->config('extension.json');
     }
 
