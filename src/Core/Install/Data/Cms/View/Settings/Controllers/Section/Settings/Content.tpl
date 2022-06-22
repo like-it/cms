@@ -4,6 +4,7 @@
 'name',
 'url',
 'routes',
+'functions',
 'options'
 ]}}
 {{$options = [
