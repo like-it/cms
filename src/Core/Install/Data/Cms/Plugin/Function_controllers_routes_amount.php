@@ -6,8 +6,6 @@ use R3m\Io\Module\Parse;
 function function_controllers_routes_amount(Parse $parse, Data $data, $node = null){
     $object = $parse->object();
     $route = $object->route();
-
-//    /Application/Host/Www/Funda/World/Controller/Abba.php
     $controller = str_replace('/', '.', $node->url);
     if(File::extension($node->url) === 'php'){
         $controller = File::basename($controller, $object->config('extension.php'));
@@ -15,7 +13,6 @@ function function_controllers_routes_amount(Parse $parse, Data $data, $node = nu
     } else {
         throw new Exception('Cannot process files other than .php');
     }
-    dd($controller);
     $count = 0;
     if($route){
         foreach($route->data() as $key => $record){
