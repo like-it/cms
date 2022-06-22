@@ -2,6 +2,7 @@
 
 use R3m\Io\App;
 use R3m\Io\Module\Data;
+use R3m\Io\Module\File;
 use R3m\Io\Module\Parse;
 
 function function_controllers_functions_amount(Parse $parse, Data $data, $node = null){
@@ -18,8 +19,11 @@ function function_controllers_functions_amount(Parse $parse, Data $data, $node =
     try {
         $autoload = $object->data(App::AUTOLOAD_R3M);
         $url = $autoload->locate($class);
-        dd($url);
-        
+        if($url){
+            $read = File::read($url);
+            dd($read);
+        }
+
     }
     catch (Exception $exception){
         echo $exception->getMessage();
