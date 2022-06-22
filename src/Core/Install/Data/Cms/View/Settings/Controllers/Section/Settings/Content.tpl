@@ -3,6 +3,7 @@
 'icon',
 'name',
 'url',
+'routes',
 'options'
 ]}}
 {{$options = [
