@@ -260,7 +260,7 @@
             "POST"
         ]
     },
-    "8e028580-fa73-49d8-9509-13916346c982   " : {
+    "8e028580-fa73-49d8-9509-13916346c982" : {
         "module" : "settings",
         "submodule" : "controllers",
         "command" : "view-routes",
@@ -413,6 +413,77 @@
         "submodule" : "logs-and-errors",
         "command" : "log",
         "subcommand" : "error",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "e3384931-16cb-4c3d-9a54-a1f8f4e69577" : {
+        "module" : "settings",
+        "submodule" : "plugins",
+        "command" : "main",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "e8d3aa97-758a-4675-977d-ac88e99fc443" : {
+        "module" : "settings",
+        "submodule" : "plugins",
+        "command" : "main",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "74ec9e67-54bc-4cec-9d12-990dfda2d061" : {
+        "module" : "settings",
+        "submodule" : "plugins",
+        "command" : "settings",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "8052efa3-f962-46ac-a357-efe5ef7099b2" : {
+        "module" : "settings",
+        "submodule" : "plugins",
+        "command" : "add-template",
+        "subcommand" : "body",
+        "path" : "Settings/Plugins/Add/Template/Body/{$node.domain}",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "11fc4dee-de0d-4dbb-b695-86bfca6c8fd6" : {
+        "module" : "settings",
+        "submodule" : "plugins",
+        "command" : "edit-template",
+        "subcommand" : "body",
+        "path" : "Settings/Plugins/Edit/Template/Body/",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "deae76a9-1428-46be-bb5f-8525dc0ebb34" : {
+        "module" : "settings",
+        "submodule" : "plugins",
+        "command" : "view",
+        "subcommand" : "body",
+        "method": [
+            "GET",
+            "POST"
+        ]
+    },
+    "240a23b6-1171-490a-a34d-aff63271316b" : {
+        "module" : "settings",
+        "submodule" : "plugins",
+        "command" : "view-routes",
+        "subcommand" : "body",
         "method": [
             "GET",
             "POST"
