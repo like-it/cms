@@ -19,6 +19,7 @@ function function_controllers_functions_amount(Parse $parse, Data $data, $node =
         $autoload = $object->data(App::AUTOLOAD_R3M);
         $url = $autoload->locate($class);
         dd($url);
+        
     }
     catch (Exception $exception){
         echo $exception->getMessage();
