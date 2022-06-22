@@ -1,5 +1,6 @@
 <?php
 
+use R3m\Io\App;
 use R3m\Io\Module\Data;
 use R3m\Io\Module\Parse;
 
@@ -14,6 +15,12 @@ function function_controllers_functions_amount(Parse $parse, Data $data, $node =
         throw new Exception('Cannot process files other than .php');
     }
     $class = str_replace('.', '\\\\', $controller);
-    d($class);
-    dd($controller);
+    try {
+        $autoload = $object->data(App::AUTOLOAD_R3M);
+        $url = $autoload->locate($class);
+        dd($url);
+    }
+    catch (Exception $exception){
+        echo $exception->getMessage();
+    }
 }
