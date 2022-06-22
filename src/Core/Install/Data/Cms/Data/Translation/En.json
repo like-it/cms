@@ -430,7 +430,7 @@
     "settings.routes.section.main.component.html.title" : "Routes",
     "settings.routes.section.main.component.html.text" : [
         "Every address in the browser is a certain route.",
-        "Control pretty formed addresses here."
+        "Control pretty formed addresses here.",
         "PLease be aware: Route positions can take up to one minute to get in effect."
     ],
     "settings.routes.section.form.component.button.add" : "Add",
