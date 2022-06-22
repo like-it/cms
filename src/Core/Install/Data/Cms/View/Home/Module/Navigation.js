@@ -27,8 +27,7 @@ main.navigation = () => {
         }
     }
     const list = section.select('.nav-link');
-    console.log(typeof is.nodeList);
-    if(typeof is.nodelist == 'function'){
+    if(typeof is.nodelist !== 'function'){
         console.log(priya);
     }
     if(is.nodeList(list)){
