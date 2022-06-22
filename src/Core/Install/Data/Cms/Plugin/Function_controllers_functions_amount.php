@@ -13,5 +13,7 @@ function function_controllers_functions_amount(Parse $parse, Data $data, $node =
     } else {
         throw new Exception('Cannot process files other than .php');
     }
+    $class = str_replace('.', '\\\\', $controller);
+    d($class);
     dd($controller);
 }
