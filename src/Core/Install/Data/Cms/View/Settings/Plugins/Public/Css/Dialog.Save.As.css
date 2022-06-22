@@ -1,0 +1,30 @@
+.dialog-save-as {
+    left: 33%;
+    width: 34%;
+    right: 33%;
+    height: 230px;
+    top: calc(50% - 115px);
+    z-index: 11;
+}
+
+.dialog-save-as .body {
+    height: 150px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 1);
+    overflow: auto;
+}
+
+.dialog-save-as .body input[type="text"] {
+    width: 100%;
+}
+
+.dialog-save-as .body .alert {
+    padding: 10px;
+    margin: 0;
+}
+
+/*
+.dialog-save-as .footer d-inline-block {
+    float: left;
+}
+ */

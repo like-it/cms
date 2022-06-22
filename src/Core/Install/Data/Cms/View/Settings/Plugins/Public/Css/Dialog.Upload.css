@@ -1,0 +1,37 @@
+.dialog-upload {
+    left: 33%;
+    width: 34%;
+    right: 33%;
+    height: 400px;
+    top: calc(50% - 200px);
+}
+
+.dialog-upload .body {
+    height: 320px;
+    background: rgba(255, 255, 255, 1);
+    overflow: auto;
+}
+
+.dialog-upload .body .dropzone {
+    border: 0;
+}
+
+.dialog-upload .body .dropzone .dz-message,
+.dialog-upload .body .dropzone.dz-clickable
+{
+    cursor: default;
+}
+
+.dialog-error-upload {
+    left: 33%;
+    width: 34%;
+    right: 33%;
+    height: 250px;
+    top: calc(50% - 125px);
+}
+
+.dialog-error-upload .body {
+    height: 170px;
+    background: rgba(255, 255, 255, 1);
+    overflow: auto;
+}
