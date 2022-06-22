@@ -469,6 +469,79 @@
             "OPTIONS"
         ]
     },
+    "eb0a97b1-d397-4970-82c0-ef583381bfcc" : {
+        "module" : "settings",
+        "submodule" : "plugins",
+        "command" : "settings",
+        "path": "Settings/Plugins/Settings/{{$node.domain}}",
+        "method" : [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "8d16dbfc-0edb-4b2b-99a2-e98dfc5c55ae" : {
+        "module" : "settings",
+        "submodule" : "plugins",
+        "command" : "add",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "f765f103-c39b-4b2c-9435-9fd1672de64d" : {
+        "module" : "settings",
+        "submodule" : "plugins",
+        "command" : "create",
+        "path": "Settings/Plugins/Create/{{$type}}/{{$node.domain}}",
+        "method": [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "33022a02-1ba2-4251-8ffe-5c5e4c8e021b" : {
+        "module" : "settings",
+        "submodule" : "plugins",
+        "command" : "copy",
+        "path": "Settings/Plugins/Copy/{{$node.domain}}",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "6644a7ce-4f36-44ee-88ce-f1a3e179921a" : {
+        "module" : "settings",
+        "submodule" : "plugins",
+        "command" : "move",
+        "path": "Settings/Plugins/Move/{{$node.domain}}",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "6090af29-f0c1-48c3-9043-35854bf208fb" : {
+        "module" : "settings",
+        "submodule" : "plugins",
+        "command" : "upload",
+        "path": "Settings/Plugins/Upload/{{$node.domain}}",
+        "method" : [
+            "POST",
+            "OPTIONS"
+        ]
+    },
+    "ff6a9877-e56b-448d-a643-352e35ab3409" : {
+        "module" : "settings",
+        "submodule" : "plugins",
+        "command" : "command",
+        "path": "Settings/Plugins/{{$node.url}}/{{$node.domain}}",
+        "method": [
+            "GET",
+            "PUT",
+            "PATCH",
+            "DELETE",
+            "OPTIONS"
+        ]
+    },
     "20309eba-c677-417e-8557-67f4fa6ddb80" : {
         "module" : "settings",
         "submodule" : "theme",
