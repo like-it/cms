@@ -25,10 +25,8 @@ function function_controllers_functions_amount(Parse $parse, Data $data, $node =
             $functions += substr_count($read,"private function");
             $functions += substr_count($read,"protected function");
             $functions += substr_count($read,"public function");
-            d($functions);
-            dd($read);
+            return $functions;
         }
-
     }
     catch (Exception $exception){
         echo $exception->getMessage();
