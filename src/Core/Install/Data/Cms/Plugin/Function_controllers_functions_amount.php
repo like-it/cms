@@ -21,6 +21,11 @@ function function_controllers_functions_amount(Parse $parse, Data $data, $node =
         $url = $autoload->locate($class);
         if($url){
             $read = File::read($url);
+            $functions = 0;
+            $functions += substr_count($read,"private function");
+            $functions += substr_count($read,"protected function");
+            $functions += substr_count($read,"public function");
+            d($functions);
             dd($read);
         }
 
