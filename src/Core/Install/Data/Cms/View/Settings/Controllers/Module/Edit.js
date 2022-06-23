@@ -177,11 +177,11 @@ edit.form = (target) => {
                         section : form.select('.edit'),
                         className : "dialog dialog-error dialog-error-save-as"
                     });
-                    const form = dialog_error.select('form');
-                    if(!form){
+                    const form2 = dialog_error.select('form');
+                    if(!form2){
                         return;
                     }
-                    form.on('submit', (event) => {
+                    form2.on('submit', (event) => {
                         dialog_error.remove();
                     });
                     const button = form.select('button[type="submit"]');
