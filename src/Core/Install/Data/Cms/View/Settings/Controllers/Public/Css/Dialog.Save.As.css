@@ -24,6 +24,8 @@
 }
 
 .dialog-error-save-as {
+    height: 230px;
+    top: calc(50% - 115px);
     z-index: 12;
 }
 
