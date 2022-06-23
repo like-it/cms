@@ -150,19 +150,19 @@ edit.form = (target) => {
                 let message = "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.message')}}";
                 if(dialog_save_as){
                     if(response.error?.name['validate_string_length'][0] === false){
-                        error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.name.validate.string.length')}}");
+                        error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.name.validate_string_length')}}");
                     }
                     if(response.error?.name['validate_string_contains'][0] === false){
-                        error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.name.validate.string.contains')}}");
+                        error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.name.validate_string_contains')}}");
                     }
                     if(response.error?.extension['validate_in_array'][0] === false){
-                        error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.extension.validate.in.array')}}");
+                        error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.extension.validate_in_array')}}");
                     }
                     if(response.error?.extension['validate_string_contains'][0] === false){
-                        error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.extension.validate.string.contains')}}");
+                        error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.extension.validate_string_contains')}}");
                     }
                     if(response.error?.extension['validate_string_length'][0] === false){
-                        error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.extension.validate.string.length')}}");
+                        error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.extension.validate_string_length')}}");
                     }
                     console.log(form.select('.edit'));
                     let dialog_error = dialog.create({

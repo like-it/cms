@@ -24,13 +24,13 @@
 }
 
 .dialog-error-save-as {
-    height: 230px;
-    top: calc(50% - 115px);
+    height: 280px;
+    top: calc(50% - 140px);
     z-index: 12;
 }
 
 .dialog-error-save-as .body {
-    height: 150px;
+    height: 200px;
     padding: 10px;
     background: rgba(255, 255, 255, 1);
     overflow: auto;
