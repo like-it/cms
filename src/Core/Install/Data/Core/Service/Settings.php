@@ -1117,12 +1117,9 @@ class Settings extends Main {
             if(File::exist($url)){
                 throw new FileExistException('Target url (' . $url .') exist.');
             } else {
-                $validate = false;
-                // need validate controller.rename.file
-                if(File::extension($url) === 'php'){
-                    $object->request('node.name', File::basename($url, '.php'));
-                    $object->request('node.extension', File::extension($url));
-                    $validate = Main::validate($object, Settings::controllers_getValidatorUrl($object), 'controller.rename.file');
+                $object->request('node.name', File::basename($url, '.' . File::extension($url)));
+                $object->request('node.extension', File::extension($url));
+                $validate = Main::validate($object, Settings::controllers_getValidatorUrl($object), 'controller.rename.file');
                 }
                 if($validate) {
                     if ($validate->success === true) {
