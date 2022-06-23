@@ -373,7 +373,7 @@ ready(() => {
     require(
     [
         root() + "{{$require.module}}" + '/'+ "{{$require.submodule}}"+'/Css/Edit.css?' + version(),
-        root() + 'Dialog/Css/Dialog.Save.As.css?' + version(),
+        root() + "{{$require.module}}" + '/'+ "{{$require.submodule}}"+'/Css/Dialog.Save.As.css?' + version(),
     ],
     () => {
         edit.init();
