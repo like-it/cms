@@ -146,7 +146,7 @@ edit.form = (target) => {
             if(response?.error){
                 const dialog_save_as = section.select('.dialog-save-as');
                 if(dialog_save_as){
-                   alert('dialog error');
+                   console.log(response.error);
                 } else {
                     data.push({
                         name: "error",
