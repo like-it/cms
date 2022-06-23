@@ -2,6 +2,7 @@
 import user from "/Module/User.js";
 import create from "/Module/Create.js";
 import menu from "/Module/Menu.js";
+import dialog from "/Module/Dialog.js";
 import { version } from "/Module/Priya.js";
 import { root } from "/Module/Web.js";
 import { getSectionByName } from "/Module/Section.js";
