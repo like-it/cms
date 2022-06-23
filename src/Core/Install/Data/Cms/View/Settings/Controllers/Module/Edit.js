@@ -164,6 +164,7 @@ edit.form = (target) => {
                     if(response.error?.extension['validate_string_length'][0] === false){
                         error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.extension.validate.string.length')}}");
                     }
+                    console.log(form.select('.edit'));
                     let dialog_error = dialog.create({
                         title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.title')}}",
                         message : message,
