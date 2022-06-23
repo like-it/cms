@@ -1120,7 +1120,6 @@ class Settings extends Main {
                 $object->request('node.name', File::basename($url, '.' . File::extension($url)));
                 $object->request('node.extension', File::extension($url));
                 $validate = Main::validate($object, Settings::controllers_getValidatorUrl($object), 'controller.rename.file');
-                }
                 if($validate) {
                     if ($validate->success === true) {
                         $object->logger()->error('fileSaveAs', [$url]);
