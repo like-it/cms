@@ -173,7 +173,7 @@ edit.form = (target) => {
                                 text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.button.ok')}}"
                             }
                         ],
-                        section : section.select('.edit'),
+                        section : form.select('.edit'),
                         className : "dialog dialog-error dialog-error-save-as"
                     });
                     const form = dialog_error.select('form');
