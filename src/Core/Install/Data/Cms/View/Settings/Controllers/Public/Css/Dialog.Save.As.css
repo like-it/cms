@@ -23,6 +23,11 @@
     margin: 0;
 }
 
+.dialog-error-save-as {
+    z-index: 12;
+}
+
+
 /*
 .dialog-save-as .footer d-inline-block {
     float: left;
