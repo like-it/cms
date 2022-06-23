@@ -146,6 +146,7 @@ edit.form = (target) => {
             if(response?.error){
                 const dialog_save_as = section.select('.dialog-save-as');
                 let error = [];
+                let message = "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.message')}}";
                 if(dialog_save_as){
                     if(response.error?.name['validate_string_length'][0] === false){
                         error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.name.validate.string.length')}}");
@@ -162,7 +163,6 @@ edit.form = (target) => {
                     if(response.error?.extension['validate_string_length'][0] === false){
                         error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.extension.validate.string.length')}}");
                     }
-                   console.log(response.error);
                     let dialog_error = dialog.create({
                         title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.title')}}",
                         message : message,
