@@ -145,8 +145,47 @@ edit.form = (target) => {
         form.request(url, data, (url, response) => {
             if(response?.error){
                 const dialog_save_as = section.select('.dialog-save-as');
+                let error = [];
                 if(dialog_save_as){
+                    if(response.error?.name['validate_string_length'][0] === false){
+                        error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.name.validate.string.length')}}");
+                    }
+                    if(response.error?.name['validate_string_contains'][0] === false){
+                        error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.name.validate.string.contains')}}");
+                    }
+                    if(response.error?.extension['validate_in_array'][0] === false){
+                        error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.extension.validate.in.array')}}");
+                    }
+                    if(response.error?.extension['validate_string_contains'][0] === false){
+                        error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.extension.validate.string.contains')}}");
+                    }
+                    if(response.error?.extension['validate_string_length'][0] === false){
+                        error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.extension.validate.string.length')}}");
+                    }
                    console.log(response.error);
+                    let dialog_error = dialog.create({
+                        title : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.title')}}",
+                        message : message,
+                        error : error,
+                        buttons : [
+                            {
+                                text : "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.button.ok')}}"
+                            }
+                        ],
+                        section : section,
+                        className : "dialog dialog-error dialog-error-save-as"
+                    });
+                    const form = dialog_error.select('form');
+                    if(!form){
+                        return;
+                    }
+                    form.on('submit', (event) => {
+                        dialog_error.remove();
+                    });
+                    const button = form.select('button[type="submit"]');
+                    if(button){
+                        button.focus();
+                    }
                 } else {
                     data.push({
                         name: "error",
