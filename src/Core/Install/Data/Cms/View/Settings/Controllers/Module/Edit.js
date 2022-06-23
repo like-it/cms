@@ -144,13 +144,18 @@ edit.form = (target) => {
         });
         form.request(url, data, (url, response) => {
             if(response?.error){
-                data.push({
-                    name: "error",
-                    value: response.error
-                });
-                request(form.data('url-error'), data, ( urlError, responseError ) => {
+                const dialog_save_as = section.select('.dialog-save-as');
+                if(dialog_save_as){
+                   alert('dialog error');
+                } else {
+                    data.push({
+                        name: "error",
+                        value: response.error
+                    });
+                    request(form.data('url-error'), data, ( urlError, responseError ) => {
 
-                });
+                    });
+                }
             }
             else if(
                 response?.class &&
