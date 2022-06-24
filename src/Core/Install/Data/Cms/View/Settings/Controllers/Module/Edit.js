@@ -147,7 +147,7 @@ edit.form = (target) => {
             if(response?.error){
                 const dialog_save_as = section.select('.dialog-save-as');
                 let error = [];
-                let message = "{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.message')}}";
+                let message = "{{sentences(__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.message')})6851}";
                 if(dialog_save_as){
                     if(response.error?.name['validate_string_length'][0] === false){
                         error.push("{{__($__.module + '.' + $__.submodule + '.' + 'dialog.error.save.as.name.validate_string_length')}}");
