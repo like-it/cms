@@ -221,7 +221,7 @@
     "settings.controllers.dialog.error.save.as.name.validate_string_length" : "The name is required.",
     "settings.controllers.dialog.error.save.as.extension.validate_in_array" : "Please use one of the following extensions: .php",
     "settings.controllers.dialog.error.save.as.extension.validate_string_contains" : "The extension must just be [A-Za-z] (alphabetical)",
-    "settings.controllers.dialog.error.save.as.extension.validate_string_length" : "The name needs an extension..",
+    "settings.controllers.dialog.error.save.as.extension.validate_string_length" : "The name needs an extension...",
     "settings.controllers.dialog.error.save.as.message" : [
         "Cannot save file."
     ],
