@@ -23,6 +23,12 @@ class System extends Main {
         return Update::start($object);
     }
 
+    public static function optimize(App $object){
+        d($object->request());
+        dd($object->config());
+    }
+
+
     /**
      * @throws AuthorizationException
      */
@@ -37,7 +43,8 @@ class System extends Main {
                 composer update --quiet && 
                 funda cache:clear &&
                 funda system update ' . $token . ' &&
-                funda cache:clear               
+                funda cache:clear  &&
+                funda system optimize             
             " ' . $token . '
         ';
         Core::execute($execute, $output);

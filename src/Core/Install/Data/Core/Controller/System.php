@@ -20,10 +20,12 @@ class System extends View {
     const COMMAND_INFO = 'info';
     const COMMAND_INSTALL = 'install';
     const COMMAND_UPDATE = 'update';
+    const COMMAND_OPTIMIZE = 'optimize';
     const COMMAND = [
         System::COMMAND_INFO,
         System::COMMAND_INSTALL,
         System::COMMAND_UPDATE,
+        System::COMMAND_OPTIMIZE,
     ];
     const DEFAULT_COMMAND = System::COMMAND_INFO;
 
@@ -32,6 +34,7 @@ class System extends View {
 
     const INFO = [
         '{{binary()}} system update                  | Performs a system update from package like-it/cms',
+        '{{binary()}} system optimize                | Runs a system optimize script from package like-it/cms',
     ];
 
     /**
@@ -77,6 +80,18 @@ class System extends View {
     }
 
     private static function update(App $object){
+        $object->request('force', App::parameter($object, 'force'));
+        try {
+            $name = System::name(__FUNCTION__, System::NAME, '/');
+            $url = System::locate($object, $name);
+            return System::response($object, $url);
+        } catch (Exception | LocateException | UrlEmptyException | UrlNotExistException $exception) {
+            d($exception);
+            return 'Command undefined.' . PHP_EOL;
+        }
+    }
+
+    private static function optimize(App $object){
         $object->request('force', App::parameter($object, 'force'));
         try {
             $name = System::name(__FUNCTION__, System::NAME, '/');
