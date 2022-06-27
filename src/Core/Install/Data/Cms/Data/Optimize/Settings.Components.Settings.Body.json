@@ -1,5 +1,30 @@
 {
+  "host" : {
+    "url" : "",
+    "scheme" : "http",
+    "extension" : "local",
+    "domain" : "",
+    "subdomain" : ""
+  },
   "controller" : {
-
-  }
+    "dir" : {
+      "source" : "",
+      "root" : "",
+      "data" : "",
+      "node" : "",
+      "plugin" : "",
+      "function" : "",
+      "model" : "",
+      "entity" : "",
+      "service" : "",
+      "component" : "",
+      "view" : "",
+      "public" : ""
+    },
+    "class" : "Host\\Cms\\Funda\\World\\Controller\\Settings",
+    "name" : "settings",
+    "title" : ""
+  },
+  "ldelim" : "{",
+  "rdelim" : "}"
 }

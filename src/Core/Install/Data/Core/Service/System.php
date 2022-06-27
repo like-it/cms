@@ -50,6 +50,7 @@ class System extends Main {
             property_exists($host, 'host') &&
             property_exists($host, 'extension')
         ){
+            dd($host);
             $object->data('cms.dir.root',
                 $object->config('project.dir.host') .
                 ucfirst($host->subdomain) .
