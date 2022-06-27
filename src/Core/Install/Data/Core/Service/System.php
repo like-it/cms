@@ -103,9 +103,9 @@ class System extends Main {
                         $state->set('host', $host);
                         $state->write($url_state);
 
-                        $command = Core::binary() . ' parse compile ' . $optimization->template . ' ' . $optimization->data . ' ' . $url_state;
-
-                        dd($command);
+                        $command = Core::binary() . ' parse compile ' . $optimization->template . ' ' . $optimization->data . ' state ' . $url_state;
+                        Core::execute($command, $output);
+                        dd($output);
                     }
                 }
             }
