@@ -104,6 +104,7 @@ class System extends Main {
                         $state->write($url_state);
 
                         $command = Core::binary() . ' parse compile ' . $optimization->template . ' ' . $optimization->data . ' state ' . $url_state;
+                        $output = [];
                         Core::execute($command, $output);
                         dd($output);
                     }
