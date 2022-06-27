@@ -1,0 +1,8 @@
+{
+  "optimizations" : [
+    {
+      "template" : "{{$cms.dir.view}}/Settings/Components/Settings.Body.tpl",
+      "data" : "{{$cms.dir.data}}/Optimize/Settings.Body.json"
+    }
+]
+}

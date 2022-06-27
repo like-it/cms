@@ -11,6 +11,7 @@ use R3m\Io\Module\Response;
 
 use R3m\Io\Exception\AuthorizationException;
 use R3m\Io\Exception\FileWriteException;
+use R3m\Io\Exception\ObjectException;
 
 class System extends Main {
 
@@ -23,7 +24,69 @@ class System extends Main {
         return Update::start($object);
     }
 
+    /**
+     * @throws ObjectException
+     * @throws FileWriteException
+     */
     public static function optimize(App $object){
+        $host_url = $object->config('project.dir.data') . 'Host' . $object->config('extension.json');
+        $is_cms = false;
+        $hosts = $object->data_read($host_url);
+        if($hosts){
+            foreach($hosts->get() as $uuid => $host){
+                if(
+                    property_exists($host, 'subdomain') &&
+                    $host->subdomain === 'cms'
+                ){
+                    $is_cms = true;
+                    break;
+                }
+            }
+        }
+        if(
+            $is_cms &&
+            !empty($host) &&
+            property_exists($host, 'subdomain') &&
+            property_exists($host, 'host') &&
+            property_exists($host, 'extension')
+        ){
+            $object->data('cms.dir.root',
+                $object->config('project.dir.host') .
+                ucfirst($host->subdomain) .
+                $object->config('ds') .
+                ucfirst($host->host) .
+                $object->config('ds') .
+                ucfirst($host->extension) .
+                $object->config('ds')
+            );
+            $object->data('cms.dir.data',
+              $object->data('cms.dir.root') .
+              $object->config('dictionary.data') .
+              $object->config('ds')
+            );
+            $object->data('cms.dir.view',
+                $object->data('cms.dir.root') .
+                $object->config('dictionary.view') .
+                $object->config('ds')
+            );
+        }
+        $url = $object->config('controller.dir.data') . 'Optimize' . $object->config('extension.json');
+        $optimize = $object->parse_read($url);
+        if($optimize){
+                $optimizations = $optimize->get('optimizations');
+                if(is_array($optimizations)){
+                    foreach($optimizations as $optimization){
+                        if(
+                            property_exists($optimization,'template') &&
+                            property_exists($optimization,'data')
+                        ){
+                            dd($optimization);
+                        }
+                    }
+                }
+        }
+
+
         d($object->request());
         dd($object->config());
     }
