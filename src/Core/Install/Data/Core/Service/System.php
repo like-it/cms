@@ -91,7 +91,7 @@ class System extends Main {
                         $user_id = posix_geteuid();
                         $uuid = Core::uuid();
                         $url_state = $object->config('project.dir.data') .
-                            $object->config('dictionary.cache') .
+                            "Cache" .
                             $object->config('ds') .
                             $user_id .
                             $object->config('ds') .
