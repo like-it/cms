@@ -1,6 +1,7 @@
 <?php
 namespace Host\Subdomain\Host\Extension\Service;
 
+use R3m\Io\Module\Data;
 use stdClass;
 use LikeIt\Cms\Core\Install\Service\Update;
 use R3m\Io\App;
@@ -48,9 +49,11 @@ class System extends Main {
             !empty($host) &&
             property_exists($host, 'subdomain') &&
             property_exists($host, 'host') &&
-            property_exists($host, 'extension')
+            property_exists($host, 'extension') &&
+            property_exists($host, 'name')
         ){
-            dd($host);
+            $host->url = App::HTTPS . $host->name . '/';
+            $object->data('host', $host);
             $object->data('cms.dir.root',
                 $object->config('project.dir.host') .
                 ucfirst($host->subdomain) .
@@ -73,21 +76,40 @@ class System extends Main {
         }
         $url = $object->config('controller.dir.data') . 'Optimize' . $object->config('extension.json');
         $optimize = $object->parse_read($url);
-        if($optimize){
-                $optimizations = $optimize->get('optimizations');
-                if(is_array($optimizations)){
-                    foreach($optimizations as $optimization){
-                        if(
-                            property_exists($optimization,'template') &&
-                            property_exists($optimization,'data')
-                        ){
-                            dd($optimization);
-                        }
+        if(
+            $optimize &&
+            !empty($host)
+        ){
+            $optimizations = $optimize->get('optimizations');
+            if(is_array($optimizations)){
+                foreach($optimizations as $optimization){
+                    if(
+                        property_exists($optimization,'template') &&
+                        property_exists($optimization,'data')
+                    ){
+                        //write host state to uuid::
+                        $user_id = posix_geteuid();
+                        $uuid = Core::uuid();
+                        $url_state = $object->config('project.dir.data') .
+                            $object->config('dictionary.cache') .
+                            $object->config('ds') .
+                            $user_id .
+                            $object->config('ds') .
+                            'State.' .
+                            $uuid .
+                            $object->config('extension.json')
+                        ;
+                        $state = new Data();
+                        $state->set('host', $host);
+                        $state->write($url_state);
+
+                        $command = Core::binary() . ' parse compile ' . $optimization->template . ' ' . $optimization->data . ' ' . $url_state;
+
+                        dd($command);
                     }
                 }
+            }
         }
-
-
         d($object->request());
         dd($object->config());
     }
