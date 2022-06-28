@@ -210,7 +210,8 @@ class System extends Main {
                         $command = 'runuser --user www-data -- composer install';
                         $output = [];
                         echo $command . PHP_EOL;
-                        Core::execute($command, $output);
+                        $output = shell_exec($command);
+                        //Core::execute($command, $output);
                         dd($output);
                     }
                 }
