@@ -206,7 +206,7 @@ class System extends Main {
                         $state->write($url_state);
                         File::chown($url_state, 'www-data', 'www-data');
                         $command = 'runuser --user www-data -- php /Application/Bin/R3m.php parse compile ' . $optimization->template . ' ' . $optimization->data . ' state ' . $url_state;
-                        $command = 'runuser --user www-data -- php /Application/Bin/R3m.php info all';
+                        $command = 'runuser --user www-data -- php /Application/Bin/R3m.php info all > test.info';
                         $output = [];
                         echo $command . PHP_EOL;
                         Core::execute($command, $output);
