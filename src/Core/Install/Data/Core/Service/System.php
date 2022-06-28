@@ -1,12 +1,14 @@
 <?php
 namespace Host\Subdomain\Host\Extension\Service;
 
+use R3m\Io\Config;
 use R3m\Io\Module\Data;
+use R3m\Io\Module\Dir;
 use stdClass;
 use LikeIt\Cms\Core\Install\Service\Update;
 use R3m\Io\App;
 use R3m\Io\Module\Core;
-use R3m\Io\Module\Dir;
+use R3m\Io\Module\Host;
 use R3m\Io\Module\File;
 use R3m\Io\Module\Response;
 
@@ -52,7 +54,9 @@ class System extends Main {
             property_exists($host, 'extension') &&
             property_exists($host, 'name')
         ){
-            $host->url = App::HTTPS . $host->name . '/';
+            
+            $host->scheme = Host::SCHEME_HTTPS;
+            $host->url = $host->scheme . '://' . $host->name . '/';
             $object->data('host', $host);
             $object->data('cms.dir.root',
                 $object->config('project.dir.host') .
@@ -102,6 +106,48 @@ class System extends Main {
                         $state = new Data();
                         $state->set('host', $host);
 
+                        if(empty($host->subdomain)){
+                            $state->set('config.host.dir.root',
+                                $object->config('project.dir.host') .
+                                ucfirst($host->host) .
+                                $object->config('ds') .
+                                ucfirst($host->extension) .
+                                $object->config('ds')
+                            );
+                        } else {
+                            $state->set('config.host.dir.root',
+                                $object->config('project.dir.host') .
+                                ucfirst($host->subdomain) .
+                                $object->config('ds') .
+                                ucfirst($host->host) .
+                                $object->config('ds') .
+                                ucfirst($host->extension) .
+                                $object->config('ds')
+                            );
+                        }
+                        $state->set('config.host.dir.data',
+                            $state->get('config.host.dir.root') .
+                            $object->config('dictionary.data') .
+                            $object->config('ds')
+                        );
+                        $state->set('config.host.dir.cache',
+                            Dir::name($object->config('framework.dir.cache'), 2) .
+                            $object->config('dictionary.host') .
+                            $object->config('ds')
+                        );
+                        $state->set('config.host.dir.public',
+                            $state->get('config.host.dir.root') .
+                            $object->config('dictionary.public') .
+                            $object->config('ds'));
+                        $state->set('config.host.dir.source',
+                            $state->get('config.host.dir.root') .
+                            $object->config('dictionary.source') .
+                            $object->config('ds'));
+                        $state->set('config.host.dir.view',
+                            $state->get('config.host.dir.root') .
+                            $object->config('dictionary.view') .
+                            $object->config('ds')
+                        );
                         $controller = [];
                         $controller['name'] = 'settings';
                         $controller['title'] = ucfirst($controller['name']);
@@ -155,9 +201,8 @@ class System extends Main {
                             $object->config('ds') .
                             $controller['title'] .
                             $object->config('ds');
-                        $state->set('controller', $controller);
+                        $state->set('config.controller', $controller);
                         $state->write($url_state);
-
                         $command = Core::binary() . ' parse compile ' . $optimization->template . ' ' . $optimization->data . ' state ' . $url_state;
                         $output = [];
                         Core::execute($command, $output);
