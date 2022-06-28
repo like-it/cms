@@ -211,11 +211,32 @@ class System extends Main {
                         //$command = 'runuser --user www-data -- composer install';
                         $output = [];
                         echo $command . PHP_EOL;
-                        system($command, $code);
+
+                        $descriptorspec = array(
+                            0 => array("pipe", "r"),  // stdin
+                            1 => array("pipe", "w"),  // stdout
+                            2 => array("pipe", "w"),  // stderr
+                        );
+
+                        $process = proc_open($command, $descriptorspec, $pipes, dirname(__FILE__), null);
+                        $stdout = stream_get_contents($pipes[1]);
+                        fclose($pipes[1]);
+
+                        $stderr = stream_get_contents($pipes[2]);
+                        fclose($pipes[2]);
+
+                        echo "stdout : \n";
+                        var_dump($stdout);
+
+                        echo "stderr :\n";
+                        var_dump($stderr);
+
+
+                        //system($command, $code);
 //                        exec($command, $output, $code);
                         //Core::execute($command, $output);
-                        d($code);
-                        dd($output);
+                        //d($code);
+                        //dd($output);
                     }
                 }
             }
