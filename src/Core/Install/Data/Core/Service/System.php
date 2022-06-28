@@ -205,6 +205,7 @@ class System extends Main {
                         $state->write($url_state);
                         $command = 'runuser -u www-data -c \'' . Core::binary() . ' parse compile ' . $optimization->template . ' ' . $optimization->data . ' state ' . $url_state . '\'';
                         $output = [];
+                        echo $command . PHP_EOL;
                         Core::execute($command, $output);
                         dd($output);
                     }
