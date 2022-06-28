@@ -212,6 +212,9 @@ class System extends Main {
                         $output = [];
                         echo $command . PHP_EOL;
 
+                        Core::execute($command, $output);
+                        dd($output);
+
                         $descriptorspec = array(
                             0 => array("pipe", "r"),  // stdin
                             1 => array("pipe", "w"),  // stdout
