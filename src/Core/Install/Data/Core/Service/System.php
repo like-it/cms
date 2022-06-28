@@ -218,7 +218,7 @@ class System extends Main {
                             2 => array("pipe", "w"),  // stderr
                         );
 
-                        $process = proc_open($command, $descriptorspec, $pipes, dirname(__FILE__), null);
+                        $process = proc_open($command, $descriptorspec, $pipes, '/Application', null);
                         $stdout = stream_get_contents($pipes[1]);
                         fclose($pipes[1]);
 
