@@ -93,6 +93,7 @@ class System extends Main {
                     ){
                         //write host state to uuid::
                         $user_id = posix_geteuid();
+                        $user_id = 33;
                         $uuid = Core::uuid();
                         $url_state = $object->config('project.dir.data') .
                             "Cache" .
@@ -203,6 +204,7 @@ class System extends Main {
                             $object->config('ds');
                         $state->set('config.controller', $controller);
                         $state->write($url_state);
+                        File::chown($url_state, 'www-data', 'www-data');
                         $command = 'runuser --user www-data -- php /Application/Bin/R3m.php parse compile ' . $optimization->template . ' ' . $optimization->data . ' state ' . $url_state;
                         $output = [];
                         echo $command . PHP_EOL;
