@@ -54,7 +54,7 @@ class System extends Main {
             property_exists($host, 'extension') &&
             property_exists($host, 'name')
         ){
-            
+
             $host->scheme = Host::SCHEME_HTTPS;
             $host->url = $host->scheme . '://' . $host->name . '/';
             $object->data('host', $host);
@@ -127,25 +127,25 @@ class System extends Main {
                         }
                         $state->set('config.host.dir.data',
                             $state->get('config.host.dir.root') .
-                            $object->config('dictionary.data') .
+                            $object->config(Config::DICTIONARY . '.' . Config::DATA) .
                             $object->config('ds')
                         );
                         $state->set('config.host.dir.cache',
                             Dir::name($object->config('framework.dir.cache'), 2) .
-                            $object->config('dictionary.host') .
+                            $object->config(Config::DICTIONARY . '.' . Config::HOST) .
                             $object->config('ds')
                         );
                         $state->set('config.host.dir.public',
                             $state->get('config.host.dir.root') .
-                            $object->config('dictionary.public') .
+                            $object->config(Config::DICTIONARY . '.' . Config::PUBLIC) .
                             $object->config('ds'));
                         $state->set('config.host.dir.source',
                             $state->get('config.host.dir.root') .
-                            $object->config('dictionary.source') .
+                            $object->config(Config::DICTIONARY . '.' . Config::SOURCE) .
                             $object->config('ds'));
                         $state->set('config.host.dir.view',
                             $state->get('config.host.dir.root') .
-                            $object->config('dictionary.view') .
+                            $object->config(Config::DICTIONARY . '.' . Config::VIEW) .
                             $object->config('ds')
                         );
                         $controller = [];
