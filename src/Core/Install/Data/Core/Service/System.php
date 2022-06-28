@@ -203,7 +203,7 @@ class System extends Main {
                             $object->config('ds');
                         $state->set('config.controller', $controller);
                         $state->write($url_state);
-                        $command = 'runuser -u www-data -c \'' . Core::binary() . ' parse compile ' . $optimization->template . ' ' . $optimization->data . ' state ' . $url_state . '\'';
+                        $command = 'runuser --user www-data -- php /Application/Bin/R3m.php parse compile ' . $optimization->template . ' ' . $optimization->data . ' state ' . $url_state;
                         $output = [];
                         echo $command . PHP_EOL;
                         Core::execute($command, $output);
