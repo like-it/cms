@@ -211,8 +211,6 @@ class System extends Main {
                 }
             }
         }
-        d($object->request());
-        dd($object->config());
     }
 
 

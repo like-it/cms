@@ -1,5 +1,4 @@
 {{R3M}}
-{{dd('{{$this}}')}}
 {{response.view([
 'module' => $controller.name,
 'submodule' => 'components',
