@@ -9,6 +9,6 @@
       "type" : "{{request('filter.type', 'All')}}",
       "extension" : "{{request('filter.extension', '')}}"
     },
-    "nodeList" : "{{request('filter.nodeList', []])}}"
+    "nodeList" : "{{request('filter.nodeList', [])}}"
   }
 }
