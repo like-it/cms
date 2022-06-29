@@ -37,6 +37,7 @@ trait Cms {
 
 
     public function controller($title=''){
+        d($this->object()->get('host'));
         dd($title);
     }
 }
