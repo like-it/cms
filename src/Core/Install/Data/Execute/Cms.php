@@ -37,7 +37,7 @@ trait Cms {
 
 
     public function controller($title=''){
-        dd($this->object->config('project.dir'));
+        dd($this->object()->config('project.dir'));
         d($this->object()->get('host'));
         dd($title);
     }
