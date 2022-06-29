@@ -35,6 +35,7 @@ trait Cms {
             $host->url = $host->scheme . '://' . $host->name . '/';
             $this->object()->set('host', $host);;
         }
+        return $host;
     }
 
 
@@ -143,5 +144,6 @@ trait Cms {
             $object->config('ds');
         $object->config('controller', $controller);
         $object->set('controller', $controller);
+        return $controller;
     }
 }
