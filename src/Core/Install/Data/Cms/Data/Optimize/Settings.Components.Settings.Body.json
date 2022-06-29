@@ -1,4 +1,5 @@
 {
+  "execute" : "{{autoload.prefix.add('Execute', '/Application/Execute/')}}",
   "host": "{{Execute:Cms:host()}}",
   "controller" : "{{Execute:Cms:controller('Settings')}}"
 }
