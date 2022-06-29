@@ -92,6 +92,7 @@ class System extends Main {
                         property_exists($optimization,'data')
                     ){
                         //write host state to uuid::
+                        /*
                         $user_id = posix_geteuid();
                         $user_id = 33;
                         $uuid = Core::uuid();
@@ -205,7 +206,9 @@ class System extends Main {
                         $state->set('config.controller', $controller);
                         $state->write($url_state);
                         File::chown($url_state, 'www-data', 'www-data');
-                        $command = '/sbin/runuser --user www-data -- php /Application/Bin/R3m.php parse compile ' . $optimization->template . ' ' . $optimization->data . ' state ' . $url_state;
+                        */
+                        //$command = '/sbin/runuser --user www-data -- php /Application/Bin/R3m.php parse compile ' . $optimization->template . ' ' . $optimization->data . ' state ' . $url_state;
+                        $command = '/sbin/runuser --user www-data -- php /Application/Bin/R3m.php parse compile ' . $optimization->template . ' ' . $optimization->data;
                         //$command = '/sbin/runuser --user www-data -- php -f /Application/Bin/R3m.php info all > test.info';
                         //$command = 'php -f /Application/Bin/R3m.php info all > test.info';
                         //$command = 'runuser --user www-data -- composer install';

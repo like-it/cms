@@ -1,3 +1,4 @@
 {
-
+  "host": "{{Execute:Cms:host()}}",
+  "controller" : "{{Execute:Cms:controller('Settings')}}"
 }
