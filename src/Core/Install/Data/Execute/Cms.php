@@ -143,6 +143,5 @@ trait Cms {
             $object->config('ds');
         $object->config('controller', $controller);
         $object->set('controller', $controller);
-        dd($title);
     }
 }
