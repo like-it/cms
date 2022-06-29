@@ -88,6 +88,61 @@ trait Cms {
                 $object->config('ds')
             );
         }
+        $controller = [];
+        $controller['name'] = strtolower($title);
+        $controller['title'] = $title;
+        $controller['class'] = 'Host\\' . ucfirst($host->subdomain) . '\\' . ucfirst($host->host) . '\\' . ucfirst($host->extension) . '\\Controller\\' . $controller['title'];
+        $controller['dir'] = [];
+        $controller['dir']['source'] =  $object->config('project.dir.host') .
+            ucfirst($host->subdomain) .
+            $object->config('ds') .
+            ucfirst($host->host) .
+            $object->config('ds') .
+            ucfirst($host->extension) .
+            $object->config('ds') .
+            'Controller' .
+            $object->config('ds');
+        $controller['dir']['root'] =  $object->config('project.dir.host') .
+            ucfirst($host->subdomain) .
+            $object->config('ds') .
+            ucfirst($host->host) .
+            $object->config('ds') .
+            ucfirst($host->extension) .
+            $object->config('ds');
+        $controller['dir']['data'] = $controller['dir']['root'] .
+            $object->config('dictionary.data') .
+            $object->config('ds');
+        $controller['dir']['node'] = $controller['dir']['root'] .
+            $object->config('dictionary.node') .
+            $object->config('ds');
+        $controller['dir']['plugin'] = $controller['dir']['root'] .
+            $object->config('dictionary.plugin') .
+            $object->config('ds');
+        $controller['dir']['function'] = $controller['dir']['root'] .
+            $object->config('dictionary.function') .
+            $object->config('ds');
+        $controller['dir']['model'] = $controller['dir']['root'] .
+            $object->config('dictionary.model') .
+            $object->config('ds');
+        $controller['dir']['entity'] = $controller['dir']['root'] .
+            $object->config('dictionary.entity') .
+            $object->config('ds');
+        $controller['dir']['service'] = $controller['dir']['root'] .
+            $object->config('dictionary.service') .
+            $object->config('ds');
+        $controller['dir']['component'] = $controller['dir']['root'] .
+            $object->config('dictionary.component') .
+            $object->config('ds');
+        $controller['dir']['view'] = $controller['dir']['root'] .
+            $object->config('dictionary.view') .
+            $object->config('ds');
+        $controller['dir']['public'] = $controller['dir']['root'] .
+            $object->config('dictionary.public') .
+            $object->config('ds') .
+            $controller['title'] .
+            $object->config('ds');
+        $object->config('controller', $controller);
+        $object->set('controller', $controller);
         dd($title);
     }
 }
