@@ -13,9 +13,5 @@
       "extension" : ""
     },
     "nodeList" : []
-  },
-  "session" : {
-    "test" : true
-  },
-  "cookie" : "{{cookie()}}"
+  }
 }
