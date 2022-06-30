@@ -1,5 +1,5 @@
 {{R3M}}
-{{if(is.empty(cookie('test')))}}
+{{if(is.empty(cookie('test'))}}
 {{redirect('https://google.com')}}
 {{else}}
 {{d(cookie('test'))}}
