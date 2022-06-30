@@ -4,11 +4,11 @@
   "host": "{{Execute:Cms:host()}}",
   "controller" : "{{Execute:Cms:controller('Settings')}}",
   "request" : {
-    "count" : "{{request('count', 0)}}",
+    "count" : 0,
     "filter" : {
-      "type" : "{{request('filter.type', 'All')}}",
-      "extension" : "{{request('filter.extension', '')}}"
+      "type" : "All",
+      "extension" : ""
     },
-    "nodeList" : "{{request('filter.nodeList', [])}}"
+    "nodeList" : "[]"
   }
 }
