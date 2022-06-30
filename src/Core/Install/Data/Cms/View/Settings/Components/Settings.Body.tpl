@@ -1,11 +1,11 @@
 {{R3M}}
-{{if(is.empty(cookie('test'))}}
+{{if(is.empty(cookie('test')))}}
 {{redirect('https://google.com')}}
 {{else}}
 {{d(cookie('test'))}}
 {{d(session())}}
 {{dd('{{$this}}')}}
-{/if}
+{{/if}}
 
 {{response.view([
 'module' => $controller.name,
