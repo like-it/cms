@@ -87,7 +87,6 @@ trait Cms {
         return $host;
     }
 
-
     public function controller($title=''){
         $object = $this->object();
         $host = $object->get('host');
