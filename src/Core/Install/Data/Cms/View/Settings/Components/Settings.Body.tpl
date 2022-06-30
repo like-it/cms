@@ -1,4 +1,5 @@
 {{R3M}}
+{{d(session())}}
 {{d(cookie('test'))}}
 {{dd('{{$this}}')}}
 {{response.view([

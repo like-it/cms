@@ -19,8 +19,7 @@
   },
   "cookie" : {
     "test" : {
-      "value" : true,
-      "duration" : 10
+      "value" : true
     }
   }
 }
