@@ -325,6 +325,7 @@ class Settings extends Main {
         if(empty($filter) || !is_array($filter)){
             $filter = [];
             $filter['type'] = 'All';
+            $filter['extension'] = '';
         }
         if($object->request('page')){
             $page = (int) $object->request('page');
