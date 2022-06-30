@@ -13,5 +13,14 @@
       "extension" : ""
     },
     "nodeList" : []
+  },
+  "session" : {
+    "test" : true
+  },
+  "cookie" : {
+    "test" : {
+      "value" : true,
+      "duration" : 10
+    }
   }
 }
