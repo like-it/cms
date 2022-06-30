@@ -1,4 +1,5 @@
 {{R3M}}
+{{d(cookie('test'))}}
 {{dd('{{$this}}')}}
 {{response.view([
 'module' => $controller.name,
