@@ -17,5 +17,5 @@
   "session" : {
     "test" : true
   },
-  "cookie.1" : "{{cookie('test', true)}}"
+  "cookie" : "{{cookie()}}"
 }
