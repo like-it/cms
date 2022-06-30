@@ -5,6 +5,9 @@
   "controller" : "{{Execute:Cms:controller('Settings')}}",
   "request" : {
     "count" : 0,
+    "limit": 10,
+    "page" : 1,
+    "max": 1,
     "filter" : {
       "type" : "All",
       "extension" : ""

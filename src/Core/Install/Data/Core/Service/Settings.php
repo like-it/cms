@@ -326,6 +326,23 @@ class Settings extends Main {
             $filter = [];
             $filter['type'] = 'All';
         }
+        if($object->request('page')){
+            $page = (int) $object->request('page');
+        } else {
+            $page = 1;
+        }
+        $limit = Limit::LIMIT;
+        $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
+        $settings =  $object->data_read($settings_url);
+        if($settings->data('component.default.limit')){
+            $limit = $settings->data('component.default.limit');
+        }
+        if($object->request('limit')){
+            $limit = (int) $object->request('limit');
+            if($limit > Limit::MAX){
+                $limit = Limit::MAX;
+            }
+        }
         $dir = new Dir();
         $data = new Data();
         $read = $dir->read($url, true);
@@ -359,23 +376,6 @@ class Settings extends Main {
                 $key = sha1($record->url);
                 $data->set($key, $record);
             }
-            if($object->request('page')){
-                $page = (int) $object->request('page');
-            } else {
-                $page = 1;
-            }
-            $limit = Limit::LIMIT;
-            $settings_url = $object->config('controller.dir.data') . 'Settings' . $object->config('extension.json');
-            $settings =  $object->data_read($settings_url);
-            if($settings->data('component.default.limit')){
-                $limit = $settings->data('component.default.limit');
-            }
-            if($object->request('limit')){
-                $limit = (int) $object->request('limit');
-                if($limit > Limit::MAX){
-                    $limit = Limit::MAX;
-                }
-            }
             $response = [];
             $list = Sort::list($data->data())->with(['url' => 'ASC']);
             if($object->request('q')){
@@ -401,6 +401,9 @@ class Settings extends Main {
         } else {
             $response = [];
             $response['count'] = 0;
+            $response['limit'] = $limit;
+            $response['page'] = 1;
+            $response['max'] = 1;
             $response['nodeList'] = [];
             $response['filter'] = $filter;
             return new Response($response, Response::TYPE_JSON);
