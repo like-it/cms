@@ -218,8 +218,8 @@ class System extends Main {
                         Core::execute($command, $output);
                         $output = implode(PHP_EOL, $output);
 
-                        $json = implode("\n", $output);
-                        $test = json_decode($json, true);
+//                        $json = implode("\n", $output);
+                        $test = json_decode($output, true);
                         $error = [];
                         $error['code'] = json_last_error();
                         $error['msg'] = json_last_error_msg();
