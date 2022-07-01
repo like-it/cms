@@ -216,6 +216,7 @@ class System extends Main {
                         echo $command . PHP_EOL;
 
                         Core::execute($command, $output);
+                        dd($output);
                         $json = implode("\n", $output);
                         $test = json_decode($json, true);
                         $error = [];
