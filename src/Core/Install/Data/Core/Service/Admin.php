@@ -175,7 +175,7 @@ class Admin extends Main
                             $content = 'Invalid claim detected in token...' . PHP_EOL;
                             File::write($dir_output . $basename, $content);
                         }
-                        File::delete($file->url);
+                        //File::delete($file->url);
                         File::delete($url);
                         File::touch($url_end);
                         File::chown(
@@ -191,6 +191,7 @@ class Admin extends Main
                     $exception
                     ){
                         //add output file with $exception
+                        dd($exception);
                         File::delete($file->url);
                     }
                 }
