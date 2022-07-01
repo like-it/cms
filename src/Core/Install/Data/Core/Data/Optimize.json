@@ -3,6 +3,39 @@
     {
       "template" : "{{$cms.dir.view}}/Settings/Components/Settings.Body.tpl",
       "data" : "{{$cms.dir.data}}/Optimize/Settings.Components.Settings.Body.json"
+    },
+    {
+      "template" : "{{$cms.dir.view}}/Settings/Controllers/Settings.Body.tpl",
+      "data" : "{{$cms.dir.data}}/Optimize/Settings.Components.Settings.Body.json"
+    },
+    {
+      "template" : "{{$cms.dir.view}}/Settings/Domains/Settings.Body.tpl",
+      "data" : "{{$cms.dir.data}}/Optimize/Settings.Components.Settings.Body.json"
+    },
+    {
+      "template" : "{{$cms.dir.view}}/Settings/Module/Settings.Body.tpl",
+      "data" : "{{$cms.dir.data}}/Optimize/Settings.Components.Settings.Body.json"
+    },
+    {
+      "template" : "{{$cms.dir.view}}/Settings/Plugins/Settings.Body.tpl",
+      "data" : "{{$cms.dir.data}}/Optimize/Settings.Components.Settings.Body.json"
+    },
+    {
+      "template" : "{{$cms.dir.view}}/Settings/Routes/Settings.Body.tpl",
+      "data" : "{{$cms.dir.data}}/Optimize/Settings.Components.Settings.Body.json"
+    },
+    {
+      "template" : "{{$cms.dir.view}}/Settings/Server/Settings.Body.tpl",
+      "data" : "{{$cms.dir.data}}/Optimize/Settings.Components.Settings.Body.json"
+    },
+    {
+      "template" : "{{$cms.dir.view}}/Settings/Theme/Settings.Body.tpl",
+      "data" : "{{$cms.dir.data}}/Optimize/Settings.Components.Settings.Body.json"
+    },
+    {
+      "template" : "{{$cms.dir.view}}/Settings/Views/Settings.Body.tpl",
+      "data" : "{{$cms.dir.data}}/Optimize/Settings.Components.Settings.Body.json"
     }
+
 ]
 }

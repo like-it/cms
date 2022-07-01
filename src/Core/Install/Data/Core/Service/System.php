@@ -91,142 +91,10 @@ class System extends Main {
                         property_exists($optimization,'template') &&
                         property_exists($optimization,'data')
                     ){
-                        //write host state to uuid::
-                        /*
-                        $user_id = posix_geteuid();
-                        $user_id = 33;
-                        $uuid = Core::uuid();
-                        $url_state = $object->config('project.dir.data') .
-                            "Cache" .
-                            $object->config('ds') .
-                            $user_id .
-                            $object->config('ds') .
-                            'State.' .
-                            $uuid .
-                            $object->config('extension.json')
-                        ;
-                        $state = new Data();
-                        $state->set('host', $host);
-
-                        if(empty($host->subdomain)){
-                            $state->set('config.host.dir.root',
-                                $object->config('project.dir.host') .
-                                ucfirst($host->host) .
-                                $object->config('ds') .
-                                ucfirst($host->extension) .
-                                $object->config('ds')
-                            );
-                        } else {
-                            $state->set('config.host.dir.root',
-                                $object->config('project.dir.host') .
-                                ucfirst($host->subdomain) .
-                                $object->config('ds') .
-                                ucfirst($host->host) .
-                                $object->config('ds') .
-                                ucfirst($host->extension) .
-                                $object->config('ds')
-                            );
-                        }
-                        $state->set('config.host.dir.data',
-                            $state->get('config.host.dir.root') .
-                            $object->config(Config::DICTIONARY . '.' . Config::DATA) .
-                            $object->config('ds')
-                        );
-                        $state->set('config.host.dir.cache',
-                            Dir::name($object->config('framework.dir.cache'), 2) .
-                            $object->config(Config::DICTIONARY . '.' . Config::HOST) .
-                            $object->config('ds')
-                        );
-                        $state->set('config.host.dir.public',
-                            $state->get('config.host.dir.root') .
-                            $object->config(Config::DICTIONARY . '.' . Config::PUBLIC) .
-                            $object->config('ds'));
-                        $state->set('config.host.dir.source',
-                            $state->get('config.host.dir.root') .
-                            $object->config(Config::DICTIONARY . '.' . Config::SOURCE) .
-                            $object->config('ds'));
-                        $state->set('config.host.dir.view',
-                            $state->get('config.host.dir.root') .
-                            $object->config(Config::DICTIONARY . '.' . Config::VIEW) .
-                            $object->config('ds')
-                        );
-                        $controller = [];
-                        $controller['name'] = 'settings';
-                        $controller['title'] = ucfirst($controller['name']);
-                        $controller['class'] = 'Host\\' . ucfirst($host->subdomain) . '\\' . ucfirst($host->host) . '\\' . ucfirst($host->extension) . '\\Controller\\' . $controller['title'];
-                        $controller['dir'] = [];
-                        $controller['dir']['source'] =  $object->config('project.dir.host') .
-                            ucfirst($host->subdomain) .
-                            $object->config('ds') .
-                            ucfirst($host->host) .
-                            $object->config('ds') .
-                            ucfirst($host->extension) .
-                            $object->config('ds') .
-                            'Controller' .
-                            $object->config('ds');
-                        $controller['dir']['root'] =  $object->config('project.dir.host') .
-                            ucfirst($host->subdomain) .
-                            $object->config('ds') .
-                            ucfirst($host->host) .
-                            $object->config('ds') .
-                            ucfirst($host->extension) .
-                            $object->config('ds');
-                        $controller['dir']['data'] = $controller['dir']['root'] .
-                            $object->config('dictionary.data') .
-                            $object->config('ds');
-                        $controller['dir']['node'] = $controller['dir']['root'] .
-                            $object->config('dictionary.node') .
-                            $object->config('ds');
-                        $controller['dir']['plugin'] = $controller['dir']['root'] .
-                            $object->config('dictionary.plugin') .
-                            $object->config('ds');
-                        $controller['dir']['function'] = $controller['dir']['root'] .
-                            $object->config('dictionary.function') .
-                            $object->config('ds');
-                        $controller['dir']['model'] = $controller['dir']['root'] .
-                            $object->config('dictionary.model') .
-                            $object->config('ds');
-                        $controller['dir']['entity'] = $controller['dir']['root'] .
-                            $object->config('dictionary.entity') .
-                            $object->config('ds');
-                        $controller['dir']['service'] = $controller['dir']['root'] .
-                            $object->config('dictionary.service') .
-                            $object->config('ds');
-                        $controller['dir']['component'] = $controller['dir']['root'] .
-                            $object->config('dictionary.component') .
-                            $object->config('ds');
-                        $controller['dir']['view'] = $controller['dir']['root'] .
-                            $object->config('dictionary.view') .
-                            $object->config('ds');
-                        $controller['dir']['public'] = $controller['dir']['root'] .
-                            $object->config('dictionary.public') .
-                            $object->config('ds') .
-                            $controller['title'] .
-                            $object->config('ds');
-                        $state->set('config.controller', $controller);
-                        $state->write($url_state);
-                        File::chown($url_state, 'www-data', 'www-data');
-                        */
-                        //$command = '/sbin/runuser --user www-data -- php /Application/Bin/R3m.php parse compile ' . $optimization->template . ' ' . $optimization->data . ' state ' . $url_state;
                         $command = '/sbin/runuser --user www-data -- php /Application/Bin/R3m.php parse compile ' . $optimization->template . ' ' . $optimization->data;
-                        //$command = '/sbin/runuser --user www-data -- php -f /Application/Bin/R3m.php info all > test.info';
-                        //$command = 'php -f /Application/Bin/R3m.php info all > test.info';
-                        //$command = 'runuser --user www-data -- composer install';
-                        $output = [];
                         echo $command . PHP_EOL;
-
-                        Core::execute($command, $output);
-                        $output = implode(PHP_EOL, $output);
-
-//                        $json = implode("\n", $output);
-                        $test = json_decode($output, true);
-                        $error = [];
-                        $error['code'] = json_last_error();
-                        $error['msg'] = json_last_error_msg();
-//                        $test = Core::object($json, Core::OBJECT_ARRAY);
-                        d($error);
-                        dd($test);
-
+                        Core::async($command);
+                        /*
                         $descriptorspec = array(
                             0 => array("pipe", "r"),  // stdin
                             1 => array("pipe", "w"),  // stdout
@@ -252,6 +120,7 @@ class System extends Main {
                         //Core::execute($command, $output);
                         //d($code);
                         //dd($output);
+                        */
                     }
                 }
             }
