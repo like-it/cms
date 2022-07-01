@@ -96,6 +96,7 @@ class System extends Main {
                         Core::async($command . ' &');
                     }
                 }
+                echo 'Optimizations fired...' . PHP_EOL;
             }
         }
     }
