@@ -93,7 +93,7 @@ class System extends Main {
                     ){
                         $command = '/sbin/runuser --user www-data -- php /Application/Bin/R3m.php parse compile ' . $optimization->template . ' ' . $optimization->data;
                         echo $command . PHP_EOL;
-                        Core::async($command . ' &');
+                        Core::execute($command . ' &');
                     }
                 }
                 echo 'Optimizations fired...' . PHP_EOL;
