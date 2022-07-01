@@ -217,7 +217,7 @@ class System extends Main {
 
                         Core::execute($command, $output);
                         $json = implode("\n", $output);
-                        $test = json_decode($json);
+                        $test = json_decode($json, true);
                         $error = [];
                         $error['code'] = json_last_error();
                         $error['msg'] = json_last_error_msg();
