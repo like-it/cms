@@ -216,7 +216,8 @@ class System extends Main {
                         echo $command . PHP_EOL;
 
                         Core::execute($command, $output);
-                        dd($output);
+                        $json = implode("\n", $output);
+                        dd($json);
 
                         $descriptorspec = array(
                             0 => array("pipe", "r"),  // stdin
