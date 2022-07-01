@@ -85,8 +85,6 @@ class System extends Main {
             !empty($host)
         ){
             $optimizations = $optimize->get('optimizations');
-            d($optimizations);
-            /*
             if(is_array($optimizations)){
                 foreach($optimizations as $optimization){
                     if(
@@ -96,7 +94,14 @@ class System extends Main {
                         $command = '/sbin/runuser --user www-data -- php /Application/Bin/R3m.php parse compile ' . $optimization->template . ' ' . $optimization->data;
                         echo $command . PHP_EOL;
                         Core::async($command);
-                        /*
+                    }
+                }
+            }
+        }
+    }
+
+    /*
+     *  /*
                         $descriptorspec = array(
                             0 => array("pipe", "r"),  // stdin
                             1 => array("pipe", "w"),  // stdout
@@ -122,14 +127,7 @@ class System extends Main {
                         //Core::execute($command, $output);
                         //d($code);
                         //dd($output);
-
-                    }
-                }
-            }
-            */
-        }
-    }
-
+     */
 
     /**
      * @throws AuthorizationException
