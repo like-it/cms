@@ -29,9 +29,6 @@ class Admin extends Main
             $url_token = $dir .$dir_part . $uuid . '.token';
             File::write($url, $task);
             File::write($url_token, $token);
-            d($url);
-            d($url_token);
-            dd($token);
             return $dir . $url_part . PHP_EOL;
         } catch (FileWriteException $exception) {
             return null;
