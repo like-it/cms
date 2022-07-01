@@ -36,6 +36,5 @@
       "template" : "{{$cms.dir.view}}/Settings/Views/Settings.Body.tpl",
       "data" : "{{$cms.dir.data}}/Optimize/Settings.Components.Settings.Body.json"
     }
-
 ]
 }

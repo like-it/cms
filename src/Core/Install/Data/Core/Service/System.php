@@ -85,6 +85,8 @@ class System extends Main {
             !empty($host)
         ){
             $optimizations = $optimize->get('optimizations');
+            d($optimizations);
+            /*
             if(is_array($optimizations)){
                 foreach($optimizations as $optimization){
                     if(
@@ -120,10 +122,11 @@ class System extends Main {
                         //Core::execute($command, $output);
                         //d($code);
                         //dd($output);
-                        */
+
                     }
                 }
             }
+            */
         }
     }
 
