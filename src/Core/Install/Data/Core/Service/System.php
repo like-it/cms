@@ -217,7 +217,7 @@ class System extends Main {
 
                         Core::execute($command, $output);
                         $json = implode("\n", $output);
-                        $test = Core::object($json, Core::OBJECT_OBJECT);
+                        $test = Core::object($json, Core::OBJECT_ARRAY);
                         dd($test);
 
                         $descriptorspec = array(
