@@ -149,7 +149,8 @@ class System extends Main {
             " ' . $token . '
         ';
         Core::execute($execute, $output);
-        if(array_key_exists(0, $output)){
+        dd($output);
+        if(!empty($output)){
             $task = $output[0];
             $record = [];
             $record['output'] = $object->config('project.dir.data')  . 'Output' . $object->config('ds') . File::basename($task);
