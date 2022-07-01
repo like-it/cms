@@ -149,9 +149,8 @@ class System extends Main {
             " ' . $token . '
         ';
         Core::execute($execute, $output);
-        dd($output);
         if(!empty($output)){
-            $task = $output[0];
+            $task = trim($output);
             $record = [];
             $record['output'] = $object->config('project.dir.data')  . 'Output' . $object->config('ds') . File::basename($task);
             $record['files'][] = $object->config('project.dir.data')  . 'Output' . $object->config('ds') . File::basename($task, '.task') . '.begin';
