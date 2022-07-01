@@ -7,4 +7,3 @@
 'init' => true,
 'prefix' => $controller.dir.view + $controller.title + '/',
 ])}}
-{{dd(session())}}
