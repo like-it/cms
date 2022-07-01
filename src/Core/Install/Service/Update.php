@@ -75,6 +75,7 @@ class Update {
         $output = [];
         Core::execute($command, $output);
         $list = [];
+        $output = explode(PHP_EOL, $output);
         foreach($output as $nr => $line){
             $explode = explode(' /', $line, 2);
             if(array_key_exists(1, $explode)){
