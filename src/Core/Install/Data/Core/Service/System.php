@@ -79,6 +79,7 @@ class System extends Main {
             );
         }
         $url = $object->config('controller.dir.data') . 'Optimize' . $object->config('extension.json');
+        $uuid = Core::uuid();
         $optimize = $object->parse_read($url);
         if(
             $optimize &&
@@ -92,43 +93,17 @@ class System extends Main {
                         property_exists($optimization,'data')
                     ){
                         $command = '/sbin/runuser --user www-data -- php /Application/Bin/R3m.php parse compile ' . $optimization->template . ' ' . $optimization->data;
-                        Core::async($command . ' &');
-                        echo $command . PHP_EOL;
+                        Core::async($command . ' async ' . $uuid .' &');
                     }
                 }
-                echo 'Optimizations fired...' . PHP_EOL;
+                $result = [];
+                $result['async']['uuid'] = $uuid;
+                $json = Core::object($result, Core::OBJECT_JSON_LINE);
+
+                return $json . PHP_EOL;
             }
         }
     }
-
-    /*
-     *  /*
-                        $descriptorspec = array(
-                            0 => array("pipe", "r"),  // stdin
-                            1 => array("pipe", "w"),  // stdout
-                            2 => array("pipe", "w"),  // stderr
-                        );
-
-                        $process = proc_open($command, $descriptorspec, $pipes, '/Application', null);
-                        $stdout = stream_get_contents($pipes[1]);
-                        fclose($pipes[1]);
-
-                        $stderr = stream_get_contents($pipes[2]);
-                        fclose($pipes[2]);
-
-                        echo "stdout : \n";
-                        var_dump($stdout);
-
-                        echo "stderr :\n";
-                        var_dump($stderr);
-
-
-                        //system($command, $code);
-//                        exec($command, $output, $code);
-                        //Core::execute($command, $output);
-                        //d($code);
-                        //dd($output);
-     */
 
     /**
      * @throws AuthorizationException
