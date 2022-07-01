@@ -90,7 +90,7 @@ class Update {
         $command = 'composer show -f json';
         $output = [];
         Core::execute($command, $output);
-        $json = trim(implode(PHP_EOL, $output));
+        $json = trim($output));
         $data = new Data(Core::object($json));
         foreach($data->get('installed') as $nr => $installed){
             $selected = false;
