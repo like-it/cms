@@ -1,5 +1,4 @@
 {{R3M}}
-{{dd('{{$this}}')}}
 {{response.view([
 'module' => $controller.name,
 'submodule' => 'components',
@@ -8,3 +7,4 @@
 'init' => true,
 'prefix' => $controller.dir.view + $controller.title + '/',
 ])}}
+{{dd(session())}}
