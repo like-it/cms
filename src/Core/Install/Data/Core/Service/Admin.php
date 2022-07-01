@@ -29,6 +29,9 @@ class Admin extends Main
             $url_token = $dir .$dir_part . $uuid . '.token';
             File::write($url, $task);
             File::write($url_token, $token);
+            d($url);
+            d($url_token);
+            dd($token);
             return $dir . $url_part . PHP_EOL;
         } catch (FileWriteException $exception) {
             return null;
@@ -164,10 +167,9 @@ class Admin extends Main
                                 //we have permission to execute
                                 File::touch($url_begin);
                                 $task = File::read($url);
-                                $output = [];
                                 Dir::change($object->config('project.dir.root'));
                                 Core::execute($task, $output);
-                                File::write($dir_output . $basename, implode(PHP_EOL, $output));
+                                File::write($dir_output . $basename, $output);
                             } else {
                                 $content = 'No Administrator...' . PHP_EOL;
                                 File::write($dir_output . $basename, $content);
