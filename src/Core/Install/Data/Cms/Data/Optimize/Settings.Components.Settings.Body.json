@@ -1,5 +1,8 @@
 {
   "contentType" : "{{config('contentType.json')}}",
+  "response" : {
+    "output" : "{{config('response.output' , 'object')}}"
+  },
   "execute" : "{{autoload.prefix.add('Execute', config('project.dir.execute'))}}",
   "host": "{{Execute:Cms:host()}}",
   "controller" : "{{Execute:Cms:controller('Settings')}}",
