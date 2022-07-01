@@ -92,8 +92,8 @@ class System extends Main {
                         property_exists($optimization,'data')
                     ){
                         $command = '/sbin/runuser --user www-data -- php /Application/Bin/R3m.php parse compile ' . $optimization->template . ' ' . $optimization->data;
+                        Core::async($command . ' &');
                         echo $command . PHP_EOL;
-                        Core::execute($command . ' &');
                     }
                 }
                 echo 'Optimizations fired...' . PHP_EOL;
